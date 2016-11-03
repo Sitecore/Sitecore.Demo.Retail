@@ -1,0 +1,18 @@
+﻿---
+ID: "980bbf2b-c208-4a75-b9ca-e1c51b6c45d0"
+Parent: "aea0ff71-1e02-4677-945e-d5cbaf908bea"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Storefront/Page Templates/ForgotPassword Page/Headers/Submitting
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150221T020805Z

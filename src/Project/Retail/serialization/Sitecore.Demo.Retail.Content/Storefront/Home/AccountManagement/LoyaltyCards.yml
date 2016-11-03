@@ -1,0 +1,86 @@
+﻿---
+ID: "76749831-fd3b-4b09-98d0-f54a1cf84084"
+Parent: "4d316bba-345f-4929-9e84-a2208c0f7aa6"
+Template: "cdef717d-e2fd-4d31-91c3-3b1d6f479f00"
+Path: /sitecore/content/Storefront/Home/AccountManagement/LoyaltyCards
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06581d7e-762c-4f8f-8121-fa3ce293ee54"
+      Hint: Loyalty Points Label
+      Value: Loyalty points
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150111T190957Z
+    - ID: "2fe5ac33-a7dd-4632-9073-4ec683b8f21e"
+      Hint: Store Label
+      Value: Store
+    - ID: "393facba-35c0-45ef-9618-23e3222f7936"
+      Hint: Expires Label
+      Value: Expires
+    - ID: "4532d6ae-b7b2-4ecc-9de1-72937a9aeb00"
+      Hint: Transaction History Header
+      Value: Transaction history
+    - ID: "4e4fbc22-cfc3-4239-ad74-bdab59f75518"
+      Hint: Your Loyalty Card Header
+      Value: Your loyalty card
+    - ID: "5dc975a5-3ec3-467f-a317-d3c36958dd33"
+      Hint: Used Points Label
+      Value: Used points
+    - ID: "5ef9112b-c58d-405b-a003-669156e9caac"
+      Hint: Back To My Account Label
+      Value: Back to My Account
+    - ID: "68bf97b5-1754-4f07-85ac-f718bb71abdb"
+      Hint: Not Yet Eligible Label
+      Value: Not yet elegible
+    - ID: "691131f8-1cb6-4598-944f-a6650e76d385"
+      Hint: Expiration Date Label
+      Value: Expiration date
+    - ID: "6b12e26a-444a-40b6-920a-8f1c35a9c3c6"
+      Hint: Type Label
+      Value: Type
+    - ID: "71164685-510b-4b23-83d5-202b57785758"
+      Hint: Issued Points Label
+      Value: Issued points
+    - ID: "79ef34f0-6ade-47b6-9157-26faff6fd78c"
+      Hint: Card Number Label
+      Value: Card number
+    - ID: "aa312ca7-fc09-4a2d-90ff-c67df417e200"
+      Hint: Active Points Label
+      Value: Active Points
+    - ID: "aa7a2c29-a8d2-46fd-b31c-2c0d78eb681e"
+      Hint: Points Per Card Header
+      Value: Points per card
+    - ID: "b3ca9d15-b86e-4baa-a0d9-cd45b7706f05"
+      Hint: Transaction Number Label
+      Value: Transaction number
+    - ID: "b9217ffa-213d-43e3-a9cc-5293ab82ea29"
+      Hint: Programs Per Card Header
+      Value: Programs per card
+    - ID: "bafc2cf9-966b-4efc-8162-01bace18d918"
+      Hint: Card Details Title
+      Value: Card Details
+    - ID: "c19f5f91-f89b-43d8-b057-52a79a06fa49"
+      Hint: Loyalty Cards Empty Text
+      Value: <p>You have no loyalty cards</p>
+    - ID: "cba04a95-279a-4fc8-83b7-989df3366b29"
+      Hint: Expired Points Label
+      Value: Expired points
+    - ID: "dcf86f3e-d266-46c9-ab44-229442459c41"
+      Hint: Date Label
+      Value: Date
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Loyalty Cards
+    - ID: "f2bccec0-4dac-47a5-a126-ad4c7cb1b513"
+      Hint: Tier Progress Header
+      Value: Tier progress
+    - ID: "fc3a59c9-a0d5-496f-86f3-9570626f5176"
+      Hint: Points Label
+      Value: Points
+    - ID: "ff667dab-4937-446c-9c7b-423c88827948"
+      Hint: Time Label
+      Value: Time

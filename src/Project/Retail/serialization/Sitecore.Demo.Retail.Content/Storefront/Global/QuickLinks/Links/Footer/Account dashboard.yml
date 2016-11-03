@@ -1,0 +1,25 @@
+﻿---
+ID: "154d2d8d-63a9-4285-becb-ae486b78d631"
+Parent: "22d28b39-f1f7-487a-9ddc-71c31ad123c6"
+Template: "87c331ae-3293-4fd1-a5f2-a625523f3019"
+Path: /sitecore/content/Storefront/Global/QuickLinks/Links/Footer/Account dashboard
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141105T092903
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "6cb9eb87-680b-4cb9-9946-9baeb553f6b8"
+      Hint: Text
+      Value: Account dashboard
+    - ID: "b861b1ed-2820-4ad8-b169-8928ac381634"
+      Hint: Link
+      Value: |
+        <link text="" linktype="internal" class="" title=""  querystring="" id="{441B60D3-09BB-4111-A3AD-D10076B78B54}" />

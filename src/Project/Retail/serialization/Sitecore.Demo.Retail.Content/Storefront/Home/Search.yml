@@ -1,0 +1,17 @@
+﻿---
+ID: "7377c931-131a-417d-a0c3-57c296237784"
+Parent: "441b60d3-09bb-4111-a3ad-d10076b78b54"
+Template: "09fb2812-e751-4578-b1eb-0d2930ad215c"
+Path: /sitecore/content/Storefront/Home/Search
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150107T172228Z
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Search

@@ -1,0 +1,21 @@
+﻿---
+ID: "3be0618a-8761-40df-a27f-2c3c8153c283"
+Parent: "8d9a1f55-4a0e-4d0b-ab8a-3bba0cdb922e"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Storefront/Page Templates/Billing Page/Credit Card/Card Number Label
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 300
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141217T184609Z

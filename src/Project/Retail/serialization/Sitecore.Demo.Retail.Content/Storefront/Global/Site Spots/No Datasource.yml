@@ -1,0 +1,21 @@
+﻿---
+ID: "7d17a5d4-662e-40e0-865f-0353026e1bf4"
+Parent: "50ca28d4-c93c-435b-92da-866276a1bfdf"
+Template: "dab02003-2a0e-4a83-b187-69429c935290"
+Path: /sitecore/content/Storefront/Global/Site Spots/No Datasource
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "08d235d0-19d2-4518-9d40-320d97cc59f4"
+      Hint: Text
+      Value: "There is no datasource!"
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141024T032506
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

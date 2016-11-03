@@ -1,0 +1,22 @@
+﻿---
+ID: "7442bd25-7ce5-428d-a0ea-42838246c9c2"
+Parent: "7395b9e1-6afa-4d63-91ed-8a8be11d26b0"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Storefront/Rendering Datasources/Pagination/Pagination
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: control/32x32/splitter_ver_b.png
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141105T032411
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

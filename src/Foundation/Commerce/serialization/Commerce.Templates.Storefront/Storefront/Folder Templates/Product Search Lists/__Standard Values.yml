@@ -1,0 +1,23 @@
+﻿---
+ID: "a1841d60-b754-4f01-b108-1c6389e686aa"
+Parent: "0f7a8207-3b70-4ee3-a45a-60579092f4e1"
+Template: "0f7a8207-3b70-4ee3-a45a-60579092f4e1"
+Path: /sitecore/templates/Storefront/Folder Templates/Product Search Lists/__Standard Values
+DB: master
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: "{D86AC339-3643-4617-B50E-D6C45F4773C9}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141022T085711
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

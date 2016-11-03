@@ -1,0 +1,14 @@
+﻿---
+ID: "2936f37f-9e6a-43cb-8d88-4911d39999be"
+Parent: "e5c0498a-7f54-4365-ae30-52a84370cc3f"
+Template: "1e052742-cc55-4d37-8744-1800340cda9a"
+Path: /sitecore/content/Storefront/Global/Lookups/Relationships
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150706T072902Z

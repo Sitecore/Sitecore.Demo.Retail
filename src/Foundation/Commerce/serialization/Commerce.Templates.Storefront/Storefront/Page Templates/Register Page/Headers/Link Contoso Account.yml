@@ -1,0 +1,18 @@
+﻿---
+ID: "4a0074f0-ea1a-4b5b-8044-08496cc87b84"
+Parent: "f26dfcec-8165-4bfc-a9fd-122487ae08af"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Storefront/Page Templates/Register Page/Headers/Link Contoso Account
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160407T193723Z

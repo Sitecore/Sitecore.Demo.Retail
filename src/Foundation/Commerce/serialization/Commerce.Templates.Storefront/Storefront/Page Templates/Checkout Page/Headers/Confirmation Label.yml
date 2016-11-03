@@ -1,0 +1,21 @@
+﻿---
+ID: "dc264dc6-6e66-44be-a58e-0d76f7a00614"
+Parent: "915aef1b-8da8-4796-9a33-b7ce7242b02a"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Storefront/Page Templates/Checkout Page/Headers/Confirmation Label
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 300
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141218T222249Z

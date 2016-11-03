@@ -1,0 +1,14 @@
+﻿---
+ID: "6c0fc63f-0f3c-4741-b069-1b1c68821eb4"
+Parent: "89003ee6-c368-4a68-b103-8acba997405c"
+Template: "7ee0975b-0698-493e-b3a2-0b2ef33d0522"
+Path: /sitecore/layout/Renderings/Storefront/Landing
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141009T040517

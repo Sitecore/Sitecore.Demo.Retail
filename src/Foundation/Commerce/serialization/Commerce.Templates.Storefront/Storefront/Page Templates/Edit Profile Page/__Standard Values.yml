@@ -1,0 +1,442 @@
+﻿---
+ID: "08a588cd-81f5-48bd-9b07-c2bdc71b612e"
+Parent: "292b2761-f08f-4d9a-9820-87cf7cbed2cc"
+Template: "292b2761-f08f-4d9a-9820-87cf7cbed2cc"
+Path: /sitecore/templates/Storefront/Page Templates/Edit Profile Page/__Standard Values
+DB: master
+SharedFields:
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{F5034347-7E92-41D7-B8EB-F51D1F1BCF1C}">
+        <r
+          id="{15A09072-CE89-4126-A9E4-17753FC726FF}"
+          ph="top"
+          uid="{0E2D603A-CF36-4EE2-B598-D2E06AEBD5AE}" />
+        <r
+          id="{B6C0593E-1C35-4C61-8DB5-E7C7AA19D955}"
+          ph="topleft"
+          uid="{17F64DAC-2A2C-4F61-A993-F3BC59203AA0}" />
+        <r
+          ds="{B5F108D3-651F-4344-BF9B-8F10675DDBA0}"
+          id="{FAA386D8-192F-4762-839D-D637BD11549F}"
+          par=""
+          ph="topright"
+          uid="{1B0865BA-8725-40D7-B472-5466055F1834}" />
+        <r
+          ds="{9988B682-59C7-4319-8BF9-7071F132A5AD}"
+          id="{9AA8E388-A6BD-46E1-A73B-DDEF601DE6F8}"
+          par=""
+          ph="topcenter"
+          uid="{8C308774-5362-4996-A416-527ED85204F1}" />
+        <r
+          id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
+          ph="messages"
+          uid="{2434C82A-C2BF-4BA8-9163-06565866796E}" />
+        <r
+          id="{79167FB2-C7E0-4124-81C9-61AFBB279388}"
+          ph="navigation"
+          uid="{1A6AE860-A323-460D-B8D7-CEFA22469672}" />
+        <r
+          id="{0FA59DDC-5AEB-4ADB-B64B-D8D03B351680}"
+          ph="navigationextra"
+          uid="{D0FFD21B-BDDF-4C59-A150-C43C76CABF37}" />
+        <r
+          ds="{98CE979E-638E-4EE0-AD7F-05164173F1C1}"
+          id="{DC1B9040-8694-456A-A5E6-81996BD1B2AA}"
+          par=""
+          ph="navigationextraleft"
+          uid="{5D2C83EE-F8CA-41B9-BBF2-03CBC74D3F52}" />
+        <r
+          ds="{5886D851-1625-48AE-A787-84FC5B5EB271}"
+          id="{582FEA78-404C-44D8-B6B4-356B080F5A7C}"
+          par=""
+          ph="navigationextraright"
+          uid="{0D3D37F8-ED81-4F72-B7C2-8D5AF8EB0094}" />
+        <r
+          ds="{889A6934-BCDC-4294-94B7-6D141E7312B4}"
+          id="{CFD437A6-404A-4C8C-8A41-EED2FB86D5DE}"
+          par=""
+          ph="navigationmain"
+          uid="{3C2F52A6-A439-456D-A812-04A831DB8A0F}" />
+        <r
+          id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
+          ph="middle"
+          uid="{F720367A-12C1-4818-887C-EB6B70A32640}" />
+        <r
+          id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
+          ph="center"
+          uid="{977A116E-E4E3-4322-8917-267068421DA1}" />
+        <r
+          id="{0AD697A5-B069-4AC5-8F18-488DAE074A06}"
+          ph="center"
+          uid="{6B3F72C0-DE53-48DB-90C6-AE1C4A2741E3}" />
+        <r
+          ds="{F6504124-F766-43D0-824B-EB339CAE8E5F}"
+          id="{2658217E-196A-4041-8F81-B8AFA7E377EE}"
+          par=""
+          ph="bottom"
+          uid="{90413A71-AF3B-426B-938F-DCD2F2968374}" />
+      </d>
+      <d
+        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
+        l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+        <r
+          id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
+          ph="middle"
+          uid="{AFAD3A52-5D00-4F87-9DFF-ED4211885A99}" />
+        <r
+          id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
+          ph="center"
+          uid="{5177212F-976E-4785-A814-95BEFFF565C5}" />
+        <r
+          id="{0AD697A5-B069-4AC5-8F18-488DAE074A06}"
+          ph="center"
+          uid="{47733CBE-2A33-4704-BE99-5D9C0089650A}" />
+      </d>
+    </r>
+- ID: "fd4e2050-186c-4375-8b99-e8a85dd7436e"
+  Hint: __Enable item fallback
+  Type: Checkbox
+  Value: 1
+Languages:
+- Language: "de-DE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
+            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            <r
+              uid="{AFAD3A52-5D00-4F87-9DFF-ED4211885A99}"
+              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
+              s:ph="middle" />
+            <r
+              uid="{5177212F-976E-4785-A814-95BEFFF565C5}"
+              s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
+              s:ph="center" />
+            <r
+              uid="{47733CBE-2A33-4704-BE99-5D9C0089650A}"
+              s:id="{0AD697A5-B069-4AC5-8F18-488DAE074A06}"
+              s:ph="center" />
+          </d>
+        </r>
+    - ID: "0c1b7dad-d2d0-4640-ad1e-ebe31f159d51"
+      Hint: Email Required Message
+      Value: The email is required.
+    - ID: "109a8e80-c052-4f8e-8a7e-5878cf467e71"
+      Hint: Last Name Required Message
+      Value: The last name is required.
+    - ID: "13c97726-033b-4e1a-9837-2f9fb2df7c20"
+      Hint: First Name
+      Value: First name
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150122T083125Z
+    - ID: "2ef9bdb1-9827-40c5-8975-3409196963d1"
+      Hint: Telephone Number Placeholder
+      Value: "1-111-1111"
+    - ID: "3c9c1491-4030-454d-9dec-ea30510b5b43"
+      Hint: Surname
+      Value: Surname
+    - ID: "4328139f-4801-4930-ab9e-510a69a62473"
+      Hint: Cancel Button
+      Value: Cancel
+    - ID: "460c9b9e-8723-49ff-8dba-03ab18379da6"
+      Hint: Telephone Number Required Message
+      Value: The telephone number is required.
+    - ID: "6f00d900-b23c-4f3c-afcf-a03fb5b0b6c5"
+      Hint: Telephone Number
+      Value: Telephone Number
+    - ID: "7413052f-1cff-4b3d-862e-dda7da617e48"
+      Hint: Email
+      Value: Email
+    - ID: "8b121b2f-9782-4c87-bc05-7825c940aaab"
+      Hint: First Name Required Message
+      Value: The first name is required.
+    - ID: "a1e4e7f0-f89d-4682-8b5d-06b58cc76885"
+      Hint: Saving Changes Button
+      Value: Saving...
+    - ID: "a341e52d-4255-489f-ad23-5fca201f77f9"
+      Hint: Last Name Placeholder
+      Value: Last name
+    - ID: "a4115ea4-306f-43e5-b4d7-6346a2cbeb2c"
+      Hint: Back To My Account
+      Value: Back to My Account
+    - ID: "b3ea88ce-8b8f-49ec-9239-1f00812ef4ef"
+      Hint: Email Placeholder
+      Value: Email
+    - ID: "c003af96-e780-4e0d-b45c-1c45e5e8f912"
+      Hint: Save Changes Button
+      Value: Save changes
+    - ID: "e3707ba5-af84-4abe-a7ba-d8c24c37c6aa"
+      Hint: First Name Placeholder
+      Value: First name
+    - ID: "e8f1a5ff-d477-4a85-9312-c9939ea8da3b"
+      Hint: Password Placeholder
+      Value: Password
+    - ID: "e93c0a73-85ee-4968-9fe9-94ddeae5297a"
+      Hint: Repeat Email
+      Value: Repeat email
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
+            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            <r
+              uid="{AFAD3A52-5D00-4F87-9DFF-ED4211885A99}"
+              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
+              s:ph="middle" />
+            <r
+              uid="{5177212F-976E-4785-A814-95BEFFF565C5}"
+              s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
+              s:ph="center" />
+            <r
+              uid="{47733CBE-2A33-4704-BE99-5D9C0089650A}"
+              s:id="{0AD697A5-B069-4AC5-8F18-488DAE074A06}"
+              s:ph="center" />
+          </d>
+        </r>
+    - ID: "0c1b7dad-d2d0-4640-ad1e-ebe31f159d51"
+      Hint: Email Required Message
+      Value: The email is required.
+    - ID: "109a8e80-c052-4f8e-8a7e-5878cf467e71"
+      Hint: Last Name Required Message
+      Value: The last name is required.
+    - ID: "13c97726-033b-4e1a-9837-2f9fb2df7c20"
+      Hint: First Name
+      Value: First name
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150122T083125Z
+    - ID: "2ef9bdb1-9827-40c5-8975-3409196963d1"
+      Hint: Telephone Number Placeholder
+      Value: "1-111-1111"
+    - ID: "3c9c1491-4030-454d-9dec-ea30510b5b43"
+      Hint: Surname
+      Value: Surname
+    - ID: "4328139f-4801-4930-ab9e-510a69a62473"
+      Hint: Cancel Button
+      Value: Cancel
+    - ID: "460c9b9e-8723-49ff-8dba-03ab18379da6"
+      Hint: Telephone Number Required Message
+      Value: The telephone number is required.
+    - ID: "6f00d900-b23c-4f3c-afcf-a03fb5b0b6c5"
+      Hint: Telephone Number
+      Value: Telephone Number
+    - ID: "7413052f-1cff-4b3d-862e-dda7da617e48"
+      Hint: Email
+      Value: Email
+    - ID: "8b121b2f-9782-4c87-bc05-7825c940aaab"
+      Hint: First Name Required Message
+      Value: The first name is required.
+    - ID: "a1e4e7f0-f89d-4682-8b5d-06b58cc76885"
+      Hint: Saving Changes Button
+      Value: Saving...
+    - ID: "a341e52d-4255-489f-ad23-5fca201f77f9"
+      Hint: Last Name Placeholder
+      Value: Last name
+    - ID: "a4115ea4-306f-43e5-b4d7-6346a2cbeb2c"
+      Hint: Back To My Account
+      Value: Back to My Account
+    - ID: "b3ea88ce-8b8f-49ec-9239-1f00812ef4ef"
+      Hint: Email Placeholder
+      Value: Email
+    - ID: "c003af96-e780-4e0d-b45c-1c45e5e8f912"
+      Hint: Save Changes Button
+      Value: Save changes
+    - ID: "e3707ba5-af84-4abe-a7ba-d8c24c37c6aa"
+      Hint: First Name Placeholder
+      Value: First name
+    - ID: "e8f1a5ff-d477-4a85-9312-c9939ea8da3b"
+      Hint: Password Placeholder
+      Value: Password
+    - ID: "e93c0a73-85ee-4968-9fe9-94ddeae5297a"
+      Hint: Repeat Email
+      Value: Repeat email
+- Language: "fr-FR"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
+            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            <r
+              uid="{AFAD3A52-5D00-4F87-9DFF-ED4211885A99}"
+              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
+              s:ph="middle" />
+            <r
+              uid="{5177212F-976E-4785-A814-95BEFFF565C5}"
+              s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
+              s:ph="center" />
+            <r
+              uid="{47733CBE-2A33-4704-BE99-5D9C0089650A}"
+              s:id="{0AD697A5-B069-4AC5-8F18-488DAE074A06}"
+              s:ph="center" />
+          </d>
+        </r>
+    - ID: "0c1b7dad-d2d0-4640-ad1e-ebe31f159d51"
+      Hint: Email Required Message
+      Value: The email is required.
+    - ID: "109a8e80-c052-4f8e-8a7e-5878cf467e71"
+      Hint: Last Name Required Message
+      Value: The last name is required.
+    - ID: "13c97726-033b-4e1a-9837-2f9fb2df7c20"
+      Hint: First Name
+      Value: First name
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150122T083125Z
+    - ID: "2ef9bdb1-9827-40c5-8975-3409196963d1"
+      Hint: Telephone Number Placeholder
+      Value: "1-111-1111"
+    - ID: "3c9c1491-4030-454d-9dec-ea30510b5b43"
+      Hint: Surname
+      Value: Surname
+    - ID: "4328139f-4801-4930-ab9e-510a69a62473"
+      Hint: Cancel Button
+      Value: Cancel
+    - ID: "460c9b9e-8723-49ff-8dba-03ab18379da6"
+      Hint: Telephone Number Required Message
+      Value: The telephone number is required.
+    - ID: "6f00d900-b23c-4f3c-afcf-a03fb5b0b6c5"
+      Hint: Telephone Number
+      Value: Telephone Number
+    - ID: "7413052f-1cff-4b3d-862e-dda7da617e48"
+      Hint: Email
+      Value: Email
+    - ID: "8b121b2f-9782-4c87-bc05-7825c940aaab"
+      Hint: First Name Required Message
+      Value: The first name is required.
+    - ID: "a1e4e7f0-f89d-4682-8b5d-06b58cc76885"
+      Hint: Saving Changes Button
+      Value: Saving...
+    - ID: "a341e52d-4255-489f-ad23-5fca201f77f9"
+      Hint: Last Name Placeholder
+      Value: Last name
+    - ID: "a4115ea4-306f-43e5-b4d7-6346a2cbeb2c"
+      Hint: Back To My Account
+      Value: Back to My Account
+    - ID: "b3ea88ce-8b8f-49ec-9239-1f00812ef4ef"
+      Hint: Email Placeholder
+      Value: Email
+    - ID: "c003af96-e780-4e0d-b45c-1c45e5e8f912"
+      Hint: Save Changes Button
+      Value: Save changes
+    - ID: "e3707ba5-af84-4abe-a7ba-d8c24c37c6aa"
+      Hint: First Name Placeholder
+      Value: First name
+    - ID: "e8f1a5ff-d477-4a85-9312-c9939ea8da3b"
+      Hint: Password Placeholder
+      Value: Password
+    - ID: "e93c0a73-85ee-4968-9fe9-94ddeae5297a"
+      Hint: Repeat Email
+      Value: Repeat email
+- Language: "ja-JP"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
+            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            <r
+              uid="{AFAD3A52-5D00-4F87-9DFF-ED4211885A99}"
+              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
+              s:ph="middle" />
+            <r
+              uid="{5177212F-976E-4785-A814-95BEFFF565C5}"
+              s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
+              s:ph="center" />
+            <r
+              uid="{47733CBE-2A33-4704-BE99-5D9C0089650A}"
+              s:id="{0AD697A5-B069-4AC5-8F18-488DAE074A06}"
+              s:ph="center" />
+          </d>
+        </r>
+    - ID: "0c1b7dad-d2d0-4640-ad1e-ebe31f159d51"
+      Hint: Email Required Message
+      Value: The email is required.
+    - ID: "109a8e80-c052-4f8e-8a7e-5878cf467e71"
+      Hint: Last Name Required Message
+      Value: The last name is required.
+    - ID: "13c97726-033b-4e1a-9837-2f9fb2df7c20"
+      Hint: First Name
+      Value: First name
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150122T083125Z
+    - ID: "2ef9bdb1-9827-40c5-8975-3409196963d1"
+      Hint: Telephone Number Placeholder
+      Value: "1-111-1111"
+    - ID: "3c9c1491-4030-454d-9dec-ea30510b5b43"
+      Hint: Surname
+      Value: Surname
+    - ID: "4328139f-4801-4930-ab9e-510a69a62473"
+      Hint: Cancel Button
+      Value: Cancel
+    - ID: "460c9b9e-8723-49ff-8dba-03ab18379da6"
+      Hint: Telephone Number Required Message
+      Value: The telephone number is required.
+    - ID: "6f00d900-b23c-4f3c-afcf-a03fb5b0b6c5"
+      Hint: Telephone Number
+      Value: Telephone Number
+    - ID: "7413052f-1cff-4b3d-862e-dda7da617e48"
+      Hint: Email
+      Value: Email
+    - ID: "8b121b2f-9782-4c87-bc05-7825c940aaab"
+      Hint: First Name Required Message
+      Value: The first name is required.
+    - ID: "a1e4e7f0-f89d-4682-8b5d-06b58cc76885"
+      Hint: Saving Changes Button
+      Value: Saving...
+    - ID: "a341e52d-4255-489f-ad23-5fca201f77f9"
+      Hint: Last Name Placeholder
+      Value: Last name
+    - ID: "a4115ea4-306f-43e5-b4d7-6346a2cbeb2c"
+      Hint: Back To My Account
+      Value: Back to My Account
+    - ID: "b3ea88ce-8b8f-49ec-9239-1f00812ef4ef"
+      Hint: Email Placeholder
+      Value: Email
+    - ID: "c003af96-e780-4e0d-b45c-1c45e5e8f912"
+      Hint: Save Changes Button
+      Value: Save changes
+    - ID: "e3707ba5-af84-4abe-a7ba-d8c24c37c6aa"
+      Hint: First Name Placeholder
+      Value: First name
+    - ID: "e8f1a5ff-d477-4a85-9312-c9939ea8da3b"
+      Hint: Password Placeholder
+      Value: Password
+    - ID: "e93c0a73-85ee-4968-9fe9-94ddeae5297a"
+      Hint: Repeat Email
+      Value: Repeat email

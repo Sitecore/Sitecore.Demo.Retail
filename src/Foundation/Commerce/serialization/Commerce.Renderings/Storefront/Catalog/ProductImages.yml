@@ -1,0 +1,33 @@
+﻿---
+ID: "a7ceee33-046a-49da-8d0b-636bac05f97f"
+Parent: "06c80404-7020-45f1-b818-cb650f71dc69"
+Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
+Path: /sitecore/layout/Renderings/Storefront/Catalog/ProductImages
+DB: master
+SharedFields:
+- ID: "11490da4-bbc2-4397-8df2-6db2ef445081"
+  Hint: VaryByUrlPath
+  Type: Checkbox
+  Value: 1
+- ID: "3d08db46-2267-41b0-bc52-be69fd618633"
+  Hint: Cacheable
+  Type: Checkbox
+  Value: 1
+- ID: "c7c26117-dbb1-42b2-ab5e-f7223845cca3"
+  Hint: __Thumbnail
+  Value: |
+    <image mediaid="{55E0F539-F1A8-4DDC-91FF-31897A6CEF36}" />
+- ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
+  Hint: Controller Action
+  Value: Product
+- ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
+  Hint: Controller
+  Value: Catalog
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141023T062352

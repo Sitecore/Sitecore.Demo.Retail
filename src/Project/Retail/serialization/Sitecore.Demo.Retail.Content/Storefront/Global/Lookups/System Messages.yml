@@ -1,0 +1,14 @@
+﻿---
+ID: "ca53f506-8d36-40d7-a3f0-e2a9d44ad9b7"
+Parent: "e5c0498a-7f54-4365-ae30-52a84370cc3f"
+Template: "7d7a9ce2-fc3d-4805-b21c-ede94f84a875"
+Path: /sitecore/content/Storefront/Global/Lookups/System Messages
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150225T211500Z

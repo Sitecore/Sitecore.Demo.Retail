@@ -1,0 +1,21 @@
+﻿---
+ID: "7fd53f4b-d6fb-4f31-ad17-1fa6ded84e3a"
+Parent: "c69ba5fd-acd1-4ae3-a8f0-3f22f7d34b34"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Storefront/Page Templates/AddressBook Page/Labels/Set As Primary Label
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 700
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150114T013909Z

@@ -1,0 +1,22 @@
+﻿---
+ID: "aea0779e-07a3-4f7b-906c-a5eee8a7307d"
+Parent: "5fd0d2b8-bde6-4363-a2fe-e97cff4e67f1"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Storefront/Rendering Parameters/Three Column Width/Data
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: applications/32x32/gear.png
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141107T040428
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

@@ -1,0 +1,30 @@
+﻿---
+ID: "8fa06dc0-fdc1-4fb6-8af0-2efd26d1f226"
+Parent: "441b60d3-09bb-4111-a3ad-d10076b78b54"
+Template: "3de20043-6546-41a2-8dfd-45b394b9247e"
+Path: /sitecore/content/Storefront/Home/Error
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150113T161321Z
+    - ID: "a9ed0f86-13ab-4ef7-a0a3-5c5046dd77e1"
+      Hint: Page Text
+      Value: |
+         <h1>
+                Oops - We´re so sorry
+            </h1>
+            <h5>
+                Don't worry, you will be back on track in no time.
+            </h5>
+            <div class="error-page-content">
+                <p>The page you are looking for doesn't exist or some other error has occured.</p>
+                <p>Go to our <a href="/">home page</a> or try the <a href="javascript:history.back()">previous page</a></p>
+            </div>
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Error

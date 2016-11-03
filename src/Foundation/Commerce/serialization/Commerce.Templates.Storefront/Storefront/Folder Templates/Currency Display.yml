@@ -1,0 +1,35 @@
+﻿---
+ID: "80e0a4c5-b2a0-4bc7-9627-357901bfe3e9"
+Parent: "8e9c32b4-1fd0-47ec-90c2-24dd2f77e312"
+Template: "ab86861a-6030-46c5-b394-e8f99e8b87db"
+Path: /sitecore/templates/Storefront/Folder Templates/Currency Display
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Business/32x32/moneybag_dollar.png
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: |
+    {E269FBB5-3750-427A-9149-7AA950B49301}
+    {BA255355-225E-4EA7-AAF7-C4A05E8FF7A1}
+- ID: "12c33f3f-86c5-43a5-aeb4-5598cec45116"
+  Hint: __Base template
+  Type: tree list
+  Value: "{66CD2302-6169-4A29-A5D1-6000E4FA7084}"
+- ID: "f7d48a55-2158-4f02-9356-756654404f73"
+  Hint: __Standard values
+  Value: "{1772F25D-9887-40C0-B9AB-ED2DF97B9006}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20151008T102435Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

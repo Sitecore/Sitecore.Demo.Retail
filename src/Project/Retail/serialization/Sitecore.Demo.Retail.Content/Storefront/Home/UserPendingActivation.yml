@@ -1,0 +1,71 @@
+﻿---
+ID: "3c6fa02b-e52e-4d53-8147-a65ea2aca0b7"
+Parent: "441b60d3-09bb-4111-a3ad-d10076b78b54"
+Template: "d782ac04-9757-448f-961b-fc956fa37bf2"
+Path: /sitecore/content/Storefront/Home/UserPendingActivation
+DB: master
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 300
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s"
+      p:p="1">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r
+          uid="{BBAFC521-96BF-4B30-8641-B80F56AD616E}"
+          p:after="r[@uid='{8C308774-5362-4996-A416-527ED85204F1}']"
+          s:id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
+          s:ph="messages" />
+        <r
+          uid="{F1AC343C-1DC7-4A86-AF62-1AB640EADED6}"
+          p:after="r[@uid='{977A116E-E4E3-4322-8917-267068421DA1}']"
+          s:id="{CD59C6DD-7FE2-4717-8184-079510769283}"
+          s:ph="center" />
+        <r
+          uid="{90413A71-AF3B-426B-938F-DCD2F2968374}"
+          p:after="*[1=2]" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160407T203220Z
+    - ID: "45f196e4-e040-4338-b0b7-f687712a4376"
+      Hint: Activating
+      Value: Activating...
+    - ID: "4c06dd00-84c9-4e7f-9b06-3fc040b49d4e"
+      Hint: Activate User
+      Value: Activate User
+    - ID: "4e57ce7d-606a-4c58-b198-13ac304e820c"
+      Hint: Email Address Of Existing Customer
+      Value: Email Address
+    - ID: "60e22088-7ef6-4f99-9c4c-c0af95c949b8"
+      Hint: Activate Text
+      Value: Please provide the following information to activate your login.
+    - ID: "8d4d0880-ac07-4c6e-a9fc-ed41791ba398"
+      Hint: Activation Code
+      Value: Activation Code
+    - ID: "b2a77fdb-42aa-4bb5-beda-4018ff796ea6"
+      Hint: Email Address Placeholder
+      Value: Email Address
+    - ID: "b62a287a-4883-4cc3-8a54-f9ec29236a63"
+      Hint: Activation Code Missing Message
+      Value: The activation code is required.
+    - ID: "d4652875-c176-4a0f-a2bb-3674d19b46a8"
+      Hint: Cancel
+      Value: Cancel
+    - ID: "dc04f123-1242-4be1-b418-0a34c901fa3c"
+      Hint: Email Missing Message
+      Value: The email is required.
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Activate the link to an existing account

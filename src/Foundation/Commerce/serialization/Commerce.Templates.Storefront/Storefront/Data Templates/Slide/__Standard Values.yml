@@ -1,0 +1,21 @@
+﻿---
+ID: "633b07a8-65d2-4b6e-b406-90dd7c6d9ff4"
+Parent: "158e6ad5-e873-42a8-87c9-01e9abcd93ec"
+Template: "158e6ad5-e873-42a8-87c9-01e9abcd93ec"
+Path: /sitecore/templates/Storefront/Data Templates/Slide/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141021T081932
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "8368a4a8-b63d-4835-8478-1daf2e4af6f8"
+      Hint: Title
+      Value: $name

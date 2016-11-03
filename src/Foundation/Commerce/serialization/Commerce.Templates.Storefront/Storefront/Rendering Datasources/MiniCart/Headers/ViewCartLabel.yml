@@ -1,0 +1,21 @@
+﻿---
+ID: "67021cb8-3c03-4d60-aa4c-76024e6463f9"
+Parent: "6011e229-bb75-4a82-9ff9-8f69d6cce3e9"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Storefront/Rendering Datasources/MiniCart/Headers/ViewCartLabel
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 600
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141209T015805Z

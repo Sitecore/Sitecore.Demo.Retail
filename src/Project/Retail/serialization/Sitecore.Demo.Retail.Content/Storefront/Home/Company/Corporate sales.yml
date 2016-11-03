@@ -1,0 +1,25 @@
+﻿---
+ID: "94af66c5-d87c-4150-bdbf-7f029c6463ca"
+Parent: "9c6ff190-cb49-42f1-9f16-fd5d97d8fd69"
+Template: "16e859d2-6542-407a-ac65-f34bcad3eb3d"
+Path: /sitecore/content/Storefront/Home/Company/Corporate sales
+DB: master
+SharedFields:
+- ID: "32b3c63b-b71b-4845-a83f-d91e57aea220"
+  Hint: DisplayInSearchResults
+  Type: Checkbox
+  Value: 1
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141117T071731
+    - ID: "29099d33-1eae-49ab-8f00-f31db72ee2e4"
+      Hint: SummaryText
+      Value: Corporate sales
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Corporate Sales

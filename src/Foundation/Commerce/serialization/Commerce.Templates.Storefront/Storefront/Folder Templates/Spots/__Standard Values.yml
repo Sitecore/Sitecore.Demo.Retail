@@ -1,0 +1,18 @@
+﻿---
+ID: "41220859-7898-4f18-9dfd-8c8cded2ba8f"
+Parent: "320189d4-5172-40e0-8dd0-0ab356e9a943"
+Template: "320189d4-5172-40e0-8dd0-0ab356e9a943"
+Path: /sitecore/templates/Storefront/Folder Templates/Spots/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141021T041529
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

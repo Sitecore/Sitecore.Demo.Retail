@@ -1,0 +1,77 @@
+﻿---
+ID: "7536d18b-ebcf-4a24-9dde-8ba77aa60dc0"
+Parent: "4d316bba-345f-4929-9e84-a2208c0f7aa6"
+Template: "d4d9e81a-c494-43ae-9851-410d09394cf8"
+Path: /sitecore/content/Storefront/Home/AccountManagement/MyOrder
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06126e2e-1a2f-42c4-8b74-cd7aa7e6c4af"
+      Hint: Shipping Total Label
+      Value: Shipping total
+    - ID: "0dd06ffb-7b7a-4b83-92bc-c92664cd10b0"
+      Hint: Shipping Address Label
+      Value: Shipping Address
+    - ID: "1faf7afc-168a-4793-97ea-42c28af2aaf9"
+      Hint: Promotion Codes Label
+      Value: Promotion Codes
+    - ID: "258b65f7-553d-4b86-9642-9f1ad528ee55"
+      Hint: Savings Label
+      Value: Savings
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150105T204831Z
+    - ID: "2846e9bf-663c-48e3-92c7-75b77d8addef"
+      Hint: Your Products Header
+      Value: Your Products
+    - ID: "3564a1f4-4988-47b1-a8bf-fc00969e22d1"
+      Hint: Subtotal Label
+      Value: Subtotal
+    - ID: "577520de-aa1e-46fe-8aef-872e19301cfc"
+      Hint: Payments Label
+      Value: Payments
+    - ID: "7ec57576-a58a-465d-9e5e-ebfd9eb94980"
+      Hint: Tax Total Label
+      Value: VAT
+    - ID: "8809e952-4681-4f4b-aede-199f27929ecf"
+      Hint: Color Label
+      Value: Color
+    - ID: "8fb602a4-1f4c-4d47-929e-5507e697a555"
+      Hint: Discount Label
+      Value: Discount
+    - ID: "97d77995-a3ba-4c22-aed5-094174626610"
+      Hint: Billing Address Label
+      Value: Billing Address
+    - ID: "9e13e4ad-a169-42ef-bb85-f8257a080b00"
+      Hint: Order Number Label
+      Value: Order number
+    - ID: "ac13e44d-df37-4619-a140-225553293fe7"
+      Hint: Loyalty Card Label
+      Value: Loyalty Card
+    - ID: "ae228cb9-9406-4ed4-939d-ed4a7df09652"
+      Hint: View All Orders Label
+      Value: View All Orders
+    - ID: "b7bc66a7-2fbd-4a75-bae1-b4255c4896bf"
+      Hint: Order Status Label
+      Value: Order Status
+    - ID: "bd92cee4-b867-4d67-9708-3f0b6d33bf6d"
+      Hint: Order Total Label
+      Value: Order Total
+    - ID: "c97afcfe-8170-4e47-a7a6-0775b7e94e14"
+      Hint: Shipping Method Label
+      Value: Shipping Method
+    - ID: "db9c6c0c-9a3e-45a3-a14b-5921f37bfd69"
+      Hint: Delivery Label
+      Value: Delivery
+    - ID: "e4d24ddf-4336-4a36-8252-6db88ef93fe9"
+      Hint: Order Date Label
+      Value: Order date
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Your Order
+    - ID: "f53a75b0-cb77-42de-9976-94cab83ed6f0"
+      Hint: Loyalty Rewards Header
+      Value: Loyalty Rewards

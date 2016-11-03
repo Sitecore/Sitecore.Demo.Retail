@@ -1,0 +1,14 @@
+﻿---
+ID: "44bd03a4-2010-425f-9d12-6d14940c762a"
+Parent: "89003ee6-c368-4a68-b103-8acba997405c"
+Template: "7ee0975b-0698-493e-b3a2-0b2ef33d0522"
+Path: /sitecore/layout/Renderings/Storefront/Shared
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141009T035603

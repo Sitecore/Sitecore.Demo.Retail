@@ -1,0 +1,14 @@
+﻿---
+ID: "4ef723ee-10db-44b5-bc8f-2628ee762388"
+Parent: "8e497ed0-714d-445f-b861-835241dbe42a"
+Template: "80e0a4c5-b2a0-4bc7-9627-357901bfe3e9"
+Path: /sitecore/Commerce/Storefront Configuration/Currency Display
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20151008T102714Z

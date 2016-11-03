@@ -1,0 +1,36 @@
+﻿---
+ID: "9988b682-59c7-4319-8bf9-7071f132a5ad"
+Parent: "50ca28d4-c93c-435b-92da-866276a1bfdf"
+Template: "a59db217-0b2a-4e79-aa72-11743fecf500"
+Path: /sitecore/content/Storefront/Global/Site Spots/MiniCart
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Business/32x32/shoppingcart_full.png
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141123T014326
+    - ID: "67021cb8-3c03-4d60-aa4c-76024e6463f9"
+      Hint: ViewCartLabel
+      Value: View cart
+    - ID: "be9ebf28-579f-4b25-a851-85ea2ddfb719"
+      Hint: Price
+      Value: Price
+    - ID: "c348822f-f374-40a7-8ceb-58240db301f5"
+      Hint: CheckoutLabel
+      Value: Checkout
+    - ID: "dfe0f97d-5a01-4c23-9037-4637ea48b1a5"
+      Hint: Quantity
+      Value: Quantity
+    - ID: "e5827172-f48c-4e97-8d48-dd546f6c6318"
+      Hint: Total
+      Value: Total
+    - ID: "e9c22df9-5e98-4cfb-8a76-34521297332d"
+      Hint: Title
+      Value: items in your cart

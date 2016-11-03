@@ -1,0 +1,18 @@
+﻿---
+ID: "70343015-300c-4f4e-9223-b1499b09cb7e"
+Parent: "d782ac04-9757-448f-961b-fc956fa37bf2"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Storefront/Page Templates/UserPendingActivation Page/Validation Messages
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160407T202103Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

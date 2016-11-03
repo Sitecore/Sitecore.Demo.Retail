@@ -1,0 +1,29 @@
+﻿---
+ID: "09fb2812-e751-4578-b1eb-0d2930ad215c"
+Parent: "fbc0ee3b-9fbf-4356-8c0b-ca31a6bcaa00"
+Template: "ab86861a-6030-46c5-b394-e8f99e8b87db"
+Path: /sitecore/templates/Storefront/Page Templates/Search Page
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Applications/32x32/view.png
+- ID: "12c33f3f-86c5-43a5-aeb4-5598cec45116"
+  Hint: __Base template
+  Type: tree list
+  Value: |
+    {16E859D2-6542-407A-AC65-F34BCAD3EB3D}
+    {CB5F3E43-EAF7-4EDB-8235-674745D95059}
+    {917BAFA7-4CD6-44B5-9DAC-59FC063A9743}
+    {02CCCF95-7BE5-4549-81F9-AC97A22D6816}
+- ID: "f7d48a55-2158-4f02-9356-756654404f73"
+  Hint: __Standard values
+  Value: "{4CD0ECEB-0437-4E19-A1BE-51C4DC359064}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141009T083840Z

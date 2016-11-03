@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <configSections>
+    <section name="cachingConfiguration" type="Microsoft.Practices.EnterpriseLibrary.Caching.Configuration.CacheManagerSettings, Microsoft.Practices.EnterpriseLibrary.Caching, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" requirePermission="true" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+  </configSections>
+
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly name="WebGrease" xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)">
+        <assemblyIdentity name="WebGrease" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-1.6.5135.21930" newVersion="1.6.5135.21930" />
+      </dependentAssembly>
+      <dependentAssembly name="Antlr3.Runtime" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" >
+        <assemblyIdentity name="Antlr3.Runtime" publicKeyToken="eb42632606e9261f" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-3.4.1.9004" newVersion="3.4.1.9004" />
+      </dependentAssembly>
+      <dependentAssembly name="Castle.Windsor" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" >
+        <assemblyIdentity name="Castle.Windsor" publicKeyToken="407dd0808d44fbdc" />
+        <bindingRedirect oldVersion="1.0.0.0-3.3.0.0" newVersion="3.3.0.0" />
+      </dependentAssembly>
+      <dependentAssembly name="Castle.Core" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" >
+        <assemblyIdentity name="Castle.Core" publicKeyToken="407dd0808d44fbdc" />
+        <bindingRedirect oldVersion="1.0.0.0-3.3.0.0" newVersion="3.3.0.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+
+  <cachingConfiguration configSource="Caching.config" xdt:Transform="InsertIfMissing" />
+
+  <appSettings>
+    <add key="webpages:Version" value="2.0.0.0" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(key)" />
+    <add key="webpages:Enabled" value="false" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(key)" />
+    <add key="PreserveLoginUrl" value="true" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(key)" />
+    <add key="ClientValidationEnabled" value="true" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(key)" />
+    <add key="UnobtrusiveJavaScriptEnabled" value="true" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(key)" />
+    <add key="ValidationSettings:UnobtrusiveValidationMode" value="None" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(key)" />
+  </appSettings>
+
+  <system.web>
+    <!-- Required for profile provider when used in combination with Facebook login via Social Connected - http://sdn.sitecore.net/products/social connected module/social connected 1,-d-,3.aspx -->
+    <profile defaultProvider="switcher" xdt:Transform="SetAttributes">
+      <providers>
+        <add name="cs" type="Sitecore.Commerce.Connect.CommerceServer.Profiles.CommerceServerProfileProvider, Sitecore.Commerce.Connect.CommerceServer" applicationName="sitecore" readOnly="false" xdt:Transform="InsertIfMissingAfter(/configuration/system.web/profile/providers/clear)" xdt:Locator="Match(name)" />
+      </providers>
+      <properties>
+        <add type="System.String" name="user_id" customProviderData="cs|GeneralInfo.user_id" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="email_address" customProviderData="cs|GeneralInfo.email_address" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="preferred_address" customProviderData="cs|GeneralInfo.preferred_address" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="address_list" customProviderData="cs|GeneralInfo.address_list" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="preferred_credit_card" customProviderData="cs|GeneralInfo.preferred_credit_card" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="credit_card_list" customProviderData="cs|GeneralInfo.credit_card_list" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="user_type" customProviderData="cs|GeneralInfo.user_type" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="last_name" customProviderData="cs|GeneralInfo.last_name" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="first_name" customProviderData="cs|GeneralInfo.first_name" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="tel_number" customProviderData="cs|GeneralInfo.tel_number" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="tel_extension" customProviderData="cs|GeneralInfo.tel_extension" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="fax_number" customProviderData="cs|GeneralInfo.fax_number" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="fax_extension" customProviderData="cs|GeneralInfo.fax_extension" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="language" customProviderData="cs|GeneralInfo.language" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.Boolean" name="direct_mail_opt_out" customProviderData="cs|GeneralInfo.direct_mail_opt_out" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.Boolean" name="express_checkout" customProviderData="cs|GeneralInfo.express_checkout" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="preferred_shipping_method" customProviderData="cs|GeneralInfo.preferred_shipping_method" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="default_shopper_list" customProviderData="cs|GeneralInfo.default_shopper_list" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="org_id" customProviderData="cs|AccountInfo.org_id" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="account_status" customProviderData="cs|AccountInfo.account_status" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="user_catalog_set" customProviderData="cs|AccountInfo.user_catalog_set" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.DateTime" name="date_registered" customProviderData="cs|AccountInfo.date_registered" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.Int32" name="access_level" customProviderData="cs|AccountInfo.access_level" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.DateTime" name="date_last_changed" customProviderData="cs|ProfileSystem.date_last_changed" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.DateTime" name="date_created" customProviderData="cs|ProfileSystem.date_created" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="user_id_changed_by" customProviderData="cs|ProfileSystem.user_id_changed_by" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.Int32" name="KeyIndex" customProviderData="cs|ProfileSystem.KeyIndex" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.DateTime" name="csadapter_date_last_changed" customProviderData="cs|ProfileSystem.csadapter_date_last_changed" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.String" name="application_name" customProviderData="cs|ProfileSystem.application_name" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.DateTime" name="last_activity_date" customProviderData="cs|ProfileSystem.last_activity_date" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.DateTime" name="date_address_list_last_changed" customProviderData="cs|ProfileSystem.date_address_list_last_changed" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+        <add type="System.DateTime" name="date_credit_card_list_last_changed" customProviderData="cs|ProfileSystem.date_credit_card_list_last_changed" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
+      </properties>
+    </profile>
+
+    <caching xdt:Transform="InsertIfMissing">
+      <cache disableMemoryCollection="false" disableExpiration="false"  percentagePhysicalMemoryUsedLimit="50" xdt:Transform="InsertIfMissing"/>
+    </caching>
+
+    <customErrors defaultRedirect="/error" />
+
+    <sessionState timeout="1"/>
+  </system.web>
+
+  <system.webServer>
+    <validation validateIntegratedModeConfiguration="false" />
+  </system.webServer>
+</configuration>

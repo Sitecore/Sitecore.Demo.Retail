@@ -1,0 +1,30 @@
+﻿---
+ID: "bf9e2e06-e978-413f-ba77-ff8aff537b68"
+Parent: "50ca28d4-c93c-435b-92da-866276a1bfdf"
+Template: "ccf3975b-d3ad-41e0-ac52-1c9126974078"
+Path: /sitecore/content/Storefront/Global/Site Spots/Add Gift Card To Cart
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "0636163a-e6cd-416a-91dc-8b703e0054d5"
+      Hint: Add To Cart Button
+      Value: Add to cart
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150126T160157Z
+    - ID: "27806479-aa11-4372-9d0c-d50ad36b1008"
+      Hint: Quantity Label
+      Value: Quantity
+    - ID: "2d951e0e-d349-4541-be10-45214d43a1b5"
+      Hint: Gift Card Amount Label
+      Value: Gift card amount
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "861390e5-5956-46dc-99ae-f70b8bdae87e"
+      Hint: Adding To Cart Label
+      Value: Adding to cart ...

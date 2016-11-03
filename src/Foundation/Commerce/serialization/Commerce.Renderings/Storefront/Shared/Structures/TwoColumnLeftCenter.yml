@@ -1,0 +1,21 @@
+﻿---
+ID: "ce3fe888-f9da-41f1-9a56-4af550e43067"
+Parent: "c3327e97-d26a-44b7-8b46-c828e87088d2"
+Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
+Path: /sitecore/layout/Renderings/Storefront/Shared/Structures/TwoColumnLeftCenter
+DB: master
+SharedFields:
+- ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
+  Hint: Controller Action
+  Value: TwoColumnLeftCenter
+- ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
+  Hint: Controller
+  Value: Shared
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150217T160115Z

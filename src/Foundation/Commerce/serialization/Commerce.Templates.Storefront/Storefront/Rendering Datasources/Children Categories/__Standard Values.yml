@@ -1,0 +1,26 @@
+﻿---
+ID: "4ebfe6c1-c129-4217-8996-0cc7d43a3f2c"
+Parent: "b58709ff-0e93-4d44-be8e-8e644d8d27cc"
+Template: "b58709ff-0e93-4d44-be8e-8e644d8d27cc"
+Path: /sitecore/templates/Storefront/Rendering Datasources/Children Categories/__Standard Values
+DB: master
+SharedFields:
+- ID: "fd4e2050-186c-4375-8b99-e8a85dd7436e"
+  Hint: __Enable item fallback
+  Type: Checkbox
+  Value: 1
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150503T070224Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "efdabaec-e463-4ea0-93ef-f5439397b208"
+      Hint: Categories Label
+      Value: Categories

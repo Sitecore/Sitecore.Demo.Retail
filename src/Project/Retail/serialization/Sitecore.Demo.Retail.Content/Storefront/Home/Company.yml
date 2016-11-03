@@ -1,0 +1,22 @@
+﻿---
+ID: "9c6ff190-cb49-42f1-9f16-fd5d97d8fd69"
+Parent: "441b60d3-09bb-4111-a3ad-d10076b78b54"
+Template: "ce35efe0-01ea-4f43-b124-66fc4b0663ef"
+Path: /sitecore/content/Storefront/Home/Company
+DB: master
+SharedFields:
+- ID: "39c4902e-9960-4469-aeef-e878e9c8218f"
+  Hint: __Hidden
+  Type: Checkbox
+  Value: 1
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 200
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141117T065909

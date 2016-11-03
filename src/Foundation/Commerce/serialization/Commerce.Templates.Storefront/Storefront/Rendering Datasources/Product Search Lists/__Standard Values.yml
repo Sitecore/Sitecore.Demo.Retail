@@ -1,0 +1,19 @@
+﻿---
+ID: "08c71895-f0df-4f0b-add5-48a508ad570e"
+Parent: "d86ac339-3643-4617-b50e-d6c45f4773c9"
+Template: "d86ac339-3643-4617-b50e-d6c45f4773c9"
+Path: /sitecore/templates/Storefront/Rendering Datasources/Product Search Lists/__Standard Values
+DB: master
+SharedFields:
+- ID: "fd4e2050-186c-4375-8b99-e8a85dd7436e"
+  Hint: __Enable item fallback
+  Type: Checkbox
+  Value: 1
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160119T081018Z

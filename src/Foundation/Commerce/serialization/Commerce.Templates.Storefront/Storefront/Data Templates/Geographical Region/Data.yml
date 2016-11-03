@@ -1,0 +1,18 @@
+﻿---
+ID: "e9506682-5912-4cd3-9911-9742891a8022"
+Parent: "f0d5dd44-101a-46f4-81c8-f48a6ff5d17b"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Storefront/Data Templates/Geographical Region/Data
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150210T110211Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

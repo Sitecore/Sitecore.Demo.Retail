@@ -1,0 +1,57 @@
+﻿@*//-----------------------------------------------------------------------
+// Copyright 2016 Sitecore Corporation A/S
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+// except in compliance with the License. You may obtain a copy of the License at
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the
+// License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+// either express or implied. See the License for the specific language governing permissions
+// and limitations under the License.
+// -------------------------------------------------------------------------------------------*@
+
+@using Sitecore.Data.Managers;
+
+@{
+    var languages = Sitecore.Context.Database.GetItem("/sitecore/System/Languages");
+    var currentLanguage = Sitecore.Context.Language;
+}
+
+<div id="B01-LanguageSelector" class="language-selector">
+    <a href="#" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+        <span class="glyphicon glyphicon-globe"></span>
+        @if (currentLanguage != null)
+        {
+            @currentLanguage.GetDisplayName().Split(':')[1].TrimStart()
+        }
+    </a>
+
+    @*Show language drop menu if count greater than 1*@
+    @if (languages.Children.Count() > 1)
+    {
+        <ul class="dropdown-menu language-menu" role="menu" aria-labelledby="dLabel">
+            @foreach (Sitecore.Data.Items.Item language in languages.Children)
+            {
+                var lang = Sitecore.Data.Managers.LanguageManager.GetLanguage(language.Name.ToString()).CultureInfo.DisplayName;
+                if (lang != currentLanguage.CultureInfo.DisplayName)
+                {
+                    var locLanguage = Sitecore.Data.Managers.LanguageManager.GetLanguage(language.Name);
+                    var dispName = locLanguage.GetDisplayName().Split(':')[1].TrimStart();
+                    <li><a id="languageButton-@language.Name" href="#" onclick="SwitchToLanguage('@language.Name', '@currentLanguage.Name')">@dispName</a></li>
+                }
+            }
+        </ul>
+    }
+
+</div>
+
+<script type="text/javascript">
+    function SwitchToLanguage(language, currentLanguage) {
+        AJAXPost(StorefrontUri("api/storefront/shared/culturechosen"), "{\"Culture\":\"" + language + "\"}", function (data, success, sender) {
+            var path = window.location.pathname.replace('/' + currentLanguage + '/', '');
+            path = (path.charAt(0) === "/") ? path : "/" + path;
+            var newpath = window.location.protocol + '//' + window.location.hostname + "/" + language + path + window.location.search;
+            window.location = newpath;
+        });
+    }
+</script>

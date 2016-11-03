@@ -1,0 +1,29 @@
+﻿---
+ID: "9f6b0568-20e9-48f5-94b9-1188f5fb6e6e"
+Parent: "4d316bba-345f-4929-9e84-a2208c0f7aa6"
+Template: "040e1cdc-6620-4a3c-b965-ce5323c05984"
+Path: /sitecore/content/Storefront/Home/AccountManagement/MyOrders
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141229T175709Z
+    - ID: "36df18a7-4794-4c9c-bc61-ea515494f82d"
+      Hint: Back to My Account Label
+      Value: Back to My Account
+    - ID: "50067d29-1af0-4af8-b051-a507c0fa2e2a"
+      Hint: Order Status Label
+      Value: Order status
+    - ID: "b5cb89f5-ad33-4d61-9c99-be47b0750d56"
+      Hint: Order Number Label
+      Value: Order number
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Your Orders
+    - ID: "f4e176dc-4d51-408f-9cb3-6c22381e55b5"
+      Hint: Order Date Label
+      Value: Order date

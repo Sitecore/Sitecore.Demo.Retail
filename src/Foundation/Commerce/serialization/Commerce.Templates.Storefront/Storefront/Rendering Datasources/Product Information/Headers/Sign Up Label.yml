@@ -1,0 +1,21 @@
+﻿---
+ID: "e02d3cb5-39fd-4d67-b8b7-7d9bc6929311"
+Parent: "71b9829d-297b-43e6-8c0a-9159c4abcc9a"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Storefront/Rendering Datasources/Product Information/Headers/Sign Up Label
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 1400
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150218T173926Z

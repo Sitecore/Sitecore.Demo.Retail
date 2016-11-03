@@ -1,0 +1,39 @@
+﻿---
+ID: "f6504124-f766-43d0-824b-eb339cae8e5f"
+Parent: "50ca28d4-c93c-435b-92da-866276a1bfdf"
+Template: "87f2f2b9-cd50-4b78-9a27-fd853d5476b9"
+Path: /sitecore/content/Storefront/Global/Site Spots/Footer Navigation
+DB: master
+SharedFields:
+- ID: "03224123-cd60-4332-94f9-e075aa600941"
+  Hint: QuickLinks Middle Right
+  Value: "{54E0708F-7431-4711-A527-67C164ED5C73}"
+- ID: "15e2bcce-41d8-4f55-a7b5-832fa2fbf003"
+  Hint: QuickLinks Middle Left
+  Value: "{BE891052-E65A-4C5F-9F52-88D288E96974}"
+- ID: "2de01af0-982a-4db7-8ad0-9d94ac98c16c"
+  Hint: QuickLinks Right
+  Value: "{A52E8682-7CDF-4C95-8AD9-F22BCA07EB4C}"
+- ID: "be2a3f6c-5608-422c-83c2-653a18ec75fd"
+  Hint: QuickLinks Left
+  Value: "{38EDD590-FCC3-45C4-9231-3056F7C9BB7C}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141105T092512
+    - ID: "3bf250e5-0beb-49a3-ac06-2d3c9fe0068f"
+      Hint: QuickLinks Middle Left Title
+      Value: Account information
+    - ID: "6e701b19-9ffa-4165-a920-229b00dc9098"
+      Hint: QuickLinks Left Title
+      Value: Company information
+    - ID: "e66895e7-249f-4200-b685-6f67acbb2c91"
+      Hint: QuickLinks Middle Right Title
+      Value: Site options
+    - ID: "f7d2acd8-133f-44d5-9fe1-acbe7301d956"
+      Hint: QuickLinks Right Title
+      Value: Follow us

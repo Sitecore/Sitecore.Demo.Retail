@@ -1,0 +1,18 @@
+﻿---
+ID: "e88448c8-7c08-42c8-bb59-f2719b84576b"
+Parent: "3deaa741-69d6-4cbf-ba89-079f22202ade"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Storefront/Rendering Datasources/QuickLinks/QuickLinks
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: network/32x32/node.png
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141021T081621

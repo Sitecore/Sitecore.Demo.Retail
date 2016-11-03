@@ -1,0 +1,31 @@
+﻿---
+ID: "f3c0cd6c-9fa9-442d-bd3a-5a25e292f2f7"
+Parent: "648ee9e7-67b0-48b7-8e9b-eadadc0519c3"
+Template: "ab86861a-6030-46c5-b394-e8f99e8b87db"
+Path: /sitecore/templates/Storefront/Data Templates/Named Search
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Applications/16x16/find.png
+- ID: "12c33f3f-86c5-43a5-aeb4-5598cec45116"
+  Hint: __Base template
+  Type: tree list
+  Value: |
+    {CB5F3E43-EAF7-4EDB-8235-674745D95059}
+    {8ED45666-178D-4732-BA2A-56EFA8C72507}
+- ID: "f7d48a55-2158-4f02-9356-756654404f73"
+  Hint: __Standard values
+  Value: "{1F58FB66-F522-46C9-B134-C694E30C7213}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141022T082644
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

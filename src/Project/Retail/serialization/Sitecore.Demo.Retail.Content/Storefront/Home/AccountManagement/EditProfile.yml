@@ -1,0 +1,17 @@
+﻿---
+ID: "276e2bdb-91ee-4558-9bfb-b8d2208952c2"
+Parent: "4d316bba-345f-4929-9e84-a2208c0f7aa6"
+Template: "292b2761-f08f-4d9a-9820-87cf7cbed2cc"
+Path: /sitecore/content/Storefront/Home/AccountManagement/EditProfile
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150122T084856Z
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Account Profile

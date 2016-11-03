@@ -1,0 +1,74 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Demo.Retail", "src\Project\Retail\code\Sitecore.Demo.Retail.csproj", "{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{1C515A08-DDF6-497A-9475-44F1990FC3CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Retail", "Retail", "{B3C10EC2-6B18-480D-8C75-CE4929838289}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{1EE871B8-E158-46DE-AD3C-6D0B7DE4A081}"
+	ProjectSection(SolutionItems) = preProject
+		gulp-config.js = gulp-config.js
+		gulpfile.js = gulpfile.js
+		package.json = package.json
+		publishsettings.targets = publishsettings.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Foundation", "Foundation", "{A65C1E2B-A56A-4E86-B928-23176FC86DB8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commerce", "Commerce", "{F12F210F-76B3-4142-8AB9-06677BCAED1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Foundation.Commerce", "src\Foundation\Commerce\code\Sitecore.Foundation.Commerce.csproj", "{662345AC-23EE-4125-87A6-0785795C2409}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Reference.Storefront.Common", "src\Foundation\Commerce\storefront\Common\Sitecore.Reference.Storefront.Common.csproj", "{8450F330-0271-4091-8809-C671CCD50671}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Reference.Storefront.Common.Settings", "src\Foundation\Commerce\storefront\CommonSettings\Sitecore.Reference.Storefront.Common.Settings.csproj", "{7B5BFDC5-7552-4EF0-807B-D9B60A78B3FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Reference.Storefront.Powered.by.CommerceServer", "src\Foundation\Commerce\storefront\CS\CSF\Sitecore.Reference.Storefront.Powered.by.CommerceServer.csproj", "{304F09AD-2FC3-453F-B016-50A1F842E3A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "storefront", "storefront", "{0639A703-FE73-43C9-8F19-5E62FA008BC3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655}.Release|Any CPU.Build.0 = Release|Any CPU
+		{662345AC-23EE-4125-87A6-0785795C2409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{662345AC-23EE-4125-87A6-0785795C2409}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{662345AC-23EE-4125-87A6-0785795C2409}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{662345AC-23EE-4125-87A6-0785795C2409}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8450F330-0271-4091-8809-C671CCD50671}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8450F330-0271-4091-8809-C671CCD50671}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8450F330-0271-4091-8809-C671CCD50671}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8450F330-0271-4091-8809-C671CCD50671}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B5BFDC5-7552-4EF0-807B-D9B60A78B3FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B5BFDC5-7552-4EF0-807B-D9B60A78B3FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B5BFDC5-7552-4EF0-807B-D9B60A78B3FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B5BFDC5-7552-4EF0-807B-D9B60A78B3FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{304F09AD-2FC3-453F-B016-50A1F842E3A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{304F09AD-2FC3-453F-B016-50A1F842E3A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{304F09AD-2FC3-453F-B016-50A1F842E3A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{304F09AD-2FC3-453F-B016-50A1F842E3A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655} = {B3C10EC2-6B18-480D-8C75-CE4929838289}
+		{B3C10EC2-6B18-480D-8C75-CE4929838289} = {1C515A08-DDF6-497A-9475-44F1990FC3CE}
+		{F12F210F-76B3-4142-8AB9-06677BCAED1E} = {A65C1E2B-A56A-4E86-B928-23176FC86DB8}
+		{662345AC-23EE-4125-87A6-0785795C2409} = {F12F210F-76B3-4142-8AB9-06677BCAED1E}
+		{8450F330-0271-4091-8809-C671CCD50671} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
+		{7B5BFDC5-7552-4EF0-807B-D9B60A78B3FD} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
+		{304F09AD-2FC3-453F-B016-50A1F842E3A9} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
+		{0639A703-FE73-43C9-8F19-5E62FA008BC3} = {F12F210F-76B3-4142-8AB9-06677BCAED1E}
+	EndGlobalSection
+EndGlobal

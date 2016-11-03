@@ -1,0 +1,18 @@
+﻿---
+ID: "b8a48538-bfea-42b2-bd01-e3cdc3858ae8"
+Parent: "ca2e00b1-0917-44a5-ad05-5fc3167aaa0c"
+Template: "b67e45b2-2fa8-481c-ad41-ea1dee59ecb0"
+Path: /sitecore/Commerce/Shipping Options
+DB: master
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 600
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150211T112233Z

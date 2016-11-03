@@ -1,0 +1,28 @@
+﻿---
+ID: "50ca28d4-c93c-435b-92da-866276a1bfdf"
+Parent: "67a61d44-9c33-4490-8f6e-ae6c1819682f"
+Template: "4e47dcb0-d735-4f1d-b369-2bb80597b0e4"
+Path: /sitecore/content/Storefront/Global/Site Spots
+DB: master
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: |
+    {1FF7F566-A109-43C2-BDE8-32ED25E35225}
+    {3DEAA741-69D6-4CBF-BA89-079F22202ADE}
+    {DAB02003-2A0E-4A83-B187-69429C935290}
+    {F73F2DD4-F64F-4134-90B2-0B16E37DF630}
+    {7395B9E1-6AFA-4D63-91ED-8A8BE11D26B0}
+    {87F2F2B9-CD50-4B78-9A27-FD853D5476B9}
+    {917BAFA7-4CD6-44B5-9DAC-59FC063A9743}
+    {72AADE9F-48C2-474A-84D2-F9FEE9107F12}
+    {CCF3975B-D3AD-41E0-AC52-1C9126974078}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141021T081605Z

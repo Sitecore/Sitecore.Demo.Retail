@@ -1,0 +1,83 @@
+﻿---
+ID: "38edd590-fcc3-45c4-9231-3056f7c9bb7c"
+Parent: "3a5114ac-44ca-401c-a20a-c3ec314630c8"
+Template: "3deaa741-69d6-4cbf-ba89-079f22202ade"
+Path: /sitecore/content/Storefront/Global/QuickLinks/Company Information
+DB: master
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 300
+Languages:
+- Language: "de-DE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "1250ae47-b620-4e3d-bd17-a36bc3595143"
+      Hint: QuickLinks
+      Type: TreelistEx
+      Value: |
+        {2416D35E-18BE-4E60-A1F5-83C8232CE6E6}
+        {F9337B4F-FCE0-46F9-9672-6BBD0F873666}
+        {6999AE2D-1E23-4E71-8912-9C990DBB08DD}
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150901T111844Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "1250ae47-b620-4e3d-bd17-a36bc3595143"
+      Hint: QuickLinks
+      Type: TreelistEx
+      Value: |
+        {2416D35E-18BE-4E60-A1F5-83C8232CE6E6}
+        {F9337B4F-FCE0-46F9-9672-6BBD0F873666}
+        {6999AE2D-1E23-4E71-8912-9C990DBB08DD}
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141105T092527
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+- Language: "fr-FR"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "1250ae47-b620-4e3d-bd17-a36bc3595143"
+      Hint: QuickLinks
+      Type: TreelistEx
+      Value: |
+        {2416D35E-18BE-4E60-A1F5-83C8232CE6E6}
+        {F9337B4F-FCE0-46F9-9672-6BBD0F873666}
+        {6999AE2D-1E23-4E71-8912-9C990DBB08DD}
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150901T111918Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+- Language: "ja-JP"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "1250ae47-b620-4e3d-bd17-a36bc3595143"
+      Hint: QuickLinks
+      Type: TreelistEx
+      Value: |
+        {2416D35E-18BE-4E60-A1F5-83C8232CE6E6}
+        {F9337B4F-FCE0-46F9-9672-6BBD0F873666}
+        {6999AE2D-1E23-4E71-8912-9C990DBB08DD}
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150901T111942Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

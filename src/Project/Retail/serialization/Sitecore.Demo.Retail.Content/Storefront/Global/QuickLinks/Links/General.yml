@@ -1,0 +1,18 @@
+﻿---
+ID: "f0f6f47f-39f3-4592-bc01-eccc5db50aae"
+Parent: "76ddd778-d0b3-4c9b-b4d9-3ee55bccaf5f"
+Template: "0c4f68b2-5c50-4bf6-8693-e5d325c8d742"
+Path: /sitecore/content/Storefront/Global/QuickLinks/Links/General
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141105T092959
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

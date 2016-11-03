@@ -1,0 +1,18 @@
+﻿---
+ID: "7d53e1c0-d54e-4003-a338-a38dcd819ede"
+Parent: "8e497ed0-714d-445f-b861-835241dbe42a"
+Template: "8f8ed946-a889-4320-9bad-bea3438aa683"
+Path: /sitecore/Commerce/Storefront Configuration/Currencies
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150929T121015Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

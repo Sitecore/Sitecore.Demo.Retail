@@ -1,0 +1,43 @@
+﻿---
+ID: "8bd15ec8-799b-4aa1-aebb-45ec6678a57f"
+Parent: "06c80404-7020-45f1-b818-cb650f71dc69"
+Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
+Path: /sitecore/layout/Renderings/Storefront/Catalog/ProductRecommendation
+DB: master
+SharedFields:
+- ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
+  Hint: Datasource Template
+  Value: /sitecore/templates/Storefront/Rendering Datasources/Product Search Lists
+- ID: "3d08db46-2267-41b0-bc52-be69fd618633"
+  Hint: Cacheable
+  Type: Checkbox
+  Value: 1
+- ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
+  Hint: Datasource Location
+  Value: /sitecore/content/Storefront/Global/Product Search Lists
+- ID: "c7c26117-dbb1-42b2-ab5e-f7223845cca3"
+  Hint: __Thumbnail
+  Value: |
+    <image mediaid="{E6E11ED1-4815-43CE-ACDB-AA766E08A05F}" />
+- ID: "c81ed375-7c73-4815-8ea5-8ccfc4056929"
+  Hint: VaryByCurrency
+  Type: Checkbox
+  Value: 1
+- ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
+  Hint: Controller Action
+  Value: MultipleProductLists
+- ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
+  Hint: Controller
+  Value: Catalog
+- ID: "f3e7e552-d7c8-469b-a150-69e4e14ab35c"
+  Hint: ClearOnIndexUpdate
+  Type: Checkbox
+  Value: 1
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141009T040447

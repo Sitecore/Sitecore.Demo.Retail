@@ -1,0 +1,25 @@
+﻿---
+ID: "ece87391-296e-41a5-bb78-dfa1ed14c730"
+Parent: "ca53f506-8d36-40d7-a3f0-e2a9d44ad9b7"
+Template: "73c120c2-846f-456c-b096-19eaae4f6258"
+Path: /sitecore/content/Storefront/Global/Lookups/System Messages/MaxWishListLineLimitReached
+DB: master
+SharedFields:
+- ID: "180436b0-affb-41e2-b6e8-a3bc8812a9f7"
+  Hint: Key
+  Value: MaxWishListLineLimitReached
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150402T070104Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "de73a874-cb1a-470d-80a2-818caba4f0e5"
+      Hint: Value
+      Value: "The maximum number of wishlist lines ({0}) has been reached."

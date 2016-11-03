@@ -1,0 +1,29 @@
+﻿---
+ID: "b6c0593e-1c35-4c61-8db5-e7c7aa19d955"
+Parent: "44bd03a4-2010-425f-9d12-6d14940c762a"
+Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
+Path: /sitecore/layout/Renderings/Storefront/Shared/LanguageSelector
+DB: master
+SharedFields:
+- ID: "1084d3d2-0457-456a-abbc-eb4cc0966072"
+  Hint: VaryByQueryString
+  Type: Checkbox
+  Value: 1
+- ID: "3d08db46-2267-41b0-bc52-be69fd618633"
+  Hint: Cacheable
+  Type: Checkbox
+  Value: 1
+- ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
+  Hint: Controller Action
+  Value: LanguageSelector
+- ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
+  Hint: Controller
+  Value: Shared
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150217T162137Z

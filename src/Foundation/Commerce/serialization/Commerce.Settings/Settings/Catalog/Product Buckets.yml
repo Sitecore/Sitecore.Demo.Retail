@@ -1,0 +1,46 @@
+﻿---
+ID: "68d829fc-d89b-4cfa-93dc-57f767c3baf9"
+Parent: "614105bc-c812-43e6-8005-1934275a9529"
+Template: "ec3a4a56-12d5-4883-b809-501f85043ced"
+Path: /sitecore/Commerce/Settings/Catalog/Product Buckets
+DB: master
+SharedFields:
+- ID: "4f17697f-bd00-4d76-b4f5-1b53c0c8d884"
+  Hint: Value
+  Type: Checkbox
+  Value: 0
+- ID: "a0cb3965-8884-4c7a-8815-b6b2e5ced162"
+  Hint: __Editors
+  Type: TreelistEx
+  Value: "{59F53BBB-D1F5-4E38-8EBA-0D73109BB59B}"
+- ID: "d312103c-b36c-4ca5-864a-c85f9abda503"
+  Hint: __Is Bucket
+  Type: Checkbox
+  Value: 0
+Languages:
+- Language: "de-DE"
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Big Data  Support
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161101T035331Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Anonymous
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20130319T112900
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

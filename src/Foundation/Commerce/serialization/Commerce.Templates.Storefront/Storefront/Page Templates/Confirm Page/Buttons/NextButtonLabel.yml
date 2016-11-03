@@ -1,0 +1,18 @@
+﻿---
+ID: "f7164ddb-92fe-4cdf-823d-989c6f90739f"
+Parent: "6d7e0b9d-b939-4f4b-b789-91a146f01392"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Storefront/Page Templates/Confirm Page/Buttons/NextButtonLabel
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141217T042212Z

@@ -1,0 +1,21 @@
+﻿---
+ID: "a48dcff4-5ad2-4d4e-8e61-4e4c538770e7"
+Parent: "82454015-7af2-4530-bed9-39a01dcd85be"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Storefront/Page Templates/ForgotPassword Page/Validation Messages/Email Missing Message
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 100
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150110T091244Z

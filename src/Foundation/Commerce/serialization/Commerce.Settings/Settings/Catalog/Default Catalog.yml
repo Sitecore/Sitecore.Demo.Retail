@@ -1,0 +1,37 @@
+﻿---
+ID: "20cf30d5-9be4-4681-91dd-e15b515fd1f3"
+Parent: "614105bc-c812-43e6-8005-1934275a9529"
+Template: "f8c2d048-1934-4eb1-9c5f-8c67db673a30"
+Path: /sitecore/Commerce/Settings/Catalog/Default Catalog
+DB: master
+SharedFields:
+- ID: "8bbc9900-067f-40ea-8500-8b2c247636f7"
+  Hint: Catalog
+  Value: Adventure Works Catalog
+Languages:
+- Language: "de-DE"
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Standardkatalog
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: "20150125T113332:635577824128814208Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Anonymous
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20131204T085348
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

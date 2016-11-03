@@ -1,0 +1,18 @@
+﻿---
+ID: "6011e229-bb75-4a82-9ff9-8f69d6cce3e9"
+Parent: "a59db217-0b2a-4e79-aa72-11743fecf500"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Storefront/Rendering Datasources/MiniCart/Headers
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141123T014125
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

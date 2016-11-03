@@ -1,0 +1,21 @@
+﻿---
+ID: "84761f65-e049-488f-959d-c24543612ef4"
+Parent: "eae32698-c28a-4e8a-b876-bb5be0ac526c"
+Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
+Path: /sitecore/layout/Renderings/Storefront/Search/SiteContentSearchResultsListHeader
+DB: master
+SharedFields:
+- ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
+  Hint: Controller Action
+  Value: SiteContentSearchResultsListHeader
+- ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
+  Hint: Controller
+  Value: StorefrontSearch
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150122T221351Z

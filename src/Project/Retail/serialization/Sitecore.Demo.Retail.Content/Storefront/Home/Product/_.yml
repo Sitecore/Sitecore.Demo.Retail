@@ -1,0 +1,32 @@
+﻿---
+ID: "4bee27d3-f30e-4467-a57a-4fff56c7e3fe"
+Parent: "4833d35e-3b01-4395-93d5-273aa8398505"
+Template: "64ca6109-64ab-487f-853f-a406ff3115b6"
+Path: /sitecore/content/Storefront/Home/Product/*
+DB: master
+SharedFields:
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s"
+      p:p="1">
+      <d
+        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+        <r
+          uid="{DF62B3B5-68B5-4D6C-8AD3-E5B82C2A3B36}">
+          <p:d />
+        </r>
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150108T195812Z
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: *

@@ -1,0 +1,50 @@
+﻿---
+ID: "1531da3c-6f6d-49e2-854a-5e604155f42a"
+Parent: "4d316bba-345f-4929-9e84-a2208c0f7aa6"
+Template: "d8f961c3-1a33-41c5-85bd-a76b785e87ab"
+Path: /sitecore/content/Storefront/Home/AccountManagement/MyWishList
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "05a55571-536e-43c3-9be1-89835d7e9ad4"
+      Hint: Color Label
+      Value: Color
+    - ID: "1068af13-b782-4362-ac38-5668fb66a1cc"
+      Hint: Unit Price Label
+      Value: Unit Price
+    - ID: "1f65e5da-12e3-44f8-9532-e08a56ff159b"
+      Hint: Change Wish List Label
+      Value: Change Wish List
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150110T133031Z
+    - ID: "2b61380c-1292-41a7-b529-a9e59b573108"
+      Hint: Add Selected Items To Cart Button
+      Value: Add selected items to cart
+    - ID: "350c0372-c64b-4e93-b5a7-bad4b9f33aad"
+      Hint: Total Label
+      Value: Total
+    - ID: "720921fc-ab99-4338-9944-ff91aca82055"
+      Hint: Quantity Label
+      Value: Quantity
+    - ID: "850244ad-20ea-4c1b-9df4-20fbbce1f5f0"
+      Hint: Add Selected Items To Cart Button Loading
+      Value: Adding items ...
+    - ID: "87e89ff1-d796-44a7-a717-ae506698dbf8"
+      Hint: Back To My Wish Lists Label
+      Value: Back to My Wish Lists
+    - ID: "8aafcf13-432c-440f-b2a3-104c6c3c760c"
+      Hint: Product Details Label
+      Value: Product Details
+    - ID: "9c6bc4ec-9d6d-4574-9dd7-88d82b9fcb38"
+      Hint: List Empty Text
+      Value: <p>Your list is empty</p>
+    - ID: "ac731847-a489-4942-99b0-8914d3c0642b"
+      Hint: You Save Label
+      Value: You save
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Your Wish List

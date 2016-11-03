@@ -1,0 +1,25 @@
+﻿---
+ID: "f7259e72-18ee-4dd6-b138-95aea2916605"
+Parent: "5be2ef93-f2f7-4df2-803f-0589c4b1fc5d"
+Template: "87c331ae-3293-4fd1-a5f2-a625523f3019"
+Path: /sitecore/content/Storefront/Global/QuickLinks/Links/Social Media/Facebook
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141105T093345
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "6cb9eb87-680b-4cb9-9946-9baeb553f6b8"
+      Hint: Text
+      Value: Facebook
+    - ID: "b861b1ed-2820-4ad8-b169-8928ac381634"
+      Hint: Link
+      Value: |
+        <link text="Facebook" linktype="external" url="http://www.facebook.com" anchor="" target="_blank" />

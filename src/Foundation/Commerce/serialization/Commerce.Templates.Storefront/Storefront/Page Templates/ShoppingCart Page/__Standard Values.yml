@@ -1,0 +1,396 @@
+﻿---
+ID: "17bcaafd-5db6-48c6-8e19-8f280600d8da"
+Parent: "a5a90b92-457c-490f-8b98-a54990772c75"
+Template: "a5a90b92-457c-490f-8b98-a54990772c75"
+Path: /sitecore/templates/Storefront/Page Templates/ShoppingCart Page/__Standard Values
+DB: master
+SharedFields:
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{F5034347-7E92-41D7-B8EB-F51D1F1BCF1C}">
+        <r
+          id="{15A09072-CE89-4126-A9E4-17753FC726FF}"
+          ph="top"
+          uid="{0E2D603A-CF36-4EE2-B598-D2E06AEBD5AE}" />
+        <r
+          ds="{98CE979E-638E-4EE0-AD7F-05164173F1C1}"
+          id="{DC1B9040-8694-456A-A5E6-81996BD1B2AA}"
+          par=""
+          ph="topleft"
+          uid="{5D2C83EE-F8CA-41B9-BBF2-03CBC74D3F52}" />
+        <r
+          id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
+          ph="messages"
+          uid="{67B3C0B8-0529-4597-A3E3-AB837B4A6FAC}" />
+        <r
+          id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
+          ph="middle"
+          uid="{F720367A-12C1-4818-887C-EB6B70A32640}" />
+        <r
+          id="{AB04C56D-6E50-4AD8-8545-60AEBAA73C3C}"
+          ph="center"
+          uid="{9665D95B-D94D-43DB-AADB-996AD434FA03}" />
+        <r
+          id="{E1399DA5-1629-4CC4-8E37-5DCCB078C711}"
+          ph="center"
+          uid="{D3D0917F-627F-4DE0-8B33-0215E03C7171}" />
+      </d>
+      <d
+        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
+        l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+        <r
+          id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
+          ph="middle"
+          uid="{01398123-D8BA-4185-A04C-5254820CCBB2}" />
+        <r
+          id="{AB04C56D-6E50-4AD8-8545-60AEBAA73C3C}"
+          ph="center"
+          uid="{5C79034B-3A89-484C-BFE6-29642E5DFB8F}" />
+      </d>
+    </r>
+- ID: "fd4e2050-186c-4375-8b99-e8a85dd7436e"
+  Hint: __Enable item fallback
+  Type: Checkbox
+  Value: 1
+Languages:
+- Language: "de-DE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "00a44708-3f62-40da-bd5c-96eafd85cac2"
+      Hint: Promo Code Label
+      Value: Promotion code
+    - ID: "03090e3b-94da-461d-9419-c9235fce5c1b"
+      Hint: Unit Price Label
+      Value: Unit price
+    - ID: "03972573-f2e1-4750-973c-abe93fae5f81"
+      Hint: Payment Total Label
+      Value: "Payment total:"
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
+            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            <r
+              uid="{01398123-D8BA-4185-A04C-5254820CCBB2}"
+              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
+              s:ph="middle" />
+            <r
+              uid="{5C79034B-3A89-484C-BFE6-29642E5DFB8F}"
+              s:id="{AB04C56D-6E50-4AD8-8545-60AEBAA73C3C}"
+              s:ph="center" />
+          </d>
+        </r>
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141121T071552
+    - ID: "2c2fa18d-775b-4e00-80bb-20022b19402b"
+      Hint: Discount Label
+      Value: "Discount:"
+    - ID: "361b56fe-46ee-4e86-9a83-5f7a1127e846"
+      Hint: Total Label
+      Value: Total
+    - ID: "3e503a8f-ad03-464e-b61d-09cc8d6e79f7"
+      Hint: Order Total Header Label
+      Value: Order Total
+    - ID: "4fe90be9-09e0-4915-881e-0def17a3f3a0"
+      Hint: Promo Code List Label
+      Value: "Promotion code:"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "6c2b407a-476f-4b29-80b7-78526ff43645"
+      Hint: Order Total Label
+      Value: "Order total:"
+    - ID: "71834529-ffdc-4d99-8203-86576cc04f33"
+      Hint: Enter Coupon Code Message
+      Value: Enter a coupon code to apply to the current order.
+    - ID: "7774845a-2602-442f-8741-2b34c1623100"
+      Hint: Adding Promo Code Button
+      Value: Adding promotion code...
+    - ID: "782ec575-8b6d-4f75-b020-21126ae25a21"
+      Hint: Total Savings Label
+      Value: "Total discount:"
+    - ID: "88c87f20-8237-4e2f-87f7-2d6b6ea43331"
+      Hint: Add Promo Code Button
+      Value: Add promotion code
+    - ID: "bcae4882-2c82-42d7-8b33-d269cb521e36"
+      Hint: Product Details Label
+      Value: Product details
+    - ID: "e5337d27-918e-4dc7-955a-9185314c6615"
+      Hint: Color Label
+      Value: "Color:"
+    - ID: "eb60a902-0075-4d80-9649-0b0a6afee633"
+      Hint: Remove Button
+      Value: Remove
+    - ID: "ec26e453-f364-4070-b697-70c5c6d5ecaf"
+      Hint: VAT Label
+      Value: "VAT:"
+    - ID: "ed2a6656-70d9-4b47-91c4-b2b3e574c6c6"
+      Hint: Quantity Label
+      Value: Quantity
+    - ID: "f1cdcc4b-3183-4465-bfa7-3dae152cafa9"
+      Hint: Savings Label
+      Value: "Discount:"
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "00a44708-3f62-40da-bd5c-96eafd85cac2"
+      Hint: Promo Code Label
+      Value: Promotion code
+    - ID: "03090e3b-94da-461d-9419-c9235fce5c1b"
+      Hint: Unit Price Label
+      Value: Unit price
+    - ID: "03972573-f2e1-4750-973c-abe93fae5f81"
+      Hint: Payment Total Label
+      Value: "Payment total:"
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
+            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            <r
+              uid="{01398123-D8BA-4185-A04C-5254820CCBB2}"
+              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
+              s:ph="middle" />
+            <r
+              uid="{5C79034B-3A89-484C-BFE6-29642E5DFB8F}"
+              s:id="{AB04C56D-6E50-4AD8-8545-60AEBAA73C3C}"
+              s:ph="center" />
+          </d>
+        </r>
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141121T071552
+    - ID: "2c2fa18d-775b-4e00-80bb-20022b19402b"
+      Hint: Discount Label
+      Value: "Discount:"
+    - ID: "361b56fe-46ee-4e86-9a83-5f7a1127e846"
+      Hint: Total Label
+      Value: Total
+    - ID: "3e503a8f-ad03-464e-b61d-09cc8d6e79f7"
+      Hint: Order Total Header Label
+      Value: Order Total
+    - ID: "4fe90be9-09e0-4915-881e-0def17a3f3a0"
+      Hint: Promo Code List Label
+      Value: "Promotion code:"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "6c2b407a-476f-4b29-80b7-78526ff43645"
+      Hint: Order Total Label
+      Value: "Order total:"
+    - ID: "71834529-ffdc-4d99-8203-86576cc04f33"
+      Hint: Enter Coupon Code Message
+      Value: Enter a coupon code to apply to the current order.
+    - ID: "7774845a-2602-442f-8741-2b34c1623100"
+      Hint: Adding Promo Code Button
+      Value: Adding promotion code...
+    - ID: "782ec575-8b6d-4f75-b020-21126ae25a21"
+      Hint: Total Savings Label
+      Value: "Total discount:"
+    - ID: "88c87f20-8237-4e2f-87f7-2d6b6ea43331"
+      Hint: Add Promo Code Button
+      Value: Add promotion code
+    - ID: "bcae4882-2c82-42d7-8b33-d269cb521e36"
+      Hint: Product Details Label
+      Value: Product details
+    - ID: "e5337d27-918e-4dc7-955a-9185314c6615"
+      Hint: Color Label
+      Value: "Color:"
+    - ID: "eb60a902-0075-4d80-9649-0b0a6afee633"
+      Hint: Remove Button
+      Value: Remove
+    - ID: "ec26e453-f364-4070-b697-70c5c6d5ecaf"
+      Hint: VAT Label
+      Value: "VAT:"
+    - ID: "ed2a6656-70d9-4b47-91c4-b2b3e574c6c6"
+      Hint: Quantity Label
+      Value: Quantity
+    - ID: "f1cdcc4b-3183-4465-bfa7-3dae152cafa9"
+      Hint: Savings Label
+      Value: "Discount:"
+- Language: "fr-FR"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "00a44708-3f62-40da-bd5c-96eafd85cac2"
+      Hint: Promo Code Label
+      Value: Promotion code
+    - ID: "03090e3b-94da-461d-9419-c9235fce5c1b"
+      Hint: Unit Price Label
+      Value: Unit price
+    - ID: "03972573-f2e1-4750-973c-abe93fae5f81"
+      Hint: Payment Total Label
+      Value: "Payment total:"
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
+            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            <r
+              uid="{01398123-D8BA-4185-A04C-5254820CCBB2}"
+              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
+              s:ph="middle" />
+            <r
+              uid="{5C79034B-3A89-484C-BFE6-29642E5DFB8F}"
+              s:id="{AB04C56D-6E50-4AD8-8545-60AEBAA73C3C}"
+              s:ph="center" />
+          </d>
+        </r>
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141121T071552
+    - ID: "2c2fa18d-775b-4e00-80bb-20022b19402b"
+      Hint: Discount Label
+      Value: "Discount:"
+    - ID: "361b56fe-46ee-4e86-9a83-5f7a1127e846"
+      Hint: Total Label
+      Value: Total
+    - ID: "3e503a8f-ad03-464e-b61d-09cc8d6e79f7"
+      Hint: Order Total Header Label
+      Value: Order Total
+    - ID: "4fe90be9-09e0-4915-881e-0def17a3f3a0"
+      Hint: Promo Code List Label
+      Value: "Promotion code:"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "6c2b407a-476f-4b29-80b7-78526ff43645"
+      Hint: Order Total Label
+      Value: "Order total:"
+    - ID: "71834529-ffdc-4d99-8203-86576cc04f33"
+      Hint: Enter Coupon Code Message
+      Value: Enter a coupon code to apply to the current order.
+    - ID: "7774845a-2602-442f-8741-2b34c1623100"
+      Hint: Adding Promo Code Button
+      Value: Adding promotion code...
+    - ID: "782ec575-8b6d-4f75-b020-21126ae25a21"
+      Hint: Total Savings Label
+      Value: "Total discount:"
+    - ID: "88c87f20-8237-4e2f-87f7-2d6b6ea43331"
+      Hint: Add Promo Code Button
+      Value: Add promotion code
+    - ID: "bcae4882-2c82-42d7-8b33-d269cb521e36"
+      Hint: Product Details Label
+      Value: Product details
+    - ID: "e5337d27-918e-4dc7-955a-9185314c6615"
+      Hint: Color Label
+      Value: "Color:"
+    - ID: "eb60a902-0075-4d80-9649-0b0a6afee633"
+      Hint: Remove Button
+      Value: Remove
+    - ID: "ec26e453-f364-4070-b697-70c5c6d5ecaf"
+      Hint: VAT Label
+      Value: "VAT:"
+    - ID: "ed2a6656-70d9-4b47-91c4-b2b3e574c6c6"
+      Hint: Quantity Label
+      Value: Quantity
+    - ID: "f1cdcc4b-3183-4465-bfa7-3dae152cafa9"
+      Hint: Savings Label
+      Value: "Discount:"
+- Language: "ja-JP"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "00a44708-3f62-40da-bd5c-96eafd85cac2"
+      Hint: Promo Code Label
+      Value: Promotion code
+    - ID: "03090e3b-94da-461d-9419-c9235fce5c1b"
+      Hint: Unit Price Label
+      Value: Unit price
+    - ID: "03972573-f2e1-4750-973c-abe93fae5f81"
+      Hint: Payment Total Label
+      Value: "Payment total:"
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
+            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            <r
+              uid="{01398123-D8BA-4185-A04C-5254820CCBB2}"
+              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
+              s:ph="middle" />
+            <r
+              uid="{5C79034B-3A89-484C-BFE6-29642E5DFB8F}"
+              s:id="{AB04C56D-6E50-4AD8-8545-60AEBAA73C3C}"
+              s:ph="center" />
+          </d>
+        </r>
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141121T071552
+    - ID: "2c2fa18d-775b-4e00-80bb-20022b19402b"
+      Hint: Discount Label
+      Value: "Discount:"
+    - ID: "361b56fe-46ee-4e86-9a83-5f7a1127e846"
+      Hint: Total Label
+      Value: Total
+    - ID: "3e503a8f-ad03-464e-b61d-09cc8d6e79f7"
+      Hint: Order Total Header Label
+      Value: Order Total
+    - ID: "4fe90be9-09e0-4915-881e-0def17a3f3a0"
+      Hint: Promo Code List Label
+      Value: "Promotion code:"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "6c2b407a-476f-4b29-80b7-78526ff43645"
+      Hint: Order Total Label
+      Value: "Order total:"
+    - ID: "71834529-ffdc-4d99-8203-86576cc04f33"
+      Hint: Enter Coupon Code Message
+      Value: Enter a coupon code to apply to the current order.
+    - ID: "7774845a-2602-442f-8741-2b34c1623100"
+      Hint: Adding Promo Code Button
+      Value: Adding promotion code...
+    - ID: "782ec575-8b6d-4f75-b020-21126ae25a21"
+      Hint: Total Savings Label
+      Value: "Total discount:"
+    - ID: "88c87f20-8237-4e2f-87f7-2d6b6ea43331"
+      Hint: Add Promo Code Button
+      Value: Add promotion code
+    - ID: "bcae4882-2c82-42d7-8b33-d269cb521e36"
+      Hint: Product Details Label
+      Value: Product details
+    - ID: "e5337d27-918e-4dc7-955a-9185314c6615"
+      Hint: Color Label
+      Value: "Color:"
+    - ID: "eb60a902-0075-4d80-9649-0b0a6afee633"
+      Hint: Remove Button
+      Value: Remove
+    - ID: "ec26e453-f364-4070-b697-70c5c6d5ecaf"
+      Hint: VAT Label
+      Value: "VAT:"
+    - ID: "ed2a6656-70d9-4b47-91c4-b2b3e574c6c6"
+      Hint: Quantity Label
+      Value: Quantity
+    - ID: "f1cdcc4b-3183-4465-bfa7-3dae152cafa9"
+      Hint: Savings Label
+      Value: "Discount:"

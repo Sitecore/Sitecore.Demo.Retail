@@ -1,0 +1,21 @@
+﻿---
+ID: "ccc6d8b6-a3ce-4e5a-b70a-297e62666ace"
+Parent: "c846ca97-b4a5-4e6a-9884-18ccd053c0a5"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Storefront/Rendering Datasources/AddToCart/Labels/AddingToCart Label
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 200
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150426T080521Z

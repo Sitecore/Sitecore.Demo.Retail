@@ -1,0 +1,14 @@
+﻿---
+ID: "08daf97a-d04f-4312-bd99-bfebbcaf0576"
+Parent: "f03a3f19-2244-4072-b2a8-f3a1704203fb"
+Template: "fe5dd826-48c6-436d-b87a-7c4210c7413b"
+Path: /sitecore/media library/Storefront/Carousel/Slides
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141021T071608

@@ -1,0 +1,14 @@
+﻿---
+ID: "cf8f1dc0-9ccf-43b6-b950-4650e40ec9e7"
+Parent: "ca2e00b1-0917-44a5-ad05-5fc3167aaa0c"
+Template: "165cff74-e848-4e6b-aaa4-bf8e67b0fbe7"
+Path: /sitecore/Commerce/Payment Options
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150212T080623Z

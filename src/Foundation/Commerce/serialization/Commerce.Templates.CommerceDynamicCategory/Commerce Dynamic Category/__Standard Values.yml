@@ -1,0 +1,80 @@
+﻿---
+ID: "6f2a43fa-30e7-4199-b7d4-8943a94fd6e1"
+Parent: "6820281f-3bb3-41b4-8c93-7771eea496d0"
+Template: "6820281f-3bb3-41b4-8c93-7771eea496d0"
+Path: /sitecore/templates/Commerce/Catalog/Commerce Dynamic Category/__Standard Values
+DB: master
+SharedFields:
+- ID: "a0cb3965-8884-4c7a-8815-b6b2e5ced162"
+  Hint: __Editors
+  Type: TreelistEx
+  Value: "{59F53BBB-D1F5-4E38-8EBA-0D73109BB59B}"
+- ID: "ac51462c-8a8d-493b-9492-34d1f26f20f1"
+  Hint: __Default Bucket Query
+  Value: "+commercesearchitemtype:product&"
+- ID: "c7815f60-96e1-40cb-bb06-b5f833f73b61"
+  Hint: __Persistent Bucket Filter
+  Value: "+location:{08BFB57F-DAC9-4B11-90C5-5D19647899EF}&"
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{0D62B8AF-6C41-4573-B246-ABEAD41A0B19}">
+        <r
+          id="{BAD1E82B-685B-4E6C-A8B7-00B3AEBA9673}"
+          ph="main"
+          uid="{03406F72-9923-44FD-8A6A-B33CEAB24EC0}" />
+        <r
+          id="{02188803-D9C2-4E91-926D-0C0AA19F730E}"
+          ph="/main/Row1"
+          uid="{6257C2BC-69C8-4C92-BCF4-94A93C371BF6}" />
+        <r
+          id="{4A8F380D-C69F-4120-B70E-95661CC2A981}"
+          ph="/main/Row2"
+          uid="{7E215B87-BD7E-4046-BC45-04FC20A2F47C}" />
+        <r
+          id="{219958FC-8DC4-4B52-89CA-F80E219FEE88}"
+          ph="/main/Row3"
+          uid="{68397D09-B2B4-46A5-A390-DE437FC820CC}" />
+        <r
+          id="{4A8F380D-C69F-4120-B70E-95661CC2A981}"
+          ph="/main/Row4"
+          uid="{1F640869-5CF4-4793-8FCD-AF14AE420C45}" />
+        <r
+          cac="1"
+          ds="{466F65AA-92AA-4CC9-9098-50F4B78C69B6}"
+          id="{943A7D19-5380-4854-9A60-9E2290205191}"
+          par=""
+          ph="TopNavigation"
+          uid="{6CFC0C1A-EC98-4775-A08B-AD25604D6967}"
+          vbd="1"
+          ciu="1" />
+        <r
+          ds=""
+          id="{430424F2-0632-47D3-8583-A097E1C43E84}"
+          par=""
+          ph="facets"
+          uid="{E0523072-B45D-4125-A761-52BD6F95DBA3}" />
+      </d>
+      <d
+        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
+        l="{14030E9F-CE92-49C6-AD87-7D49B50E42EA}">
+        <r
+          ds=""
+          id="{493B3A83-0FA7-4484-8FC9-4680991CF743}"
+          par=""
+          ph="content"
+          uid="{A08C9132-DBD1-474F-A2CA-6CA26A4AA650}" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20131011T095552

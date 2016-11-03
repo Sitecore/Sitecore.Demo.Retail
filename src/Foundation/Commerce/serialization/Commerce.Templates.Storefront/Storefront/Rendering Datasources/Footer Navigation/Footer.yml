@@ -1,0 +1,22 @@
+﻿---
+ID: "834dcb38-bc09-4ae1-84b1-13ded5a068fc"
+Parent: "87f2f2b9-cd50-4b78-9a27-fd853d5476b9"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Storefront/Rendering Datasources/Footer Navigation/Footer
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: wordprocessing/32x32/footer_h.png
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141105T092158
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

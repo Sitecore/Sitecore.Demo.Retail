@@ -1,0 +1,29 @@
+﻿---
+ID: "bf31fa78-918d-4de3-8411-358a1825189b"
+Parent: "f95e9223-4db2-4b91-b720-3b48eb0ca312"
+Template: "87c331ae-3293-4fd1-a5f2-a625523f3019"
+Path: /sitecore/content/Storefront/Global/QuickLinks/Links/TopBar/Store catalogs
+DB: master
+SharedFields:
+- ID: "96914d76-288d-4e7a-90c8-e4c4594f9e12"
+  Hint: Show Always
+  Type: Checkbox
+  Value: 1
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 75
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141021T082358
+    - ID: "6cb9eb87-680b-4cb9-9946-9baeb553f6b8"
+      Hint: Text
+      Value: Store catalogs
+    - ID: "b861b1ed-2820-4ad8-b169-8928ac381634"
+      Hint: Link
+      Value: |
+        <link text="" linktype="internal" url="" anchor="" title="" class="" querystring="" target="" id="{F6EF6372-3323-44D3-83B9-7514A3C6621A}" />

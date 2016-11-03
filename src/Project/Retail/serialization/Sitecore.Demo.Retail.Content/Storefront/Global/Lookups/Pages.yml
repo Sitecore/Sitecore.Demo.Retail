@@ -1,0 +1,14 @@
+﻿---
+ID: "7702a7f9-2f80-48cc-afbd-e88e49eaa1ef"
+Parent: "e5c0498a-7f54-4365-ae30-52a84370cc3f"
+Template: "ce35efe0-01ea-4f43-b124-66fc4b0663ef"
+Path: /sitecore/content/Storefront/Global/Lookups/Pages
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150906T104818Z

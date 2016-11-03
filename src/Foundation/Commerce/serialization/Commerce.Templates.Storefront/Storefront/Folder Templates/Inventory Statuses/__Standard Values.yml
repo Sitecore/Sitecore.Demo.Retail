@@ -1,0 +1,26 @@
+﻿---
+ID: "ff265615-b756-4c4e-b722-c4af8bf14c39"
+Parent: "b59e0882-0880-421a-9e6d-1d065d99fac3"
+Template: "b59e0882-0880-421a-9e6d-1d065d99fac3"
+Path: /sitecore/templates/Storefront/Folder Templates/Inventory Statuses/__Standard Values
+DB: master
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: "{1510C85E-5B24-44F6-9593-9F5DC0DDE15A}"
+- ID: "f7d48a55-2158-4f02-9356-756654404f73"
+  Hint: __Standard values
+  Value: "{FF265615-B756-4C4E-B722-C4AF8BF14C39}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150223T141902Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

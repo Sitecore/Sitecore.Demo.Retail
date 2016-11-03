@@ -1,0 +1,26 @@
+﻿---
+ID: "1d118706-6e71-4e16-9fff-48e6f4ca7385"
+Parent: "f95e9223-4db2-4b91-b720-3b48eb0ca312"
+Template: "87c331ae-3293-4fd1-a5f2-a625523f3019"
+Path: /sitecore/content/Storefront/Global/QuickLinks/Links/TopBar/Account
+DB: master
+SharedFields:
+- ID: "5723c6b6-8a8a-4960-aec8-050200ae62d2"
+  Hint: Show when Authenticated
+  Type: Checkbox
+  Value: 1
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141021T082330
+    - ID: "6cb9eb87-680b-4cb9-9946-9baeb553f6b8"
+      Hint: Text
+      Value: Account
+    - ID: "b861b1ed-2820-4ad8-b169-8928ac381634"
+      Hint: Link
+      Value: |
+        <link linktype="external" url="/accountmanagement" anchor="" target="" />

@@ -1,0 +1,27 @@
+﻿---
+ID: "ce4fab14-5e56-4972-953a-75f0eb627f72"
+Parent: "7d53e1c0-d54e-4003-a338-a38dcd819ede"
+Template: "ba255355-225e-4ea7-aaf7-c4a05e8ff7a1"
+Path: /sitecore/Commerce/Storefront Configuration/Currencies/EUR
+DB: master
+SharedFields:
+- ID: "083db23d-64d5-48f7-9f2a-710c5612a4a4"
+  Hint: Currency Symbol
+  Value: EUR
+- ID: "1b863c74-d174-4691-b89a-bf30884b3932"
+  Hint: Currency Number Format Culture
+  Value: "fr-FR"
+- ID: "21d2daa4-1fc3-4ea6-b75f-608cb27770ff"
+  Hint: Currency Symbol Position
+  Value: 3
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "106d1a2d-66e0-429d-b601-07019beca165"
+      Hint: Currency Description
+      Value: Euro
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150929T122417Z

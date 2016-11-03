@@ -1,0 +1,28 @@
+﻿---
+ID: "4565ad10-6d3c-48ed-b0bf-621e595880aa"
+Parent: "e73f80cf-979a-4749-904f-865a3118d4fc"
+Template: "158e6ad5-e873-42a8-87c9-01e9abcd93ec"
+Path: /sitecore/content/Storefront/Global/Carousels/Slides/Frontpage/Slide 1
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "035e53ad-6996-4c3c-9b2f-54221b60dcdc"
+      Hint: Text
+      Value: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit lacus ut dolor bibendum, at iaculis mauris vestibulum. Ut et. 
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141021T045339
+    - ID: "51a720da-cd19-4573-bf52-f90cef743e9e"
+      Hint: Image
+      Value: |
+        <image mediaid="{D43459E9-FD7E-4BAA-8565-35BD4BF0BF28}" />
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "8368a4a8-b63d-4835-8478-1daf2e4af6f8"
+      Hint: Title
+      Value:  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis. 

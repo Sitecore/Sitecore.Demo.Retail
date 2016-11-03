@@ -1,0 +1,24 @@
+﻿---
+ID: "c37d966d-ae09-401e-84b9-fe0c2c70e342"
+Parent: "51263c5f-6712-4f5c-a1ab-5afb90b885d7"
+Template: "ab86861a-6030-46c5-b394-e8f99e8b87db"
+Path: /sitecore/templates/Storefront/Rendering Datasources/Carousel
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Control/32x32/splitter_ver_h.png
+- ID: "12c33f3f-86c5-43a5-aeb4-5598cec45116"
+  Hint: __Base template
+  Type: tree list
+  Value: |
+    {1930BBEB-7805-471A-A3BE-4858AC7CF696}
+    {41E220D2-6345-4488-8B27-3E68E5D92BAF}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141021T043105

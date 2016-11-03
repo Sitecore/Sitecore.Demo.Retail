@@ -1,0 +1,21 @@
+﻿---
+ID: "0636163a-e6cd-416a-91dc-8b703e0054d5"
+Parent: "43bb49ff-147d-470b-ad32-10c2ad3b5d9c"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Storefront/Rendering Datasources/Add Gift Card To Cart/Buttons/Add To Cart Button
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 100
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150126T155949Z

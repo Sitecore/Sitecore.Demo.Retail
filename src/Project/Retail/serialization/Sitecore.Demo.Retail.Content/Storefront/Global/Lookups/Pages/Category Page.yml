@@ -1,0 +1,17 @@
+﻿---
+ID: "287af1a2-d61c-4df9-9aef-8c8c5c746b1c"
+Parent: "7702a7f9-2f80-48cc-afbd-e88e49eaa1ef"
+Template: "9de07365-6b42-464b-b819-5423b563095c"
+Path: /sitecore/content/Storefront/Global/Lookups/Pages/Category Page
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150906T104842Z
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Category Page

@@ -1,0 +1,18 @@
+﻿---
+ID: "9b303130-f463-4dce-a25f-ca1877c950eb"
+Parent: "915aef1b-8da8-4796-9a33-b7ce7242b02a"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Storefront/Page Templates/Checkout Page/Headers/Processing Label
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150224T144823Z

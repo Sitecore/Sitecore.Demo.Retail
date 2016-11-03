@@ -1,0 +1,28 @@
+﻿---
+ID: "96926ce2-aa2e-4e0d-aea7-85f616186aef"
+Parent: "b8a48538-bfea-42b2-bd01-e3cdc3858ae8"
+Template: "0484480b-fcbd-4949-b6ac-9778b5f7c294"
+Path: /sitecore/Commerce/Shipping Options/Select delivery options by item
+DB: master
+SharedFields:
+- ID: "129a8fd5-2137-425c-a389-bea3874b720e"
+  Hint: Shipping Option Value
+  Value: 4
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 50
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150211T112414Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "ad5e05d0-8736-4467-bcca-f4403d65f736"
+      Hint: Value
+      Value: Select delivery options by item
