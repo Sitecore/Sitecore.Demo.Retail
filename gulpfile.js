@@ -50,10 +50,10 @@ gulp.task("02-Nuget-Restore", function (callback) {
   return gulp.src(solution).pipe(nugetRestore());
 });
 
-
 gulp.task("03-Publish-All-Projects", function (callback) {
   return runSequence(
     "Build-Solution",
+    "Publish-Storefront-Projects",
     "Publish-Foundation-Projects",
     "Publish-Feature-Projects",
     "Publish-Project-Projects", callback);
@@ -124,7 +124,7 @@ var publishProjects = function (location, dest) {
   var targets = ["Build"];
 
   console.log("publish to " + dest + " folder");
-  return gulp.src([location + "/**/code/*.csproj"])
+  return gulp.src([location + "/**/code/*.csproj", location + "/*.csproj"])
     .pipe(foreach(function (stream, file) {
       return stream
         .pipe(debug({ title: "Building project:" }))
@@ -166,6 +166,10 @@ gulp.task("Build-Solution", function () {
           maxcpucount: 0,
           toolsVersion: 14.0
         }));
+});
+
+gulp.task("Publish-Storefront-Projects", function () {
+  return publishProjects("./src/Foundation/Commerce/storefront/{CommonSettings,CS/CSF}");
 });
 
 gulp.task("Publish-Foundation-Projects", function () {

@@ -40,7 +40,7 @@
     <!-- Required for profile provider when used in combination with Facebook login via Social Connected - http://sdn.sitecore.net/products/social connected module/social connected 1,-d-,3.aspx -->
     <profile defaultProvider="switcher" xdt:Transform="SetAttributes">
       <providers>
-        <add name="cs" type="Sitecore.Commerce.Connect.CommerceServer.Profiles.CommerceServerProfileProvider, Sitecore.Commerce.Connect.CommerceServer" applicationName="sitecore" readOnly="false" xdt:Transform="InsertIfMissingAfter(/configuration/system.web/profile/providers/clear)" xdt:Locator="Match(name)" />
+        <add name="cs" type="Sitecore.Commerce.Connect.CommerceServer.Profiles.CommerceServerProfileProvider, Sitecore.Commerce.Connect.CommerceServer" applicationName="sitecore" readOnly="false" xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" />
       </providers>
       <properties>
         <add type="System.String" name="user_id" customProviderData="cs|GeneralInfo.user_id" xdt:Transform="InsertIfMissing"  xdt:Locator="Match(name)" />
