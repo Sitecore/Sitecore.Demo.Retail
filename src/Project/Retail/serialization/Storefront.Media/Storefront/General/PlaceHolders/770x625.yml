@@ -1,0 +1,73 @@
+﻿---
+ID: "e154de65-943a-401b-b69b-95dc8d958962"
+Parent: "49c08763-73b6-472c-b711-c42a9494e9d7"
+Template: "f1828a2c-7e5d-4bbd-98ca-320474871548"
+Path: /sitecore/media library/Storefront/General/PlaceHolders/770x625
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: "~/media/E154DE65943A401BB69B95DC8D958962.ashx?h=16&thn=1&w=16"
+- ID: "22eac599-f13b-4607-a89d-c091763a467d"
+  Hint: Width
+  Value: 770
+- ID: "40e50ed9-ba07-4702-992e-a912738d32dc"
+  Hint: Blob
+  BlobID: "8289eb31-8884-4363-85fa-ba2755b2452a"
+  Value: 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
+- ID: "6954b7c7-2487-423f-8600-436cb3b6dc0e"
+  Hint: Size
+  Value: 3183
+- ID: "6f47a0a5-9c94-4b48-abeb-42d38def6054"
+  Hint: Mime Type
+  Value: image/gif
+- ID: "c06867fe-9a43-4c7d-b739-48780492d06f"
+  Hint: Extension
+  Value: gif
+- ID: "cb09946f-3218-4823-87d2-d5007c199a96"
+  Hint: Dimensions
+  Value: 770 x 625
+- ID: "de2ca9e4-c117-4c8a-a139-1ff4b199d15a"
+  Hint: Height
+  Value: 625
+Languages:
+- Language: "de-DE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: "20150415T114951:635646953915424429Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150415T114951Z
+- Language: "fr-FR"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: "20150415T114951:635646953916217244Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+- Language: "ja-JP"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: "20150415T114951:635646953916686011Z"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

@@ -1,0 +1,41 @@
+﻿---
+ID: "08bfb57f-dac9-4b11-90c5-5d19647899ef"
+Parent: "0291f8d9-e2d9-4bdc-a426-0f235725964c"
+Template: "334e2b54-f913-411d-b159-a7b16d65242c"
+Path: /sitecore/Commerce/Catalog Management/Catalogs
+DB: master
+SharedFields:
+- ID: "dec8d2d5-e3cf-48b6-a653-8e69e2716641"
+  Hint: __Security
+  Value: |
+    ar|sitecore\Commerce Catalog Administrator|pe|+item:create|+item:read|+item:rename|+item:delete|+item:write|^*|pd|+item:create|+item:read|+item:rename|+item:delete|+item:write|^*|ar|sitecore\Commerce Merchandiser|pe|+item:create|+item:read|+item:rename|+item:delete|+item:write|^*|pd|+item:create|+item:read|+item:rename|+item:delete|+item:write|^*|ar|sitecore\Commerce Catalog Groups Administrator|pe|+item:read|pd|+item:read|
+- ID: "ed3ebccd-a230-4659-923f-014707e1945d"
+  Hint: Selected Catalogs
+  Value: Adventure Works Catalog
+Languages:
+- Language: "de-DE"
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Kataloge
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161106T220240Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Anonymous
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20130226T110900
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

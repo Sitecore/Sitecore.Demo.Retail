@@ -1,0 +1,54 @@
+﻿---
+ID: "8d55638a-c918-41a0-81cd-99a42b887058"
+Parent: "6de2c7e4-89ee-40e1-b50d-2670f3e0965c"
+Template: "f1828a2c-7e5d-4bbd-98ca-320474871548"
+Path: /sitecore/media library/Storefront/Site Spots/StorefrontLogo
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: "~/media/8D55638AC91841A081CD99A42B887058.ashx?h=16&thn=1&w=16"
+- ID: "22eac599-f13b-4607-a89d-c091763a467d"
+  Hint: Width
+  Value: 230
+- ID: "40e50ed9-ba07-4702-992e-a912738d32dc"
+  Hint: Blob
+  BlobID: "e4b7eb37-dac9-4a64-8488-c9cc5972ae3e"
+  Value: R0lGODdh5gBBAOMAAMzMzJaWlrGxsZycnKOjo6qqqre3t76+vsXFxQAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAA5gBBAAAE/hDISau9OOvNu/9gKI5kaZ5oqq5s675wLM90bd94ru987//AoHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0es1uu9/wuHxOr9vv+Lx+z+/7NwZ/TQIDAQMCFoSGgRWKBActBYYUAZWWAZCCPQSXAQUUkpeIE6GWCCsGlYwSnZWZmjqpAYgCrhIHqgChpwC4AQYIhZ8pCJXDE5WjsD4GA8e5vQTDxb8StQPWlSqc2BXJy0TUqxTiEpzDvq+U2gCWGbLqrLPgQ5wBvBWSA7yFo+UWlgzICpChkLMC6ioRKEQAHz0dteZ5q7QPmcR21S5IKrAxg69L5q9aVXyYQxaBC5YGhLz47QK1Sg7zKQzVTZczBL6Okazha+QFbhaVQdNoTINBCfCI1txJoxAmDdQy9ZPw74KscQAlVqUQkWmNiFip4oN27pYtDE6XZhWaEeeErl5lUNP5Viu0a9kIYkhFgFPYCcLMPsVVU19cGRFjIs0VaoIvYIHR/kqllqsrBPaoGsPZ8vALp50o2AsIqpNieXovuQQ9dCDF055TsHbH1WBYR/HWDSuFAUEBhlibGSoAO7bx48iTK1/OvLnz59CjS59Ovbr169iza9/Ovbv37+DDix9Pvrz58+jTz4gAADs=
+- ID: "6954b7c7-2487-423f-8600-436cb3b6dc0e"
+  Hint: Size
+  Value: 560
+- ID: "6f47a0a5-9c94-4b48-abeb-42d38def6054"
+  Hint: Mime Type
+  Value: image/gif
+- ID: "c06867fe-9a43-4c7d-b739-48780492d06f"
+  Hint: Extension
+  Value: gif
+- ID: "cb09946f-3218-4823-87d2-d5007c199a96"
+  Hint: Dimensions
+  Value: 230 x 65
+- ID: "de2ca9e4-c117-4c8a-a139-1ff4b199d15a"
+  Hint: Height
+  Value: 65
+Languages:
+- Language: "de-DE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: "20141021T043640:635494630000465031"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141021T043640
+    - ID: "65885c44-8fcd-4a7f-94f1-ee63703fe193"
+      Hint: Alt
+      Value: Logo
