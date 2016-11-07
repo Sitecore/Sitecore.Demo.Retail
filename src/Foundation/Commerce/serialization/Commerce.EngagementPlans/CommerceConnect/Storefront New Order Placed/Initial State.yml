@@ -1,0 +1,32 @@
+﻿---
+ID: "7cfa539a-4770-4134-b72e-4db1af688f0f"
+Parent: "7ca697ea-5cca-4b59-85a3-d048b285e6b4"
+Template: "8ce2707a-3742-4a89-933b-065e5be02bc9"
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CommerceConnect/Storefront New Order Placed/Initial State
+DB: master
+BranchID: "6f6a861f-78cf-4859-8ad8-7a2d5ccdbeb6"
+SharedFields:
+- ID: "07ce07cb-078c-415e-8f92-96690babd6c7"
+  Hint: Time interval
+  Value: 20160
+- ID: "3f72bc07-de92-483e-a724-d430769d9ba4"
+  Hint: Designer ID
+  Value: "c095ef33-296c-4c1f-ae15-15bdac65bf3b"
+- ID: "7642ed71-348b-4b88-8634-cc7b28949472"
+  Hint: Origin ID
+  Value: "00000000-0000-0000-0000-000000000000"
+Languages:
+- Language: en
+  Fields:
+  - ID: "06f2d72a-1924-4b9a-ba1e-186ce4e57efd"
+    Hint: Description
+    Value: A new order has been received.
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Initial State
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161031T214301Z

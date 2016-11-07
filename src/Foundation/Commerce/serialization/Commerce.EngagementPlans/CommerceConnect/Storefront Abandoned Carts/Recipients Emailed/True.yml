@@ -1,0 +1,52 @@
+﻿---
+ID: "1d0ad6f2-0035-49bc-ad52-6294a79ddbcc"
+Parent: "91f363c5-be5b-4be5-baae-2a2414728d83"
+Template: "0a43a0fe-7e0e-49ef-95d4-e3de34f4f175"
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CommerceConnect/Storefront Abandoned Carts/Recipients Emailed/True
+DB: master
+BranchID: "8c90e12f-4e2e-4e3d-9137-b2d5f5dd40c0"
+SharedFields:
+- ID: "21f3482b-bb14-4555-ba5d-af20d400d5b9"
+  Hint: Rule
+  Type: Rules
+  Value: |
+    <ruleset>
+      <rule
+        uid="{4951A787-56B4-4E74-8AB2-B2DCEF77371A}">
+        <conditions>
+          <condition
+            id="{4888ABBB-F17D-4485-B14B-842413F88732}"
+            uid="5EBFEECACBBC49B08E3B0BE116556E76" />
+        </conditions>
+      </rule>
+    </ruleset>
+- ID: "3f72bc07-de92-483e-a724-d430769d9ba4"
+  Hint: Designer ID
+  Value: "6f687cda-2d83-445d-9237-af3532b0e1c6"
+- ID: "7642ed71-348b-4b88-8634-cc7b28949472"
+  Hint: Origin ID
+  Value: "00000000-0000-0000-0000-000000000000"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 1
+- ID: "d2368879-c784-4031-9b79-6a3bf3cb444e"
+  Hint: Next state
+  Value: "5e3db5de-c1aa-464b-a61b-f7e3c5bc5c3e"
+- ID: "e13dcd09-d9bb-43c9-8d7d-438c79d714ca"
+  Hint: Evaluate
+  Value: "{F487AA7E-DF8D-4B8D-B168-07DA8F3CA658}"
+Languages:
+- Language: en
+  Fields:
+  - ID: "06f2d72a-1924-4b9a-ba1e-186ce4e57efd"
+    Hint: Description
+    Value: Always evaluates to 'true'.
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: True
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161031T214300Z

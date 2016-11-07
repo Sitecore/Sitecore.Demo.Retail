@@ -2,7 +2,7 @@
 ID: "086d42a3-d9c3-4249-9657-54f14a2fcc65"
 Parent: "16e859d2-6542-407a-ac65-f34bcad3eb3d"
 Template: "16e859d2-6542-407a-ac65-f34bcad3eb3d"
-Path: /sitecore/templates/Storefront/Page Templates/Standard Page/__Standard Values
+Path: /sitecore/templates/Storefront/Page Templates/Base/Standard Page/__Standard Values
 DB: master
 SharedFields:
 - ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"

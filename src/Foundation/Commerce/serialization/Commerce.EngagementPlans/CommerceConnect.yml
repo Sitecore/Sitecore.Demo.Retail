@@ -1,0 +1,29 @@
+﻿---
+ID: "03402bee-21e9-458a-b3f4-d004cc4f21fa"
+Parent: "4497a9be-0a00-4ee4-9ae0-50d6cbb4fab2"
+Template: "a87a00b1-e6db-45ab-8b54-636fec3b5523"
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CommerceConnect
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: applications/32x32/folder_blue.png
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: |
+    {8C90E12F-4E2E-4E3D-9137-B2D5F5DD40C0}
+    {534EE43B-00B1-49D0-92A7-E78B9C127B00}
+    {6F6A861F-78CF-4859-8AD8-7A2D5CCDBEB6}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20130606T104300
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

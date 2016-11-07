@@ -1,0 +1,35 @@
+﻿---
+ID: "aeb19569-3bf7-40ac-b5a2-00115f6739e3"
+Parent: "3044b9e2-77a5-43f1-aba3-afeab84aed10"
+Template: "8c5ead00-5f68-4310-ab0c-84f283b5ee0a"
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CommerceConnect/Storefront Products Back In Stock/Waiting/True/RemoveExpired
+DB: master
+BranchID: "534ee43b-00b1-49d0-92a7-e78b9c127b00"
+SharedFields:
+- ID: "3f72bc07-de92-483e-a724-d430769d9ba4"
+  Hint: Designer ID
+  Value: "8f5cebe6-164c-40a8-b27b-e6bdc8487e16"
+- ID: "7642ed71-348b-4b88-8634-cc7b28949472"
+  Hint: Origin ID
+  Value: "906f11c6-7663-409f-a68f-731dda88f9d1"
+- ID: "a291a22b-99e2-46bb-a27b-8ec744275396"
+  Hint: Type
+  Value: Sitecore.Commerce.Automation.MarketingAutomation.AutomationActions.RemoveExpiredBackInStockNotificationsAction, Sitecore.Commerce
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 0
+Languages:
+- Language: en
+  Fields:
+  - ID: "06f2d72a-1924-4b9a-ba1e-186ce4e57efd"
+    Hint: Description
+    Value: "Removes back-in-stock notifications that have expired due to being past interest date."
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Remove Expired Back In Stock Notifications
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161031T214305Z

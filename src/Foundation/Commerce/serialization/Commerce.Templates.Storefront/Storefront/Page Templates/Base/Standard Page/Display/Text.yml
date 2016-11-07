@@ -1,16 +1,16 @@
 ﻿---
-ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+ID: "ae723519-4ead-4d6c-a0d3-feace0d9926a"
 Parent: "0a0c10ce-6d1c-4da0-bab8-651681548f54"
 Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
-Path: /sitecore/templates/Storefront/Page Templates/Standard Page/Display/Title
+Path: /sitecore/templates/Storefront/Page Templates/Base/Standard Page/Display/Text
 DB: master
 SharedFields:
 - ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
   Hint: Type
-  Value: "Single-Line Text"
+  Value: Rich Text
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
-  Value: 500
+  Value: 200
 Languages:
 - Language: en
   Versions:
@@ -18,4 +18,4 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150320T125051Z
+      Value: 20141117T052425

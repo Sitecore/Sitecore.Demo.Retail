@@ -1,0 +1,35 @@
+﻿---
+ID: "347070d9-eeb2-4c7e-9ad9-01bc5c4162ef"
+Parent: "00efc40d-7442-4943-87f1-f8663f04919a"
+Template: "8c5ead00-5f68-4310-ab0c-84f283b5ee0a"
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CommerceConnect/Storefront Abandoned Carts/Initial State/True/Set Cart Status
+DB: master
+BranchID: "8c90e12f-4e2e-4e3d-9137-b2d5f5dd40c0"
+SharedFields:
+- ID: "1507131d-cee3-49e9-af32-de5403a37b49"
+  Hint: Parameters
+  Value: Cart Status=Abandoned
+- ID: "3f72bc07-de92-483e-a724-d430769d9ba4"
+  Hint: Designer ID
+  Value: "a17b5749-11c0-4fc7-872d-8a80a7ddacee"
+- ID: "7642ed71-348b-4b88-8634-cc7b28949472"
+  Hint: Origin ID
+  Value: "9aae195b-9d00-4804-b8c6-33a333b3941f"
+- ID: "a291a22b-99e2-46bb-a27b-8ec744275396"
+  Hint: Type
+  Value: Sitecore.Commerce.Automation.MarketingAutomation.AutomationActions.SetCartStatusAction, Sitecore.Commerce
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 0
+Languages:
+- Language: en
+  Fields:
+  - ID: "06f2d72a-1924-4b9a-ba1e-186ce4e57efd"
+    Hint: Description
+    Value: Sets cart status
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161031T214259Z

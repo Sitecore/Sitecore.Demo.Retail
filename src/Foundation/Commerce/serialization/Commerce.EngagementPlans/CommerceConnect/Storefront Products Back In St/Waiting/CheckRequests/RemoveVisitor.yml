@@ -1,0 +1,32 @@
+﻿---
+ID: "f0957bcc-3e62-4181-8c9c-5bd8dbf28d4d"
+Parent: "1cd5643c-f6b7-41fd-8af8-3e1cb9f66d61"
+Template: "8c5ead00-5f68-4310-ab0c-84f283b5ee0a"
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CommerceConnect/Storefront Products Back In Stock/Waiting/CheckRequests/RemoveVisitor
+DB: master
+BranchID: "534ee43b-00b1-49d0-92a7-e78b9c127b00"
+SharedFields:
+- ID: "3f72bc07-de92-483e-a724-d430769d9ba4"
+  Hint: Designer ID
+  Value: "7745beb3-dff0-4844-89df-a5ba27b3cf13"
+- ID: "7642ed71-348b-4b88-8634-cc7b28949472"
+  Hint: Origin ID
+  Value: "9f3be6df-5028-485b-9908-cb9f4f7018e0"
+- ID: "a291a22b-99e2-46bb-a27b-8ec744275396"
+  Hint: Type
+  Value: Sitecore.Automation.MarketingAutomation.AutomationActions.RemoveVisitorAction,Sitecore.Analytics.Automation
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 0
+Languages:
+- Language: en
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Remove Visitor from this Plan
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161031T214304Z

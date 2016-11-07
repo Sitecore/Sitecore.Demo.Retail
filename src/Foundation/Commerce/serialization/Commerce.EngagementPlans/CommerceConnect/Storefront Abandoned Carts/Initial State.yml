@@ -1,0 +1,29 @@
+﻿---
+ID: "f3278eaf-21e5-4de2-afd3-400235e0747f"
+Parent: "7138acc1-329c-4070-86dd-6a53d6f57ac5"
+Template: "8ce2707a-3742-4a89-933b-065e5be02bc9"
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CommerceConnect/Storefront Abandoned Carts/Initial State
+DB: master
+BranchID: "8c90e12f-4e2e-4e3d-9137-b2d5f5dd40c0"
+SharedFields:
+- ID: "07ce07cb-078c-415e-8f92-96690babd6c7"
+  Hint: Time interval
+  Value: 1440
+- ID: "3f72bc07-de92-483e-a724-d430769d9ba4"
+  Hint: Designer ID
+  Value: "845adc55-eb2e-4dbc-ae16-4b4f4f9ac581"
+- ID: "7642ed71-348b-4b88-8634-cc7b28949472"
+  Hint: Origin ID
+  Value: "00000000-0000-0000-0000-000000000000"
+Languages:
+- Language: en
+  Fields:
+  - ID: "06f2d72a-1924-4b9a-ba1e-186ce4e57efd"
+    Hint: Description
+    Value: "Email notifications will be sent to all customers in this state with non-empty carts when the time will run out."
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161031T214256Z

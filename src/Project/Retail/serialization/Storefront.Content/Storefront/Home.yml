@@ -72,7 +72,7 @@ SharedFields:
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
         <r
           uid="{1634C13E-4B80-414F-BD44-0D3DA46A2A9F}"
-          p:before="r[@uid='{1A6AE860-A323-460D-B8D7-CEFA22469672}']"
+          p:after="r[@uid='{8C308774-5362-4996-A416-527ED85204F1}']"
           s:ph="messages" />
         <r
           uid="{31CF9A90-BB50-48CA-B541-C98879643BEA}"

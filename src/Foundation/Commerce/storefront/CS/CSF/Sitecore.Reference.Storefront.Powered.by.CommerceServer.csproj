@@ -63,6 +63,10 @@
       <HintPath>..\..\..\..\..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CommerceMessageManager, Version=6.0.1.0, Culture=en-US, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\lib\CommerceServer\CommerceMessageManager.dll</HintPath>
+    </Reference>
     <Reference Include="CommerceServer.Core.Catalog, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
@@ -116,6 +120,7 @@
     <Reference Include="Sitecore.Kernel, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Kernel.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sitecore.Mvc, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -195,6 +200,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\de-DE\CommerceMessageManager.resources.dll" />
+    <Content Include="bin\en-us\CommerceMessageManager.resources.dll" />
+    <Content Include="bin\fr-fr\CommerceMessageManager.resources.dll" />
+    <Content Include="bin\ja-JP\CommerceMessageManager.resources.dll" />
+    <Content Include="bin\jp-JP\CommerceMessageManager.resources.dll" />
     <Content Include="OrderObjectMappings.xml" />
     <Content Include="OrderPipelineMappings.xml" />
     <Content Include="App_Config\Include\Reference.Storefront\Reference.Storefront.Index.Lucene.config">
@@ -240,7 +250,7 @@
     <Content Include="App_Config\Include\Reference.Storefront\Reference.Storefront.Prices.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Config\CommerceServer.Core.config">
+    <Content Include="App_Config\CommerceServer.Core.config.disabled">
       <SubType>Designer</SubType>
     </Content>
     <None Include="MergeFiles\Merge.Commerce.Storefront.config">

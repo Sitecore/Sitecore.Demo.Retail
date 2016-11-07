@@ -1,0 +1,52 @@
+﻿---
+ID: "a785da07-7edb-4f8c-9707-dce5022320eb"
+Parent: "f3278eaf-21e5-4de2-afd3-400235e0747f"
+Template: "0a43a0fe-7e0e-49ef-95d4-e3de34f4f175"
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CommerceConnect/Storefront Abandoned Carts/Initial State/Is cart empty
+DB: master
+BranchID: "8c90e12f-4e2e-4e3d-9137-b2d5f5dd40c0"
+SharedFields:
+- ID: "21f3482b-bb14-4555-ba5d-af20d400d5b9"
+  Hint: Rule
+  Type: Rules
+  Value: |
+    <ruleset>
+      <rule
+        uid="{FD3F0DB5-DCD0-4F30-B9AB-E76AB903DACB}">
+        <conditions>
+          <condition
+            id="{1F3EF36E-E64E-4310-803D-39EEBE4A08B5}"
+            uid="43D1A557943E454AA5E72DED2862CDB1" />
+        </conditions>
+      </rule>
+    </ruleset>
+- ID: "3f72bc07-de92-483e-a724-d430769d9ba4"
+  Hint: Designer ID
+  Value: "f4d31842-c7e3-4b85-a2cb-439154886911"
+- ID: "7642ed71-348b-4b88-8634-cc7b28949472"
+  Hint: Origin ID
+  Value: "00000000-0000-0000-0000-000000000000"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 0
+- ID: "d2368879-c784-4031-9b79-6a3bf3cb444e"
+  Hint: Next state
+  Value: "b0966066-1d44-4632-9387-7a2c49528021"
+- ID: "e13dcd09-d9bb-43c9-8d7d-438c79d714ca"
+  Hint: Evaluate
+  Value: "{F487AA7E-DF8D-4B8D-B168-07DA8F3CA658}"
+Languages:
+- Language: en
+  Fields:
+  - ID: "06f2d72a-1924-4b9a-ba1e-186ce4e57efd"
+    Hint: Description
+    Value: Evaluates to 'true' if cart is empty.
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: "Is cart empty?"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161031T214257Z

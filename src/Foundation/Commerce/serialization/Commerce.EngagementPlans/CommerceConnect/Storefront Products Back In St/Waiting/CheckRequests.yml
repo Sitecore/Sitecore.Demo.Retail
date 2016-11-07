@@ -1,0 +1,52 @@
+﻿---
+ID: "1cd5643c-f6b7-41fd-8af8-3e1cb9f66d61"
+Parent: "007f895b-3658-4b9c-9bbb-b9a4221133c9"
+Template: "0a43a0fe-7e0e-49ef-95d4-e3de34f4f175"
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CommerceConnect/Storefront Products Back In Stock/Waiting/CheckRequests
+DB: master
+BranchID: "534ee43b-00b1-49d0-92a7-e78b9c127b00"
+SharedFields:
+- ID: "21f3482b-bb14-4555-ba5d-af20d400d5b9"
+  Hint: Rule
+  Type: Rules
+  Value: |
+    <ruleset>
+      <rule
+        uid="{CD22D320-CB8A-4479-9B3E-30CA21D61330}">
+        <conditions>
+          <condition
+            id="{10C4C877-A1BD-42FC-A148-6EA4C74CF6E9}"
+            uid="FEB07C75B3114673ACCC430BA41997F6" />
+        </conditions>
+      </rule>
+    </ruleset>
+- ID: "3f72bc07-de92-483e-a724-d430769d9ba4"
+  Hint: Designer ID
+  Value: "fceaadcf-d03c-49b3-91c6-5bc0138075ab"
+- ID: "7642ed71-348b-4b88-8634-cc7b28949472"
+  Hint: Origin ID
+  Value: "00000000-0000-0000-0000-000000000000"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 0
+- ID: "d2368879-c784-4031-9b79-6a3bf3cb444e"
+  Hint: Next state
+  Value: "a6e57821-8c03-4d2b-a071-76c6b7184e03"
+- ID: "e13dcd09-d9bb-43c9-8d7d-438c79d714ca"
+  Hint: Evaluate
+  Value: "{B81C1F4C-8B83-44D9-902F-448463DBCCBC}"
+Languages:
+- Language: en
+  Fields:
+  - ID: "06f2d72a-1924-4b9a-ba1e-186ce4e57efd"
+    Hint: Description
+    Value: Check if visitor has no more notification requests.
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Check if visitor has no more notification requests.
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161031T214304Z

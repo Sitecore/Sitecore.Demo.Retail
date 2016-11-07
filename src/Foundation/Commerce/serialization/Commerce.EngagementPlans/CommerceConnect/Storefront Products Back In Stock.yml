@@ -1,0 +1,16 @@
+﻿---
+ID: "36b4083e-f7f7-4e60-a747-75ddbec6bb4b"
+Parent: "03402bee-21e9-458a-b3f4-d004cc4f21fa"
+Template: "6e5b63d6-2401-4a52-8b4d-cfef5e4e9752"
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CommerceConnect/Storefront Products Back In Stock
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Value: "20161107T053510:636140937102027484Z"
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{EDCBB550-BED3-490F-82B8-7B2F14CCD26E}"

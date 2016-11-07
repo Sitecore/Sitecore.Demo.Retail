@@ -1,0 +1,41 @@
+﻿---
+ID: "240f9136-4e30-4deb-8688-cc2a1d08ea96"
+Parent: "9524ab64-925c-4540-8d14-275bbfe994e7"
+Template: "8c5ead00-5f68-4310-ab0c-84f283b5ee0a"
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CommerceConnect/Storefront Products Back In Stock/ExpiredRequestsRemoved/AreProductsInStock/Send Back In Stock Notification Email
+DB: master
+BranchID: "534ee43b-00b1-49d0-92a7-e78b9c127b00"
+SharedFields:
+- ID: "1507131d-cee3-49e9-af32-de5403a37b49"
+  Hint: Parameters
+  Value: "AutomationActionDescription=Products Back in Stock&Subject=Products Back in Stock&Content=%3cp%3eThe+following+products+are+back+in+stock+and+available+for+order%3a%3c%2fp%3e%0a%3cp%3e%24ProductsBackInStock%24%3c%2fp%3e&FixedEmail=&FromName=no_reply&FromEmail=no_reply@sitecore.net&BaseSiteURL=http://localhost"
+- ID: "3f72bc07-de92-483e-a724-d430769d9ba4"
+  Hint: Designer ID
+  Value: "69af39af-831c-4829-be55-afc254f84daf"
+- ID: "7642ed71-348b-4b88-8634-cc7b28949472"
+  Hint: Origin ID
+  Value: "60c9e710-545d-4816-b5bd-5aea0c44064f"
+- ID: "8728a037-47d3-4180-b754-87926eda7ae8"
+  Hint: Editor
+  Value: /sitecore/shell/~/xaml/Sitecore.Shell.Applications.MarketingAutomation.Dialogs.ActionEditors.SendEmailMessage.aspx
+- ID: "a291a22b-99e2-46bb-a27b-8ec744275396"
+  Hint: Type
+  Value: Sitecore.Commerce.Automation.MarketingAutomation.AutomationActions.SendBackInStockNotificationEmailAction, Sitecore.Commerce
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 0
+Languages:
+- Language: en
+  Fields:
+  - ID: "06f2d72a-1924-4b9a-ba1e-186ce4e57efd"
+    Hint: Description
+    Value: "Sends back-in-stock notification emails."
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Send Back In Stock Notification Email
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161031T214302Z

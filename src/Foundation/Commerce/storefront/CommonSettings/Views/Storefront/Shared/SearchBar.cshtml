@@ -16,13 +16,14 @@
     string searchPlaceholder = Html.Sitecore().CurrentItem["Search"];
 }
 
-<div id="B03-SearchBar" class="search-bar">
-    <form action="~/search" method="get" id="SearchForm">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="@searchPlaceholder" name="@Sitecore.Reference.Storefront.StorefrontConstants.QueryStrings.SearchKeyword" value="@Model.SearchKeyword">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-            </span>
+<li class="navbar-activity-search">
+    <form action="~/search" class="navbar-form" role="search">
+        <div class="form-group">
+            <input type="text" name="@Sitecore.Reference.Storefront.StorefrontConstants.QueryStrings.SearchKeyword" placeholder="@searchPlaceholder" value="@Model.SearchKeyword" autocomplete="off"/>
         </div>
     </form>
-</div>
+
+    <a href="#" class="btn navbar-toggle-search" data-toggle-class="is-searching" data-target="#mainNavbar">
+        <span class="glyphicon glyphicon-search"></span>
+    </a>
+</li>

@@ -1,0 +1,32 @@
+﻿---
+ID: "3b4c394a-75ba-49d6-b29d-c31fffd18d81"
+Parent: "1d0ad6f2-0035-49bc-ad52-6294a79ddbcc"
+Template: "8c5ead00-5f68-4310-ab0c-84f283b5ee0a"
+Path: /sitecore/system/Marketing Control Panel/Engagement Plans/CommerceConnect/Storefront Abandoned Carts/Recipients Emailed/True/Trigger Cart Abandoned Outcome
+DB: master
+BranchID: "8c90e12f-4e2e-4e3d-9137-b2d5f5dd40c0"
+SharedFields:
+- ID: "3f72bc07-de92-483e-a724-d430769d9ba4"
+  Hint: Designer ID
+  Value: "ffcacb53-8449-47c5-9a1f-827f80d1a897"
+- ID: "7642ed71-348b-4b88-8634-cc7b28949472"
+  Hint: Origin ID
+  Value: "0454df32-a2cd-4898-bf48-dded783748df"
+- ID: "a291a22b-99e2-46bb-a27b-8ec744275396"
+  Hint: Type
+  Value: Sitecore.Commerce.Automation.MarketingAutomation.AutomationActions.TriggerCartAbandonedOutcome, Sitecore.Commerce
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 1
+Languages:
+- Language: en
+  Fields:
+  - ID: "06f2d72a-1924-4b9a-ba1e-186ce4e57efd"
+    Hint: Description
+    Value: Triggers the cart abandoned outcome.
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161031T214300Z

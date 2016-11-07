@@ -1,0 +1,41 @@
+﻿---
+ID: "37bf44cb-dd14-4e97-9a19-581d46b33968"
+Parent: "c70b773b-fb5a-4fe4-9494-07d42acf1d7e"
+Template: "8c5ead00-5f68-4310-ab0c-84f283b5ee0a"
+Path: "/sitecore/system/Marketing Control Panel/Engagement Plans/CommerceConnect/Storefront Abandoned Carts/Initial State/Has email/Send E-Mail Message"
+DB: master
+BranchID: "8c90e12f-4e2e-4e3d-9137-b2d5f5dd40c0"
+SharedFields:
+- ID: "1507131d-cee3-49e9-af32-de5403a37b49"
+  Hint: Parameters
+  Value: "AutomationActionDescription=Abandoned cart&Subject=Abandoned cart&Content=%3cp%3eHello!%3c%2fp%3e%0a%3cp%3eSeems+that+you+have+forgotten+to+complete+the+checkout+process.+Please%2c+either+complete+the+checkout+process+or+remove+all+of+the+products+from+cart.+%3c%2fp%3e&FixedEmail=&FromName=no_reply&FromEmail=no_reply@sitecore.net&BaseSiteURL=http://localhost"
+- ID: "3f72bc07-de92-483e-a724-d430769d9ba4"
+  Hint: Designer ID
+  Value: "c03cf4ff-806f-4fcb-a75e-4d2d21026a8a"
+- ID: "7642ed71-348b-4b88-8634-cc7b28949472"
+  Hint: Origin ID
+  Value: "bc62a688-ae9e-4462-abd4-73e28782d74a"
+- ID: "8728a037-47d3-4180-b754-87926eda7ae8"
+  Hint: Editor
+  Value: /sitecore/shell/~/xaml/Sitecore.Shell.Applications.MarketingAutomation.Dialogs.ActionEditors.SendEmailMessage.aspx
+- ID: "a291a22b-99e2-46bb-a27b-8ec744275396"
+  Hint: Type
+  Value: Sitecore.Automation.MarketingAutomation.AutomationActions.SendEmailMessageAction,Sitecore.Analytics.Automation
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 0
+Languages:
+- Language: en
+  Fields:
+  - ID: "06f2d72a-1924-4b9a-ba1e-186ce4e57efd"
+    Hint: Description
+    Value: 
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: "Send E-Mail Message"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161031T214258Z
