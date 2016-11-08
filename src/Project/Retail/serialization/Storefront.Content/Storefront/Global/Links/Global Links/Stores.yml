@@ -1,0 +1,21 @@
+﻿---
+ID: "e018a950-a027-45be-9217-543bd970ee71"
+Parent: "c5bce776-8e95-44f9-ab65-52631be0db3c"
+Template: "390333c8-751b-4332-84a3-6360b969a19f"
+Path: /sitecore/content/Storefront/Global/Links/Global Links/Stores
+DB: master
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 200
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: Stores
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161107T070259Z

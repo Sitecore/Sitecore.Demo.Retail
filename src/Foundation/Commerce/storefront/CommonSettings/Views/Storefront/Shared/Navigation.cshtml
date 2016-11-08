@@ -17,37 +17,31 @@
     return;
 }
 
-<div id="B06-Navigation" class="navbar navbar-default" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand visible-xs-block" href="#">@Model.StoreTitle</a>
-    </div>
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            @{
-                foreach (var category in Model.ChildCategories)
-                {
-                    var cModel = new CategoryViewModel(category);
-                    <li><a href="@cModel.GetLink()" itemid="@cModel.Item.ID.ToString()">@cModel.DisplayNameRender</a></li>
+<div class="navbar-collapse collapse" id="siteNavbar">
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle text-uppercase" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                Products (TO DO)<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                @{
+                    foreach (var category in Model.ChildCategories)
+                    {
+                        var cModel = new CategoryViewModel(category);
+                        <li><a href="@cModel.GetLink()" itemid="@cModel.Item.ID.ToString()">@cModel.DisplayNameRender</a></li>
+                    }
                 }
-            }
-        </ul>
+            </ul>
+        </li>
+    </ul>
 
-        <script type="text/javascript">
-            if (currentCategory !== null) {
-                var pathname = window.location.pathname;
-                var item = $(".navbar-nav").find('a[itemid="' + currentCategory + '"]');
-                if (item.length) {
-                    item.parent().addClass('active');
-                }
+    <script type="text/javascript">
+        if (currentCategory !== null) {
+            var pathname = window.location.pathname;
+            var item = $(".navbar-nav").find('a[itemid="' + currentCategory + '"]');
+            if (item.length) {
+                item.parent().addClass('active');
             }
-        </script>
-    </div>
-    <div>
-    </div>
+        }
+    </script>
 </div>

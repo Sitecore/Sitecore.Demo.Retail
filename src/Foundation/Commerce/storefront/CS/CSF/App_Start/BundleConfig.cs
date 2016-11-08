@@ -30,7 +30,7 @@ namespace Sitecore.Reference.Storefront
         /// <param name="bundles">The bundles collection to add to</param>
         public static void RegisterBundles(BundleCollection bundles)
         {
-            //// BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
 
             bundles.Add(new ScriptBundle("~/js/jquery").Include(
                         "~/Scripts/jquery-{version}.js", 
@@ -91,7 +91,10 @@ namespace Sitecore.Reference.Storefront
                 "~/Scripts/Storefront/addresses.js",
                 "~/Scripts/Storefront/register.js",
                 "~/Scripts/Storefront/search.js",
-                "~/Scripts/Storefront/editprofile.js"));    
+                "~/Scripts/Storefront/editprofile.js"));
+
+            bundles.Add(new ScriptBundle("~/js/habitat").Include(
+                "~/scripts/Sitecore.Foundation.Theming.js"));
         }
     }
 }

@@ -7,18 +7,29 @@ DB: master
 SharedFields:
 - ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
   Hint: __Icon
-  Value: Core3/32x32/home_green.png
+  Value: 
 Languages:
 - Language: en
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Retail
   Versions:
   - Version: 1
     Fields:
+    - ID: "02115632-fe1e-4b3d-9ad4-a4ddf1f782f0"
+      Hint: Copyright
+      Value: <p>Copyright&nbsp;&copy; Sitecore 2016 | Habitat Retail is part of the Sitecore Demo portfolio</p>
     - ID: "235ae392-97ac-4822-be38-837da3e7724e"
       Hint: SiteBrowserTitle
       Value: " - Habitat Retail"
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20141009T023657
+      Value: 20141008T153657Z
+    - ID: "e748d808-64c1-4dec-9718-f35cf9689e4b"
+      Hint: Logo
+      Value: |
+        <image mediaid="{4C894563-1BC9-46ED-B3C6-DD31A64A09F5}" />
     - ID: "efd4980a-030c-497c-8880-40b6030ac28b"
       Hint: OrganisationName
       Value: Habitat Retail

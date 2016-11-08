@@ -18,22 +18,10 @@
     }
 }
 
-<div id="C09-ProductRating" class="rating">
-    <ul id="rating">
-        <li @(Model.CustomerAverageRating >= 1 ? "class=rated" : "")>
-            <span class="glyphicon glyphicon-star"></span>
-        </li>
-        <li @(Model.CustomerAverageRating >= 2 ? "class=rated" : "")>
-            <span class="glyphicon glyphicon-star"></span>
-        </li>
-        <li @(Model.CustomerAverageRating >= 3 ? "class=rated" : "")>
-            <span class="glyphicon glyphicon-star"></span>
-        </li>
-        <li @(Model.CustomerAverageRating >= 4 ? "class=rated" : "")>
-            <span class="glyphicon glyphicon-star"></span>
-        </li>
-        <li @(Model.CustomerAverageRating >= 5 ? "class=rated" : "")>
-            <span class="glyphicon glyphicon-star"></span>
-        </li>
-    </ul>
+<div id="C09-ProductRating" class="rating m-b-1">
+    <span @(Model.CustomerAverageRating >= 1 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
+    <span @(Model.CustomerAverageRating >= 2 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
+    <span @(Model.CustomerAverageRating >= 3 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
+    <span @(Model.CustomerAverageRating >= 4 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
+    <span @(Model.CustomerAverageRating >= 5 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
 </div>

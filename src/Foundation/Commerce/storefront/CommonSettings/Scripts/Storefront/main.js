@@ -213,12 +213,8 @@ $(document).ready(function () {
         }
     });
 
-    $(".thumbnails li a").on('click', function (e) {
+    $(".thumbnails .thumbnail").on('click', function (e) {
         e.preventDefault();
-        var activeThumb = $(this);
-
-        activeThumb.closest("ul").find(".selected-thumb").removeClass("selected-thumb");
-        activeThumb.closest("li").toggleClass("selected-thumb");
 
         $('#prod-large-view').attr('src', $(this).attr('href'));
     });
