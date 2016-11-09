@@ -292,6 +292,7 @@
     <Content Include="Views\Storefront\Account\Register.cshtml" />
     <Content Include="Views\Storefront\Account\UserPendingActivation.cshtml" />
     <Content Include="Views\Storefront\Account\FederatedSignout.cshtml" />
+    <Content Include="Views\Storefront\Shared\TitleTextHeader.cshtml" />
     <None Include="Views\Web.config" />
   </ItemGroup>
   <PropertyGroup>

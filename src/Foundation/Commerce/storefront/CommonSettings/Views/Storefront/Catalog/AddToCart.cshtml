@@ -41,7 +41,7 @@
             @Html.Hidden("ImageUrl", Model.Images[0].GetImageUrl(50, 50))
         }
 
-        <div class="control-group">
+        <div class="form-group">
             <label class="control-label" for="Quantity">@quantityLabel</label>
             <div class="controls" id="quantity">
                 @Html.TextBoxFor(model => model.Quantity, new { @type = "number", @class = "form-control", @min = "1", @max = "100", @required = "required", @Value = "1" })

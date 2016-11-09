@@ -16,7 +16,22 @@
     {
         return;
     }
+    var productImage = Model.Images.FirstOrDefault();
+    var imageUrl = (productImage == null ? null : productImage.GetImageUrl(770, 625));
 }
 
-<div id="C11-CategoryPageHeader"></div>
+<div class="jumbotron jumbotron-xl bg-media" style="background-image: url('@imageUrl')">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>
+                    @Model.DisplayName
+                </h1>
 
+                <p class="lead">
+                    @Model.Description
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

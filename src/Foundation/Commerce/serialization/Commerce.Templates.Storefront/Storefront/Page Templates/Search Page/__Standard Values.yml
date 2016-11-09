@@ -78,21 +78,25 @@ SharedFields:
           ph="navbar-activity"
           uid="{DE40A8F4-F8D7-4916-BCDF-C3D724FF96E2}" />
         <r
-          id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
-          ph="messages"
-          uid="{9A330B78-4526-4C50-A8DB-F2FA8E1854CC}" />
-        <r
           id="{A2216CA7-B205-4042-A345-72117D0086C3}"
           par="UseStaticPlaceholderNames=1"
           ph="page-layout"
           uid="{496F70C1-ACDB-49BB-B9B7-CEC6BF0A12F9}" />
+        <r
+          id="{EE933E0E-D6D6-46A9-8FCB-9016C3AC234C}"
+          ph="/page-layout/page-header"
+          uid="{CE8CB33B-478E-4AA7-8288-2388670BF669}" />
+        <r
+          id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
+          ph="/page-layout/page-header"
+          uid="{9A330B78-4526-4C50-A8DB-F2FA8E1854CC}" />
         <r
           id="{D201A487-5099-48A1-8189-55944F70C6CB}"
           par="UseStaticPlaceholderNames=1"
           ph="page-layout"
           uid="{F57AC5DE-D0F0-40C4-95AE-7E3371FD16F8}" />
         <r
-          id="{A85A0B65-D3B7-48B8-B362-F17AA3CA7DF1}"
+          id="{EADA94FA-315F-4DF2-AC49-13346DFDAF12}"
           par="UseStaticPlaceholderNames=1"
           ph="/page-layout/section"
           uid="{897C99D8-9A09-4A4B-8336-B7D0E95FA84F}" />
@@ -121,16 +125,16 @@ SharedFields:
         <r
           ds="{CD29D0CE-ACB7-4023-AF46-E4386BF4054B}"
           id="{84761F65-E049-488F-959D-C24543612EF4}"
-          ph="/page-layout/section/col-narrow-2"
+          ph="/page-layout/section/col-wide-1"
           uid="{0EBFF6E0-B868-429D-B794-B4F8DC19ADC2}" />
         <r
           id="{8B9E7071-0898-4AF7-BDA3-53E1B2A31990}"
-          ph="/page-layout/section/col-narrow-2"
+          ph="/page-layout/section/col-wide-1"
           uid="{A3670133-E6F2-4467-A564-7F99C2F38F58}" />
         <r
           ds="{1B0B70F6-BB9E-4AEB-BAEA-7045C076249E}"
           id="{74A2340A-3DE0-4A78-B68D-D35F699B1F9A}"
-          ph="/page-layout/section/col-narrow-2"
+          ph="/page-layout/section/col-wide-1"
           uid="{550A3DC7-2E07-4B05-A975-723FF55873C6}" />
         <r
           id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"

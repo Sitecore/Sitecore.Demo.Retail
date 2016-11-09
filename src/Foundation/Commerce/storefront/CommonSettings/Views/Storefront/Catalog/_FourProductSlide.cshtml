@@ -18,9 +18,10 @@
     {
         return;
     }
+    var slides = (Model.Products.Count < 4 ? Model.Products.Count : 4);
 }
 
-<div class="owl-carousel" data-options='{"items": 4, "navigation": true, "navigationText": ["<", ">"], "autoPlay": false}'>
+<div class="owl-carousel" data-options='{"items": @slides, "navigation": true, "navigationText": ["<", ">"], "autoPlay": false}'>
     @{
         foreach (ProductViewModel product in Model.Products)
         {

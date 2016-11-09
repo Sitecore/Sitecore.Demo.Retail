@@ -18,11 +18,18 @@
     }
 }
 
-<div id="C13-SiteContentList" class="col-md-12">
-    <div class="results">
-        @foreach (var contentItem in Model.ContentItems)
-        {
-            @Html.Partial("~/Views/Storefront/Catalog/_SiteContentSummary.cshtml", contentItem)
-        }
-    </div>
-</div>
+<ul class="C13-SiteContentList list-unstyled list-divided">
+    @foreach (var contentItem in Model.ContentItems)
+    {
+        <li>
+            <h3>
+                <a href="@contentItem.ContentPath">
+                    @contentItem.SummaryTitle
+                </a>
+            </h3>
+            <p>
+                @contentItem.SummaryText
+            </p>
+        </li>
+    }
+</ul>

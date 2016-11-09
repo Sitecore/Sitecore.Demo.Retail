@@ -18,19 +18,26 @@
     }
 }
 
-<div id="C03-ProductFacets" class="row">
-    <div class="col-md-12">
+<div class="sidebar sidebar-static">
+    <button type="button" class="sidebar-toggle visible-xs collapsed" data-toggle="collapse" data-target="#facets-sidebar" aria-expanded="false">
+        <span class="text">Filter products</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <div class="sidebar-collapse collapse" id="facets-sidebar">
         <!-- Toggle facets for mobile -->
         @foreach (var facet in Model.ActiveFacets)
         {
-            if (facet.IsValid())
-            {
+                var facetId = facet.DisplayName.ToLower().Replace(" ", "");
+
+                if (facet.IsValid())
+                {
                 <div class="facets-container">
-                    <h5>@facet.DisplayName.ToUpper()</h5>
-                    <label for="color-toggle"> + </label>
-                    <input type="checkbox" id="color-toggle" class="toggle-facets" />
-                    <div class="@facet.DisplayName.ToLower().Replace(" ", "")-list">
-                        <ul class="facet-@facet.DisplayName.ToLower()">
+                    <h5>@facet.DisplayName</h5>
+                    <input type="checkbox" id="color-toggle" class="toggle-facets hidden" />
+                    <div class="@facetId-list">
+                        <ul class="facet-@facetId nav nav-pills nav-stacked">
                             @foreach (var value in facet.FoundValues)
                             {
                                 bool addingFacet = true;
@@ -51,7 +58,7 @@
                                             break;
                                         case "false":
                                             name = "No";
-                                            break;                                            
+                                            break;
                                     }
 
                                     var isActveFacet = string.Empty;
@@ -65,7 +72,12 @@
                                     }
 
                                     int jsIsActive = addingFacet ? 1 : 0;
-                                    <li @isActveFacet><a onclick="FireFacetApplied('@facet.Name', '@value.Name', @jsIsActive, '@Url.AddToFacets(facet.Name, value.Name)')"><span pid="facetName">@name</span> <span pid="facetCount">(@facetCount)</span></a></li>
+                                    <li @isActveFacet>
+                                        <a href="#" onclick="FireFacetApplied('@facet.Name', '@value.Name', @jsIsActive, '@Url.AddToFacets(facet.Name, value.Name)')">
+                                            <span pid="facetName">@name</span> 
+                                            <span pid="facetCount">(@facetCount)</span>
+                                        </a>
+                                    </li>
                                 }
                             }
                         </ul>

@@ -62,7 +62,7 @@
     </form>
 
     <div id="main-container">
-        <header class="bg-white @(Sitecore.Context.PageMode.IsExperienceEditor ? "header-static" : "header-fixed")">
+        <header class="bg-white @(Sitecore.Context.PageMode.IsExperienceEditor ? "header-static" : "header-fixed") header-has-top">
             @Html.Sitecore().Placeholder("header-top")
 
             @Html.Sitecore().Placeholder("navbar")

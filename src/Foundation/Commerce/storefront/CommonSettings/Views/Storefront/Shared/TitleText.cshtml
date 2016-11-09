@@ -12,6 +12,11 @@
 
 @model RenderingModel
 
-<h1>@Html.Sitecore().Field(StorefrontConstants.ItemFields.Title)</h1>
-
-<p>@Html.Sitecore().Field("Text")</p>
+<header>
+    <h1>
+        @Html.Sitecore().Field(StorefrontConstants.ItemFields.Title)
+    </h1>
+    <div class="lead">
+        @Html.Sitecore().Field("Text")
+    </div>
+</header>

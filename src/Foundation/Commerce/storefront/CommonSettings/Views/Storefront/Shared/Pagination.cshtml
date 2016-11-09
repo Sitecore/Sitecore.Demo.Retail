@@ -18,7 +18,7 @@
 }
 
 <div id="C06-Pagination" class="row">
-    @if (Model.Pagination.TotalResultCount > 0)
+    @if (Model.Pagination.TotalResultCount > 0 && Model.Pagination.NumberOfPages > 1)
     {
         <div class="col-md-12">
             <div class="pagination-container">

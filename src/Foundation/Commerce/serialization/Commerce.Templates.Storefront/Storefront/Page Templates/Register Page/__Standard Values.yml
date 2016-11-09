@@ -62,14 +62,14 @@ SharedFields:
           ph="navbar-activity"
           uid="{989CE95A-F72C-40CF-AC7A-8849C3A29ACC}" />
         <r
-          id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
-          ph="messages"
-          uid="{E8C1A1F5-78D1-4C9E-BD0E-CDCA59C56B80}" />
-        <r
           id="{A2216CA7-B205-4042-A345-72117D0086C3}"
           par="UseStaticPlaceholderNames=1"
           ph="page-layout"
           uid="{A23EFD1C-A3C6-4106-A62B-4E5463E9BC0E}" />
+        <r
+          id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
+          ph="/page-layout/page-header"
+          uid="{E8C1A1F5-78D1-4C9E-BD0E-CDCA59C56B80}" />
         <r
           id="{D201A487-5099-48A1-8189-55944F70C6CB}"
           par="UseStaticPlaceholderNames=1"
