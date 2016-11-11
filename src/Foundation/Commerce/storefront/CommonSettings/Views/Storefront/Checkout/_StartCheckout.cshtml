@@ -26,7 +26,7 @@
     var selectDeliveryFirstMessage = @StorefrontManager.GetHtmlSystemMessage("SelectDeliveryFirstMessage");
 }
 
-<div id="checkoutContainer" class="row">
+<div id="checkoutContainer">
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -46,13 +46,13 @@
     }
 
     <script type="text/javascript">
-    ko.validation.localize({ required: '@requiredFieldMessage' });
-    ko.validation.localize({ email: '@requiredEmailMessage' });
-    ko.validation.localize({ number: '@requiredNumberMessage' });
+        ko.validation.localize({ required: '@requiredFieldMessage' });
+        ko.validation.localize({ email: '@requiredEmailMessage' });
+        ko.validation.localize({ number: '@requiredNumberMessage' });
 
-    AddMessage('SelectDeliveryFirstMessage', '@selectDeliveryFirstMessage');
-    AddMessage('EmailsMustMatchMessage', '@emailsMustMatchMessage');
+        AddMessage('SelectDeliveryFirstMessage', '@selectDeliveryFirstMessage');
+        AddMessage('EmailsMustMatchMessage', '@emailsMustMatchMessage');
 
-    initCheckoutData("@StorefrontManager.CurrentStorefront.GetMapKey()");
+        initCheckoutData("@StorefrontManager.CurrentStorefront.GetMapKey()");
     </script>
 </div>

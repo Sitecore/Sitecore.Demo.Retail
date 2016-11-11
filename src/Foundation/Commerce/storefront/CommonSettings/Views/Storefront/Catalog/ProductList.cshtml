@@ -19,12 +19,10 @@
 }
 
 <div id="C05-ProductList" class="row">
-    <div class="col-md-12 product-list">
-        @foreach (ProductViewModel product in Model.ChildProducts)
-        {
-            <div class="col-sm-4 col-xs-12">
-                @Html.Partial("~/Views/Storefront/Catalog/_ProductSummary.cshtml", product)
-            </div>
-        }
-    </div>
+    @foreach (ProductViewModel product in Model.ChildProducts)
+    {
+        <div class="col-sm-4 col-xs-12">
+            @Html.Partial("~/Views/Storefront/Catalog/_ProductSummary.cshtml", product)
+        </div>
+    }
 </div>

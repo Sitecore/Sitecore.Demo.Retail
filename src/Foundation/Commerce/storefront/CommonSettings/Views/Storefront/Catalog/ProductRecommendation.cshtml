@@ -27,7 +27,7 @@
         {
             var active = Model.ProductSearchResults.IndexOf(productSearchResult) == 0;
             <li role="presentation" class=@(active ? "active" : "")>
-                <a href="#tab-@GetId(productSearchResult)" aria-controls="home" role="tab" data-toggle="tab">
+                <a href="#tab-@GetId(productSearchResult)" role="tab" data-toggle="tab">
                     @productSearchResult.NamedSearchItemDisplayNameRender
                 </a>
             </li>

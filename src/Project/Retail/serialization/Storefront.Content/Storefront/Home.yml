@@ -39,6 +39,10 @@ SharedFields:
 - ID: "872f1c3e-42e7-4f28-9b06-ae6d0c40c3ca"
   Hint: DefaultProductId
   Value: 22565422120
+- ID: "9e712a53-d222-46ea-a6ef-82f29af0e0fd"
+  Hint: Supports Gift Card Payment
+  Type: Checkbox
+  Value: 1
 - ID: "a204f8d6-b81a-4c1b-88ef-2dbc9471c18a"
   Hint: Category Images
   Value: 
@@ -52,6 +56,14 @@ SharedFields:
   Hint: Catalogs
   Type: Treelist
   Value: "{2C1225CC-24C0-496B-AEB7-7BEF84C0252A}"
+- ID: "c3c1de9d-8881-47d1-b10f-d4ab17306cd5"
+  Hint: Supports Wishlists
+  Type: Checkbox
+  Value: 1
+- ID: "caf0c107-bbb2-4eed-ba3e-692b1d975854"
+  Hint: Supports Loyalty Program
+  Type: Checkbox
+  Value: 1
 - ID: "cc553205-a4d2-4feb-b722-9b41e9fa5271"
   Hint: TrackingCookieName
   Value: _visitor

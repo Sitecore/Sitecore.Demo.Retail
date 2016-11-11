@@ -20,26 +20,28 @@
     var writeMessageLabel = Html.Sitecore().Field("Write Message Label", deliveryPage);
 }
 
-<div class="col-md-12">
-    <h1>@sendByEmailHeaderLabel</h1>
-</div>
-<!-- ko if: $root.isAuthenticated -->
-<div class="col-md-12">
-    <div class="form-group">
-        <input type="checkbox" id="sendEmailToMe" data-bind="event: {change: setSendToMe}">
-        <label for="sendEmailToMe">@sendToMeLabel</label>
+<div  class="row m-t-2">
+    <div class="text-center m-b-1">
+        <h3>@sendByEmailHeaderLabel</h3>
     </div>
-</div>
-<!-- /ko -->
-<div class="col-md-12">
-    <div class="form-group">
-        <label for="shippingEmailAddress">@recilientEmailLabel*</label>
-        <input type="text" class="form-control" id="shippingEmailAddress" placeholder="@recilientEmailLabelPlaceholder" data-bind="value: shippingEmail">
+    <!-- ko if: $root.isAuthenticated -->
+    <div class="col-md-12">
+        <div class="form-group">
+            <input type="checkbox" id="sendEmailToMe" data-bind="event: {change: setSendToMe}">
+            <label for="sendEmailToMe">@sendToMeLabel</label>
+        </div>
     </div>
-</div>
-<div class="col-md-12">
-    <div class="form-group">
-        <label for="shippingEmailMessage">@writeMessageLabel</label>
-        <textarea class="form-control" rows="3" id="shippingEmailMessage" data-bind="value: shippingEmailContent"></textarea>
+    <!-- /ko -->
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="shippingEmailAddress">@recilientEmailLabel*</label>
+            <input type="text" class="form-control" id="shippingEmailAddress" placeholder="@recilientEmailLabelPlaceholder" data-bind="value: shippingEmail">
+        </div>
     </div>
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="shippingEmailMessage">@writeMessageLabel</label>
+            <textarea class="form-control" rows="3" id="shippingEmailMessage" data-bind="value: shippingEmailContent"></textarea>
+        </div>
+    </div>    
 </div>

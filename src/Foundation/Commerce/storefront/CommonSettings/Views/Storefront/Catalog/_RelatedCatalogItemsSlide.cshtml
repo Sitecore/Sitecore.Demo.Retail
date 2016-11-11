@@ -17,24 +17,15 @@
     {
         return;
     }
+    var slides = (Model.ChildProducts.Count < 4 && Model.ChildProducts.Count > 1 ? Model.ChildProducts.Count : 4);
 }
 
 <!-- Wrapper for slides -->
-<div class="carousel-inner">
+<div class="owl-carousel" data-options='{"items": @slides, "navigation": true, "navigationText": ["<", ">"], "autoPlay": false}'>
     @{
-
-        for (int i = 0; i < Model.ChildProducts.Count; i += 4)
+        foreach (ProductViewModel product in Model.ChildProducts)
         {
-            <div class="item@(i == 0 ? " active" : "")">
-                <div class="row">
-                    @foreach (ProductViewModel product in Model.ChildProducts.Skip(i).Take(4))
-                    {
-                        <div class="col-sm-3 col-xs-6">
-                            @Html.Partial("~/Views/Storefront/Catalog/_ProductSummary.cshtml", product)
-                        </div>
-                    }
-                </div>
-            </div>
+            @Html.Partial("~/Views/Storefront/Catalog/_ProductSummary.cshtml", product)
         }
     }
 </div>

@@ -16,9 +16,8 @@
     var savingsLabel = Html.Sitecore().Field("Savings Label", Html.Sitecore().CurrentItem);
 }
 
-<tr>
-    <td class="cart-delete"><a pid="remove" class="delete-item" data-bind="attr: {'data-ajax-lineitemid': externalCartLineId}"><span class="glyphicon glyphicon-remove-circle"></span></a></td>
-    <td class="cart-image hidden-sm hidden-xs">
+<tr class="row">
+    <td class="hidden-xs">
         <a data-bind="attr:{'href' : productUrl}"><img class="img-responsive" data-bind="attr: {src: image}" alt="a" pid="image" /></a>
     </td>
     <td class="cart-info">
@@ -30,21 +29,26 @@
         <span pid="color" data-bind="text: color"></span>
         <!-- /ko -->
     </td>
-    <td class="cart-price">
+    <td class="cart-quantity" style="width: 10%;">
+        <input pid="quantity" type="number" class="form-control form-control-quantity" placeholder="1" data-bind="attr: {value: quantity, 'data-ajax-lineitemid': externalCartLineId}">
+    </td>
+    <td class="cart-price text-right hidden-xs">
         <span pid="price" data-bind="text: linePrice"></span>
-        <p data-bind="visible: shouldShowDiscountOffers">
+        <p data-bind="visible: shouldShowDiscountOffers" class="m-b-0">
             <span>@discountLabel</span>
             <span pid="discountNames" data-bind="text: discountOfferNames" class="savings"></span>
         </p>
     </td>
-    <td class="cart-quantity text-center" style="width: 10%;">
-        <input pid="quantity" type="number" class="form-control form-control-quantity" placeholder="1" data-bind="attr: {value: quantity, 'data-ajax-lineitemid': externalCartLineId}">
-    </td>
-    <td class="cart-total">
-        <span pid="total" data-bind="text: lineTotal"></span>
+    <td class="cart-total text-right">
+        <strong pid="total" data-bind="text: lineTotal"></strong>
         <p data-bind="visible: shouldShowSavings">
             <span>@savingsLabel </span>
             <span pid="discount" data-bind="text: lineItemDiscount" class="savings"></span>
         </p>
+    </td>
+    <td class="cart-delete">
+        <a pid="remove" class="delete-item" data-bind="attr: {'data-ajax-lineitemid': externalCartLineId}">
+            <span class="glyphicon glyphicon-remove icon-md"></span>
+        </a>
     </td>
 </tr>

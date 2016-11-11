@@ -1,14 +1,14 @@
 ﻿@*//-----------------------------------------------------------------------
-// Copyright 2016 Sitecore Corporation A/S
-// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
-// except in compliance with the License. You may obtain a copy of the License at
-//       http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software distributed under the
-// License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-// either express or implied. See the License for the specific language governing permissions
-// and limitations under the License.
-// -------------------------------------------------------------------------------------------*@
+    // Copyright 2016 Sitecore Corporation A/S
+    // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+    // except in compliance with the License. You may obtain a copy of the License at
+    //       http://www.apache.org/licenses/LICENSE-2.0
+    //
+    // Unless required by applicable law or agreed to in writing, software distributed under the
+    // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    // either express or implied. See the License for the specific language governing permissions
+    // and limitations under the License.
+    // -------------------------------------------------------------------------------------------*@
 
 @{
     var orderTotalHeaderLabel = Html.Sitecore().Field("Order Total Header Label", Html.Sitecore().CurrentItem);
@@ -19,28 +19,30 @@
     var totalSavingsLabel = Html.Sitecore().Field("Total Savings Label", Html.Sitecore().CurrentItem);
 }
 
-<div data-binding="visible: total > 0" id="summarySection">
-    <div class="col-md-12">
-        <h3>@orderTotalHeaderLabel</h3>
-    </div>
-    <div class="col-md-12 summary">
-        <span class="text">@paymentTotalLabel</span>
-        <span class="amount" data-bind="text: subTotal" pid="subtotal"></span>
-    </div>
-    <div class="col-md-12 summary">
-        <span class="text">@vatLabel</span>
-        <span class="amount" data-bind="text: taxTotal" pid="taxTotal"></span>
-    </div>
-    <div class="col-md-12 summary">
-        <span class="text">@shippingLabel</span>
-        <span class="amount" data-bind="text: shippingTotal" pid="shippingTotal"></span>
-    </div>
-    <div class="col-md-12 total">
-        <span class="text">@orderTotalLabel</span>
-        <span class="amount" data-bind="text: total" pid="total"></span>
-    </div>
-    <div class="col-md-12">
-        <span>@totalSavingsLabel </span>
-        <span data-bind="text: discount" pid="discountTotal"></span>
-    </div>
+<div class="headline text-center">
+    <h3>@orderTotalHeaderLabel</h3>
 </div>
+<table class="table table-striped">
+    <tr>
+        <td>@paymentTotalLabel</td>
+        <td class="text-right"><strong data-bind="text: subTotal" pid="subtotal"></strong></td>
+    </tr>
+    <tr>
+        <td>@vatLabel</span>
+        <td class="text-right" data-bind="text: taxTotal" pid="taxTotal"></td>
+    </tr>
+    <tr>
+        <td>@shippingLabel</td>
+        <td class="text-right" data-bind="text: shippingTotal" pid="shippingTotal"></td>
+    </tr>
+    <tr>
+        <td><strong>@orderTotalLabel</strong></td>
+        <td class="text-right"><strong data-bind="text: total" pid="total"></strong></td>
+    </tr>
+    <tr>
+        <td><em>@totalSavingsLabel</em></td>
+        <td class="text-right">
+            <em pid="discountTotal" data-bind="text: discount"></em>
+        </td>
+    </tr>
+</table>

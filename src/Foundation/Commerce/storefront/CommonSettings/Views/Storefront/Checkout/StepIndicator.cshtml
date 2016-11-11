@@ -10,16 +10,23 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-<div class="col-md-12" id="checkoutStepIndicator">
-    <!-- Styling div - Container -->
-    <div class="product-slide">
-        <ul class="nav nav-tabs nav-justified">
-            <li class="active"><a id="checkoutNavigation1" href="#" class="temp-click">@Html.Sitecore().Field("Delivery Information Label", Html.Sitecore().CurrentItem)</a></li>
-            <li><a id="checkoutNavigation2" href="#" class="temp-click">@Html.Sitecore().Field("Billing Information Label", Html.Sitecore().CurrentItem)</a></li>
-            <li><a id="checkoutNavigation3" href="#" class="temp-click">@Html.Sitecore().Field("Confirmation Label", Html.Sitecore().CurrentItem)</a></li>
-        </ul>
-    </div>
-</div>
+<ul class="nav nav-tabs nav-justified m-b-1">
+    <li class="active">
+        <a id="checkoutNavigation1" href="#" class="temp-click">
+            @Html.Sitecore().Field("Delivery Information Label", Html.Sitecore().CurrentItem) <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </li>
+    <li>
+        <a id="checkoutNavigation2" href="#" class="temp-click">
+            @Html.Sitecore().Field("Billing Information Label", Html.Sitecore().CurrentItem) <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </li>
+    <li>
+        <a id="checkoutNavigation3" href="#" class="temp-click">
+            @Html.Sitecore().Field("Confirmation Label", Html.Sitecore().CurrentItem)
+        </a>
+    </li>
+</ul>
 <script type="text/javascript">
     setupStepIndicator();
 </script>

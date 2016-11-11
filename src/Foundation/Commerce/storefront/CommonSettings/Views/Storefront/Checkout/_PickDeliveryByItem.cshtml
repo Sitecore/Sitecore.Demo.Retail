@@ -22,54 +22,37 @@
 <div class="col-md-12">
     <h1>@selectDeliveryOptionsHeader</h1>
 </div>
-<div class="col-md-12" data-bind="foreach: cart().cartLines">
-    <div class='itemEven accordion-row'>
-        <div class="accordionHeader">
-            <div class="col-md-8">
-                <div class="accordion-toggle">
-                    <img class="img-responsive" alt="a" data-bind="attr:{ src:image }" />
-                    <div class="accordion-prod-info">
-                        <h5 data-bind="text:displayName"></h5>
-                        <p data-bind="visible: color != null">(@colorLabel: <span data-bind="text:color"></span>)</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+<table class="table" data-bind="foreach: cart().cartLines">
+    <tr>
+        <td class="col-md-2">
+            <img class="img-responsive" alt="a" data-bind="attr:{ src:image }" />
+        </td>
+        <td class="col-md-6">
+            <div class="accordion-prod-info">
+                <h5 data-bind="text:displayName"></h5>
+                <p data-bind="visible: color != null">(@colorLabel: <span data-bind="text:color"></span>)</p>
             </div>
-            <div class="col-md-4">
-                <select class="form-control" data-bind="foreach: shippingOptions, attr: { id:'lineShippingPreference-'+ externalCartLineId }, value: selectedShippingOption">
-                    <!-- ko if: $index() == 0 -->
-                    <option value="0">@deliveryOptionLabel</option>
-                    <!-- /ko -->
-                    <!-- ko if: ShippingOptionType.Value != 4 -->
-                    <option data-bind="text: Name, value: ShippingOptionType.Value"></option>
-                    <!-- /ko -->
-                </select>
-            </div>
-        </div>
-        <div class="accordionContent" data-bind="attr: { id:'AccordionContent-'+ externalCartLineId }, visible: showShipOptionContent()">
-            <div data-bind="attr: { id:'ShipAll-'+ externalCartLineId }, visible: isLineShipAll" class="col-md-12">
-                @Html.Partial("~/Views/Storefront/Checkout/_ByItem_ShipAll.cshtml")
-            </div>
-            <div data-bind="attr: { id:'Email-'+ externalCartLineId }, visible: isLineShipToEmail" class="col-md-12">
-                @Html.Partial("~/Views/Storefront/Checkout/_ByItem_SendByEmail.cshtml")
-            </div>
-            <div data-bind="attr: { id:'PickStore-'+ externalCartLineId }, visible: isLineShipToStore" class="col-md-12">
-                @Html.Partial("~/Views/Storefront/Checkout/_ByItem_Store.cshtml")
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <div class="col-md-12 accordion-status">
-            <strong>@deliverySelectedLabel:</strong>
-            <span class="delivery-content" data-bind="attr: { id: 'selectedDeliveryLabel-'+ externalCartLineId }, text: selectedShippingOptionName"></span>
-            <div class="change-delivery" data-bind="attr: { id: 'changeDelivery-'+ externalCartLineId }">
-                <div class="openSign" data-bind="visible: !showShipOptionContent(), click: toggleShipContent">
-                    <span class="glyphicon glyphicon-plus-sign"></span> @openDeliveryInfoLabel
-                </div>
-                <div class="closeSign" data-bind="visible: showShipOptionContent(), click: toggleShipContent">
-                    <span class="glyphicon glyphicon-minus-sign"></span> @closeDeliveryInfoLabel
-                </div>
-            </div>
-        </div> 
-        <div class="clearfix"></div>
-    </div>
-</div>
+        </td>
+        <td class="col-md-4">
+            <select class="form-control" data-bind="foreach: shippingOptions, attr: { id:'lineShippingPreference-'+ externalCartLineId }, value: selectedShippingOption">
+                <!-- ko if: $index() == 0 -->
+                <option value="0">@deliveryOptionLabel</option>
+                <!-- /ko -->
+                <!-- ko if: ShippingOptionType.Value != 4 -->
+                <option data-bind="text: Name, value: ShippingOptionType.Value"></option>
+                <!-- /ko -->
+            </select>
+        </td>
+    </tr>
+    <tr class="accordionContent" data-bind="attr: { id:'AccordionContent-'+ externalCartLineId }, visible: showShipOptionContent()">
+        <td data-bind="attr: { id:'ShipAll-'+ externalCartLineId }, visible: isLineShipAll" colspan="3">
+            @Html.Partial("~/Views/Storefront/Checkout/_ByItem_ShipAll.cshtml")
+        </td>
+        <td data-bind="attr: { id:'Email-'+ externalCartLineId }, visible: isLineShipToEmail" colspan="3">
+            @Html.Partial("~/Views/Storefront/Checkout/_ByItem_SendByEmail.cshtml")
+        </td>
+        <td data-bind="attr: { id:'PickStore-'+ externalCartLineId }, visible: isLineShipToStore" colspan="3">
+            @Html.Partial("~/Views/Storefront/Checkout/_ByItem_Store.cshtml")
+        </td>
+    </tr>
+</table>

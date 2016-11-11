@@ -12,27 +12,44 @@
 
 @model Sitecore.Reference.Storefront.Models.RenderingModels.NavigationViewModel
 
-@if (Model == null || Model.ChildCategories == null || !Model.ChildCategories.Any())
-{
-    return;
+@{
+    if (Model == null || Model.ChildCategories == null || !Model.ChildCategories.Any())
+    {
+        return;
+    }
+
+    var mainCategories = Model.ChildCategories.Take(6);
+    var secondaryCategories = Model.ChildCategories.Skip(6);
 }
 
 <div class="navbar-collapse collapse" id="siteNavbar">
     <ul class="nav navbar-nav">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle text-uppercase" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                Products (TO DO)<span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                @{
-                    foreach (var category in Model.ChildCategories)
-                    {
-                        var cModel = new CategoryViewModel(category);
-                        <li><a href="@cModel.GetLink()" itemid="@cModel.Item.ID.ToString()">@cModel.DisplayNameRender</a></li>
-                    }
-                }
-            </ul>
-        </li>
+        @{
+            foreach (var category in mainCategories)
+            {
+                var cModel = new CategoryViewModel(category);
+                <li>
+                    <a class="text-uppercase" href="@cModel.GetLink()" itemid="@cModel.Item.ID.ToString()">@cModel.DisplayNameRender</a>
+                </li>
+            }
+            if (secondaryCategories.Any())
+            {
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle text-uppercase" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Other<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @{
+                            foreach (var category in secondaryCategories)
+                            {
+                                var cModel = new CategoryViewModel(category);
+                                <li><a href="@cModel.GetLink()" itemid="@cModel.Item.ID.ToString()">@cModel.DisplayNameRender</a></li>
+                            }
+                        }
+                    </ul>
+                </li>
+            }
+        }
     </ul>
 
     <script type="text/javascript">

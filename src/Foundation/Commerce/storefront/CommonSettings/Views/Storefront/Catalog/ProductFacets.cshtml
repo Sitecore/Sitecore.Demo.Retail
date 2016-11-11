@@ -29,22 +29,21 @@
         <!-- Toggle facets for mobile -->
         @foreach (var facet in Model.ActiveFacets)
         {
-                var facetId = facet.DisplayName.ToLower().Replace(" ", "");
-
-                if (facet.IsValid())
-                {
+            var facetId = facet.DisplayName.ToLower().Replace(" ", "");
+            if (facet.IsValid())
+            {
                 <div class="facets-container">
                     <h5>@facet.DisplayName</h5>
-                    <input type="checkbox" id="color-toggle" class="toggle-facets hidden" />
+                    <input type="checkbox" id="color-toggle" class="toggle-facets hidden"/>
                     <div class="@facetId-list">
                         <ul class="facet-@facetId nav nav-pills nav-stacked">
                             @foreach (var value in facet.FoundValues)
                             {
-                                bool addingFacet = true;
+                                var facetValueSelected = false;
                                 var facetCount = value.AggregateCount;
                                 if (value.IsValid())
                                 {
-                                    string name = value.Name;
+                                    var name = value.Name;
                                     switch (name)
                                     {
                                         case "1":
@@ -61,19 +60,18 @@
                                             break;
                                     }
 
-                                    var isActveFacet = string.Empty;
+                                    var activeFacetClass = string.Empty;
                                     foreach (var activeFacet in Model.ActiveFacets)
                                     {
                                         if (activeFacet.Values.Contains(value.Name))
                                         {
-                                            isActveFacet = "class=active";
-                                            addingFacet = false;
+                                            activeFacetClass = "class=active";
+                                            facetValueSelected = true;
                                         }
                                     }
 
-                                    int jsIsActive = addingFacet ? 1 : 0;
-                                    <li @isActveFacet>
-                                        <a href="#" onclick="FireFacetApplied('@facet.Name', '@value.Name', @jsIsActive, '@Url.AddToFacets(facet.Name, value.Name)')">
+                                    <li @activeFacetClass>
+                                        <a href="#" onclick="FireFacetApplied('@facet.Name', '@value.Name', @(facetValueSelected ? 0 : 1), '@Url.AddToFacets(facet.Name, value.Name)')">
                                             <span pid="facetName">@name</span> 
                                             <span pid="facetCount">(@facetCount)</span>
                                         </a>
@@ -91,8 +89,10 @@
 <script type="text/javascript">
     function FireFacetApplied(facetName, facetValue, isApplied, url) {
         var facet = facetName + "=" + facetValue;
-        AJAXPost(StorefrontUri("api/storefront/catalog/facetapplied"), "{\"facetValue\":\"" + facet + "\", \"isApplied\":" + isApplied + "}", function (data, success, sender) {
-            window.location.href = url;
-        });
+        AJAXPost(StorefrontUri("api/storefront/catalog/facetapplied"),
+            "{\"facetValue\":\"" + facet + "\", \"isApplied\":" + isApplied + "}",
+            function(data, success, sender) {
+                window.location.href = url;
+            });
     }
 </script>

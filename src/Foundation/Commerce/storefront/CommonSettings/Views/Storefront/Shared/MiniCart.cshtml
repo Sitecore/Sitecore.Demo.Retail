@@ -12,7 +12,7 @@
 
 @using Sitecore.Reference.Storefront.Managers
 
-<li class="dropdown hidden-xs" id="B02-Basket">
+<li class="dropdown" id="B02-Basket">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <span class="glyphicon glyphicon-shopping-cart"></span><span class="badge bg-primary" id="miniCartItemCount" data-bind="text: lineitemcount"></span> 
     </a>
@@ -35,7 +35,9 @@
                     </p>
                 </div>
                 <div class="media-right">
-                    <a href="#" class="color-primary"><span class="glyphicon glyphicon-remove-circle"></span></a>
+                    <a href="#" class="text-primary">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
                 </div>
             </li>
         </ul>

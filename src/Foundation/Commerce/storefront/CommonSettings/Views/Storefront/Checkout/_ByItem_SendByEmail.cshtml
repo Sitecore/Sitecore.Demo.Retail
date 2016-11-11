@@ -20,26 +20,37 @@
     var writeMessageLabel = Html.Sitecore().Field("Write Message Label", deliveryPage);
  }
 
-<div class="col-md-12">
-    <h1>@sendByEmailHeaderLabel</h1>
-</div>
-<!-- ko if: $root.isAuthenticated -->
-<div class="col-md-12">
-    <div class="form-group">
-        <input type="checkbox" data-bind="attr: {id: 'sendEmailToMe-'+ externalCartLineId}, event: {change: $root.setSendToMe}">
-        <label data-bind="attr: {for:'sendEmailToMe-'+ externalCartLineId}">@sendToMeLabel</label>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a role="button" data-bind="attr: { href: '#panel'+ externalCartLineId }" data-toggle="collapse" class="panel-title">
+            @sendByEmailHeaderLabel
+            <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+        </a>
     </div>
-</div>
-<!-- /ko -->
-<div class="col-md-12">
-    <div class="form-group">
-        <label data-bind="attr:{for:'shippingEmailAddress-'+ externalCartLineId}">@recilientEmailLabel*</label>
-        <input type="text" class="form-control" data-bind="attr: {id:'shippingEmailAddress-'+ externalCartLineId}, value: shippingEmail" placeholder="@recilientEmailLabelPlaceholder">
-    </div>
-</div>
-<div class="col-md-12">
-    <div class="form-group">
-        <label data-bind="attr:{for:'shippingEmailMessage-'+ externalCartLineId}">@writeMessageLabel</label>
-        <textarea class="form-control" rows="3" data-bind="attr: {id:'shippingEmailMessage-'+ externalCartLineId}, value: shippingEmailContent"></textarea>
+    <div class="panel-collapse collapse in" data-bind="attr: { id: 'panel'+ externalCartLineId }">
+        <div class="panel-body">
+            <div class="row">
+                <!-- ko if: $root.isAuthenticated -->
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="checkbox" data-bind="attr: {id: 'sendEmailToMe-'+ externalCartLineId}, event: {change: $root.setSendToMe}">
+                        <label data-bind="attr: {for:'sendEmailToMe-'+ externalCartLineId}">@sendToMeLabel</label>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label data-bind="attr:{for:'shippingEmailAddress-'+ externalCartLineId}">@recilientEmailLabel*</label>
+                        <input type="text" class="form-control" data-bind="attr: {id:'shippingEmailAddress-'+ externalCartLineId}, value: shippingEmail" placeholder="@recilientEmailLabelPlaceholder">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label data-bind="attr:{for:'shippingEmailMessage-'+ externalCartLineId}">@writeMessageLabel</label>
+                        <textarea class="form-control" rows="3" data-bind="attr: {id:'shippingEmailMessage-'+ externalCartLineId}, value: shippingEmailContent"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -58,10 +58,10 @@ Languages:
       Value: Address
     - ID: "6e1f8154-749a-49bb-8845-e8b352cc267c"
       Hint: Pick Up At Store Header
-      Value: PICK UP ITEMS AT STORE
+      Value: Pick up at store
     - ID: "6e4a71ea-31c3-4faf-890c-e61372a46a96"
       Hint: Ship This Item Header
-      Value: SHIP THIS ITEM
+      Value: Ship this item
     - ID: "70e55efb-678b-4bec-a608-b0e632334974"
       Hint: Shipping Name Label
       Value: Shipping name
@@ -73,7 +73,7 @@ Languages:
       Value: Country/Region
     - ID: "8614b786-115c-4cd8-a66b-bb80eb89b6eb"
       Hint: Select Delivery Options Header
-      Value: SELECT DELIVERY OPTIONS BY ITEMS
+      Value: Select delivery by item
     - ID: "8a3acc81-a34b-49c7-81e9-5ed871cdee11"
       Hint: Choose Other Address Label
       Value: Use another address
@@ -106,10 +106,10 @@ Languages:
       Value: Choose from Address book
     - ID: "db8b54af-55d4-4ab0-8141-ffd91e7b08f8"
       Hint: Ship All Items Label
-      Value: SHIP ALL ITEMS
+      Value: Ship all items
     - ID: "ded5a5d3-9a5b-4fb4-84fa-6bcd9b69ff00"
       Hint: Send By Email Header
-      Value: SEND BY EMAIL
+      Value: Send by email
     - ID: "e234d011-7a30-4f31-96e2-e3787d9bfd1f"
       Hint: Open Delivery Info Label
       Value: Open delivery info

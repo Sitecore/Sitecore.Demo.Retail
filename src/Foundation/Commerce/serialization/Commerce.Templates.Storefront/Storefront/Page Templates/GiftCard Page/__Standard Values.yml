@@ -76,44 +76,45 @@ SharedFields:
           ph="page-layout"
           uid="{6D5CD8E2-86F0-4406-9F97-08D1A43BEEF1}" />
         <r
-          id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
+          id="{1B92270B-EC01-4939-B579-0ADFEB758A95}"
           par="UseStaticPlaceholderNames=1"
           ph="/page-layout/section"
           uid="{B049AE63-7778-41F2-AA33-1AB3C3BE542B}" />
         <r
-          id="{E45FD475-ADD0-42A0-A297-ADFE98B47A4A}"
-          ph="/page-layout/section/col-huge"
-          uid="{3858834C-1AF1-40F3-80AE-E0B818EA5C4C}" />
-        <r
           id="{A7CEEE33-046A-49DA-8D0B-636BAC05F97F}"
-          ph="productimages"
+          ph="/page-layout/section/col-wide-1"
           uid="{CBF8B050-CFD6-4013-83BF-5EF3AAF64682}" />
         <r
-          id="{49424190-0EFA-4414-8D18-4569CC8EA5FD}"
-          ph="productrating"
-          uid="{3B217F90-4061-48A6-BDCF-23A624D69491}" />
-        <r
           id="{AAF9B3B2-BE53-4B85-BDBF-E7704C0B28D2}"
-          ph="socialconnector"
+          ph="/page-layout/section/col-wide-2"
           uid="{8C2C1F8D-59F1-4B59-8B17-FC5BE9CF1765}" />
+        <r
+          id="{49424190-0EFA-4414-8D18-4569CC8EA5FD}"
+          ph="/page-layout/section/col-wide-2"
+          uid="{3B217F90-4061-48A6-BDCF-23A624D69491}" />
         <r
           ds="{2CD89BFE-2CCB-420F-8913-68A063BA4AE8}"
           id="{700D7CE2-8F0B-410A-AA29-1683BA6FFC9C}"
-          ph="productinformation"
+          ph="/page-layout/section/col-wide-2"
           uid="{1246D83F-4D53-4A33-A619-D3E0FF4F550B}" />
         <r
           ds="{BF9E2E06-E978-413F-BA77-FF8AFF537B68}"
           id="{619FBEF7-DBC4-4F09-9922-F0701BC887E6}"
-          ph="addtocart"
+          ph="/page-layout/section/col-wide-2"
           uid="{AB30B911-D624-44FD-9367-09094970F6A5}" />
         <r
           ds="{E48E2CCA-493D-410D-9B15-B2E1A0939730}"
           id="{04ADF67D-1449-4DAC-A496-CA3B504AAF71}"
-          ph="shareandprint"
+          ph="/page-layout/section/col-wide-2"
           uid="{93A1C3F2-8B63-43AF-AF7B-7CE6F269E9FB}" />
         <r
+          id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
+          par="UseStaticPlaceholderNames=1"
+          ph="/page-layout/section"
+          uid="{D420B79F-B0AE-4123-A8D5-1F330AA901C7}" />
+        <r
           id="{7B9B4279-22EC-4274-901F-96B1A5CAB999}"
-          ph="checkgiftcardbalance"
+          ph="/page-layout/section/col-huge"
           uid="{890EB9AE-89DE-490F-8758-CACF59DFB432}" />
         <r
           id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"

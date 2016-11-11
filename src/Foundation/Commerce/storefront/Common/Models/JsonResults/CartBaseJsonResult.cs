@@ -76,6 +76,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         /// The sub total.
         /// </value>
         public string Subtotal { get; set; }
+        public decimal SubtotalAmount { get; set; }
 
         /// <summary>
         /// Gets or sets the tax total.
@@ -84,6 +85,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         /// The tax total.
         /// </value>
         public string TaxTotal { get; set; }
+        public decimal TaxTotalAmount { get; set; }
 
         /// <summary>
         /// Gets or sets the total.
@@ -108,11 +110,13 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         /// The discount.
         /// </value>
         public string Discount { get; set; }
+        public decimal DiscountAmount { get; set; }
 
         /// <summary>
         /// Gets or sets the shipping total.
         /// </summary>
         public string ShippingTotal { get; set; }
+        public decimal ShippingTotalAmount { get; set; }
 
         /// <summary>
         /// Gets or sets the promo codes.
@@ -135,11 +139,15 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             var currencyCode = StorefrontManager.GetCustomerCurrency();
 
             this.Subtotal = 0.0M.ToCurrency(currencyCode);
+            this.SubtotalAmount = 0.0M;
             this.TaxTotal = 0.0M.ToCurrency(currencyCode);
+            this.TaxTotalAmount = 0.0M;
             this.Total = 0.0M.ToCurrency(currencyCode);
             this.TotalAmount = 0.0M;
             this.Discount = 0.0M.ToCurrency(currencyCode);
+            this.DiscountAmount = 0.0M;
             this.ShippingTotal = 0.0M.ToCurrency(currencyCode);
+            this.ShippingTotalAmount = 0.0M;
 
             if (cart == null)
             {
@@ -158,13 +166,16 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             }
 
             var commerceTotal = (CommerceTotal)cart.Total;
-
             this.Subtotal = commerceTotal.Subtotal.ToCurrency(currencyCode);
+            this.SubtotalAmount = commerceTotal.Subtotal;
             this.TaxTotal = cart.Total.TaxTotal.Amount.ToCurrency(currencyCode);
+            this.TaxTotalAmount = cart.Total.TaxTotal.Amount;
             this.Total = cart.Total.Amount.ToCurrency(currencyCode);
             this.TotalAmount = cart.Total.Amount;
             this.Discount = commerceTotal.OrderLevelDiscountAmount.ToCurrency(currencyCode);
+            this.DiscountAmount = commerceTotal.OrderLevelDiscountAmount;
             this.ShippingTotal = commerceTotal.ShippingTotal.ToCurrency(currencyCode);
+            this.ShippingTotalAmount = commerceTotal.ShippingTotal;
         }
     }
 }

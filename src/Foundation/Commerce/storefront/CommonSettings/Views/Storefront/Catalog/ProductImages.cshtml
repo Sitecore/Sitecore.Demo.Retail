@@ -47,7 +47,7 @@
         <div class="row thumbnails">
             @foreach (var mediaItem in Model.Images)
             {
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-3 col-xs-4">
                     <a class="thumbnail" href="@mediaItem.GetImageUrl(770, 625)"><img src="@mediaItem.GetImageUrl(770/4, 625/4)" class="img-responsive" alt="a" /></a>
                 </div>
             }

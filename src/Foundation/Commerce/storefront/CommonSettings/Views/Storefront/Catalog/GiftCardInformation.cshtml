@@ -18,23 +18,17 @@
     }
 }
 
-<div id="C11-ProductInformation">
-    <div class="col-md-12 col-xs-12">
-        <h1 id="displayName">@Model.DisplayName</h1>
-    </div>
-    <div class="col-md-12 col-xs-12">
-        <p>
-            @Html.Sitecore().Field("Item number", Model.Rendering.RenderingItem) 
-            <span id="itemNumber">@Model.RenderField("ItemNumber")</span>
-        </p>
-    </div>
-    <div class="col-md-12 col-xs-12">
-        <div class="description">
-            <h6>@Html.Sitecore().Field("Description", Model.Rendering.RenderingItem)</h6>
-            <p id="description">@Model.DescriptionRender</p>
-        </div>
-    </div>
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="prod-variants-close"></div>
-    </div>
+<div id="C11-ProductInformation" class="m-b-1">
+    <h1 id="displayName">@Model.DisplayName</h1>
+    @{
+        var itemNumber = Model.RenderField("ItemNumber");
+        if (!string.IsNullOrWhiteSpace(itemNumber.ToString()))
+        {
+            <p>
+                @Html.Sitecore().Field("Item number", Model.Rendering.RenderingItem)
+                <span id="itemNumber">@itemNumber</span>
+            </p>
+        }
+    }
+    <p id="description">@Model.DescriptionRender</p>
 </div>
