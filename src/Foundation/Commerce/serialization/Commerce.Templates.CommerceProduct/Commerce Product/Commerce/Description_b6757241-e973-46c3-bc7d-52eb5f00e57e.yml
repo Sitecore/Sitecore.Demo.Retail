@@ -1,5 +1,5 @@
 ﻿---
-ID: "42022abe-a882-4ede-8084-346b13954da6"
+ID: "b6757241-e973-46c3-bc7d-52eb5f00e57e"
 Parent: "616cad27-50c7-424b-b907-4b929cd9fc29"
 Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
 Path: /sitecore/templates/Commerce/Catalog/Commerce Product/Commerce/Description
@@ -12,11 +12,11 @@ SharedFields:
 - ID: "21828437-ea4b-40a1-8c61-4ce60ea41db6"
   Hint: Validate Button
   Type: tree list
-  Value: "{EE6C9091-2692-470E-A9D6-4CDBA665577A}"
+  Value: "{00D01CB6-C668-49EF-9A61-1DF16A2A26F7}"
 - ID: "337e20e1-999a-4eea-85ad-b58a03ae75cc"
   Hint: Quick Action Bar
   Type: tree list
-  Value: "{EE6C9091-2692-470E-A9D6-4CDBA665577A}"
+  Value: "{00D01CB6-C668-49EF-9A61-1DF16A2A26F7}"
 - ID: "39847666-389d-409b-95bd-f2016f11eed5"
   Hint: Unversioned
   Type: Checkbox
@@ -36,7 +36,7 @@ SharedFields:
 - ID: "9c903e29-650d-4af2-b9bd-526d5c14a1a5"
   Hint: Validator Bar
   Type: tree list
-  Value: "{EE6C9091-2692-470E-A9D6-4CDBA665577A}"
+  Value: "{00D01CB6-C668-49EF-9A61-1DF16A2A26F7}"
 - ID: "a0f35a32-14b5-4147-9851-7e0bbdc17efc"
   Hint: Assign To All Product Types
   Type: Checkbox
@@ -73,7 +73,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20161106T231651Z
+      Value: 20161101T040734Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
@@ -91,7 +91,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20161106T231651Z
+      Value: 20161101T040734Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
@@ -109,7 +109,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20161106T231651Z
+      Value: 20161101T040734Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
@@ -127,7 +127,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20161106T231651Z
+      Value: 20161101T040734Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |

@@ -5,10 +5,6 @@ Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
 Path: /sitecore/layout/Renderings/Storefront/Shared/Navigation
 DB: master
 SharedFields:
-- ID: "11490da4-bbc2-4397-8df2-6db2ef445081"
-  Hint: VaryByUrlPath
-  Type: Checkbox
-  Value: 0
 - ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
   Hint: Datasource Template
   Value: /sitecore/templates/Commerce/Catalog/Commerce Navigation Item

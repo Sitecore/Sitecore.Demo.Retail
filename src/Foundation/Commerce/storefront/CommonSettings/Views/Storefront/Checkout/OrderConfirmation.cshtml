@@ -14,34 +14,31 @@
 @using Sitecore.Reference.Storefront.Models;
 @model OrderConfirmationViewModel
 
-<div id="orderConfirmationContainer" class="wrap-main-content">
-    <div id="##" class="wrap-content-title-text">
-        <div class="col-md-6" id="printConfirmationArea">
-            <h1>
-                @Html.Sitecore().Field(StorefrontConstants.ItemFields.Title, Html.Sitecore().CurrentItem)
-            </h1>
-            <p>
-                @Html.Sitecore().Field("Email Notification Message Label", Html.Sitecore().CurrentItem)
-            </p>
-            <h3>
-                @Html.Sitecore().Field("Order Information Label", Html.Sitecore().CurrentItem.Children["Order Confirmation"]):
-            </h3>
-            <p class="order-number">
-                @Html.Sitecore().Field("Confirmation Number Label", Html.Sitecore().CurrentItem.Children["Order Confirmation"]): <span>@Model.ConfirmationId</span>
-            </p>
-            <p class="order-status">
-                @Html.Sitecore().Field("Status Label", Html.Sitecore().CurrentItem.Children["Order Confirmation"]): <span>@Model.OrderStatus</span>
-            </p>
-            <p>
-                @Html.Sitecore().Field("Email Sent Message", Html.Sitecore().CurrentItem.Children["Order Confirmation"])
-            </p>
-            <span class="receipt-button">
-                <a href="#" id="printButton" onclick="printPage()">
-                    <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 col-xs-12">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    @Html.Sitecore().Field("Order Information Label", Html.Sitecore().CurrentItem.Children["Order Confirmation"])
+                </h3>
+            </div>
+            <div class="panel-body">
+                <p class="order-number">
+                    @Html.Sitecore().Field("Confirmation Number Label", Html.Sitecore().CurrentItem.Children["Order Confirmation"]): <strong>@Model.ConfirmationId</strong>
+                </p>
+                <p class="order-status">
+                    @Html.Sitecore().Field("Status Label", Html.Sitecore().CurrentItem.Children["Order Confirmation"]): <strong>@Model.OrderStatus</strong>
+                </p>
+                <p>
+                    @Html.Sitecore().Field("Email Sent Message", Html.Sitecore().CurrentItem.Children["Order Confirmation"])
+                </p>
+            </div>
+            <div class="panel-footer">
+                <a href="#" id="printButton" onclick="printPage()" class="btn btn-default">
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
                     @Html.Sitecore().Field("Print Receipt Label", Html.Sitecore().CurrentItem.Children["Order Confirmation"])
                 </a>
-            </span>
+            </div>
         </div>
-        <div class="col-md-6 spot-single-image">@Html.Sitecore().Field("Image", Html.Sitecore().CurrentItem, new { Parameters = new Sitecore.Collections.SafeDictionary<string> { { "class", "img-responsive" } } })</div>
     </div>
 </div>
