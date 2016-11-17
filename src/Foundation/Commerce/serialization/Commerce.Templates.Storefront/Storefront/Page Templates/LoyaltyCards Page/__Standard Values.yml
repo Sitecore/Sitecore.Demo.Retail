@@ -67,6 +67,10 @@ SharedFields:
           ph="page-layout"
           uid="{1B5084FC-0F98-46F2-83C6-4A23714059BE}" />
         <r
+          id="{EE933E0E-D6D6-46A9-8FCB-9016C3AC234C}"
+          ph="/page-layout/page-header"
+          uid="{69C51F18-51F9-4758-828B-85F84C6BE8C1}" />
+        <r
           id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
           ph="/page-layout/page-header"
           uid="{DDFD2794-D24C-44CE-BDBF-DF162339C9AD}" />
@@ -80,10 +84,6 @@ SharedFields:
           par="UseStaticPlaceholderNames=1"
           ph="/page-layout/section"
           uid="{FB9CD454-2402-40E6-90E3-31FDF2A34AC9}" />
-        <r
-          id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
-          ph="/page-layout/section/col-huge"
-          uid="{69C51F18-51F9-4758-828B-85F84C6BE8C1}" />
         <r
           id="{627C7B98-557E-44A5-865B-1C26F6DF4FA4}"
           ph="/page-layout/section/col-huge"

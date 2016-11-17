@@ -42,7 +42,7 @@ SharedFields:
 - ID: "9e712a53-d222-46ea-a6ef-82f29af0e0fd"
   Hint: Supports Gift Card Payment
   Type: Checkbox
-  Value: 1
+  Value: 0
 - ID: "a204f8d6-b81a-4c1b-88ef-2dbc9471c18a"
   Hint: Category Images
   Value: 
@@ -59,11 +59,11 @@ SharedFields:
 - ID: "c3c1de9d-8881-47d1-b10f-d4ab17306cd5"
   Hint: Supports Wishlists
   Type: Checkbox
-  Value: 1
+  Value: 0
 - ID: "caf0c107-bbb2-4eed-ba3e-692b1d975854"
   Hint: Supports Loyalty Program
   Type: Checkbox
-  Value: 1
+  Value: 0
 - ID: "cc553205-a4d2-4feb-b722-9b41e9fa5271"
   Hint: TrackingCookieName
   Value: _visitor
@@ -106,6 +106,9 @@ Languages:
       Hint: __Created by
       Value: |
         sitecore\Admin
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: Experience True Technology Wonders
     - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
       Hint: Title
       Value: Reference Storefront

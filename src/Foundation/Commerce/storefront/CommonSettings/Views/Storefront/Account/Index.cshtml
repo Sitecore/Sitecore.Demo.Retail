@@ -15,28 +15,8 @@
     bool supportsWishlists = storefront.SupportsWishLists;
     bool supportsLoyaltyProgram = storefront.SupportsLoyaltyPrograms;
 }
-<div class="wrap-main-content">
-    <div id="S02-TwoColumnLeftCenter" class="row">
-        <div class="col-md-6">
-            <div class="row myaccount">
-                @{
-                    @Html.Partial("~/Views/Storefront/Account/_RecentOrders.cshtml")
-                    if (supportsWishlists)
-                    {
-                        @Html.Partial("~/Views/Storefront/Account/_WishLists.cshtml")
-                    }
-                    if (supportsLoyaltyProgram)
-                    {
-                        @Html.Partial("~/Views/Storefront/Account/_LoyaltyAccount.cshtml")
-                    }
-                }
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="row myaccount">
-                @Html.Partial("~/Views/Storefront/Account/_AccountProfile.cshtml")
-                @Html.Partial("~/Views/Storefront/Account/_AddressBook.cshtml")
-            </div>
-        </div>
-    </div>
+<div class="text-right">
+    <a href="@Url.Action("LogOff", "Account")" class="btn btn-warning btn-lg">
+        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log out @* TODO: Hardcoded *@
+    </a>
 </div>

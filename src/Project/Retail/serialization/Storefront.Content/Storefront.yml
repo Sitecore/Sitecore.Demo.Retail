@@ -20,6 +20,10 @@ Languages:
     - ID: "02115632-fe1e-4b3d-9ad4-a4ddf1f782f0"
       Hint: Copyright
       Value: <p>Copyright&nbsp;&copy; Sitecore 2016 | Habitat Retail is part of the Sitecore Demo portfolio</p>
+    - ID: "12537182-f35c-403f-afb5-747d55c450b8"
+      Hint: ShowInMenu
+      Type: Checkbox
+      Value: 1
     - ID: "235ae392-97ac-4822-be38-837da3e7724e"
       Hint: SiteBrowserTitle
       Value: " - Habitat Retail"
@@ -32,4 +36,7 @@ Languages:
         <image mediaid="{4C894563-1BC9-46ED-B3C6-DD31A64A09F5}" />
     - ID: "efd4980a-030c-497c-8880-40b6030ac28b"
       Hint: OrganisationName
+      Value: Habitat Retail
+    - ID: "f07811d3-41e9-440a-9d81-310c1d78bed6"
+      Hint: Title
       Value: Habitat Retail

@@ -12,43 +12,53 @@
 
 @using Sitecore.Reference.Storefront.Managers
 
-<div class="col-md-12" id="addressBook">
-    <h2>
-        @Html.Sitecore().Field("Address Book Title", Html.Sitecore().CurrentItem)
-        <a href="@StorefrontManager.StorefrontUri("/accountmanagement/addressbook")" class="view-all pull-right">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> @Html.Sitecore().Field("Add New Address Label", Html.Sitecore().CurrentItem)
-        </a>
-    </h2>
-
-    <div id="addressesSection">
-        <div data-bind="visible: showLoader()">
-            <img src="/Images/loading.gif" />
-        </div>
-        <div class="table-responsive" id="addresses" data-bind="visible: isNotEmpty" style="display: none;">
-            <table class="table table-hover small-list">
-                <thead>
-                    <tr>
-                        <td width="90%">@Html.Sitecore().Field("Address Label", Html.Sitecore().CurrentItem)</td>
-                    </tr>
-                </thead>
-                <tbody data-bind="foreach: addresses()">
-                    <tr data-bind="css: { 'odd': $index() % 2 == 0 }">
-                        <td>
-                            <a href="#" data-bind="attr: { href: detailsUrl }">
-                                <span data-bind="text: fullAddress"></span>
-                                <span class="pull-right" data-bind="if: isPrimary">
-                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                    @Html.Sitecore().Field("Primary Address Label", Html.Sitecore().CurrentItem)
-                                </span>
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+<div class="panel panel-default" id="addressesSection">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+            @Html.Sitecore().Field("Address Book Title", Html.Sitecore().CurrentItem)
+        </h2>
+    </div>
+    <div class="panel-body" data-bind="visible: isEmpty" >
+        <div data-bind="visible: showLoader" class="text-center">
+            <span class="fa fa-spinner fa-pulse fa-3x"></span>
         </div>
         <div id="addressesEmpty" data-bind="visible: isEmpty" style="display: none;">
             @Html.Sitecore().Field("AddressBook Empty Text", Html.Sitecore().CurrentItem)
         </div>
+    </div>
+    <table class="table table-hover" id="addresses" data-bind="visible: isNotEmpty" style="display: none;">
+        <thead>
+            <tr>
+                <th>
+                    @Html.Sitecore().Field("Address Label", Html.Sitecore().CurrentItem)
+                </th>
+                <th class="pull-right">
+                    @Html.Sitecore().Field("Primary Address Label", Html.Sitecore().CurrentItem)
+                </th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: addresses()">
+            <tr data-bind="css: { 'odd': $index() % 2 == 0 }">
+                <td>
+                    <a href="#" data-bind="attr: { href: detailsUrl }">
+                        <span data-bind="text: fullAddress"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="#" data-bind="attr: { href: detailsUrl }">
+                        <span class="pull-right" data-bind="if: isPrimary">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        <a href="@StorefrontManager.StorefrontUri("/accountmanagement/addressbook")" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> @Html.Sitecore().Field("Add New Address Label", Html.Sitecore().CurrentItem)
+        </a>
     </div>
 </div>
 

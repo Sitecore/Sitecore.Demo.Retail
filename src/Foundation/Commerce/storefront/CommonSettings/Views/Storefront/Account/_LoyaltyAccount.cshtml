@@ -12,40 +12,50 @@
 
 @using Sitecore.Reference.Storefront.Managers
 @{
+    var storefront = StorefrontManager.CurrentStorefront;
+    var supportsLoyaltyProgram = storefront.SupportsLoyaltyPrograms;
+    if (!supportsLoyaltyProgram)
+    {
+        return;
+    }
     var joiningLabel = @Html.Sitecore().Field("Joining Loyalty Program Button", Html.Sitecore().CurrentItem);
 }
 
-<div class="col-md-12" id="loyaltyAccount">
-    <h2>
-        @Html.Sitecore().Field("Loyalty Title", Html.Sitecore().CurrentItem)
-        <a href="@StorefrontManager.StorefrontUri("/accountmanagement/loyaltycards")" class="view-all pull-right">
-            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> @Html.Sitecore().Field("View Details Label", Html.Sitecore().CurrentItem)
-        </a>
-    </h2>
-    <div id="loyaltySection">
-        <div data-bind="visible: showLoader">
-            <img src="/Images/loading.gif" />
-        </div>
-        <div class="table-responsive" id="loyaltyCards" data-bind="visible: isNotEmpty" style="display: none">
-            <table class="table table-hover small-list">
-                <thead>
-                    <tr>
-                        <td width="90%">@Html.Sitecore().Field("Card Number Label", Html.Sitecore().CurrentItem)</td>
-                        <td width="10%">&nbsp;</td>
-                    </tr>
-                </thead>
-                <tbody data-bind="foreach: LoyaltyCards">
-                    <tr data-bind="css: {'odd': $index() % 2 == 0}">
-                        <td><a href="@StorefrontManager.StorefrontUri("/accountmanagement/loyaltycards")" data-bind="text: CardNumber"></a></td>
-                        <td><a href="@StorefrontManager.StorefrontUri("/accountmanagement/loyaltycards")"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+<div class="panel panel-default" id="recentOrdersSection">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> @Html.Sitecore().Field("Loyalty Title", Html.Sitecore().CurrentItem)
+        </h2>
         <div id="loyaltyCardsEmpty" data-bind="visible: isEmpty" style="display: none">
-            @Html.Sitecore().Field("Loyalty Empty Text", Html.Sitecore().CurrentItem)
-            <button type="button" class="btn btn-primary" id="joinLoyaltyProgram" data-loading-text="@joiningLabel" onclick=" joinLoyaltyProgram() ">@Html.Sitecore().Field("Join Loyalty Program Button", Html.Sitecore().CurrentItem)</button>
+            <p>
+                @Html.Sitecore().Field("Loyalty Empty Text", Html.Sitecore().CurrentItem)
+            </p>
+            <button type="button" class="btn btn-primary" id="joinLoyaltyProgram" data-loading-text="@joiningLabel" onclick="joinLoyaltyProgram() ">@Html.Sitecore().Field("Join Loyalty Program Button", Html.Sitecore().CurrentItem)</button>
         </div>
+    </div>
+    <div class="panel-body">
+        <div data-bind="visible: showLoader" class="text-center">
+            <span class="fa fa-spinner fa-pulse fa-3x"></span>
+        </div>
+    </div>
+    <table class="table table-hover" id="loyaltyCards" style="display: none" data-bind="visible: isNotEmpty">
+        <thead>
+            <tr>
+                <th width="90%">@Html.Sitecore().Field("Card Number Label", Html.Sitecore().CurrentItem)</th>
+                <th width="10%">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: orders">
+            <tr data-bind="css: {'odd': $index() % 2 == 0}">
+                <td><a href="@StorefrontManager.StorefrontUri("/accountmanagement/loyaltycards")" data-bind="text: CardNumber"></a></td>
+                <td><a href="@StorefrontManager.StorefrontUri("/accountmanagement/loyaltycards")"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="panel-footer" data-bind="visible: isNotEmpty" style="display: none">
+        <a href="@StorefrontManager.StorefrontUri("/accountmanagement/loyaltycards")" class="view-all btn btn-default">
+            @Html.Sitecore().Field("View Details Label", Html.Sitecore().CurrentItem) <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        </a>
     </div>
 </div>
 

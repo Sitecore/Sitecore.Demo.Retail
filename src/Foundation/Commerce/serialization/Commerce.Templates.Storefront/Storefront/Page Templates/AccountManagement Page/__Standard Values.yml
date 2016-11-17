@@ -67,6 +67,10 @@ SharedFields:
           ph="page-layout"
           uid="{4B3E25BE-C4C0-41C3-9118-E87490295E44}" />
         <r
+          id="{EE933E0E-D6D6-46A9-8FCB-9016C3AC234C}"
+          ph="/page-layout/page-header"
+          uid="{977A116E-E4E3-4322-8917-267068421DA1}" />
+        <r
           id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
           ph="/page-layout/page-header"
           uid="{00264F71-7D83-4239-898A-938570F5B329}" />
@@ -76,18 +80,34 @@ SharedFields:
           ph="page-layout"
           uid="{C4F3162E-7389-4F56-9DC9-346A76BCE6D9}" />
         <r
-          id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
+          id="{1B92270B-EC01-4939-B579-0ADFEB758A95}"
           par="UseStaticPlaceholderNames=1"
           ph="/page-layout/section"
           uid="{85C74672-7236-4604-B84B-6C0A39B3D40C}" />
         <r
-          id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
-          ph="/page-layout/section/col-huge"
-          uid="{977A116E-E4E3-4322-8917-267068421DA1}" />
+          id="{33DC43C9-15E5-48A9-9D0A-8D0168BD2A4C}"
+          ph="col-wide-1"
+          uid="{0473DF40-F1E1-4C58-9184-EE536B7BF1BA}" />
+        <r
+          id="{49E2BB98-08C8-4FDF-9FCF-60C2307C2789}"
+          ph="col-wide-1"
+          uid="{01F7AA29-D08D-4A55-870C-AD3DCA23DD13}" />
+        <r
+          id="{373D6185-C711-4F2E-B2EF-E2FFAA21E0A3}"
+          ph="col-wide-1"
+          uid="{8F021720-F97E-48B7-B5EF-B2B2E867EDA2}" />
+        <r
+          id="{54A79A70-C374-4AF1-B77C-C5655E096AEA}"
+          ph="col-wide-2"
+          uid="{0E8C248E-322B-4B37-BE1D-858C9A3BB367}" />
+        <r
+          id="{2DC1E1DC-BEA7-4023-9585-C75FF16C192C}"
+          ph="col-wide-2"
+          uid="{6EC5DDA9-3CA4-46F0-A3C4-D70B837D7545}" />
         <r
           id="{87C089CC-C0B6-479D-9876-05D77CF6B42F}"
-          ph="/page-layout/section/col-huge"
-          uid="{6EC5DDA9-3CA4-46F0-A3C4-D70B837D7545}" />
+          ph="col-wide-2"
+          uid="{F4ABB916-A2B6-4248-946E-9E384A1CFBC0}" />
         <r
           id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"
           ph="footer"
