@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:complexType name="Features" >
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Feature">
+				<xs:complexType>
+					<xs:attribute name="identity" type="xs:string" use="required" />
+					<xs:attribute name="activateUsingHttpGet" type="xs:boolean" />
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Solutions">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="Solution">
+				<xs:complexType>
+					<xs:attribute name="identity" type="xs:string" use="required" />
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CommerceServerContrib">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="1" maxOccurs="1" name="Configurations">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Configuration">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Variables">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element maxOccurs="unbounded" name="Variable">
+														<xs:complexType>
+															<xs:attribute name="identity" type="xs:string" use="required" />
+															<xs:attribute name="value" type="xs:string" use="required" />
+															<xs:attribute name="description" type="xs:string" use="required" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="UserAccounts">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element maxOccurs="unbounded" name="UserAccount">
+														<xs:complexType>
+															<xs:attribute name="identity" type="xs:string" use="required" />
+															<xs:attribute name="fullName" type="xs:string" use="required" />
+															<xs:attribute name="operationalUnit" type="xs:string" use="required" />
+															<xs:attribute name="domain" type="xs:string" use="required" />
+															<xs:attribute name="username" type="xs:string" use="required" />
+															<xs:attribute name="password" type="xs:string" use="required" />
+															<xs:attribute name="email" type="xs:string" use="required" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="UserGroups">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element maxOccurs="unbounded" name="UserGroup">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Users">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element maxOccurs="unbounded" name="User">
+																				<xs:complexType>
+																					<xs:attribute name="userAccountIdentity" type="xs:string" use="required" />
+																				</xs:complexType>
+																			</xs:element>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="identity" type="xs:string" use="required" />
+															<xs:attribute name="operationalUnit" type="xs:string" use="required" />
+															<xs:attribute name="domain" type="xs:string" use="required" />
+															<xs:attribute name="name" type="xs:string" use="required" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="IIS">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ApplicationPools">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element maxOccurs="unbounded" name="ApplicationPool">
+																	<xs:complexType>
+																		<xs:attribute name="name" type="xs:string" use="required" />
+																		<xs:attribute name="userAccountIdentity" type="xs:string" use="required" />
+																		<xs:attribute name="create" type="xs:boolean" use="required" />
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="Websites">
+														<xs:complexType mixed="true">
+															<xs:sequence>
+																<xs:element name="Website">
+																	<xs:complexType>
+																		<xs:attribute name="identity" type="xs:string" use="required" />
+																		<xs:attribute name="serverName" type="xs:string" use="required" />
+																		<xs:attribute name="port" type="xs:unsignedShort" use="required" />
+																		<xs:attribute name="path" type="xs:string" use="required" />
+																		<xs:attribute name="url" type="xs:string" use="required" />
+																		<xs:attribute name="create" type="xs:boolean" use="required" />
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="Certificates">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Certificate">
+																	<xs:complexType>
+																		<xs:attribute name="identity" type="xs:string" use="required" />
+																		<xs:attribute name="path" type="xs:string" use="required" />
+																		<xs:attribute name="password" type="xs:string" use="required" />
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="CommerceServer">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Schemas">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="CatalogSchema">
+																	<xs:complexType>
+																		<xs:attribute name="identity" type="xs:string" use="required" />
+																		<xs:attribute name="path" type="xs:string" use="required" />
+																		<xs:attribute name="replace" type="xs:boolean" use="required" />
+																		<xs:attribute name="transacted" type="xs:boolean" use="required" />
+																		<xs:attribute name="allowSchemaUpdate" type="xs:boolean" use="required" />
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="CatalogInventorySchema">
+																	<xs:complexType>
+																		<xs:attribute name="identity" type="xs:string" use="required" />
+																		<xs:attribute name="path" type="xs:string" use="required" />
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="ProfilesSchema">
+																	<xs:complexType>
+																		<xs:attribute name="identity" type="xs:string" use="required" />
+																		<xs:attribute name="path" type="xs:string" use="required" />
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="WebServices">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element maxOccurs="unbounded" name="WebService">
+																	<xs:complexType>
+																		<xs:attribute name="identity" type="xs:string" use="required" />
+																		<xs:attribute name="websiteIdentity" type="xs:string" use="required" />
+																		<xs:attribute name="virtualDirectoryPath" type="xs:string" use="required" />
+																		<xs:attribute name="path" type="xs:string" use="required" />
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="Databases">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element maxOccurs="unbounded" name="Database">
+																	<xs:complexType>
+																		<xs:attribute name="identity" type="xs:string" use="required" />
+																		<xs:attribute name="serverName" type="xs:string" use="required" />
+																		<xs:attribute name="databaseName" type="xs:string" use="required" />
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="DatabaseScripts">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element maxOccurs="unbounded" name="DatabaseScript">
+																	<xs:complexType>
+																		<xs:attribute name="identity" type="xs:string" use="required" />
+																		<xs:attribute name="databaseIdentity" type="xs:string" use="required" />
+																		<xs:attribute name="path" type="xs:string" use="required" />
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="Pipelines">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element maxOccurs="unbounded" name="Pipeline">
+																	<xs:complexType>
+                                    <xs:attribute name="dllPath" type="xs:string" use="required" />
+                                    <xs:attribute name="regPath" type="xs:string" use="required" />
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="identity" type="xs:string" use="required" />
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="identity" type="xs:string" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Deployments">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element minOccurs="1" maxOccurs="unbounded" name="Deployment">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element minOccurs="1" maxOccurs="1" name="SPFarm">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element minOccurs="0" maxOccurs="1" name="Solutions">
+														<xs:complexType mixed="true">
+															<xs:sequence minOccurs="0">
+																<xs:element maxOccurs="unbounded" name="Solution">
+																	<xs:complexType>
+																		<xs:attribute name="identity" type="xs:string" use="required" />
+																		<xs:attribute name="path" type="xs:string" use="required" />
+																		<xs:attribute name="generate" type="xs:boolean" use="required" />
+																		<xs:attribute name="deleteIfExists" type="xs:boolean" use="required" />
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element minOccurs="0" maxOccurs="1" name="DeploySolutions" type="Solutions" />
+													<xs:element minOccurs="0" maxOccurs="1" name="ActivateFeatures" type="Features" />
+													<xs:element minOccurs="0" maxOccurs="1" name="SPWebApplications">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element minOccurs="0" maxOccurs="unbounded" name="SPWebApplication">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element minOccurs="0" maxOccurs="1" name="SPWebApplicationExtensions">
+																				<xs:complexType>
+																					<xs:sequence>
+																						<xs:element name="SPWebApplicationExtension">
+																							<xs:complexType>
+																								<xs:attribute name="identity" type="xs:string" use="required" />
+																								<xs:attribute name="url" type="xs:string" use="required" />
+																								<xs:attribute name="hostheader" type="xs:string" use="required" />
+																								<xs:attribute name="port" type="xs:unsignedByte" use="required" />
+																								<xs:attribute name="zone" type="xs:string" use="required" />
+																								<xs:attribute name="signInRedirectUrl" type="xs:string" use="required" />
+																							</xs:complexType>
+																						</xs:element>
+																					</xs:sequence>
+																				</xs:complexType>
+																			</xs:element>
+																			<xs:element minOccurs="0" maxOccurs="1" name="SPAlternateUrls">
+																				<xs:complexType>
+																					<xs:sequence>
+																						<xs:element maxOccurs="unbounded" name="SPAlternateUrl">
+																							<xs:complexType>
+																								<xs:attribute name="identity" type="xs:string" use="required" />
+																								<xs:attribute name="url" type="xs:string" use="required" />
+																								<xs:attribute name="zone" type="xs:string" use="required" />
+																								<xs:attribute name="internal" type="xs:boolean" use="required" />
+																							</xs:complexType>
+																						</xs:element>
+																					</xs:sequence>
+																				</xs:complexType>
+																			</xs:element>
+																			<xs:element minOccurs="0" maxOccurs="1" name="SPManagedPaths">
+																				<xs:complexType>
+																					<xs:sequence>
+																						<xs:element name="SPManagedPath">
+																							<xs:complexType>
+																								<xs:attribute name="identity" type="xs:string" use="required" />
+																								<xs:attribute name="relativeUrl" type="xs:string" use="required" />
+																								<xs:attribute name="explicit" type="xs:boolean" use="required" />
+																							</xs:complexType>
+																						</xs:element>
+																					</xs:sequence>
+																				</xs:complexType>
+																			</xs:element>
+																			<xs:element minOccurs="0" maxOccurs="1" name="IIS">
+																				<xs:complexType>
+																					<xs:sequence>
+																						<xs:element minOccurs="0" maxOccurs="1" name="Certificates">
+																							<xs:complexType>
+																								<xs:sequence>
+																									<xs:element name="Certificate">
+																										<xs:complexType>
+																											<xs:attribute name="identity" type="xs:string" use="required" />
+																											<xs:attribute name="path" type="xs:string" use="required" />
+																											<xs:attribute name="password" type="xs:string" use="required" />
+																										</xs:complexType>
+																									</xs:element>
+																								</xs:sequence>
+																							</xs:complexType>
+																						</xs:element>
+																						<xs:element minOccurs="0" maxOccurs="1" name="WebBindings">
+																							<xs:complexType>
+																								<xs:sequence>
+																									<xs:element name="WebBinding">
+																										<xs:complexType>
+																											<xs:attribute name="webApplicationIdentity" type="xs:string" use="required" />
+																											<xs:attribute name="port" type="xs:unsignedShort" use="required" />
+																											<xs:attribute name="hostheader" type="xs:string" use="required" />
+																											<xs:attribute name="protocol" type="xs:string" use="required" />
+																											<xs:attribute name="ip" type="xs:string" use="required" />
+																											<xs:attribute name="certificate" type="xs:string" use="required" />
+																										</xs:complexType>
+																									</xs:element>
+																								</xs:sequence>
+																							</xs:complexType>
+																						</xs:element>
+																					</xs:sequence>
+																				</xs:complexType>
+																			</xs:element>
+																			<xs:element name="Smtp">
+																				<xs:complexType>
+																					<xs:attribute name="server" type="xs:string" use="required" />
+																					<xs:attribute name="fromAddress" type="xs:string" use="required" />
+																				</xs:complexType>
+																			</xs:element>
+																			<xs:element minOccurs="0" maxOccurs="1" name="DeploySolutions" type="Solutions" />
+																			<xs:element minOccurs="0" maxOccurs="1" name="ActivateFeatures" type="Features" />
+																			<xs:element minOccurs="0" maxOccurs="1" name="SPSites">
+																				<xs:complexType>
+																					<xs:sequence>
+																						<xs:element minOccurs="0" maxOccurs="unbounded" name="SPSite">
+																							<xs:complexType>
+																								<xs:sequence>
+																									<xs:element minOccurs="0" maxOccurs="1" name="VariationLabels">
+																										<xs:complexType>
+																											<xs:sequence>
+																												<xs:element maxOccurs="unbounded" name="VariationLabel">
+																													<xs:complexType>
+																														<xs:attribute name="title" type="xs:string" use="required" />
+																														<xs:attribute name="description" type="xs:string" use="required" />
+																														<xs:attribute name="flagControlDisplayName" type="xs:string" use="required" />
+																														<xs:attribute name="language" type="xs:string" use="required" />
+																														<xs:attribute name="locale" type="xs:unsignedShort" use="required" />
+																														<xs:attribute name="hierarchyCreationMode" type="xs:string" use="required" />
+																														<xs:attribute name="isSource" type="xs:boolean" use="required" />
+																														<xs:attribute name="sourceSiteTemplate" type="xs:string" use="optional" />
+																													</xs:complexType>
+																												</xs:element>
+																											</xs:sequence>
+																										</xs:complexType>
+																									</xs:element>
+																									<xs:element minOccurs="1" maxOccurs="1"  name="SiteOwner">
+																										<xs:complexType>
+																											<xs:attribute name="userAccountIdentity" type="xs:string" use="required" />
+																										</xs:complexType>
+																									</xs:element>
+																									<xs:element minOccurs="1" maxOccurs="1" name="SiteOwnerSecondary">
+																										<xs:complexType>
+																											<xs:attribute name="userAccountIdentity" type="xs:string" use="required" />
+																										</xs:complexType>
+																									</xs:element>
+																									<xs:element minOccurs="0" maxOccurs="1" name="ActivateFeatures" type="Features" />
+																									<xs:element minOccurs="0" maxOccurs="1" name="SPWebs">
+																										<xs:complexType>
+																											<xs:sequence>
+																												<xs:element minOccurs="0"  maxOccurs="unbounded" name="SPWeb">
+																													<xs:complexType>
+																														<xs:sequence>
+																															<xs:element minOccurs="0" maxOccurs="1" name="ActivateFeatures" type="Features" />
+																														</xs:sequence>
+																														<xs:attribute name="identity" type="xs:string" use="required" />
+																														<xs:attribute name="url" type="xs:string" use="required" />
+																														<xs:attribute name="template" type="xs:string" use="optional" />
+																														<xs:attribute name="create" type="xs:boolean" use="required" />
+																														<xs:attribute name="deleteIfExists" type="xs:boolean" use="optional" />
+																													</xs:complexType>
+																												</xs:element>
+																											</xs:sequence>
+																										</xs:complexType>
+																									</xs:element>
+																								</xs:sequence>
+																								<xs:attribute name="identity" type="xs:string" use="required" />
+																								<xs:attribute name="url" type="xs:string" use="required" />
+																								<xs:attribute name="language" type="xs:unsignedShort" use="optional" />
+																								<xs:attribute name="template" type="xs:string" use="optional" />
+																								<xs:attribute name="create" type="xs:boolean" use="required" />
+																								<xs:attribute name="deleteIfExists" type="xs:boolean" use="required" />
+																							</xs:complexType>
+																						</xs:element>
+																					</xs:sequence>
+																				</xs:complexType>
+																			</xs:element>
+																		</xs:sequence>
+																		<xs:attribute name="identity" type="xs:string" use="required" />
+																		<xs:attribute name="url" type="xs:string" use="required" />
+																		<xs:attribute name="zone" type="xs:string" use="optional" />
+																		<xs:attribute name="hostheader" type="xs:string" use="optional" />
+																		<xs:attribute name="port" type="xs:unsignedByte" use="optional" />
+																		<xs:attribute name="contentDatabaseName" type="xs:string" use="optional" />
+																		<xs:attribute name="iisAppPoolName" type="xs:string" use="optional" />
+																		<xs:attribute name="iisAppPoolUserAccountIdentity" type="xs:string" use="optional" />
+																		<xs:attribute name="deleteIfExists" type="xs:boolean" use="required" />
+																		<xs:attribute name="create" type="xs:boolean" use="required" />
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="identity" type="xs:string" use="optional" />
+												<xs:attribute name="adminDatabaseIdentity" type="xs:string" use="optional" />
+												<xs:attribute name="contentDatabaseIdentity" type="xs:string" use="optional" />
+												<xs:attribute name="url" type="xs:string" use="optional" />
+												<xs:attribute name="port" type="xs:unsignedShort" use="optional" />
+												<xs:attribute name="iisAppPoolName" type="xs:string" use="optional" />
+												<xs:attribute name="iisAppPoolUserAccountIdentity" type="xs:string" use="optional" />
+												<xs:attribute name="deleteIfExists" type="xs:boolean" use="optional" />
+												<xs:attribute name="create" type="xs:boolean" use="optional" />
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="identity" type="xs:string" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
