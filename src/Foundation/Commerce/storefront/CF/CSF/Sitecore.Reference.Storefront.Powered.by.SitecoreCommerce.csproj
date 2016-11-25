@@ -90,8 +90,44 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Analytics, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Aggregation, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.Aggregation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Core, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.DataAccess, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.DataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Model, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.Model.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.MongoDB, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.MongoDB.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.OmniChannel, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.OmniChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Outcome, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.Outcome.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Processing, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.Processing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Sql, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.Sql.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Commerce, Version=8.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -100,6 +136,10 @@
     <Reference Include="Sitecore.Commerce.Connect.CommerceServer, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Commerce.Engine.Connect, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.Commerce.Engine.Connect.API.1.0.1512\lib\net45\Sitecore.Commerce.Engine.Connect.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.ContentSearch, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -117,6 +157,34 @@
     <Reference Include="Sitecore.Mvc, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Xdb.Client, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Xdb.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Xdb.Configuration, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Xdb.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Base, Version=2013.1.1600.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Stimulsoft.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Database, Version=2013.1.1600.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Stimulsoft.Database.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Report, Version=2013.1.1600.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Stimulsoft.Report.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Web, Version=2013.1.1600.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Stimulsoft.Report.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.WebDesign, Version=2013.1.1600.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Stimulsoft.Report.WebDesign.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -192,11 +260,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\de-DE\CommerceMessageManager.resources.dll" />
-    <Content Include="bin\en-us\CommerceMessageManager.resources.dll" />
-    <Content Include="bin\fr-fr\CommerceMessageManager.resources.dll" />
-    <Content Include="bin\ja-JP\CommerceMessageManager.resources.dll" />
-    <Content Include="bin\jp-JP\CommerceMessageManager.resources.dll" />
     <Content Include="OrderObjectMappings.xml" />
     <Content Include="OrderPipelineMappings.xml" />
     <Content Include="App_Config\Include\Reference.Storefront\Reference.Storefront.Index.Lucene.config">
@@ -230,7 +293,7 @@
     <Content Include="App_Config\Include\Reference.Storefront\Reference.Storefront.Orders.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Config\CommerceServer.Core.config" />
+    <None Include="App_Config\CommerceServer.Core.config.disabled" />
     <None Include="MergeFiles\Merge.Commerce.Storefront.config">
       <SubType>Designer</SubType>
     </None>
