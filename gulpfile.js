@@ -169,7 +169,7 @@ gulp.task("Build-Solution", function () {
 });
 
 gulp.task("Publish-Storefront-Projects", function () {
-  return publishProjects("./src/Foundation/Commerce/storefront/{CommonSettings,CS/CSF}");
+  return publishProjects("./src/Foundation/Commerce/storefront/{CommonSettings,CF/CSF}");
 });
 
 gulp.task("Publish-Foundation-Projects", function () {
