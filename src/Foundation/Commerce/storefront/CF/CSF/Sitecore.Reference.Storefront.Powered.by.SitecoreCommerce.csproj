@@ -293,7 +293,7 @@
     <Content Include="App_Config\Include\Reference.Storefront\Reference.Storefront.Orders.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="App_Config\CommerceServer.Core.config.disabled" />
+    <Content Include="App_Config\CommerceServer.Core.config.disabled" />
     <None Include="MergeFiles\Merge.Commerce.Storefront.config">
       <SubType>Designer</SubType>
     </None>
