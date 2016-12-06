@@ -90,43 +90,43 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Analytics, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Analytics.Aggregation, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.Aggregation.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.Aggregation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Analytics.Core, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Analytics.DataAccess, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.DataAccess.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.DataAccess.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Analytics.Model, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.Model.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.Model.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Analytics.MongoDB, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.MongoDB.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.MongoDB.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Analytics.OmniChannel, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.OmniChannel.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.OmniChannel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Analytics.Outcome, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.Outcome.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.Outcome.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Analytics.Processing, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.Processing.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.Processing.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Analytics.Sql, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Analytics.Sql.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.Sql.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Commerce, Version=8.2.0.0, Culture=neutral, processorArchitecture=MSIL">
