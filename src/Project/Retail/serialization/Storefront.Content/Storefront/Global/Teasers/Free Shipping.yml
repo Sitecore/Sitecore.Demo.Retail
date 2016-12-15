@@ -1,0 +1,20 @@
+﻿---
+ID: "20564ed2-6836-4e21-9946-26ffb0644cdd"
+Parent: "032b6f47-61fa-4e80-9d87-7dc3970bd696"
+Template: "c7d9d293-4ef8-4380-8e10-c4632e729f39"
+Path: /sitecore/content/Storefront/Global/Teasers/Free Shipping
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "13d97a52-7c4e-407c-960d-fadde8a3c1b1"
+      Hint: TeaserSummary
+      Value: Free shipping when you buy a product and a related item. Just add the code SHIP2 to your shopping cart
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161215T142732Z
+    - ID: "4a59d072-5b41-4a79-a157-2b2ccac10f2b"
+      Hint: TeaserTitle
+      Value: Free Shipping

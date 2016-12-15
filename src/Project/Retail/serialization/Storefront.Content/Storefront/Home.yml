@@ -99,6 +99,49 @@ Languages:
   Versions:
   - Version: 1
     Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{FAD6585A-A605-4FDE-B461-3ADE0A1D7FA4}">
+              <rls>
+                <ruleset>
+                  <rule
+                    uid="{A1798B3C-E1F6-42BE-A376-0B98E5CC1712}"
+                    s:name="Interested in TVs">
+                    <conditions>
+                      <condition
+                        uid="C9EE3F177513434DB9AD463D314B719D"
+                        s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                    </conditions>
+                    <actions>
+                      <action
+                        uid="5E8E4856EC1E4C159090D56F9EB32EA7"
+                        s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
+                        s:DataSource="{D5D74D9B-D572-4AE2-B96A-9B8DD86E4C19}" />
+                    </actions>
+                  </rule>
+                  <rule
+                    uid="{00000000-0000-0000-0000-000000000000}"
+                    s:name="Default">
+                    <conditions>
+                      <condition
+                        uid="E0BD4C902FCB45198E60937D770D025B"
+                        s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                    </conditions>
+                    <actions />
+                  </rule>
+                </ruleset>
+              </rls>
+            </r>
+          </d>
+        </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141009T064502Z

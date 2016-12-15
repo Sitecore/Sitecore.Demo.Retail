@@ -1,0 +1,18 @@
+﻿---
+ID: "2479dc14-604a-4fd3-a2ca-10e6954a95cc"
+Parent: "441b60d3-09bb-4111-a3ad-d10076b78b54"
+Template: "fff5f245-ffc0-4022-a998-9b07aa5e761f"
+Path: /sitecore/content/Storefront/Home/_Local
+DB: master
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: "-1000"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161215T130450Z
