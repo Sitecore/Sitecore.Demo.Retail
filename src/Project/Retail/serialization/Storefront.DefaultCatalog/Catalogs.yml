@@ -11,7 +11,7 @@ SharedFields:
     ar|sitecore\Commerce Catalog Administrator|pe|+item:create|+item:read|+item:rename|+item:delete|+item:write|^*|pd|+item:create|+item:read|+item:rename|+item:delete|+item:write|^*|ar|sitecore\Commerce Merchandiser|pe|+item:create|+item:read|+item:rename|+item:delete|+item:write|^*|pd|+item:create|+item:read|+item:rename|+item:delete|+item:write|^*|ar|sitecore\Commerce Catalog Groups Administrator|pe|+item:read|pd|+item:read|
 - ID: "ed3ebccd-a230-4659-923f-014707e1945d"
   Hint: Selected Catalogs
-  Value: Helix_Master
+  Value: Adventure Works Catalog|Helix_Master
 Languages:
 - Language: "de-DE"
   Fields:
