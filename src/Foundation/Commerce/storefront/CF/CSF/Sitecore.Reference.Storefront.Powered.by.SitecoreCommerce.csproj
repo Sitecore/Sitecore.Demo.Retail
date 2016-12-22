@@ -138,7 +138,7 @@
       <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Commerce.Engine.Connect, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.Commerce.Engine.Connect.API.1.0.1512\lib\net45\Sitecore.Commerce.Engine.Connect.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Commerce.Engine.Connect.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.ContentSearch, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
