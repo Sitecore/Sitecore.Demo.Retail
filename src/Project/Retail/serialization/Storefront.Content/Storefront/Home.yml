@@ -4,8 +4,172 @@ Parent: "662344c9-d908-46d8-9a1a-cbf2eaa32e93"
 Template: "fb9dbd60-cba2-490d-9c72-997271d576a3"
 Path: /sitecore/content/Storefront/Home
 DB: master
+SharedFields:
+- ID: "01c98ae9-82bb-4237-acdd-ba5b0a518f2f"
+  Hint: Use Index File For Product Status In Lists
+  Type: Checkbox
+  Value: 0
+- ID: "0ccf5ac9-fa08-4421-9651-707b33193f8e"
+  Hint: CookieExpiryInDays
+  Value: 2
+- ID: "0d2d45c1-783b-4a72-a797-f5907bc37cfe"
+  Hint: DefaultCartName
+  Value: Default
+- ID: "239412bd-046d-4c97-98ba-17b5fb07f004"
+  Hint: ShopName
+  Value: website
+- ID: "268036a9-3394-4964-8cb3-ac4ca68bf4b4"
+  Hint: RouteKey
+  Value: contoso
+- ID: "2f3dffc4-3648-4183-8741-1cc97a04937c"
+  Hint: GiftCardProductId
+  Value: 22565422120
+- ID: "51cdf89d-e4e6-438b-a6cf-75747529cafd"
+  Hint: GiftCardAmountOptions
+  Value: 10|20|25|50|100
+- ID: "6c86e9a8-d48a-4e3b-8375-b81414ce28e5"
+  Hint: Default Image
+  Value: 
+- ID: "7315350f-f3b5-4740-a227-186f7a2ba9f7"
+  Hint: Default Currency
+  Value: "{80F76147-FD9C-440D-A457-D2B3A4AA9F7A}"
+- ID: "7fd4ca02-383c-45e1-902d-c3ed9e4a112f"
+  Hint: Max Number of Addresses
+  Value: 6
+- ID: "872f1c3e-42e7-4f28-9b06-ae6d0c40c3ca"
+  Hint: DefaultProductId
+  Value: 22565422120
+- ID: "9e712a53-d222-46ea-a6ef-82f29af0e0fd"
+  Hint: Supports Gift Card Payment
+  Type: Checkbox
+  Value: 0
+- ID: "a204f8d6-b81a-4c1b-88ef-2dbc9471c18a"
+  Hint: Category Images
+  Value: 
+- ID: "a8925eb2-72e3-4636-9f21-c894a61975b8"
+  Hint: Sender Email Address
+  Value: "no-reply@sitecore.commerce.storefront.com"
+- ID: "ae00dc8b-c90d-412f-b262-19ef55a20506"
+  Hint: Product Images
+  Value: 
+- ID: "b36de708-9413-4382-bb53-b944e6d02cfc"
+  Hint: Catalogs
+  Type: Treelist
+  Value: "{48F34156-2364-4AF0-8241-0D4F037201EF}"
+- ID: "c3c1de9d-8881-47d1-b10f-d4ab17306cd5"
+  Hint: Supports Wishlists
+  Type: Checkbox
+  Value: 0
+- ID: "caf0c107-bbb2-4eed-ba3e-692b1d975854"
+  Hint: Supports Loyalty Program
+  Type: Checkbox
+  Value: 0
+- ID: "cc553205-a4d2-4feb-b722-9b41e9fa5271"
+  Hint: TrackingCookieName
+  Value: _visitor
+- ID: "e00b561c-503b-47af-979f-d6c0c911721d"
+  Hint: IdKeyName
+  Value: visitorId
+- ID: "eebcd18a-6447-4dec-9c57-12faf4714034"
+  Hint: Forms Authentication
+  Type: Checkbox
+  Value: 1
+- ID: "f605d200-01a0-4235-8886-391c4c906092"
+  Hint: OperatingUnitNumber
+  Value: 
+- ID: "fbf2bba1-47bc-4b2e-bf76-133c8faea0fb"
+  Hint: General Images
+  Value: "{D2BE1B43-9784-47F1-B00E-F324BC0D474A}"
 Languages:
+- Language: "de-DE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150423T171740Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Reference Storefront
 - Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{FAD6585A-A605-4FDE-B461-3ADE0A1D7FA4}">
+              <rls>
+                <ruleset>
+                  <rule
+                    uid="{A1798B3C-E1F6-42BE-A376-0B98E5CC1712}"
+                    s:name="Interested in TVs">
+                    <conditions>
+                      <condition
+                        uid="C9EE3F177513434DB9AD463D314B719D"
+                        s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                    </conditions>
+                    <actions>
+                      <action
+                        uid="5E8E4856EC1E4C159090D56F9EB32EA7"
+                        s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
+                        s:DataSource="{D5D74D9B-D572-4AE2-B96A-9B8DD86E4C19}" />
+                    </actions>
+                  </rule>
+                  <rule
+                    uid="{00000000-0000-0000-0000-000000000000}"
+                    s:name="Default">
+                    <conditions>
+                      <condition
+                        uid="E0BD4C902FCB45198E60937D770D025B"
+                        s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                    </conditions>
+                    <actions />
+                  </rule>
+                </ruleset>
+              </rls>
+            </r>
+          </d>
+        </r>
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141009T064502Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: Experience True Technology Wonders
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Reference Storefront
+- Language: "fr-FR"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150423T171804Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Reference Storefront
+- Language: "ja-JP"
   Versions:
   - Version: 1
     Fields:
