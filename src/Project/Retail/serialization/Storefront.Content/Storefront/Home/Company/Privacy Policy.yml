@@ -1,0 +1,39 @@
+﻿---
+ID: "2f45110f-2b7e-4e32-a7f3-48bfa35e67a7"
+Parent: "9c6ff190-cb49-42f1-9f16-fd5d97d8fd69"
+Template: "16e859d2-6542-407a-ac65-f34bcad3eb3d"
+Path: /sitecore/content/Storefront/Home/Company/Privacy Policy
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161229T180909Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "ae723519-4ead-4d6c-a0d3-feace0d9926a"
+      Hint: Text
+      Value: |
+        This Privacy Policy describes the information that we collect through our website www.habitat.com and how we use that information. If you have any questions or comments about this Privacy Policy or your personal information, please contact us at <a href="mailto:info@habitat.com">info@habitat.com</a>.<br />
+        <br />
+        In general, you do not have to provide personal information to use this website. However, certain services which you may subscribe for through this website (for instance, firm mailings) may require you to provide personal information, such as your name, address, email address and other contact information. We use such personal information to respond to your inquiries and to send you newsletters or publications that you request. You may also receive other mailings relating to Habitat seminars or events that we think may be of interest to you.<br />
+        <br />
+        In addition, incidental to your use of this website, our web server automatically logs certain information such as the name of your internet service provider, the IP address of the computer you are using, the type of browser software and operating system that you use, the date and time you access our website, the website address, if any, from which you linked directly to our website, the website address, if any, to which you travel from our website, and other similar traffic-related information. We may also aggregate information relating to your and other visitors&rsquo; traffic patterns. We use the foregoing information to help us improve the website and the services that we provide through the website. We do not use such data in any way to create or maintain a personal profile of you or collect personal information from you.<br />
+        <br />
+        Generally, we will not disclose information we collect through your use of the website to third parties. We reserve the right, however, to provide such information to our employees, contractors, agents, and designees to the extent necessary to enable them to perform certain website-related services (e.g., web hosting or maintenance services) on our behalf. We also reserve the right to disclose such information to any third party if we believe that we are required to do so for any or all of the following reasons: (i) by law; (ii) to comply with legal processes or governmental requests; (iii) to prevent, investigate, detect or prosecute criminal offences or attacks on the technical integrity of the web site or our network; and/or (iv) to protect the rights, property, or safety of Habitat, the users of the website, or the public.<br />
+        <br />
+        We do not use cookies on our web site to collect information on or from our users.<br />
+        <br />
+        If you would like to change your personal information, or if you no longer wish to receive materials from us or want your personal information removed from our firm&rsquo;s database, please contact us at <a href="mailto:info@habitat.com">info@habitat.com</a>. Alternatively, when you receive materials from us by e-mail or other communications you can make use of the &ldquo;opt out&rdquo; provision in such communications so that we know that you no longer wish to receive such materials from us.<br />
+        <br />
+        The internet and the benefits it offers are evolving rapidly, as are the ways in which people use the internet and the laws surrounding such use. Habitat therefore reserves the right to update and revise this Privacy Policy at any time. You can determine if this Privacy Policy has been revised by sending an e-mail to <a href="mailto:info@habitat.com">info@habitat.com</a>. Your use of our website constitutes your acceptance of the terms of the Privacy Policy as amended or revised by us, and you should therefore review this Privacy Policy regularly to ensure that you are aware of its terms.<br />
+        <br />
+        This website contains links to other sites. Please be aware that we are not and cannot be responsible for the privacy practices of such other sites and that this Privacy Policy applies solely to the information which we collect through this website. We encourage you to ensure that you read the privacy statements of all the destination sites which you visit.<br />
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Privacy Policy

@@ -12,6 +12,7 @@
 
 @model RenderingModel
 <div id="B07-FooterNavigation" class="row">
+    
     <div class="col-md-3 col-sm-3">
         <div class="links">
             @{
@@ -21,8 +22,9 @@
                     Sitecore.Data.Fields.MultilistField leftLinksField = leftLinkField.TargetItem.Fields["QuickLinks"];
                     Item[] leftLinks = leftLinksField != null ? leftLinksField.GetItems() : new Item[0];
 
-                    <h4>@Html.Sitecore().Field("QuickLinks Left Title", Model.Item, new { text = Html.Sitecore().Field("Text", Model.Item) })</h4>
-                    <ul class="footer-lists">
+                    <h4 class="text-primary">@Html.Sitecore().Field("QuickLinks Left Title", Model.Item, new { text = Html.Sitecore().Field("Text", Model.Item) })</h4>
+                    <ul class="nav nav-stacked"><li class="divider"></li></ul>
+                    <ul class="nav nav-stacked">
                         @foreach (var item in leftLinks)
                         {
                             <li>@Html.Sitecore().Field("Link", item, new { text = Html.Sitecore().Field("Text", item) })</li>
@@ -35,20 +37,21 @@
     <div class="col-md-3 col-sm-3">
         <div class="links">
             @{
-                Sitecore.Data.Fields.LookupField leftMiddleLinkField = Model.Item.Fields["QuickLinks Middle Left"];
-                if (leftMiddleLinkField != null && leftMiddleLinkField.TargetItem != null)
-                {
-                    Sitecore.Data.Fields.MultilistField leftMiddleLinksField = leftMiddleLinkField.TargetItem.Fields["QuickLinks"];
-                    Item[] leftMiddleLinks = leftMiddleLinksField != null ? leftMiddleLinksField.GetItems() : new Item[0];
+              Sitecore.Data.Fields.LookupField leftMiddleLinkField = Model.Item.Fields["QuickLinks Middle Left"];
+              if (leftMiddleLinkField != null && leftMiddleLinkField.TargetItem != null)
+              {
+                  Sitecore.Data.Fields.MultilistField leftMiddleLinksField = leftMiddleLinkField.TargetItem.Fields["QuickLinks"];
+                  Item[] leftMiddleLinks = leftMiddleLinksField != null ? leftMiddleLinksField.GetItems() : new Item[0];
 
-                    <h4>@Html.Sitecore().Field("QuickLinks Middle Left Title", Model.Item, new { text = Html.Sitecore().Field("Text", Model.Item) })</h4>
-                    <ul class="footer-lists">
+                <h4 class="text-primary">@Html.Sitecore().Field("QuickLinks Middle Left Title", Model.Item, new { text = Html.Sitecore().Field("Text", Model.Item) })</h4>
+                    <ul class="nav nav-stacked"><li class="divider"></li></ul>
+                    <ul class="nav nav-stacked">
                         @foreach (var item in leftMiddleLinks)
                         {
-                            <li>@Html.Sitecore().Field("Link", item, new { text = Html.Sitecore().Field("Text", item) })</li>
+                        <li>@Html.Sitecore().Field("Link", item, new { text = Html.Sitecore().Field("Text", item) })</li>
                         }
                     </ul>
-                }
+              }
             }
         </div>
     </div>
@@ -61,14 +64,15 @@
                     Sitecore.Data.Fields.MultilistField rightMiddleLinksField = rightMiddleLinkField.TargetItem.Fields["QuickLinks"];
                     Item[] rightMiddleLinks = rightMiddleLinksField != null ? rightMiddleLinksField.GetItems() : new Item[0];
 
-                    <h4>@Html.Sitecore().Field("QuickLinks Middle Right Title", Model.Item, new { text = Html.Sitecore().Field("Text", Model.Item) })</h4>
-                    <ul class="footer-lists">
+                    <h4 class="text-primary">@Html.Sitecore().Field("QuickLinks Middle Right Title", Model.Item, new { text = Html.Sitecore().Field("Text", Model.Item) })</h4>
+                    <ul class="nav nav-stacked"><li class="divider"></li></ul>
+                    <ul class="nav nav-stacked">
                         @foreach (var item in rightMiddleLinks)
                         {
-                            <li>@Html.Sitecore().Field("Link", item, new { text = Html.Sitecore().Field("Text", item) })</li>
+                        <li>@Html.Sitecore().Field("Link", item, new { text = Html.Sitecore().Field("Text", item) })</li>
                         }
                     </ul>
-                }
+              }
             }
         </div>
     </div>
@@ -81,14 +85,15 @@
                     Sitecore.Data.Fields.MultilistField rightLinksField = rightLinkField.TargetItem.Fields["QuickLinks"];
                     Item[] rightLinks = rightLinksField != null ? rightLinksField.GetItems() : new Item[0];
 
-                    <h4>@Html.Sitecore().Field("QuickLinks Right Title", Model.Item, new { text = Html.Sitecore().Field("Text", Model.Item) })</h4>
-                    <ul class="footer-lists">
+                    <h4 class="text-primary">@Html.Sitecore().Field("QuickLinks Right Title", Model.Item, new { text = Html.Sitecore().Field("Text", Model.Item) })</h4>
+                    <ul class="nav nav-stacked"><li class="divider"></li></ul>
+                    <ul class="nav nav-stacked">
                         @foreach (var item in rightLinks)
                         {
-                            <li>@Html.Sitecore().Field("Link", item, new { text = Html.Sitecore().Field("Text", item) })</li>
+                        <li>@Html.Sitecore().Field("Link", item, new { text = Html.Sitecore().Field("Text", item) })</li>
                         }
                     </ul>
-                }
+              }
             }
         </div>
     </div>

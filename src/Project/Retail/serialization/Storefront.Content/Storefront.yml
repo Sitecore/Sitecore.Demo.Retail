@@ -19,7 +19,9 @@ Languages:
     Fields:
     - ID: "02115632-fe1e-4b3d-9ad4-a4ddf1f782f0"
       Hint: Copyright
-      Value: <p>Copyright&nbsp;&copy; Sitecore 2016 | Habitat Retail is part of the Sitecore Demo portfolio</p>
+      Value: |
+        <p>Copyright&nbsp;&copy; Sitecore 2016 | Commerce Storefront</p>
+        <p><a href="~/link.aspx?_id=C17F79116BDB42629C566652E79142EB&amp;_z=z">Legal Notice</a> | <a href="~/link.aspx?_id=2F45110F2B7E4E32A7F348BFA35E67A7&amp;_z=z">Privacy Policy</a></p>
     - ID: "12537182-f35c-403f-afb5-747d55c450b8"
       Hint: ShowInMenu
       Type: Checkbox
