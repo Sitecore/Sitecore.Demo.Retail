@@ -14,13 +14,13 @@ SharedFields:
   Type: tree list
   Value: |
     {3794E2B4-09C1-41EB-B90F-F32856C38E45}
-    {C6281DE5-86E9-4FDC-83C1-35F58F7B5832}
+    {1ECE5F0E-88A2-45B1-922F-43EC21F68F3C}
 - ID: "337e20e1-999a-4eea-85ad-b58a03ae75cc"
   Hint: Quick Action Bar
   Type: tree list
   Value: |
     {3794E2B4-09C1-41EB-B90F-F32856C38E45}
-    {C6281DE5-86E9-4FDC-83C1-35F58F7B5832}
+    {1ECE5F0E-88A2-45B1-922F-43EC21F68F3C}
 - ID: "39847666-389d-409b-95bd-f2016f11eed5"
   Hint: Unversioned
   Type: Checkbox
@@ -42,7 +42,7 @@ SharedFields:
   Type: tree list
   Value: |
     {3794E2B4-09C1-41EB-B90F-F32856C38E45}
-    {C6281DE5-86E9-4FDC-83C1-35F58F7B5832}
+    {1ECE5F0E-88A2-45B1-922F-43EC21F68F3C}
 - ID: "a0f35a32-14b5-4147-9851-7e0bbdc17efc"
   Hint: Assign To All Product Types
   Type: Checkbox
