@@ -1,0 +1,167 @@
+﻿---
+ID: "9d2b5fe1-2564-484f-9a3f-2256114390ac"
+Parent: "042c770b-89ae-466a-9a31-18397780c535"
+Template: "042c770b-89ae-466a-9a31-18397780c535"
+Path: /sitecore/templates/Project/Retail/Page Types/News Article/__Standard Values
+DB: master
+SharedFields:
+- ID: "c464d2d7-3382-428a-bcdf-0963c60ba0e3"
+  Hint: NewsDate
+  Value: $date
+- ID: "c9283d9e-7c29-4419-9c28-5a5c8ff53e84"
+  Hint: __Bucketable
+  Type: Checkbox
+  Value: 1
+- ID: "ca9b9f52-4fb0-4f87-a79f-24dea62cda65"
+  Hint: __Default workflow
+  Value: "{E2A658AB-B142-4AD9-AACA-C69200622F44}"
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
+        <r
+          uid="{944F1E94-92B0-4752-AA4A-F4E6C89039F0}"
+          id="{E7AE3F87-CF66-40F2-A9F5-33ECF08BC777}"
+          ph="head" />
+        <r
+          uid="{CF479D40-341A-4FB9-B331-4D0DED703813}"
+          id="{3389CAFC-000C-41E5-921C-92821B3DB7B5}"
+          ph="head" />
+        <r
+          uid="{67054D0C-126E-4EB6-852B-377FA5EE1A9A}"
+          id="{C28B9C5F-8E01-42EC-ADF6-3324FAF92C7D}"
+          ph="header-top" />
+        <r
+          uid="{950BB503-BACA-4025-BC4A-64C00781C566}"
+          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
+          id="{69B9C355-004B-4268-BB1E-2F725B8752B7}"
+          ph="right-header-top" />
+        <r
+          uid="{478FD4F1-EBA3-4DB0-AF85-1DC8E1DD072E}"
+          id="{E26A158B-FA1E-4E9B-8622-E4458243FF46}"
+          ph="navbar" />
+        <r
+          uid="{7FF6FDA5-6497-485B-BC1F-3E8791D3983E}"
+          id="{A47C8288-7D4C-45FF-B75F-4AEDBF58A02D}"
+          ph="navbar-left" />
+        <r
+          uid="{AAEF5C39-7FD9-4F08-88E0-F9E9952E5476}"
+          ds="{889A6934-BCDC-4294-94B7-6D141E7312B4}"
+          id="{CFD437A6-404A-4C8C-8A41-EED2FB86D5DE}"
+          ph="navbar-center" />
+        <r
+          uid="{C1AE045A-3053-4F13-B99D-1BAA9836B991}"
+          id="{8832BA30-99C3-4D20-9B1C-237D910A153F}"
+          ph="navbar-right" />
+        <r
+          uid="{F2BEC95F-A056-4780-BE23-36EDB3E588A6}"
+          ds="{B5F108D3-651F-4344-BF9B-8F10675DDBA0}"
+          id="{FAA386D8-192F-4762-839D-D637BD11549F}"
+          ph="navbar-activity" />
+        <r
+          uid="{245F793F-E60C-47ED-9FD8-0B425635D4AC}"
+          id="{B6C0593E-1C35-4C61-8DB5-E7C7AA19D955}"
+          ph="navbar-activity" />
+        <r
+          uid="{346595F0-F92E-4020-9EA3-A8C12C4BB8D7}"
+          ds="{9988B682-59C7-4319-8BF9-7071F132A5AD}"
+          id="{9AA8E388-A6BD-46E1-A73B-DDEF601DE6F8}"
+          ph="navbar-activity" />
+        <r
+          uid="{7C6660E3-75A9-4DC6-87B4-59A6C6197555}"
+          id="{A2216CA7-B205-4042-A345-72117D0086C3}"
+          par="UseStaticPlaceholderNames=1"
+          ph="page-layout" />
+        <r
+          uid="{7D6A9B46-2502-47FF-A065-380038FB7CF8}"
+          id="{ABCB6064-2121-4A38-986C-4A21323226AB}"
+          ph="/page-layout/page-header" />
+        <r
+          uid="{DF4606A2-458D-488F-837E-C81BABE2C421}"
+          ds=""
+          id="{D201A487-5099-48A1-8189-55944F70C6CB}"
+          par="Background&amp;ContainerIsFluid&amp;UseStaticPlaceholderNames=1"
+          ph="page-layout" />
+        <r
+          uid="{A7815624-8AA8-489B-8085-571486E7E48A}"
+          id="{CF750731-1275-4CC7-A9E6-809515CB4DD1}"
+          ph="/page-layout/section" />
+        <r
+          uid="{0A92E89B-04DE-4A45-9DD5-A9E2369239DD}"
+          ds=""
+          id="{F366176E-2C2B-4AF2-B356-BCF8BD657C58}"
+          par=""
+          ph="/page-layout/section/col-wide-1" />
+        <r
+          uid="{8764D2B4-4D63-49F2-92BD-BA08DF1F0C0F}"
+          id="{BDD730EB-F808-4C65-B94A-D2F03672EAFB}"
+          ph="/page-layout/section/col-narrow-1" />
+        <r
+          uid="{B37C3697-CCC2-46F1-B25A-B01A5D08439D}"
+          id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"
+          ph="footer" />
+        <r
+          uid="{B1A76AC9-0122-4F20-9B23-D06E55CD600E}"
+          id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
+          ph="/page-layout/page-header" />
+        <r
+          uid="{699CDA2E-F13A-41A3-8EAE-C8D62CC48EF5}"
+          id="{DE648E12-A568-4919-802E-A688EBC9B9F3}"
+          par="UseStaticPlaceholderNames=1"
+          ph="/footer/section" />
+        <r
+          uid="{92335FA0-A187-45E3-BD5A-49F4543CAA91}"
+          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
+          id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
+          par=""
+          ph="/footer/section/col-narrow-1" />
+        <r
+          uid="{3C1536EA-92CD-4D0D-B0AE-8E588CB5113C}"
+          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
+          id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
+          par=""
+          ph="/footer/section/col-narrow-2" />
+        <r
+          uid="{6B1077FE-5642-458E-B93D-E29706C34AC3}"
+          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
+          id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
+          par=""
+          ph="/footer/section/col-narrow-3" />
+        <r
+          uid="{AB6DF3C0-4B85-431A-A490-96EC7B93B914}"
+          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
+          id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
+          par=""
+          ph="/footer/section/col-narrow-4" />
+        <r
+          uid="{F1E20896-6ECE-4A2E-925C-1C55B9EBA60E}"
+          id="{7DAE9F23-890F-4E06-99A7-CCEDB74D3D8E}"
+          ph="postfooter" />
+        <r
+          uid="{A381BB70-77E1-44FF-A40E-7AA12AB4AB66}"
+          id="{CED18F24-62C2-445E-B0D9-045E3325297B}"
+          ph="page-sidebar" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150824T175451Z
+    - ID: "3437eaac-6ee8-460b-a33d-da1f714b5a93"
+      Hint: NewsImage
+      Value: |
+        <image mediaid="{732E8624-A9B7-4F16-B2D1-61FE6E12B6E7}" />
+    - ID: "bd9ecd4a-c0b0-4233-a3cd-d995519ac87b"
+      Hint: NewsTitle
+      Value: $name
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: $name

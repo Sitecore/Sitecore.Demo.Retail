@@ -1,0 +1,32 @@
+﻿---
+ID: "5ae64a78-e4db-41f1-a97e-bd42bfd4ba9e"
+Parent: "9c6ff190-cb49-42f1-9f16-fd5d97d8fd69"
+Template: "16e859d2-6542-407a-ac65-f34bcad3eb3d"
+Path: /sitecore/content/Storefront/Home/Company/Find a Store
+DB: master
+SharedFields:
+- ID: "32b3c63b-b71b-4845-a83f-d91e57aea220"
+  Hint: DisplayInSearchResults
+  Type: Checkbox
+  Value: 1
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161228T195553Z
+    - ID: "29099d33-1eae-49ab-8f00-f31db72ee2e4"
+      Hint: SummaryText
+      Value: Find a Habitat store
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "ae723519-4ead-4d6c-a0d3-feace0d9926a"
+      Hint: Text
+      Value: "<p>There&rsquo;s always something happening at a Habitat store. Take part in product demonstrations, get answers to your specific questions, and experience the complete lineup of our innovative products first-hand. We&rsquo;re glad to be here. We want you to feel the same. Come join the fun.</p>"
+    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
+      Hint: Title
+      Value: Find a Store

@@ -74,6 +74,52 @@ SharedFields:
   Hint: Forms Authentication
   Type: Checkbox
   Value: 1
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s"
+      p:p="1"
+      s:xsd="http://www.w3.org/2001/XMLSchema">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r
+          uid="{96CC7D47-0E17-493A-A8BD-B596996BD2CB}">
+          <p:d />
+        </r>
+        <r
+          uid="{3406A29D-E7AA-49D2-A305-0C266DA06E00}">
+          <p:d />
+        </r>
+        <r
+          uid="{0DA1BF71-4491-4E34-A79A-CB73D1B153B1}"
+          p:after="r[@uid='{31CF9A90-BB50-48CA-B541-C98879643BEA}']"
+          s:ds="{F6504124-F766-43D0-824B-EB339CAE8E5F}"
+          s:id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"
+          s:par=""
+          s:ph="footer" />
+        <r
+          uid="{10AD0FB9-D152-4C52-A418-B79B0E59EEC1}">
+          <p:d />
+        </r>
+        <r
+          uid="{B890088A-5710-4DB9-A38B-47200892680D}">
+          <p:d />
+        </r>
+        <r
+          uid="{7F785393-FAC9-4B70-B398-C095F5FABB5B}">
+          <p:d />
+        </r>
+        <r
+          uid="{D19920BE-D66A-4ECB-B8D2-F77D711D8715}">
+          <p:d />
+        </r>
+        <r
+          uid="{33222378-0DB5-48D8-A533-0064A4611AB4}">
+          <p:d />
+        </r>
+      </d>
+    </r>
 - ID: "f605d200-01a0-4235-8886-391c4c906092"
   Hint: OperatingUnitNumber
   Value: 
@@ -109,6 +155,11 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{CFF7E995-8CB2-4402-8AFC-EB64646FCE5C}"
+              p:before="*"
+              s:id="{2658217E-196A-4041-8F81-B8AFA7E377EE}"
+              s:ph="/footer/section/col-huge_5cd7d17e-b9ad-46b9-9b7c-925e2bff59f7" />
+            <r
               uid="{FAD6585A-A605-4FDE-B461-3ADE0A1D7FA4}">
               <rls>
                 <ruleset>
@@ -117,14 +168,20 @@ Languages:
                     s:name="Interested in TVs">
                     <conditions>
                       <condition
-                        uid="C9EE3F177513434DB9AD463D314B719D"
-                        s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                        uid="616FBCB55AE54C3D90D803C155C0E9CF"
+                        s:id="{E00DB4F0-B206-4544-AD90-25D201CFB62C}"
+                        s:ProfileName="Retail Persona"
+                        s:PatternName="Harrison the Homebuyer" />
                     </conditions>
                     <actions>
                       <action
                         uid="5E8E4856EC1E4C159090D56F9EB32EA7"
                         s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
                         s:DataSource="{D5D74D9B-D572-4AE2-B96A-9B8DD86E4C19}" />
+                      <action
+                        uid="62C58ED47E384BC2A3DF5B1A51EEE93A"
+                        s:id="{7B578B65-BD2F-4C7C-9A24-DAE3E98B4F23}"
+                        s:RenderingItem="{A9B002E1-963F-4F35-B6DB-14A8D4BF171A}" />
                     </actions>
                   </rule>
                   <rule
@@ -133,6 +190,32 @@ Languages:
                     <conditions>
                       <condition
                         uid="E0BD4C902FCB45198E60937D770D025B"
+                        s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                    </conditions>
+                    <actions>
+                      <action
+                        uid="6B6C2F4E67404A0FACD7B22A1E386A79"
+                        s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
+                        s:DataSource="{E7C14FBE-123B-4879-BC46-E2CB6EAA68C1}" />
+                      <action
+                        uid="0128B29ED2AC4BCB815B8236527E4962"
+                        s:id="{7B578B65-BD2F-4C7C-9A24-DAE3E98B4F23}"
+                        s:RenderingItem="{A9B002E1-963F-4F35-B6DB-14A8D4BF171A}" />
+                    </actions>
+                  </rule>
+                </ruleset>
+              </rls>
+            </r>
+            <r
+              uid="{8BE50F19-C969-4AC1-843F-3BCF8E4FB610}">
+              <rls>
+                <ruleset>
+                  <rule
+                    uid="{00000000-0000-0000-0000-000000000000}"
+                    s:name="Default">
+                    <conditions>
+                      <condition
+                        uid="34005AE84CBB4F608B3AF51A8DB45CF1"
                         s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
                     </conditions>
                     <actions />

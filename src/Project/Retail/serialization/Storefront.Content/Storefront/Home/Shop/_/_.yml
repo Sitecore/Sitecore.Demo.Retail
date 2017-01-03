@@ -24,6 +24,35 @@ Languages:
   Versions:
   - Version: 1
     Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{8F5A287B-3B42-4444-A487-9C4E6AEAD5A3}"
+              p:before="*"
+              s:id="{2658217E-196A-4041-8F81-B8AFA7E377EE}"
+              s:ph="/footer/section/col-huge_983f751b-e135-413e-8efb-88f4b7a36339" />
+            <r
+              uid="{983F751B-E135-413E-8EFB-88F4B7A36339}"
+              p:after="r[@uid='{8F5A287B-3B42-4444-A487-9C4E6AEAD5A3}']"
+              s:id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
+              s:ph="/footer/section" />
+            <r
+              uid="{657D052D-24A8-4F3A-A421-D28EB2E21D7F}"
+              s:ds="{F6504124-F766-43D0-824B-EB339CAE8E5F}"
+              s:par="" />
+            <r
+              uid="{542DB17E-9B0C-4EF5-9E2F-94CF6858244C}">
+              <p:d />
+            </r>
+          </d>
+        </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150108T213319Z

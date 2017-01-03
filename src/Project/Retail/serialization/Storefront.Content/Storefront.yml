@@ -11,6 +11,10 @@ SharedFields:
 Languages:
 - Language: en
   Fields:
+  - ID: "2a84eca4-68bb-4451-b4ac-98ea71a5a3dc"
+    Hint: SiteProfiles
+    Type: Multilist
+    Value: "{4F7F3405-9606-495E-8D44-55177A382BB3}"
   - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
     Value: Retail
@@ -19,7 +23,9 @@ Languages:
     Fields:
     - ID: "02115632-fe1e-4b3d-9ad4-a4ddf1f782f0"
       Hint: Copyright
-      Value: <p>Copyright&nbsp;&copy; Sitecore 2016 | Habitat Retail is part of the Sitecore Demo portfolio</p>
+      Value: |
+        <p>Copyright&nbsp;&copy; Sitecore 2016 | Commerce Storefront</p>
+        <p><a href="~/link.aspx?_id=C17F79116BDB42629C566652E79142EB&amp;_z=z">Legal Notice</a> | <a href="~/link.aspx?_id=2F45110F2B7E4E32A7F348BFA35E67A7&amp;_z=z">Privacy Policy</a></p>
     - ID: "12537182-f35c-403f-afb5-747d55c450b8"
       Hint: ShowInMenu
       Type: Checkbox
