@@ -17,23 +17,25 @@
 
 namespace Sitecore.Reference.Storefront
 {
-    using System.Web.Mvc;
-    using System.Web.Routing;
-    using Sitecore.Reference.Storefront.SitecorePipelines;
-    using System.Collections.Generic;
-    using Util;
+  using System.Web.Mvc;
+  using System.Web.Routing;
+  using Sitecore.Reference.Storefront.SitecorePipelines;
+  using System.Collections.Generic;
+  using Util;
 
-    /// <summary>
-    /// Used to register all routes
-    /// </summary>
-    public static class RouteConfig
-    {
-        private static List<ApiInfo> _apiInfoList = new List<ApiInfo>()
+  /// <summary>
+  /// Used to register all routes
+  /// </summary>
+  public static class RouteConfig
+  {
+    private static List<ApiInfo> _apiInfoList = new List<ApiInfo>()
         {
             new ApiInfo("account-getcurrentuser", "Account", "GetCurrentUser"),
             new ApiInfo("account-register", "Account", "Register"),
             new ApiInfo("account-addresslist", "Account", "AddressList"),
             new ApiInfo("account-recentorders", "Account", "RecentOrders"),
+            new ApiInfo("account-reorder", "Account", "Reorder"),
+            new ApiInfo("account-cancelorder", "Account", "CancelOrder"),
             new ApiInfo("account-addressdelete", "Account", "AddressDelete"),
             new ApiInfo("account-addressmodify", "Account", "AddressModify"),
             new ApiInfo("account-updateprofile", "Account", "UpdateProfile"),
@@ -47,6 +49,7 @@ namespace Sitecore.Reference.Storefront
             new ApiInfo("cart-updateminicart", "Cart", "UpdateMiniCart"),
             new ApiInfo("catalog-facetapplied", "Catalog", "FacetApplied"),
             new ApiInfo("catalog-getproductstockinfo", "Catalog", "GetCurrentProductStockInfo"),
+            new ApiInfo("catalog-checkgiftcardbalance", "Catalog", "CheckGiftCardBalance"),
             new ApiInfo("catalog-signupforbackinstocknotification", "Catalog", "SignUpForBackInStockNotification"),
             new ApiInfo("catalog-sortorderapplied", "Catalog", "SortOrderApplied"),
             new ApiInfo("catalog-switchcurrency", "Catalog", "SwitchCurrency"),
@@ -59,75 +62,75 @@ namespace Sitecore.Reference.Storefront
             new ApiInfo("global-culturechosen", "Shared", "CultureChosen")
         };
 
-        /// <summary>
-        ///  Called to register any routes
-        /// </summary>
-        /// <param name="routes">The route collection to add to</param>
-        public static void RegisterRoutes(RouteCollection routes)
-        {
-            foreach (var apiInfo in _apiInfoList)
-            {
-                routes.MapRoute(
-                    name: apiInfo.Name,
-                    url: apiInfo.Url,
-                    defaults: new { controller = apiInfo.Controller, action = apiInfo.Action, id = UrlParameter.Optional });
-            }
+    /// <summary>
+    ///  Called to register any routes
+    /// </summary>
+    /// <param name="routes">The route collection to add to</param>
+    public static void RegisterRoutes(RouteCollection routes)
+    {
+      foreach (var apiInfo in _apiInfoList)
+      {
+        routes.MapRoute(
+            name: apiInfo.Name,
+            url: apiInfo.Url,
+            defaults: new { controller = apiInfo.Controller, action = apiInfo.Action, id = UrlParameter.Optional });
+      }
 
-            routes.MapRoute(
-                name: ProductItemResolver.ShopCategoryRouteName,
-                url: ProductItemResolver.ShopUrlRoute + "/{id}",
-                defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.CategoryItemType });
+      routes.MapRoute(
+          name: ProductItemResolver.ShopCategoryRouteName,
+          url: ProductItemResolver.ShopUrlRoute + "/{id}",
+          defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.CategoryItemType });
 
-            routes.MapRoute(
-                name: ProductItemResolver.ShopProductRouteName,
-                url: ProductItemResolver.ShopUrlRoute + "/{category}/{id}",
-                defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType });
+      routes.MapRoute(
+          name: ProductItemResolver.ShopProductRouteName,
+          url: ProductItemResolver.ShopUrlRoute + "/{category}/{id}",
+          defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType });
 
-            routes.MapRoute(
-                name: ProductItemResolver.ShopCategoryWithCatalogRouteName,
-                url: "{catalog}/" + ProductItemResolver.ShopUrlRoute + "/{id}",
-                defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.CategoryItemType });
+      routes.MapRoute(
+          name: ProductItemResolver.ShopCategoryWithCatalogRouteName,
+          url: "{catalog}/" + ProductItemResolver.ShopUrlRoute + "/{id}",
+          defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.CategoryItemType });
 
-            routes.MapRoute(
-                name: ProductItemResolver.ShopProductWithCatalogRouteName,
-                url: "{catalog}/" + ProductItemResolver.ShopUrlRoute + "/{category}/{id}",
-                defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType });
+      routes.MapRoute(
+          name: ProductItemResolver.ShopProductWithCatalogRouteName,
+          url: "{catalog}/" + ProductItemResolver.ShopUrlRoute + "/{category}/{id}",
+          defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType });
 
-            routes.MapRoute(
-                name: ProductItemResolver.CategoryRouteName,
-                url: ProductItemResolver.CategoryUrlRoute + "/{id}",
-                defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.CategoryItemType });
+      routes.MapRoute(
+          name: ProductItemResolver.CategoryRouteName,
+          url: ProductItemResolver.CategoryUrlRoute + "/{id}",
+          defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.CategoryItemType });
 
-            routes.MapRoute(
-                name: ProductItemResolver.ProductRouteName,
-                url: ProductItemResolver.ProductUrlRoute + "/{id}",
-                defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType });
+      routes.MapRoute(
+          name: ProductItemResolver.ProductRouteName,
+          url: ProductItemResolver.ProductUrlRoute + "/{id}",
+          defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType });
 
-            routes.MapRoute(
-                name: "ProductAction",
-                url: ProductItemResolver.ProductUrlRoute + "/{action}/{id}",
-                defaults: new { controller = "Catalog", id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType });
+      routes.MapRoute(
+          name: "ProductAction",
+          url: ProductItemResolver.ProductUrlRoute + "/{action}/{id}",
+          defaults: new { controller = "Catalog", id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType });
 
-            routes.MapRoute(
-                name: ProductItemResolver.CategoryWithCatalogRouteName,
-                url: "{catalog}/" + ProductItemResolver.CategoryUrlRoute + "/{id}",
-                defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.CategoryItemType });
+      routes.MapRoute(
+          name: ProductItemResolver.CategoryWithCatalogRouteName,
+          url: "{catalog}/" + ProductItemResolver.CategoryUrlRoute + "/{id}",
+          defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.CategoryItemType });
 
-            routes.MapRoute(
-                name: ProductItemResolver.ProductWithCatalogRouteName,
-                url: "{catalog}/" + ProductItemResolver.ProductUrlRoute + "/{id}",
-                defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType });
+      routes.MapRoute(
+          name: ProductItemResolver.ProductWithCatalogRouteName,
+          url: "{catalog}/" + ProductItemResolver.ProductUrlRoute + "/{id}",
+          defaults: new { id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType });
 
-            routes.MapRoute(
-                name: "catalogitem-all",
-                url: ProductItemResolver.NavigationItemName + "/{*pathElements}",
-                defaults: new { itemType = ProductItemResolver.CatalogItemType });
+      routes.MapRoute(
+          name: "catalogitem-all",
+          url: ProductItemResolver.NavigationItemName + "/{*pathElements}",
+          defaults: new { itemType = ProductItemResolver.CatalogItemType });
 
-            routes.MapRoute(
-                name: "logoff",
-                url: "logoff",
-                defaults: new { controller = "Account", action = "LogOff", storefront = UrlParameter.Optional }
-            );
-        }
+      routes.MapRoute(
+          name: "logoff",
+          url: "logoff",
+          defaults: new { controller = "Account", action = "LogOff", storefront = UrlParameter.Optional }
+      );
     }
+  }
 }
