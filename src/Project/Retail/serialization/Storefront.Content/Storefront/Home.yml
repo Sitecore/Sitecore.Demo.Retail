@@ -168,14 +168,20 @@ Languages:
                     s:name="Interested in TVs">
                     <conditions>
                       <condition
-                        uid="C9EE3F177513434DB9AD463D314B719D"
-                        s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                        uid="616FBCB55AE54C3D90D803C155C0E9CF"
+                        s:id="{E00DB4F0-B206-4544-AD90-25D201CFB62C}"
+                        s:ProfileName="Retail Persona"
+                        s:PatternName="Harrison the Homebuyer" />
                     </conditions>
                     <actions>
                       <action
                         uid="5E8E4856EC1E4C159090D56F9EB32EA7"
                         s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
                         s:DataSource="{D5D74D9B-D572-4AE2-B96A-9B8DD86E4C19}" />
+                      <action
+                        uid="62C58ED47E384BC2A3DF5B1A51EEE93A"
+                        s:id="{7B578B65-BD2F-4C7C-9A24-DAE3E98B4F23}"
+                        s:RenderingItem="{A9B002E1-963F-4F35-B6DB-14A8D4BF171A}" />
                     </actions>
                   </rule>
                   <rule
@@ -184,6 +190,32 @@ Languages:
                     <conditions>
                       <condition
                         uid="E0BD4C902FCB45198E60937D770D025B"
+                        s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                    </conditions>
+                    <actions>
+                      <action
+                        uid="6B6C2F4E67404A0FACD7B22A1E386A79"
+                        s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
+                        s:DataSource="{E7C14FBE-123B-4879-BC46-E2CB6EAA68C1}" />
+                      <action
+                        uid="0128B29ED2AC4BCB815B8236527E4962"
+                        s:id="{7B578B65-BD2F-4C7C-9A24-DAE3E98B4F23}"
+                        s:RenderingItem="{A9B002E1-963F-4F35-B6DB-14A8D4BF171A}" />
+                    </actions>
+                  </rule>
+                </ruleset>
+              </rls>
+            </r>
+            <r
+              uid="{8BE50F19-C969-4AC1-843F-3BCF8E4FB610}">
+              <rls>
+                <ruleset>
+                  <rule
+                    uid="{00000000-0000-0000-0000-000000000000}"
+                    s:name="Default">
+                    <conditions>
+                      <condition
+                        uid="34005AE84CBB4F608B3AF51A8DB45CF1"
                         s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
                     </conditions>
                     <actions />
