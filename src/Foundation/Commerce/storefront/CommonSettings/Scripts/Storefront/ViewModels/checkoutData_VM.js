@@ -22,6 +22,7 @@ function CheckoutDataViewModel(data) {
     self.isShipItems = ko.observable(false);
     self.emailDeliveryMethod = ko.observable(data.EmailDeliveryMethod);
     self.shipToStoreDeliveryMethod = ko.observable(data.ShipToStoreDeliveryMethod);
+    self.paymentClientToken = ko.observable(data.PaymentClientToken);
 
     self.orderShippingOptions = ko.observableArray();
     if (data.OrderShippingOptions != null) {
@@ -174,7 +175,7 @@ function CheckoutDataViewModel(data) {
     self.cartLoyaltyCardNumber = data.CartLoyaltyCardNumber;
     self.giftCardPayment = ko.validatedObservable(new GiftCardPaymentViewModel());
     self.loyaltyCardPayment = ko.validatedObservable(data.CartLoyaltyCardNumber ? new LoyaltyCardPaymentViewModel({ "CartLoyaltyCardNumber": data.CartLoyaltyCardNumber, "Amount": 0.00 }) : new LoyaltyCardPaymentViewModel());
-    self.creditCardPayment = ko.validatedObservable(new CreditCardPaymentViewModel());   
+    self.creditCardPayment = ko.validatedObservable(new CreditCardPaymentViewModel());
     self.creditCardEnable = ko.observable(false);
     self.billingAddress = ko.validatedObservable(new AddressViewModel({ "ExternalId": "1" }));
     self.billingAddressEnable = ko.observable(false);
@@ -274,8 +275,7 @@ function CheckoutDataViewModel(data) {
     };
 
     self.addCountry = function (name, code) {
-        if (self.countries[code] == undefined)
-        {
+        if (self.countries[code] == undefined) {
             self.countries.push(new Country(name, code));
         }
     };

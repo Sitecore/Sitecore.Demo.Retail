@@ -87,6 +87,7 @@ namespace Sitecore.Reference.Storefront
                 "~/Scripts/Storefront/passwordmanagement.js",
                 "~/Scripts/Storefront/wishlist.js",
                 "~/Scripts/Storefront/loyaltycards.js",
+                "~/Scripts/Storefront/order.js",
                 "~/Scripts/Storefront/checkout.js",
                 "~/Scripts/Storefront/addresses.js",
                 "~/Scripts/Storefront/register.js",
