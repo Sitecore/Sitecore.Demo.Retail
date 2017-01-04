@@ -42,16 +42,16 @@
             }
             <tr>
                 <td>
-                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.OrderID">@commerceOrder.OrderID</a>
+                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.ExternalId">@commerceOrder.OrderID</a>
                 </td>
                 <td>
-                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.OrderID">@commerceOrder.LastModified.ToDisplayedDate()</a>
+                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.ExternalId">@commerceOrder.LastModified.ToDisplayedDate()</a>
                 </td>
                 <td>
-                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.OrderID">@StorefrontManager.GetOrderStatusName(commerceOrder.Status)</a>
+                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.ExternalId">@StorefrontManager.GetOrderStatusName(commerceOrder.Status)</a>
                 </td>
                 <td>
-                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.OrderID"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.ExternalId"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
                 </td>
             </tr>
         }

@@ -171,8 +171,11 @@
     <Compile Include="Models\CurrencyInformationModel.cs" />
     <Compile Include="Models\CustomerLinkupPendingViewModel.cs" />
     <Compile Include="Models\IdentityProviderModel.cs" />
+    <Compile Include="Models\InputModels\CancelOrderInputModel.cs" />
     <Compile Include="Models\InputModels\CustomerLinkupPendingInputModel.cs" />
     <Compile Include="Models\InputModels\FederatedPaymentInputModelItem.cs" />
+    <Compile Include="Models\InputModels\ReorderInputModel.cs" />
+    <Compile Include="Models\JsonResults\CancelOrderBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\CardPaymentAcceptUrlJsonResult.cs" />
     <Compile Include="Models\JsonResults\LineShippingOptionBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\ShippingMethodBaseJsonResult.cs" />

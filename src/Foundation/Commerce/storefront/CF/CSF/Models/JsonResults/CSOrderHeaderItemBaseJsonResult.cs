@@ -17,26 +17,26 @@
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Entities.Orders;
-    using Sitecore.Reference.Storefront.Managers;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
+  using Sitecore.Commerce.Entities.Orders;
+  using Sitecore.Reference.Storefront.Managers;
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System.Web;
 
+  /// <summary>
+  /// Defines the CSOrderHeaderItemBaseJsonResult class.
+  /// </summary>
+  public class CSOrderHeaderItemBaseJsonResult : OrderHeaderItemBaseJsonResult
+  {
     /// <summary>
-    /// Defines the CSOrderHeaderItemBaseJsonResult class.
+    /// Initializes a new instance of the <see cref="CSOrderHeaderItemBaseJsonResult"/> class.
     /// </summary>
-    public class CSOrderHeaderItemBaseJsonResult : OrderHeaderItemBaseJsonResult
+    /// <param name="header">The order header.</param>
+    public CSOrderHeaderItemBaseJsonResult(OrderHeader header) : base(header)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CSOrderHeaderItemBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="header">The order header.</param>
-        public CSOrderHeaderItemBaseJsonResult(OrderHeader header) : base(header)
-        {
-            this.DetailsUrl = string.Concat(StorefrontManager.StorefrontUri("/accountmanagement/myorder"), "?id=", header.OrderID);
-            this.OrderId = header.OrderID;
-        }
+      this.DetailsUrl = string.Concat(StorefrontManager.StorefrontUri("/accountmanagement/myorder"), "?id=", header.ExternalId);
+      this.OrderId = header.OrderID;
     }
+  }
 }

@@ -94,15 +94,83 @@ namespace Sitecore.Reference.Storefront.Controllers
         /// </value>
         public OrderManager OrderManager { get; protected set; }
 
-        #endregion
+    #endregion
 
-        #region Controller actions
+    #region Controller actions
 
-        /// <summary>
-        /// The default action for the main page for the account section
-        /// </summary>
-        /// <returns>The view for the section</returns>
-        [HttpGet]
+
+    /// <summary>
+    /// Sends a request to reorder one or more items from a previous order.
+    /// </summary>
+    /// <param name="inputModel">The reorder input model.</param>
+    /// <returns>The result of the operation.</returns>
+    [Authorize]
+    [HttpPost]
+    [ValidateJsonAntiForgeryToken]
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+    public JsonResult Reorder(ReorderInputModel inputModel)
+    {
+      try
+      {
+        Assert.ArgumentNotNull(inputModel, "inputModel");
+        var validationResult = new BaseJsonResult();
+
+        this.ValidateModel(validationResult);
+        if (validationResult.HasErrors)
+        {
+          return Json(validationResult, JsonRequestBehavior.AllowGet);
+        }
+
+        var response = this.OrderManager.Reorder(this.CurrentStorefront, this.CurrentVisitorContext, inputModel);
+        var result = new BaseJsonResult(response.ServiceProviderResult);
+        return Json(result, JsonRequestBehavior.AllowGet);
+      }
+      catch (Exception e)
+      {
+        CommerceLog.Current.Error("Reorder", this);
+        return Json(new BaseJsonResult("Reorder", e), JsonRequestBehavior.AllowGet);
+      }
+    }
+
+    /// <summary>
+    /// Sends a request to cancel one or more items from an existing order.
+    /// </summary>
+    /// <param name="inputModel">The order cancellation input model.</param>
+    /// <returns>The result of the operation.</returns>
+    [Authorize]
+    [HttpPost]
+    [ValidateJsonAntiForgeryToken]
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+    public JsonResult CancelOrder(CancelOrderInputModel inputModel)
+    {
+      try
+      {
+        Assert.ArgumentNotNull(inputModel, "inputModel");
+        var validationResult = new CancelOrderBaseJsonResult();
+
+        this.ValidateModel(validationResult);
+        if (validationResult.HasErrors)
+        {
+          return Json(validationResult, JsonRequestBehavior.AllowGet);
+        }
+
+        var response = this.OrderManager.CancelOrder(this.CurrentStorefront, this.CurrentVisitorContext, inputModel);
+        var result = new CancelOrderBaseJsonResult(response.ServiceProviderResult);
+
+        return Json(result, JsonRequestBehavior.AllowGet);
+      }
+      catch (Exception e)
+      {
+        CommerceLog.Current.Error("CancelOrder", this);
+        return Json(new BaseJsonResult("CancelOrder", e), JsonRequestBehavior.AllowGet);
+      }
+    }
+
+    /// <summary>
+    /// The default action for the main page for the account section
+    /// </summary>
+    /// <returns>The view for the section</returns>
+    [HttpGet]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public override ActionResult Index()
         {
