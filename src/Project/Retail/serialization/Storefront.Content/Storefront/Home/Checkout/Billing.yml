@@ -152,6 +152,9 @@ Languages:
     - ID: "c84f3978-0801-460f-800d-046a261525b3"
       Hint: Country Label
       Value: Country/Region
+    - ID: "d6e5495f-8f1b-423a-aeef-ed544704cde0"
+      Hint: Validate Payment Label
+      Value: Validate Payment
     - ID: "e375aba1-d631-4c68-b6da-93e7ddf7ca24"
       Hint: Zipcode Label
       Value: Zipcode
