@@ -1,0 +1,21 @@
+﻿---
+ID: "c6e45321-a7cd-4992-aae7-95a5f04f8bc0"
+Parent: "92caf6be-135a-4d03-9438-83bae34d5a6b"
+Template: "b4fb6139-9750-4dac-ad16-1e4663e22dce"
+Path: /sitecore/Commerce/Commerce Control Panel/Shared Settings/Payment Options/Gift Card
+DB: master
+SharedFields:
+- ID: "3c9ab946-f6bb-4a99-a5b6-c7fd79e2de4b"
+  Hint: Payment Option Type
+  Value: "{1F93AE21-D064-42EB-8751-92F9035F0CF9}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161205T084239Z
+    - ID: "8bb2cc42-f0d1-4d31-a94f-da60bd47ec2d"
+      Hint: Title
+      Value: Gift Card

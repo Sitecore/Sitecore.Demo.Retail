@@ -1,0 +1,30 @@
+﻿---
+ID: "b8c17241-1b2b-472b-806d-4875c75a6003"
+Parent: "51541163-54af-4d41-b86e-0b2e3a26b215"
+Template: "a2a80c92-826a-4928-beed-6e46fff31919"
+Path: /sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/Storefront/Fulfillment Configuration
+DB: master
+SharedFields:
+- ID: "0452eb98-bc28-4fd8-a3b4-533f26c62705"
+  Hint: Fulfillment Options
+  Type: Multilist
+  Value: |
+    {13372399-0C90-4827-B4DD-CA69B7EE3F94}
+    {5B8EC4C9-020D-4F2E-B38B-74FD6441EADF}
+    {1CA75E23-86D1-4089-B7A4-346E96E66161}
+- ID: "769b63db-453f-44e6-aa90-cbc916e47f7d"
+  Hint: Allow items to be delivered Individually
+  Type: Checkbox
+  Value: 1
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161209T140442Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

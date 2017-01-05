@@ -1,0 +1,22 @@
+﻿---
+ID: "5915e5bc-73d7-43bd-82bb-7309971609fc"
+Parent: "51541163-54af-4d41-b86e-0b2e3a26b215"
+Template: "9c514ff0-fbf7-42f1-82f6-156272f70caa"
+Path: /sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/Storefront/Language Configuration
+DB: master
+SharedFields:
+- ID: "03265dc1-ccfe-470d-aed1-ea9aab5b3f55"
+  Hint: Language Set
+  Value: "{DA122580-69B3-4C1F-B533-E35B8F015514}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161212T152555Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

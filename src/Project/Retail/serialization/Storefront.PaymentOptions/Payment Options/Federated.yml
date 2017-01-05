@@ -1,0 +1,21 @@
+﻿---
+ID: "3c86b4a2-7d72-4110-a697-82d6cd0b6619"
+Parent: "92caf6be-135a-4d03-9438-83bae34d5a6b"
+Template: "b4fb6139-9750-4dac-ad16-1e4663e22dce"
+Path: /sitecore/Commerce/Commerce Control Panel/Shared Settings/Payment Options/Federated
+DB: master
+SharedFields:
+- ID: "3c9ab946-f6bb-4a99-a5b6-c7fd79e2de4b"
+  Hint: Payment Option Type
+  Value: "{642E367E-4281-4C21-A25C-9B4A47722958}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161204T121844Z
+    - ID: "8bb2cc42-f0d1-4d31-a94f-da60bd47ec2d"
+      Hint: Title
+      Value: Federated
