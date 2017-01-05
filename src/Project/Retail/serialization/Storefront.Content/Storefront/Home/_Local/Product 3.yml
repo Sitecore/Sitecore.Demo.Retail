@@ -1,0 +1,31 @@
+﻿---
+ID: "932b892d-9ef3-4965-b80b-0982eab4d0f1"
+Parent: "2479dc14-604a-4fd3-a2ca-10e6954a95cc"
+Template: "c7d9d293-4ef8-4380-8e10-c4632e729f39"
+Path: /sitecore/content/Storefront/Home/_Local/Product 3
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "0f6b5546-e0ab-4487-81de-640c1aa1b65b"
+      Hint: TeaserImage
+      Value: |
+        <image mediaid="{A21DB431-294F-4E3B-B3F2-050D3EC75DA5}" />
+    - ID: "13d97a52-7c4e-407c-960d-fadde8a3c1b1"
+      Hint: TeaserSummary
+      Value: "Hear your favorite music from anywhere in the room. The Punch 360º Radial bookshelf speaker uses proprietary full-circle technology to equally project sound in every direction."
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170105T121039Z
+    - ID: "3f7e7e3a-4e8e-4639-b079-fc5aeff172f5"
+      Hint: Teaser Label
+      Value: Speakers
+    - ID: "4a59d072-5b41-4a79-a157-2b2ccac10f2b"
+      Hint: TeaserTitle
+      Value: Punch 360º Radial Bookshelf Speaker
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

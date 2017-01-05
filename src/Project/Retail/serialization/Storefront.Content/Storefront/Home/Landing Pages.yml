@@ -4,6 +4,13 @@ Parent: "441b60d3-09bb-4111-a3ad-d10076b78b54"
 Template: "a87a00b1-e6db-45ab-8b54-636fec3b5523"
 Path: /sitecore/content/Storefront/Home/Landing Pages
 DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: People/32x32/target.png
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 900
 Languages:
 - Language: en
   Versions:

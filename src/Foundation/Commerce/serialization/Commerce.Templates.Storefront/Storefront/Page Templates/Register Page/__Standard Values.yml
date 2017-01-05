@@ -93,30 +93,25 @@ SharedFields:
           ph="footer"
           uid="{7DC943A5-0EC4-4348-AA74-D983494FCB51}" />
         <r
-          id="{DE648E12-A568-4919-802E-A688EBC9B9F3}"
+          id="{DB4DA660-2D4A-4214-8896-9724E165DA44}"
           par="UseStaticPlaceholderNames=1"
           ph="/footer/section"
-          uid="{E3DF315D-9BAF-4971-8252-9F529F32CA73}" />
+          uid="{187B5C4B-7A7F-4541-8A0F-2C5B4BCDC7BB}" />
         <r
-          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
+          ds="{4279B055-6B9C-4F96-9179-81EC406EFDDD}"
           id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
           ph="/footer/section/col-narrow-1"
-          uid="{9C4D9C3D-BCFD-4A59-B3A5-603C119BC617}" />
+          uid="{4D303C7C-3740-4B6B-8F74-02B7A67657F6}" />
         <r
-          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
+          ds="{63E42451-AD63-4CDE-934E-9E039B9422C5}"
           id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
           ph="/footer/section/col-narrow-2"
-          uid="{C90982EC-E441-4403-A790-D8030C9BC244}" />
+          uid="{7EA84110-4C16-4651-9B9B-A14D02858F0A}" />
         <r
-          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
-          id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
-          ph="/footer/section/col-narrow-3"
-          uid="{94BB8957-8476-451B-8C20-EB5DC5E7A66A}" />
-        <r
-          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
-          id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
-          ph="/footer/section/col-narrow-4"
-          uid="{F7A71E6A-625A-4112-BE99-3719FC5D95DA}" />
+          ds="{D010EC68-8E7B-430C-99A6-713FED4D0745}"
+          id="{A25C9850-AAB7-46A6-84B7-0DFAB32FC357}"
+          ph="/footer/section/col-wide-1"
+          uid="{C2B09A00-9799-44DE-8106-AF2B86AE84C1}" />
         <r
           id="{7DAE9F23-890F-4E06-99A7-CCEDB74D3D8E}"
           ph="postfooter"

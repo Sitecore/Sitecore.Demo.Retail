@@ -1,0 +1,14 @@
+﻿---
+ID: "79ea8a12-d56b-4f4b-b540-08bf1424adbb"
+Parent: "5c11ed5a-baa7-485d-bebf-591a09704fcb"
+Template: "fe5dd826-48c6-436d-b87a-7c4210c7413b"
+Path: /sitecore/media library/Storefront/Images
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170105T111340Z

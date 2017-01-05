@@ -27,8 +27,9 @@ Languages:
     - ID: "02115632-fe1e-4b3d-9ad4-a4ddf1f782f0"
       Hint: Copyright
       Value: |
-        <p>Copyright&nbsp;&copy; Sitecore 2016 | Commerce Storefront</p>
-        <p><a href="~/link.aspx?_id=C17F79116BDB42629C566652E79142EB&amp;_z=z">Legal Notice</a> | <a href="~/link.aspx?_id=2F45110F2B7E4E32A7F348BFA35E67A7&amp;_z=z">Privacy Policy</a></p>
+        <p>Please read our <a href="~/link.aspx?_id=E0F37E53CA9B47F6897D625C709283EC&amp;_z=z">Legal Notice</a>&nbsp;and our <a href="~/link.aspx?_id=DD218F71CE4F492FBD60ED5C767FB319&amp;_z=z">Privacy Policy</a>.</p>
+        <p>Copyright &copy; 2016 Sitecore<br />
+        <small>&ldquo;Habitat Electronics&rdquo; as used here is for demonstration purposes only and to represent the software and services provided by Sitecore further described at www.sitecore.net.</small></p>
     - ID: "12537182-f35c-403f-afb5-747d55c450b8"
       Hint: ShowInMenu
       Type: Checkbox

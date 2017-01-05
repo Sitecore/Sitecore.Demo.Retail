@@ -1,0 +1,80 @@
+﻿---
+ID: "cb05a285-4429-4111-9a77-7ccc12a519fa"
+Parent: "ed3c9b4c-f879-4798-9e10-b860931539a7"
+Template: "843fe5e3-63c2-48d6-8feb-bab096b9715e"
+Path: /sitecore/content/Storefront/Home/Life with Habitat/What should I budget for appliances
+DB: master
+SharedFields:
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "{E2A658AB-B142-4AD9-AACA-C69200622F44}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: What should I budget for appliances
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170105T033855Z
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{FF21E8D4-EB3D-400E-83CB-34065712FC18}"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "9492e0bb-9df9-46e7-8188-ec795c4ade44"
+      Hint: Image
+      Value: |
+        <image mediaid="{FA7AE72D-7C89-464C-B995-4ACDD1C903A2}" />
+    - ID: "ac3fd4db-8266-476d-9635-67814d91e901"
+      Hint: Summary
+      Value: "<p>3 sample kitchen appliance packages for high, midrange, and entry-level budgets.</p>"
+    - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
+      Hint: Title
+      Value: "What should I budget for appliances?"
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: What should I budget for appliances
+    - ID: "d74f396d-5c5e-4916-bd0a-bfd58b6b1967"
+      Hint: Body
+      Value: |
+        <p>Functionality of kitchen appliances combined with design aesthetics are key elements in creating a dream kitchen. How do you select kitchen appliances within a budget for the most important room in your home? In this blog post, we priced out three sample kitchen packages for high end luxury appliances, mid-range priced appliances, and budget/economical appliances.</p>
+        <p>The size and style of the appliances you select will influence the shape and design of your kitchen, so this will be an important first conversation with your designer. These appliance decisions affect the plumbing and electrical design plans as well. Consider your budget and lifestyle when selecting appliances. Below are answers to three recent questions clients asked when preparing to purchase appliances.</p>
+        <p><strong>&ldquo;What is the difference between standard and professional appliances?&rdquo;</strong>&nbsp;</p>
+        <p>Pro appliances are pricier but tend to be more durable and powerful, and they are designed beautifully. For serious cooks, heavy entertainers, or large families, they are a good choice. There are also many options in standard appliances, which also get the job done and can be beautiful as well. The investment you make is a personal decision based on lifestyle, budget, and taste.</p>
+        <p><strong>&ldquo;Where should I buy my appliances?&rdquo;</strong></p>
+        <p>You can buy them on your own or through your kitchen designer. We highly recommend clients purchase their appliance package through Habitat for several reasons, and if you are working with a professional kitchen designer, I recommend you do the same. Here&rsquo;s why: Your kitchen designer can offer highly competitive and often the lowest prices available for your appliances. </p>
+        <p><strong>&ldquo;How do I select my appliances within my budget?&rdquo;</strong>&nbsp;</p>
+        <p>Go shopping first to determine the quality and the features of what you&rsquo;re looking for so you can help yourself establish a budget. Once you have established a general category you want&nbsp;to be in, your kitchen designer will help you refine your final choices based on experience and knowledge of those appliances. Your kitchen designer can give you a good comparable that might be a better choice, or fill you in on customer feedback by telling you what previous clients liked or didn&rsquo;t like about features of the appliances they selected.</p>
+        <p>Because there is such a broad range in price, we like to send you out there to get an idea first. Do you want a $900 refrigerator, a $3,000 refrigerator, or a $7,000 refrigerator? You need to determine how much money you want to allocate and what features are important to you.</p>
+        <p>Examining the wide array of different characteristics can help you evaluate your kitchen appliance options for both professional grade and standard grade appliances. Consider the following: your budget, appliance size, aesthetic design, color and/or integrated panel options, maintenance and ease of cleaning, energy efficiency, consumer reviews, ventilation requirements, and warrantees.</p>
+        <p>In this artcile we are pricing out three separate appliance packages for you to examine based on current retail prices in the marketplace. We used retail prices below to illustrate the following price points:&nbsp;1) a High-end luxury appliance package; 2) a Mid-level appliance package; and 3) a Budget or economical appliance package.</p>
+        <p><strong>1) A high end luxury appliance package might look like this:</strong></p>
+        <ul>
+            <li>Range, 48&rdquo; Duel burner and a griddle: $11,379.00</li>
+            <li>Fully Integrated Dishwasher with 6 Wash Programs, 14 Place Setting, CleanAir Drying, Double Waterproof, Built-in Water Softener, PC Update, Cutlery Tray and Q2 Acoustics: $1199.00</li>
+            <li>Microwave, 1.1 Cu. Ft. Countertop Microwave Oven: $375.00</li>
+            <li>Micro Trim Kit $119.00</li>
+            <li>Refrigerator, 36" Stainless Steel Built-In Bottom Freezer Refrigerator: $8,045.00</li>
+            <li>Cooking hood: $2,469.00</li>
+        </ul>
+        <p>Note: Additionally, high-end kitchens often add wine coolers, warming drawers, and additional refrigerator and freezer drawers.</p>
+        <p><strong>2) A mid range medium-priced appliance package might look like this:</strong></p>
+        <ul>
+            <li><strong>&nbsp;</strong>Range 30-Inch 4-Burner Gas Slide-In Range: $1,729.00</li>
+            <li>Canopy Hood: $899.00</li>
+            <li>Dishwasher, 24'' 6-Cycle/5-Option Dishwasher, Pocket Handle: $699.00</li>
+            <li>Refrigerator, 24.6 cu. ft. Counter-Depth Side-by-Side Refrigerator: $2,579.00</li>
+            <li>Microwave, 1.0 cu. ft. microwave oven: $229.00</li>
+        </ul>
+        <p><strong>3) A budget appliance package might look like this:</strong></p>
+        <ul>
+            <li>Range, Professional Series: $709.00</li>
+            <li>Micro Hood: $289.00</li>
+            <li>Refrigerator, Stainless Steel Side-by-Side: $999.00</li>
+            <li>Dishwasher , 24" Built-in Dishwasher, Stainless Steel: $599.00</li>
+        </ul>

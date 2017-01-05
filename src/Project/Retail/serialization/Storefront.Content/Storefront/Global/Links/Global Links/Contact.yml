@@ -19,3 +19,7 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20161107T070310Z
+    - ID: "fe71c30e-f07d-4052-8594-c3028cd76e1f"
+      Hint: Link
+      Value: |
+        <link id="{FECC893F-7B4E-436E-9E28-3CBB959DF098}" querystring="" linktype="internal" text="" anchor="" url="/Storefront/Home/Customer Service" title="" class="" target="" />

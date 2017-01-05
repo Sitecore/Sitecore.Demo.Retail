@@ -26,4 +26,4 @@ Languages:
     - ID: "fe71c30e-f07d-4052-8594-c3028cd76e1f"
       Hint: Link
       Value: |
-        <link text="" linktype="internal" class="" title="" target="" querystring="" id="{4D316BBA-345F-4929-9E84-A2208C0F7AA6}" />
+        <link id="{4D316BBA-345F-4929-9E84-A2208C0F7AA6}" querystring="" target="" text="" title="" class="" url="/Storefront/Home/AccountManagement" linktype="internal" />
