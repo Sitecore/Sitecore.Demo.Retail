@@ -32,6 +32,8 @@ namespace Sitecore.Reference.Storefront.Managers
   using Sitecore.Reference.Storefront.Connect.Pipelines.Arguments;
   using Sitecore.Reference.Storefront.Models.InputModels;
   using Sitecore.Reference.Storefront.Models.SitecoreItemModels;
+  using Sitecore.Reference.Storefront.Util;
+  using Sitecore.Reference.Storefront.Extensions;
 
   /// <summary>
   /// Defines the OrderManager class.
@@ -109,6 +111,23 @@ namespace Sitecore.Reference.Storefront.Managers
       {
         var cartCache = CommerceTypeLoader.CreateInstance<CartCacheHelper>();
         cartCache.InvalidateCartCache(visitorContext.GetCustomerId());
+
+        var mailUtil = new MailUtil();
+
+        var wasEmailSent = mailUtil.SendMail("PurchaseConfirmation", inputModel.UserEmail, storefront.SenderEmailAddress, new object(),
+                                              new object[] {
+                                                              string.Format("{0} {1}", cart.Parties.FirstOrDefault()?.FirstName, cart.Parties.FirstOrDefault()?.LastName),
+                                                              errorResult.Order.TrackingNumber,
+                                                              errorResult.Order.OrderDate,
+                                                              string.Join(", ", cart.Lines.Select(x=>x.Product.ProductName)),
+                                                              cart.Total.Amount.ToCurrency(cart.Total.CurrencyCode)
+                                                           });
+        if (!wasEmailSent)
+        {
+          var message = StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.CouldNotSentEmailError);
+          errorResult.SystemMessages.Add(new SystemMessage(message));
+        }
+
       }
 
       Helpers.LogSystemMessages(errorResult.SystemMessages, errorResult);
