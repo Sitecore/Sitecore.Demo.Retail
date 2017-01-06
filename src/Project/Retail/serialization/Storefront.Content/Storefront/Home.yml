@@ -180,7 +180,47 @@ Languages:
               p:after="r[@uid='{3BDFBD2C-5C58-4D47-BE52-542DAE3B8C1A}']"
               s:ds="{E7C14FBE-123B-4879-BC46-E2CB6EAA68C1}"
               s:id="{A9B002E1-963F-4F35-B6DB-14A8D4BF171A}"
-              s:ph="/page-layout/page-header" />
+              s:ph="/page-layout/page-header">
+              <rls>
+                <ruleset>
+                  <rule
+                    uid="{9A2F8B8E-4D6D-4752-A625-BAA0EE4F7C56}"
+                    s:name="Harrison">
+                    <conditions>
+                      <and
+                        uid="34E7EA10230944099D41D00D8BC1B4A6">
+                        <condition
+                          uid="0C2754402D9F4D8DBFB96B63BEA83506"
+                          s:id="{E00DB4F0-B206-4544-AD90-25D201CFB62C}"
+                          s:ProfileName="Retail Persona"
+                          s:PatternName="Harrison the Homebuyer" />
+                        <condition
+                          uid="92C7DA8F33C045BEB21B75CDDE8A2D25"
+                          s:id="{4D290FF3-1587-4FEE-AB37-88768766A9D9}"
+                          s:except="true"
+                          s:GoalId="{D0B0F3F7-931D-445F-95C5-413E83232897}" />
+                      </and>
+                    </conditions>
+                    <actions>
+                      <action
+                        uid="6688361E84024306BD20260A0F3D3442"
+                        s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
+                        s:DataSource="{D5D74D9B-D572-4AE2-B96A-9B8DD86E4C19}" />
+                    </actions>
+                  </rule>
+                  <rule
+                    uid="{00000000-0000-0000-0000-000000000000}"
+                    s:name="Default">
+                    <conditions>
+                      <condition
+                        uid="8705A2F194F345C282CB9A3B5C679B5E"
+                        s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                    </conditions>
+                    <actions />
+                  </rule>
+                </ruleset>
+              </rls>
+            </r>
             <r
               uid="{FAD6585A-A605-4FDE-B461-3ADE0A1D7FA4}">
               <p:d />

@@ -21,6 +21,9 @@ Languages:
   - ID: "06f2d72a-1924-4b9a-ba1e-186ce4e57efd"
     Hint: Description
     Value: All customers in this state have received email notifications and going to be categorized.
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Recipients Emailed
   Versions:
   - Version: 1
     Fields:

@@ -11,14 +11,17 @@ SharedFields:
     <tracking>
       <profile id="{4F7F3405-9606-495E-8D44-55177A382BB3}" name="Retail Persona">
         <key name="Televisions" value="5" />
-        <key name="Appliances" value="0" />
-        <key name="Gaming or Subscription" value="0" />
-        <key name="Audio" value="0" />
+        <key name="Appliances" value="4" />
+        <key name="Gaming or Subscription" value="4" />
+        <key name="Audio" value="5" />
       </profile>
     </tracking>
 Languages:
 - Language: en
   Fields:
+  - ID: "462c9ea6-1bc7-4131-9d65-9976801daa48"
+    Hint: Title
+    Value: 
   - ID: "a26fc256-1db0-44aa-ba3d-1c830bf882a2"
     Hint: Name
     Value: Harrison the Homebuyer
