@@ -1,0 +1,29 @@
+﻿---
+ID: "5d535e05-bf02-423b-9972-63b09ece0765"
+Parent: "3a772dcc-ec1f-435b-b4d9-2f10b3e53396"
+Template: "4a6a7e36-2481-438f-a9ba-0453ecc638fa"
+Path: /sitecore/system/Marketing Control Panel/Profiles/Retail Persona/Pattern Cards/Kerry Kitchen Buyer
+DB: master
+SharedFields:
+- ID: "6da71ad3-5849-4482-9317-d21390e5a348"
+  Hint: Pattern
+  Value: |
+    <tracking>
+      <profile id="{4F7F3405-9606-495E-8D44-55177A382BB3}" name="Retail Persona">
+        <key name="Televisions" value="1" />
+        <key name="Appliances" value="5" />
+        <key name="Gaming or Subscription" value="0" />
+        <key name="Audio" value="2" />
+      </profile>
+    </tracking>
+- ID: "fe732790-2ddb-4657-a882-c2fce1fbf0c9"
+  Hint: Name
+  Value: Kerry Kitchen Buyer
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161215T135422Z

@@ -184,8 +184,33 @@ Languages:
               <rls>
                 <ruleset>
                   <rule
+                    uid="{CD260325-93E7-4671-9B58-C66D0B482E0D}"
+                    s:name="Kerry">
+                    <conditions>
+                      <and
+                        uid="72DE3A0C5987445B881518A015368998">
+                        <condition
+                          uid="A0A2083AA2E14668A038B0B5FED17213"
+                          s:id="{E00DB4F0-B206-4544-AD90-25D201CFB62C}"
+                          s:ProfileName="Retail Persona"
+                          s:PatternName="Kerry Kitchen Buyer" />
+                        <condition
+                          uid="A8563DF8E31543008EB90F15C3774D3F"
+                          s:id="{4D290FF3-1587-4FEE-AB37-88768766A9D9}"
+                          s:except="true"
+                          s:GoalId="{99D2ABA6-E742-4DAA-8FBD-0F036F3FCDBE}" />
+                      </and>
+                    </conditions>
+                    <actions>
+                      <action
+                        uid="E51ADE35828E457F9545AB2C841E3EEC"
+                        s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
+                        s:DataSource="{0645C6B9-EC76-48C6-9C2F-0314D850B4AD}" />
+                    </actions>
+                  </rule>
+                  <rule
                     uid="{9A2F8B8E-4D6D-4752-A625-BAA0EE4F7C56}"
-                    s:name="Harrison">
+                    s:name="Harry">
                     <conditions>
                       <and
                         uid="34E7EA10230944099D41D00D8BC1B4A6">
@@ -193,7 +218,7 @@ Languages:
                           uid="0C2754402D9F4D8DBFB96B63BEA83506"
                           s:id="{E00DB4F0-B206-4544-AD90-25D201CFB62C}"
                           s:ProfileName="Retail Persona"
-                          s:PatternName="Harrison the Homebuyer" />
+                          s:PatternName="Harry the Homebuyer" />
                         <condition
                           uid="92C7DA8F33C045BEB21B75CDDE8A2D25"
                           s:id="{4D290FF3-1587-4FEE-AB37-88768766A9D9}"

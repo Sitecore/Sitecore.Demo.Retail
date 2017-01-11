@@ -4,6 +4,11 @@ Parent: "2479dc14-604a-4fd3-a2ca-10e6954a95cc"
 Template: "c7d9d293-4ef8-4380-8e10-c4632e729f39"
 Path: /sitecore/content/Storefront/Home/_Local/Product 2
 DB: master
+SharedFields:
+- ID: "e8ab122c-6f54-4d4e-aec6-f81addc558fc"
+  Hint: TeaserLink
+  Value: |
+    <link text="View" linktype="external" url="/shop/Televisions_televisions/HelixSpectra75â4KLEDUltraHDTelevision_6042265" anchor="" target="" />
 Languages:
 - Language: en
   Versions:
