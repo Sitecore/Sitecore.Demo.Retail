@@ -59,7 +59,7 @@ SharedFields:
 - ID: "b36de708-9413-4382-bb53-b944e6d02cfc"
   Hint: Catalogs
   Type: Treelist
-  Value: "{48F34156-2364-4AF0-8241-0D4F037201EF}"
+  Value: "{A890E85A-FE79-4574-9B99-E180A877993A}"
 - ID: "c3c1de9d-8881-47d1-b10f-d4ab17306cd5"
   Hint: Supports Wishlists
   Type: Checkbox
