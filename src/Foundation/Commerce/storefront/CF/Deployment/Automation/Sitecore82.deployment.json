@@ -1,0 +1,103 @@
+{
+  "configRoot": "C:\\SitecorePowerShell\\DeploymentConfigs\\Common",
+  "bypassConfigRoot": false,
+  "includes": [
+    {
+      "file": "\\UtilitiesCommon.config.json"
+    },
+    {
+      "file": "\\SearchProviders.config.json"
+    },
+    {
+      "file": "\\Mongo.config.json"
+    },
+    {
+      "file": "\\DB.config.json"
+    },
+    {
+      "file": "\\DeploymentCommon.config.json"
+    },
+    {
+      "file": "\\ScBase.config.json"
+    },
+    {
+      "file": "\\ScCsBase.config.json"
+    },
+    {
+      "file": "\\CsCore82.config.json"
+    },
+    {
+      "file": "\\Connect82.config.json"
+    },
+    {
+      "file": "\\CsConnect82.config.json"
+    },
+    {
+      "file": "\\CsMerch82.config.json"
+    },
+    {
+      "file": "\\StorefrontCommon82.config.json"
+    },
+    {
+      "file": "\\StorefrontCs82.config.json"
+    },
+    {
+      "file": "\\ScRoles.config.json"
+    },
+    {
+      "file": "\\QaCommon.config.json"
+    }
+  ],
+  "releaseBuild": {
+    "csCore": {
+      "releaseNum": "11.4.74"
+    },
+    "scPlatform": {
+      "version": "8.1",
+      "revision": "160502",
+      "solr": {
+        "version": "1.0.0",
+        "revision": "160502"
+      }
+    },
+    "connect": {
+      "version": "8.2",
+      "revision": "160408",
+      "revisionPath": "20160408.1"
+    },
+    "csConnect": {
+      "version": "8.2.63"
+    },
+    "csMerch": {
+      "version": "8.2.60"
+    },
+    "storefrontCommon": {
+      "version": "###releaseBuild.storefrontCs.version###"
+    },
+    "storefrontCs": {
+      "version": "8.2.111"
+    }
+  },
+  "DB": {
+    "sqlVersion": "12"
+  },
+  "Mongo": {
+    "basePath": "!!!SystemDrive!!!\\MongoDB\\bin"
+  },
+  "deployOptions": {
+    "installHost": "!!!SYSTEMDRIVE!!!",
+    "installName": "CSStoreFrontTest"
+  },
+  "ScBaseConfig": {
+    "InstanceName": "CSRefStoreFront",
+    "ScHostHeaderName": "cs.reference.storefront.com"
+  },
+  "runActions": [
+    {
+      "name": "sfcs-Grp-FullDeploy",
+      "isGroup": true,
+      "bypass": false
+    },
+    {}
+  ]
+}

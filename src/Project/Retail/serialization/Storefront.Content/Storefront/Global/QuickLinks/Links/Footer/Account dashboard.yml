@@ -18,8 +18,8 @@ Languages:
         sitecore\admin
     - ID: "6cb9eb87-680b-4cb9-9946-9baeb553f6b8"
       Hint: Text
-      Value: Account dashboard
+      Value: My Account
     - ID: "b861b1ed-2820-4ad8-b169-8928ac381634"
       Hint: Link
       Value: |
-        <link text="" linktype="internal" class="" title=""  querystring="" id="{441B60D3-09BB-4111-A3AD-D10076B78B54}" />
+        <link text="" anchor="" linktype="internal" class="" title="" target="" querystring="" id="{4D316BBA-345F-4929-9E84-A2208C0F7AA6}" />

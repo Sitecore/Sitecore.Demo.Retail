@@ -27,9 +27,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Reference.Storefro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Reference.Storefront.Common.Settings", "src\Foundation\Commerce\storefront\CommonSettings\Sitecore.Reference.Storefront.Common.Settings.csproj", "{7B5BFDC5-7552-4EF0-807B-D9B60A78B3FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Reference.Storefront.Powered.by.CommerceServer", "src\Foundation\Commerce\storefront\CS\CSF\Sitecore.Reference.Storefront.Powered.by.CommerceServer.csproj", "{304F09AD-2FC3-453F-B016-50A1F842E3A9}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "storefront", "storefront", "{0639A703-FE73-43C9-8F19-5E62FA008BC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Reference.Storefront.Powered.by.SitecoreCommerce", "src\Foundation\Commerce\storefront\CF\CSF\Sitecore.Reference.Storefront.Powered.by.SitecoreCommerce.csproj", "{304F09AD-2FC3-453F-B016-50A1F842E3A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,7 +68,7 @@ Global
 		{662345AC-23EE-4125-87A6-0785795C2409} = {F12F210F-76B3-4142-8AB9-06677BCAED1E}
 		{8450F330-0271-4091-8809-C671CCD50671} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
 		{7B5BFDC5-7552-4EF0-807B-D9B60A78B3FD} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
-		{304F09AD-2FC3-453F-B016-50A1F842E3A9} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
 		{0639A703-FE73-43C9-8F19-5E62FA008BC3} = {F12F210F-76B3-4142-8AB9-06677BCAED1E}
+		{304F09AD-2FC3-453F-B016-50A1F842E3A9} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
 	EndGlobalSection
 EndGlobal

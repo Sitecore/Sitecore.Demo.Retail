@@ -53,7 +53,7 @@ Languages:
       Value: Order Information
     - ID: "37e9811a-b949-4d89-8637-26e8547c7bb8"
       Hint: Apply Gift Card Label
-      Value: Apply gift card
+      Value: Pay with Gift Card
     - ID: "3bb46433-5d5b-4187-b8ca-99a09117f1cb"
       Hint: Billing Name Label
       Value: Billing name
@@ -114,7 +114,7 @@ Languages:
       Value: Enter the information regarding your gift card here
     - ID: "a0531c10-9929-4554-88f9-1199e044142b"
       Hint: Apply Credit Card Label
-      Value: Apply Credit Card
+      Value: Pay with Credit Card
     - ID: "a1237227-60f6-43d5-b9f2-314510e74a03"
       Hint: Address Label
       Value: Address
@@ -152,6 +152,9 @@ Languages:
     - ID: "c84f3978-0801-460f-800d-046a261525b3"
       Hint: Country Label
       Value: Country/Region
+    - ID: "d6e5495f-8f1b-423a-aeef-ed544704cde0"
+      Hint: Validate Payment Label
+      Value: Validate Payment
     - ID: "e375aba1-d631-4c68-b6da-93e7ddf7ca24"
       Hint: Zipcode Label
       Value: Zipcode

@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommerceServer>
+  <Configurations>
+
+    <Configuration identity="Domain.Dev.CSConfig">
+      <Variables>
+        <Variable identity="PROJECT_NAME" value="CFSolutionStorefrontSite" description="" />
+        <Variable identity="DOMAIN_NAME" value="$($Env:COMPUTERNAME)" description="" />
+        <Variable identity="SOLUTION_BASE_DIRECTORY" value="$(Split-Path -Path $DEPLOYMENT_DIRECTORY -Parent)" description="" />
+        <Variable identity="CS_SQL_Server" value="$($Env:COMPUTERNAME)" description="" />
+      </Variables>
+      <UserAccounts>
+        <UserAccount identity="CSStagingServiceUser" fullName="Commerce Server Staging Service User for $($PROJECT_NAME)" domain="$($DOMAIN_NAME)" username="CSStagingUser" password="Pu8azaCr" email="" />
+      </UserAccounts>
+      <CommerceServer identity="$($PROJECT_NAME)">
+        <Configure stagingUser="CSStagingServiceUser" mailerUser="CSMailingServiceUser"/>
+      </CommerceServer>
+    </Configuration>
+
+    <Configuration identity="Domain.Dev.Unpup">
+      <Variables>
+        <Variable identity="PROJECT_NAME" value="CFSolutionStorefrontSite" description="" />
+        <Variable identity="DOMAIN_NAME" value="$($Env:COMPUTERNAME)" description="" />
+        <Variable identity="SOLUTION_BASE_DIRECTORY" value="$(Split-Path -Path $DEPLOYMENT_DIRECTORY -Parent)" description="" />
+        <Variable identity="DATABASE_DIRECTORY" value="$(Join-Path -Path $SOLUTION_BASE_DIRECTORY -ChildPath &quot;database&quot;)" description="" />
+        <Variable identity="INETPUB_DIRECTORY" value="$( Join-Path -Path $Env:SYSTEMDRIVE -ChildPath &quot;inetpub&quot; )" description="" />
+        <Variable identity="WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CFCSServices&quot; )" description="" />
+        <Variable identity="CS_WEBSERVICE_IIS_SITE_NAME" value="CFCSServices" description="" />
+        <Variable identity="CS_WEB_SERVER" value="$($Env:COMPUTERNAME)" description="" />
+        <Variable identity="CS_SQL_Server" value="$($Env:COMPUTERNAME)" description="" />
+        <Variable identity="FoundationService_DIRECTORY" value="$( Join-Path -Path $SOLUTION_BASE_DIRECTORY -ChildPath &quot;Foundation&quot; )" description="" />
+        <Variable identity="EventCreatePath" value="$($Env:SYSTEMROOT)\System32\eventcreate.exe" description="Path to the eventcreate.exe utility" />
+        <Variable identity="REGEDIT_PATH" value="$( Join-Path -Path $Env:SYSTEMROOT -ChildPath &quot;SysWow64\regedit.exe&quot; )" description="" />
+        <Variable identity="REGEDIT_64_PATH" value="$( Join-Path -Path $Env:SYSTEMROOT -ChildPath &quot;regedit.exe&quot; )" description="" />
+        <Variable identity="SQLCMD_PATH" value="SQLCMD.EXE" description="" />
+
+        <Variable identity="ZIP_TOOL" value="$($DEPLOYMENT_DIRECTORY)\packages\DeploymentTools.*\Tools\7z.exe" description="" />
+        <Variable identity="DEPLOY_CONFIG" value="DevDeploy" description="" />
+        <Variable identity="COMMERCESERVICES_DEPENDENCIES_DIRECTORY" value="c:\CommerceServices" />
+
+        <Variable identity="COMMERCE_OPSAPI_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceOps&quot; )" description="" />
+        <Variable identity="COMMERCE_OPSAPI_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceOps" description="" />
+        <Variable identity="COMMERCE_SHOPS_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceShops&quot; )" description="" />
+        <Variable identity="COMMERCE_SHOPS_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceShops" description="" />
+        <Variable identity="COMMERCE_AUTHORING_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceAuthoring&quot; )" description="" />
+        <Variable identity="COMMERCE_AUTHORING_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceAuthoring" description="" />
+        <Variable identity="COMMERCE_MINIONS_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceMinions&quot; )" description="" />
+        <Variable identity="COMMERCE_MINIONS_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceMinions" description="" />
+      </Variables>
+      <Registry>
+        <File path="$($DEPLOYMENT_DIRECTORY)\packages\DeploymentTools.*\Tools\DisableLoopbackCheck.reg"/>
+      </Registry>
+      <UserAccounts>
+        <UserAccount identity="CSRuntimeUser" fullName="Commerce Server web site user for $($PROJECT_NAME)" domain="$($DOMAIN_NAME)" username="CSPrsRuntimeUser" password="Pu8azaCr" email="" />
+        <UserAccount identity="CSFoundationUser" fullName="Commerce Server foundation web service User for $($PROJECT_NAME)" domain="$($DOMAIN_NAME)" username="CSFndRuntimeUser" password="Pu8azaCr" email="" />
+        <UserAccount identity="CSCatalogUser" fullName="Commerce Server Catalog User for $($PROJECT_NAME)" domain="$($DOMAIN_NAME)" username="CSCatalogUser" password="Pu8azaCr" email="" />
+        <UserAccount identity="CSMarketingUser" fullName="Commerce Server Marketing User for $($PROJECT_NAME)" domain="$($DOMAIN_NAME)" username="CSMarketingUser" password="Pu8azaCr" email="" />
+        <UserAccount identity="CSOrdersUser" fullName="Commerce Server Orders User for $($PROJECT_NAME)" domain="$($DOMAIN_NAME)" username="CSOrdersUser" password="Pu8azaCr" email="" />
+        <UserAccount identity="CSProfilesUser" fullName="Commerce Server Profiles User for $($PROJECT_NAME)" domain="$($DOMAIN_NAME)" username="CSProfilesUser" password="Pu8azaCr" email="" />
+      </UserAccounts>
+      <UserGroups>
+        <UserGroup identity="IIS_IUSRS" name="IIS_IUSRS" >
+          <Users>
+            <User userAccountIdentity="CSRuntimeUser" />
+            <User userAccountIdentity="CSFoundationUser" />
+            <User userAccountIdentity="CSCatalogUser" />
+            <User userAccountIdentity="CSMarketingUser" />
+            <User userAccountIdentity="CSOrdersUser" />
+            <User userAccountIdentity="CSProfilesUser" />
+          </Users>
+        </UserGroup>
+      </UserGroups>
+      <Events>
+        <Definition EventSource="Commerce Server" />
+        <Definition EventSource="Commerce Server Business UI" />
+        <Definition EventSource="Commerce Server Catalog" />
+        <Definition EventSource="Commerce Server List Manager" />
+        <Definition EventSource="Commerce Server Orders" />
+        <Definition EventSource="Commerce Server Promotion Code Generator" />
+        <Definition EventSource="Commerce Server Staging" />
+        <Definition EventSource="Commerce Server Web Services" />
+        <Definition EventSource="Commerce Services Exceptions" />
+      </Events>
+      <Folders>
+        <Folder identity="Temp" path="c:\windows\temp">
+          <UserAccounts>
+            <UserAccount userAccountIdentity="CSRuntimeUser" />
+            <UserAccount userAccountIdentity="CSFoundationUser" />
+            <UserAccount userAccountIdentity="CSCatalogUser" />
+            <UserAccount userAccountIdentity="CSMarketingUser" />
+            <UserAccount userAccountIdentity="CSOrdersUser" />
+            <UserAccount userAccountIdentity="CSProfilesUser" />
+          </UserAccounts>
+        </Folder>
+      </Folders>
+      <IIS>
+        <ApplicationPools>
+          <ApplicationPool name="CFCSServices" userAccountIdentity="CSFoundationUser" create="true" fullName="$($CS_WEBSERVICE_IIS_SITE_NAME)" framework="v4.0" />
+          <ApplicationPool name="CFCSCatalogWebService" userAccountIdentity="CSCatalogUser" create="true" fullName="$($PROJECT_NAME)AppPool_Catalog" framework="v4.0" />
+          <ApplicationPool name="CFCSProfilesWebService" userAccountIdentity="CSProfilesUser" create="true" fullName="$($PROJECT_NAME)AppPool_Profiles" framework="v4.0" />
+		  
+          <!-- <ApplicationPool name="CommerceServices" userAccountIdentity="CSFoundationUser" create="true" fullName="$($COMMERCESERVICES_WEBSERVICE_IIS_SITE_NAME)" framework="v4.0" /> -->
+        </ApplicationPools>
+        <Websites>
+          <Website identity="CFCSServices" serverName="$($Env:COMPUTERNAME)" port="1004" path="$($WS_DIRECTORY)" url="http://$($Env:COMPUTERNAME):1004/" create="true" deleteIfExists="false" protocol="http" applicationPool="CFCSServices">
+            <VirtualDirectories>
+              <VirtualDirectory identity="$($PROJECT_NAME)_CatalogWebService" applicationPool="CFCSCatalogWebService" path="$($WS_DIRECTORY)\$($PROJECT_NAME)_CatalogWebService" create="true" deleteIfExists="true"/>
+              <VirtualDirectory identity="$($PROJECT_NAME)_ProfilesWebService" applicationPool="CFCSProfilesWebService" path="$($WS_DIRECTORY)\$($PROJECT_NAME)_ProfilesWebService" create="true" deleteIfExists="true"/>
+            </VirtualDirectories>
+          </Website>
+          <!--<Website identity="CommerceServices" serverName="$($Env:COMPUTERNAME)" port="5000" path="$($COMMERCESERVICES_WS_DIRECTORY)" url="http://$($Env:COMPUTERNAME):5000/" create="true" deleteIfExists="false" protocol="http" applicationPool="CommerceServices">
+          </Website>-->
+        </Websites>
+      </IIS>
+      <CommerceServer identity="$($PROJECT_NAME)">
+        <SetupSite siteName="$($PROJECT_NAME)" catalogAzmanFile="$($WS_DIRECTORY)\$($PROJECT_NAME)_CatalogWebService\CatalogAuthorizationStore.xml"/>
+        <Schemas>
+          <Catalog path="$( Join-Path -Path $DATABASE_DIRECTORY -ChildPath &quot;Catalog\Catalog.xml&quot; )" replace="true" transacted="true" allowSchemaUpdate="true">
+            <AzManFile path="$($WS_DIRECTORY)\$($PROJECT_NAME)_CatalogWebService\CatalogAuthorizationStore.xml"/>
+          </Catalog>
+          <Inventory path="$( Join-Path -Path $DATABASE_DIRECTORY -ChildPath &quot;Inventory\Inventory.xml&quot; )"/>
+          <Profiles path="$( Join-Path -Path $DATABASE_DIRECTORY -ChildPath &quot;Profiles\Profiles.xml&quot; )" />
+          <Marketing path="$( Join-Path -Path $DATABASE_DIRECTORY -ChildPath &quot;Marketing\Marketing.xml&quot; )" />
+          <Orders path="$( Join-Path -Path $DATABASE_DIRECTORY -ChildPath &quot;Orders\Orders.xml&quot; )" />
+          <OrdersConfig path="$( Join-Path -Path $DATABASE_DIRECTORY -ChildPath &quot;Orders\OrdersConfig.xml&quot; )" />
+        </Schemas>
+        <Databases>
+          <Database identity="CSMaster" serverName="$($Env:COMPUTERNAME)" databaseName="master" />
+        </Databases>
+        <DatabaseScripts>
+          <DatabaseScript identity="" databaseIdentity="CSMaster" path="$(Join-Path -Path $DATABASE_DIRECTORY -ChildPath &quot;Security\CommerceServer_Security.sql&quot;)" />
+          <!-- <DatabaseScript identity="" databaseIdentity="CSMaster" path="$(Join-Path -Path $DATABASE_DIRECTORY -ChildPath &quot;CommerceServices\CommerceServicesDbScript.sql&quot;)" /> -->
+        </DatabaseScripts>
+        <Dacpacs>
+          <Dacpac database="Profiles" path="$( Join-Path -Path $DATABASE_DIRECTORY -ChildPath &quot;Profiles\Commerce.Storefront.ProfileDatabase.dacpac&quot; )" />
+        </Dacpacs>
+      </CommerceServer>
+    </Configuration>
+
+    <Configuration identity="Domain.Dev.Existing">
+      <!-- Variables are read in before all other items to ensure they are defined before the rest of the file is read in. -->
+      <Variables>
+        <Variable identity="PROJECT_NAME" value="CFSolutionStorefrontSite" description="" />
+
+        <!--
+			This is already defined in the script as the location of the script file.
+			If you override this, it MUST be a physical path.
+			-->
+        <!--<Variable identity="DEPLOYMENT_DIRECTORY" value="" description="" />-->
+        <Variable identity="SOLUTION_BASE_DIRECTORY" value="$(Split-Path -Path $DEPLOYMENT_DIRECTORY -Parent)" description="" />
+        <Variable identity="DATABASE_DIRECTORY" value="$(Join-Path -Path $SOLUTION_BASE_DIRECTORY -ChildPath &quot;database&quot;)" description="" />
+        <Variable identity="DOMAIN_NAME" value="$($Env:COMPUTERNAME)" description="" />
+        <Variable identity="CURRENT_USER_NAME" value="$($Env:USERNAME)" description="" />
+        <Variable identity="CURRENT_USER_DOMAIN" value="$($Env:USERDOMAIN)" description="" />
+        <Variable identity="AUTHORIZE_CURRENT_USER" value="$($true)" description="" />
+        <Variable identity="CS_WEBSERVICE_IIS_SITE_NAME" value="CFCSServices" description="" />
+        <Variable identity="FX20_PATH" value="C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727" description="" />
+        <Variable identity="WINSDK_DIRECTORY" value="C:\Program Files\Microsoft SDKs\Windows\v6.0A\Bin" description="" />
+        <Variable identity="RESGEN_PATH" value="$( Join-Path -Path $SOLUTION_BASE_DIRECTORY -ChildPath &quot;Deployment\resgen.exe&quot; )" description="" />
+        <Variable identity="MSBUILD_PATH" value="C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe" description="" />
+        <Variable identity="SQLCMD_PATH" value="SQLCMD.EXE" description="" />
+        <Variable identity="APPCMD_PATH" value="$( Join-Path -Path $Env:SYSTEMROOT -ChildPath &quot;system32\inetsrv\APPCMD.exe&quot; )" description="" />
+        <Variable identity="REGASM_PATH" value="$( Join-Path -Path $Env:SYSTEMROOT -ChildPath &quot;\Microsoft.NET\Framework\v2.0.50727\RegAsm.exe&quot; )" description="" />
+        <Variable identity="REGASM_64_PATH" value="$( Join-Path -Path $Env:SYSTEMROOT -ChildPath &quot;\Microsoft.NET\Framework64\v2.0.50727\RegAsm.exe&quot; )" description="" />
+        <Variable identity="REGEDIT_PATH" value="$( Join-Path -Path $Env:SYSTEMROOT -ChildPath &quot;SysWow64\regedit.exe&quot; )" description="" />
+        <Variable identity="REGEDIT_64_PATH" value="$( Join-Path -Path $Env:SYSTEMROOT -ChildPath &quot;regedit.exe&quot; )" description="" />
+        <Variable identity="INETPUB_DIRECTORY" value="$( Join-Path -Path $Env:SYSTEMDRIVE -ChildPath &quot;inetpub&quot; )" description="" />
+        <Variable identity="WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CFCSServices&quot; )" description="" />
+        <Variable identity="FoundationService_DIRECTORY" value="$( Join-Path -Path $SOLUTION_BASE_DIRECTORY -ChildPath &quot;Foundation&quot; )" description="" />
+        <Variable identity="MVCSite_DIRECTORY" value="$( Join-Path -Path $SOLUTION_BASE_DIRECTORY -ChildPath &quot;MVCSiteTemplate&quot; )" description="" />
+        <Variable identity="MVCSite_UrlDomain" value="mvc.local" description="" />
+        <Variable identity="CS_DB_Folder" value="C:\Program Files\Microsoft SQL Server\CSDatabases\" description="" />
+        <Variable identity="MAKE_CERT" value="$($DEPLOYMENT_DIRECTORY)\packages\DeploymentTools.*\Tools\makecert.exe" description="" />
+        <Variable identity="IMPORT_INVENTORY" value="$($DEPLOYMENT_DIRECTORY)\packages\DeploymentTools.*\Tools\ImportInventory.exe" description="" />
+        <Variable identity="ZIP_TOOL" value="$($DEPLOYMENT_DIRECTORY)\packages\DeploymentTools.*\Tools\7z.exe" description="" />
+
+        <!-- Sitecore needs a local SQL user account with admin rights, you must change the below values or if you wish to use trusted connections, set the trusted value to be true -->
+        <Variable identity="trustedSQLConnection" value="$($true)" description="" />
+        <!-- Set the value below if you are not using trusted connections for sql -->
+        <Variable identity="sql_server_data_source" value="$($Env:COMPUTERNAME)" description="" />
+        <Variable identity="sql_user_name" value="sa" description="" />
+        <Variable identity="sql_user_password" value="Admin-1" description="" />
+
+        <Variable identity="mvcSupport" value="$($true)" description="" />
+        <Variable identity="launchSitecore" value="$($false)" description="" />
+        <Variable identity="instanceName" value="CFRefStorefront" description="" />
+        <Variable identity="installDir" value="$(Join-Path -Path $INETPUB_DIRECTORY -ChildPath $instanceName)" description="" />
+        <Variable identity="SitecorePort" value="7669" description="" />
+        <Variable identity="scHostHeaderName" value="cf.reference.storefront.com" description="" />
+
+        <Variable identity="SitecoreDataFolder" value="$( Join-Path -Path $installDir -ChildPath &quot;Data&quot; )" description="" />
+        <Variable identity="SitecoreWebsiteFolder" value="$( Join-Path -Path $installDir -ChildPath &quot;Website&quot; )" description="" />
+        <Variable identity="SitecoreDBFolder" value="$( Join-Path -Path $installDir -ChildPath &quot;Database&quot; )" description="" />
+        <Variable identity="SitecoreDB_MDF_Folder" value="$( Join-Path -Path $SitecoreDBFolder -ChildPath &quot;MDF&quot; )" description="" />
+        <Variable identity="SitecoreDB_LDF_Folder" value="$( Join-Path -Path $SitecoreDBFolder -ChildPath &quot;LDF&quot; )" description="" />
+        <Variable identity="SitecoreAppConfigIncFolder" value="$( Join-Path -Path $SitecoreWebsiteFolder -ChildPath &quot;App_Config\Include&quot; )" description="" />
+
+        <Variable identity="Sitecore_DB_Core_Name" value="$($instanceName)Sitecore_Core" description="" />
+        <Variable identity="Sitecore_DB_Master_Name" value="$($instanceName)Sitecore_Master" description="" />
+        <Variable identity="Sitecore_DB_Web_Name" value="$($instanceName)Sitecore_Web" description="" />
+        <Variable identity="Sitecore_DB_DMS_Name" value="$($instanceName)Sitecore_Analytics" description="" />
+
+        <Variable identity="MONGO_EXE_PATH" value="C:\MongoDB" description="MongoDB Installation path" />
+        <Variable identity="Sitecore_MONGODB_Analytics_Name" value="$($instanceName)analytics" description="" />
+        <Variable identity="Sitecore_MONGODB_History_Name" value="$($instanceName)tracking_history" description="" />
+        <Variable identity="Sitecore_MONGODB_Live_Name" value="$($instanceName)tracking_live" description="" />
+
+        <Variable identity="COMMERCESERVICES_DEPENDENCIES_DIRECTORY" value="c:\CommerceServices" />
+
+        <Variable identity="COMMERCE_OPSAPI_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceOps&quot; )" description="" />
+        <Variable identity="COMMERCE_OPSAPI_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceOps" description="" />
+        <Variable identity="COMMERCE_SHOPS_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceShops&quot; )" description="" />
+        <Variable identity="COMMERCE_SHOPS_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceShops" description="" />
+        <Variable identity="COMMERCE_AUTHORING_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceAuthoring&quot; )" description="" />
+        <Variable identity="COMMERCE_AUTHORING_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceAuthoring" description="" />
+        <Variable identity="COMMERCE_MINIONS_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceMinions&quot; )" description="" />
+        <Variable identity="COMMERCE_MINIONS_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceMinions" description="" />
+      </Variables>
+
+      <IIS>
+        <ApplicationPools>
+          <!-- App pool to run as, will be created if not present -->
+          <ApplicationPool name="FoundationService" userAccountIdentity="CSFoundationUser" create="true" fullName="$($PROJECT_NAME)AppPool_Foundation" framework="v4.0" />
+        </ApplicationPools>
+        <Websites>
+          <Website identity="$($instanceName)" create="false" deleteIfExists="false" changeAppPool="true" applicationPool="FoundationService">
+          </Website>
+        </Websites>
+      </IIS>
+
+      <Folders>
+        <Folder identity="DataFolder" path="$($SitecoreDataFolder)">
+          <UserAccounts>
+            <UserAccount userAccountIdentity="CSFoundationUser" />
+          </UserAccounts>
+        </Folder>
+        <Folder identity="WebsiteFolder" path="$($SitecoreWebsiteFolder)">
+          <UserAccounts>
+            <UserAccount userAccountIdentity="CSFoundationUser" />
+          </UserAccounts>
+        </Folder>
+      </Folders>
+
+      <Registry>
+        <File path="$($DEPLOYMENT_DIRECTORY)\packages\DeploymentTools.*\Tools\increaseWebConfigSize.reg"/>
+      </Registry>
+
+      <UserAccounts>
+        <UserAccount identity="CSFoundationUser" fullName="Commerce Server foundation User for $($PROJECT_NAME)" domain="$($DOMAIN_NAME)" username="CSFndRuntimeUser" password="Pu8azaCr" email="" />
+      </UserAccounts>
+
+      <Sitecore identity="$($PROJECT_NAME)">
+        <Databases>
+          <Database identity="CSMaster" serverName="$($Env:COMPUTERNAME)" databaseName="master" />
+        </Databases>
+        <DatabaseScripts>
+          <DatabaseScript identity="" databaseIdentity="CSMaster" path="$(Join-Path -Path $DATABASE_DIRECTORY -ChildPath &quot;Security\SC_Security.sql&quot;)" />
+        </DatabaseScripts>
+      </Sitecore>
+    </Configuration>
+
+    <Configuration identity="Domain.Dev.Merge">
+      <!-- Variables are read in before all other items to ensure they are defined before the rest of the file is read in. -->
+      <Variables>
+        <Variable identity="SOLUTION_BASE_DIRECTORY" value="$(Split-Path -Path $DEPLOYMENT_DIRECTORY -Parent)" description="" />
+        <Variable identity="MERGE_TOOL" value="$($DEPLOYMENT_DIRECTORY)\packages\DeploymentTools.*\Tools\CSSiteCoreWebConfigMerger.exe" description="" />
+
+        <Variable identity="DATABASE_DIRECTORY" value="$(Join-Path -Path $SOLUTION_BASE_DIRECTORY -ChildPath &quot;database&quot;)" description="" />
+
+        <Variable identity="INETPUB_DIRECTORY" value="$( Join-Path -Path $Env:SYSTEMDRIVE -ChildPath &quot;inetpub&quot; )" description="" />
+
+        <Variable identity="instanceName" value="CFRefStorefront" description="" />
+        <Variable identity="installDir" value="$(Join-Path -Path $INETPUB_DIRECTORY -ChildPath $instanceName)" description="" />
+
+        <Variable identity="SitecoreWebsiteFolder" value="$( Join-Path -Path $installDir -ChildPath &quot;Website&quot; )" description="" />
+        <Variable identity="MainWebConfig" value="$( Join-Path -Path $SitecoreWebsiteFolder -ChildPath &quot;web.config&quot; )" description="" />
+        <Variable identity="ViewsWebConfig" value="$( Join-Path -Path $SitecoreWebsiteFolder -ChildPath &quot;Views\web.config&quot; )" description="" />
+
+        <Variable identity="SitecoreDomainsFolder" value="$( Join-Path -Path $SitecoreWebsiteFolder -ChildPath &quot;App_Config\Security&quot; )" description="" />
+        <Variable identity="MainDomainsConfig" value="$( Join-Path -Path $SitecoreDomainsFolder -ChildPath &quot;domains.config&quot; )" description="" />
+
+        <Variable identity="COMMERCESERVICES_DEPENDENCIES_DIRECTORY" value="c:\CommerceServices" />
+
+        <Variable identity="COMMERCE_OPSAPI_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceOps&quot; )" description="" />
+        <Variable identity="COMMERCE_OPSAPI_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceOps" description="" />
+        <Variable identity="COMMERCE_SHOPS_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceShops&quot; )" description="" />
+        <Variable identity="COMMERCE_SHOPS_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceShops" description="" />
+        <Variable identity="COMMERCE_AUTHORING_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceAuthoring&quot; )" description="" />
+        <Variable identity="COMMERCE_AUTHORING_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceAuthoring" description="" />
+        <Variable identity="COMMERCE_MINIONS_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceMinions&quot; )" description="" />
+        <Variable identity="COMMERCE_MINIONS_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceMinions" description="" />
+
+      </Variables>
+
+      <Sitecore>
+        <MergeFiles>
+          <File in="$( Join-Path -Path $SitecoreWebsiteFolder -ChildPath &quot;MergeFiles\Merge.CommerceServer.config&quot; )" out="$MainWebConfig"/>
+          <File in="$( Join-Path -Path $SitecoreWebsiteFolder -ChildPath &quot;MergeFiles\Merge.Commerce.Storefront.config&quot; )" out="$MainWebConfig"/>
+          <File in="$( Join-Path -Path $SitecoreWebsiteFolder -ChildPath &quot;MergeFiles\Views\Merge.Web.config&quot; )" out="$ViewsWebConfig"/>
+        </MergeFiles>
+      </Sitecore>
+
+    </Configuration>
+
+    <Configuration identity="Domain.Dev.SC">
+      <!-- Variables are read in before all other items to ensure they are defined before the rest of the file is read in. -->
+      <Variables>
+        <Variable identity="PROJECT_NAME" value="CFSolutionStorefrontSite" description="" />
+
+        <!--
+			This is already defined in the script as the location of the script file.
+			If you override this, it MUST be a physical path.
+			-->
+        <!--<Variable identity="DEPLOYMENT_DIRECTORY" value="" description="" />-->
+        <Variable identity="SOLUTION_BASE_DIRECTORY" value="$(Split-Path -Path $DEPLOYMENT_DIRECTORY -Parent)" description="" />
+        <Variable identity="DATABASE_DIRECTORY" value="$(Join-Path -Path $SOLUTION_BASE_DIRECTORY -ChildPath &quot;database&quot;)" description="" />
+        <Variable identity="DOMAIN_NAME" value="$($Env:COMPUTERNAME)" description="" />
+        <Variable identity="CURRENT_USER_NAME" value="$($Env:USERNAME)" description="" />
+        <Variable identity="CURRENT_USER_DOMAIN" value="$($Env:USERDOMAIN)" description="" />
+        <Variable identity="AUTHORIZE_CURRENT_USER" value="$($true)" description="" />
+        <Variable identity="CS_WEBSERVICE_IIS_SITE_NAME" value="CFCSServices" description="" />
+        <Variable identity="FX20_PATH" value="C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727" description="" />
+        <Variable identity="WINSDK_DIRECTORY" value="C:\Program Files\Microsoft SDKs\Windows\v6.0A\Bin" description="" />
+        <Variable identity="RESGEN_PATH" value="$( Join-Path -Path $SOLUTION_BASE_DIRECTORY -ChildPath &quot;Deployment\resgen.exe&quot; )" description="" />
+        <Variable identity="MSBUILD_PATH" value="C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe" description="" />
+        <Variable identity="SQLCMD_PATH" value="SQLCMD.EXE" description="" />
+        <Variable identity="APPCMD_PATH" value="$( Join-Path -Path $Env:SYSTEMROOT -ChildPath &quot;system32\inetsrv\APPCMD.exe&quot; )" description="" />
+        <Variable identity="REGASM_PATH" value="$( Join-Path -Path $Env:SYSTEMROOT -ChildPath &quot;\Microsoft.NET\Framework\v2.0.50727\RegAsm.exe&quot; )" description="" />
+        <Variable identity="REGASM_64_PATH" value="$( Join-Path -Path $Env:SYSTEMROOT -ChildPath &quot;\Microsoft.NET\Framework64\v2.0.50727\RegAsm.exe&quot; )" description="" />
+        <Variable identity="REGEDIT_PATH" value="$( Join-Path -Path $Env:SYSTEMROOT -ChildPath &quot;SysWow64\regedit.exe&quot; )" description="" />
+        <Variable identity="REGEDIT_64_PATH" value="$( Join-Path -Path $Env:SYSTEMROOT -ChildPath &quot;regedit.exe&quot; )" description="" />
+        <Variable identity="INETPUB_DIRECTORY" value="$( Join-Path -Path $Env:SYSTEMDRIVE -ChildPath &quot;inetpub&quot; )" description="" />
+        <Variable identity="WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CFCSServices&quot; )" description="" />
+        <Variable identity="FoundationService_DIRECTORY" value="$( Join-Path -Path $SOLUTION_BASE_DIRECTORY -ChildPath &quot;Foundation&quot; )" description="" />
+        <Variable identity="MVCSite_DIRECTORY" value="$( Join-Path -Path $SOLUTION_BASE_DIRECTORY -ChildPath &quot;MVCSiteTemplate&quot; )" description="" />
+        <Variable identity="MVCSite_UrlDomain" value="mvc.local" description="" />
+        <Variable identity="CS_DB_Folder" value="C:\Program Files\Microsoft SQL Server\CSDatabases\" description="" />
+        <Variable identity="MAKE_CERT" value="$($DEPLOYMENT_DIRECTORY)\packages\DeploymentTools.*\Tools\makecert.exe" description="" />
+        <Variable identity="IMPORT_INVENTORY" value="$($DEPLOYMENT_DIRECTORY)\packages\DeploymentTools.*\Tools\ImportInventory.exe" description="" />
+        <Variable identity="ZIP_TOOL" value="$($DEPLOYMENT_DIRECTORY)\packages\DeploymentTools.*\Tools\7z.exe" description="" />
+
+        <!-- To install the sitecore zip, you must change the following 2 variables to match your locations -->
+        <Variable identity="sitecoreZip" value="$($DEPLOYMENT_DIRECTORY)\packages\SitecorePackage.*\content\Sitecore*.zip" description="Location of the Sitecore zip install package" />
+        <Variable identity="licenseFile" value="$($DEPLOYMENT_DIRECTORY)\License\license.xml" description="Location of your Sitecore license file" />
+        <Variable identity="tdsDir" value="$($DEPLOYMENT_DIRECTORY)\packages\TDSDevIntegration.*\content" description="Location of the TDS files." />
+
+        <!-- Sitecore needs a local SQL user account with admin rights, you must change the below values or if you wish to use trusted connections, set the trusted value to be true -->
+        <Variable identity="trustedSQLConnection" value="$($true)" description="" />
+        <!-- Set the value below if you are not using trusted connections for sql -->
+        <Variable identity="sql_server_data_source" value="$($Env:COMPUTERNAME)" description="" />
+        <Variable identity="sql_user_name" value="sa" description="" />
+        <Variable identity="sql_user_password" value="Admin-1" description="" />
+
+        <Variable identity="mvcSupport" value="$($true)" description="" />
+        <Variable identity="launchSitecore" value="$($false)" description="" />
+        <Variable identity="instanceName" value="CFRefStorefront" description="" />
+        <Variable identity="installDir" value="$(Join-Path -Path $INETPUB_DIRECTORY -ChildPath $instanceName)" description="" />
+        <Variable identity="SitecorePort" value="7669" description="" />
+        <Variable identity="scHostHeaderName" value="cf.reference.storefront.com" description="" />
+
+        <Variable identity="SitecoreDataFolder" value="$( Join-Path -Path $installDir -ChildPath &quot;Data&quot; )" description="" />
+        <Variable identity="SitecoreWebsiteFolder" value="$( Join-Path -Path $installDir -ChildPath &quot;Website&quot; )" description="" />
+        <Variable identity="SitecoreDBFolder" value="$( Join-Path -Path $installDir -ChildPath &quot;Databases&quot; )" description="" />
+        <Variable identity="SitecoreDB_MDF_Folder" value="$( Join-Path -Path $SitecoreDBFolder -ChildPath &quot;MDF&quot; )" description="" />
+        <Variable identity="SitecoreDB_LDF_Folder" value="$( Join-Path -Path $SitecoreDBFolder -ChildPath &quot;LDF&quot; )" description="" />
+        <Variable identity="SitecoreAppConfigIncFolder" value="$( Join-Path -Path $SitecoreWebsiteFolder -ChildPath &quot;App_Config\Include&quot; )" description="" />
+
+        <Variable identity="Sitecore_DB_Core_Name" value="$($instanceName)Sitecore_Core" description="" />
+        <Variable identity="Sitecore_DB_Master_Name" value="$($instanceName)Sitecore_Master" description="" />
+        <Variable identity="Sitecore_DB_Web_Name" value="$($instanceName)Sitecore_Web" description="" />
+        <Variable identity="Sitecore_DB_DMS_Name" value="$($instanceName)Sitecore_Analytics" description="reporting db" />
+
+        <Variable identity="DYNAMICS_RETAIL_DIRECTORY" value="$(Split-Path -Path $SOLUTION_BASE_DIRECTORY -Parent)" description="" />
+
+        <Variable identity="MONGO_EXE_PATH" value="C:\MongoDB" description="MongoDB Installation path" />
+        <Variable identity="Sitecore_MONGODB_Analytics_Name" value="$($instanceName)analytics" description="" />
+        <Variable identity="Sitecore_MONGODB_History_Name" value="$($instanceName)tracking_history" description="" />
+        <Variable identity="Sitecore_MONGODB_Live_Name" value="$($instanceName)tracking_live" description="" />
+
+        <Variable identity="COMMERCESERVICES_DEPENDENCIES_DIRECTORY" value="c:\CommerceServices" />
+
+        <Variable identity="COMMERCE_OPSAPI_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceOps&quot; )" description="" />
+        <Variable identity="COMMERCE_OPSAPI_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceOps" description="" />
+        <Variable identity="COMMERCE_SHOPS_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceShops&quot; )" description="" />
+        <Variable identity="COMMERCE_SHOPS_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceShops" description="" />
+        <Variable identity="COMMERCE_AUTHORING_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceAuthoring&quot; )" description="" />
+        <Variable identity="COMMERCE_AUTHORING_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceAuthoring" description="" />
+        <Variable identity="COMMERCE_MINIONS_SERVICES_WS_DIRECTORY" value="$( Join-Path -Path $INETPUB_DIRECTORY -ChildPath &quot;CommerceMinions&quot; )" description="" />
+        <Variable identity="COMMERCE_MINIONS_SERVICES_WEBSERVICE_IIS_SITE_NAME" value="CommerceMinions" description="" />
+
+      </Variables>
+      <Registry>
+        <File path="$($DEPLOYMENT_DIRECTORY)\packages\DeploymentTools.*\Tools\increaseWebConfigSize.reg"/>
+      </Registry>
+      <SitecoreInstall installTds="true">
+        <Install identity="$($instanceName)" />
+        <!-- IIS Settings for the Sitecore install -->
+        <IIS>
+          <!-- App pool to run as, will be created if not present -->
+          <ApplicationPool name="FoundationService" userAccountIdentity="CSFoundationUser" create="true" fullName="$($PROJECT_NAME)AppPool_Foundation" framework="v4.0" />
+          <Certificates>
+            <Certificate identity="$($scHostHeaderName)" selfSigned="true" />
+          </Certificates>
+          <WebBindings>
+            <WebBinding webApplicationIdentity="$($instanceName)" port="80" hostheader="$($scHostHeaderName)" protocol="http" ip="*" certificate="" />
+            <WebBinding webApplicationIdentity="$($instanceName)" port="443" hostheader="$($scHostHeaderName)" protocol="https" ip="*" certificate="$($scHostHeaderName)" />
+            <WebBinding webApplicationIdentity="$($instanceName)" port="$($SitecorePort)" hostheader="localhost" protocol="http" ip="*" certificate="" />
+          </WebBindings>
+        </IIS>
+      </SitecoreInstall>
+      <Sitecore identity="$($PROJECT_NAME)">
+        <Databases>
+          <Database identity="CSMaster" serverName="$($Env:COMPUTERNAME)" databaseName="master" />
+        </Databases>
+        <DatabaseScripts>
+          <DatabaseScript identity="" databaseIdentity="CSMaster" path="$(Join-Path -Path $DATABASE_DIRECTORY -ChildPath &quot;Security\SC_Security.sql&quot;)" />
+        </DatabaseScripts>
+      </Sitecore>
+      <UserAccounts>
+        <UserAccount identity="CSFoundationUser" fullName="Commerce Server foundation User for $($PROJECT_NAME)" domain="$($DOMAIN_NAME)" username="CSFndRuntimeUser" password="Pu8azaCr" email="" />
+      </UserAccounts>
+    </Configuration>
+  </Configurations>
+</CommerceServer>

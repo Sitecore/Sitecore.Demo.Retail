@@ -1,0 +1,15 @@
+﻿---
+ID: "a2f149d2-72ce-42b9-8633-76aaa051fc15"
+Parent: "4f7f3405-9606-495e-8d44-55177a382bb3"
+Template: "1ad02405-7207-4962-ba96-6d6c3ba30ba7"
+Path: /sitecore/system/Marketing Control Panel/Profiles/Retail Persona/Profile Cards
+DB: master
+BranchID: "07624a03-bb2f-45d8-abe1-15e2b1705ff3"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161215T134045Z

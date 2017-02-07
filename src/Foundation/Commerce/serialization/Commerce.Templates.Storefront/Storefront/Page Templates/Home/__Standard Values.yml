@@ -9,6 +9,15 @@ SharedFields:
   Hint: Use Index File For Product Status In Lists
   Type: Checkbox
   Value: 1
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: |
+    {843FE5E3-63C2-48D6-8FEB-BAB096B9715E}
+    {4EF6D34C-A2F9-41B1-AC57-EDB94DF4B725}
+    {B2BE0A70-179C-4BB2-86EB-D7C6189F5584}
+    {1295278C-7061-4BED-8C87-43372499F61B}
+    {97E55781-EB1C-42AC-AE73-9EDA64A2CE74}
 - ID: "359f8db3-9a61-4b19-b568-8942518b2af6"
   Hint: No Datasource Item
   Value: /sitecore/content/Storefront/Global/Site Spots/No Datasource
@@ -119,25 +128,25 @@ SharedFields:
           ph="/footer/section"
           uid="{10AD0FB9-D152-4C52-A418-B79B0E59EEC1}" />
         <r
-          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
+          ds="{4279B055-6B9C-4F96-9179-81EC406EFDDD}"
           id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
           ph="/footer/section/col-narrow-1"
           uid="{B890088A-5710-4DB9-A38B-47200892680D}" />
         <r
-          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
+          ds="{679E0D22-BD89-4900-B34E-DFDD878A6810}"
           id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
           ph="/footer/section/col-narrow-2"
-          uid="{7F785393-FAC9-4B70-B398-C095F5FABB5B}" />
+          uid="{D716BD68-1E09-49DB-985C-B433F28E16AA}" />
         <r
-          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
+          ds="{C11CB1D5-CA7A-47B0-9376-39028B9BB07A}"
           id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
           ph="/footer/section/col-narrow-3"
-          uid="{D19920BE-D66A-4ECB-B8D2-F77D711D8715}" />
+          uid="{9114B964-EF0B-46EC-BBA2-3DF7A1006476}" />
         <r
-          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
+          ds="{63E42451-AD63-4CDE-934E-9E039B9422C5}"
           id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
           ph="/footer/section/col-narrow-4"
-          uid="{33222378-0DB5-48D8-A533-0064A4611AB4}" />
+          uid="{A98777A7-7DD0-4EE7-9DC6-0396C41A427F}" />
         <r
           id="{7DAE9F23-890F-4E06-99A7-CCEDB74D3D8E}"
           ph="postfooter"

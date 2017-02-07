@@ -9,10 +9,26 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r>
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <d
+        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
+        l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+        <r
+          id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
+          ph="middle"
+          uid="{7475AC75-881B-4D0B-8741-EDD9757FE324}" />
+        <r
+          id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
+          ph="middle"
+          uid="{490D3EE0-869C-4BDC-97DF-09164FEAF057}" />
+      </d>
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
+        <r
+          id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
+          ph="/footer/section"
+          uid="{E310B610-B011-4730-B6F4-2E7E64DBED13}" />
         <r
           id="{E7AE3F87-CF66-40F2-A9F5-33ECF08BC777}"
           ph="head"
@@ -85,34 +101,11 @@ SharedFields:
           ph="/page-layout/section"
           uid="{A2436EA4-5CE4-46DD-8EDC-E78F42234849}" />
         <r
+          ds="{F6504124-F766-43D0-824B-EB339CAE8E5F}"
           id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"
+          par=""
           ph="footer"
           uid="{B37C3697-CCC2-46F1-B25A-B01A5D08439D}" />
-        <r
-          id="{DE648E12-A568-4919-802E-A688EBC9B9F3}"
-          par="UseStaticPlaceholderNames=1"
-          ph="/footer/section"
-          uid="{699CDA2E-F13A-41A3-8EAE-C8D62CC48EF5}" />
-        <r
-          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
-          id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
-          ph="/footer/section/col-narrow-1"
-          uid="{92335FA0-A187-45E3-BD5A-49F4543CAA91}" />
-        <r
-          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
-          id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
-          ph="/footer/section/col-narrow-2"
-          uid="{3C1536EA-92CD-4D0D-B0AE-8E588CB5113C}" />
-        <r
-          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
-          id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
-          ph="/footer/section/col-narrow-3"
-          uid="{6B1077FE-5642-458E-B93D-E29706C34AC3}" />
-        <r
-          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
-          id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
-          ph="/footer/section/col-narrow-4"
-          uid="{AB6DF3C0-4B85-431A-A490-96EC7B93B914}" />
         <r
           id="{7DAE9F23-890F-4E06-99A7-CCEDB74D3D8E}"
           ph="postfooter"
@@ -121,18 +114,6 @@ SharedFields:
           id="{CED18F24-62C2-445E-B0D9-045E3325297B}"
           ph="page-sidebar"
           uid="{A381BB70-77E1-44FF-A40E-7AA12AB4AB66}" />
-      </d>
-      <d
-        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-        l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
-        <r
-          id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
-          ph="middle"
-          uid="{7475AC75-881B-4D0B-8741-EDD9757FE324}" />
-        <r
-          id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
-          ph="middle"
-          uid="{490D3EE0-869C-4BDC-97DF-09164FEAF057}" />
       </d>
     </r>
 - ID: "fd4e2050-186c-4375-8b99-e8a85dd7436e"
@@ -188,7 +169,27 @@ Languages:
     - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
       Hint: __Final Renderings
       Type: Layout
-      Value: 
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{E310B610-B011-4730-B6F4-2E7E64DBED13}">
+              <p:d />
+            </r>
+            <r
+              uid="{96CC7D47-0E17-493A-A8BD-B596996BD2CB}"
+              p:before="*"
+              s:id="{2658217E-196A-4041-8F81-B8AFA7E377EE}"
+              s:ph="/footer/section/col-huge_5cd7d17e-b9ad-46b9-9b7c-925e2bff59f7" />
+            <r
+              uid="{5CD7D17E-B9AD-46B9-9B7C-925E2BFF59F7}"
+              p:after="r[@uid='{96CC7D47-0E17-493A-A8BD-B596996BD2CB}']"
+              s:id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
+              s:ph="/footer/section" />
+          </d>
+        </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141020T064001

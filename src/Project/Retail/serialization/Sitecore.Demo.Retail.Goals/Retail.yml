@@ -1,0 +1,14 @@
+﻿---
+ID: "2947c5d2-048b-47a1-9deb-875790fd94bb"
+Parent: "0cb97a9f-cafb-42a0-8be1-89ab9ae32bd9"
+Template: "a87a00b1-e6db-45ab-8b54-636fec3b5523"
+Path: /sitecore/system/Marketing Control Panel/Goals/Retail
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170106T190007Z

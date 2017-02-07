@@ -38,7 +38,7 @@ function setupCheckoutPage() {
 
                 ShowGlobalMessages(data);
                 $("#orderGetShippingMethods").button('reset');
-            }, $(this));           
+            }, $(this));
         }
         else {
             checkoutDataViewModel.shippingAddress.errors.showAllMessages();
@@ -364,7 +364,21 @@ function setShippingMethodsResponse(data, success, sender) {
         }
 
         updatePaymentAllAmount();
-        if (checkoutDataViewModel.cardPaymentAcceptPageUrl().length == 0) {
+        if (checkoutDataViewModel.paymentClientToken() != null) {
+            var clientToken = checkoutDataViewModel.paymentClientToken();
+            if (clientToken.length > 0) {
+                braintree.setup(clientToken, 'dropin', {
+                    container: 'dropin-container',
+                    paymentMethodNonceReceived: function (event, nonce) {
+                        if (nonce.length > 0) {
+                            checkoutDataViewModel.cardPaymentResultAccessCode = nonce;
+                            checkoutDataViewModel.cardPaymentAcceptCardPrefix = "paypal";
+                        }
+                    }
+                });
+            }
+        }
+        else if (checkoutDataViewModel.cardPaymentAcceptPageUrl().length == 0) {
             getCardPaymentAcceptUrl();
         }
         $("#deliveryMethodSet").val(true);
@@ -587,23 +601,27 @@ function initBillingPage() {
             if (accordion.hasClass("open")) {
                 accordionToggleIcon.html("<span class='glyphicon glyphicon-minus-sign'></span>");
                 if (this.id == "ccpayment") {
-                    checkoutDataViewModel.creditCardPayment().isAdded(true);                  
+                    checkoutDataViewModel.creditCardPayment().isAdded(true);
+                    if (checkoutDataViewModel.paymentClientToken() != null) {
+                        checkoutDataViewModel.creditCardEnable(true);
+                        checkoutDataViewModel.billingAddressEnable(true);
+                    }
                 }
             } else {
-                accordionToggleIcon.html("<span class='glyphicon glyphicon-plus-sign'></span>");               
+                accordionToggleIcon.html("<span class='glyphicon glyphicon-plus-sign'></span>");
             }
-        });       
+        });
     });
 }
 
-function getCardPaymentAcceptUrl() {    
-    if (checkoutDataViewModel && checkoutDataViewModel.payFederatedPayment && checkoutDataViewModel.shippingAddress()) {       
+function getCardPaymentAcceptUrl() {
+    if (checkoutDataViewModel && checkoutDataViewModel.payFederatedPayment && checkoutDataViewModel.shippingAddress()) {
         AJAXPost(StorefrontUri("api/storefront/checkout/GetCardPaymentAcceptUrl"), null, function (data, success, sender) {
             if (data.Success && success) {
                 checkoutDataViewModel.cardPaymentAcceptPageUrl(data.ServiceUrl);
                 checkoutDataViewModel.messageOrigin = data.MessageOrigin;
 
-                removeCardPaymentAcceptListener(); 
+                removeCardPaymentAcceptListener();
                 addCardPaymentAcceptListener();
             }
             ShowGlobalMessages(data);
@@ -674,12 +692,12 @@ function submitCardPaymentAcceptPayment() {
     }
 };
 
-function addCardPaymentAcceptListener() {    
+function addCardPaymentAcceptListener() {
     window.addEventListener("message", this.cardPaymentAcceptMessageHandler, false);
 }
 
 
-function removeCardPaymentAcceptListener() {   
+function removeCardPaymentAcceptListener() {
     window.removeEventListener("message", this.cardPaymentAcceptMessageHandler, false);
 }
 
@@ -693,44 +711,44 @@ function cardPaymentAcceptMessageHandler(eventInfo) {
     var message = eventInfo.data;
     if (typeof (message) === "string" && message.length > 0) {
 
-    // Handle various messages from the card payment accept page
-        var messageObject = JSON.parse(message);        
-    switch (messageObject.type) {
-        case checkoutDataViewModel.CARDPAYMENTACCEPTPAGEHEIGHT:           
-            var cardPaymentAcceptIframe = $("cardPaymentAcceptFrame");
-            cardPaymentAcceptIframe.height = messageObject.value;
-            break;
-        case checkoutDataViewModel.CARDPAYMENTACCEPTCARDPREFIX:            
-            checkoutDataViewModel.cardPaymentAcceptCardPrefix = messageObject.value;
-            break;
-        case checkoutDataViewModel.CARDPAYMENTACCEPTPAGEERROR:
-            // Handle retrieve card payment accept result failure.
-            var paymentErrors = messageObject.value;
-            var errors = [];
-            for (var i = 0; i < paymentErrors.length; i++) {
-                errors.push(!paymentErrors[i].Message ? paymentErrors[i].Code.toString() : paymentErrors[i].Message);
-            }
-            var data = { "Errors": errors};
-            ShowGlobalMessages(data);
-            break;
-        case checkoutDataViewModel.CARDPAYMENTACCEPTPAGERESULT:            
-            checkoutDataViewModel.cardPaymentResultAccessCode = messageObject.value;            
-            setPaymentMethods();
-            break;
-        default:
-            // Ignore all other messages.
+        // Handle various messages from the card payment accept page
+        var messageObject = JSON.parse(message);
+        switch (messageObject.type) {
+            case checkoutDataViewModel.CARDPAYMENTACCEPTPAGEHEIGHT:
+                var cardPaymentAcceptIframe = $("cardPaymentAcceptFrame");
+                cardPaymentAcceptIframe.height = messageObject.value;
+                break;
+            case checkoutDataViewModel.CARDPAYMENTACCEPTCARDPREFIX:
+                checkoutDataViewModel.cardPaymentAcceptCardPrefix = messageObject.value;
+                break;
+            case checkoutDataViewModel.CARDPAYMENTACCEPTPAGEERROR:
+                // Handle retrieve card payment accept result failure.
+                var paymentErrors = messageObject.value;
+                var errors = [];
+                for (var i = 0; i < paymentErrors.length; i++) {
+                    errors.push(!paymentErrors[i].Message ? paymentErrors[i].Code.toString() : paymentErrors[i].Message);
+                }
+                var data = { "Errors": errors };
+                ShowGlobalMessages(data);
+                break;
+            case checkoutDataViewModel.CARDPAYMENTACCEPTPAGERESULT:
+                checkoutDataViewModel.cardPaymentResultAccessCode = messageObject.value;
+                setPaymentMethods();
+                break;
+            default:
+                // Ignore all other messages.
         }
     }
 }
 
-function setPaymentMethods() {   
+function setPaymentMethods() {
     var data = "{";
 
     if (checkoutDataViewModel.creditCardPayment().isAdded()) {
         var cc = checkoutDataViewModel.creditCardPayment();
         if (checkoutDataViewModel && checkoutDataViewModel.payFederatedPayment) {
             var creditCard = {
-                "CardToken": checkoutDataViewModel.cardPaymentResultAccessCode,              
+                "CardToken": checkoutDataViewModel.cardPaymentResultAccessCode,
                 "Amount": cc.creditCardAmount(),
                 "CardPaymentAcceptCardPrefix": checkoutDataViewModel.cardPaymentAcceptCardPrefix
             };
@@ -739,7 +757,27 @@ function setPaymentMethods() {
                 data += ",";
             }
 
-            data += '"FederatedPayment":' +JSON.stringify(creditCard);
+            data += '"FederatedPayment":' + JSON.stringify(creditCard);
+            if (checkoutDataViewModel.cardPaymentAcceptCardPrefix === "paypal") {
+                var ba = checkoutDataViewModel.billingAddress();
+                var billingAddress =
+                {
+                    "Name": ba.name(),
+                    "Address1": ba.address1(),
+                    "Country": ba.country(),
+                    "City": ba.city(),
+                    "State": ba.state(),
+                    "ZipPostalCode": ba.zipPostalCode(),
+                    "ExternalId": ba.externalId(),
+                    "PartyId": ba.externalId()
+                };
+
+                if (data.length > 1) {
+                    data += ",";
+                }
+
+                data += '"BillingAddress":' + JSON.stringify(billingAddress);
+            }
         } else {
             var creditCard = {
                 "CreditCardNumber": cc.creditCardNumber(),
@@ -810,24 +848,24 @@ function setPaymentMethodsResponse(data, success, sender) {
     if (data.Success && success) {
         if (checkoutDataViewModel != null) {
             checkoutDataViewModel.cart().setSummary(data);
-            if (checkoutDataViewModel && checkoutDataViewModel.payFederatedPayment && checkoutDataViewModel.creditCardPayment().isAdded()) {
+            if (checkoutDataViewModel && checkoutDataViewModel.payFederatedPayment && checkoutDataViewModel.cardPaymentAcceptCardPrefix != "paypal" && checkoutDataViewModel.creditCardPayment().isAdded()) {
                 var cc = checkoutDataViewModel.creditCardPayment();
                 cc.creditCardNumberMasked(data.Payment[0].CreditCardNumber);
                 cc.expirationMonth(data.Payment[0].ExpirationMonth);
                 cc.expirationYear(data.Payment[0].ExpirationYear);
                 cc.customerNameOnPayment(data.Payment[0].CustomerNameOnPayment);
 
-                var ba = checkoutDataViewModel.billingAddress();                
+                var ba = checkoutDataViewModel.billingAddress();
                 var address = data.Parties[0];
                 addingCountry = checkoutDataViewModel.countries[address.Country] == undefined;
-                checkoutDataViewModel.addCountry(address.Country, address.Country);             
+                checkoutDataViewModel.addCountry(address.Country, address.Country);
                 ba.address1(address.Address1);
                 ba.country(address.Country);
                 ba.city(address.City);
                 ba.state(address.State);
-                ba.zipPostalCode(address.ZipPostalCode);               
+                ba.zipPostalCode(address.ZipPostalCode);
             }
-        }        
+        }
 
         switchingCheckoutStep('confirm');
     }
@@ -927,8 +965,8 @@ function switchingCheckoutStep(step) {
 
     if (step === "billing") {
         if ($("#deliveryMethodSet").val() === 'false') {
-            setShippingMethods();            
-            } else {
+            setShippingMethods();
+        } else {
             $("#billingStep").show();
             $("#reviewStep").hide();
             $("#shippingStep").hide();

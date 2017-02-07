@@ -10,7 +10,16 @@ SharedFields:
   Type: layout
   Value: |
     <r xmlns:p="p" xmlns:s="s"
-      p:p="1" />
+      p:p="1"
+      s:xsd="http://www.w3.org/2001/XMLSchema">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+        <r
+          uid="{10C1BE30-D1C5-46F2-A04E-F804CB3E5C66}"
+          s:ds="{F6504124-F766-43D0-824B-EB339CAE8E5F}"
+          s:par="" />
+      </d>
+    </r>
 Languages:
 - Language: en
   Versions:
@@ -21,7 +30,23 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1" />
+          p:p="1">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{CF7CB618-9710-4ACA-A9A9-ACED4629D7E1}"
+              p:before="*"
+              s:id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
+              s:ph="/footer/section" />
+            <r
+              uid="{5D610DF6-68A4-4B87-A857-4EC0AEF37EC3}"
+              p:after="r[@uid='{10C1BE30-D1C5-46F2-A04E-F804CB3E5C66}']"
+              s:ds=""
+              s:id="{2658217E-196A-4041-8F81-B8AFA7E377EE}"
+              s:par=""
+              s:ph="/footer/section/col-huge_cf7cb618-9710-4aca-a9a9-aced4629d7e1" />
+          </d>
+        </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150108T213308Z

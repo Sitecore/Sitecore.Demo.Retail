@@ -1,0 +1,70 @@
+﻿---
+ID: "cc63ad79-be94-4e0c-8d17-fa6cf61f12b6"
+Parent: "fecc893f-7b4e-436e-9e28-3cbb959df098"
+Template: "97e55781-eb1c-42ac-ae73-9eda64a2ce74"
+Path: /sitecore/content/Storefront/Home/Customer Service/FAQ
+DB: master
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: |
+    {97E55781-EB1C-42AC-AE73-9EDA64A2CE74}
+    {BA1EB1BD-E705-4BE6-A432-06B7F1B2F2CC}
+    {BFDC1F27-3D2D-495F-89A3-0951F882420B}
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "{E2A658AB-B142-4AD9-AACA-C69200622F44}"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 200
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{565F9960-4E47-4DA4-9406-0A29DD09911F}"
+              s:ds=""
+              s:par="" />
+            <r
+              uid="{A01CD632-B5B0-4DD8-AE33-884B54F5E4A5}"
+              p:after="r[@uid='{565F9960-4E47-4DA4-9406-0A29DD09911F}']"
+              s:ds="{5B8CCC82-9F07-4EC9-9AB4-A35A857EC34E}"
+              s:id="{52A898D9-6D20-43FD-9798-1578B14A117C}"
+              s:par=""
+              s:ph="/page-layout/section/col-wide-1" />
+          </d>
+        </r>
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: FAQ
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170105T030724Z
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{FF21E8D4-EB3D-400E-83CB-34065712FC18}"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "9492e0bb-9df9-46e7-8188-ec795c4ade44"
+      Hint: Image
+      Value: |
+        <image mediaid="{96071499-B41D-45B4-B749-630970D7981B}" />
+    - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
+      Hint: Title
+      Value: FAQ
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: FAQ

@@ -7,7 +7,7 @@ DB: master
 SharedFields:
 - ID: "8bbc9900-067f-40ea-8500-8b2c247636f7"
   Hint: Catalog
-  Value: Adventure Works Catalog
+  Value: Habitat_Master
 Languages:
 - Language: "de-DE"
   Fields:

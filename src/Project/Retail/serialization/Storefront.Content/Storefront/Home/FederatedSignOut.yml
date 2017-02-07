@@ -5,6 +5,9 @@ Template: "6bddd4a2-05a1-4f2a-8b64-36121309ebcd"
 Path: /sitecore/content/Storefront/Home/FederatedSignOut
 DB: master
 SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 1825
 - ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
   Hint: __Renderings
   Type: layout
@@ -48,7 +51,7 @@ SharedFields:
           ph="navigationextraleft"
           uid="{5D2C83EE-F8CA-41B9-BBF2-03CBC74D3F52}" />
         <r
-          ds="{5886D851-1625-48AE-A787-84FC5B5EB271}"
+          ds=""
           id="{582FEA78-404C-44D8-B6B4-356B080F5A7C}"
           par=""
           ph="navigationextraright"
@@ -101,6 +104,10 @@ SharedFields:
     </r>
 Languages:
 - Language: en
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Signout
   Versions:
   - Version: 1
     Fields:

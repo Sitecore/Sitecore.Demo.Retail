@@ -1,0 +1,59 @@
+﻿@*//-----------------------------------------------------------------------
+// Copyright 2016 Sitecore Corporation A/S
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+// except in compliance with the License. You may obtain a copy of the License at
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the
+// License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+// either express or implied. See the License for the specific language governing permissions
+// and limitations under the License.
+// -------------------------------------------------------------------------------------------*@
+
+@using Sitecore.Commerce.Connect.CommerceServer.Orders.Models
+@using Sitecore.Commerce.Entities.Orders
+@using Sitecore.Reference.Storefront.Managers
+@using Sitecore.Reference.Storefront.Extensions
+@model List<OrderHeader>
+
+
+<div class="text-right">
+    <a href="@StorefrontManager.StorefrontUri("/accountmanagement")" class="btn btn-default">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> @Html.Sitecore().Field("Back To My Account Label", Html.Sitecore().CurrentItem)
+    </a>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>@Html.Sitecore().Field("Order Number Label", Html.Sitecore().CurrentItem)</th>
+            <th>@Html.Sitecore().Field("Order Date Label", Html.Sitecore().CurrentItem)</th>
+            <th>@Html.Sitecore().Field("Order Status Label", Html.Sitecore().CurrentItem)</th>
+            <th width="10%">&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            var commerceOrder = order as CommerceOrderHeader;
+            if (commerceOrder == null)
+            {
+                continue;
+            }
+            <tr>
+                <td>
+                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.ExternalId">@commerceOrder.OrderID</a>
+                </td>
+                <td>
+                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.ExternalId">@commerceOrder.LastModified.ToDisplayedDate()</a>
+                </td>
+                <td>
+                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.ExternalId">@StorefrontManager.GetOrderStatusName(commerceOrder.Status)</a>
+                </td>
+                <td>
+                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.ExternalId"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

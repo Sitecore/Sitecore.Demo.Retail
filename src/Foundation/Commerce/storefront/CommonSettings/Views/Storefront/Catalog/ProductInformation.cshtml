@@ -179,13 +179,7 @@
             var sizeValue = string.IsNullOrWhiteSpace(variant.Size) ? string.Empty : variant.Size.GetHashCode().ToString();
             var colorValue = string.IsNullOrWhiteSpace(variant.ProductColor) ? string.Empty : variant.ProductColor.GetHashCode().ToString();
 
-            @:AddVariantCombination('@sizeValue',
-    '@colorValue',
-    '@variant.Id',
-    '@variant.ListPrice.ToCurrency(currencyCode)',
-    '@variant.AdjustedPrice.ToCurrency(currencyCode)',
-    @variant.IsOnSale.ToString().ToLower(),
-    '@savingsMessage');
+            @:AddVariantCombination('@sizeValue','@colorValue','@variant.Id','@variant.ListPrice.ToCurrency(currencyCode)','@variant.AdjustedPrice.ToCurrency(currencyCode)',@variant.IsOnSale.ToString().ToLower(),'@savingsMessage');
         }
     }
     else
@@ -197,9 +191,6 @@
             savingsMessage = percentLead + " " + Model.SavingsPercentage + "%";
         }
 
-        @:priceInfoVM.switchInfo('@Model.ListPriceWithCurrency',    ;    
-    '@Model.AdjustedPriceWithCurrency',
-    @Model.IsOnSale.ToString().ToLower(),
-    '@savingsMessage');
+        @:priceInfoVM.switchInfo('@Model.ListPriceWithCurrency', '@Model.AdjustedPriceWithCurrency',@Model.IsOnSale.ToString().ToLower(),'@savingsMessage');
     }
 </script>
