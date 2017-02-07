@@ -53,8 +53,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
@@ -66,23 +66,18 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="CommerceServer.Core.Catalog, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="CommerceServer.Core.CrossTier, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
-      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\lib\CommerceServer\CommerceServer.Core.Catalog.dll</HintPath>
     </Reference>
     <Reference Include="CommerceServer.Core.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
-      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\lib\CommerceServer\CommerceServer.Core.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Web.Deployment, Version=7.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sitecore.CMS.Core.API.10.0.0.103\lib\net452\Microsoft.Web.Deployment.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -132,19 +127,19 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Commerce, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.Commerce.Connect.API.10.0.174\lib\net45\Sitecore.Commerce.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Commerce.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Commerce.Connect.CommerceServer, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.CommerceServer.Connect.API.10.0.70\lib\net45\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Commerce.Engine.Connect, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.Commerce.Engine.Connect.API.1.0.2301\lib\net45\Sitecore.Commerce.Engine.Connect.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Commerce.Engine.Connect.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Commerce.Remote, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.Commerce.Connect.API.10.0.174\lib\net45\Sitecore.Commerce.Remote.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Commerce.Remote.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.ContentSearch, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -165,31 +160,31 @@
       <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Xdb.Client, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Xdb.Client.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Xdb.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Xdb.Configuration, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Sitecore.Xdb.Configuration.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Sitecore.Xdb.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stimulsoft.Base, Version=2013.1.1600.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Stimulsoft.Base.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Stimulsoft.Base.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stimulsoft.Database, Version=2013.1.1600.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Stimulsoft.Database.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Stimulsoft.Database.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stimulsoft.Report, Version=2013.1.1600.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Stimulsoft.Report.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Stimulsoft.Report.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stimulsoft.Report.Web, Version=2013.1.1600.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Stimulsoft.Report.Web.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Stimulsoft.Report.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Stimulsoft.Report.WebDesign, Version=2013.1.1600.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\packages\Sitecore.xDB.API.10.0.0001-r160314\lib\net45\Stimulsoft.Report.WebDesign.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\lib\Sitecore\Stimulsoft.Report.WebDesign.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

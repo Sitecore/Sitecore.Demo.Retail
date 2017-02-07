@@ -7,7 +7,7 @@ DB: master
 SharedFields:
 - ID: "ac51462c-8a8d-493b-9492-34d1f26f20f1"
   Hint: __Default Bucket Query
-  Value: "+commercesearchitemtype:product&brand:Fabrikam&+location:{08BFB57F-DAC9-4B11-90C5-5D19647899EF}&"
+  Value: "+commercesearchitemtype:product&brand:Mira Laptops&+location:{08BFB57F-DAC9-4B11-90C5-5D19647899EF}&"
 Languages:
 - Language: en
   Versions:
