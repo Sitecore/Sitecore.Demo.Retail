@@ -54,12 +54,6 @@ namespace Sitecore.Reference.Storefront
                         "~/Scripts/knockout-{version}.js",
                         "~/Scripts/knockout.validation-{version}.js"));                      
 
-            bundles.Add(new StyleBundle("~/styles/storefront").Include(
-                "~/Content/Storefront/bootstrap.css",
-                "~/Content/Storefront/bootstrap-addins.css",
-                "~/Content/Storefront/sitecore-theme.css",
-                "~/Content/Storefront/app.css"));
-
             bundles.Add(new ScriptBundle("~/js/storefront/bootstrap").Include(
                 "~/Scripts/Storefront/bootstrap.js"));
 

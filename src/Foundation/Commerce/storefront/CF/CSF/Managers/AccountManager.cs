@@ -118,10 +118,11 @@ namespace Sitecore.Reference.Storefront.Managers
             var isLoggedIn = AuthenticationManager.Login(userName, password, persistent);
             if (isLoggedIn)
             {
-                Tracker.Current.CheckForNull().Session.Identify(userName);
-
+                if (Tracker.Current != null)
+                {
+                    Tracker.Current.Session.Identify(userName);
+                }
                 visitorContext.SetCommerceUser(this.ResolveCommerceUser().Result);
-
                 this.CartManager.MergeCarts(storefront, visitorContext, anonymousVisitorId, anonymousVisitorCart);
             }
 
@@ -133,7 +134,10 @@ namespace Sitecore.Reference.Storefront.Managers
         /// </summary>
         public virtual void Logout()
         {
-            Tracker.Current.CheckForNull().EndVisit(true);
+            if (Tracker.Current != null)
+            {
+                Tracker.Current.EndVisit(true);
+            }
             System.Web.HttpContext.Current.Session.Abandon();
             AuthenticationManager.Logout();
         }

@@ -68,7 +68,7 @@ function addOrderItemsToCart() {
 }
 
 function enableCancelOrderItems() {
-    $('#cancelOrderItems').prop("disabled", !($("#selectAllOrderItems").is(':checked')));
+    $('#cancelOrderItems').prop("disabled", ($("#confirm-orderStatus").attr("data-value") == "Cancelled") || !($("#selectAllOrderItems").is(':checked')));
     enableSelectAllOrderItems();
 }
 
@@ -100,6 +100,7 @@ function cancelOrderItems() {
             $('#selectAllOrderItems').removeAttr('checked');
             $("#addToCartSuccess").show().fadeOut(4000);
             UpdateMiniCart();
+            location.reload(true);
         }
 
         enableAddOrderItemsToCart();

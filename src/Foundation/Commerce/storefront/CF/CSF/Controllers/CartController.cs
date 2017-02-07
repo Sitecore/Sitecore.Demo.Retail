@@ -15,6 +15,9 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Web.SessionState;
+using Sitecore.Commerce.Entities.Carts;
+
 namespace Sitecore.Reference.Storefront.Controllers
 {
     using System;
@@ -140,7 +143,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        [StorefrontSessionState(System.Web.SessionState.SessionStateBehavior.ReadOnly)]
+        [StorefrontSessionState(SessionStateBehavior.ReadOnly)]
         public JsonResult GetCurrentCart()
         {
             try
@@ -319,7 +322,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                 {
                     result.Initialize(response.Result);
 
-                    if (response.Result.HasBasketErrors())
+                    if (HasBasketErrors(response.Result))
                     {
                         // We clear the cart from the cache when basket errors are detected.  This stops the message from being displayed over and over as the
                         // cart will be retrieved again from CS and the pipelines will be executed.
@@ -418,5 +421,16 @@ namespace Sitecore.Reference.Storefront.Controllers
         }
 
         #endregion
+
+        /// <summary>
+        /// Determines whether [has basket errors] [the specified cart].
+        /// </summary>
+        /// <param name="cart">The cart.</param>
+        /// <returns>True if basket errors have been detected; Otherwise false.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "This functionality only pertains to Carts and not entities.")]
+        private static bool HasBasketErrors(CartBase cart)
+        {
+            return cart.Properties.ContainsProperty("_Basket_Errors");
+        }
     }
 }

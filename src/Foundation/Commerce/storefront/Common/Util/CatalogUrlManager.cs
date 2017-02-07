@@ -381,7 +381,10 @@ namespace Sitecore.Reference.Storefront
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "By design, we ned a string to be returned.")]
         public static string ExtractCatalogNameFromCurrentUrl()
         {
+            #pragma warning disable 618
             var linkProvider = Sitecore.Links.LinkManager.Provider as CatalogLinkProvider;
+            #pragma warning restore 618
+
             if (linkProvider != null && linkProvider.IncludeCatalog)
             {
                 var catalogName = Sitecore.Web.WebUtil.GetUrlName(2);

@@ -220,7 +220,7 @@ namespace Sitecore.Reference.Storefront.Managers
 
             var cart = cartResult.Cart as CommerceCart;
             var addLinesRequest = new AddCartLinesRequest(cart, lines);
-            addLinesRequest.RefreshCart(true);
+            RefreshCart(addLinesRequest, true);
             var addLinesResult = this.CartServiceProvider.AddCartLines(addLinesRequest);
             if (addLinesResult.Success && addLinesResult.Cart != null)
             {
@@ -265,7 +265,7 @@ namespace Sitecore.Reference.Storefront.Managers
             }
 
             var removeLinesRequest = new RemoveCartLinesRequest(cart, new[] { lineToRemove });
-            removeLinesRequest.RefreshCart(true);
+            RefreshCart(removeLinesRequest, true);
             var removeLinesResult = this.CartServiceProvider.RemoveCartLines(removeLinesRequest);
             if (removeLinesResult.Success && removeLinesResult.Cart != null)
             {
@@ -314,7 +314,7 @@ namespace Sitecore.Reference.Storefront.Managers
             {
                 cartLineToChange.Quantity = inputModel.Quantity;
                 var request = new UpdateCartLinesRequest(cart, new[] { cartLineToChange });
-                request.RefreshCart(true);
+                RefreshCart(request, true);
                 result = this.CartServiceProvider.UpdateCartLines(request);
             }
 
@@ -355,7 +355,7 @@ namespace Sitecore.Reference.Storefront.Managers
 
             var cart = cartResult.Cart as CommerceCart;
             var request = new AddPromoCodeRequest(cart, promoCode);
-            request.RefreshCart(true);
+            RefreshCart(request, true);
             result = ((CommerceCartServiceProvider)this.CartServiceProvider).AddPromoCode(request);
             if (result.Success && result.Cart != null)
             {
@@ -396,7 +396,7 @@ namespace Sitecore.Reference.Storefront.Managers
             cartCache.InvalidateCartCache(visitorContext.GetCustomerId());
 
             var request = new RemovePromoCodeRequest(cart, promoCode);
-            request.RefreshCart(true);  // We need the CS pipelines to run.
+            RefreshCart(request, true);  // We need the CS pipelines to run.
             result = ((CommerceCartServiceProvider)this.CartServiceProvider).RemovePromoCode(request);
             if (result.Success && result.Cart != null)
             {
@@ -416,7 +416,7 @@ namespace Sitecore.Reference.Storefront.Managers
         /// <returns>
         /// The manager response where the modified CommerceCart is returned in the Result.
         /// </returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public virtual ManagerResponse<AddShippingInfoResult, CommerceCart> SetShippingMethods([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] SetShippingMethodsInputModel inputModel)
         {
             Assert.ArgumentNotNull(storefront, "storefront");
@@ -482,7 +482,7 @@ namespace Sitecore.Reference.Storefront.Managers
 
             var payments = new List<PaymentInfo>();
             var cart = (CommerceCart)response.ServiceProviderResult.Cart;
-            if (inputModel.CreditCardPayment != null && !string.IsNullOrEmpty(inputModel.CreditCardPayment.PaymentMethodID) && inputModel.BillingAddress != null)
+            if (inputModel.CreditCardPayment != null && !String.IsNullOrEmpty(inputModel.CreditCardPayment.PaymentMethodID) && inputModel.BillingAddress != null)
             {
                 CommerceParty billingParty = inputModel.BillingAddress.ToParty();
                 List<Party> parties = cart.Parties.ToList();
@@ -492,7 +492,7 @@ namespace Sitecore.Reference.Storefront.Managers
                 payments.Add(inputModel.CreditCardPayment.ToCreditCardPaymentInfo());
             }
 
-            if (inputModel.FederatedPayment != null && !string.IsNullOrEmpty(inputModel.FederatedPayment.CardToken) && inputModel.BillingAddress != null)
+            if (inputModel.FederatedPayment != null && !String.IsNullOrEmpty(inputModel.FederatedPayment.CardToken) && inputModel.BillingAddress != null)
             {
                 CommerceParty billingParty = inputModel.BillingAddress.ToParty();
                 List<Party> parties = cart.Parties.ToList();
@@ -504,12 +504,12 @@ namespace Sitecore.Reference.Storefront.Managers
                 payments.Add(federatedPayment);
             }
 
-            if (inputModel.GiftCardPayment != null && !string.IsNullOrEmpty(inputModel.GiftCardPayment.PaymentMethodID))
+            if (inputModel.GiftCardPayment != null && !String.IsNullOrEmpty(inputModel.GiftCardPayment.PaymentMethodID))
             {
                 payments.Add(inputModel.GiftCardPayment.ToGiftCardPaymentInfo());
             }
 
-            if (inputModel.LoyaltyCardPayment != null && !string.IsNullOrEmpty(inputModel.LoyaltyCardPayment.PaymentMethodID))
+            if (inputModel.LoyaltyCardPayment != null && !String.IsNullOrEmpty(inputModel.LoyaltyCardPayment.PaymentMethodID))
             {
                 payments.Add(inputModel.LoyaltyCardPayment.ToLoyaltyCardPaymentInfo());
             }
@@ -617,7 +617,7 @@ namespace Sitecore.Reference.Storefront.Managers
         protected virtual CartResult LoadCartByName(string shopName, string cartName, string userName, bool refreshCart = false)
         {
             var request = new LoadCartByNameRequest(shopName, cartName, userName);
-            request.RefreshCart(refreshCart);
+            RefreshCart(request, refreshCart);
 
             var result = this.CartServiceProvider.LoadCart(request);
 
@@ -640,7 +640,7 @@ namespace Sitecore.Reference.Storefront.Managers
             Assert.ArgumentNotNull(cartLines, "cartLine");
 
             var request = new RemoveCartLinesRequest(cart, cartLines);
-            request.RefreshCart(refreshCart);
+            RefreshCart(request, refreshCart);
             var result = this.CartServiceProvider.RemoveCartLines(request);
 
             Helpers.LogSystemMessages(result.SystemMessages, result);
@@ -662,7 +662,7 @@ namespace Sitecore.Reference.Storefront.Managers
             Assert.ArgumentNotNull(orderShippingPreferenceType, "orderShippingPreferenceType");
             Assert.ArgumentNotNull(shipments, "shipments");
 
-            var request = new Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest(cart, shipments.ToList(), orderShippingPreferenceType);
+            var request = new Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest(cart, shipments.ToList(), orderShippingPreferenceType);
             var result = this.CartServiceProvider.AddShippingInfo(request);
             if (!result.Success)
             {
@@ -750,7 +750,7 @@ namespace Sitecore.Reference.Storefront.Managers
                         EmailParty party = new EmailParty();
 
                         party.ExternalId = Guid.NewGuid().ToString();
-                        party.Name = string.Format(CultureInfo.InvariantCulture, "{0}{1}", CommerceServerStorefrontConstants.CartConstants.EmailAddressNamePrefix, i);
+                        party.Name = String.Format(CultureInfo.InvariantCulture, "{0}{1}", CommerceServerStorefrontConstants.CartConstants.EmailAddressNamePrefix, i);
                         party.Email = inputModel.ElectronicDeliveryEmail;
                         party.Text = inputModel.ElectronicDeliveryEmailContent;
 
@@ -813,5 +813,25 @@ namespace Sitecore.Reference.Storefront.Managers
         }
 
         #endregion
+
+        /// <summary>
+        /// Adds a value to a cart request indicating that the Commerce Server pipelines (.pcf) should/shouldn't be run on the cart
+        /// </summary>
+        /// <param name="request">The request to append to</param>
+        /// <param name="refresh">if set to <c>true</c> run the Commerce Server pipelines.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "the is by design")]
+        private static void RefreshCart(CartRequest request, bool refresh)
+        {
+            var info = CartRequestInformation.Get(request);
+
+            if (info == null)
+            {
+                info = new CartRequestInformation(request, refresh);
+            }
+            else
+            {
+                info.Refresh = refresh;
+            }
+        }
     }
 }

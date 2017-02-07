@@ -15,34 +15,58 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Web.Mvc;
+using Sitecore.Commerce.Connect.CommerceServer;
+using Sitecore.Commerce.Connect.CommerceServer.Catalog;
+using Sitecore.Commerce.Connect.CommerceServer.Catalog.Fields;
+using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
+using Sitecore.Commerce.Connect.CommerceServer.Search;
+using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
+using Sitecore.Commerce.Contacts;
+using Sitecore.Commerce.Entities.Inventory;
+using Sitecore.ContentSearch.Linq;
+using Sitecore.Data;
+using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
+using Sitecore.Mvc.Presentation;
+using Sitecore.Reference.Storefront.Managers;
+using Sitecore.Reference.Storefront.Models;
+using Sitecore.Reference.Storefront.Models.SitecoreItemModels;
+
 namespace Sitecore.Reference.Storefront.Controllers
 {
-    using Models;
-    using Sitecore.Commerce.Connect.CommerceServer;
-    using Sitecore.Commerce.Connect.CommerceServer.Catalog;
-    using Sitecore.Commerce.Connect.CommerceServer.Catalog.Fields;
-    using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
-    using Sitecore.Commerce.Connect.CommerceServer.Search;
-    using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
-    using Sitecore.Commerce.Contacts;
-    using Sitecore.Reference.Storefront.Managers;
-    using Sitecore.Reference.Storefront.Models.SitecoreItemModels;
-    using Sitecore.ContentSearch.Linq;
-    using Sitecore.Data;
-    using Sitecore.Data.Items;
-    using Sitecore.Diagnostics;
-    using Sitecore.Mvc.Presentation;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Web.Mvc;
-    using Sitecore.Commerce.Entities.Inventory;
-
     /// <summary>
-    /// Used to manage the data and view retrieval for catalog pages
+    ///     Used to manage the data and view retrieval for catalog pages
     /// </summary>
     public class LandingController : CSBaseController
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="LandingController" /> class.
+        /// </summary>
+        /// <param name="accountManager">The account manager.</param>
+        /// <param name="inventoryManager">The inventory manager.</param>
+        /// <param name="contactFactory">The contact factory.</param>
+        public LandingController([NotNull] AccountManager accountManager, [NotNull] InventoryManager inventoryManager,
+            [NotNull] ContactFactory contactFactory)
+            : base(accountManager, contactFactory)
+        {
+            Assert.ArgumentNotNull(inventoryManager, "inventoryManager");
+
+            InventoryManager = inventoryManager;
+        }
+
+        /// <summary>
+        ///     Gets or sets the inventory manager.
+        /// </summary>
+        /// <value>
+        ///     The inventory manager.
+        /// </value>
+        public InventoryManager InventoryManager { get; protected set; }
+
         #region Variables
 
         private const string CurrentCategoryViewModelKeyName = "CurrentCategoryViewModel";
@@ -50,32 +74,10 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         #endregion
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LandingController"/> class.
-        /// </summary>
-        /// <param name="accountManager">The account manager.</param>
-        /// <param name="inventoryManager">The inventory manager.</param>
-        /// <param name="contactFactory">The contact factory.</param>
-        public LandingController([NotNull] AccountManager accountManager, [NotNull] InventoryManager inventoryManager, [NotNull] ContactFactory contactFactory)
-            : base(accountManager, contactFactory)
-        {
-            Assert.ArgumentNotNull(inventoryManager, "inventoryManager");
-
-            this.InventoryManager = inventoryManager;
-        }
-
-        /// <summary>
-        /// Gets or sets the inventory manager.
-        /// </summary>
-        /// <value>
-        /// The inventory manager.
-        /// </value>
-        public InventoryManager InventoryManager { get; protected set; }
-
         #region Controller actions
 
         /// <summary>
-        /// Promoes the rotator.
+        ///     Promoes the rotator.
         /// </summary>
         /// <returns>The action result</returns>
         [AllowAnonymous]
@@ -92,20 +94,18 @@ namespace Sitecore.Reference.Storefront.Controllers
             var viewModel = new PromoRotator(item);
 
             foreach (var associatedItemId in associatedItemIdArray)
-            {
                 if (!string.IsNullOrEmpty(associatedItemId))
                 {
                     var associatedItem = Context.Database.GetItem(ID.Parse(associatedItemId));
                     var commercePromotion = new CommercePromotion(associatedItem);
                     viewModel.Promotions.Add(commercePromotion);
                 }
-            }
 
             return View(CurrentRenderingView, viewModel);
         }
 
         /// <summary>
-        /// Promoes the list.
+        ///     Promoes the list.
         /// </summary>
         /// <returns>The action result</returns>
         [AllowAnonymous]
@@ -116,9 +116,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             var datasourceItem = Context.Database.GetItem(ID.Parse(datasource));
 
             if (datasourceItem == null)
-            {
                 return View(CurrentRenderingView, new PromoList());
-            }
 
             var associatedItemIds = datasourceItem["Promotions"];
             var associatedItemIdArray = associatedItemIds.Split("|".ToCharArray());
@@ -127,15 +125,23 @@ namespace Sitecore.Reference.Storefront.Controllers
 
             foreach (var associatedItemId in associatedItemIdArray)
             {
-                var commercePromotion = SitecoreItemManager.Instance().GetItem<CommercePromotion>(associatedItemId);
+                var commercePromotion = CreateCommercePromotionItem(associatedItemId);
                 viewModel.Promotions.Add(commercePromotion);
             }
 
             return View(CurrentRenderingView, viewModel);
         }
 
+        private static CommercePromotion CreateCommercePromotionItem(string associatedItemId)
+        {
+            var item = Context.Database.GetItem(associatedItemId);
+            var sitecoreItem = (CommercePromotion) Activator.CreateInstance(typeof(CommercePromotion), item);
+            var commercePromotion = sitecoreItem;
+            return commercePromotion;
+        }
+
         /// <summary>
-        /// Returns a Promotion View based on the datasource of the control
+        ///     Returns a Promotion View based on the datasource of the control
         /// </summary>
         /// <returns>The promotion view.</returns>
         [AllowAnonymous]
@@ -150,14 +156,14 @@ namespace Sitecore.Reference.Storefront.Controllers
         }
 
         /// <summary>
-        /// Gets Carousel view.
+        ///     Gets Carousel view.
         /// </summary>
         /// <returns>Carousel view</returns>
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Carousel()
         {
-            return View(this.CurrentRenderingView);
+            return View(CurrentRenderingView);
         }
 
         #endregion
@@ -165,11 +171,11 @@ namespace Sitecore.Reference.Storefront.Controllers
         #region Protected helper methods
 
         /// <summary>
-        /// This method returns child categories for this category
+        ///     This method returns child categories for this category
         /// </summary>
         /// <param name="searchOptions">The options to perform the search with</param>
         /// <param name="categoryItem">The category item whose children to retrieve</param>
-        /// <returns>A list of child categories</returns>       
+        /// <returns>A list of child categories</returns>
         protected CategorySearchResults GetChildCategories(CommerceSearchOptions searchOptions, Item categoryItem)
         {
             var returnList = new List<Item>();
@@ -177,64 +183,63 @@ namespace Sitecore.Reference.Storefront.Controllers
             var totalCategoryCount = 0;
 
             if (Item != null)
-            {
                 return SearchNavigation.GetCategoryChildCategories(categoryItem.ID, searchOptions);
-            }
 
-            return new CategorySearchResults(returnList, totalCategoryCount, totalPageCount, searchOptions.StartPageIndex, new List<FacetCategory>());
+            return new CategorySearchResults(returnList, totalCategoryCount, totalPageCount,
+                searchOptions.StartPageIndex, new List<FacetCategory>());
         }
 
         /// <summary>
-        /// Creates a product view model based on an Item and Rendering
+        ///     Creates a product view model based on an Item and Rendering
         /// </summary>
         /// <param name="productItem">The product item to based the model on</param>
         /// <param name="rendering">The rendering to initialize the model with</param>
         /// <returns>A Product View Model</returns>
         protected ProductViewModel GetProductViewModel(Item productItem, Rendering rendering)
         {
-            if (this.CurrentSiteContext.Items[CurrentProductViewModelKeyName] != null)
-            {
-                return (ProductViewModel) this.CurrentSiteContext.Items[CurrentProductViewModelKeyName];
-            }
+            if (CurrentSiteContext.Items[CurrentProductViewModelKeyName] != null)
+                return (ProductViewModel) CurrentSiteContext.Items[CurrentProductViewModelKeyName];
 
             var variants = new List<VariantViewModel>();
             if (productItem != null && productItem.HasChildren)
-            {
                 foreach (Item item in productItem.Children)
                 {
                     var v = new VariantViewModel(item);
                     variants.Add(v);
                 }
-            }
 
             var productViewModel = new ProductViewModel();
             productViewModel.Initialize(rendering, variants);
             PopulateStockInformation(productViewModel);
 
-            this.CurrentSiteContext.Items[CurrentProductViewModelKeyName] = productViewModel;
+            CurrentSiteContext.Items[CurrentProductViewModelKeyName] = productViewModel;
 
-            return (ProductViewModel)this.CurrentSiteContext.Items[CurrentProductViewModelKeyName];
+            return (ProductViewModel) CurrentSiteContext.Items[CurrentProductViewModelKeyName];
         }
 
         /// <summary>
-        /// Populates the stock information
+        ///     Populates the stock information
         /// </summary>
         /// <param name="model">The product model</param>
         protected void PopulateStockInformation(ProductViewModel model)
         {
-            var stockInfos = this.InventoryManager.GetStockInformation(this.CurrentStorefront, new List<CommerceInventoryProduct> { new CommerceInventoryProduct { ProductId = model.ProductId, CatalogName = model.CatalogName } }, StockDetailsLevel.Status).Result;
+            var stockInfos =
+                InventoryManager.GetStockInformation(CurrentStorefront,
+                    new List<CommerceInventoryProduct>
+                    {
+                        new CommerceInventoryProduct {ProductId = model.ProductId, CatalogName = model.CatalogName}
+                    },
+                    StockDetailsLevel.Status).Result;
             var stockInfo = stockInfos.FirstOrDefault();
             if (stockInfo == null || stockInfo.Status == null)
-            {
                 return;
-            }
 
             model.StockStatus = stockInfo.Status;
-            this.InventoryManager.VisitedProductStockStatus(this.CurrentStorefront, stockInfo, string.Empty);
+            InventoryManager.VisitedProductStockStatus(CurrentStorefront, stockInfo, string.Empty);
         }
 
         /// <summary>
-        /// Gets a lists of target items from a relationship field
+        ///     Gets a lists of target items from a relationship field
         /// </summary>
         /// <param name="field">the relationship field</param>
         /// <param name="relationshipName">the relationship name, for example upsell</param>
@@ -243,18 +248,16 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             List<Item> items = null;
 
-            IEnumerable<Item> relationships = field.GetRelationshipsTargets(relationshipName);
+            var relationships = field.GetRelationshipsTargets(relationshipName);
 
             if (relationships != null)
-            {
                 items = new List<Item>(relationships);
-            }
 
             return items;
         }
 
         /// <summary>
-        /// Builds a category view model or retrieves it if it already exists
+        ///     Builds a category view model or retrieves it if it already exists
         /// </summary>
         /// <param name="productSearchOptions">The product options class for finding child products</param>
         /// <param name="categorySearchOptions">The category options classf or finding child categories</param>
@@ -262,26 +265,28 @@ namespace Sitecore.Reference.Storefront.Controllers
         /// <param name="item">The item.</param>
         /// <param name="rendering">The rendering to initialize the model with</param>
         /// <returns>
-        /// A category view model
+        ///     A category view model
         /// </returns>
-        protected virtual LandingPageViewModel GetLandingPageViewModel(CommerceSearchOptions productSearchOptions, CommerceSearchOptions categorySearchOptions, IEnumerable<CommerceQuerySort> sortFields, Item item, Rendering rendering)
+        protected virtual LandingPageViewModel GetLandingPageViewModel(CommerceSearchOptions productSearchOptions,
+            CommerceSearchOptions categorySearchOptions, IEnumerable<CommerceQuerySort> sortFields, Item item,
+            Rendering rendering)
         {
-            if (this.CurrentSiteContext.Items[CurrentCategoryViewModelKeyName] == null)
+            if (CurrentSiteContext.Items[CurrentCategoryViewModelKeyName] == null)
             {
                 var categoryViewModel = new LandingPageViewModel(item);
-                this.CurrentSiteContext.Items[CurrentCategoryViewModelKeyName] = categoryViewModel;
+                CurrentSiteContext.Items[CurrentCategoryViewModelKeyName] = categoryViewModel;
             }
 
-            var viewModel = (LandingPageViewModel)this.CurrentSiteContext.Items[CurrentCategoryViewModelKeyName];
+            var viewModel = (LandingPageViewModel) CurrentSiteContext.Items[CurrentCategoryViewModelKeyName];
             return viewModel;
         }
 
         /// <summary>
-        /// This method returns child products for this category
+        ///     This method returns child products for this category
         /// </summary>
         /// <param name="searchOptions">The options to perform the search with</param>
         /// <param name="categoryItem">The category item whose children to retrieve</param>
-        /// <returns>A list of child products</returns>        
+        /// <returns>A list of child products</returns>
         protected SearchResults GetChildProducts(CommerceSearchOptions searchOptions, Item categoryItem)
         {
             IEnumerable<CommerceQueryFacet> facets = null;
@@ -292,12 +297,15 @@ namespace Sitecore.Reference.Storefront.Controllers
             if (Item != null)
             {
                 SearchResponse searchResponse = null;
-                if (CatalogUtility.IsItemDerivedFromCommerceTemplate(categoryItem, CommerceConstants.KnownTemplateIds.CommerceDynamicCategoryTemplate))
+                if (CatalogUtility.IsItemDerivedFromCommerceTemplate(categoryItem,
+                    CommerceConstants.KnownTemplateIds.CommerceDynamicCategoryTemplate))
                 {
                     var defaultBucketQuery = categoryItem[CommerceConstants.KnownSitecoreFieldNames.DefaultBucketQuery];
-                    var persistendBucketFilter = categoryItem[CommerceConstants.KnownSitecoreFieldNames.PersistentBucketFilter];
+                    var persistendBucketFilter =
+                        categoryItem[CommerceConstants.KnownSitecoreFieldNames.PersistentBucketFilter];
                     persistendBucketFilter = CleanLanguageFromFilter(persistendBucketFilter);
-                    searchResponse = SearchNavigation.SearchCatalogItems(defaultBucketQuery, persistendBucketFilter, searchOptions);
+                    searchResponse = SearchNavigation.SearchCatalogItems(defaultBucketQuery, persistendBucketFilter,
+                        searchOptions);
                 }
                 else
                 {
@@ -314,40 +322,41 @@ namespace Sitecore.Reference.Storefront.Controllers
                 }
             }
 
-            var results = new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex, facets);
+            var results = new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex,
+                facets);
             return results;
         }
 
         /// <summary>
-        /// Takes a collection of a facets and a querystring of facet values and adds the values to the collection
+        ///     Takes a collection of a facets and a querystring of facet values and adds the values to the collection
         /// </summary>
         /// <param name="facets">The facet collection</param>
         /// <param name="valueQueryString">The values to add to the collection in querystring format</param>
         /// <param name="productSearchOptions">The options to update with facets</param>
-        protected void UpdateOptionsWithFacets(IEnumerable<CommerceQueryFacet> facets, string valueQueryString, CommerceSearchOptions productSearchOptions)
+        protected void UpdateOptionsWithFacets(IEnumerable<CommerceQueryFacet> facets, string valueQueryString,
+            CommerceSearchOptions productSearchOptions)
         {
             if (facets != null && facets.Any())
             {
                 if (!string.IsNullOrEmpty(valueQueryString))
                 {
-                    var facetValuesCombos = valueQueryString.Split(new char[] { '&' });
+                    var facetValuesCombos = valueQueryString.Split('&');
 
                     foreach (var facetValuesCombo in facetValuesCombos)
                     {
-                        var facetValues = facetValuesCombo.Split(new char[] { '=' });
+                        var facetValues = facetValuesCombo.Split('=');
 
                         var name = facetValues[0];
 
-                        var existingFacet = facets.FirstOrDefault(item => item.Name.Equals(name, System.StringComparison.OrdinalIgnoreCase));
+                        var existingFacet =
+                            facets.FirstOrDefault(item => item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
                         if (existingFacet != null)
                         {
-                            var values = facetValues[1].Split(new char[] { StorefrontConstants.QueryStrings.FacetsSeparator });
+                            var values = facetValues[1].Split(StorefrontConstants.QueryStrings.FacetsSeparator);
 
                             foreach (var value in values)
-                            {
                                 existingFacet.Values.Add(value);
-                            }
                         }
                     }
                 }
@@ -357,21 +366,20 @@ namespace Sitecore.Reference.Storefront.Controllers
         }
 
         /// <summary>
-        /// Adds and required sorting to the options class
+        ///     Adds and required sorting to the options class
         /// </summary>
         /// <param name="sortField">The field to sort on</param>
         /// <param name="sortDirection">The direction to perform the sorting</param>
         /// <param name="productSearchOptions">The options class to add the sorting to.</param>
-        protected void UpdateOptionsWithSorting(string sortField, CommerceConstants.SortDirection? sortDirection, CommerceSearchOptions productSearchOptions)
+        protected void UpdateOptionsWithSorting(string sortField, CommerceConstants.SortDirection? sortDirection,
+            CommerceSearchOptions productSearchOptions)
         {
             if (!string.IsNullOrEmpty(sortField))
             {
                 productSearchOptions.SortField = sortField;
 
                 if (sortDirection.HasValue)
-                {
                     productSearchOptions.SortDirection = sortDirection.Value;
-                }
 
                 ViewBag.SortField = sortField;
                 ViewBag.SortDirection = sortDirection;
@@ -379,31 +387,25 @@ namespace Sitecore.Reference.Storefront.Controllers
         }
 
         /// <summary>
-        /// Cleans the language from filter.
+        ///     Cleans the language from filter.
         /// </summary>
         /// <param name="filter">The filter.</param>
         /// <returns>The updated filter.</returns>
         protected string CleanLanguageFromFilter(string filter)
         {
-            if (filter.IndexOf("language:", System.StringComparison.OrdinalIgnoreCase) < 0)
-            {
+            if (filter.IndexOf("language:", StringComparison.OrdinalIgnoreCase) < 0)
                 return filter;
-            }
 
             var newFilter = new StringBuilder();
 
             var statementList = filter.Split(';');
             foreach (var statement in statementList)
             {
-                if (statement.IndexOf("language", System.StringComparison.OrdinalIgnoreCase) >= 0)
-                {
+                if (statement.IndexOf("language", StringComparison.OrdinalIgnoreCase) >= 0)
                     continue;
-                }
 
                 if (newFilter.Length > 0)
-                {
                     newFilter.Append(';');
-                }
 
                 newFilter.Append(statement);
             }

@@ -331,6 +331,7 @@
     <Compile Include="Connect\Pipelines\Customers\GetUser.cs" />
     <Compile Include="Connect\Pipelines\Orders\GetAvailableCountries.cs" />
     <Compile Include="Connect\Pipelines\Orders\GetAvailableRegions.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CSBaseController.cs" />
     <Compile Include="Controllers\LandingController.cs" />
@@ -342,6 +343,7 @@
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Extensions\InputModelExtension.cs" />
     <Compile Include="Managers\AccountManager.cs" />
+    <Compile Include="Managers\BaseManager.cs" />
     <Compile Include="Managers\CartManager.cs" />
     <Compile Include="Managers\CatalogManager.cs" />
     <Compile Include="Managers\GiftCardManager.cs" />
@@ -378,13 +380,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Connect\Pipelines\Carts\" />
-    <Folder Include="Connect\Pipelines\Payments\" />
-    <Folder Include="Connect\Pipelines\Shipping\" />
-    <Folder Include="Connect\Services\Orders\" />
-    <Folder Include="Connect\Services\Prices\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
