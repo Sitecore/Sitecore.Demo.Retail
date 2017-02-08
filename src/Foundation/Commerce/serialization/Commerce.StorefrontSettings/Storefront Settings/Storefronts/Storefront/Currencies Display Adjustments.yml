@@ -1,0 +1,14 @@
+﻿---
+ID: "54324696-7331-4a80-a163-604c6af624d9"
+Parent: "51541163-54af-4d41-b86e-0b2e3a26b215"
+Template: "128c8948-5304-473e-93d1-914cc5f29b90"
+Path: /sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/Storefront/Currencies Display Adjustments
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161205T113151Z

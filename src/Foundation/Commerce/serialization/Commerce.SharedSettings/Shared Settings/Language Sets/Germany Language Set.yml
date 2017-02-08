@@ -1,0 +1,28 @@
+﻿---
+ID: "b846e733-f3d9-4e35-be6c-4dbf76e095e9"
+Parent: "16055462-0dfa-4b49-a130-012589d12d47"
+Template: "d8abc594-0fbf-4407-b0e0-7fe4feaeb2ed"
+Path: /sitecore/Commerce/Commerce Control Panel/Shared Settings/Language Sets/Germany Language Set
+DB: master
+SharedFields:
+- ID: "12b7253c-1e8c-43c1-a733-124957d529fb"
+  Hint: Languages
+  Value: "de-DE|en"
+- ID: "3a621478-cc5c-4777-8cb3-a7911ae264e2"
+  Hint: Default Language
+  Value: "de-DE"
+- ID: "ffd6d079-7dbc-4f1e-b46e-75745b71b1e6"
+  Hint: Fallback Language
+  Value: en
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160404T180509Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

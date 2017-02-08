@@ -1,0 +1,21 @@
+﻿---
+ID: "7e077edc-7103-460b-988f-78b0211b9261"
+Parent: "13372399-0c90-4827-b4dd-ca69b7ee3f94"
+Template: "79c4bb54-df7d-4825-bfa7-32ff9b051299"
+Path: /sitecore/Commerce/Commerce Control Panel/Shared Settings/Fulfillment Options/Digital/Email
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "19110ebd-4668-429d-9237-e8dfe81c09a8"
+      Hint: Title
+      Value: Email
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161210T055423Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

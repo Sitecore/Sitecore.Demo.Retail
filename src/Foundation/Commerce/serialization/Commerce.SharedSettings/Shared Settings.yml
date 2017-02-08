@@ -1,0 +1,18 @@
+﻿---
+ID: "bec7a22d-95bd-49d9-9715-5a2307110139"
+Parent: "770ef91b-36cc-42bf-865e-b76633fac34b"
+Template: "14fdf1e0-a529-423f-9c8c-0d77fb870bbf"
+Path: /sitecore/Commerce/Commerce Control Panel/Shared Settings
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161127T132226Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

@@ -1,0 +1,21 @@
+﻿---
+ID: "4b494292-598e-4a61-a156-d7501f7953ed"
+Parent: "d779664a-29f8-4ada-b12c-a6666ec03958"
+Template: "2e5cb4cd-59d1-4ae0-9967-831bed5b7945"
+Path: /sitecore/Commerce/Commerce Control Panel/Shared Settings/Currency Settings/Currency Sets/All Currencies
+DB: master
+SharedFields:
+- ID: "3fac8159-f5c1-471d-a26c-4c3c3d494532"
+  Hint: Currencies
+  Value: CAD|USD|EUR
+- ID: "9cc02000-c6fb-41b6-b3b2-f1e9b2dff4d1"
+  Hint: Default Currency
+  Value: USD
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160201T160115Z

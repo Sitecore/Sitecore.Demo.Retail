@@ -1,0 +1,21 @@
+﻿---
+ID: "60d23160-c39d-4b72-89db-489ccb57276a"
+Parent: "41fbc29e-001f-42ac-80b7-835440c852a7"
+Template: "1f8158d8-4139-46be-94af-9ff80501f5de"
+Path: "/sitecore/Commerce/Commerce Control Panel/Shared Settings/Countries-Regions/United States"
+DB: master
+SharedFields:
+- ID: "6364fd2c-7b9e-482d-b96b-7c324d49011e"
+  Hint: Country Code
+  Value: US
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161205T100810Z
+    - ID: "9f6720cc-654f-4fdd-9848-7039da6a0e7b"
+      Hint: Name
+      Value: United States

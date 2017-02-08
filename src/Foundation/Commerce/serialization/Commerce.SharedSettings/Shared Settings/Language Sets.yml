@@ -1,0 +1,14 @@
+﻿---
+ID: "16055462-0dfa-4b49-a130-012589d12d47"
+Parent: "bec7a22d-95bd-49d9-9715-5a2307110139"
+Template: "8a9db89c-887d-4894-8208-e03f830b8861"
+Path: /sitecore/Commerce/Commerce Control Panel/Shared Settings/Language Sets
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150812T200346Z

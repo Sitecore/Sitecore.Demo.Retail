@@ -1,0 +1,18 @@
+﻿---
+ID: "41947900-706c-4646-a3dd-f97b58f02424"
+Parent: "bec7a22d-95bd-49d9-9715-5a2307110139"
+Template: "b678ecfb-87a3-4f27-b3fb-2877f332c950"
+Path: /sitecore/Commerce/Commerce Control Panel/Shared Settings/Currency Settings
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161128T115219Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

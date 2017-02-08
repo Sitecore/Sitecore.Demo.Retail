@@ -1,0 +1,67 @@
+﻿---
+ID: "476eb910-e8b8-44e7-97dc-9fc88d7e109a"
+Parent: "0563a7d2-1468-4448-be8e-f6751c4aca09"
+Template: "389ac363-2868-4180-8a70-8ce1c57d2223"
+Path: "/sitecore/Commerce/Commerce Control Panel/Shared Settings/Fulfillment Option Types/Deliver Items Individually - split shipment"
+DB: master
+SharedFields:
+- ID: "b282baad-f8eb-4fd6-a42d-88a6714426db"
+  Hint: Type ID
+  Value: 4
+Languages:
+- Language: da
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170127T135406Z
+    - ID: "349b8cb1-a03b-41f9-bba3-0f92df4f21ea"
+      Hint: Name
+      Value: Levér varerne separat
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Anonymous
+- Language: "de-DE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170127T135228Z
+    - ID: "349b8cb1-a03b-41f9-bba3-0f92df4f21ea"
+      Hint: Name
+      Value: Artikel individuell liefern
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Anonymous
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161206T105517Z
+    - ID: "349b8cb1-a03b-41f9-bba3-0f92df4f21ea"
+      Hint: Name
+      Value: Deliver Items Individually
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+- Language: "ja-JP"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170127T135527Z
+    - ID: "349b8cb1-a03b-41f9-bba3-0f92df4f21ea"
+      Hint: Name
+      Value: 商品を個別に配送
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Anonymous

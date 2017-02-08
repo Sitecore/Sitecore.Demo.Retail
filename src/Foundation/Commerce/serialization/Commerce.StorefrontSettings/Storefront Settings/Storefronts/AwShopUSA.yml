@@ -1,0 +1,22 @@
+﻿---
+ID: "9dbff73f-dccd-4b76-ad72-733ca1de0a83"
+Parent: "99a2d449-7cc0-4fac-b516-db2176898898"
+Template: "59190273-fdcc-4048-9537-7edbdf94b22d"
+Path: /sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/AwShopUSA
+DB: master
+Languages:
+- Language: en
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Adventure Works USA
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160404T181543Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

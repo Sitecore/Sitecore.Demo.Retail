@@ -1,0 +1,25 @@
+﻿---
+ID: "073b17e0-09fe-411e-89f8-1662b15537cc"
+Parent: "d779664a-29f8-4ada-b12c-a6666ec03958"
+Template: "2e5cb4cd-59d1-4ae0-9967-831bed5b7945"
+Path: /sitecore/Commerce/Commerce Control Panel/Shared Settings/Currency Settings/Currency Sets/Canada Currency Set
+DB: master
+SharedFields:
+- ID: "3fac8159-f5c1-471d-a26c-4c3c3d494532"
+  Hint: Currencies
+  Value: CAD|USD
+- ID: "9cc02000-c6fb-41b6-b3b2-f1e9b2dff4d1"
+  Hint: Default Currency
+  Value: CAD
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160404T175351Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

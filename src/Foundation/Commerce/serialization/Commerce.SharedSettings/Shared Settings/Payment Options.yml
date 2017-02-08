@@ -1,0 +1,14 @@
+﻿---
+ID: "92caf6be-135a-4d03-9438-83bae34d5a6b"
+Parent: "bec7a22d-95bd-49d9-9715-5a2307110139"
+Template: "9589531a-14f5-4313-b0d3-2bc5624d0706"
+Path: /sitecore/Commerce/Commerce Control Panel/Shared Settings/Payment Options
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150812T204910Z
