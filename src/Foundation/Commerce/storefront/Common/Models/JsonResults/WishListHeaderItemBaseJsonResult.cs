@@ -15,46 +15,27 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Sitecore.Commerce.Entities.WishLists;
+using Sitecore.Foundation.Commerce.Managers;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Entities.WishLists;
-    using Sitecore.Reference.Storefront.Managers;
-
-    /// <summary>
-    /// Json result for whish list header operations.
-    /// </summary>
     public class WishListHeaderItemBaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WishListHeaderItemBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="header">The wish list header.</param>
         public WishListHeaderItemBaseJsonResult(WishListHeader header)
         {
-            this.ExternalId = header.ExternalId;
-            this.Name = header.Name;
-            this.IsFavorite = header.IsFavorite;
-            this.DetailsUrl = string.Concat(StorefrontManager.StorefrontUri("/accountmanagement/mywishlist"), "?id=", header.ExternalId);
+            ExternalId = header.ExternalId;
+            Name = header.Name;
+            IsFavorite = header.IsFavorite;
+            DetailsUrl = string.Concat(StorefrontManager.StorefrontUri("/accountmanagement/mywishlist"), "?id=", header.ExternalId);
         }
 
-        /// <summary>
-        /// Gets or sets the external ID of the wish list header.
-        /// </summary>
         public string ExternalId { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets the name of the wish list header.
-        /// </summary>
         public string Name { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether this is the favorite wish list.
-        /// </summary>
         public bool IsFavorite { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets the details url of the wish list header.
-        /// </summary>
         public string DetailsUrl { get; protected set; }
     }
 }

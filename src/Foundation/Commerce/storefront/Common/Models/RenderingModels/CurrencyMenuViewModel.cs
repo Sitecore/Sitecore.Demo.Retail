@@ -15,43 +15,19 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Linq;
+using Sitecore.Commerce.Services.Prices;
+using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Mvc.Presentation;
+
 namespace Sitecore.Reference.Storefront.Models.RenderingModels
 {
-    using Sitecore.Commerce.Services.Prices;
-    using Sitecore.Mvc.Presentation;
-    using Sitecore.Reference.Storefront.Managers;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    /// <summary>
-    /// Defines the CurrencyMenuViewModel class.
-    /// </summary>
     public class CurrencyMenuViewModel : RenderingModel
     {
-        private List<CurrencyInformationModel> _currencyList = new List<CurrencyInformationModel>();
+        public List<CurrencyInformationModel> CurrencyList { get; } = new List<CurrencyInformationModel>();
 
-        /// <summary>
-        /// Gets the currency list.
-        /// </summary>
-        /// <value>
-        /// The currency list.
-        /// </value>
-        public List<CurrencyInformationModel> CurrencyList
-        {
-            get
-            {
-                return _currencyList;
-            }
-        }
-
-        /// <summary>
-        /// Initializes the specified rendering.
-        /// </summary>
-        /// <param name="rendering">The rendering.</param>
-        /// <param name="result">The result.</param>
         public void Initialize(Rendering rendering, GetSupportedCurrenciesResult result)
         {
             if (!result.Success || result.Currencies == null)
@@ -63,12 +39,12 @@ namespace Sitecore.Reference.Storefront.Models.RenderingModels
 
             var currencies = supportedCurrencies.Intersect(result.Currencies);
 
-            foreach (string currency in currencies)
+            foreach (var currency in currencies)
             {
                 var currencyInfoModel = StorefrontManager.GetCurrencyInformation(currency);
                 if (currencyInfoModel != null)
                 {
-                    this._currencyList.Add(currencyInfoModel);
+                    CurrencyList.Add(currencyInfoModel);
                 }
             }
         }

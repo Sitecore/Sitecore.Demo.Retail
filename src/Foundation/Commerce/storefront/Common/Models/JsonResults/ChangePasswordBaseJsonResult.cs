@@ -15,50 +15,28 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Sitecore.Commerce.Services;
+using Sitecore.Diagnostics;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Diagnostics;
-    using Sitecore.Commerce.Services;
-
-    /// <summary>
-    /// Defines the ChangePasswordBaseJsonResult class.
-    /// </summary>
     public class ChangePasswordBaseJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ChangePasswordBaseJsonResult"/> class.
-        /// </summary>
         public ChangePasswordBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ChangePasswordBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The result.</param>
-        public ChangePasswordBaseJsonResult(ServiceProviderResult result)
-            : base(result)
-        {            
+        public ChangePasswordBaseJsonResult(ServiceProviderResult result) : base(result)
+        {
         }
 
-        /// <summary>
-        /// Gets or sets the name of the user.
-        /// </summary>
-        /// <value>
-        /// The name of the user.
-        /// </value>
         public string UserName { get; set; }
 
-        /// <summary>
-        /// Initializes the specified user name.
-        /// </summary>
-        /// <param name="userName">Name of the user.</param>
         public virtual void Initialize(string userName)
         {
             Assert.ArgumentNotNullOrEmpty(userName, "userName");
 
-            this.UserName = userName;
+            UserName = userName;
         }
     }
 }

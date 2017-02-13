@@ -15,18 +15,12 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Sitecore.Reference.Storefront.Models
 {
-    using System;
- 
-    /// <summary>
-    /// Used to represent a logoff uri
-    /// </summary>
     public class FederatedSignOutModel
     {
-        /// <summary>
-        /// Gets or sets the logoff URI.
-        /// </summary>       
-        public Uri LogOffUri { get; set; }      
+        public Uri LogOffUri { get; set; }
     }
 }

@@ -15,75 +15,31 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using Sitecore.Commerce.Entities.WishLists;
+using Sitecore.Commerce.Services;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Entities.WishLists;
-    using Sitecore.Commerce.Services;
-    using System.Collections.Generic;
-
-    /// <summary>
-    /// Json result for wish list operations.
-    /// </summary>
     public class WishListBaseJsonResult : BaseJsonResult
     {
-        private readonly List<WishListItemBaseJsonResult> _lines = new List<WishListItemBaseJsonResult>();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WishListBaseJsonResult"/> class.
-        /// </summary>
         public WishListBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WishListBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The service provider result.</param>
         public WishListBaseJsonResult(ServiceProviderResult result)
             : base(result)
         {
-        }        
-
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance is favorite.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if this instance is favorite; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsFavorite { get; set; }
-
-        /// <summary>
-        /// Gets or sets the external identifier.
-        /// </summary>
-        /// <value>
-        /// The external identifier.
-        /// </value>
-        public string ExternalId { get; set; }
-
-        /// <summary>
-        /// Gets the wish list lines.
-        /// </summary>
-        /// <value>
-        /// The lines.
-        /// </value>
-        public List<WishListItemBaseJsonResult> Lines
-        {
-            get { return this._lines; }
         }
 
-        /// <summary>
-        /// Initializes the specified wish list.
-        /// </summary>
-        /// <param name="wishList">The wish list.</param>
+        public string Name { get; set; }
+
+        public bool IsFavorite { get; set; }
+
+        public string ExternalId { get; set; }
+
+        public List<WishListItemBaseJsonResult> Lines { get; } = new List<WishListItemBaseJsonResult>();
+
         public virtual void Initialize(WishList wishList)
         {
             if (wishList == null)
@@ -91,13 +47,13 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
                 return;
             }
 
-            this.Name = wishList.Name;
-            this.IsFavorite = wishList.IsFavorite;
-            this.ExternalId = wishList.ExternalId;
+            Name = wishList.Name;
+            IsFavorite = wishList.IsFavorite;
+            ExternalId = wishList.ExternalId;
 
             foreach (var line in wishList.Lines)
             {
-                this._lines.Add(new WishListItemBaseJsonResult(line, wishList.ExternalId));
+                Lines.Add(new WishListItemBaseJsonResult(line, wishList.ExternalId));
             }
         }
     }

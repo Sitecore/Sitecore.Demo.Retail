@@ -14,48 +14,30 @@
 // either express or implied. See the License for the specific language governing permissions 
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
- 
+
+using Sitecore.Commerce.Services;
+using Sitecore.Diagnostics;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Services;
-    using Sitecore.Diagnostics;
-
-    /// <summary>
-    /// The Json result of a request to retrieve the available states.
-    /// </summary>
     public class UpdateLoyaltyCardBaseJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UpdateLoyaltyCardBaseJsonResult"/> class.
-        /// </summary>
         public UpdateLoyaltyCardBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UpdateLoyaltyCardBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The service provider result.</param>
         public UpdateLoyaltyCardBaseJsonResult(ServiceProviderResult result)
             : base(result)
         {
         }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the loyalty card was successfully updated.
-        /// </summary>
         public bool WasUpdated { get; set; }
 
-        /// <summary>
-        /// Initializes the specified was updated.
-        /// </summary>
-        /// <param name="wasUpdated">if set to <c>true</c> [was updated].</param>
         public virtual void Initialize(bool wasUpdated)
         {
             Assert.ArgumentNotNull(wasUpdated, "wasUpdated");
 
-            this.WasUpdated = wasUpdated;
+            WasUpdated = wasUpdated;
         }
     }
 }

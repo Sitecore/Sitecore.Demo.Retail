@@ -15,39 +15,26 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
+using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
+using Sitecore.Foundation.Commerce;
+using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Mvc.Presentation;
+
 namespace Sitecore.Reference.Storefront.Models.RenderingModels
 {
-    using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
-    using Sitecore.Mvc.Presentation;
-    using System;
-
-    /// <summary>
-    /// Used to represent a pagination
-    /// </summary>
-    public class PaginationViewModel : Sitecore.Mvc.Presentation.RenderingModel
+    public class PaginationViewModel : RenderingModel
     {
-        /// <summary>
-        /// Gets or sets the pagination details for this category
-        /// </summary>
         public PaginationModel Pagination { get; set; }
 
-        /// <summary>
-        /// Gets or sets the paging querystring token.
-        /// </summary>
         public string QueryStringToken { get; set; }
 
-        /// <summary>
-        /// Initializes the view model
-        /// </summary>
-        /// <param name="rendering">The rendering</param>
-        /// <param name="products">The list of child products</param>
-        /// <param name="searchOptions">Any search options used to find products in this category</param>
         public void Initialize(Rendering rendering, SearchResults products, CommerceSearchOptions searchOptions)
         {
             base.Initialize(rendering);
-            this.QueryStringToken = StorefrontConstants.QueryStrings.Paging;
+            QueryStringToken = StorefrontConstants.QueryStrings.Paging;
 
-            int itemsPerPage = (searchOptions != null) ? searchOptions.NumberOfItemsToReturn : 20;
+            var itemsPerPage = searchOptions != null ? searchOptions.NumberOfItemsToReturn : 20;
 
             if (products != null)
             {
@@ -59,7 +46,7 @@ namespace Sitecore.Reference.Storefront.Models.RenderingModels
                     NumberOfPages = products.TotalPageCount,
                     PageResultCount = itemsPerPage,
                     StartResultIndex = alreadyShown + 1,
-                    EndResultIndex = System.Math.Min(products.TotalItemCount, alreadyShown + itemsPerPage)
+                    EndResultIndex = Math.Min(products.TotalItemCount, alreadyShown + itemsPerPage)
                 };
             }
         }

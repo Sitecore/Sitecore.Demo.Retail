@@ -15,61 +15,35 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using Sitecore.Commerce.Entities.LoyaltyPrograms;
+using Sitecore.Commerce.Services;
+using Sitecore.Diagnostics;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Entities.LoyaltyPrograms;
-    using Sitecore.Commerce.Services;
-    using Sitecore.Diagnostics;
-    using System.Collections.Generic;
-
-    /// <summary>
-    /// Json result for loyalty cards operations.
-    /// </summary>
     public class LoyaltyCardsBaseJsonResult : BaseJsonResult
     {
-        private readonly List<LoyaltyCardItemBaseJsonResult> _cards = new List<LoyaltyCardItemBaseJsonResult>();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LoyaltyCardsBaseJsonResult"/> class.
-        /// </summary>
         public LoyaltyCardsBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LoyaltyCardsBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The service provider result.</param>
         public LoyaltyCardsBaseJsonResult(ServiceProviderResult result)
             : base(result)
         {
         }
 
-        /// <summary>
-        /// Gets the loyalty cards.
-        /// </summary>
-        public List<LoyaltyCardItemBaseJsonResult> LoyaltyCards
-        {
-            get
-            {
-                return this._cards;
-            }
-        }
+        public List<LoyaltyCardItemBaseJsonResult> LoyaltyCards { get; } = new List<LoyaltyCardItemBaseJsonResult>();
 
-        /// <summary>
-        /// Initializes the specified loyalty cards.
-        /// </summary>
-        /// <param name="loyaltyCards">The loyalty cards.</param>
         public virtual void Initialize(IEnumerable<LoyaltyCard> loyaltyCards)
         {
             Assert.ArgumentNotNull(loyaltyCards, "loyaltyCards");
-            
+
             foreach (var card in loyaltyCards)
             {
                 var result = new LoyaltyCardItemBaseJsonResult();
                 result.Initialize(card);
-                this.LoyaltyCards.Add(result);
+                LoyaltyCards.Add(result);
             }
         }
     }

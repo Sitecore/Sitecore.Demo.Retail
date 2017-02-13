@@ -15,58 +15,48 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce;
+using Sitecore.Links;
+
 namespace Sitecore.Reference.Storefront.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
-
-    /// <summary>
-    /// Model that represents a summary of a site content item.
-    /// </summary>
     public class SiteContentViewModel
     {
-        /// <summary>
-        /// The maximum summary title length.
-        /// </summary>
         public const int MaxTitleLength = 100;
 
-        /// <summary>
-        /// Gets or sets the site content item.
-        /// </summary>
-        public Sitecore.Data.Items.Item Item { get; set; }
+        public Item Item { get; set; }
 
-        /// <summary>
-        /// Gets or sets the path to the site content page.
-        /// </summary>
         public string ContentPath { get; set; }
 
-        /// <summary>
-        /// Gets or sets the site content summary title.
-        /// </summary>
         public string SummaryTitle { get; set; }
 
-        /// <summary>
-        /// Gets or sets the site content summary text.
-        /// </summary>
         public string SummaryText { get; set; }
 
-        /// <summary>
-        /// Creates a <see cref="SiteContentViewModel"/> based on a Sitecore item.
-        /// </summary>
-        /// <param name="item">The sitecore item.</param>
-        /// <returns>A <see cref="SiteContentViewModel"/>.</returns>
-        public static SiteContentViewModel Create(Sitecore.Data.Items.Item item)
+        public static SiteContentViewModel Create(Item item)
         {
-            Sitecore.Diagnostics.Assert.ArgumentNotNull(item, "item");
-            var model = new SiteContentViewModel();
-            model.Item = item;
-            model.ContentPath = Sitecore.Links.LinkManager.GetItemUrl(item);
-            model.SummaryTitle = Helpers.TrimTextToLength(item[StorefrontConstants.ItemFields.Title], MaxTitleLength);
-            model.SummaryText = item[StorefrontConstants.ItemFields.SummaryText];
+            Assert.ArgumentNotNull(item, "item");
+            var model = new SiteContentViewModel
+            {
+                Item = item,
+                ContentPath = LinkManager.GetItemUrl(item),
+                SummaryTitle = TrimTextToLength(item[StorefrontConstants.ItemFields.Title], MaxTitleLength),
+                SummaryText = item[StorefrontConstants.ItemFields.SummaryText]
+            };
 
             return model;
+        }
+
+        private static string TrimTextToLength(string text, int maximumLength)
+        {
+            if (text != null && text.Length > maximumLength)
+            {
+                text = text.Substring(0, maximumLength);
+                text = text.Substring(0, text.LastIndexOf(' ') + 1);
+            }
+
+            return text ?? string.Empty;
         }
     }
 }

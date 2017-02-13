@@ -15,32 +15,18 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using Sitecore.Data.Items;
+using Sitecore.Foundation.Commerce;
+using Sitecore.Foundation.Commerce.Models.Search;
+using Sitecore.Mvc.Presentation;
+
 namespace Sitecore.Reference.Storefront.Models.RenderingModels
 {
-    using Sitecore.Data.Items;
-    using Sitecore.Mvc.Presentation;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
-
-    /// <summary>
-    /// Used to represent the navigation
-    /// </summary>
-    public class NavigationViewModel : Sitecore.Mvc.Presentation.RenderingModel
+    public class NavigationViewModel : RenderingModel
     {
-        /// <summary>
-        /// Gets the list of child categories
-        /// </summary>
-        public List<Item> ChildCategories
-        {
-            get;
-            private set;
-        }
+        public List<Item> ChildCategories { get; private set; }
 
-        /// <summary>
-        /// Gets the title of the store
-        /// </summary>
         public string StoreTitle
         {
             get
@@ -50,11 +36,6 @@ namespace Sitecore.Reference.Storefront.Models.RenderingModels
             }
         }
 
-        /// <summary>
-        /// Initializes the view model
-        /// </summary>
-        /// <param name="rendering">The rendering</param>
-        /// <param name="childCategories">The list of child categories</param>
         public void Initialize(Rendering rendering, CategorySearchResults childCategories)
         {
             base.Initialize(rendering);

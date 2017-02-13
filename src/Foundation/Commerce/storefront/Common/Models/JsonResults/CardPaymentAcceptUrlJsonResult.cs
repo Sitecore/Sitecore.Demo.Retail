@@ -15,53 +15,33 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
+using System.Globalization;
+using Sitecore.Commerce.Services.Payments;
+using Sitecore.Diagnostics;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using System;
-    using System.Globalization;
-    using Diagnostics;
-    using Sitecore.Commerce.Services.Payments;
-
-    /// <summary>
-    /// Defines the CardPaymentAcceptUrlJsonResult class.
-    /// </summary>
     public class CardPaymentAcceptUrlJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CardPaymentAcceptUrlJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The result.</param>
-        public CardPaymentAcceptUrlJsonResult(GetPaymentServiceUrlResult result)
-            : base(result)
+        public CardPaymentAcceptUrlJsonResult(GetPaymentServiceUrlResult result) : base(result)
         {
             Assert.IsNotNull(result, "result");
 
             if (result.Success)
             {
                 var serviceUrl = new Uri(result.Url);
-                this.ServiceUrl = result.Url;
-                this.MessageOrigin = string.Format(CultureInfo.InvariantCulture, "{0}://{1}", serviceUrl.Scheme, serviceUrl.Authority);
+                ServiceUrl = result.Url;
+                MessageOrigin = string.Format(CultureInfo.InvariantCulture, "{0}://{1}", serviceUrl.Scheme, serviceUrl.Authority);
             }
             else
             {
-                this.SetErrors(result);
-            }          
+                SetErrors(result);
+            }
         }
 
-        /// <summary>
-        /// Gets or sets the payment service URL.
-        /// </summary>
-        /// <value>
-        /// The payment service URL.
-        /// </value>
         public string ServiceUrl { get; set; }
 
-        /// <summary>
-        /// Gets or sets the message origin.
-        /// </summary>
-        /// <value>
-        /// The message origin.
-        /// </value>
         public string MessageOrigin { get; set; }
     }
 }

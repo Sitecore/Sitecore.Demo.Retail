@@ -15,61 +15,37 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
+using Sitecore.Foundation.Commerce;
+using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Mvc.Presentation;
+
 namespace Sitecore.Reference.Storefront.Models.RenderingModels
 {
-    using System.Collections.Generic;
-    using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
-    using Sitecore.Mvc.Presentation;
-    using System.Linq;
-
-    /// <summary>
-    /// Used to represent a product list header
-    /// </summary>
     public class ProductListHeaderViewModel : RenderingModel
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ProductListHeaderViewModel"/> class.
-        /// </summary>
         public ProductListHeaderViewModel()
         {
-            this.PageSizeClass = StorefrontConstants.StyleClasses.ChangePageSize;
+            PageSizeClass = StorefrontConstants.StyleClasses.ChangePageSize;
         }
 
-        /// <summary>
-        /// Gets or sets the list of sortable fields
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is the desired behavior")]
-        public IEnumerable<CommerceQuerySort> SortFields
-        {
-            get;
-            protected set;
-        }
-        
-        /// <summary>
-        /// Gets or sets the pagination details for this category
-        /// </summary>
+        public IEnumerable<CommerceQuerySort> SortFields { get; protected set; }
+
         public PaginationModel Pagination { get; set; }
 
-        /// <summary>
-        /// Gets or sets the name of the page size CSS class.
-        /// </summary>
         public string PageSizeClass { get; set; }
 
-        /// <summary>
-        /// Initializes the view model
-        /// </summary>
-        /// <param name="rendering">The rendering</param>
-        /// <param name="products">The list of child products</param>
-        /// <param name="sortFields">The fields to allow sorting on</param>
-        /// <param name="searchOptions">Any search options used to find products in this category</param>
         public void Initialize(Rendering rendering, SearchResults products, IEnumerable<CommerceQuerySort> sortFields, CommerceSearchOptions searchOptions)
         {
             base.Initialize(rendering);
 
-            int itemsPerPage = (searchOptions != null) ? searchOptions.NumberOfItemsToReturn : 0;
-
-            if (products != null)
+            if (products != null && searchOptions != null)
             {
+                var itemsPerPage = searchOptions.NumberOfItemsToReturn;
                 var alreadyShown = products.CurrentPageNumber * searchOptions.NumberOfItemsToReturn;
                 Pagination = new PaginationModel
                 {
@@ -78,7 +54,7 @@ namespace Sitecore.Reference.Storefront.Models.RenderingModels
                     NumberOfPages = products.TotalPageCount,
                     PageResultCount = itemsPerPage,
                     StartResultIndex = alreadyShown + 1,
-                    EndResultIndex = System.Math.Min(products.TotalItemCount, alreadyShown + itemsPerPage)
+                    EndResultIndex = Math.Min(products.TotalItemCount, alreadyShown + itemsPerPage)
                 };
             }
 

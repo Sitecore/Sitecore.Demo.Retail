@@ -144,9 +144,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Foundation\Commerce\storefront\Common\Sitecore.Reference.Storefront.Common.csproj">
+    <ProjectReference Include="..\..\..\Foundation\Commerce\storefront\Common\Sitecore.Reference.Storefront.csproj">
       <Project>{8450f330-0271-4091-8809-c671ccd50671}</Project>
-      <Name>Sitecore.Reference.Storefront.Common</Name>
+      <Name>Sitecore.Reference.Storefront</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -10,8 +10,12 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
+@using Sitecore.Configuration
 @using Sitecore.Reference.Storefront;
-@using Sitecore.Reference.Storefront.Managers;
+@using Sitecore.Foundation.Commerce.Managers;
+@using Sitecore.Foundation.Commerce.Models
+@using Sitecore.WordOCX.HtmlDocument
+@using Sitecore.Mvc.Analytics.Extensions
 
 @{
     var siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>();
@@ -34,12 +38,12 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
     @Styles.Render("~/styles/storefront")
 
-    @Scripts.Render("~/js/modernizr")
-    @Scripts.Render("~/js/jquery")
-    @Scripts.Render("~/js/knockout")
-    @Scripts.Render("~/js/jqueryval")
-    @Scripts.Render("~/js/storefront/bootstrap")
-    @Scripts.Render("~/js/storefront")
+    @Settings.Scripts.Render("~/js/modernizr")
+    @Settings.Scripts.Render("~/js/jquery")
+    @Settings.Scripts.Render("~/js/knockout")
+    @Settings.Scripts.Render("~/js/jqueryval")
+    @Settings.Scripts.Render("~/js/storefront/bootstrap")
+    @Settings.Scripts.Render("~/js/storefront")
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -58,7 +62,7 @@
         }
     </script>
 
-    @Html.Sitecore().AnalyticsVisitorIdentification()
+    @Html.Sitecore().VisitorIdentification()
 
     <form id="_CRSFform" action="#" method="post">
         @Html.AntiForgeryToken()

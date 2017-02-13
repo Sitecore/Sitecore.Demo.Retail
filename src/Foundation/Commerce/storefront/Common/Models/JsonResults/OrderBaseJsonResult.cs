@@ -15,58 +15,33 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Sitecore.Commerce.Entities.Carts;
+using Sitecore.Commerce.Entities.Orders;
+using Sitecore.Commerce.Services;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
-    using Sitecore.Commerce.Entities.Carts;
-    using Sitecore.Commerce.Services;
-    using Sitecore.Commerce.Services.Carts;
-    using Sitecore.Diagnostics;
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Web;
-
-    /// <summary>
-    /// Emits the Json result of a Order request.
-    /// </summary>
     public class OrderBaseJsonResult : CartBaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OrderBaseJsonResult"/> class.
-        /// </summary>
         public OrderBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OrderBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The result.</param>
         public OrderBaseJsonResult(ServiceProviderResult result)
             : base(result)
         {
         }
 
-        /// <summary>
-        /// Gets or sets the order ID.
-        /// </summary>
         public string OrderId { get; set; }
 
-        /// <summary>
-        /// Initializes this object based on the data contained in the provided cart.
-        /// </summary>
-        /// <param name="cart">The cart used to initialize this object.</param>
         public override void Initialize(Cart cart)
         {
             base.Initialize(cart);
 
-            var order = cart as Sitecore.Commerce.Entities.Orders.Order;
+            var order = cart as Order;
             if (order != null)
             {
-                this.OrderId = order.OrderID;
+                OrderId = order.OrderID;
             }
         }
     }

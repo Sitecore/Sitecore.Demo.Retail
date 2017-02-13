@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8450F330-0271-4091-8809-C671CCD50671}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sitecore.Reference.Storefront</RootNamespace>
+    <AssemblyName>Sitecore.Reference.Storefront</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <StyleCopOverrideSettingsFile>..\..\Settings.Sitecore.StyleCop</StyleCopOverrideSettingsFile>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>12.0</OldToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AntiXssLibrary, Version=4.2.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\AntiXSS.4.2.1\lib\net40\AntiXssLibrary.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CommerceServer.Core.Catalog, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL" />
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\DotNetOpenAuth.AspNet.4.0.3.12153\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\DotNetOpenAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\DotNetOpenAuth.OAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\DotNetOpenAuth.OAuth.Consumer.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\DotNetOpenAuth.OpenId.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlSanitizationLibrary, Version=4.2.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\AntiXSS.4.2.1\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=736440c9b414ea16, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\CodeContracts.Unofficial.1.0.0.0\lib\Net35\Microsoft.Contracts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Automation, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.Automation.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.DataAccess, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.MongoDB, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.MongoDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Commerce, Version=8.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Commerce.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Commerce.Connect.CommerceServer, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Commerce.Engine.Connect, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Commerce.Engine.Connect.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.ContentSearch.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Linq, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.ContentSearch.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Foundation.Dictionary">
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Foundation.SitecoreExtensions">
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Foundation.SitecoreExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Kernel, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Mvc, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Mvc.Analytics">
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Mvc.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WindsorConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CatalogController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\CSBaseController.cs" />
+    <Compile Include="Controllers\LandingController.cs" />
+    <Compile Include="Controllers\NavigationSearchController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
+    <Compile Include="Controllers\StorefrontSearchController.cs" />
+    <Compile Include="Infrastructure\DependenciesInstaller.cs" />
+    <Compile Include="Infrastructure\SitecorePipelines\RegisterDataModelExtensionsBase.cs" />
+    <Compile Include="Infrastructure\StorefrontSessionStateAttribute.cs" />
+    <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
+    <Compile Include="Infrastructure\WindsorControllerFactoryBase.cs" />
+    <Compile Include="Models\CustomerLinkupPendingViewModel.cs" />
+    <Compile Include="Models\IdentityProviderModel.cs" />
+    <Compile Include="Models\JsonResults\AddressItemJsonResult.cs" />
+    <Compile Include="Models\JsonResults\AddressListItemJsonResult.cs" />
+    <Compile Include="Models\JsonResults\CancelOrderBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\CardPaymentAcceptUrlJsonResult.cs" />
+    <Compile Include="Models\JsonResults\CSCartBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\LineShippingOptionBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\ShippingMethodBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\ShippingMethodPerItemBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\ShippingMethodsJsonResult.cs" />
+    <Compile Include="Models\JsonResults\ShippingOptionBaseJsonResult.cs" />
+    <Compile Include="Models\FederatedSignoutModel.cs" />
+    <Compile Include="Models\OrderConfirmationViewModel.cs" />
+    <Compile Include="Models\RenderingModels\CurrencyMenuViewModel.cs" />
+    <Compile Include="Models\JsonResults\AddressItemBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\AddressListItemBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\AvailableStatesBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\CartAdjustmentBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\CartBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\CartLineBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\ForgotPasswordBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\CheckoutDataBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\LoyaltyCardItemBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\LoyaltyCardsBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\LoyaltyRewardPointItemBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\ProfileBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\RegisterBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\ChangePasswordBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\ShippingMethodsBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\StockInfoListBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\StockInfoBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\GiftCardBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\LoyaltyProgramItemBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\LoyaltyTierItemBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\LoyaltyTransactionItemBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\MiniCartBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\OrderHeaderItemBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\SubmitOrderBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\UpdateLoyaltyCardBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\UserBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\OrderBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\OrdersBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\WishListHeaderItemBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\WishListItemBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\WishListBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\WishListsBaseJsonResult.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\RenderingModels\CartRenderingModel.cs" />
+    <Compile Include="Models\ProductSearchResultViewModel.cs" />
+    <Compile Include="Models\RenderingModels\MultipleProductSearchResultsViewModel.cs" />
+    <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\CustomCommerceCartLine.cs" />
+    <Compile Include="Models\JsonResults\BaseJsonResult.cs" />
+    <Compile Include="Models\LandingPageViewModel.cs" />
+    <Compile Include="Models\NoDataSourceViewModel.cs" />
+    <Compile Include="Models\PaginationModel.cs" />
+    <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\RelatedCatalogItemsViewModel.cs" />
+    <Compile Include="Models\RenderingModels\NavigationViewModel.cs" />
+    <Compile Include="Models\RenderingModels\PaginationViewModel.cs" />
+    <Compile Include="Models\RenderingModels\ProductFacetsViewModel.cs" />
+    <Compile Include="Models\RenderingModels\ProductListHeaderViewModel.cs" />
+    <Compile Include="Models\SearchBarModel.cs" />
+    <Compile Include="Models\SiteContentSearchResultsViewModel.cs" />
+    <Compile Include="Models\SiteContentViewModel.cs" />
+    <Compile Include="Models\SitecoreItemModels\CommerceServerStorefront.cs" />
+    <Compile Include="Models\VariantPropertiesEqualityComparer.cs" />
+    <Compile Include="Models\VariantViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\VariantIndexInfo.cs" />
+    <Compile Include="Search\VariantInfoComputedField.cs" />
+    <Compile Include="SitecorePipelines\InitializeBundles.cs" />
+    <Compile Include="SitecorePipelines\InitializeControllerFactory.cs" />
+    <Compile Include="SitecorePipelines\InitializeRoutes.cs" />
+    <Compile Include="Utils\SearchNavigation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <Content Include="App_Config\CommerceServer.Core.config.disabled" />
+    <Content Include="App_Config\Include\Reference.Storefront\Reference.Storefront.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Include\Reference.Storefront\Reference.Storefront.Customer.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Include\Reference.Storefront\Reference.Storefront.Index.Lucene.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Include\Reference.Storefront\Reference.Storefront.Index.Solr.config.example">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Include\Reference.Storefront\Reference.Storefront.Orders.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Config\Include\Reference.Storefront\Sitecore.ItemWebApi.config" />
+    <Content Include="MergeFiles\Merge.Commerce.Storefront.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="MergeFiles\Views\Merge.Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <None Include="Scripts\jquery-2.0.3.min.map" />
+    <None Include="Scripts\jsuri-1.1.1.min.js.map" />
+    <None Include="Scripts\knockout.validation-2.0.0.min.js.map" />
+    <Content Include="Sitecore\Copyrights\CastleWinsor_Apache.txt" />
+    <Content Include="Sitecore\Copyrights\Knockout.Validation_MIT.txt" />
+    <Content Include="Sitecore\Copyrights\Microsoft.AspNet.Mvc_rtw_enu.htm" />
+    <Content Include="Sitecore\Copyrights\Microsoft.AspNet.Razor_rtw_enu.htm" />
+    <Content Include="Sitecore\Copyrights\Microsoft.AspNet.WebApi_rtw_enu.htm" />
+    <Content Include="Sitecore\Copyrights\Microsoft.AspNet.WebPages_rtw_enu.htm" />
+    <Content Include="Sitecore\Copyrights\Microsoft.Web.Infrastructure-eula.htm" />
+    <Content Include="Sitecore\Copyrights\Newtonsoft.Json_MIT.txt" />
+    <Content Include="Sitecore\Copyrights\WebActivatorEx_MSPL.txt" />
+    <Content Include="Views\Storefront\Account\_AccountProfile.cshtml" />
+    <Content Include="Views\Storefront\Account\_AddressBook.cshtml" />
+    <Content Include="Views\Storefront\Account\_LoyaltyAccount.cshtml" />
+    <Content Include="Views\Storefront\Account\_RecentOrders.cshtml" />
+    <Content Include="Views\Storefront\Account\_WishLists.cshtml" />
+    <Content Include="Views\Storefront\Account\Addresses.cshtml" />
+    <Content Include="Views\Storefront\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Storefront\Account\EditProfile.cshtml" />
+    <Content Include="Views\Storefront\Account\FederatedSignout.cshtml" />
+    <Content Include="Views\Storefront\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Storefront\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Storefront\Account\Index.cshtml" />
+    <Content Include="Views\Storefront\Account\Login.cshtml" />
+    <Content Include="Views\Storefront\Account\LoyaltyCards.cshtml" />
+    <Content Include="Views\Storefront\Account\MyWishList.cshtml" />
+    <Content Include="Views\Storefront\Account\MyWishLists.cshtml" />
+    <Content Include="Views\Storefront\Account\Register.cshtml" />
+    <Content Include="Views\Storefront\Account\UserPendingActivation.cshtml" />
+    <Content Include="Views\Storefront\Catalog\_FourProductSlide.cshtml" />
+    <Content Include="Views\Storefront\Catalog\_ProductSummary.cshtml" />
+    <Content Include="Views\Storefront\Catalog\_RelatedCatalogItemsSlide.cshtml" />
+    <Content Include="Views\Storefront\Catalog\_SiteContentSummary.cshtml" />
+    <Content Include="Views\Storefront\Catalog\AddGiftCardToCart.cshtml" />
+    <Content Include="Views\Storefront\Catalog\AddToCart.cshtml" />
+    <Content Include="Views\Storefront\Catalog\CategoryPageHeader.cshtml" />
+    <Content Include="Views\Storefront\Catalog\CheckGiftCardBalance.cshtml" />
+    <Content Include="Views\Storefront\Catalog\ChildCategoryNavigation.cshtml" />
+    <Content Include="Views\Storefront\Catalog\GiftCardInformation.cshtml" />
+    <Content Include="Views\Storefront\Catalog\GiftCardPresentation.cshtml" />
+    <Content Include="Views\Storefront\Catalog\ProductFacets.cshtml" />
+    <Content Include="Views\Storefront\Catalog\ProductImages.cshtml" />
+    <Content Include="Views\Storefront\Catalog\ProductInformation.cshtml" />
+    <Content Include="Views\Storefront\Catalog\ProductList.cshtml" />
+    <Content Include="Views\Storefront\Catalog\ProductListHeader.cshtml" />
+    <Content Include="Views\Storefront\Catalog\ProductPresentation.cshtml" />
+    <Content Include="Views\Storefront\Catalog\ProductRating.cshtml" />
+    <Content Include="Views\Storefront\Catalog\ProductRecommendation.cshtml" />
+    <Content Include="Views\Storefront\Catalog\RelatedCatalogItems.cshtml" />
+    <Content Include="Views\Storefront\Catalog\SiteContentList.cshtml" />
+    <Content Include="Views\Storefront\Checkout\_Billing.cshtml" />
+    <Content Include="Views\Storefront\Checkout\_ByItem_SendByEmail.cshtml" />
+    <Content Include="Views\Storefront\Checkout\_ByItem_ShipAll.cshtml" />
+    <Content Include="Views\Storefront\Checkout\_ByItem_Store.cshtml" />
+    <Content Include="Views\Storefront\Checkout\_CheckoutFooter.cshtml" />
+    <Content Include="Views\Storefront\Checkout\_Confirm.cshtml" />
+    <Content Include="Views\Storefront\Checkout\_Delivery.cshtml" />
+    <Content Include="Views\Storefront\Checkout\_PickAtStore.cshtml" />
+    <Content Include="Views\Storefront\Checkout\_PickDeliveryByItem.cshtml" />
+    <Content Include="Views\Storefront\Checkout\_SendByEmail.cshtml" />
+    <Content Include="Views\Storefront\Checkout\_ShipAll.cshtml" />
+    <Content Include="Views\Storefront\Checkout\_StartCheckout.cshtml" />
+    <Content Include="Views\Storefront\Checkout\OrderConfirmation.cshtml" />
+    <Content Include="Views\Storefront\Checkout\StepIndicator.cshtml" />
+    <Content Include="Views\Storefront\Checkout\StorefrontCheckout.cshtml" />
+    <Content Include="Views\Storefront\Landing\Carousel.cshtml" />
+    <Content Include="Views\Storefront\Shared\_Layout.cshtml" />
+    <Content Include="Views\Storefront\Shared\_PrintLayout.cshtml" />
+    <Content Include="Views\Storefront\Shared\Breadcrumbs.cshtml" />
+    <Content Include="Views\Storefront\Shared\CurrencyMenu.cshtml" />
+    <Content Include="Views\Storefront\Shared\Empty.cshtml" />
+    <Content Include="Views\Storefront\Shared\Error.cshtml" />
+    <Content Include="Views\Storefront\Shared\ErrorImage.cshtml" />
+    <Content Include="Views\Storefront\Shared\ErrorsSummary.cshtml" />
+    <Content Include="Views\Storefront\Shared\FooterNavigation.cshtml" />
+    <Content Include="Views\Storefront\Shared\LanguageSelector.cshtml" />
+    <Content Include="Views\Storefront\Shared\Logo.cshtml" />
+    <Content Include="Views\Storefront\Shared\MiniCart.cshtml" />
+    <Content Include="Views\Storefront\Shared\Navigation.cshtml" />
+    <Content Include="Views\Storefront\Shared\NavigationButtons.cshtml" />
+    <Content Include="Views\Storefront\Shared\NoDatasource.cshtml" />
+    <Content Include="Views\Storefront\Shared\Pagination.cshtml" />
+    <Content Include="Views\Storefront\Shared\PrintOnly.cshtml" />
+    <Content Include="Views\Storefront\Shared\SearchBar.cshtml" />
+    <Content Include="Views\Storefront\Shared\SearchEvent.cshtml" />
+    <Content Include="Views\Storefront\Shared\ShareAndPrint.cshtml" />
+    <Content Include="Views\Storefront\Shared\SocialConnector.cshtml" />
+    <Content Include="Views\Storefront\Shared\Structures\NavigationExtraStructure.cshtml" />
+    <Content Include="Views\Storefront\Shared\Structures\NavigationStructure.cshtml" />
+    <Content Include="Views\Storefront\Shared\Structures\SingleColumn.cshtml" />
+    <Content Include="Views\Storefront\Shared\Structures\ThreeColumn.cshtml" />
+    <Content Include="Views\Storefront\Shared\Structures\TopStructure.cshtml" />
+    <Content Include="Views\Storefront\Shared\Structures\TwoColumnCenterRight.cshtml" />
+    <Content Include="Views\Storefront\Shared\Structures\TwoColumnLeftCenter.cshtml" />
+    <Content Include="Views\Storefront\Shared\TitleText.cshtml" />
+    <Content Include="Views\Storefront\Shared\TitleTextHeader.cshtml" />
+    <Content Include="Views\Storefront\Shared\TopBarLinks.cshtml" />
+    <Content Include="Views\Storefront\ShoppingCart\_CartSummary.cshtml" />
+    <Content Include="Views\Storefront\ShoppingCart\_LineItem.cshtml" />
+    <Content Include="Views\Storefront\ShoppingCart\CheckoutButtons.cshtml" />
+    <Content Include="Views\Storefront\ShoppingCart\ShoppingCart.cshtml" />
+    <Content Include="Views\Storefront\Account\MyOrder.cshtml" />
+    <Content Include="Views\Storefront\Account\MyOrders.cshtml" />
+    <None Include="Views\Web.config" />
+    <Content Include="Views\web.config.transform">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Scripts\autoNumeric.js" />
+    <Content Include="Scripts\bootstrap-1.2.1.js" />
+    <Content Include="Scripts\bootstrap-1.2.1.min.js" />
+    <Content Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.0.3.js" />
+    <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.js" />
+    <Content Include="Scripts\jquery.blockUI.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.placeholder.js" />
+    <Content Include="Scripts\jquery.placeholder.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jsuri-1.1.1.js" />
+    <Content Include="Scripts\jsuri-1.1.1.min.js" />
+    <Content Include="Scripts\knockout-2.3.0.debug.js" />
+    <Content Include="Scripts\knockout-2.3.0.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\knockout.validation-2.0.0.js" />
+    <Content Include="Scripts\knockout.validation-2.0.0.min.js" />
+    <Content Include="Scripts\modernizr-2.6.1.min.js" />
+    <Content Include="Scripts\number-polyfill.js" />
+    <Content Include="Scripts\number-polyfill.min.js" />
+    <Content Include="Scripts\Storefront\order.js" />
+    <Content Include="Scripts\plugins.js" />
+    <Content Include="Scripts\Storefront\addresses.js" />
+    <Content Include="Scripts\Storefront\bootstrap.js" />
+    <Content Include="Scripts\Storefront\bootstrap.min.js" />
+    <Content Include="Scripts\Storefront\cart.js" />
+    <Content Include="Scripts\Storefront\checkout.js" />
+    <Content Include="Scripts\Storefront\debug-knockout.js" />
+    <Content Include="Scripts\Storefront\editprofile.js" />
+    <Content Include="Scripts\Storefront\knockout-3.2.0.debug.js" />
+    <Content Include="Scripts\Storefront\loyaltycards.js" />
+    <Content Include="Scripts\Storefront\main.js" />
+    <Content Include="Scripts\Storefront\maps.js" />
+    <Content Include="Scripts\Storefront\passwordmanagement.js" />
+    <Content Include="Scripts\Storefront\product-details.js" />
+    <Content Include="Scripts\Storefront\register.js" />
+    <Content Include="Scripts\Storefront\search.js" />
+    <Content Include="Scripts\Storefront\Sitecore.js" />
+    <Content Include="Scripts\Storefront\userpendingactivation.js" />
+    <Content Include="Scripts\Storefront\ViewModels\addresses_VM.js" />
+    <Content Include="Scripts\Storefront\ViewModels\billing_VM.js" />
+    <Content Include="Scripts\Storefront\ViewModels\CartKnockoutModels.js" />
+    <Content Include="Scripts\Storefront\ViewModels\checkoutData_VM.js" />
+    <Content Include="Scripts\Storefront\ViewModels\confirm_VM.js" />
+    <Content Include="Scripts\Storefront\ViewModels\delivery_VM.js" />
+    <Content Include="Scripts\Storefront\ViewModels\errorsummary_VM.js" />
+    <Content Include="Scripts\Storefront\ViewModels\loyaltycards_VM.js" />
+    <Content Include="Scripts\Storefront\ViewModels\minicart_VM.js" />
+    <Content Include="Scripts\Storefront\ViewModels\orders_VM.js" />
+    <Content Include="Scripts\Storefront\ViewModels\StepIndicator.js" />
+    <Content Include="Scripts\Storefront\ViewModels\wishlist_VM.js" />
+    <Content Include="Scripts\Storefront\wishlist.js" />
+    <Content Include="Scripts\_references.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\code\Sitecore.Foundation.Commerce.csproj">
+      <Project>{662345ac-23ee-4125-87a6-0785795c2409}</Project>
+      <Name>Sitecore.Foundation.Commerce</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v14.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:59620/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

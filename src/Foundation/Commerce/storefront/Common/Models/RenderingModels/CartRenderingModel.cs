@@ -15,46 +15,23 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
+using Sitecore.Mvc.Presentation;
+
 namespace Sitecore.Reference.Storefront.Models.RenderingModels
 {
-    using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
-    using Sitecore.Mvc.Presentation;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
-
-    /// <summary>
-    /// Defines the CartRenderingModel class.
-    /// </summary>
-    public class CartRenderingModel : Sitecore.Mvc.Presentation.RenderingModel
+    public class CartRenderingModel : RenderingModel
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CartRenderingModel"/> class.
-        /// </summary>
-        /// <param name="cart">The cart.</param>
         public CartRenderingModel(CommerceCart cart)
         {
-            this.Cart = cart;
+            Cart = cart;
         }
 
-        /// <summary>
-        /// Gets or sets the cart.
-        /// </summary>
-        /// <value>
-        /// The cart.
-        /// </value>
         public CommerceCart Cart { get; set; }
 
-        /// <summary>
-        /// Gets the specified cart.
-        /// </summary>
-        /// <param name="cart">The cart.</param>
-        /// <param name="rendering">The rendering.</param>
-        /// <returns>Gets an instance of the CartRenderingModel with initialized Sitecore rendering.</returns>
         public static CartRenderingModel Get(CommerceCart cart, Rendering rendering)
         {
-            CartRenderingModel model = new CartRenderingModel(cart);
+            var model = new CartRenderingModel(cart);
 
             model.Initialize(rendering);
 

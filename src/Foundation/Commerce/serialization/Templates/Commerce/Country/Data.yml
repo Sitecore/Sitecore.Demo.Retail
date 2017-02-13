@@ -1,0 +1,18 @@
+﻿---
+ID: "5850e6b4-5ef2-4d88-ba1f-20e3f51c4154"
+Parent: "9086e8e0-55ad-443f-99af-cff0f95e7138"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Foundation/Commerce/Country/Data
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150210T110106Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

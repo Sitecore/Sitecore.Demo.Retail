@@ -15,51 +15,25 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using Sitecore.Commerce.Entities.WishLists;
+using Sitecore.Commerce.Services;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Entities.WishLists;
-    using Sitecore.Commerce.Services;
-    using System.Collections.Generic;
-
-    /// <summary>
-    /// Json result for wish lists operations.
-    /// </summary>
     public class WishListsBaseJsonResult : BaseJsonResult
     {
-        private List<WishListHeaderItemBaseJsonResult> _wishLists = new List<WishListHeaderItemBaseJsonResult>();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WishListsBaseJsonResult"/> class.
-        /// </summary>
         public WishListsBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WishListsBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The service provider result.</param>
         public WishListsBaseJsonResult(ServiceProviderResult result)
             : base(result)
         {
-        }    
-
-        /// <summary>
-        /// Gets the wish lists.
-        /// </summary>
-        public List<WishListHeaderItemBaseJsonResult> WishLists 
-        { 
-            get 
-            { 
-                return this._wishLists; 
-            } 
         }
 
-        /// <summary>
-        /// Initializes the specified wish lists.
-        /// </summary>
-        /// <param name="wishLists">The wish lists.</param>
+        public List<WishListHeaderItemBaseJsonResult> WishLists { get; } = new List<WishListHeaderItemBaseJsonResult>();
+
         public virtual void Initialize(IEnumerable<WishListHeader> wishLists)
         {
             if (wishLists == null)
@@ -69,7 +43,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
             foreach (var wishList in wishLists)
             {
-                this._wishLists.Add(new WishListHeaderItemBaseJsonResult(wishList));
+                WishLists.Add(new WishListHeaderItemBaseJsonResult(wishList));
             }
         }
     }

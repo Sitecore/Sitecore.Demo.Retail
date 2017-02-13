@@ -10,7 +10,8 @@
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
 
-@using Sitecore.Reference.Storefront.Managers
+@using Sitecore.Foundation.Commerce
+@using Sitecore.Foundation.Commerce.Managers
 @model SearchBarModel
 @{
     string searchPlaceholder = Html.Sitecore().CurrentItem["Search"];
@@ -19,7 +20,7 @@
 <li class="navbar-activity-search">
     <form action="~/search" class="navbar-form" role="search">
         <div class="form-group">
-            <input type="text" name="@Sitecore.Reference.Storefront.StorefrontConstants.QueryStrings.SearchKeyword" placeholder="@searchPlaceholder" value="@Model.SearchKeyword" autocomplete="off"/>
+            <input type="text" name="@StorefrontConstants.QueryStrings.SearchKeyword" placeholder="@searchPlaceholder" value="@Model.SearchKeyword" autocomplete="off"/>
         </div>
     </form>
 

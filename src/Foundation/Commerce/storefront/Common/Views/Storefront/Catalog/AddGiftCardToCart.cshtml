@@ -11,6 +11,7 @@
   // -------------------------------------------------------------------------------------------*@
 
 @using Sitecore.Commerce.Entities.Inventory
+@using Sitecore.Foundation.SitecoreExtensions.Extensions
 @model ProductViewModel
 
 @{
@@ -46,7 +47,7 @@
 
   if (Model.Images != null && Model.Images.Any())
   {
-    @Html.Hidden("ImageUrl", Model.Images[0].GetImageUrl(50, 50))
+    @Html.Hidden("ImageUrl", Model.Images[0]?.ImageUrl(50, 50))
   }
 
   <div class="form-group giftcard-amount">

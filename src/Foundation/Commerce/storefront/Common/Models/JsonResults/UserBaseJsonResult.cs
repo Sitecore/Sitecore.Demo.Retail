@@ -15,78 +15,39 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Sitecore.Commerce.Entities.Customers;
+using Sitecore.Commerce.Services;
+using Sitecore.Diagnostics;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Entities.Customers;
-    using Sitecore.Diagnostics;
-    using Sitecore.Commerce.Services;
-
-    /// <summary>
-    /// Emits the Json result of a get user request.
-    /// </summary>
     public class UserBaseJsonResult : BaseJsonResult
-    { 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UserBaseJsonResult"/> class.
-        /// </summary>
+    {
         public UserBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UserBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The result.</param>
         public UserBaseJsonResult(ServiceProviderResult result)
             : base(result)
         {
         }
 
-        /// <summary>
-        /// Gets or sets the first name.
-        /// </summary>
-        /// <value>
-        /// The first name.
-        /// </value>
         public string FirstName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the last name.
-        /// </summary>
-        /// <value>
-        /// The last name.
-        /// </value>
         public string LastName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the full name.
-        /// </summary>
-        /// <value>
-        /// The full name.
-        /// </value>
         public string FullName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the email result.
-        /// </summary>
-        /// <value>
-        /// The email result.
-        /// </value>
         public string Email { get; set; }
 
-        /// <summary>
-        /// Initializes this object based on the data contained in the provided cart.
-        /// </summary>
-        /// <param name="user">The user.</param>
         public virtual void Initialize(CommerceUser user)
         {
             Assert.ArgumentNotNull(user, "user");
 
-            this.FirstName = user.FirstName;
-            this.LastName = user.LastName;
-            this.FullName = string.Concat(this.FirstName, string.Empty, this.LastName);
-            this.Email = user.Email;
+            FirstName = user.FirstName;
+            LastName = user.LastName;
+            FullName = string.Concat(FirstName, string.Empty, LastName);
+            Email = user.Email;
         }
     }
 }

@@ -15,49 +15,18 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using Sitecore.Commerce.Connect.CommerceServer;
+using Sitecore.Commerce.Entities.Shipping;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Connect.CommerceServer;
-    using Sitecore.Commerce.Entities.Shipping;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    /// <summary>
-    /// Defines the LineShippingOptionBaseJsonResult class.
-    /// </summary>
     public class LineShippingOptionBaseJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LineShippingOptionBaseJsonResult"/> class.
-        /// </summary>
-        public LineShippingOptionBaseJsonResult()
-            : base()
-        {
-        }
-
-        /// <summary>
-        /// Gets or sets the line identifier.
-        /// </summary>
-        /// <value>
-        /// The line identifier.
-        /// </value>
         public string LineId { get; set; }
 
-        /// <summary>
-        /// Gets or sets the shipping options.
-        /// </summary>
-        /// <value>
-        /// The shipping options.
-        /// </value>
         public IEnumerable<ShippingOptionBaseJsonResult> ShippingOptions { get; set; }
 
-        /// <summary>
-        /// Initializes the specified line shipping option.
-        /// </summary>
-        /// <param name="lineShippingOption">The line shipping option.</param>
         public void Initialize(LineShippingOption lineShippingOption)
         {
             if (lineShippingOption == null)
@@ -65,7 +34,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
                 return;
             }
 
-            this.LineId = lineShippingOption.LineId;
+            LineId = lineShippingOption.LineId;
 
             var shippingOptionList = new List<ShippingOptionBaseJsonResult>();
 
@@ -80,7 +49,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
                 }
             }
 
-            this.ShippingOptions = shippingOptionList;
+            ShippingOptions = shippingOptionList;
         }
     }
 }

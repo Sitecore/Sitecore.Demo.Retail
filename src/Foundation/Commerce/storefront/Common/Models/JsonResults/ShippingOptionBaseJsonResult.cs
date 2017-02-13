@@ -15,73 +15,23 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Sitecore.Commerce.Entities.Shipping;
+using Sitecore.Foundation.Commerce.Managers;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Entities.Shipping;
-    using Sitecore.Reference.Storefront.Managers;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    /// <summary>
-    /// Defines the ShippingOptionBaseJsonResult class.
-    /// </summary>
     public class ShippingOptionBaseJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ShippingOptionBaseJsonResult"/> class.
-        /// </summary>
-        public ShippingOptionBaseJsonResult()
-            : base()
-        {
-        }
-
-        /// <summary>
-        /// Gets or sets the external identifier.
-        /// </summary>
-        /// <value>
-        /// The external identifier.
-        /// </value>
         public string ExternalId { get; set; }
 
-        /// <summary>
-        /// Gets or sets the description.
-        /// </summary>
-        /// <value>
-        /// The description.
-        /// </value>
         public string Description { get; set; }
 
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
         public string Name { get; set; }
 
-        /// <summary>
-        /// Gets or sets the type of the shipping option.
-        /// </summary>
-        /// <value>
-        /// The type of the shipping option.
-        /// </value>
-        public Sitecore.Commerce.Entities.Shipping.ShippingOptionType ShippingOptionType { get; set; }
+        public ShippingOptionType ShippingOptionType { get; set; }
 
-        /// <summary>
-        /// Gets or sets the name of the shop.
-        /// </summary>
-        /// <value>
-        /// The name of the shop.
-        /// </value>
         public string ShopName { get; set; }
 
-        /// <summary>
-        /// Initializes the specified shipping option.
-        /// </summary>
-        /// <param name="shippingOption">The shipping option.</param>
         public virtual void Initialize(ShippingOption shippingOption)
         {
             if (shippingOption == null)
@@ -89,12 +39,12 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
                 return;
             }
 
-            this.ExternalId = shippingOption.ExternalId;
-            this.Description = shippingOption.Description;
-            this.Name = StorefrontManager.GetShippingName(shippingOption.Name);
-            this.Description = shippingOption.Description;
-            this.ShippingOptionType = shippingOption.ShippingOptionType;
-            this.ShopName = shippingOption.ShopName;
+            ExternalId = shippingOption.ExternalId;
+            Description = shippingOption.Description;
+            Name = StorefrontManager.GetShippingName(shippingOption.Name);
+            Description = shippingOption.Description;
+            ShippingOptionType = shippingOption.ShippingOptionType;
+            ShopName = shippingOption.ShopName;
         }
     }
 }

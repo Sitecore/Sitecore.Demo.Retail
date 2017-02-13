@@ -15,22 +15,14 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using Sitecore.Mvc.Presentation;
+
 namespace Sitecore.Reference.Storefront.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
-
-    /// <summary>
-    /// Model that represents site content search results.
-    /// </summary>
-    public class SiteContentSearchResultsViewModel : Sitecore.Mvc.Presentation.RenderingModel
+    public class SiteContentSearchResultsViewModel : RenderingModel
     {
-        /// <summary>
-        /// Gets or sets the list of site content search result items.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Property setting is desired here.")]
         public List<SiteContentViewModel> ContentItems { get; set; }
     }
 }

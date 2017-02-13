@@ -15,79 +15,46 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+using Sitecore.Commerce.Services.Customers;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Services.Customers;
-    using System.ComponentModel.DataAnnotations;
-
-    /// <summary>
-    /// Defines the ProfileJsonResult class.
-    /// </summary>
     public class ProfileBaseJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ProfileBaseJsonResult"/> class.
-        /// </summary>
         public ProfileBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ProfileBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The result.</param>
         public ProfileBaseJsonResult(UpdateUserResult result)
             : base(result)
-        {           
+        {
         }
 
-        /// <summary>
-        /// Gets or sets the email.
-        /// </summary>
-        /// <value>
-        /// The email.
-        /// </value>
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        /// <summary>
-        /// Gets or sets the first name.
-        /// </summary>
-        /// <value>
-        /// The first name.
-        /// </value>
         [Display(Name = "First name")]
         public string FirstName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the last name
-        /// </summary>
         [Display(Name = "Last name")]
         public string LastName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the telephone
-        /// </summary>
         [Display(Name = "Telephone")]
         public string TelephoneNumber { get; set; }
 
-        /// <summary>
-        /// Initializes the specified result.
-        /// </summary>
-        /// <param name="result">The result.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public virtual void Initialize(UpdateUserResult result)
         {
             if (result.CommerceUser != null)
             {
-                this.Email = result.CommerceUser.Email;
-                this.FirstName = result.CommerceUser.FirstName;
-                this.LastName = result.CommerceUser.LastName;
-                this.TelephoneNumber = result.Properties["Phone"] as string;
+                Email = result.CommerceUser.Email;
+                FirstName = result.CommerceUser.FirstName;
+                LastName = result.CommerceUser.LastName;
+                TelephoneNumber = result.Properties["Phone"] as string;
             }
 
-            this.SetErrors(result);
+            SetErrors(result);
         }
     }
 }
