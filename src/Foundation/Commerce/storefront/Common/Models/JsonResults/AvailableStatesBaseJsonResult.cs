@@ -36,7 +36,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(Dictionary<string, string> states)
         {
-            Assert.ArgumentNotNull(states, "states");
+            Assert.ArgumentNotNull(states, nameof(states));
 
             States = states;
         }

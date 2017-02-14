@@ -27,9 +27,9 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Orders
     {
         public override void Process(ServicePipelineArgs args)
         {
-            Assert.ArgumentNotNull(args, "args");
-            Assert.ArgumentCondition(args.Request is GetAvailableCountriesRequest, "args.Request", "args.Request is GetAvailableCountriesRequest");
-            Assert.ArgumentCondition(args.Result is GetAvailableCountriesResult, "args.Result", "args.Result is GetAvailableCountriesResult");
+            Assert.ArgumentNotNull(args, nameof(args));
+            Assert.ArgumentCondition(args.Request is GetAvailableCountriesRequest, nameof(args.Request), "args.Request is GetAvailableCountriesRequest");
+            Assert.ArgumentCondition(args.Result is GetAvailableCountriesResult, nameof(args.Result), "args.Result is GetAvailableCountriesResult");
 
             var result = (GetAvailableCountriesResult) args.Result;
 

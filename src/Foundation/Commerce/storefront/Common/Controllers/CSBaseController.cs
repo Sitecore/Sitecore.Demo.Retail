@@ -25,7 +25,7 @@ namespace Sitecore.Reference.Storefront.Controllers
     {
         public CSBaseController([NotNull] AccountManager accountManager, [NotNull] ContactFactory contactFactory) : base(contactFactory)
         {
-            Assert.ArgumentNotNull(accountManager, "accountManager");
+            Assert.ArgumentNotNull(accountManager, nameof(accountManager));
 
             AccountManager = accountManager;
         }

@@ -39,8 +39,8 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         public OrderManager(OrderServiceProvider orderServiceProvider, [NotNull] CartManager cartManager)
         {
-            Assert.ArgumentNotNull(orderServiceProvider, "orderServiceProvider");
-            Assert.ArgumentNotNull(cartManager, "cartManager");
+            Assert.ArgumentNotNull(orderServiceProvider, nameof(orderServiceProvider));
+            Assert.ArgumentNotNull(cartManager, nameof(cartManager));
 
             OrderServiceProvider = orderServiceProvider;
             CartManager = cartManager;
@@ -50,13 +50,11 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public CartManager CartManager { get; protected set; }
 
-        public ManagerResponse<SubmitVisitorOrderResult, CommerceOrder> SubmitVisitorOrder(
-            [NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext,
-            [NotNull] SubmitOrderInputModel inputModel)
+        public ManagerResponse<SubmitVisitorOrderResult, CommerceOrder> SubmitVisitorOrder([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] SubmitOrderInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNull(inputModel, "inputModel");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
             var errorResult = new SubmitVisitorOrderResult {Success = false};
 
@@ -133,30 +131,27 @@ namespace Sitecore.Foundation.Commerce.Managers
             [NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext,
             [NotNull] string countryCode)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNullOrEmpty(countryCode, "countryCode");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNullOrEmpty(countryCode, nameof(countryCode));
 
             var request = new GetAvailableRegionsRequest(countryCode);
-            var result = ((CommerceOrderServiceProvider) OrderServiceProvider).GetAvailableRegions(request);
+            var result = OrderServiceProvider.GetAvailableRegions(request);
 
             result.WriteToSitecoreLog();
-            return new ManagerResponse<GetAvailableRegionsResult, Dictionary<string, string>>(result,
-                new Dictionary<string, string>(result.AvailableRegions));
+            return new ManagerResponse<GetAvailableRegionsResult, Dictionary<string, string>>(result, new Dictionary<string, string>(result.AvailableRegions));
         }
 
-        public ManagerResponse<GetVisitorOrdersResult, IEnumerable<OrderHeader>> GetOrders(string customerId,
-            string shopName)
+        public ManagerResponse<GetVisitorOrdersResult, IEnumerable<OrderHeader>> GetOrders(string customerId, string shopName)
         {
-            Assert.ArgumentNotNullOrEmpty(customerId, "customerId");
-            Assert.ArgumentNotNullOrEmpty(shopName, "shopName");
+            Assert.ArgumentNotNullOrEmpty(customerId, nameof(customerId));
+            Assert.ArgumentNotNullOrEmpty(shopName, nameof(shopName));
 
             var request = new GetVisitorOrdersRequest(customerId, shopName);
             var result = OrderServiceProvider.GetVisitorOrders(request);
             if (result.Success && result.OrderHeaders != null && result.OrderHeaders.Count > 0)
             {
-                return new ManagerResponse<GetVisitorOrdersResult, IEnumerable<OrderHeader>>(result,
-                    result.OrderHeaders.ToList());
+                return new ManagerResponse<GetVisitorOrdersResult, IEnumerable<OrderHeader>>(result, result.OrderHeaders.ToList());
             }
 
             result.WriteToSitecoreLog();
@@ -166,10 +161,10 @@ namespace Sitecore.Foundation.Commerce.Managers
         public ManagerResponse<CartResult, CommerceCart> Reorder([NotNull] CommerceStorefront storefront,
             [NotNull] VisitorContext visitorContext, ReorderInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNull(inputModel, "inputModel");
-            Assert.ArgumentNotNullOrEmpty(inputModel.OrderId, "inputModel.OrderId");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNull(inputModel, nameof(inputModel));
+            Assert.ArgumentNotNullOrEmpty(inputModel.OrderId, nameof(inputModel.OrderId));
 
             var request = new ReorderByCartNameRequest
             {
@@ -188,13 +183,12 @@ namespace Sitecore.Foundation.Commerce.Managers
         public ManagerResponse<VisitorCancelOrderResult, bool> CancelOrder([NotNull] CommerceStorefront storefront,
             [NotNull] VisitorContext visitorContext, CancelOrderInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNull(inputModel, "inputModel");
-            Assert.ArgumentNotNullOrEmpty(inputModel.OrderId, "inputModel.OrderId");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNull(inputModel, nameof(inputModel));
+            Assert.ArgumentNotNullOrEmpty(inputModel.OrderId, nameof(inputModel.OrderId));
 
-            var request = new VisitorCancelOrderRequest(inputModel.OrderId, visitorContext.GetCustomerId(),
-                storefront.ShopName);
+            var request = new VisitorCancelOrderRequest(inputModel.OrderId, visitorContext.GetCustomerId(), storefront.ShopName);
             request.OrderLineExternalIds = inputModel.OrderLineExternalIds;
             var result = OrderServiceProvider.VisitorCancelOrder(request);
 
@@ -203,12 +197,11 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<VisitorCancelOrderResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<GetVisitorOrderResult, CommerceOrder> GetOrderDetails(
-            [NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string orderId)
+        public ManagerResponse<GetVisitorOrderResult, CommerceOrder> GetOrderDetails([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string orderId)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNullOrEmpty(orderId, "orderId");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNullOrEmpty(orderId, nameof(orderId));
 
             var customerId = visitorContext.GetCustomerId();
             var request = new GetVisitorOrderRequest(orderId, customerId, storefront.ShopName);
@@ -220,7 +213,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         public ManagerResponse<GetAvailableCountriesResult, Dictionary<string, string>> GetAvailableCountries()
         {
             var request = new GetAvailableCountriesRequest();
-            var result = ((CommerceOrderServiceProvider) OrderServiceProvider).GetAvailableCountries(request);
+            var result = OrderServiceProvider.GetAvailableCountries(request);
             result.WriteToSitecoreLog();
             return new ManagerResponse<GetAvailableCountriesResult, Dictionary<string, string>>(result,
                 new Dictionary<string, string>(result.AvailableCountries));

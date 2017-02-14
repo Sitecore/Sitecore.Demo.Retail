@@ -26,19 +26,19 @@ using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Foundation.Commerce.Infrastructure.ComputedFields
 {
-    public class SiteContentItem : BaseComputedField
+    public class IsSiteContentItem : BaseComputedField
     {
         public override object ComputeValue(IIndexable itemToIndex)
         {
-            Assert.ArgumentNotNull(itemToIndex, "itemToIndex");
+            Assert.ArgumentNotNull(itemToIndex, nameof(itemToIndex));
 
-            var item = (Item) (itemToIndex as SitecoreIndexableItem);
-            if (item == null)
+            var item = itemToIndex as SitecoreIndexableItem;
+            if (item?.Item == null)
             {
                 return false;
             }
 
-            return (item.IsDerived(StorefrontConstants.KnownTemplateItemIds.StandardPage) || item.IsDerived(StorefrontConstants.KnownTemplateItemIds.SecuredPage)) && item[StorefrontConstants.ItemFields.DisplayInSearchResults] == "1";
+            return item.Item.HasLayout() && item.Item[StorefrontConstants.ItemFields.DisplayInSearchResults] == "1";
         }
     }
 }

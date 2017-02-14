@@ -15,17 +15,19 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-namespace Sitecore.Reference.Storefront.SitecorePipelines
-{
-    using Sitecore.Pipelines;
-    using System.Web.Optimization;
+using System.Web.Optimization;
+using Sitecore.Pipelines;
 
+namespace Sitecore.Reference.Storefront.Infrastructure.SitecorePipelines
+{
     public class InitializeBundles
     {
         public void Process(PipelineArgs args)
         {
             if (Context.IsUnitTesting)
+            {
                 return;
+            }
 
             BundleTable.EnableOptimizations = true;
             RegisterBundles(BundleTable.Bundles);
@@ -36,26 +38,26 @@ namespace Sitecore.Reference.Storefront.SitecorePipelines
             BundleTable.EnableOptimizations = true;
 
             bundles.Add(new ScriptBundle("~/js/jquery").Include(
-                        "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery.cookie.js",
-                        "~/Scripts/jquery.blockUI.js",
-                        "~/Scripts/jquery-ui-{version}.js"));
+                "~/Scripts/jquery-{version}.js",
+                "~/Scripts/jquery.cookie.js",
+                "~/Scripts/jquery.blockUI.js",
+                "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/js/jqueryval").Include(
-                        "~/Scripts/jquery.validate*",
-                        "~/Scripts/jquery.unobtrusive*"));
+                "~/Scripts/jquery.validate*",
+                "~/Scripts/jquery.unobtrusive*"));
 
             bundles.Add(new ScriptBundle("~/js/bootstrap").Include(
-                        "~/Scripts/bootstrap-{version}.js"));
+                "~/Scripts/bootstrap-{version}.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/js/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+                "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/js/knockout").Include(
-                        "~/Scripts/knockout-{version}.js",
-                        "~/Scripts/knockout.validation-{version}.js"));
+                "~/Scripts/knockout-{version}.js",
+                "~/Scripts/knockout.validation-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/js/storefront/bootstrap").Include(
                 "~/Scripts/Storefront/bootstrap.js"));

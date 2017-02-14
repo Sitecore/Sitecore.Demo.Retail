@@ -17,7 +17,6 @@
 
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Automation.Data.Items;
@@ -37,26 +36,37 @@ namespace Sitecore.Foundation.Commerce.Util
         private const string DefaultLocalizationFolder = "Storefront";
 
         private const string EaPlanFormatString = "{0} {1}";
+        private const string AbandonedCartsEaPlanId = "{7138ACC1-329C-4070-86DD-6A53D6F57AC5}";
+        private const string AbandonedCartsEaPlanName = "Abandoned Carts";
+        private const string NewOrderPlacedEaPlanId = "{7CA697EA-5CCA-4B59-85A3-D048B285E6B4}";
+        private const string NewOrderPlacedEaPlanName = "New Order Placed";
+        private const string ProductsBackInStockEaPlanId = "{36B4083E-F7F7-4E60-A747-75DDBEC6BB4B}";
+        private const string ProductsBackInStockEaPlanName = "Products Back In Stock";
+        private const string AbandonedCartsEaPlanBranchTemplateId = "{8C90E12F-4E2E-4E3D-9137-B2D5F5DD40C0}";
+        private const string NewOrderPlacedEaPlanBranchTemplateId = "{6F6A861F-78CF-4859-8AD8-7A2D5CCDBEB6}";
+        private const string ProductsBackInStockEaPlanBranchTemplateId = "{534EE43B-00B1-49D0-92A7-E78B9C127B00}";
+        private const string DeployCommandId = "{4044A9C4-B583-4B57-B5FF-2791CB0351DF}";
+        private const string CommerceConnectEaPlanParentId = "{03402BEE-21E9-458A-B3F4-D004CC4F21FA}";
 
         private readonly List<EaPlanInfo> _eaPlanInfos = new List<EaPlanInfo>
         {
             new EaPlanInfo
             {
-                Name = StorefrontConstants.EngagementPlans.AbandonedCartsEaPlanName,
-                ItemId = StorefrontConstants.EngagementPlans.AbandonedCartsEaPlanId,
-                EaPlanId = StorefrontConstants.KnownItemIds.AbandonedCartsEaPlanBranchTemplateId
+                Name = AbandonedCartsEaPlanName,
+                ItemId = AbandonedCartsEaPlanId,
+                EaPlanId = AbandonedCartsEaPlanBranchTemplateId
             },
             new EaPlanInfo
             {
-                Name = StorefrontConstants.EngagementPlans.NewOrderPlacedEaPlanName,
-                ItemId = StorefrontConstants.EngagementPlans.NewOrderPlacedEaPlanId,
-                EaPlanId = StorefrontConstants.KnownItemIds.NewOrderPlacedEaPlanBranchTemplateId
+                Name = NewOrderPlacedEaPlanName,
+                ItemId = NewOrderPlacedEaPlanId,
+                EaPlanId = NewOrderPlacedEaPlanBranchTemplateId
             },
             new EaPlanInfo
             {
-                Name = StorefrontConstants.EngagementPlans.ProductsBackInStockEaPlanName,
-                ItemId = StorefrontConstants.EngagementPlans.ProductsBackInStockEaPlanId,
-                EaPlanId = StorefrontConstants.KnownItemIds.ProductsBackInStockEaPlanBranchTemplateId
+                Name = ProductsBackInStockEaPlanName,
+                ItemId = ProductsBackInStockEaPlanId,
+                EaPlanId = ProductsBackInStockEaPlanBranchTemplateId
             }
         };
 
@@ -83,7 +93,7 @@ namespace Sitecore.Foundation.Commerce.Util
                 if (item != null)
                 {
                     plan.Name = string.Format(CultureInfo.InvariantCulture, EaPlanFormatString, StorefrontConstants.Settings.WebsiteName, item.DisplayName);
-                    var result = ItemManager.AddFromTemplate(plan.Name, ID.Parse(plan.EaPlanId), database.GetItem(StorefrontConstants.KnownItemIds.CommerceConnectEaPlanParentId), ID.Parse(plan.ItemId));
+                    var result = ItemManager.AddFromTemplate(plan.Name, ID.Parse(plan.EaPlanId), database.GetItem(CommerceConnectEaPlanParentId), ID.Parse(plan.ItemId));
                     continue;
                 }
 
@@ -102,7 +112,7 @@ namespace Sitecore.Foundation.Commerce.Util
                     continue;
                 }
 
-                var result = ((Item) engagementPlanItem).State.GetWorkflow().Execute(StorefrontConstants.KnownItemIds.DeployCommandId, engagementPlanItem, string.Empty, false).Succeeded;
+                var result = ((Item) engagementPlanItem).State.GetWorkflow().Execute(DeployCommandId, engagementPlanItem, string.Empty, false).Succeeded;
 
                 if (!result)
                 {

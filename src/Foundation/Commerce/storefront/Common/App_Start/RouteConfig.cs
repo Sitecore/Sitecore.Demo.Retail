@@ -21,13 +21,12 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines;
 using Sitecore.Foundation.Commerce.Util;
-using Sitecore.Reference.Storefront.SitecorePipelines;
 
 namespace Sitecore.Reference.Storefront
 {
     public static class RouteConfig
     {
-        private static readonly List<ApiInfo> ApiInfoList = new List<ApiInfo>
+        private static readonly List<ApiInfo> _apiInfoList = new List<ApiInfo>
         {
             new ApiInfo("account-getcurrentuser", "Account", "GetCurrentUser"),
             new ApiInfo("account-register", "Account", "Register"),
@@ -63,7 +62,7 @@ namespace Sitecore.Reference.Storefront
 
         public static void RegisterRoutes(RouteCollection routes)
         {
-            foreach (var apiInfo in ApiInfoList)
+            foreach (var apiInfo in _apiInfoList)
                 routes.MapRoute(
                     apiInfo.Name,
                     apiInfo.Url,

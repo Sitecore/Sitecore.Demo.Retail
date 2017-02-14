@@ -23,7 +23,7 @@ namespace Sitecore.Foundation.Commerce.Connect.Arguments
     {
         public GetSupportedCurrenciesRequest(string shopName, string catalogName) : base(shopName)
         {
-            Assert.ArgumentNotNullOrEmpty(catalogName, "catalogName");
+            Assert.ArgumentNotNullOrEmpty(catalogName, nameof(catalogName));
 
             this.CatalogName = catalogName;
         }

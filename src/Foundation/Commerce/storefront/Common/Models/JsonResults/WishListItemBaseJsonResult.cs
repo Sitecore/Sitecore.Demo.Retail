@@ -32,8 +32,8 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
     {
         public WishListItemBaseJsonResult(WishListLine line, string wishListId)
         {
-            Assert.ArgumentNotNull(line, "line");
-            Assert.ArgumentNotNullOrEmpty(wishListId, "wishListId");
+            Assert.ArgumentNotNull(line, nameof(line));
+            Assert.ArgumentNotNullOrEmpty(wishListId, nameof(wishListId));
 
             var product = (CommerceCartProduct) line.Product;
             var productItem = ProductItemResolver.ResolveCatalogItem(product.ProductId, product.ProductCatalog, true);

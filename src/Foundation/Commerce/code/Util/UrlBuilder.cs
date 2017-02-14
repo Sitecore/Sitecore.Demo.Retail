@@ -16,8 +16,6 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Web;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Foundation.Commerce.Models;

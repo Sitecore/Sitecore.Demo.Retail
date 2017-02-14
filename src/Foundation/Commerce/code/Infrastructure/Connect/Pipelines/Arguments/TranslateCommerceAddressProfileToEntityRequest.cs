@@ -26,8 +26,8 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Arguments
     {
         public TranslateCommerceAddressProfileToEntityRequest([NotNull] Profile sourceProfile, [NotNull] CommerceParty destinationParty)
         {
-            Assert.ArgumentNotNull(sourceProfile, "commerceProfile");
-            Assert.ArgumentNotNull(destinationParty, "customerParty");
+            Assert.ArgumentNotNull(sourceProfile, nameof(sourceProfile));
+            Assert.ArgumentNotNull(destinationParty, nameof(destinationParty));
 
             this.SourceProfile = sourceProfile;
             this.DestinationParty = destinationParty;

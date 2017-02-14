@@ -14,7 +14,7 @@
 @using Sitecore.Foundation.SitecoreExtensions.Extensions
 @using Sitecore.Mvc.Configuration
 @using Sitecore.Foundation.Commerce.Managers
-@model LoginModel
+@model Sitecore.Reference.Storefront.Models.LoginModel
 @{
     var signing = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.SigningButton];
     var storefront = StorefrontManager.CurrentStorefront;
@@ -79,7 +79,7 @@
             @foreach (var provider in Model.Providers)
             {
                 <div class="col-lg-4">
-                    <button name="provider" type="submit" onclick="window.location.href = '#'" class="btn btn-primary btn-block btn-social-@provider.Name" id="@provider.Name" value="@provider.Name" style='background-image: url("@(provider.Image?.ImageUrl(28, 28))"); background-repeat: no-repeat'>
+                    <button name="provider" type="submit" onclick='window.location.href="#"' class="btn btn-primary btn-block btn-social-@provider.Name" id="@provider.Name" value="@provider.Name" style='background-image: url("@(provider.Image?.ImageUrl(28, 28))"); background-repeat: no-repeat'>
                         <div id="provider-name">&emsp;&nbsp;@provider.Name&nbsp;@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.SignInButton, Html.Sitecore().CurrentItem)</div>
                     </button>
                 </div>

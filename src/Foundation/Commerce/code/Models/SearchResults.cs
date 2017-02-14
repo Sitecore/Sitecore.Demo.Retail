@@ -15,7 +15,6 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.Data.Items;
@@ -51,7 +50,7 @@ namespace Sitecore.Foundation.Commerce.Models
 
             set
             {
-                Assert.ArgumentNotNull(value, "value");
+                Assert.ArgumentNotNull(value, nameof(value));
                 _searchResultItems = value;
             }
         }
@@ -66,7 +65,7 @@ namespace Sitecore.Foundation.Commerce.Models
 
             set
             {
-                Assert.ArgumentNotNull(value, "value");
+                Assert.ArgumentNotNull(value, nameof(value));
                 _facets = value;
             }
         }

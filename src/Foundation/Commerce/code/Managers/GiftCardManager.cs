@@ -28,7 +28,7 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         public GiftCardManager([NotNull] GiftCardServiceProvider giftCardServiceProvider)
         {
-            Assert.ArgumentNotNull(giftCardServiceProvider, "giftCardServiceProvider");
+            Assert.ArgumentNotNull(giftCardServiceProvider, nameof(giftCardServiceProvider));
 
             GiftCardServiceProvider = giftCardServiceProvider;
         }
@@ -37,9 +37,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public ManagerResponse<GetGiftCardResult, decimal> GetGiftCardBalance([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string giftCardId)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNullOrEmpty(giftCardId, "giftCardId");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNullOrEmpty(giftCardId, nameof(giftCardId));
 
             var result = GetGiftCard(giftCardId, storefront.ShopName).ServiceProviderResult;
 
@@ -49,7 +49,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public ManagerResponse<GetGiftCardResult, GiftCard> GetGiftCard(string giftCardId, string shopName)
         {
-            Assert.ArgumentNotNullOrEmpty(giftCardId, "giftCardId");
+            Assert.ArgumentNotNullOrEmpty(giftCardId, nameof(giftCardId));
 
             var request = new GetGiftCardRequest(giftCardId, shopName);
             var result = GiftCardServiceProvider.GetGiftCard(request);

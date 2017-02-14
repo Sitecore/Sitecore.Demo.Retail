@@ -10,10 +10,11 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 @using Sitecore.Data.Fields
+@using Sitecore.Data.Items
 @using Sitecore.Foundation.Commerce
 @using Sitecore.Foundation.SitecoreExtensions.Extensions
 @using Sitecore.Foundation.Commerce.Managers
-@model RenderingModel
+@model Sitecore.Mvc.Presentation.RenderingModel
 @{
     MultilistField linksField = Model.Item.Fields["QuickLinks"];
     var links = linksField != null ? linksField.GetItems() : new Item[0];

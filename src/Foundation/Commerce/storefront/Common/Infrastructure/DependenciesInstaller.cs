@@ -28,25 +28,18 @@ namespace Sitecore.Reference.Storefront.Infrastructure
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Classes.FromThisAssembly()
-                .BasedOn<IController>()
-                .LifestyleTransient());
+            container.Register(Classes.FromThisAssembly().BasedOn<IController>().LifestyleTransient());
 
-            container.Register(Classes.FromThisAssembly()
-                .BasedOn<IHttpController>()
-                .LifestyleTransient());
+            container.Register(Classes.FromThisAssembly().BasedOn<IHttpController>().LifestyleTransient());
 
-            container.Register(Classes.FromAssemblyContaining<CartServiceProvider>()
-                .Pick()
-                .WithService.DefaultInterfaces());
+            container.Register(Classes.FromThisAssembly().Pick());
 
-            container.Register(Classes.FromThisAssembly()
-                .Pick()
-                .WithService.DefaultInterfaces());
+            container.Register(Classes.FromAssemblyNamed("Sitecore.Foundation.Commerce").Pick());
 
             container.Register(Classes.FromAssemblyNamed("Sitecore.Commerce.Connect.CommerceServer").Pick());
 
-            container.Register(Classes.FromAssemblyNamed("Sitecore.Reference.Storefront.Common").Pick());
+            container.Register(Classes.FromAssemblyNamed("Sitecore.Commerce").Pick());
+
         }
     }
 }

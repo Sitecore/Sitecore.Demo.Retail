@@ -10,8 +10,9 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
+@using Sitecore.Data.Items
 @using Sitecore.Foundation.Commerce
-@model RenderingModel
+@model Sitecore.Mvc.Presentation.RenderingModel
 @{
     Sitecore.Data.Fields.MultilistField slidesField = Html.Sitecore().CurrentItem.Fields["Slides"];
     Item[] slides = slidesField != null ? slidesField.GetItems() : new Item[0];
@@ -24,7 +25,7 @@
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
                     @{
-                        for (int i = 0; i < slides.Length; i++)
+                        for (var i = 0; i < slides.Length; i++)
 			            {
                             <li data-target="#carousel-example-generic" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
                         }

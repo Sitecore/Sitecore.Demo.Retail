@@ -33,7 +33,7 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
     {
         public AddParties([NotNull] IEntityFactory entityFactory)
         {
-            Assert.ArgumentNotNull(entityFactory, "entityFactory");
+            Assert.ArgumentNotNull(entityFactory, nameof(entityFactory));
 
             EntityFactory = entityFactory;
         }
@@ -42,14 +42,14 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
 
         public override void Process(ServicePipelineArgs args)
         {
-            Assert.ArgumentNotNull(args, "args");
-            Assert.ArgumentCondition(args.Request is AddPartiesRequest, "args.Request", "args.Request is AddPartiesRequest");
-            Assert.ArgumentCondition(args.Result is AddPartiesResult, "args.Result", "args.Result is AddPartiesResult");
+            Assert.ArgumentNotNull(args, nameof(args));
+            Assert.ArgumentCondition(args.Request is AddPartiesRequest, nameof(args.Request), "args.Request is AddPartiesRequest");
+            Assert.ArgumentCondition(args.Result is AddPartiesResult, nameof(args.Result), "args.Result is AddPartiesResult");
 
             var request = (AddPartiesRequest) args.Request;
             var result = (AddPartiesResult) args.Result;
-            Assert.ArgumentNotNull(request.Parties, "request.Parties");
-            Assert.ArgumentNotNull(request.CommerceCustomer, "request.CommerceCustomer");
+            Assert.ArgumentNotNull(request.Parties, nameof(request.Parties));
+            Assert.ArgumentNotNull(request.CommerceCustomer, nameof(request.CommerceCustomer));
 
             Profile customerProfile = null;
             var response = GetCommerceUserProfile(request.CommerceCustomer.ExternalId, ref customerProfile);
@@ -74,8 +74,9 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
 
         protected virtual Party ProcessCommerceParty(AddPartiesResult result, Profile customerProfile, CommerceParty partyToAdd)
         {
-            Assert.ArgumentNotNull(partyToAdd.Name, "partyToAdd.Name");
-            Assert.ArgumentNotNull(partyToAdd.ExternalId, "partyToAdd.ExternalId");
+            Assert.ArgumentNotNull(partyToAdd, nameof(partyToAdd));
+            Assert.ArgumentNotNull(partyToAdd.Name, nameof(partyToAdd.Name));
+            Assert.ArgumentNotNull(partyToAdd.ExternalId, nameof(partyToAdd.ExternalId));
 
             Profile addressProfile = null;
             var response = CreateAddressProfile(partyToAdd.ExternalId, ref addressProfile);

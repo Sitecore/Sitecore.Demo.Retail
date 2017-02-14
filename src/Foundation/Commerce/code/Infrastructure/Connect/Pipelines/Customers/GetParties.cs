@@ -34,7 +34,7 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
     {
         public GetParties([NotNull] IEntityFactory entityFactory)
         {
-            Assert.ArgumentNotNull(entityFactory, "entityFactory");
+            Assert.ArgumentNotNull(entityFactory, nameof(entityFactory));
 
             EntityFactory = entityFactory;
         }
@@ -43,13 +43,13 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
 
         public override void Process(ServicePipelineArgs args)
         {
-            Assert.ArgumentNotNull(args, "args");
-            Assert.ArgumentCondition(args.Request is GetPartiesRequest, "args.Request", "args.Request is GetPartiesRequest");
-            Assert.ArgumentCondition(args.Result is GetPartiesResult, "args.Result", "args.Result is GetPartiesResult");
+            Assert.ArgumentNotNull(args, nameof(args));
+            Assert.ArgumentCondition(args.Request is GetPartiesRequest, nameof(args.Request), "args.Request is GetPartiesRequest");
+            Assert.ArgumentCondition(args.Result is GetPartiesResult, nameof(args.Result), "args.Result is GetPartiesResult");
 
             var request = (GetPartiesRequest) args.Request;
             var result = (GetPartiesResult) args.Result;
-            Assert.ArgumentNotNull(request.CommerceCustomer, "request.CommerceCustomer");
+            Assert.ArgumentNotNull(request.CommerceCustomer, nameof(request.CommerceCustomer));
 
             var partyList = new List<Party>();
 

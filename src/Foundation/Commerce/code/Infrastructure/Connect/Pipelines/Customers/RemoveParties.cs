@@ -29,9 +29,9 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
     {
         public override void Process(ServicePipelineArgs args)
         {
-            Assert.ArgumentNotNull(args, "args");
-            Assert.ArgumentCondition(args.Request is RemovePartiesRequest, "args.Request", "args.Request is RemovePartiesRequest");
-            Assert.ArgumentCondition(args.Result is CustomerResult, "args.Result", "args.Result is CustomerResult");
+            Assert.ArgumentNotNull(args, nameof(args));
+            Assert.ArgumentCondition(args.Request is RemovePartiesRequest, nameof(args.Request), "args.Request is RemovePartiesRequest");
+            Assert.ArgumentCondition(args.Result is CustomerResult, nameof(args.Result), "args.Result is CustomerResult");
 
             var request = (RemovePartiesRequest) args.Request;
             var result = (CustomerResult) args.Result;

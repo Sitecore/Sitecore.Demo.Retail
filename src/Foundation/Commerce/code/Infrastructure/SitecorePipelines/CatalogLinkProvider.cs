@@ -58,8 +58,8 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
 
         public override string GetDynamicUrl(Item item, LinkUrlOptions options)
         {
-            Assert.ArgumentNotNull(item, "item");
-            Assert.ArgumentNotNull(options, "options");
+            Assert.ArgumentNotNull(item, nameof(item));
+            Assert.ArgumentNotNull(options, nameof(options));
 
             var url = string.Empty;
 

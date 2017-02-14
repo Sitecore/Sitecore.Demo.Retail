@@ -32,9 +32,9 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
     {
         public override void Process(ServicePipelineArgs args)
         {
-            Assert.ArgumentNotNull(args, "args");
-            Assert.ArgumentCondition(args.Request is UpdatePartiesRequest, "args.Request", "args.Request is UpdatePartiesRequest");
-            Assert.ArgumentCondition(args.Result is CustomerResult, "args.Result", "args.Result is CustomerResult");
+            Assert.ArgumentNotNull(args, nameof(args));
+            Assert.ArgumentCondition(args.Request is UpdatePartiesRequest, nameof(args.Request), "args.Request is UpdatePartiesRequest");
+            Assert.ArgumentCondition(args.Result is CustomerResult, nameof(args.Result), "args.Result is CustomerResult");
 
             var request = (UpdatePartiesRequest) args.Request;
             var result = (CustomerResult) args.Result;

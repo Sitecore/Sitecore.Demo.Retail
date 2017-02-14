@@ -16,7 +16,6 @@
 // -------------------------------------------------------------------------------------------
 
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 using Sitecore.Commerce.Services.Customers;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults

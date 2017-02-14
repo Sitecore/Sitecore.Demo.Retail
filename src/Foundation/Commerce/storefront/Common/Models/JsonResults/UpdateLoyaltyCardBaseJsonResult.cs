@@ -35,7 +35,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(bool wasUpdated)
         {
-            Assert.ArgumentNotNull(wasUpdated, "wasUpdated");
+            Assert.ArgumentNotNull(wasUpdated, nameof(wasUpdated));
 
             WasUpdated = wasUpdated;
         }

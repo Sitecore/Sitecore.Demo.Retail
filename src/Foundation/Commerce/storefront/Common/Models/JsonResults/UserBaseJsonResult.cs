@@ -42,7 +42,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(CommerceUser user)
         {
-            Assert.ArgumentNotNull(user, "user");
+            Assert.ArgumentNotNull(user, nameof(user));
 
             FirstName = user.FirstName;
             LastName = user.LastName;

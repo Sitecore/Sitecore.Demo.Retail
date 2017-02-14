@@ -43,7 +43,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.ComputedFields
 
         public override object ComputeValue(IIndexable indexable)
         {
-            Assert.ArgumentNotNull(indexable, "indexable");
+            Assert.ArgumentNotNull(indexable, nameof(indexable));
             var validatedItem = GetValidatedItem(indexable);
 
             if (validatedItem == null || string.IsNullOrWhiteSpace(validatedItem.Name))

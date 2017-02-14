@@ -16,7 +16,6 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Sitecore.Data;
 
 namespace Sitecore.Foundation.Commerce
@@ -24,28 +23,6 @@ namespace Sitecore.Foundation.Commerce
     [Obsolete("Move to Templates.cs or similar")]
     public static class StorefrontConstants
     {
-        public static class Views
-        {
-            public static readonly string Empty = "/Shared/Empty";
-
-            public static readonly string Addresses = "Addresses";
-
-            public static readonly string EditProfile = "EditProfile";
-
-            public static readonly string Register = "Register";
-
-            public static readonly string UserPendingActivation = "UserPendingActivation";
-        }
-
-        public static class KnownActionNames
-        {
-            public static readonly string AccountLinkupPendingActionName = "AccountLinkupPending";
-
-            public static readonly string RegisterActionName = "Register";
-
-            public static readonly string LoginActionName = "Login";
-        }
-
         public static class SystemMessages
         {
             public static readonly string AuthenticationProviderError = "AuthenticationProviderError";
@@ -57,7 +34,6 @@ namespace Sitecore.Foundation.Commerce
             public static readonly string CouldNotFindEmailBodyMessageError = "CouldNotFindEmailBodyMessageError";
 
             public static readonly string CouldNotFindEmailSubjectMessageError = "CouldNotFindEmailSubjectMessageError";
-
 
             public static readonly string CouldNotSentEmailError = "CouldNotSentEmailError";
 
@@ -127,25 +103,6 @@ namespace Sitecore.Foundation.Commerce
             public static readonly int DefaultItemsPerPage = 12;
 
             public static readonly string DefaultCurrencyCode = "USD";
-        }
-
-        public static class EngagementPlans
-        {
-            public static readonly string AbandonedCartsEaPlanId = "{7138ACC1-329C-4070-86DD-6A53D6F57AC5}";
-
-            public static readonly string AbandonedCartsEaPlanName = "Abandoned Carts";
-
-            public static readonly string NewOrderPlacedEaPlanId = "{7CA697EA-5CCA-4B59-85A3-D048B285E6B4}";
-
-            public static readonly string NewOrderPlacedEaPlanName = "New Order Placed";
-
-            public static readonly string ProductsBackInStockEaPlanId = "{36B4083E-F7F7-4E60-A747-75DDBEC6BB4B}";
-
-            public static readonly string ProductsBackInStockEaPlanName = "Products Back In Stock";
-
-            public static readonly string WishListCreatedEaPlanId = "{C6BD2A27-3528-4107-8764-DB010EA400FF}";
-
-            public static readonly string WishListCreatedEaPlanName = "Wish List Created";
         }
 
         public static class KnownFieldNames
@@ -283,13 +240,6 @@ namespace Sitecore.Foundation.Commerce
             public static readonly string DisclaimerText = "Disclaimer Text";
         }
 
-        public static class KnownTemplateNames
-        {
-            public static readonly string CommerceNamedSearch = "Commerce Named Search";
-
-            public static readonly string NamedSearch = "Named Search";
-        }
-
         public static class KnownTemplateItemIds
         {
             public static readonly ID Home = new ID("{FB9DBD60-CBA2-490D-9C72-997271D576A3}");
@@ -326,45 +276,6 @@ namespace Sitecore.Foundation.Commerce
             public static readonly string Shipping = "Shipping";
         }
 
-        public static class KnownItemIds
-        {
-
-            public static readonly string CommerceConnectEaPlanParentId = "{03402BEE-21E9-458A-B3F4-D004CC4F21FA}";
-
-            public static readonly string AbandonedCartsEaPlanBranchTemplateId = "{8C90E12F-4E2E-4E3D-9137-B2D5F5DD40C0}";
-
-            public static readonly string NewOrderPlacedEaPlanBranchTemplateId = "{6F6A861F-78CF-4859-8AD8-7A2D5CCDBEB6}";
-
-            public static readonly string ProductsBackInStockEaPlanBranchTemplateId = "{534EE43B-00B1-49D0-92A7-E78B9C127B00}";
-
-            public static readonly string WishListCreatedEaPlanBranchTemplateId = "{35E75C72-4985-4E09-88C3-0EAC6CD1E64F}";
-
-            public static readonly string DeployCommandId = "{4044A9C4-B583-4B57-B5FF-2791CB0351DF}";
-        }
-
-        public static class KnownSiteContextProperties
-        {
-            public static readonly string ShopName = "shopName";
-        }
-
-        public static class PageEventDataNames
-        {
-            public static readonly string ShopName = "ShopName";
-
-            public static readonly string Currency = "Currency";
-        }
-
-        public static class PipelineNames
-        {
-            public const string SearchInitiated = Prefix + "searchInitiated";
-
-            public const string VisitedProductDetailsPage = Prefix + "visitedProductDetailsPage";
-
-            public const string VisitedCategoryPage = Prefix + "visitedCategoryPage";
-
-            private const string Prefix = "commerce.storefront.";
-        }
-
         public static class QueryStrings
         {
             public const string ConfirmationId = "confirmationId";
@@ -395,20 +306,6 @@ namespace Sitecore.Foundation.Commerce
             public static readonly string Title = "Title";
 
             public static readonly string SummaryText = "SummaryText";
-        }
-
-        public static class StyleClasses
-        {
-            public static readonly string ChangePageSize = "changePageSize";
-
-            public static readonly string ChangeSiteContentPageSize = "changeSiteContentPageSize";
-        }
-
-        public static class CartConstants
-        {
-            public static readonly string BillingAddressName = "Billing";
-
-            public static readonly string ShippingAddressName = "Shipping";
         }
     }
 }

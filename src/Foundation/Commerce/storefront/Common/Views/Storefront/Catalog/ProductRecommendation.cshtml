@@ -18,7 +18,7 @@
         return;
     }
 
-    Func<ProductSearchResultViewModel, string> GetId = product => product.DisplayName.Replace(' ', '-').ToLowerInvariant();
+    Func<ProductSearchResultViewModel, string> getId = product => product.DisplayName.Replace(' ', '-').ToLowerInvariant();
 }
 
 <ul class="nav nav-tabs nav-justified" role="tablist">
@@ -27,7 +27,7 @@
         {
             var active = Model.ProductSearchResults.IndexOf(productSearchResult) == 0;
             <li role="presentation" class=@(active ? "active" : "")>
-                <a href="#tab-@GetId(productSearchResult)" role="tab" data-toggle="tab">
+                <a href="#tab-@getId(productSearchResult)" role="tab" data-toggle="tab">
                     @productSearchResult.NamedSearchItemDisplayNameRender
                 </a>
             </li>
@@ -39,7 +39,7 @@
         foreach (var productSearchResult in Model.ProductSearchResults)
         {
             var active = Model.ProductSearchResults.IndexOf(productSearchResult) == 0;
-            <div role="tabpanel" class="tab-pane @(active ? "active" : "")" id="tab-@GetId(productSearchResult)">
+            <div role="tabpanel" class="tab-pane @(active ? "active" : "")" id="tab-@getId(productSearchResult)">
                 @Html.Partial("~/Views/Storefront/Catalog/_FourProductSlide.cshtml", productSearchResult)
             </div>
         }

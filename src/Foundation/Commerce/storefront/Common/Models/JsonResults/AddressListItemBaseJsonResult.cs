@@ -40,7 +40,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(IEnumerable<Party> addresses, Dictionary<string, string> countries)
         {
-            Assert.ArgumentNotNull(addresses, "addresses");
+            Assert.ArgumentNotNull(addresses, nameof(addresses));
 
             if (countries != null && countries.Count > 0)
             {

@@ -6,12 +6,13 @@
         {
             public static class Fields
             {
-                public static readonly string SiteContentItem = "sitecontentitem";
-                public static readonly string InStockLocations = "instocklocations";
-                public static readonly string OutOfStockLocations = "outofstocklocations";
-                public static readonly string OrderableLocations = "orderablelocations";
-                public static readonly string PreOrderable = "preorderable";
-                public static readonly string ChildCategoriesSequence = "childcategoriessequence";
+                public const string VariantInfo = "VariantInfo";
+                public const string IsSiteContentItem = "IsSitecoreContentItem";
+                public const string InStockLocations = "instocklocations";
+                public const string OutOfStockLocations = "outofstocklocations";
+                public const string OrderableLocations = "orderablelocations";
+                public const string PreOrderable = "preorderable";
+                public const string ChildCategoriesSequence = "childcategoriessequence";
             }
         }
     }

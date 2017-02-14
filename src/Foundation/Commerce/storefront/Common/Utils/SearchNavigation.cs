@@ -16,8 +16,6 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
@@ -30,10 +28,7 @@ using Sitecore.ContentSearch.Linq.Utilities;
 using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.ContentSearch.Utilities;
 using Sitecore.Data;
-using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
-using Sitecore.Foundation.Commerce;
-using Sitecore.Foundation.Commerce.Models.Search;
 
 namespace Sitecore.Reference.Storefront
 {
@@ -90,7 +85,7 @@ namespace Sitecore.Reference.Storefront
 
         public static SearchResponse SearchCatalogItemsByKeyword(string keyword, string catalogName, CommerceSearchOptions searchOptions)
         {
-            Assert.ArgumentNotNullOrEmpty(catalogName, "catalogName");
+            Assert.ArgumentNotNullOrEmpty(catalogName, nameof(catalogName));
             var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
             var searchIndex = searchManager.GetIndex(catalogName);
 
@@ -130,7 +125,7 @@ namespace Sitecore.Reference.Storefront
                 //var rootSearchPath = Sitecore.IO.FileUtil.MakePath(Sitecore.Context.Site.ContentStartPath, "Home", '/');
                 var searchResults = context.GetQueryable<SearchResultItem>();
                 searchResults = searchResults.Where(item => item.Path.StartsWith(Context.Site.ContentStartPath));
-                searchResults = searchResults.Where(item => item[Foundation.Commerce.Constants.CommerceIndex.Fields.SiteContentItem] == "1");
+                searchResults = searchResults.Where(item => item[Foundation.Commerce.Constants.CommerceIndex.Fields.IsSiteContentItem] == "1");
                 searchResults = searchResults.Where(item => item.Language == CurrentLanguageName);
                 searchResults = searchResults.Where(GetContentExpression(keyword));
                 searchResults = searchResults.Page(searchOptions.StartPageIndex, searchOptions.NumberOfItemsToReturn);

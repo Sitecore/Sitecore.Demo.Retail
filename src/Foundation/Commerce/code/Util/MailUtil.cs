@@ -35,20 +35,20 @@ namespace Sitecore.Foundation.Commerce.Util
 
         public virtual bool SendMail([NotNull] MailTemplate mailTemplate)
         {
-            Assert.ArgumentNotNull(mailTemplate, "mailTemplate");
-            Assert.ArgumentNotNull(mailTemplate.ToEmail, "mailTemplate.To");
-            Assert.ArgumentNotNull(mailTemplate.FromEmail, "mailTemplate.From");
+            Assert.ArgumentNotNull(mailTemplate, nameof(mailTemplate));
+            Assert.ArgumentNotNull(mailTemplate.ToEmail, nameof(mailTemplate.ToEmail));
+            Assert.ArgumentNotNull(mailTemplate.FromEmail, nameof(mailTemplate.FromEmail));
 
             return SendMail(mailTemplate.ToEmail, mailTemplate.FromEmail, mailTemplate.Subject, mailTemplate.Body, string.Empty);
         }
 
         public virtual bool SendMail([NotNull] string templateName, [NotNull] string toEmail, [NotNull] string fromEmail, [NotNull] object subjectParameters, [NotNull] object[] bodyParameters)
         {
-            Assert.ArgumentNotNull(templateName, "templateName");
-            Assert.ArgumentNotNull(toEmail, "toEmail");
-            Assert.ArgumentNotNull(fromEmail, "fromEmail");
-            Assert.ArgumentNotNull(subjectParameters, "subjectParameters");
-            Assert.ArgumentNotNull(bodyParameters, "bodyParameters");
+            Assert.ArgumentNotNull(templateName, nameof(templateName));
+            Assert.ArgumentNotNull(toEmail, nameof(toEmail));
+            Assert.ArgumentNotNull(fromEmail, nameof(fromEmail));
+            Assert.ArgumentNotNull(subjectParameters, nameof(subjectParameters));
+            Assert.ArgumentNotNull(bodyParameters, nameof(bodyParameters));
 
             var mailTemplates = StorefrontManager.CurrentStorefront.GlobalItem.Children[StorefrontConstants.KnowItemNames.Mails];
             if (mailTemplates == null)
@@ -85,11 +85,11 @@ namespace Sitecore.Foundation.Commerce.Util
 
         public virtual bool SendMail([NotNull] string toEmail, [NotNull] string fromEmail, [NotNull] string subject, [NotNull] string body, [NotNull] string attachmentFileName)
         {
-            Assert.ArgumentNotNull(toEmail, "toEmail");
-            Assert.ArgumentNotNull(fromEmail, "fromEmail");
-            Assert.ArgumentNotNull(subject, "subject");
-            Assert.ArgumentNotNull(body, "body");
-            Assert.ArgumentNotNull(attachmentFileName, "attachmentFileName");
+            Assert.ArgumentNotNull(toEmail, nameof(toEmail));
+            Assert.ArgumentNotNull(fromEmail, nameof(fromEmail));
+            Assert.ArgumentNotNull(subject, nameof(subject));
+            Assert.ArgumentNotNull(body, nameof(body));
+            Assert.ArgumentNotNull(attachmentFileName, nameof(attachmentFileName));
 
             _mailTo = toEmail;
             _mailFrom = fromEmail;

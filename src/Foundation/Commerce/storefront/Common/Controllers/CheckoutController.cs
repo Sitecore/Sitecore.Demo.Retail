@@ -46,10 +46,10 @@ namespace Sitecore.Reference.Storefront.Controllers
             [NotNull] ContactFactory contactFactory)
             : base(accountManager, contactFactory)
         {
-            Assert.ArgumentNotNull(cartManager, "cartManager");
-            Assert.ArgumentNotNull(orderManager, "orderManager");
-            Assert.ArgumentNotNull(paymentManager, "paymentManager");
-            Assert.ArgumentNotNull(shippingManager, "shippingManager");
+            Assert.ArgumentNotNull(cartManager, nameof(cartManager));
+            Assert.ArgumentNotNull(orderManager, nameof(orderManager));
+            Assert.ArgumentNotNull(paymentManager, nameof(paymentManager));
+            Assert.ArgumentNotNull(shippingManager, nameof(shippingManager));
 
             CartManager = cartManager;
             OrderManager = orderManager;
@@ -170,7 +170,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(inputModel, "inputModel");
+                Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);
@@ -204,7 +204,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(inputModel, "inputModel");
+                Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);
@@ -237,7 +237,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(inputModel, "inputModel");
+                Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);
@@ -272,7 +272,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(inputModel, "inputModel");
+                Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);
@@ -305,7 +305,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public JsonResult GetNearbyStoresJson(GetNearbyStoresInputModel inputModel)
         {
-            Assert.ArgumentNotNull(inputModel, "inputModel");
+            Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
             //var response = this.StoreManager.GetNearbyStores(CurrentStorefront, CurrentVisitorContext, inputModel);
             //var result = new GetNearbyStoresJsonResult(response.ServiceProviderResult);
@@ -321,7 +321,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(model, "model");
+                Assert.ArgumentNotNull(model, nameof(model));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);

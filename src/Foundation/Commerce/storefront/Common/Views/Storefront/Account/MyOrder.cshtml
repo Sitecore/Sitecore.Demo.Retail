@@ -13,10 +13,13 @@
 @using Sitecore.Commerce.Engine.Connect.Entities.Carts
 @using Sitecore.Commerce.Entities.GiftCards
 @using Sitecore.Commerce.Entities.LoyaltyPrograms
+@using Sitecore.Data
+@using Sitecore.Data.Items
 @using Sitecore.Foundation.Commerce
 @using Sitecore.Foundation.Commerce.Extensions
 @using Sitecore.Foundation.SitecoreExtensions.Extensions
 @using Sitecore.Foundation.Commerce.Managers
+@using Sitecore.Commerce.Connect.CommerceServer.Orders.Models
 @model CommerceOrder
 @{
     var productDetailsLabel = Html.Sitecore().Field("Product Details Label", Html.Sitecore().CurrentItem);
@@ -77,7 +80,7 @@
         <thead>
         <tr class="order-header">
             <td>
-                <input type="checkbox" onclick=" selectAllOrderItems(this) " id="selectAllOrderItems"/>
+                <input type="checkbox" onclick="selectAllOrderItems(this)" id="selectAllOrderItems"/>
             </td>
             <th></th>
             <td>@productDetailsLabel</td>
@@ -133,7 +136,7 @@
 
             <tr>
                 <td>
-                    <input type="checkbox" class="item-to-selected" onchange=" enableAddOrderItemsToCart();enableCancelOrderItems(); " data-externalId="@cartLine.ExternalCartLineId"/>
+                    <input type="checkbox" class="item-to-selected" onchange="enableAddOrderItemsToCart();enableCancelOrderItems();" data-externalId="@cartLine.ExternalCartLineId"/>
                 </td>
                 <td class="cart-image hidden-sm hidden-xs">
                     <img src="@image" class="img-responsive" alt="a" pid="image"/>

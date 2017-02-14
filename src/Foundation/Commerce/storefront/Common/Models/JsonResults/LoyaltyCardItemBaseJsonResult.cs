@@ -41,7 +41,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(LoyaltyCard loyaltyCard)
         {
-            Assert.ArgumentNotNull(loyaltyCard, "loyaltyCard");
+            Assert.ArgumentNotNull(loyaltyCard, nameof(loyaltyCard));
 
             CardNumber = loyaltyCard.CardNumber;
 

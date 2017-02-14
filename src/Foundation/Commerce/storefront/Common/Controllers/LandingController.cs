@@ -48,8 +48,8 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         public LandingController([NotNull] AccountManager accountManager, [NotNull] InventoryManager inventoryManager, [NotNull] CatalogManager catalogManager, [NotNull] ContactFactory contactFactory) : base(accountManager, contactFactory)
         {
-            Assert.ArgumentNotNull(inventoryManager, "inventoryManager");
-            Assert.ArgumentNotNull(catalogManager, "catalogManager");
+            Assert.ArgumentNotNull(inventoryManager, nameof(inventoryManager));
+            Assert.ArgumentNotNull(catalogManager, nameof(catalogManager));
 
             CatalogManager = catalogManager;
             InventoryManager = inventoryManager;

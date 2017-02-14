@@ -44,8 +44,8 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public InventoryManager([NotNull] InventoryServiceProvider inventoryServiceProvider, [NotNull] ContactFactory contactFactory)
         {
-            Assert.ArgumentNotNull(inventoryServiceProvider, "inventoryServiceProvider");
-            Assert.ArgumentNotNull(contactFactory, "contactFactory");
+            Assert.ArgumentNotNull(inventoryServiceProvider, nameof(inventoryServiceProvider));
+            Assert.ArgumentNotNull(contactFactory, nameof(contactFactory));
 
             InventoryServiceProvider = inventoryServiceProvider;
             ContactFactory = contactFactory;
@@ -107,7 +107,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                         continue;
                     }
 
-                    StockStatus status = null;
+                    StockStatus status;
 
                     var isInStock = resultDocument.Fields.ContainsKey(Constants.CommerceIndex.Fields.InStockLocations)
                                     && resultDocument.Fields[Constants.CommerceIndex.Fields.InStockLocations] != null;
@@ -239,8 +239,8 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<GetStockInformationResult, IEnumerable<StockInformation>> GetStockInformation([NotNull] CommerceStorefront storefront, IEnumerable<InventoryProduct> products, StockDetailsLevel detailsLevel)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(products, "products");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(products, nameof(products));
 
             var request = new GetStockInformationRequest(storefront.ShopName, products, detailsLevel) {Location = _obecContext.InventoryLocation, VisitorId = ContactFactory.GetContact()};
             var result = InventoryServiceProvider.GetStockInformation(request);
@@ -253,8 +253,8 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<GetPreOrderableInformationResult, IEnumerable<OrderableInformation>> GetPreOrderableInformation([NotNull] CommerceStorefront storefront, IEnumerable<InventoryProduct> products)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(products, "products");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(products, nameof(products));
 
             var request = new GetPreOrderableInformationRequest(storefront.ShopName, products);
             var result = InventoryServiceProvider.GetPreOrderableInformation(request);
@@ -265,8 +265,8 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<GetBackOrderableInformationResult, IEnumerable<OrderableInformation>> GetBackOrderableInformation([NotNull] CommerceStorefront storefront, IEnumerable<InventoryProduct> products)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(products, "products");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(products, nameof(products));
 
             var request = new GetBackOrderableInformationRequest(storefront.ShopName, products);
             var result = InventoryServiceProvider.GetBackOrderableInformation(request);
@@ -277,8 +277,8 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<VisitedProductStockStatusResult, bool> VisitedProductStockStatus([NotNull] CommerceStorefront storefront, StockInformation stockInformation, string location)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(stockInformation, "stockInformation");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(stockInformation, nameof(stockInformation));
 
             var request = new VisitedProductStockStatusRequest(storefront.ShopName, stockInformation) {Location = location};
             var result = InventoryServiceProvider.VisitedProductStockStatus(request);
@@ -289,10 +289,10 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<VisitorSignUpForStockNotificationResult, bool> VisitorSignupForStockNotification([NotNull] CommerceStorefront storefront, SignUpForNotificationInputModel model, string location)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(model, "model");
-            Assert.ArgumentNotNullOrEmpty(model.ProductId, "model.ProductId");
-            Assert.ArgumentNotNullOrEmpty(model.Email, "model.Email");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(model, nameof(model));
+            Assert.ArgumentNotNullOrEmpty(model.ProductId, nameof(model.ProductId));
+            Assert.ArgumentNotNullOrEmpty(model.Email, nameof(model.Email));
 
             var visitorId = ContactFactory.GetContact();
             var builder = new CommerceInventoryProductBuilder();

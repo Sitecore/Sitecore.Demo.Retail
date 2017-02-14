@@ -1,9 +1,9 @@
-﻿//---------------------------------------------------------------------
-// <copyright file="InitializeRoutes.cs" company="Sitecore Corporation">
+﻿//-----------------------------------------------------------------------
+// <copyright file="DependenciesInstaller.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>The route ininitialization</summary>
-//---------------------------------------------------------------------
+// <summary>Defines the DependenciesInstaller class.</summary>
+//-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
 // except in compliance with the License. You may obtain a copy of the License at
@@ -15,20 +15,20 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System.Web.Http;
-using System.Web.Routing;
-using Sitecore.Pipelines;
+using System.Web.Mvc;
+using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.SubSystems.Configuration;
+using Castle.Windsor;
 
-namespace Sitecore.Reference.Storefront.SitecorePipelines
+namespace Sitecore.Foundation.Commerce.Infrastructure
 {
-    public class InitializeRoutes
+    public class DependenciesInstaller : IWindsorInstaller
     {
-        public void Process(PipelineArgs args)
+        public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            if (!Context.IsUnitTesting)
-            {
-                RouteConfig.RegisterRoutes(RouteTable.Routes);
-            }
+            container.Register(Classes.FromThisAssembly().BasedOn<IController>().LifestyleTransient());
+
+            container.Register(Classes.FromThisAssembly().Pick());
         }
     }
 }

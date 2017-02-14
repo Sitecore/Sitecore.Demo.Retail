@@ -37,7 +37,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(IEnumerable<LoyaltyCard> loyaltyCards)
         {
-            Assert.ArgumentNotNull(loyaltyCards, "loyaltyCards");
+            Assert.ArgumentNotNull(loyaltyCards, nameof(loyaltyCards));
 
             foreach (var card in loyaltyCards)
             {

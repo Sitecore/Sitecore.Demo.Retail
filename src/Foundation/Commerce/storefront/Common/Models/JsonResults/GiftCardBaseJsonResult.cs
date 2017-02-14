@@ -54,7 +54,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(GiftCard giftCard)
         {
-            Assert.ArgumentNotNull(giftCard, "giftCard");
+            Assert.ArgumentNotNull(giftCard, nameof(giftCard));
 
             var currencyCode = StorefrontManager.GetCustomerCurrency();
 

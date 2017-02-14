@@ -32,7 +32,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public PricingManager([NotNull] PricingServiceProvider pricingServiceProvider)
         {
-            Assert.ArgumentNotNull(pricingServiceProvider, "pricingServiceProvider");
+            Assert.ArgumentNotNull(pricingServiceProvider, nameof(pricingServiceProvider));
 
             this.PricingServiceProvider = pricingServiceProvider;
         }
@@ -41,7 +41,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<GetProductPricesResult, IDictionary<string, Price>> GetProductPrices([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string catalogName, string productId, bool includeVariants, params string[] priceTypeIds)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
 
             if (priceTypeIds == null)
             {
@@ -68,7 +68,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<GetProductBulkPricesResult, IDictionary<string, Price>> GetProductBulkPrices([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string catalogName, IEnumerable<string> productIds, params string[] priceTypeIds)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
 
             if (priceTypeIds == null)
             {
@@ -91,7 +91,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<GetSupportedCurrenciesResult, IReadOnlyCollection<string>> GetSupportedCurrencies(CommerceStorefront storefront, string catalogName)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
 
             var request = new Sitecore.Foundation.Commerce.Connect.Arguments.GetSupportedCurrenciesRequest(storefront.ShopName, catalogName);
             var result = this.PricingServiceProvider.GetSupportedCurrencies(request);
@@ -101,8 +101,8 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<ServiceProviderResult, bool> CurrencyChosenPageEvent(CommerceStorefront storefront, string currency)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNullOrEmpty(currency, "currency");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNullOrEmpty(currency, nameof(currency));
 
             var request = new CurrencyChosenRequest(storefront.ShopName, currency);
             var result = this.PricingServiceProvider.CurrencyChosen(request);

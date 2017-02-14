@@ -194,7 +194,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public static string Lookup(string tableName, string itemName, out Item lookupItem, bool insertBracketsWhenNotFound)
         {
-            Assert.ArgumentNotNullOrEmpty(tableName, "tableName");
+            Assert.ArgumentNotNullOrEmpty(tableName, nameof(tableName));
 
             lookupItem = null;
 

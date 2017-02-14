@@ -24,7 +24,7 @@ namespace Sitecore.Reference.Storefront.Models
     {
         public NoDataSourceViewModel(Item noDataSourceItem)
         {
-            Assert.ArgumentNotNull(noDataSourceItem, "noDatasourceItem");
+            Assert.ArgumentNotNull(noDataSourceItem, nameof(noDataSourceItem));
             Message = noDataSourceItem["Text"];
         }
 

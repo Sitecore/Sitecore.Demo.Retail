@@ -32,7 +32,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         public SharedController([NotNull] ContactFactory contactFactory, [NotNull] CatalogManager catalogManager)
             : base(contactFactory)
         {
-            Assert.ArgumentNotNull(catalogManager, "catalogManager");
+            Assert.ArgumentNotNull(catalogManager, nameof(catalogManager));
 
             _model = new RenderingModel();
 

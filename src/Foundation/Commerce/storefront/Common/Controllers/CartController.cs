@@ -17,7 +17,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
 using System.Web.SessionState;
 using System.Web.UI;
@@ -39,7 +38,7 @@ namespace Sitecore.Reference.Storefront.Controllers
     {
         public CartController([NotNull] CartManager cartManager, [NotNull] AccountManager accountManager, [NotNull] ContactFactory contactFactory) : base(accountManager, contactFactory)
         {
-            Assert.ArgumentNotNull(cartManager, "cartManager");
+            Assert.ArgumentNotNull(cartManager, nameof(cartManager));
 
             CartManager = cartManager;
         }
@@ -139,7 +138,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(inputModel, "inputModel");
+                Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);
@@ -167,7 +166,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(inputModels, "inputModels");
+                Assert.ArgumentNotNull(inputModels, nameof(inputModels));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);
@@ -195,7 +194,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(model, "model");
+                Assert.ArgumentNotNull(model, nameof(model));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);
@@ -228,7 +227,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(inputModel, "inputModel");
+                Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);
@@ -269,7 +268,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(model, "model");
+                Assert.ArgumentNotNull(model, nameof(model));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);
@@ -302,7 +301,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(model, "model");
+                Assert.ArgumentNotNull(model, nameof(model));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);

@@ -55,7 +55,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(LoyaltyRewardPoint rewardPoint)
         {
-            Assert.ArgumentNotNull(rewardPoint, "rewardPoint");
+            Assert.ArgumentNotNull(rewardPoint, nameof(rewardPoint));
 
             ActivePoints = rewardPoint.ActivePoints.ToString(Context.Language.CultureInfo);
             CurrencyCode = rewardPoint.CurrencyCode;

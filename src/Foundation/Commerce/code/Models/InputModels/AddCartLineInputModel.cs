@@ -15,7 +15,6 @@
 // -------------------------------------------------------------------------------------------
 
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Sitecore.Foundation.Commerce.Models.InputModels
 {

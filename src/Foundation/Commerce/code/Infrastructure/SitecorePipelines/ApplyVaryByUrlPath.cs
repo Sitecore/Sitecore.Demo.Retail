@@ -26,7 +26,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
     {
         public override void Process(RenderRenderingArgs args)
         {
-            Assert.ArgumentNotNull(args, "args");
+            Assert.ArgumentNotNull(args, nameof(args));
 
             if (args.Rendered
                 || HttpContext.Current == null

@@ -49,7 +49,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(StockInformation stockInfo)
         {
-            Assert.ArgumentNotNull(stockInfo, "stockInfo");
+            Assert.ArgumentNotNull(stockInfo, nameof(stockInfo));
 
             if (stockInfo == null || stockInfo.Status == null)
             {

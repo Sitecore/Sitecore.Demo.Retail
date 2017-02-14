@@ -16,7 +16,6 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Mvc.Presentation;

@@ -31,18 +31,18 @@ namespace Sitecore.Reference.Storefront.Infrastructure
 {
     public abstract class WindsorControllerFactoryBase : DefaultControllerFactory
     {
-        private readonly IKernel kernel;
+        private readonly IKernel _kernel;
 
         protected WindsorControllerFactoryBase(IKernel kernel)
         {
-            this.kernel = kernel;
+            this._kernel = kernel;
         }
 
         public override void ReleaseController(IController controller)
         {
             if (IsFromCurrentAssembly(controller.GetType()))
             {
-                kernel.ReleaseComponent(controller);
+                _kernel.ReleaseComponent(controller);
             }
             else
             {
@@ -59,7 +59,7 @@ namespace Sitecore.Reference.Storefront.Infrastructure
                     throw new HttpException(404, string.Format(CultureInfo.InvariantCulture, "The controller for path '{0}' could not be found.", requestContext.HttpContext.Request.Path));
                 }
 
-                return (IController) kernel.Resolve(controllerType);
+                return (IController) _kernel.Resolve(controllerType);
             }
 
             var controller = base.GetControllerInstance(requestContext, controllerType);

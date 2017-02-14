@@ -27,14 +27,15 @@ using Sitecore.Commerce.Connect.CommerceServer.Search.ComputedFields;
 using Sitecore.ContentSearch;
 using Sitecore.Data;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Models;
 
-namespace Sitecore.Reference.Storefront.Search.ComputedFields
+namespace Sitecore.Foundation.Commerce.Infrastructure.ComputedFields
 {
     public class VariantInfoComputedField : BaseCommerceVariants<string>
     {
         public override object ComputeValue(IIndexable indexable)
         {
-            Assert.ArgumentNotNull(indexable, "indexable");
+            Assert.ArgumentNotNull(indexable, nameof(indexable));
             var validatedItem = GetValidatedItem(indexable);
 
             if (validatedItem == null)
@@ -48,7 +49,7 @@ namespace Sitecore.Reference.Storefront.Search.ComputedFields
             {
                 var variantInfo = new VariantIndexInfo
                 {
-                    VariantId = GetVariantFieldValue<string>(productVariant, "VariantId"),
+                    VariantId = productVariant.VariantId,
                     BasePrice = GetVariantFieldValue<decimal>(productVariant, "BasePriceVariant"),
                     ListPrice = productVariant.ListPrice
                 };

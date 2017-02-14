@@ -23,25 +23,20 @@ namespace Sitecore.Reference.Storefront.Infrastructure
 {
     public class WindsorControllerFactory : WindsorControllerFactoryBase
     {
-        public WindsorControllerFactory(IKernel kernel)
-            : base(kernel)
+        public WindsorControllerFactory(IKernel kernel) : base(kernel)
         {
         }
 
         protected override bool IsFromCurrentAssembly(Type type)
         {
-            if (type != null)
+            if (type == null)
             {
-                var currentAssembly = Assembly.GetExecutingAssembly().FullName;
-                var controllerAssembly = type.Assembly.FullName;
-
-                if (currentAssembly.Equals(controllerAssembly, StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;
-                }
+                return false;
             }
+            var currentAssembly = Assembly.GetExecutingAssembly().FullName;
+            var controllerAssembly = type.Assembly.FullName;
 
-            return false;
+            return currentAssembly.Equals(controllerAssembly, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

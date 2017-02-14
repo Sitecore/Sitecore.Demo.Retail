@@ -35,7 +35,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(string userName)
         {
-            Assert.ArgumentNotNullOrEmpty(userName, "userName");
+            Assert.ArgumentNotNullOrEmpty(userName, nameof(userName));
 
             UserName = userName;
         }

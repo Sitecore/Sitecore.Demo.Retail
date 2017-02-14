@@ -24,7 +24,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
     {
         public CartAdjustmentBaseJsonResult(CartAdjustment adjustment)
         {
-            Assert.ArgumentNotNull(adjustment, "adjustment");
+            Assert.ArgumentNotNull(adjustment, nameof(adjustment));
             Amount = adjustment.Amount.ToString("C", Context.Language.CultureInfo);
             Description = adjustment.Description;
             IsCharge = adjustment.IsCharge;

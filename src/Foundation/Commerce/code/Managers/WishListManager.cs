@@ -34,9 +34,9 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         public WishListManager([NotNull] WishListServiceProvider wishListServiceProvider, [NotNull] AccountManager accountManager, [NotNull] InventoryManager inventoryManager)
         {
-            Assert.ArgumentNotNull(wishListServiceProvider, "wishListServiceProvider");
-            Assert.ArgumentNotNull(accountManager, "accountManager");
-            Assert.ArgumentNotNull(inventoryManager, "inventoryManager");
+            Assert.ArgumentNotNull(wishListServiceProvider, nameof(wishListServiceProvider));
+            Assert.ArgumentNotNull(accountManager, nameof(accountManager));
+            Assert.ArgumentNotNull(inventoryManager, nameof(inventoryManager));
 
             WishListServiceProvider = wishListServiceProvider;
             AccountManager = accountManager;
@@ -51,9 +51,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<CreateWishListResult, WishList> CreateWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string wishListName)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNullOrEmpty(wishListName, "wishListName");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNullOrEmpty(wishListName, nameof(wishListName));
 
             var request = new CreateWishListRequest(visitorContext.UserId, wishListName, storefront.ShopName);
             var result = WishListServiceProvider.CreateWishList(request);
@@ -64,9 +64,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<GetWishListResult, WishList> GetWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNullOrEmpty(wishListId, "wishListId");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNullOrEmpty(wishListId, nameof(wishListId));
 
             var request = new GetWishListRequest(visitorContext.UserId, wishListId, storefront.ShopName);
             var result = WishListServiceProvider.GetWishList(request);
@@ -82,8 +82,8 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<GetWishListsResult, IEnumerable<WishListHeader>> GetWishLists([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
 
             var request = new GetWishListsRequest(visitorContext.UserId, storefront.ShopName);
             var result = WishListServiceProvider.GetWishLists(request);
@@ -94,9 +94,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<DeleteWishListResult, WishList> DeleteWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNullOrEmpty(wishListId, "wishListId");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNullOrEmpty(wishListId, nameof(wishListId));
 
             var request = new DeleteWishListRequest(new WishList {UserId = visitorContext.UserId, CustomerId = visitorContext.UserId, ExternalId = wishListId, ShopName = storefront.ShopName});
             var result = WishListServiceProvider.DeleteWishList(request);
@@ -107,10 +107,10 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<RemoveWishListLinesResult, WishList> RemoveWishListLines([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId, IEnumerable<WishListLineInputModel> models)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNull(models, "models");
-            Assert.ArgumentNotNullOrEmpty(wishListId, "wishListId");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNull(models, nameof(models));
+            Assert.ArgumentNotNullOrEmpty(wishListId, nameof(wishListId));
 
             var lineIds = models.Select(model => model.ExternalLineId).ToList();
             var request = new RemoveWishListLinesRequest(new WishList {UserId = visitorContext.UserId, CustomerId = visitorContext.UserId, ExternalId = wishListId, ShopName = storefront.ShopName}, lineIds);
@@ -122,10 +122,10 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<UpdateWishListLinesResult, WishList> UpdateWishListLines([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId, IEnumerable<WishListLine> lines)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNull(lines, "lines");
-            Assert.ArgumentNotNullOrEmpty(wishListId, "wishListId");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNull(lines, nameof(lines));
+            Assert.ArgumentNotNullOrEmpty(wishListId, nameof(wishListId));
 
             var request = new UpdateWishListLinesRequest(new WishList {UserId = visitorContext.UserId, CustomerId = visitorContext.UserId, ExternalId = wishListId, ShopName = storefront.ShopName}, lines);
             var result = WishListServiceProvider.UpdateWishListLines(request);
@@ -140,11 +140,11 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<UpdateWishListLinesResult, WishList> UpdateWishListLine([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] WishListLineInputModel model)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNull(model, "model");
-            Assert.ArgumentNotNullOrEmpty(model.WishListId, "model.WishListId");
-            Assert.ArgumentNotNullOrEmpty(model.ProductId, "model.ProductId");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNull(model, nameof(model));
+            Assert.ArgumentNotNullOrEmpty(model.WishListId, nameof(model.WishListId));
+            Assert.ArgumentNotNullOrEmpty(model.ProductId, nameof(model.ProductId));
 
             var wishListLine = new WishListLine
             {
@@ -157,10 +157,10 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<AddLinesToWishListResult, WishList> AddLinesToWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId, IEnumerable<WishListLine> lines)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNull(lines, "lines");
-            Assert.ArgumentNotNullOrEmpty(wishListId, "wishListId");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNull(lines, nameof(lines));
+            Assert.ArgumentNotNullOrEmpty(wishListId, nameof(wishListId));
 
             var request = new AddLinesToWishListRequest(new WishList {UserId = visitorContext.UserId, CustomerId = visitorContext.UserId, ExternalId = wishListId, ShopName = storefront.ShopName}, lines);
             var result = WishListServiceProvider.AddLinesToWishList(request);
@@ -171,9 +171,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<AddLinesToWishListResult, WishList> AddLinesToWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, AddToWishListInputModel model)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNull(model, "model");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNull(model, nameof(model));
 
             var product = new CommerceCartProduct
             {
@@ -212,9 +212,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<UpdateWishListResult, WishList> UpdateWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, UpdateWishListInputModel model)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNull(model, "model");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNull(model, nameof(model));
 
             var request = new UpdateWishListRequest(new WishList {UserId = visitorContext.UserId, CustomerId = visitorContext.UserId, ExternalId = model.ExternalId, Name = model.Name, IsFavorite = model.IsFavorite, ShopName = storefront.ShopName});
             var result = WishListServiceProvider.UpdateWishList(request);

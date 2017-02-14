@@ -85,7 +85,7 @@ namespace Sitecore.Foundation.Commerce.Util
 
         public static string BuildUrl(Item item, bool includeCatalog, bool includeFriendlyName, string root)
         {
-            Assert.ArgumentNotNull(item, "item");
+            Assert.ArgumentNotNull(item, nameof(item));
 
             string itemFriendlyName;
             string itemName;
@@ -99,7 +99,7 @@ namespace Sitecore.Foundation.Commerce.Util
 
         public static string BuildUrl(string itemName, string itemFriendlyName, string catalogName, string root)
         {
-            Assert.ArgumentNotNullOrEmpty(itemName, "itemName");
+            Assert.ArgumentNotNullOrEmpty(itemName, nameof(itemName));
 
             var route = new StringBuilder("/");
 
@@ -143,7 +143,7 @@ namespace Sitecore.Foundation.Commerce.Util
         public static string BuildVariantShopLink(Item item, bool includeCatalog, bool includeFriendlyName,
             bool includeCurrentCategory)
         {
-            Assert.ArgumentNotNull(item, "item");
+            Assert.ArgumentNotNull(item, nameof(item));
 
             string variantName;
             string variantId;
@@ -176,7 +176,7 @@ namespace Sitecore.Foundation.Commerce.Util
         public static string BuildProductShopLink(Item item, bool includeCatalog, bool includeFriendlyName,
             bool includeCurrentCategory)
         {
-            Assert.ArgumentNotNull(item, "item");
+            Assert.ArgumentNotNull(item, nameof(item));
 
             string productName;
             string productId;
@@ -204,7 +204,7 @@ namespace Sitecore.Foundation.Commerce.Util
 
         public static string BuildCategoryShopLink(Item item, bool includeCatalog, bool includeFriendlyName)
         {
-            Assert.ArgumentNotNull(item, "item");
+            Assert.ArgumentNotNull(item, nameof(item));
 
             var categoryName = string.Empty;
             var categoryId = string.Empty;
@@ -220,7 +220,7 @@ namespace Sitecore.Foundation.Commerce.Util
         public static string BuildShopUrl(string categoryId, string categoryName, string productId, string productName,
             string variantId, string variantName, string catalogName)
         {
-            Assert.ArgumentNotNullOrEmpty(categoryId, "categoryId");
+            Assert.ArgumentNotNullOrEmpty(categoryId, nameof(categoryId));
 
             var route = new StringBuilder("/");
 
@@ -380,7 +380,7 @@ namespace Sitecore.Foundation.Commerce.Util
 
         private static string ExtractCatalogName(Item item, bool includeCatalog)
         {
-            Assert.ArgumentNotNull(item, "item");
+            Assert.ArgumentNotNull(item, nameof(item));
 
             if (includeCatalog)
             {
@@ -393,7 +393,7 @@ namespace Sitecore.Foundation.Commerce.Util
         private static void ExtractCatalogItemInfo(Item item, bool includeFriendlyName, out string itemName,
             out string itemFriendlyName)
         {
-            Assert.ArgumentNotNull(item, "item");
+            Assert.ArgumentNotNull(item, nameof(item));
 
             if (_searchManagerLoader.Value.IsItemCatalog(item) || _searchManagerLoader.Value.IsItemVirtualCatalog(item))
             {

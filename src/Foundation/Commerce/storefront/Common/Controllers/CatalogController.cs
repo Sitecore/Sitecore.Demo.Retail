@@ -17,7 +17,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -67,10 +66,10 @@ namespace Sitecore.Reference.Storefront.Controllers
             [NotNull] CartManager cartManager)
             : base(accountManager, contactFactory)
         {
-            Assert.ArgumentNotNull(inventoryManager, "inventoryManager");
-            Assert.ArgumentNotNull(catalogManager, "catalogManager");
-            Assert.ArgumentNotNull(giftCardManager, "giftCardManager");
-            Assert.ArgumentNotNull(pricingManager, "pricingManager");
+            Assert.ArgumentNotNull(inventoryManager, nameof(inventoryManager));
+            Assert.ArgumentNotNull(catalogManager, nameof(catalogManager));
+            Assert.ArgumentNotNull(giftCardManager, nameof(giftCardManager));
+            Assert.ArgumentNotNull(pricingManager, nameof(pricingManager));
 
             InventoryManager = inventoryManager;
             CatalogManager = catalogManager;
@@ -410,7 +409,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                 CatalogManager.VisitedProductDetailsPage(CurrentStorefront, model.ProductId, model.ProductName, model.ParentCategoryId, model.ParentCategoryName);
             }
 
-            return View(GetAbsoluteRenderingView(StorefrontConstants.Views.Empty));
+            return View(GetAbsoluteRenderingView("/Shared/Empty"));
         }
 
         public ActionResult VisitedCategoryPage()
@@ -438,7 +437,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                 }
             }
 
-            return View(GetAbsoluteRenderingView(StorefrontConstants.Views.Empty));
+            return View(GetAbsoluteRenderingView("/Shared/Empty"));
         }
 
         public ActionResult RelatedCatalogItems()
@@ -483,7 +482,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(model, "model");
+                Assert.ArgumentNotNull(model, nameof(model));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);
@@ -544,7 +543,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(inputModel, "inputModel");
+                Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);
@@ -578,7 +577,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(model, "model");
+                Assert.ArgumentNotNull(model, nameof(model));
 
                 var result = new BaseJsonResult();
                 ValidateModel(result);
@@ -1011,7 +1010,7 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         public RelatedCatalogItemsViewModel GetRelationshipsFromItem([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, Item catalogItem, Rendering rendering)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
 
             if (catalogItem != null &&
                 catalogItem.Fields.Contains(CommerceConstants.KnownFieldIds.RelationshipList) &&
@@ -1035,14 +1034,14 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         public RelatedCatalogItemsViewModel GetRelationshipsFromField([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, RelationshipField field, Rendering rendering)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
 
             return GetRelationshipsFromField(storefront, visitorContext, field, rendering, null);
         }
 
         public RelatedCatalogItemsViewModel GetRelationshipsFromField([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, RelationshipField field, Rendering rendering, IEnumerable<string> relationshipNames)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
 
             relationshipNames = relationshipNames ?? Enumerable.Empty<string>();
             relationshipNames = relationshipNames.Select(s => s.Trim());

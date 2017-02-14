@@ -15,7 +15,6 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System.Diagnostics.CodeAnalysis;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
 
@@ -36,7 +35,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(string confirmUrl)
         {
-            Assert.ArgumentNotNullOrEmpty(confirmUrl, "confirmUrl");
+            Assert.ArgumentNotNullOrEmpty(confirmUrl, nameof(confirmUrl));
 
             ConfirmUrl = confirmUrl;
         }

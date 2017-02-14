@@ -42,59 +42,38 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         public BaseController(ContactFactory contactFactory)
         {
-            Assert.ArgumentNotNull(contactFactory, "contactFactory");
+            Assert.ArgumentNotNull(contactFactory, nameof(contactFactory));
 
             ContactFactory = contactFactory;
         }
 
         public ContactFactory ContactFactory { get; }
-        public ISiteContext CurrentSiteContext
-        {
-            get { return _siteContext ?? (_siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>()); }
-        }
-        public virtual VisitorContext CurrentVisitorContext
-        {
-            get { return _currentVisitorContext ?? (_currentVisitorContext = new VisitorContext(ContactFactory)); }
-        }
-        public CommerceStorefront CurrentStorefront
-        {
-            get { return StorefrontManager.CurrentStorefront; }
-        }
+        public ISiteContext CurrentSiteContext => _siteContext ?? (_siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>());
+
+        public virtual VisitorContext CurrentVisitorContext => _currentVisitorContext ?? (_currentVisitorContext = new VisitorContext(ContactFactory));
+
+        public CommerceStorefront CurrentStorefront => StorefrontManager.CurrentStorefront;
 
         public Catalog CurrentCatalog
         {
             get
             {
-                if (_currentCatalog == null)
+                if (_currentCatalog != null)
                 {
-                    _currentCatalog = CurrentStorefront.DefaultCatalog;
-                    if (_currentCatalog == null)
-                        _currentCatalog =
-                            new Catalog(Context.Database.GetItem(CommerceConstants.KnownItemIds.DefaultCatalog));
+                    return _currentCatalog;
                 }
+                _currentCatalog = CurrentStorefront.DefaultCatalog ?? new Catalog(Context.Database.GetItem(CommerceConstants.KnownItemIds.DefaultCatalog));
 
                 return _currentCatalog;
             }
         }
 
-        public ICommerceSearchManager CurrentSearchManager
-        {
-            get
-            {
-                return _currentSearchManager ??
-                       (_currentSearchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>());
-            }
-        }
+        public ICommerceSearchManager CurrentSearchManager => _currentSearchManager ??
+                                                              (_currentSearchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>());
 
-        protected Rendering CurrentRendering
-        {
-            get { return RenderingContext.Current.Rendering; }
-        }
+        protected Rendering CurrentRendering => RenderingContext.Current.Rendering;
 
-        protected string CurrentRenderingView
-        {
-            get { return GetRenderingView(); }
-        }
+        protected string CurrentRenderingView => GetRenderingView();
 
         protected Item Item
         {
@@ -154,17 +133,14 @@ namespace Sitecore.Reference.Storefront.Controllers
             else if (controllerName.Equals("StorefrontSearch", StringComparison.OrdinalIgnoreCase))
                 controllerName = "Search";
 
-            const string RenderingViewPathFormatString = "~/Views/{0}/{1}/{2}.cshtml";
-
-            var renderingViewPath = string.Format(CultureInfo.InvariantCulture, RenderingViewPathFormatString, shopName,
-                controllerName, renderingViewName);
+            var renderingViewPath = $"~/Views/{shopName}/{controllerName}/{renderingViewName}.cshtml";
 
             var result = ViewEngines.Engines.FindView(ControllerContext, renderingViewPath, null);
 
             if (result.View != null)
                 return renderingViewPath;
 
-            return string.Format(CultureInfo.InvariantCulture, RenderingViewPathFormatString, shopName, "Shared",
+            return string.Format(CultureInfo.InvariantCulture, "~/Views/{0}/{1}/{2}.cshtml", shopName, "Shared",
                 renderingViewName);
         }
 
@@ -175,9 +151,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             if (!subpath.StartsWith("/", StringComparison.OrdinalIgnoreCase))
                 subpath = subpath.Insert(0, "/");
 
-            const string RenderingViewPathFormatString = "~/Views/{0}{1}.cshtml";
-            var renderingViewPath = string.Format(CultureInfo.InvariantCulture, RenderingViewPathFormatString, shopName,
-                subpath);
+            var renderingViewPath = $"~/Views/{shopName}{subpath}.cshtml";
 
             return renderingViewPath;
         }

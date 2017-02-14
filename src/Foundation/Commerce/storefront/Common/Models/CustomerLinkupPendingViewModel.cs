@@ -17,7 +17,6 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Reference.Storefront.Models

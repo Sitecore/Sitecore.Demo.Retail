@@ -37,7 +37,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(LoyaltyTier tier, LoyaltyCardTier cardTier)
         {
-            Assert.ArgumentNotNull(tier, "tier");
+            Assert.ArgumentNotNull(tier, nameof(tier));
 
             TierId = tier.TierId;
             Description = tier.Description;

@@ -33,7 +33,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public VisitorContext([NotNull] ContactFactory contactFactory)
         {
-            Assert.ArgumentNotNull(contactFactory, "contactFactory");
+            Assert.ArgumentNotNull(contactFactory, nameof(contactFactory));
 
             ContactFactory = contactFactory;
         }

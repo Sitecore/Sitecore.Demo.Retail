@@ -17,10 +17,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Web;
-using CommerceServer.Core.Catalog;
+using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Foundation.Commerce.Extensions;
@@ -29,7 +28,6 @@ using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Links;
 using Sitecore.Mvc;
 using Sitecore.Mvc.Presentation;
-using StockStatus = Sitecore.Commerce.Entities.Inventory.StockStatus;
 
 namespace Sitecore.Reference.Storefront.Models
 {
@@ -49,8 +47,6 @@ namespace Sitecore.Reference.Storefront.Models
 
         public override Item Item => _item ?? base.Item;
 
-        public string ProductId => Item.Name;
-
         public string ProductName { get; set; }
 
         public string ParentCategoryId { get; set; }
@@ -66,18 +62,22 @@ namespace Sitecore.Reference.Storefront.Models
             get
             {
                 if (_images != null)
+                {
                     return _images;
+                }
 
                 _images = new List<MediaItem>();
 
                 MultilistField field = Item.Fields["Images"];
 
                 if (field != null)
+                {
                     foreach (var id in field.TargetIDs)
                     {
                         MediaItem mediaItem = Item.Database.GetItem(id);
                         _images.Add(mediaItem);
                     }
+                }
 
                 return _images;
             }
@@ -94,8 +94,6 @@ namespace Sitecore.Reference.Storefront.Models
 
         public HtmlString DisplayNameRender => PageContext.Current.HtmlHelper.Sitecore().Field(FieldIDs.DisplayName.ToString(), Item);
 
-        public decimal? ListPrice { get; set; }
-
         public string ListPriceWithCurrency => ListPrice.HasValue ? ListPrice.ToCurrency(StorefrontManager.GetCustomerCurrency()) : string.Empty;
 
         public decimal CustomerAverageRating { get; set; }
@@ -107,39 +105,43 @@ namespace Sitecore.Reference.Storefront.Models
                 var starsImage = "stars_sm_0";
                 var rating = CustomerAverageRating;
                 if (rating > 0 && rating < 1)
+                {
                     starsImage = "stars_sm_1";
+                }
                 else if (rating > 1 && rating < 2)
+                {
                     starsImage = "stars_sm_1";
+                }
                 else if (rating > 2 && rating < 3)
+                {
                     starsImage = "stars_sm_2";
+                }
                 else if (rating > 3 && rating < 4)
+                {
                     starsImage = "stars_sm_3";
+                }
                 else if (rating > 4 && rating < 5)
+                {
                     starsImage = "stars_sm_4";
+                }
                 else
+                {
                     starsImage = "stars_sm_5";
+                }
 
                 return starsImage;
             }
         }
 
-        public decimal? AdjustedPrice { get; set; }
-
         public string AdjustedPriceWithCurrency => AdjustedPrice.HasValue ? AdjustedPrice.ToCurrency(StorefrontManager.GetCustomerCurrency()) : string.Empty;
 
         public decimal SavingsPercentage => CalculateSavingsPercentage(AdjustedPrice, ListPrice);
 
-        public decimal? LowestPricedVariantAdjustedPrice { get; set; }
-
         public string LowestPricedVariantAdjustedPriceWithCurrency => LowestPricedVariantAdjustedPrice.HasValue ? LowestPricedVariantAdjustedPrice.ToCurrency(StorefrontManager.GetCustomerCurrency()) : string.Empty;
-
-        public decimal? LowestPricedVariantListPrice { get; set; }
 
         public string LowestPricedVariantListPriceWithCurrency => LowestPricedVariantListPrice.HasValue ? LowestPricedVariantListPrice.ToCurrency(StorefrontManager.GetCustomerCurrency()) : string.Empty;
 
         public decimal VariantSavingsPercentage => CalculateSavingsPercentage(LowestPricedVariantAdjustedPrice, LowestPricedVariantListPrice);
-
-        public decimal? HighestPricedVariantAdjustedPrice { get; set; }
 
         public bool IsOnSale => AdjustedPrice.HasValue && ListPrice.HasValue && AdjustedPrice < ListPrice;
 
@@ -153,8 +155,6 @@ namespace Sitecore.Reference.Storefront.Models
             }
         }
 
-        public string CatalogName => Item["CatalogName"];
-
         public decimal? Quantity { get; set; }
 
         [Required]
@@ -163,17 +163,11 @@ namespace Sitecore.Reference.Storefront.Models
 
         public List<KeyValuePair<string, decimal?>> GiftCardAmountOptions { get; set; }
 
-        public StockStatus StockStatus { get; set; }
-
-        public string StockStatusName { get; set; }
-
         public double StockCount { get; set; }
 
         public string StockAvailabilityDate { get; set; }
 
         public IEnumerable<VariantViewModel> Variants { get; protected set; }
-        IEnumerable<ICatalogProductVariant> ICatalogProduct.Variants => Variants;
-        IEnumerable<IProductVariant> IInventoryProduct.Variants => Variants;
 
         public List<string> VariantProductColor
         {
@@ -197,7 +191,9 @@ namespace Sitecore.Reference.Storefront.Models
                 var home = Context.Database.GetItem(Context.Site.RootPath + Context.Site.StartItem);
                 var textsItemPath = home["Product List Texts"];
                 if (string.IsNullOrEmpty(textsItemPath))
+                {
                     return null;
+                }
 
                 return Context.Database.GetItem(textsItemPath);
             }
@@ -209,7 +205,9 @@ namespace Sitecore.Reference.Storefront.Models
             {
                 var productListTexts = ProductListTexts;
                 if (productListTexts != null)
+                {
                     return productListTexts["Add To Cart Link Text"];
+                }
 
                 return string.Empty;
             }
@@ -221,13 +219,35 @@ namespace Sitecore.Reference.Storefront.Models
             {
                 var productListTexts = ProductListTexts;
                 if (productListTexts != null)
+                {
                     return productListTexts["Product Page Link Text"];
+                }
 
                 return string.Empty;
             }
         }
 
         public string ProductUrl => ProductId.Equals(StorefrontManager.CurrentStorefront.GiftCardProductId, StringComparison.OrdinalIgnoreCase) ? StorefrontManager.StorefrontUri("/buygiftcard") : LinkManager.GetDynamicUrl(Item);
+
+        public string ProductId => Item.Name;
+
+        public decimal? ListPrice { get; set; }
+
+        public decimal? AdjustedPrice { get; set; }
+
+        public decimal? LowestPricedVariantAdjustedPrice { get; set; }
+
+        public decimal? LowestPricedVariantListPrice { get; set; }
+
+        public decimal? HighestPricedVariantAdjustedPrice { get; set; }
+
+        public string CatalogName => Item["CatalogName"];
+        IEnumerable<ICatalogProductVariant> ICatalogProduct.Variants => Variants;
+
+        public StockStatus StockStatus { get; set; }
+
+        public string StockStatusName { get; set; }
+        IEnumerable<IProductVariant> IInventoryProduct.Variants => Variants;
 
         public void Initialize(Rendering rendering, List<VariantViewModel> variants)
         {
@@ -242,7 +262,9 @@ namespace Sitecore.Reference.Storefront.Models
                 && (fieldValue.ToString().Equals("Default", StringComparison.OrdinalIgnoreCase) || fieldValue.ToString().Equals(string.Empty, StringComparison.OrdinalIgnoreCase))
                 && Item.HasChildren
                 && Item.Children[0] != null)
+            {
                 fieldValue = PageContext.Current.HtmlHelper.Sitecore().Field("VariantFeatures", Item.Children[0]);
+            }
 
             return fieldValue;
         }
@@ -255,7 +277,9 @@ namespace Sitecore.Reference.Storefront.Models
         public decimal CalculateSavingsPercentage(decimal? adjustedPrice, decimal? listPrice)
         {
             if (!adjustedPrice.HasValue || !listPrice.HasValue || listPrice.Value <= adjustedPrice.Value)
+            {
                 return 0;
+            }
 
             var percentage = decimal.Floor(100 * (listPrice.Value - adjustedPrice.Value) / listPrice.Value);
             var integerPart = (int) percentage;

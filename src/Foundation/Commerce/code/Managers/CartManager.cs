@@ -44,8 +44,8 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         public CartManager([NotNull] InventoryManager inventoryManager, [NotNull] CommerceCartServiceProvider cartServiceProvider)
         {
-            Assert.ArgumentNotNull(inventoryManager, "inventoryManager");
-            Assert.ArgumentNotNull(cartServiceProvider, "cartServiceProvider");
+            Assert.ArgumentNotNull(inventoryManager, nameof(inventoryManager));
+            Assert.ArgumentNotNull(cartServiceProvider, nameof(cartServiceProvider));
 
             InventoryManager = inventoryManager;
             CartServiceProvider = cartServiceProvider;
@@ -96,9 +96,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<CartResult, bool> UpdateCartCurrency([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string currencyCode)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNullOrEmpty(currencyCode, "currencyCode");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNullOrEmpty(currencyCode, nameof(currencyCode));
 
             var result = GetCurrentCart(storefront, visitorContext);
             if (!result.ServiceProviderResult.Success)
@@ -123,7 +123,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<CartResult, bool> AddLineItemsToCart([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, IEnumerable<AddCartLineInputModel> inputModelList)
         {
-            Assert.ArgumentNotNull(inputModelList, "inputModelList");
+            Assert.ArgumentNotNull(inputModelList, nameof(inputModelList));
 
             var cartResult = LoadCartByName(storefront.ShopName, storefront.DefaultCartName, visitorContext.UserId, false);
             if (!cartResult.Success || cartResult.Cart == null)
@@ -136,9 +136,9 @@ namespace Sitecore.Foundation.Commerce.Managers
             var lines = new List<CartLine>();
             foreach (var inputModel in inputModelList)
             {
-                Assert.ArgumentNotNullOrEmpty(inputModel.ProductId, "inputModel.ProductId");
-                Assert.ArgumentNotNullOrEmpty(inputModel.CatalogName, "inputModel.CatalogName");
-                Assert.ArgumentNotNull(inputModel.Quantity, "inputModel.Quantity");
+                Assert.ArgumentNotNullOrEmpty(inputModel.ProductId, nameof(inputModel.ProductId));
+                Assert.ArgumentNotNullOrEmpty(inputModel.CatalogName, nameof(inputModel.CatalogName));
+                Assert.ArgumentNotNull(inputModel.Quantity, nameof(inputModel.Quantity));
 
                 var quantity = (uint) inputModel.Quantity;
 
@@ -176,7 +176,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<CartResult, CommerceCart> RemoveLineItemFromCart([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string externalCartLineId)
         {
-            Assert.ArgumentNotNullOrEmpty(externalCartLineId, "externalCartLineId");
+            Assert.ArgumentNotNullOrEmpty(externalCartLineId, nameof(externalCartLineId));
 
             var cartResult = LoadCartByName(storefront.ShopName, storefront.DefaultCartName, visitorContext.UserId, false);
             if (!cartResult.Success || cartResult.Cart == null)
@@ -212,8 +212,8 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<CartResult, CommerceCart> ChangeLineQuantity([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] UpdateCartLineInputModel inputModel)
         {
-            Assert.ArgumentNotNull(inputModel, "inputModel");
-            Assert.ArgumentNotNullOrEmpty(inputModel.ExternalCartLineId, "inputModel.ExternalCartLineId");
+            Assert.ArgumentNotNull(inputModel, nameof(inputModel));
+            Assert.ArgumentNotNullOrEmpty(inputModel.ExternalCartLineId, nameof(inputModel.ExternalCartLineId));
 
             var cartResult = LoadCartByName(storefront.ShopName, storefront.DefaultCartName, visitorContext.UserId);
             if (!cartResult.Success || cartResult.Cart == null)
@@ -253,7 +253,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<AddPromoCodeResult, CommerceCart> AddPromoCodeToCart([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string promoCode)
         {
-            Assert.ArgumentNotNullOrEmpty(promoCode, "promoCode");
+            Assert.ArgumentNotNullOrEmpty(promoCode, nameof(promoCode));
 
             var result = new AddPromoCodeResult {Success = false};
             var cartResult = LoadCartByName(storefront.ShopName, storefront.DefaultCartName, visitorContext.UserId);
@@ -282,9 +282,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<RemovePromoCodeResult, CommerceCart> RemovePromoCodeFromCart([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string promoCode)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNullOrEmpty(promoCode, "promoCode");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNullOrEmpty(promoCode, nameof(promoCode));
 
             var result = new RemovePromoCodeResult {Success = false};
             var cartResult = LoadCartByName(storefront.ShopName, storefront.DefaultCartName, visitorContext.UserId);
@@ -314,9 +314,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<AddShippingInfoResult, CommerceCart> SetShippingMethods([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] SetShippingMethodsInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNull(inputModel, "inputModel");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
             var result = new AddShippingInfoResult {Success = false};
             var response = GetCurrentCart(storefront, visitorContext, true);
@@ -357,9 +357,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<CartResult, CommerceCart> SetPaymentMethods([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] PaymentInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNull(inputModel, "inputModel");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
             var result = new AddPaymentInfoResult {Success = false};
             var response = GetCurrentCart(storefront, visitorContext, true);
@@ -411,9 +411,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<CartResult, CommerceCart> MergeCarts([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string anonymousVisitorId, Cart anonymousVisitorCart)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNullOrEmpty(anonymousVisitorId, "anonymousVisitorId");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNullOrEmpty(anonymousVisitorId, nameof(anonymousVisitorId));
 
             var userId = visitorContext.UserId;
             var cartResult = LoadCartByName(storefront.ShopName, storefront.DefaultCartName, userId, true);
@@ -454,10 +454,10 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual ManagerResponse<CartResult, CommerceCart> UpdateCart([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] CommerceCart cart, [NotNull] CommerceCart cartChanges)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNull(cart, "cart");
-            Assert.ArgumentNotNull(cartChanges, "cartChanges");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNull(cart, nameof(cart));
+            Assert.ArgumentNotNull(cartChanges, nameof(cartChanges));
 
             var updateCartRequest = new UpdateCartRequest(cart, cartChanges);
             var result = CartServiceProvider.UpdateCart(updateCartRequest);
@@ -478,8 +478,8 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         protected virtual CartResult RemoveCartLines(Cart cart, IEnumerable<CartLine> cartLines, bool refreshCart = false)
         {
-            Assert.ArgumentNotNull(cart, "cart");
-            Assert.ArgumentNotNull(cartLines, "cartLine");
+            Assert.ArgumentNotNull(cart, nameof(cart));
+            Assert.ArgumentNotNull(cartLines, nameof(cartLines));
 
             var request = new RemoveCartLinesRequest(cart, cartLines);
             RefreshCart(request, refreshCart);
@@ -490,9 +490,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         protected virtual AddShippingInfoResult AddShippingInfoToCart([NotNull] CommerceCart cart, [NotNull] ShippingOptionType orderShippingPreferenceType, [NotNull] IEnumerable<ShippingInfo> shipments)
         {
-            Assert.ArgumentNotNull(cart, "cart");
-            Assert.ArgumentNotNull(orderShippingPreferenceType, "orderShippingPreferenceType");
-            Assert.ArgumentNotNull(shipments, "shipments");
+            Assert.ArgumentNotNull(cart, nameof(cart));
+            Assert.ArgumentNotNull(orderShippingPreferenceType, nameof(orderShippingPreferenceType));
+            Assert.ArgumentNotNull(shipments, nameof(shipments));
 
             var request = new AddShippingInfoRequest(cart, shipments.ToList(), orderShippingPreferenceType);
             var result = CartServiceProvider.AddShippingInfo(request);
@@ -502,7 +502,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         protected virtual void UpdateStockInformation([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] CommerceCartLine cartLine, [NotNull] string catalogName)
         {
-            Assert.ArgumentNotNull(cartLine, "cartLine");
+            Assert.ArgumentNotNull(cartLine, nameof(cartLine));
 
             var products = new List<InventoryProduct> {new CommerceInventoryProduct {ProductId = cartLine.Product.ProductId, CatalogName = catalogName}};
             var stockInfoResult = InventoryManager.GetStockInformation(storefront, products, StockDetailsLevel.Status).ServiceProviderResult;

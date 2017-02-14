@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="InitializeControllerFactory.cs" company="Sitecore Corporation">
+// <copyright file="VariantIndexInfo.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Defines the InitializeControllerFactory class.</summary>
+// <summary>Product variant information stored in the "VariantInfo" index document property.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -15,26 +15,14 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using Sitecore.Mvc.Controllers;
-using Sitecore.Pipelines;
-using Sitecore.Reference.Storefront.Infrastructure;
-using ControllerBuilder = System.Web.Mvc.ControllerBuilder;
-
-namespace Sitecore.Reference.Storefront.SitecorePipelines
+namespace Sitecore.Foundation.Commerce.Models
 {
-    public class InitializeControllerFactory
+    public class VariantIndexInfo
     {
-        public virtual void Process(PipelineArgs args)
-        {
-            SetControllerFactory(args);
-        }
+        public string VariantId { get; set; }
 
-        protected virtual void SetControllerFactory(PipelineArgs args)
-        {
-            var controllerFactory = new WindsorControllerFactory(WindsorConfig.Container.Kernel);
-            var sitecoreFactory = new SitecoreControllerFactory(controllerFactory);
+        public decimal ListPrice { get; set; }
 
-            ControllerBuilder.Current.SetControllerFactory(sitecoreFactory);
-        }
+        public decimal BasePrice { get; set; }
     }
 }

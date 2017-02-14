@@ -1,9 +1,9 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="SiteContentSearchResultsViewModel.cs" company="Sitecore Corporation">
+﻿//---------------------------------------------------------------------
+// <copyright file="InitializeRoutes.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Defines the SiteContentSearchResultsViewModel class.</summary>
-//-----------------------------------------------------------------------
+// <summary>The route ininitialization</summary>
+//---------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
 // except in compliance with the License. You may obtain a copy of the License at
@@ -15,13 +15,19 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using Sitecore.Mvc.Presentation;
+using System.Web.Routing;
+using Sitecore.Pipelines;
 
-namespace Sitecore.Reference.Storefront.Models
+namespace Sitecore.Reference.Storefront.Infrastructure.SitecorePipelines
 {
-    public class SiteContentSearchResultsViewModel : RenderingModel
+    public class InitializeRoutes
     {
-        public List<SiteContentViewModel> ContentItems { get; set; }
+        public void Process(PipelineArgs args)
+        {
+            if (!Context.IsUnitTesting)
+            {
+                RouteConfig.RegisterRoutes(RouteTable.Routes);
+            }
+        }
     }
 }

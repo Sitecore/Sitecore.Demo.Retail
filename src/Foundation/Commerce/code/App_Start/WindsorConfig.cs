@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ChangePasswordBaseJsonResult.cs" company="Sitecore Corporation">
+// <copyright file="WindsorConfig.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Emits the Json result of a change password.</summary>
+// <summary>Defines the WindsorConfig class.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -15,28 +15,32 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using Sitecore.Commerce.Services;
-using Sitecore.Diagnostics;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
+using Sitecore.Foundation.Commerce;
+using WebActivatorEx;
 
-namespace Sitecore.Reference.Storefront.Models.JsonResults
+[assembly: PreApplicationStartMethod(typeof(WindsorConfig), "ConfigureContainer")]
+[assembly: ApplicationShutdownMethod(typeof(WindsorConfig), "ReleaseContainer")]
+
+namespace Sitecore.Foundation.Commerce
 {
-    public class ChangePasswordBaseJsonResult : BaseJsonResult
+    public static class WindsorConfig
     {
-        public ChangePasswordBaseJsonResult()
+        internal static readonly IWindsorContainer Container;
+
+        static WindsorConfig()
+        {
+            Container = new WindsorContainer().Install(FromAssembly.This());
+        }
+
+        public static void ConfigureContainer()
         {
         }
 
-        public ChangePasswordBaseJsonResult(ServiceProviderResult result) : base(result)
+        public static void ReleaseContainer()
         {
-        }
-
-        public string UserName { get; set; }
-
-        public virtual void Initialize(string userName)
-        {
-            Assert.ArgumentNotNullOrEmpty(userName, nameof(userName));
-
-            UserName = userName;
+            Container.Dispose();
         }
     }
 }

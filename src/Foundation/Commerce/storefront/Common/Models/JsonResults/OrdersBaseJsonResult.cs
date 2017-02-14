@@ -38,7 +38,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(IEnumerable<OrderHeader> orderHeaders)
         {
-            Assert.ArgumentNotNull(orderHeaders, "orderHeaders");
+            Assert.ArgumentNotNull(orderHeaders, nameof(orderHeaders));
 
             foreach (var orderHeader in orderHeaders)
             {

@@ -32,7 +32,7 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         public PaymentManager([NotNull] PaymentServiceProvider paymentServiceProvider, [NotNull] CartManager cartManager)
         {
-            Assert.ArgumentNotNull(paymentServiceProvider, "paymentServiceProvider");
+            Assert.ArgumentNotNull(paymentServiceProvider, nameof(paymentServiceProvider));
 
             PaymentServiceProvider = paymentServiceProvider;
             CartManager = cartManager;
@@ -44,8 +44,8 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public ManagerResponse<GetPaymentOptionsResult, IEnumerable<PaymentOption>> GetPaymentOptions([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
 
             var result = new GetPaymentOptionsResult {Success = false};
             var cartResult = CartManager.GetCurrentCart(storefront, visitorContext);
@@ -64,9 +64,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public ManagerResponse<GetPaymentMethodsResult, IEnumerable<PaymentMethod>> GetPaymentMethods([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, PaymentOption paymentOption)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNull(paymentOption, "paymentOption");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNull(paymentOption, nameof(paymentOption));
 
             var result = new GetPaymentMethodsResult {Success = false};
             var cartResult = CartManager.GetCurrentCart(storefront, visitorContext);

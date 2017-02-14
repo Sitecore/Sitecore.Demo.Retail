@@ -45,7 +45,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(LoyaltyProgramStatus program)
         {
-            Assert.ArgumentNotNull(program, "program");
+            Assert.ArgumentNotNull(program, nameof(program));
 
             Name = program.Name;
             Description = program.Description;

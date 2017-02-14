@@ -40,6 +40,9 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         {
             base.Initialize(shippingMethods);
 
+            if (shippingMethods == null || shippingMethodsPerItem == null)
+                return;
+
             var shippingMethodPerItemArray = shippingMethodsPerItem as ShippingMethodPerItem[] ?? shippingMethodsPerItem.ToArray();
             if (!shippingMethodPerItemArray.Any())
             {

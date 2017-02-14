@@ -39,7 +39,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(LoyaltyCardTransaction transaction)
         {
-            Assert.ArgumentNotNull(transaction, "transaction");
+            Assert.ArgumentNotNull(transaction, nameof(transaction));
 
             ExternalId = transaction.ExternalId;
             EntryTime = transaction.EntryDateTime.ToShortTimeString();

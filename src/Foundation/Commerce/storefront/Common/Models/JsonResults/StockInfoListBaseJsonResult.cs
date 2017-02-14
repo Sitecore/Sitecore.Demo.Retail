@@ -38,7 +38,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(IEnumerable<StockInformation> stockInformations)
         {
-            Assert.ArgumentNotNull(stockInformations, "stockInformations");
+            Assert.ArgumentNotNull(stockInformations, nameof(stockInformations));
 
             var stockInfos = stockInformations as IList<StockInformation> ?? stockInformations.ToList();
             if (!stockInfos.Any())

@@ -16,7 +16,6 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.ContentSearch;
 
@@ -30,7 +29,7 @@ namespace Sitecore.Foundation.Commerce.Models.Search
         [IndexField("adjustedprice")]
         public double AdjustedPrice { get; set; }
 
-        [IndexField("variantinfo")]
+        [IndexField(Constants.CommerceIndex.Fields.VariantInfo)]
         public string VariantInfo { get; set; }
 
         public Dictionary<string, object> OtherFields { get; set; }

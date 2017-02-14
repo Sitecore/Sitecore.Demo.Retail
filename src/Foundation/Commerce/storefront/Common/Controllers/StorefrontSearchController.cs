@@ -37,6 +37,7 @@ namespace Sitecore.Reference.Storefront.Controllers
 {
     public class StorefrontSearchController : BaseController
     {
+        private const string ChangeSiteContentPageSizeClass = "changeSiteContentPageSize";
         private const string CurrentCategoryViewModelKeyName = "CurrentCategoryViewModel";
         private const string CurrentSearchProductResultsKeyName = "CurrentSearchProductResults";
         private const string CurrentSearchContentResultsKeyName = "CurrentSearchContentResults";
@@ -250,9 +251,9 @@ namespace Sitecore.Reference.Storefront.Controllers
                 return (SearchResults) CurrentSiteContext.Items[CurrentSearchProductResultsKeyName];
             }
 
-            Assert.ArgumentNotNull(searchKeyword, "searchOptions");
-            Assert.ArgumentNotNull(searchKeyword, "searchKeyword");
-            Assert.ArgumentNotNull(searchKeyword, "catalogName");
+            Assert.ArgumentNotNull(searchKeyword, nameof(searchKeyword));
+            Assert.ArgumentNotNull(searchKeyword, nameof(searchKeyword));
+            Assert.ArgumentNotNull(searchKeyword, nameof(searchKeyword));
 
             var returnList = new List<Item>();
             var totalPageCount = 0;
@@ -330,7 +331,7 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         protected virtual ProductListHeaderViewModel GetSiteContentListHeaderViewModel(CommerceSearchOptions searchOptions, string searchKeyword, Rendering rendering)
         {
-            var viewModel = new ProductListHeaderViewModel {PageSizeClass = StorefrontConstants.StyleClasses.ChangeSiteContentPageSize};
+            var viewModel = new ProductListHeaderViewModel {PageSizeClass = ChangeSiteContentPageSizeClass};
             SearchResults searchResults = null;
             if (searchOptions != null)
             {

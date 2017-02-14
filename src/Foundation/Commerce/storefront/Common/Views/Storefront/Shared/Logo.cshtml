@@ -10,7 +10,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-@model RenderingModel
+@model Sitecore.Mvc.Presentation.RenderingModel
 <div id="B04-Logo" class="logo">
     @Html.Sitecore().Field("Link", Model.Item, new { text = @Html.Sitecore().Field("Image", Model.Item) })
 </div>

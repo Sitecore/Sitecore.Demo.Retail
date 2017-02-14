@@ -33,8 +33,8 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         public ShippingManager([NotNull] ShippingServiceProvider shippingServiceProvider, [NotNull] CartManager cartManager)
         {
-            Assert.ArgumentNotNull(shippingServiceProvider, "shippingServiceProvider");
-            Assert.ArgumentNotNull(cartManager, "cartManager");
+            Assert.ArgumentNotNull(shippingServiceProvider, nameof(shippingServiceProvider));
+            Assert.ArgumentNotNull(cartManager, nameof(cartManager));
 
             ShippingServiceProvider = shippingServiceProvider;
             CartManager = cartManager;
@@ -46,7 +46,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public ManagerResponse<GetShippingOptionsResult, List<ShippingOption>> GetShippingPreferences([NotNull] Cart cart)
         {
-            Assert.ArgumentNotNull(cart, "cart");
+            Assert.ArgumentNotNull(cart, nameof(cart));
 
             var request = new GetShippingOptionsRequest(cart);
             var result = ShippingServiceProvider.GetShippingOptions(request);
@@ -61,9 +61,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public ManagerResponse<GetShippingMethodsResult, IReadOnlyCollection<ShippingMethod>> GetShippingMethods([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] GetShippingMethodsInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNull(visitorContext, "visitorContext");
-            Assert.ArgumentNotNull(inputModel, "inputModel");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
             var result = new GetShippingMethodsResult {Success = false};
             var cartResult = CartManager.GetCurrentCart(storefront, visitorContext);
@@ -76,12 +76,9 @@ namespace Sitecore.Foundation.Commerce.Managers
             var cart = cartResult.Result;
             var preferenceType = InputModelExtension.GetShippingOptionType(inputModel.ShippingPreferenceType);
 
-            var request = new GetShippingMethodsRequest(
-                new ShippingOption {ShippingOptionType = preferenceType},
-                inputModel.ShippingAddress != null ? inputModel.ShippingAddress.ToParty() : null,
-                cart)
+            var request = new GetShippingMethodsRequest(new ShippingOption {ShippingOptionType = preferenceType}, inputModel.ShippingAddress?.ToParty(), cart)
             {
-                Lines = inputModel.Lines != null ? inputModel.Lines.ToCommerceCartLines() : null
+                Lines = inputModel.Lines?.ToCommerceCartLines()
             };
 
             result = ShippingServiceProvider.GetShippingMethods<Sitecore.Commerce.Services.Shipping.GetShippingMethodsRequest, GetShippingMethodsResult>(request);

@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="VariantIndexInfo.cs" company="Sitecore Corporation">
+// <copyright file="InitializeControllerFactory.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Product variant information stored in the "VariantInfo" index document property.</summary>
+// <summary>Defines the InitializeControllerFactory class.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -15,14 +15,25 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-namespace Sitecore.Reference.Storefront.Search.ComputedFields
+using Sitecore.Mvc.Controllers;
+using Sitecore.Pipelines;
+using ControllerBuilder = System.Web.Mvc.ControllerBuilder;
+
+namespace Sitecore.Reference.Storefront.Infrastructure.SitecorePipelines
 {
-    public class VariantIndexInfo
+    public class InitializeControllerFactory
     {
-        public string VariantId { get; set; }
+        public virtual void Process(PipelineArgs args)
+        {
+            SetControllerFactory(args);
+        }
 
-        public decimal ListPrice { get; set; }
+        protected virtual void SetControllerFactory(PipelineArgs args)
+        {
+            var controllerFactory = new WindsorControllerFactory(WindsorConfig.Container.Kernel);
+            var sitecoreFactory = new SitecoreControllerFactory(controllerFactory);
 
-        public decimal BasePrice { get; set; }
+            ControllerBuilder.Current.SetControllerFactory(sitecoreFactory);
+        }
     }
 }

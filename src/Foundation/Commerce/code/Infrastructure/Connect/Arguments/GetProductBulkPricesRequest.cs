@@ -24,7 +24,7 @@ namespace Sitecore.Foundation.Commerce.Connect.Arguments
     {
         public GetProductBulkPricesRequest(string catalogName, IEnumerable<string> productIds, params string[] priceTypeIds) : base(productIds)
         {
-            Assert.ArgumentNotNull(catalogName, "catalogName");
+            Assert.ArgumentNotNull(catalogName, nameof(catalogName));
             ProductCatalogName = catalogName;
             PriceTypeIds = priceTypeIds;
         }

@@ -30,9 +30,9 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Orders
     {
         public override void Process(ServicePipelineArgs args)
         {
-            Assert.ArgumentNotNull(args, "args");
-            Assert.ArgumentCondition(args.Request is GetAvailableRegionsRequest, "args.Request", "args.Request is GetAvailableRegionsRequest");
-            Assert.ArgumentCondition(args.Result is GetAvailableRegionsResult, "args.Result", "args.Result is GetAvailableRegionsResult");
+            Assert.ArgumentNotNull(args, nameof(args));
+            Assert.ArgumentCondition(args.Request is GetAvailableRegionsRequest, nameof(args.Request), "args.Request is GetAvailableRegionsRequest");
+            Assert.ArgumentCondition(args.Result is GetAvailableRegionsResult, nameof(args.Result), "args.Result is GetAvailableRegionsResult");
 
             var request = (GetAvailableRegionsRequest) args.Request;
             var result = (GetAvailableRegionsResult) args.Result;

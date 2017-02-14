@@ -21,16 +21,16 @@ namespace Sitecore.Foundation.Commerce.Models.Search
 {
     public class InventorySearchResultItem : CommerceProductSearchResultItem
     {
-        [IndexField("outofstocklocations")]
+        [IndexField(Constants.CommerceIndex.Fields.OutOfStockLocations)]
         public string OutOfStockLocations { get; set; }
 
-        [IndexField("orderablelocations")]
+        [IndexField(Constants.CommerceIndex.Fields.OrderableLocations)]
         public string OrderableLocations { get; set; }
 
-        [IndexField("preorderable")]
+        [IndexField(Constants.CommerceIndex.Fields.PreOrderable)]
         public string PreOrderable { get; set; }
 
-        [IndexField("instocklocations")]
+        [IndexField(Constants.CommerceIndex.Fields.InStockLocations)]
         public string InStockLocations { get; set; }
     }
 }

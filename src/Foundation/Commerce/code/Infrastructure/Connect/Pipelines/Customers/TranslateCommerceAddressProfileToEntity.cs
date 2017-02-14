@@ -30,14 +30,14 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
     {
         public override void Process(ServicePipelineArgs args)
         {
-            Assert.ArgumentNotNull(args, "args");
-            Assert.ArgumentNotNull(args.Request, "args.request");
-            Assert.ArgumentNotNull(args.Result, "args.result");
-            Assert.ArgumentCondition(args.Request is TranslateCommerceAddressProfileToEntityRequest, "args.Request ", "args.Request is TranslateCommerceProfileToEntityRequest");
+            Assert.ArgumentNotNull(args, nameof(args));
+            Assert.ArgumentNotNull(args.Request, nameof(args.Request));
+            Assert.ArgumentNotNull(args.Result, nameof(args.Result));
+            Assert.ArgumentCondition(args.Request is TranslateCommerceAddressProfileToEntityRequest, nameof(args.Request), "args.Request is TranslateCommerceProfileToEntityRequest");
 
             var request = (TranslateCommerceAddressProfileToEntityRequest) args.Request;
-            Assert.ArgumentNotNull(request.SourceProfile, "request.SourceProfile");
-            Assert.ArgumentNotNull(request.DestinationParty, "request.DestinationParty");
+            Assert.ArgumentNotNull(request.SourceProfile, nameof(request.SourceProfile));
+            Assert.ArgumentNotNull(request.DestinationParty, nameof(request.DestinationParty));
 
             if (request.DestinationParty != null)
                 TranslateToCommerceParty(request.SourceProfile, request.DestinationParty);

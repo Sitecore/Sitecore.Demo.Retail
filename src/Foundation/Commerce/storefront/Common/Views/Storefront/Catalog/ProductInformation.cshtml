@@ -9,8 +9,10 @@
     // either express or implied. See the License for the specific language governing permissions
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
+@using Sitecore.Foundation.Commerce.Extensions
 @using Sitecore.Foundation.Commerce.Managers
-@model ProductViewModel
+@using Sitecore.Reference.Storefront.Models
+@model Sitecore.Reference.Storefront.Models.ProductViewModel
 @{
     if (Model == null)
     {
@@ -76,7 +78,7 @@
         </a>
     </div>
 
-    @if (Model.Variants != null && Model.Variants.Count > 0)
+    @if (Model.Variants != null && Model.Variants.Any())
     {
         var colors = Model.Variants.Where(variant => !string.IsNullOrWhiteSpace(variant.ProductColor)).Distinct(new VariantPropertiesEqualityComparer(VariantPropertiesComparisonProperty.ProductColor));
         if (colors.Any())
@@ -92,7 +94,7 @@
             </div>
         }
     }
-    @if (Model.Variants != null && Model.Variants.Count > 0)
+    @if (Model.Variants != null && Model.Variants.Any())
     {
         var sizes = Model.Variants.Where(variant => !string.IsNullOrWhiteSpace(variant.Size)).Distinct(new VariantPropertiesEqualityComparer(VariantPropertiesComparisonProperty.Size));
 

@@ -10,7 +10,8 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-@model CategoryViewModel
+@using Sitecore.Reference.Storefront.Models
+@model Sitecore.Reference.Storefront.Models.CategoryViewModel
 @{
     if (Model == null || Model.ChildProducts == null || !Model.ChildProducts.Any())
     {

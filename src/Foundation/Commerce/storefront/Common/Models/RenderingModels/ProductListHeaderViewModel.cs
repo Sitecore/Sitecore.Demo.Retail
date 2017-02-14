@@ -17,10 +17,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
-using Sitecore.Foundation.Commerce;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Mvc.Presentation;
 
@@ -28,9 +26,11 @@ namespace Sitecore.Reference.Storefront.Models.RenderingModels
 {
     public class ProductListHeaderViewModel : RenderingModel
     {
+        private const string DefaultPageSizeClass = "changePageSize";
+
         public ProductListHeaderViewModel()
         {
-            PageSizeClass = StorefrontConstants.StyleClasses.ChangePageSize;
+            PageSizeClass = DefaultPageSizeClass;
         }
 
         public IEnumerable<CommerceQuerySort> SortFields { get; protected set; }

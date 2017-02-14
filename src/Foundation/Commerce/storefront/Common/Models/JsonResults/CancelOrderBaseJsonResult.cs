@@ -29,7 +29,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         public CancelOrderBaseJsonResult(VisitorCancelOrderResult result)
             : base(result)
         {
-            Assert.ArgumentNotNull(result, "result");
+            Assert.ArgumentNotNull(result, nameof(result));
             if (result.CancellationStatus != null)
             {
                 CancellationStatus = result.CancellationStatus.Name;

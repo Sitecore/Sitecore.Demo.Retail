@@ -54,7 +54,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public virtual void Initialize(Party address)
         {
-            Assert.ArgumentNotNull(address, "address");
+            Assert.ArgumentNotNull(address, nameof(address));
 
             ExternalId = address.ExternalId;
             Address1 = address.Address1;

@@ -2,7 +2,6 @@
 // <copyright file="CatalogManager.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Defines the CategoryViewModel class.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -53,9 +52,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public CatalogManager([NotNull] CatalogServiceProvider catalogServiceProvider, [NotNull] GlobalizationServiceProvider globalizationServiceProvider, [NotNull] PricingManager pricingManager, [NotNull] InventoryManager inventoryManager)
         {
-            Assert.ArgumentNotNull(catalogServiceProvider, "catalogServiceProvider");
-            Assert.ArgumentNotNull(pricingManager, "pricingManager");
-            Assert.ArgumentNotNull(inventoryManager, "inventoryManager");
+            Assert.ArgumentNotNull(catalogServiceProvider, nameof(catalogServiceProvider));
+            Assert.ArgumentNotNull(pricingManager, nameof(pricingManager));
+            Assert.ArgumentNotNull(inventoryManager, nameof(inventoryManager));
 
             CatalogServiceProvider = catalogServiceProvider;
             GlobalizationServiceProvider = globalizationServiceProvider;
@@ -85,7 +84,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         public CatalogResult VisitedCategoryPage([NotNull] CommerceStorefront storefront, [NotNull] string categoryId,
             string categoryName)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
 
             var request = new VisitedCategoryPageRequest(storefront.ShopName, categoryId, categoryName);
             return CatalogServiceProvider.VisitedCategoryPage(request);
@@ -94,7 +93,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         public CatalogResult VisitedProductDetailsPage([NotNull] CommerceStorefront storefront,
             [NotNull] string productId, string productName, string parentCategoryId, string parentCategoryName)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
 
             var request = new VisitedProductDetailsPageRequest(storefront.ShopName, productId, productName,
                 parentCategoryId, parentCategoryName);
@@ -103,57 +102,53 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public SearchResults GetProductSearchResults(Item dataSource, CommerceSearchOptions productSearchOptions)
         {
-            Assert.ArgumentNotNull(productSearchOptions, "productSearchOptions");
+            Assert.ArgumentNotNull(productSearchOptions, nameof(productSearchOptions));
 
-            if (dataSource != null)
+            if (dataSource == null)
             {
-                var totalProductCount = 0;
-                var totalPageCount = 0;
-                var error = string.Empty;
-
-                if (dataSource.TemplateName == StorefrontConstants.KnownTemplateNames.CommerceNamedSearch ||
-                    dataSource.TemplateName == StorefrontConstants.KnownTemplateNames.NamedSearch)
-                {
-                    var returnList = new List<Item>();
-                    IEnumerable<CommerceQueryFacet> facets = null;
-                    var searchOptions = new CommerceSearchOptions(-1, 0);
-                    var defaultBucketQuery = dataSource[CommerceConstants.KnownSitecoreFieldNames.DefaultBucketQuery];
-                    var persistendBucketFilter =
-                        CleanLanguageFromFilter(
-                            dataSource[CommerceConstants.KnownSitecoreFieldNames.PersistentBucketFilter]);
-
-                    try
-                    {
-                        var searchResponse = FindCatalogItems(defaultBucketQuery, persistendBucketFilter, searchOptions);
-                        if (searchResponse != null)
-                        {
-                            returnList.AddRange(searchResponse.ResponseItems);
-
-                            totalProductCount = searchResponse.TotalItemCount;
-                            totalPageCount = searchResponse.TotalPageCount;
-                            facets = searchResponse.Facets;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        error = ex.Message;
-                    }
-
-                    return new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex,
-                        facets);
-                }
-
-                var childProducts = GetChildProducts(productSearchOptions, dataSource).SearchResultItems;
-                return new SearchResults(childProducts, totalProductCount, totalPageCount,
-                    productSearchOptions.StartPageIndex, new List<CommerceQueryFacet>());
+                return null;
             }
 
-            return null;
+            var totalProductCount = 0;
+            var totalPageCount = 0;
+
+            if (dataSource.IsDerived(StorefrontConstants.KnownTemplateItemIds.NamedSearch))
+            {
+                var returnList = new List<Item>();
+                IEnumerable<CommerceQueryFacet> facets = null;
+                var searchOptions = new CommerceSearchOptions(-1, 0);
+                var defaultBucketQuery = dataSource[CommerceConstants.KnownSitecoreFieldNames.DefaultBucketQuery];
+                var persistendBucketFilter = CleanLanguageFromFilter(dataSource[CommerceConstants.KnownSitecoreFieldNames.PersistentBucketFilter]);
+
+                try
+                {
+                    var searchResponse = FindCatalogItems(defaultBucketQuery, persistendBucketFilter, searchOptions);
+                    if (searchResponse != null)
+                    {
+                        returnList.AddRange(searchResponse.ResponseItems);
+
+                        totalProductCount = searchResponse.TotalItemCount;
+                        totalPageCount = searchResponse.TotalPageCount;
+                        facets = searchResponse.Facets;
+                    }
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
+
+                return new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex,
+                    facets);
+            }
+
+            var childProducts = GetChildProducts(productSearchOptions, dataSource).SearchResultItems;
+            return new SearchResults(childProducts, totalProductCount, totalPageCount,
+                productSearchOptions.StartPageIndex, new List<CommerceQueryFacet>());
         }
 
         public MultipleProductSearchResults GetMultipleProductSearchResults(BaseItem dataSource, CommerceSearchOptions productSearchOptions)
         {
-            Assert.ArgumentNotNull(productSearchOptions, "productSearchOptions");
+            Assert.ArgumentNotNull(productSearchOptions, nameof(productSearchOptions));
 
             MultilistField searchesField = dataSource.Fields[StorefrontConstants.KnownFieldNames.NamedSearches];
             var searches = searchesField.GetItems();
@@ -307,7 +302,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         public virtual ManagerResponse<CatalogResult, bool> VisitedProductDetailsPage(
             [NotNull] CommerceStorefront storefront)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
 
             var productId = CatalogUrlManager.ExtractItemIdFromCurrentUrl();
             var parentCategoryName = CatalogUrlManager.ExtractCategoryNameFromCurrentUrl();
@@ -323,7 +318,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         public virtual ManagerResponse<CatalogResult, bool> FacetApplied([NotNull] CommerceStorefront storefront,
             string facet, bool isApplied)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
 
             var request = new FacetAppliedRequest(storefront.ShopName, facet, isApplied);
             var result = CatalogServiceProvider.FacetApplied(request);
@@ -335,7 +330,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         public virtual ManagerResponse<CatalogResult, bool> SortOrderApplied([NotNull] CommerceStorefront storefront,
             string sortKey, CommerceConstants.SortDirection? sortDirection)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
 
             var connectSortDirection = SortDirection.Ascending;
             if (sortDirection.HasValue)
@@ -360,8 +355,8 @@ namespace Sitecore.Foundation.Commerce.Managers
         public virtual ManagerResponse<CatalogResult, bool> RegisterSearchEvent([NotNull] CommerceStorefront storefront,
             string searchKeyword, int numberOfHits)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNullOrEmpty(searchKeyword, "searchKeyword");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNullOrEmpty(searchKeyword, nameof(searchKeyword));
 
             var request = new SearchInitiatedRequest(storefront.ShopName, searchKeyword, numberOfHits);
             var result = CatalogServiceProvider.SearchInitiated(request);
@@ -373,8 +368,8 @@ namespace Sitecore.Foundation.Commerce.Managers
         public virtual ManagerResponse<GlobalizationResult, bool> RaiseCultureChosenPageEvent(
             [NotNull] CommerceStorefront storefront, string culture)
         {
-            Assert.ArgumentNotNull(storefront, "storefront");
-            Assert.ArgumentNotNullOrEmpty(culture, "culture");
+            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNullOrEmpty(culture, nameof(culture));
 
             var result =
                 GlobalizationServiceProvider.CultureChosen(new CultureChosenRequest(storefront.ShopName, culture));
@@ -511,7 +506,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         }
         public static Item GetCategory(string categoryName, string catalogName)
         {
-            Assert.ArgumentNotNullOrEmpty(catalogName, "catalogName");
+            Assert.ArgumentNotNullOrEmpty(catalogName, nameof(catalogName));
 
             Item result = null;
             var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
@@ -540,7 +535,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public static Item GetProduct(string productId, string catalogName)
         {
-            Assert.ArgumentNotNullOrEmpty(catalogName, "catalogName");
+            Assert.ArgumentNotNullOrEmpty(catalogName, nameof(catalogName));
 
             Item result = null;
             var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();

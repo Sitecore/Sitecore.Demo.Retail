@@ -17,7 +17,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
@@ -60,7 +59,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             [NotNull] ContactFactory contactFactory)
             : base(accountManager, contactFactory)
         {
-            Assert.ArgumentNotNull(orderManager, "orderManager");
+            Assert.ArgumentNotNull(orderManager, nameof(orderManager));
 
             OrderManager = orderManager;
         }
@@ -76,7 +75,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(inputModel, "inputModel");
+                Assert.ArgumentNotNull(inputModel, nameof(inputModel));
                 var validationResult = new BaseJsonResult();
 
                 ValidateModel(validationResult);
@@ -104,7 +103,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(inputModel, "inputModel");
+                Assert.ArgumentNotNull(inputModel, nameof(inputModel));
                 var validationResult = new CancelOrderBaseJsonResult();
 
                 ValidateModel(validationResult);
@@ -240,7 +239,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(inputModel, "RegisterInputModel");
+                Assert.ArgumentNotNull(inputModel, nameof(inputModel));
                 var result = new RegisterBaseJsonResult();
 
                 ValidateModel(result);
@@ -297,7 +296,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(inputModel, "ChangePasswordInputModel");
+                Assert.ArgumentNotNull(inputModel, nameof(inputModel));
                 var result = new ChangePasswordBaseJsonResult();
 
                 ValidateModel(result);
@@ -454,7 +453,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(model, "model");
+                Assert.ArgumentNotNull(model, nameof(model));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);
@@ -489,7 +488,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(model, "model");
+                Assert.ArgumentNotNull(model, nameof(model));
 
                 var validationResult = new BaseJsonResult();
                 ValidateModel(validationResult);
@@ -572,7 +571,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(model, "UpdateProfileInputModel");
+                Assert.ArgumentNotNull(model, nameof(model));
                 var result = new ProfileBaseJsonResult();
 
                 ValidateModel(result);
@@ -648,7 +647,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                Assert.ArgumentNotNull(model, "model");
+                Assert.ArgumentNotNull(model, nameof(model));
                 var result = new ForgotPasswordBaseJsonResult();
 
                 ValidateModel(result);

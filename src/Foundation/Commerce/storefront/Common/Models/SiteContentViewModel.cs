@@ -36,7 +36,7 @@ namespace Sitecore.Reference.Storefront.Models
 
         public static SiteContentViewModel Create(Item item)
         {
-            Assert.ArgumentNotNull(item, "item");
+            Assert.ArgumentNotNull(item, nameof(item));
             var model = new SiteContentViewModel
             {
                 Item = item,

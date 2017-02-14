@@ -46,15 +46,15 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Prices
 
         public override void Process(ServicePipelineArgs args)
         {
-            Assert.ArgumentNotNull(args, "args");
-            Assert.ArgumentNotNull(args.Request, "args.request");
-            Assert.ArgumentCondition(args.Request is GetSupportedCurrenciesRequest, "args.Request", "args.Request is RefSFArgs.GetSupportedCurrenciesRequest");
-            Assert.ArgumentCondition(args.Result is GetSupportedCurrenciesResult, "args.Result", "args.Result is GetSupportedCurrenciesResult");
+            Assert.ArgumentNotNull(args, nameof(args));
+            Assert.ArgumentNotNull(args.Request, nameof(args.Request));
+            Assert.ArgumentCondition(args.Request is GetSupportedCurrenciesRequest, nameof(args.Request), "args.Request is RefSFArgs.GetSupportedCurrenciesRequest");
+            Assert.ArgumentCondition(args.Result is GetSupportedCurrenciesResult, nameof(args.Result), "args.Result is GetSupportedCurrenciesResult");
 
             var request = (GetSupportedCurrenciesRequest) args.Request;
             var result = (GetSupportedCurrenciesResult) args.Result;
 
-            Assert.ArgumentNotNullOrEmpty(request.CatalogName, "request.CatalogName");
+            Assert.ArgumentNotNullOrEmpty(request.CatalogName, nameof(request.CatalogName));
 
             var catalogRepository = CommerceTypeLoader.CreateInstance<ICatalogRepository>();
 
