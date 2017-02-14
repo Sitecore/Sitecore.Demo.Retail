@@ -1,0 +1,37 @@
+﻿---
+ID: "c06c656b-0a23-4314-b687-836bc62044e4"
+Parent: "6d68b489-71da-474f-953c-2c00906f50a3"
+Template: "94fd1606-139e-46ee-86ff-bc5bf3c79804"
+Path: /sitecore/system/Marketing Control Panel/Campaigns/Retail/Microwave Promotion/Google Paid Ad
+DB: master
+SharedFields:
+- ID: "43f1e538-5661-4e28-b8be-d93b0f6c1715"
+  Hint: Cost per Click
+  Value: 1
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "{689E2994-4656-4C58-9112-7826CB46EE69}"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 400
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "0f47d1b4-bcb4-4f7f-9065-6ecb46aab9a1"
+      Hint: Title
+      Value: Google Paid Ad
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170214T130550Z
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{EDCBB550-BED3-490F-82B8-7B2F14CCD26E}"
+    - ID: "4c1bf83b-06e2-4b07-ad16-0e65d95e356e"
+      Hint: Channel
+      Value: "{67150678-B200-44BB-BBAE-1D7B901D0860}"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
