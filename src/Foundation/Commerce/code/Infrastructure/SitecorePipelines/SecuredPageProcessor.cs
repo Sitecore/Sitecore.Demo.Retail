@@ -35,7 +35,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
 
             // We must test specifically for Category and Product types because of the catalog item resolver who
             // changes the Sitecore.Context.Item and therefore it is not the page that is represented.
-            if (!Context.Item.IsDerived(StorefrontConstants.KnownTemplateItemIds.SecuredPage) && !Context.Item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductTemplate) && !Context.Item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate))
+            if (!Context.Item.IsDerived(Templates.SecuredPage.ID) && !Context.Item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductTemplate) && !Context.Item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate))
             {
                 return;
             }

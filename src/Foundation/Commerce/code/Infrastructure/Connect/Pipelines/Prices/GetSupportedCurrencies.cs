@@ -60,7 +60,7 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Prices
 
             var catalog = catalogRepository.GetCatalogReadOnly(request.CatalogName);
 
-            var currencyList = new List<string> {catalog["Currency"].ToString()};
+            var currencyList = new List<string> {catalog[CommerceConstants.KnownCatalogFieldNames.Currency].ToString()};
 
             if (_currenciesToInject.Count > 0)
                 currencyList.AddRange(_currenciesToInject);

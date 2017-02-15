@@ -35,6 +35,7 @@ using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
 using Sitecore.Foundation.Commerce.Util;
+using Sitecore.Foundation.Dictionary.Repositories;
 using Sitecore.Security.Authentication;
 
 namespace Sitecore.Foundation.Commerce.Managers
@@ -98,7 +99,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             var result = CustomerServiceProvider.GetUser(request);
             if (!result.Success || result.CommerceUser == null)
             {
-                var message = StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.UserNotFoundError);
+                var message = DictionaryPhraseRepository.Current.Get("/System Messages/Account Manager/User Not Found Error", "The email address does not exists");
                 result.SystemMessages.Add(new SystemMessage {Message = message});
             }
 
@@ -159,9 +160,8 @@ namespace Sitecore.Foundation.Commerce.Managers
             else
             {
                 // user is authenticated, but not in the CommerceUsers domain - probably here because we are in edit or preview mode
-                var message =
-                    StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.UpdateUserProfileError);
-                message = string.Format(CultureInfo.InvariantCulture, message, Context.User.LocalName);
+                var message = DictionaryPhraseRepository.Current.Get("/System Messages/Account Manager/Update User Profile Error", "Cannot update profile details for user {0}.");
+                message = string.Format(message, Context.User.LocalName);
                 result = new UpdateUserResult {Success = false};
                 result.SystemMessages.Add(new SystemMessage {Message = message});
             }
@@ -291,8 +291,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                     result.Success = false;
                     result.SystemMessages.Add(new SystemMessage
                     {
-                        Message =
-                            StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.UserAlreadyExists)
+                        Message = DictionaryPhraseRepository.Current.Get("/System Messages/Accounts/User Already Exists", "User name already exists. Please enter a different user name.")
                     });
                 }
             }
@@ -321,8 +320,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             var result = CustomerServiceProvider.UpdatePassword(request);
             if (!result.Success && !result.SystemMessages.Any())
             {
-                var message =
-                    StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.PasswordCouldNotBeReset);
+                var message = DictionaryPhraseRepository.Current.Get("/System Messages/Accounts/Password Could Not Be Reset", "Your password could not be reset. Please verify the data you entered");
                 result.SystemMessages.Add(new SystemMessage {Message = message});
             }
 
@@ -363,8 +361,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                         storefront.SenderEmailAddress, new object(), new object[] {userIpAddress, provisionalPassword});
                     if (!wasEmailSent)
                     {
-                        var message =
-                            StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.CouldNotSentEmailError);
+                        var message = DictionaryPhraseRepository.Current.Get("/System Messages/Accounts/Could Not Send Email Error", "Sorry, the email could not be sent");
                         result.Success = false;
                         result.SystemMessages.Add(new SystemMessage {Message = message});
                     }
@@ -456,33 +453,25 @@ namespace Sitecore.Foundation.Commerce.Managers
             switch (createStatus)
             {
                 case MembershipCreateStatus.DuplicateUserName:
-                    return StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.UserAlreadyExists);
-
+                    return DictionaryPhraseRepository.Current.Get("/System Messages/Account Manager/User Already Exists", "User name already exists. Please enter a different user name.");
                 case MembershipCreateStatus.DuplicateEmail:
-                    return StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.UserNameForEmailExists);
-
+                    return DictionaryPhraseRepository.Current.Get("/System Messages/Account Manager/User Name For Email Exists", "A user name for that e-mail address already exists. Please enter a different e-mail address.");
                 case MembershipCreateStatus.InvalidPassword:
-                    return StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.InvalidPasswordError);
-
+                    return DictionaryPhraseRepository.Current.Get("/System Messages/Account Manager/Invalid Password Error", "The password provided is invalid. Please enter a valid password value.");
                 case MembershipCreateStatus.InvalidEmail:
-                    return StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.InvalidEmailError);
-
+                    return DictionaryPhraseRepository.Current.Get("/System Messages/Account Manager/Invalid Email Error", "The e-mail address provided is invalid. Please check the value and try again.");
                 case MembershipCreateStatus.InvalidAnswer:
-                    return StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.PasswordRetrievalAnswerInvalid);
-
+                    return DictionaryPhraseRepository.Current.Get("/System Messages/Account Manager/Password Retrieval Answer Invalid", "The password retrieval answer provided is invalid. Please check the value and try again.");
                 case MembershipCreateStatus.InvalidQuestion:
-                    return StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.PasswordRetrievalQuestionInvalid);
-
+                    return DictionaryPhraseRepository.Current.Get("/System Messages/Account Manager/Password Retrieval Question Invalid", "The password retrieval question provided is invalid. Please check the value and try again.");
                 case MembershipCreateStatus.InvalidUserName:
-                    return StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.UserNameInvalid);
-
+                    return DictionaryPhraseRepository.Current.Get("/System Messages/Account Manager/User Name Invalid", "The user name provided is invalid. Please check the value and try again.");
                 case MembershipCreateStatus.ProviderError:
-                    return StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.AuthenticationProviderError);
-
+                    return DictionaryPhraseRepository.Current.Get("/System Messages/Account Manager/Authentication Provider Error", "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.");
                 case MembershipCreateStatus.UserRejected:
-                    return StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.UserRejectedError);
+                    return DictionaryPhraseRepository.Current.Get("/System Messages/Account Manager/User Rejected Error", "The user creation request has been cancelled. Please verify your entry and try again. If the problem persists, please contact your system administrator.");
                 default:
-                    return StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.UnknownMembershipProviderError);
+                    return DictionaryPhraseRepository.Current.Get("/System Messages/Account Manager/Unknown Membership Provider Error", "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.");
             }
         }
     }

@@ -140,8 +140,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             if (result.View != null)
                 return renderingViewPath;
 
-            return string.Format(CultureInfo.InvariantCulture, "~/Views/{0}/{1}/{2}.cshtml", shopName, "Shared",
-                renderingViewName);
+            return $"~/Views/{shopName}/Shared/{renderingViewName}.cshtml";
         }
 
         protected string GetAbsoluteRenderingView(string subpath)

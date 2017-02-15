@@ -35,7 +35,6 @@ namespace Sitecore.Foundation.Commerce.Util
 
         private const string DefaultLocalizationFolder = "Storefront";
 
-        private const string EaPlanFormatString = "{0} {1}";
         private const string AbandonedCartsEaPlanId = "{7138ACC1-329C-4070-86DD-6A53D6F57AC5}";
         private const string AbandonedCartsEaPlanName = "Abandoned Carts";
         private const string NewOrderPlacedEaPlanId = "{7CA697EA-5CCA-4B59-85A3-D048B285E6B4}";
@@ -92,12 +91,12 @@ namespace Sitecore.Foundation.Commerce.Util
 
                 if (item != null)
                 {
-                    plan.Name = string.Format(CultureInfo.InvariantCulture, EaPlanFormatString, StorefrontConstants.Settings.WebsiteName, item.DisplayName);
-                    var result = ItemManager.AddFromTemplate(plan.Name, ID.Parse(plan.EaPlanId), database.GetItem(CommerceConnectEaPlanParentId), ID.Parse(plan.ItemId));
+                    plan.Name = $"{"Storefront"} {item.DisplayName}";
+                    ItemManager.AddFromTemplate(plan.Name, ID.Parse(plan.EaPlanId), database.GetItem(CommerceConnectEaPlanParentId), ID.Parse(plan.ItemId));
                     continue;
                 }
 
-                CommerceLog.Current.Error(string.Format(CultureInfo.InvariantCulture, "Error creating engagement plan '{0}'.", plan.Name), this);
+                CommerceLog.Current.Error($"Error creating engagement plan '{plan.Name}'.", this);
             }
         }
 
@@ -116,7 +115,7 @@ namespace Sitecore.Foundation.Commerce.Util
 
                 if (!result)
                 {
-                    CommerceLog.Current.Error(string.Format(CultureInfo.InvariantCulture, "Error deploying engagement plan '{0}'.", planInfo.Name), this);
+                    CommerceLog.Current.Error($"Error deploying engagement plan '{planInfo.Name}'.", this);
                 }
             }
         }

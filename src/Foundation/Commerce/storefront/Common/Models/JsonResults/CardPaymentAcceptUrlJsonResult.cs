@@ -32,7 +32,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             {
                 var serviceUrl = new Uri(result.Url);
                 ServiceUrl = result.Url;
-                MessageOrigin = string.Format(CultureInfo.InvariantCulture, "{0}://{1}", serviceUrl.Scheme, serviceUrl.Authority);
+                MessageOrigin = $"{serviceUrl.Scheme}://{serviceUrl.Authority}";
             }
             else
             {

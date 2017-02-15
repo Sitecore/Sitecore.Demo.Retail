@@ -56,7 +56,7 @@ namespace Sitecore.Reference.Storefront.Infrastructure
             {
                 if (controllerType == null)
                 {
-                    throw new HttpException(404, string.Format(CultureInfo.InvariantCulture, "The controller for path '{0}' could not be found.", requestContext.HttpContext.Request.Path));
+                    throw new HttpException(404, $"The controller for path '{requestContext.HttpContext.Request.Path}' could not be found.");
                 }
 
                 return (IController) _kernel.Resolve(controllerType);

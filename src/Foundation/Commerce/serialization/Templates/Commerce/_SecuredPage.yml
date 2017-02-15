@@ -1,8 +1,8 @@
 ﻿---
 ID: "02cccf95-7be5-4549-81f9-ac97a22d6816"
-Parent: "13ddc439-cbc5-4e91-b2f1-dd95541a7469"
+Parent: "bd214739-36da-4e98-9552-e800262c5320"
 Template: "ab86861a-6030-46c5-b394-e8f99e8b87db"
-Path: /sitecore/templates/Storefront/Page Templates/Base/Secured Page
+Path: /sitecore/templates/Foundation/Commerce/_SecuredPage
 DB: master
 SharedFields:
 - ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"

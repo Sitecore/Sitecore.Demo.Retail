@@ -32,6 +32,7 @@ using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
 using Sitecore.Foundation.Commerce.Util;
+using Sitecore.Foundation.Dictionary.Repositories;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
@@ -71,7 +72,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             {
                 errorResult.SystemMessages.Add(new SystemMessage
                 {
-                    Message = StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.SubmitOrderHasEmptyCart)
+                    Message = DictionaryPhraseRepository.Current.Get("/System Messages/Orders/Submit Order Has Empty Cart", "Cannot submit and order with an empty cart.")
                 });
                 return new ManagerResponse<SubmitVisitorOrderResult, CommerceOrder>(errorResult, null);
             }
@@ -102,7 +103,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 if (!wasEmailSent)
                 {
                     var message =
-                        StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.CouldNotSentEmailError);
+                       DictionaryPhraseRepository.Current.Get("/System Messages/Orders/Could Not Send Email Error", "Sorry, the email could not be sent");
                     errorResult.SystemMessages.Add(new SystemMessage(message));
                 }
             }

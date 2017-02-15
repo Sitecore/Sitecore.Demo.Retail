@@ -23,6 +23,7 @@ using Sitecore.Commerce.Contacts;
 using Sitecore.Commerce.Entities.Customers;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Util;
+using Sitecore.Foundation.Dictionary.Repositories;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
@@ -62,8 +63,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                     return GetExperienceEditorVisitorTrackingId();
                 }
 
-                throw new ConfigurationErrorsException(
-                    StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.TrackingNotEnabled));
+                throw new ConfigurationErrorsException(DictionaryPhraseRepository.Current.Get("/System Messages/Visitors/Tracking Not Enabled", "Xdb Tracking must be enabled."));
             }
         }
 
@@ -97,8 +97,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             CommerceUser = user;
 
-            Assert.IsNotNull(CommerceUser.Customers, "The user '{0}' does not contain a Customers collection.",
-                user.UserName);
+            Assert.IsNotNull(CommerceUser.Customers, "The user '{0}' does not contain a Customers collection.", user.UserName);
 
             _userId = CommerceUser.Customers.FirstOrDefault();
         }

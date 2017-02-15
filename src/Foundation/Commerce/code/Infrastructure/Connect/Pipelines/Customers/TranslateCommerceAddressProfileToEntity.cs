@@ -47,20 +47,20 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
 
         protected virtual void TranslateToCommerceParty(Profile profile, CommerceParty party)
         {
-            party.ExternalId = Get<string>(profile, "GeneralInfo.address_id");
-            party.FirstName = Get<string>(profile, "GeneralInfo.first_name");
-            party.LastName = Get<string>(profile, "GeneralInfo.last_name");
-            party.Name = Get<string>(profile, "GeneralInfo.address_name");
-            party.Address1 = Get<string>(profile, "GeneralInfo.address_line1");
-            party.Address2 = Get<string>(profile, "GeneralInfo.address_line2");
-            party.City = Get<string>(profile, "GeneralInfo.city");
-            party.RegionCode = Get<string>(profile, "GeneralInfo.region_code");
-            party.RegionName = Get<string>(profile, "GeneralInfo.region_name");
-            party.ZipPostalCode = Get<string>(profile, "GeneralInfo.postal_code");
-            party.CountryCode = Get<string>(profile, "GeneralInfo.country_code");
-            party.Country = Get<string>(profile, "GeneralInfo.country_name");
-            party.PhoneNumber = Get<string>(profile, "GeneralInfo.tel_number");
-            party.State = Get<string>(profile, "GeneralInfo.region_code");
+            party.ExternalId = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.AddressId);
+            party.FirstName = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.FirstName);
+            party.LastName = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.LastName);
+            party.Name = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.AddressName);
+            party.Address1 = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.AddressLine1);
+            party.Address2 = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.AddressLine2);
+            party.City = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.City);
+            party.RegionCode = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.RegionCode);
+            party.RegionName = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.RegionName);
+            party.ZipPostalCode = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.PostalCode);
+            party.CountryCode = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.CountryCode);
+            party.Country = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.CountryName);
+            party.PhoneNumber = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.TelNumber);
+            party.State = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.RegionCode);
 
             TranslateToCommercePartyCustomProperties(profile, party);
         }

@@ -35,6 +35,7 @@ using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
 using Sitecore.Foundation.Commerce.Util;
+using Sitecore.Foundation.Dictionary.Repositories;
 using WebGrease.Css.Extensions;
 using AddShippingInfoRequest = Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest;
 
@@ -85,7 +86,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
             else
             {
-                var message = StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.CartNotFoundError);
+                var message = DictionaryPhraseRepository.Current.Get("/System Messages/Cart/Cart Not Found Error", "Could not retrieve the cart for the current user");
                 cartResult.SystemMessages.Add(new SystemMessage {Message = message});
             }
 
@@ -128,7 +129,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             var cartResult = LoadCartByName(storefront.ShopName, storefront.DefaultCartName, visitorContext.UserId, false);
             if (!cartResult.Success || cartResult.Cart == null)
             {
-                var message = StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.CartNotFoundError);
+                var message = DictionaryPhraseRepository.Current.Get("/System Messages/Cart/Cart Not Found Error", "Could not retrieve the cart for the current user");
                 cartResult.SystemMessages.Add(new SystemMessage {Message = message});
                 return new ManagerResponse<CartResult, bool>(cartResult, cartResult.Success);
             }
@@ -140,17 +141,29 @@ namespace Sitecore.Foundation.Commerce.Managers
                 Assert.ArgumentNotNullOrEmpty(inputModel.CatalogName, nameof(inputModel.CatalogName));
                 Assert.ArgumentNotNull(inputModel.Quantity, nameof(inputModel.Quantity));
 
+                if (inputModel.Quantity == null)
+                {
+                    continue;
+                }
                 var quantity = (uint) inputModel.Quantity;
 
                 // Special handling for a Gift Card
                 if (inputModel.ProductId.Equals(storefront.GiftCardProductId, StringComparison.OrdinalIgnoreCase))
                 {
-                    inputModel.VariantId = inputModel.GiftCardAmount.Value.ToString("000", CultureInfo.InvariantCulture);
+                    if (inputModel.GiftCardAmount != null)
+                    {
+                        inputModel.VariantId = inputModel.GiftCardAmount.Value.ToString("000", CultureInfo.InvariantCulture);
+                    }
                 }
 
-                var cartLine = new CommerceCartLine(inputModel.CatalogName, inputModel.ProductId, inputModel.VariantId == "-1" ? null : inputModel.VariantId, quantity);
-                cartLine.Properties["ProductUrl"] = inputModel.ProductUrl;
-                cartLine.Properties["ImageUrl"] = inputModel.ImageUrl;
+                var cartLine = new CommerceCartLine(inputModel.CatalogName, inputModel.ProductId, inputModel.VariantId == "-1" ? null : inputModel.VariantId, quantity)
+                {
+                    Properties =
+                    {
+                        ["ProductUrl"] = inputModel.ProductUrl,
+                        ["ImageUrl"] = inputModel.ImageUrl
+                    }
+                };
                 // UpdateStockInformation(storefront, visitorContext, cartLine, inputModel.CatalogName);      
 
                 lines.Add(cartLine);
@@ -181,7 +194,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             var cartResult = LoadCartByName(storefront.ShopName, storefront.DefaultCartName, visitorContext.UserId, false);
             if (!cartResult.Success || cartResult.Cart == null)
             {
-                var message = StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.CartNotFoundError);
+                var message = DictionaryPhraseRepository.Current.Get("/System Messages/Cart/Cart Not Found Error", "Could not retrieve the cart for the current user");
                 cartResult.SystemMessages.Add(new SystemMessage {Message = message});
                 return new ManagerResponse<CartResult, CommerceCart>(cartResult, cartResult.Cart as CommerceCart);
             }
@@ -218,7 +231,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             var cartResult = LoadCartByName(storefront.ShopName, storefront.DefaultCartName, visitorContext.UserId);
             if (!cartResult.Success || cartResult.Cart == null)
             {
-                var message = StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.CartNotFoundError);
+                var message = DictionaryPhraseRepository.Current.Get("/System Messages/Cart/Cart Not Found Error", "Could not retrieve the cart for the current user");
                 cartResult.SystemMessages.Add(new SystemMessage {Message = message});
                 return new ManagerResponse<CartResult, CommerceCart>(cartResult, cartResult.Cart as CommerceCart);
             }
@@ -259,7 +272,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             var cartResult = LoadCartByName(storefront.ShopName, storefront.DefaultCartName, visitorContext.UserId);
             if (!cartResult.Success || cartResult.Cart == null)
             {
-                var message = StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.CartNotFoundError);
+                var message = DictionaryPhraseRepository.Current.Get("/System Messages/Cart/Cart Not Found Error", "Could not retrieve the cart for the current user");
                 cartResult.SystemMessages.Add(new SystemMessage {Message = message});
                 return new ManagerResponse<AddPromoCodeResult, CommerceCart>(result, cartResult.Cart as CommerceCart);
             }
@@ -290,7 +303,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             var cartResult = LoadCartByName(storefront.ShopName, storefront.DefaultCartName, visitorContext.UserId);
             if (!cartResult.Success || cartResult.Cart == null)
             {
-                var message = StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.CartNotFoundError);
+                var message = DictionaryPhraseRepository.Current.Get("/System Messages/Cart/Cart Not Found Error", "Could not retrieve the cart for the current user");
                 cartResult.SystemMessages.Add(new SystemMessage {Message = message});
                 return new ManagerResponse<RemovePromoCodeResult, CommerceCart>(result, cartResult.Cart as CommerceCart);
             }
@@ -419,7 +432,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             var cartResult = LoadCartByName(storefront.ShopName, storefront.DefaultCartName, userId, true);
             if (!cartResult.Success || cartResult.Cart == null)
             {
-                var message = StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.CartNotFoundError);
+                var message = DictionaryPhraseRepository.Current.Get("/System Messages/Cart/Cart Not Found Error", "Could not retrieve the cart for the current user");
                 cartResult.SystemMessages.Add(new SystemMessage {Message = message});
                 return new ManagerResponse<CartResult, CommerceCart>(cartResult, cartResult.Cart as CommerceCart);
             }
@@ -566,7 +579,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                         var party = new EmailParty();
 
                         party.ExternalId = Guid.NewGuid().ToString();
-                        party.Name = string.Format(CultureInfo.InvariantCulture, "{0}{1}", CommerceServerStorefrontConstants.CartConstants.EmailAddressNamePrefix, i);
+                        party.Name = $"Shipping_Email_{i}";
                         party.Email = inputModel.ElectronicDeliveryEmail;
                         party.Text = inputModel.ElectronicDeliveryEmailContent;
 
@@ -610,10 +623,17 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         protected virtual void AddBasketErrorsToResult(CommerceCart cart, ServiceProviderResult result)
         {
-            if (cart != null && cart.Properties["_Basket_Errors"] != null)
+            if (cart?.Properties[KnownBasketWeaklyTypeProperties.BasketErrors] != null)
             {
-                var basketErrors = cart.Properties["_Basket_Errors"] as List<string>;
-                basketErrors.ForEach(m => result.SystemMessages.Add(new SystemMessage {Message = m}));
+                var basketErrors = cart.Properties[KnownBasketWeaklyTypeProperties.BasketErrors] as List<string>;
+                if (basketErrors == null)
+                {
+                    return;
+                }
+                foreach (var m in basketErrors)
+                {
+                    result.SystemMessages.Add(new SystemMessage {Message = m});
+                }
             }
         }
 

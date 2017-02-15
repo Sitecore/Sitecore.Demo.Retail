@@ -211,7 +211,6 @@
     <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\CSBaseController.cs" />
-    <Compile Include="Controllers\LandingController.cs" />
     <Compile Include="Controllers\NavigationSearchController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\StorefrontSearchController.cs" />
@@ -308,9 +307,6 @@
     <Content Include="MergeFiles\Merge.Commerce.Storefront.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="MergeFiles\Views\Merge.Web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -381,7 +377,6 @@
     <Content Include="Views\Storefront\Checkout\OrderConfirmation.cshtml" />
     <Content Include="Views\Storefront\Checkout\StepIndicator.cshtml" />
     <Content Include="Views\Storefront\Checkout\StorefrontCheckout.cshtml" />
-    <Content Include="Views\Storefront\Landing\Carousel.cshtml" />
     <Content Include="Views\Storefront\Shared\_Layout.cshtml" />
     <Content Include="Views\Storefront\Shared\_PrintLayout.cshtml" />
     <Content Include="Views\Storefront\Shared\Breadcrumbs.cshtml" />

@@ -120,7 +120,7 @@ namespace Sitecore.Foundation.Commerce.Extensions
             var paymentOptions = Context.Database.GetItem("/sitecore/Commerce/Commerce Control Panel/Shared Settings/Payment Options");
             if (paymentOptions != null && paymentOptions.Children.Any())
             {
-                var paymentOption = paymentOptions.Children.Where(o => o.Name.Equals(paymentType, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+                var paymentOption = paymentOptions.Children.FirstOrDefault(o => o.Name.Equals(paymentType, StringComparison.OrdinalIgnoreCase));
                 if (paymentOption != null)
                 {
                     return paymentOption.ID.ToGuid().ToString("D");
@@ -143,7 +143,7 @@ namespace Sitecore.Foundation.Commerce.Extensions
                 City = item.City,
                 Country = item.Country,
                 ExternalId = string.IsNullOrWhiteSpace(item.PartyId) || item.PartyId == "0" ? Guid.NewGuid().ToString() : item.PartyId,
-                Name = string.Format(CultureInfo.InvariantCulture, "{0}{1}", CommerceServerStorefrontConstants.CartConstants.ShippingAddressNamePrefix, item.Name),
+                Name = $"Shipping_{item.Name}",
                 PartyId = item.PartyId,
                 State = item.State,
                 ZipPostalCode = item.ZipPostalCode
@@ -165,7 +165,7 @@ namespace Sitecore.Foundation.Commerce.Extensions
                 City = item.City,
                 Country = item.Country,
                 ExternalId = Guid.NewGuid().ToString(),
-                Name = string.Format(CultureInfo.InvariantCulture, "{0}{1}", CommerceServerStorefrontConstants.CartConstants.BillingAddressNamePrefix, item.Name),
+                Name = $"Billing_{item.Name}",
                 PartyId = item.PartyId,
                 State = item.State,
                 ZipPostalCode = item.ZipPostalCode
@@ -211,7 +211,7 @@ namespace Sitecore.Foundation.Commerce.Extensions
                 ShippingOptionType = GetShippingOptionType(item.ShippingPreferenceType),
                 ElectronicDeliveryEmail = item.ElectronicDeliveryEmail,
                 ElectronicDeliveryEmailContent = item.ElectronicDeliveryEmailContent,
-                LineIDs = item.LineIDs != null ? item.LineIDs.AsReadOnly() : new List<string>().AsReadOnly()
+                LineIDs = item.LineIDs?.AsReadOnly() ?? new List<string>().AsReadOnly()
             };
 
             return shippingInfo;

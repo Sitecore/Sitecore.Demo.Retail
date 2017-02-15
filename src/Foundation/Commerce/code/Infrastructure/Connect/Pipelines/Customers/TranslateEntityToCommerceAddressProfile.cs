@@ -49,19 +49,21 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Customer
 
         protected virtual void TranslateCommerceCustomerParty(CommerceParty party, Profile profile)
         {
-            profile["GeneralInfo.first_name"].Value = party.FirstName;
-            profile["GeneralInfo.last_name"].Value = party.LastName;
-            profile["GeneralInfo.address_name"].Value = party.Name;
-            profile["GeneralInfo.address_line1"].Value = party.Address1;
-            profile["GeneralInfo.address_line2"].Value = party.Address2;
-            profile["GeneralInfo.city"].Value = party.City;
-            profile["GeneralInfo.region_code"].Value = party.RegionCode;
-            profile["GeneralInfo.region_name"].Value = party.RegionName;
-            profile["GeneralInfo.postal_code"].Value = party.ZipPostalCode;
-            profile["GeneralInfo.country_code"].Value = party.CountryCode;
-            profile["GeneralInfo.country_name"].Value = party.Country;
-            profile["GeneralInfo.tel_number"].Value = party.PhoneNumber;
-            profile["GeneralInfo.region_code"].Value = party.State;
+            profile[Constants.Profile.GeneralInfo.FirstName].Value = party.FirstName;
+            profile[Constants.Profile.GeneralInfo.LastName].Value = party.LastName;
+            profile[Constants.Profile.GeneralInfo.AddressName].Value = party.Name;
+            profile[Constants.Profile.GeneralInfo.AddressLine1].Value = party.Address1;
+            profile[Constants.Profile.GeneralInfo.AddressLine2].Value = party.Address2;
+            profile[Constants.Profile.GeneralInfo.City].Value = party.City;
+            if (!string.IsNullOrEmpty(party.State))
+                profile[Constants.Profile.GeneralInfo.RegionCode].Value = party.State;
+            else if (!string.IsNullOrEmpty(party.RegionCode))
+                profile[Constants.Profile.GeneralInfo.RegionCode].Value = party.RegionCode;
+            profile[Constants.Profile.GeneralInfo.RegionName].Value = party.RegionName;
+            profile[Constants.Profile.GeneralInfo.PostalCode].Value = party.ZipPostalCode;
+            profile[Constants.Profile.GeneralInfo.CountryCode].Value = party.CountryCode;
+            profile[Constants.Profile.GeneralInfo.CountryName].Value = party.Country;
+            profile[Constants.Profile.GeneralInfo.TelNumber].Value = party.PhoneNumber;
 
             TranslateCommerceCustomerPartyCustomProperties(party, profile);
         }

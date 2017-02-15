@@ -43,6 +43,7 @@ using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
 using Sitecore.Foundation.Commerce.Models.Search;
 using Sitecore.Foundation.Commerce.Util;
+using Sitecore.Foundation.Dictionary.Repositories;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Mvc.Presentation;
 using Sitecore.Reference.Storefront.Models;
@@ -122,7 +123,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                     else
                     {
                         var json = new BaseJsonResult {Success = false};
-                        json.Errors.Add(StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.InvalidCurrencyError));
+                        json.Errors.Add(DictionaryPhraseRepository.Current.Get("/Catalog/Switch Currency/Invalid Currency Error", "An invalid currency was supplied."));
                         return json;
                     }
                 }
@@ -139,15 +140,15 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             var datasource = CurrentRendering.DataSource;
 
-            if (!string.IsNullOrEmpty(datasource))
+            if (string.IsNullOrEmpty(datasource))
             {
-                var datasourceItem = Context.Database.GetItem(ID.Parse(datasource));
-                var categoryViewModel = GetCategoryViewModel(null, null, datasourceItem, CurrentRendering, string.Empty);
-
-                return View(CurrentRenderingView, categoryViewModel);
+                return View(CurrentRenderingView);
             }
 
-            return View(CurrentRenderingView);
+            var datasourceItem = Context.Database.GetItem(ID.Parse(datasource));
+            var categoryViewModel = GetCategoryViewModel(null, null, datasourceItem, CurrentRendering, string.Empty);
+
+            return View(CurrentRenderingView, categoryViewModel);
         }
 
         public ActionResult PageTitle()
@@ -161,18 +162,18 @@ namespace Sitecore.Reference.Storefront.Controllers
             [Bind(Prefix = StorefrontConstants.QueryStrings.Sort)] string sortField,
             [Bind(Prefix = StorefrontConstants.QueryStrings.SortDirection)] CommerceConstants.SortDirection? sortDirection)
         {
-            var productSearchOptions = new CommerceSearchOptions
-            {
-                NumberOfItemsToReturn = StorefrontConstants.Settings.DefaultItemsPerPage,
-                StartPageIndex = 0,
-                SortField = sortField
-            };
-
             var currentRendering = RenderingContext.Current.Rendering;
             if (string.IsNullOrEmpty(currentRendering.DataSource))
             {
                 return GetNoDataSourceView();
             }
+
+            var productSearchOptions = new CommerceSearchOptions
+            {
+                NumberOfItemsToReturn = 12,
+                StartPageIndex = 0,
+                SortField = sortField
+            };
 
             var datasource = currentRendering.Item;
 
@@ -192,7 +193,7 @@ namespace Sitecore.Reference.Storefront.Controllers
 
             foreach (var productViewModel in products)
             {
-                var productItem = multipleProductSearchResults.SearchResults .SelectMany(productSearchResult => productSearchResult.SearchResultItems).FirstOrDefault(item => item.Name == productViewModel.ProductId);
+                var productItem = multipleProductSearchResults.SearchResults.SelectMany(productSearchResult => productSearchResult.SearchResultItems).FirstOrDefault(item => item.Name == productViewModel.ProductId);
                 productViewModel.CustomerAverageRating = CatalogManager.GetProductRating(productItem);
             }
 
@@ -346,17 +347,8 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         public ActionResult CategoryPageHeader()
         {
-            Category currentCategory;
-
             //This is a Wild Card - Wild card pages are named "*"
-            if (Item.Name == "*")
-            {
-                currentCategory = CatalogManager.GetCurrentCategoryByUrl();
-            }
-            else
-            {
-                currentCategory = CatalogManager.GetCategory(Context.Item);
-            }
+            var currentCategory = Item.Name == "*" ? CatalogManager.GetCurrentCategoryByUrl() : CatalogManager.GetCategory(Context.Item);
 
             if (currentCategory == null)
             {
@@ -395,13 +387,13 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         public ActionResult Product()
         {
-            ProductViewModel model = null;
+            ProductViewModel model;
             return GetProductInformation(out model);
         }
 
         public ActionResult VisitedProductDetailsPage()
         {
-            ProductViewModel model = null;
+            ProductViewModel model;
             GetProductInformation(out model);
 
             if (model != null)
@@ -805,26 +797,16 @@ namespace Sitecore.Reference.Storefront.Controllers
             var totalPageCount = 0;
             var totalProductCount = 0;
 
-            var childProductsCacheKey = string.Format(CultureInfo.InvariantCulture, "ChildProductSearch_{0}", categoryItem.ID.ToString());
+            var childProductsCacheKey = $"ChildProductSearch_{categoryItem.ID.ToString()}";
 
             if (!CurrentSiteContext.Items.Contains(childProductsCacheKey))
             {
                 if (Item != null)
                 {
-                    SearchResponse searchResponse = null;
-                    if (CatalogUtility.IsItemDerivedFromCommerceTemplate(categoryItem, CommerceConstants.KnownTemplateIds.CommerceDynamicCategoryTemplate) || categoryItem.TemplateName == "Commerce Named Search")
+                    SearchResponse searchResponse;
+                    if (categoryItem.IsDerived(CommerceConstants.KnownTemplateIds.CommerceDynamicCategoryTemplate) || categoryItem.IsDerived(Templates.NamedSearch.ID))
                     {
-                        try
-                        {
-                            var defaultBucketQuery = categoryItem[CommerceConstants.KnownSitecoreFieldNames.DefaultBucketQuery];
-                            var persistendBucketFilter = categoryItem[CommerceConstants.KnownSitecoreFieldNames.PersistentBucketFilter];
-                            persistendBucketFilter = CleanLanguageFromFilter(persistendBucketFilter);
-                            searchResponse = CatalogManager.FindCatalogItems(defaultBucketQuery, persistendBucketFilter, searchOptions);
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Error(ex.Message, ex, this);
-                        }
+                        searchResponse = CatalogManager.FindCatalogItems(categoryItem, searchOptions);
                     }
                     else
                     {
@@ -961,7 +943,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             ProductViewModel productViewModel;
             var productId = CatalogUrlManager.ExtractItemIdFromCurrentUrl();
-            var virtualProductCacheKey = string.Format(CultureInfo.InvariantCulture, "VirtualProduct_{0}", productId);
+            var virtualProductCacheKey = $"VirtualProduct_{productId}";
             if (CurrentSiteContext.Items.Contains(virtualProductCacheKey))
             {
                 productViewModel = CurrentSiteContext.Items[virtualProductCacheKey] as ProductViewModel;
@@ -979,7 +961,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                 if (productItem == null)
                 {
                     Log.Error($"The requested product '{productId}' does not exist in the catalog '{CurrentCatalog.Name}' or cannot be displayed in the language '{Context.Language}'", this);
-                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "The requested product '{0}' does not exist in the catalog '{1}' or cannot be displayed in the language '{2}'", productId, CurrentCatalog.Name, Context.Language));
+                    throw new InvalidOperationException($"The requested product '{productId}' does not exist in the catalog '{CurrentCatalog.Name}' or cannot be displayed in the language '{Context.Language}'");
                 }
 
                 Item = productItem;

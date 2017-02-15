@@ -23,7 +23,6 @@ using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
-using Sitecore.Foundation.Commerce.Managers;
 
 namespace Sitecore.Foundation.Commerce.Models
 {
@@ -111,10 +110,7 @@ namespace Sitecore.Foundation.Commerce.Models
 
         public virtual string GiftCardAmountOptions
         {
-            get
-            {
-                return InnerItem == null ? "10|20|25|50|100" : InnerItem["GiftCardAmountOptions"];
-            }
+            get { return InnerItem == null ? "10|20|25|50|100" : InnerItem["GiftCardAmountOptions"]; }
         }
 
         public virtual string DefaultProductId => InnerItem == null ? "22565422120" : InnerItem["DefaultProductId"];
@@ -144,7 +140,7 @@ namespace Sitecore.Foundation.Commerce.Models
                     return Context.Database.GetItem(ID.Parse(linkedCurrency)).Name;
                 }
 
-                throw new ConfigurationErrorsException(StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.DefaultCurrencyNotSetException));
+                throw new ConfigurationErrorsException("Default currency not set on the store");
             }
         }
 
@@ -154,8 +150,7 @@ namespace Sitecore.Foundation.Commerce.Models
             {
                 var returnValues = new List<string>();
 
-                MultilistField supportedCurrenciesList =
-                    HomeItem.Fields[StorefrontConstants.KnownFieldNames.SupportedCurrencies];
+                MultilistField supportedCurrenciesList = HomeItem.Fields[StorefrontConstants.KnownFieldNames.SupportedCurrencies];
                 if (supportedCurrenciesList != null)
                 {
                     returnValues.AddRange(

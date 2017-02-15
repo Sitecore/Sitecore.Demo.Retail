@@ -110,6 +110,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.ContentSearch.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Foundation.Dictionary">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.SitecoreExtensions">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.SitecoreExtensions.dll</HintPath>
     </Reference>
@@ -290,11 +293,8 @@
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Models\Catalog.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\CommercePromotion.cs" />
     <Compile Include="Models\CommerceStorefront.cs" />
     <Compile Include="Models\ISiteContext.cs" />
-    <Compile Include="Models\PromoList.cs" />
-    <Compile Include="Models\PromoRotator.cs" />
     <Compile Include="Models\SitecoreItemBase.cs" />
     <Compile Include="StorefrontConstants.cs" />
     <Compile Include="Templates.cs" />

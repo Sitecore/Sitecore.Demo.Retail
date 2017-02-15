@@ -57,8 +57,7 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         public CatalogManager CatalogManager { get; protected set; }
 
-        public ActionResult SearchBar(
-            [Bind(Prefix = StorefrontConstants.QueryStrings.SearchKeyword)] string searchKeyword)
+        public ActionResult SearchBar([Bind(Prefix = StorefrontConstants.QueryStrings.SearchKeyword)] string searchKeyword)
         {
             var model = new SearchBarModel {SearchKeyword = searchKeyword};
             return View(CurrentRenderingView, model);
@@ -407,9 +406,9 @@ namespace Sitecore.Reference.Storefront.Controllers
                 Catalog = StorefrontManager.CurrentStorefront.DefaultCatalog,
                 ItemsPerPage = pageSize ?? searchManager.GetItemsPerPageForItem(Item)
             };
-            if (searchInfo.ItemsPerPage == 0)
+            if (searchInfo.ItemsPerPage <= 0)
             {
-                searchInfo.ItemsPerPage = StorefrontConstants.Settings.DefaultItemsPerPage;
+                searchInfo.ItemsPerPage = 12;
             }
 
             var productSearchOptions = new CommerceSearchOptions(searchInfo.ItemsPerPage, pageNumber.GetValueOrDefault(0));

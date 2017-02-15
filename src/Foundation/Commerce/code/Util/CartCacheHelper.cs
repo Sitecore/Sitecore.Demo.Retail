@@ -33,8 +33,7 @@ namespace Sitecore.Foundation.Commerce.Util
 
             if (!cacheProvider.Contains(CommerceConstants.KnownCachePrefixes.Sitecore, CommerceConstants.KnownCacheNames.CommerceCartCache, id))
             {
-                var msg = string.Format(CultureInfo.InvariantCulture, "CartCacheHelper::InvalidateCartCache - Cart for customer id {0} is not in the cache!", id);
-                CommerceTrace.Current.Write(msg);
+                CommerceTrace.Current.Write($"CartCacheHelper::InvalidateCartCache - Cart for customer id {id} is not in the cache!");
             }
 
             cacheProvider.RemoveData(CommerceConstants.KnownCachePrefixes.Sitecore, CommerceConstants.KnownCacheNames.CommerceCartCache, id);
@@ -49,8 +48,7 @@ namespace Sitecore.Foundation.Commerce.Util
 
             if (cacheProvider.Contains(CommerceConstants.KnownCachePrefixes.Sitecore, CommerceConstants.KnownCacheNames.CommerceCartCache, id))
             {
-                var msg = string.Format(CultureInfo.InvariantCulture, "CartCacheHelper::AddCartToCache - Cart for customer id {0} is already in the cache!", id);
-                CommerceTrace.Current.Write(msg);
+                CommerceTrace.Current.Write($"CartCacheHelper::AddCartToCache - Cart for customer id {id} is already in the cache!");
             }
 
             cacheProvider.AddData(CommerceConstants.KnownCachePrefixes.Sitecore, CommerceConstants.KnownCacheNames.CommerceCartCache, id, cart);
@@ -67,8 +65,7 @@ namespace Sitecore.Foundation.Commerce.Util
 
             if (cart == null)
             {
-                var msg = string.Format(CultureInfo.InvariantCulture, "CartCacheHelper::GetCart - Cart for customerId {0} does not exist in the cache!", id);
-                CommerceTrace.Current.Write(msg);
+                CommerceTrace.Current.Write($"CartCacheHelper::GetCart - Cart for customerId {id} does not exist in the cache!");
             }
 
             return cart;

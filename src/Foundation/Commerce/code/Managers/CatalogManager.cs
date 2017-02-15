@@ -16,12 +16,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Catalog;
-using Sitecore.Commerce.Connect.CommerceServer.Catalog.Fields;
 using Sitecore.Commerce.Connect.CommerceServer.Search;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.Commerce.Engine.Connect.Entities.Prices;
@@ -72,7 +70,9 @@ namespace Sitecore.Foundation.Commerce.Managers
             get
             {
                 if (_currentCatalog != null)
+                {
                     return _currentCatalog;
+                }
 
                 _currentCatalog = StorefrontManager.CurrentStorefront.DefaultCatalog ?? new Catalog(Context.Database.GetItem(CommerceConstants.KnownItemIds.DefaultCatalog));
 
@@ -112,33 +112,22 @@ namespace Sitecore.Foundation.Commerce.Managers
             var totalProductCount = 0;
             var totalPageCount = 0;
 
-            if (dataSource.IsDerived(StorefrontConstants.KnownTemplateItemIds.NamedSearch))
+            if (dataSource.IsDerived(Templates.NamedSearch.ID))
             {
                 var returnList = new List<Item>();
                 IEnumerable<CommerceQueryFacet> facets = null;
                 var searchOptions = new CommerceSearchOptions(-1, 0);
-                var defaultBucketQuery = dataSource[CommerceConstants.KnownSitecoreFieldNames.DefaultBucketQuery];
-                var persistendBucketFilter = CleanLanguageFromFilter(dataSource[CommerceConstants.KnownSitecoreFieldNames.PersistentBucketFilter]);
-
-                try
+                var searchResponse = FindCatalogItems(dataSource, searchOptions);
+                if (searchResponse != null)
                 {
-                    var searchResponse = FindCatalogItems(defaultBucketQuery, persistendBucketFilter, searchOptions);
-                    if (searchResponse != null)
-                    {
-                        returnList.AddRange(searchResponse.ResponseItems);
+                    returnList.AddRange(searchResponse.ResponseItems);
 
-                        totalProductCount = searchResponse.TotalItemCount;
-                        totalPageCount = searchResponse.TotalPageCount;
-                        facets = searchResponse.Facets;
-                    }
-                }
-                catch (Exception)
-                {
-                    // ignored
+                    totalProductCount = searchResponse.TotalItemCount;
+                    totalPageCount = searchResponse.TotalPageCount;
+                    facets = searchResponse.Facets;
                 }
 
-                return new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex,
-                    facets);
+                return new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex, facets);
             }
 
             var childProducts = GetChildProducts(productSearchOptions, dataSource).SearchResultItems;
@@ -154,13 +143,16 @@ namespace Sitecore.Foundation.Commerce.Managers
             var searches = searchesField.GetItems();
             var productsSearchResults = new List<SearchResults>();
             foreach (var search in searches)
-                if (search.IsDerived(StorefrontConstants.KnownTemplateItemIds.NamedSearch))
+            {
+                if (search.IsDerived(Templates.NamedSearch.ID))
                 {
                     var productsSearchResult = GetProductSearchResults(search, productSearchOptions);
                     if (productsSearchResult == null)
+                    {
                         continue;
+                    }
                     productsSearchResult.NamedSearchItem = search;
-                    productsSearchResult.DisplayName = search[StorefrontConstants.KnownFieldNames.Title];
+                    productsSearchResult.DisplayName = search[Templates.NamedSearch.Fields.Title];
                     productsSearchResults.Add(productsSearchResult);
                 }
                 else if (search.IsDerived(StorefrontConstants.KnownTemplateItemIds.SelectedProducts))
@@ -175,6 +167,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                     MultilistField productListField = search.Fields[StorefrontConstants.KnownFieldNames.ProductList];
                     var productList = productListField.GetItems();
                     foreach (var productItem in productList)
+                    {
                         if (productItem.IsDerived(CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate) ||
                             productItem.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductTemplate))
                         {
@@ -182,11 +175,13 @@ namespace Sitecore.Foundation.Commerce.Managers
 
                             itemCount++;
                         }
+                    }
 
                     staticSearchList.TotalItemCount = itemCount;
                     staticSearchList.TotalPageCount = itemCount;
                     productsSearchResults.Add(staticSearchList);
                 }
+            }
             return new MultipleProductSearchResults(productsSearchResults);
         }
 
@@ -196,7 +191,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             var categoryId = CatalogUrlManager.ExtractItemIdFromCurrentUrl();
 
-            var virtualCategoryCacheKey = string.Format(CultureInfo.InvariantCulture, "VirtualCategory_{0}", categoryId);
+            var virtualCategoryCacheKey = $"VirtualCategory_{categoryId}";
 
             if (CurrentSiteContext.Items.Contains(virtualCategoryCacheKey))
             {
@@ -232,12 +227,16 @@ namespace Sitecore.Foundation.Commerce.Managers
         public virtual void GetProductPrice([NotNull] VisitorContext visitorContext, ICatalogProduct productViewModel)
         {
             if (productViewModel == null)
+            {
                 return;
+            }
 
             var includeVariants = productViewModel.Variants != null && productViewModel.Variants.Any();
             var pricesResponse = PricingManager.GetProductPrices(StorefrontManager.CurrentStorefront, visitorContext, productViewModel.CatalogName, productViewModel.ProductId, includeVariants, null);
             if (pricesResponse == null || !pricesResponse.ServiceProviderResult.Success || pricesResponse.Result == null)
+            {
                 return;
+            }
 
             Price price;
             if (pricesResponse.Result.TryGetValue(productViewModel.ProductId, out price))
@@ -248,12 +247,16 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
 
             if (!includeVariants)
+            {
                 return;
+            }
 
             foreach (var variant in productViewModel.Variants)
             {
                 if (!pricesResponse.Result.TryGetValue(variant.VariantId, out price))
+                {
                     continue;
+                }
 
                 var extendedPrice = (ExtendedCommercePrice) price;
                 variant.ListPrice = extendedPrice.Amount;
@@ -264,7 +267,9 @@ namespace Sitecore.Foundation.Commerce.Managers
         public virtual void GetProductBulkPrices([NotNull] VisitorContext visitorContext, IEnumerable<ICatalogProduct> productViewModels)
         {
             if (productViewModels == null || !productViewModels.Any())
+            {
                 return;
+            }
 
             var catalogName = productViewModels.Select(p => p.CatalogName).First();
             var productIds = productViewModels.Select(p => p.ProductId).ToList();
@@ -276,7 +281,9 @@ namespace Sitecore.Foundation.Commerce.Managers
             {
                 Price price;
                 if (!prices.Any() || !prices.TryGetValue(productViewModel.ProductId, out price))
+                {
                     continue;
+                }
 
                 var extendedPrice = (ExtendedCommercePrice) price;
 
@@ -291,12 +298,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public virtual decimal GetProductRating(Item productItem)
         {
-            var ratingString = productItem["Rating"];
+            var ratingString = productItem[Templates.HasRating.Fields.Rating];
             decimal rating;
-            if (decimal.TryParse(ratingString, out rating))
-                return rating;
-
-            return 0;
+            return decimal.TryParse(ratingString, out rating) ? rating : 0;
         }
 
         public virtual ManagerResponse<CatalogResult, bool> VisitedProductDetailsPage(
@@ -334,6 +338,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             var connectSortDirection = SortDirection.Ascending;
             if (sortDirection.HasValue)
+            {
                 switch (sortDirection.Value)
                 {
                     case CommerceConstants.SortDirection.Asc:
@@ -344,6 +349,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                         connectSortDirection = SortDirection.Descending;
                         break;
                 }
+            }
 
             var request = new ProductSortingRequest(storefront.ShopName, sortKey, connectSortDirection);
             var result = CatalogServiceProvider.ProductSorting(request);
@@ -377,35 +383,53 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GlobalizationResult, bool>(result, result.Success);
         }
 
-        public SearchResponse FindCatalogItems(string defaultBucketQuery, string persistentBucketFilter, CommerceSearchOptions searchOptions)
+        public SearchResponse FindCatalogItems(Item bucketQuery, CommerceSearchOptions searchOptions)
         {
+            Assert.ArgumentNotNull(bucketQuery, nameof(bucketQuery));
+            Assert.ArgumentNotNull(searchOptions, nameof(searchOptions));
+
+            var defaultBucketQuery = bucketQuery[CommerceConstants.KnownSitecoreFieldNames.DefaultBucketQuery];
+            var persistentBucketFilter = CleanLanguageFromFilter(bucketQuery[CommerceConstants.KnownSitecoreFieldNames.PersistentBucketFilter]);
+
             var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
             var searchIndex = searchManager.GetIndex();
 
             var defaultQuery = defaultBucketQuery.Replace("&", ";");
             var persistentQuery = persistentBucketFilter.Replace("&", ";");
             var combinedQuery = CombineQueries(persistentQuery, defaultQuery);
-            var searchStringModel = SearchStringModel.ParseDatasourceString(combinedQuery);
 
-            using (var context = searchIndex.CreateSearchContext(SearchSecurityOptions.EnableSecurityCheck))
+            try
             {
-                var query = LinqHelper.CreateQuery<SitecoreUISearchResultItem>(context, searchStringModel).Where(item => item.Language == Context.Language.Name);
+                var searchStringModel = SearchStringModel.ParseDatasourceString(combinedQuery);
+                using (var context = searchIndex.CreateSearchContext(SearchSecurityOptions.EnableSecurityCheck))
+                {
+                    var query = LinqHelper.CreateQuery<SitecoreUISearchResultItem>(context, searchStringModel).Where(item => item.Language == Context.Language.Name);
 
-                query = searchManager.AddSearchOptionsToQuery(query, searchOptions);
+                    query = searchManager.AddSearchOptionsToQuery(query, searchOptions);
 
-                var results = query.GetResults();
-                var response = SearchResponse.CreateFromUISearchResultsItems(searchOptions, results);
+                    var results = query.GetResults();
+                    var response = SearchResponse.CreateFromUISearchResultsItems(searchOptions, results);
 
-                return response;
+                    return response;
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error("Could not find catalog items. Bucket query failed", e, this);
+                return null;
             }
         }
 
         private static string CombineQueries(string query1, string query2)
         {
             if (!string.IsNullOrWhiteSpace(query1) && !string.IsNullOrWhiteSpace(query2))
+            {
                 return string.Concat(query1, ";", query2);
+            }
             if (!string.IsNullOrWhiteSpace(query1))
+            {
                 return query1;
+            }
             return query2;
         }
 
@@ -419,27 +443,15 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             if (RenderingContext.Current.Rendering.Item != null)
             {
-                SearchResponse searchResponse = null;
-                if (
-                    CatalogUtility.IsItemDerivedFromCommerceTemplate(categoryItem,
-                        CommerceConstants.KnownTemplateIds.CommerceDynamicCategoryTemplate) ||
-                    categoryItem.TemplateName == "Commerce Named Search")
-                    try
-                    {
-                        var defaultBucketQuery =
-                            categoryItem[CommerceConstants.KnownSitecoreFieldNames.DefaultBucketQuery];
-                        var persistendBucketFilter =
-                            categoryItem[CommerceConstants.KnownSitecoreFieldNames.PersistentBucketFilter];
-                        persistendBucketFilter = CleanLanguageFromFilter(persistendBucketFilter);
-                        searchResponse = FindCatalogItems(defaultBucketQuery, persistendBucketFilter,
-                            searchOptions);
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Error(ex.Message, ex, this);
-                    }
+                SearchResponse searchResponse;
+                if (categoryItem.IsDerived(CommerceConstants.KnownTemplateIds.CommerceDynamicCategoryTemplate) || categoryItem.IsDerived(Templates.NamedSearch.ID))
+                {
+                    searchResponse = FindCatalogItems(categoryItem, searchOptions);
+                }
                 else
+                {
                     searchResponse = GetCategoryProducts(categoryItem.ID, searchOptions);
+                }
 
                 if (searchResponse != null)
                 {
@@ -451,8 +463,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 }
             }
 
-            var results = new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex,
-                facets);
+            var results = new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex, facets);
             return results;
         }
 
@@ -486,7 +497,9 @@ namespace Sitecore.Foundation.Commerce.Managers
         protected string CleanLanguageFromFilter(string filter)
         {
             if (filter.IndexOf("language:", StringComparison.OrdinalIgnoreCase) < 0)
+            {
                 return filter;
+            }
 
             var newFilter = new StringBuilder();
 
@@ -494,16 +507,21 @@ namespace Sitecore.Foundation.Commerce.Managers
             foreach (var statement in statementList)
             {
                 if (statement.IndexOf("language", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
                     continue;
+                }
 
                 if (newFilter.Length > 0)
+                {
                     newFilter.Append(';');
+                }
 
                 newFilter.Append(statement);
             }
 
             return newFilter.ToString();
         }
+
         public static Item GetCategory(string categoryName, string catalogName)
         {
             Assert.ArgumentNotNullOrEmpty(catalogName, nameof(catalogName));
@@ -527,7 +545,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
                 var foundSearchItem = categoryQuery.FirstOrDefault();
                 if (foundSearchItem != null)
+                {
                     result = foundSearchItem.GetItem();
+                }
             }
 
             return result;
@@ -557,7 +577,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
                 var foundSearchItem = productQuery.FirstOrDefault();
                 if (foundSearchItem != null)
+                {
                     result = foundSearchItem.GetItem();
+                }
             }
 
             return result;
@@ -582,14 +604,13 @@ namespace Sitecore.Foundation.Commerce.Managers
                 if (!list.Any())
                 {
                     return new CategorySearchResults(childCategoryList, childCategoryList.Count, 1, 1, new List<FacetCategory>());
-
                 }
-                if (!list[0].Fields.ContainsKey(Foundation.Commerce.Constants.CommerceIndex.Fields.ChildCategoriesSequence))
+                if (!list[0].Fields.ContainsKey(Constants.CommerceIndex.Fields.ChildCategoriesSequence))
                 {
                     return new CategorySearchResults(childCategoryList, childCategoryList.Count, 1, 1, new List<FacetCategory>());
                 }
 
-                var childCategoryDelimitedString = list[0][Foundation.Commerce.Constants.CommerceIndex.Fields.ChildCategoriesSequence];
+                var childCategoryDelimitedString = list[0][Constants.CommerceIndex.Fields.ChildCategoriesSequence];
 
                 var categoryIdArray = childCategoryDelimitedString.Split('|');
 
@@ -599,8 +620,5 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             return new CategorySearchResults(childCategoryList, childCategoryList.Count, 1, 1, new List<FacetCategory>());
         }
-
     }
-
-
 }

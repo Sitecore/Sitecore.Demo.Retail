@@ -35,6 +35,7 @@ using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
+using Sitecore.Foundation.Dictionary.Repositories;
 using Sitecore.Links;
 using Sitecore.Reference.Storefront.Infrastructure;
 using Sitecore.Reference.Storefront.Models;
@@ -523,8 +524,8 @@ namespace Sitecore.Reference.Storefront.Controllers
                         var numberOfAddresses = AllAddresses(result).Count;
                         if (numberOfAddresses >= StorefrontManager.CurrentStorefront.MaxNumberOfAddresses)
                         {
-                            var message = StorefrontManager.GetSystemMessage(StorefrontConstants.SystemMessages.MaxAddressLimitReached);
-                            result.Errors.Add(string.Format(CultureInfo.InvariantCulture, message, numberOfAddresses));
+                            var message = DictionaryPhraseRepository.Current.Get("/Accounts/Max Address Limit Reached", "The maximum number of addresses ({0}) has been reached.");
+                            result.Errors.Add(string.Format(message, numberOfAddresses));
                             result.Success = false;
                         }
                         else

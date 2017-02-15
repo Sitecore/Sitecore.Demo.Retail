@@ -227,7 +227,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         {
             var productList = wishList.Lines.Select(line => new CommerceInventoryProduct {ProductId = line.Product.ProductId, CatalogName = ((CommerceCartProduct) line.Product).ProductCatalog}).ToList();
 
-            var stockInfos = InventoryManager.GetStockInformation(storefront, productList, StockDetailsLevel.Status).Result;
+            var stockInfos = InventoryManager.GetStockInformation(storefront, productList, StockDetailsLevel.Status).Result?.ToArray();
             if (stockInfos == null)
             {
                 return;
@@ -241,7 +241,9 @@ namespace Sitecore.Foundation.Commerce.Managers
                     continue;
                 }
 
-                line.Product.StockStatus = new StockStatus(System.Convert.ToInt32((decimal) stockInfo.Properties["OnHandQuantity"]), stockInfo.Status.Name);
+                var quantity = stockInfo is CommerceStockInformation ? (stockInfo as CommerceStockInformation).OnHandQuantity ?? stockInfo.Count : stockInfo.Count;
+
+                line.Product.StockStatus = new StockStatus(System.Convert.ToInt32(quantity), stockInfo.Status.Name);
                 InventoryManager.VisitedProductStockStatus(storefront, stockInfo, string.Empty);
             }
         }

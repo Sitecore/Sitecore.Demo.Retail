@@ -37,7 +37,7 @@ namespace Sitecore.Foundation.Commerce.Models
         {
             get
             {
-                return (_itemsPerPage == 0) ? StorefrontConstants.Settings.DefaultItemsPerPage : _itemsPerPage;
+                return (_itemsPerPage <= 0) ? 12 : _itemsPerPage;
             }
 
             set 

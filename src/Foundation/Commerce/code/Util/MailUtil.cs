@@ -77,8 +77,8 @@ namespace Sitecore.Foundation.Commerce.Util
                 return false;
             }
 
-            var subject = string.Format(CultureInfo.InvariantCulture, subjectField.ToString(), subjectParameters);
-            var body = string.Format(CultureInfo.InvariantCulture, bodyField.ToString(), bodyParameters);
+            var subject = string.Format(subjectField.ToString(), subjectParameters);
+            var body = string.Format(bodyField.ToString(), bodyParameters);
 
             return SendMail(toEmail, fromEmail, subject, body, string.Empty);
         }

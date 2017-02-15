@@ -44,7 +44,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
                 return;
             }
 
-            args.CacheKey = string.Format(CultureInfo.InvariantCulture, "_#varyByUrlPath_{0}_{1}_{2}_{3}", Context.Site.Name, Context.Language.Name, HttpContext.Current.Request.Url.AbsoluteUri, args.Rendering.RenderingItem.ID.ToString());
+            args.CacheKey = $"_#varyByUrlPath_{Context.Site.Name}_{Context.Language.Name}_{HttpContext.Current.Request.Url.AbsoluteUri}_{args.Rendering.RenderingItem.ID.ToString()}";
         }
     }
 }

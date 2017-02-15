@@ -50,21 +50,5 @@ namespace Sitecore.Foundation.Commerce
 
             public const string Value = "Value";
         }
-
-        public static class CartConstants
-        {
-            public const string BillingAddressNamePrefix = "Billing_";
-
-            public const string ShippingAddressNamePrefix = "Shipping_";
-
-            public const string EmailAddressNamePrefix = ShippingAddressNamePrefix + "Email_";
-        }
-
-        public static class KnowWeaklyTypesProperties
-        {
-            public const string EmailText = "EmailText";
-
-            public const string PartyType = "PartyType";
-        }
     }
 }

@@ -23,85 +23,8 @@ namespace Sitecore.Foundation.Commerce
     [Obsolete("Move to Templates.cs or similar")]
     public static class StorefrontConstants
     {
-        public static class SystemMessages
-        {
-            public static readonly string AuthenticationProviderError = "AuthenticationProviderError";
-
-            public static readonly string CartNotFoundError = "CartNotFoundError";
-
-            public static readonly string CouldNotCreateUser = "CouldNotCreatedUser";
-
-            public static readonly string CouldNotFindEmailBodyMessageError = "CouldNotFindEmailBodyMessageError";
-
-            public static readonly string CouldNotFindEmailSubjectMessageError = "CouldNotFindEmailSubjectMessageError";
-
-            public static readonly string CouldNotSentEmailError = "CouldNotSentEmailError";
-
-            public static readonly string InvalidEmailError = "InvalidEmailError";
-
-            public static readonly string InvalidPasswordError = "InvalidPasswordError";
-
-            public static readonly string MailSentToMessage = "MailSentToMessage";
-
-            public static readonly string MaxAddressLimitReached = "MaxAddresseLimitReached";
-
-            public static readonly string MaxLoyaltyProgramsToJoinReached = "MaxLoyaltyProgramsToJoinReached";
-
-            public static readonly string MaxWishListLineLimitReached = "MaxWishListLineLimitReached";
-
-            public static readonly string MaxWishListLimitReached = "MaxWishListLimitReached";
-
-            public static readonly string PasswordCouldNotBeReset = "PasswordCouldNotBeReset";
-
-            public static readonly string PasswordRetrievalAnswerInvalid = "PasswordRetrievalAnswerInvalid";
-
-            public static readonly string PasswordRetrievalQuestionInvalid = "PasswordRetrievalQuestionInvalid";
-
-            public static readonly string SubmitOrderHasEmptyCart = "SubmitOrderHasEmptyCart";
-
-            public static readonly string TrackingNotEnabled = "TrackingNotEnabled";
-
-            public static readonly string UnknownMembershipProviderError = "UnknownMembershipProviderError";
-
-            public static readonly string UpdateUserProfileError = "UpdateUserProfileError";
-
-            public static readonly string UserAlreadyExists = "UserAlreadyExists";
-
-            public static readonly string UserNameForEmailExists = "UserNameForEmailExists";
-
-            public static readonly string UserNameInvalid = "UserNameInvalid";
-
-            public static readonly string UserNotFoundError = "UserNotFoundError";
-
-            public static readonly string UserRejectedError = "UserRejectedError";
-
-            public static readonly string DefaultCurrencyNotSetException = "DefaultCurrencyNotSetException";
-
-            public static readonly string InvalidCurrencyError = "InvalidCurrencyError";
-
-            public static readonly string LoginFailed = "LoginFailed";
-
-            public static readonly string AuthorizationCodeMissing = "AuthorizationCodeMissing";
-
-            public static readonly string CancelPendingRequest = "CancelPendingRequest";
-
-            public static readonly string AccountNotFound = "AccountNotFound";
-
-            public static readonly string ActivationCodeSent = "ActivationCodeSent";
-
-            public static readonly string WrongActivationCode = "WrongActivationCode";
-
-            public static readonly string LinkupSucceeded = "LinkupSucceeded";
-
-            public static readonly string CardAuthorizationFailed = "CardAuthorizationFailed";
-        }
-
         public static class Settings
         {
-            public static readonly string WebsiteName = "Storefront";
-
-            public static readonly int DefaultItemsPerPage = 12;
-
             public static readonly string DefaultCurrencyCode = "USD";
         }
 
@@ -243,12 +166,6 @@ namespace Sitecore.Foundation.Commerce
         public static class KnownTemplateItemIds
         {
             public static readonly ID Home = new ID("{FB9DBD60-CBA2-490D-9C72-997271D576A3}");
-
-            public static readonly ID NamedSearch = new ID("{F3C0CD6C-9FA9-442D-BD3A-5A25E292F2F7}");
-
-            public static readonly ID StandardPage = new ID("{16E859D2-6542-407A-AC65-F34BCAD3EB3D}");
-
-            public static readonly ID SecuredPage = new ID("{02CCCF95-7BE5-4549-81F9-AC97A22D6816}");
 
             public static readonly ID SelectedProducts = new ID("{A45D0030-79F2-4DBF-9A74-226A33C58249}");
         }

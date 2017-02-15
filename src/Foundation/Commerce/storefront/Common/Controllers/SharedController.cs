@@ -29,8 +29,7 @@ namespace Sitecore.Reference.Storefront.Controllers
     {
         private readonly RenderingModel _model;
 
-        public SharedController([NotNull] ContactFactory contactFactory, [NotNull] CatalogManager catalogManager)
-            : base(contactFactory)
+        public SharedController([NotNull] ContactFactory contactFactory, [NotNull] CatalogManager catalogManager) : base(contactFactory)
         {
             Assert.ArgumentNotNull(catalogManager, nameof(catalogManager));
 

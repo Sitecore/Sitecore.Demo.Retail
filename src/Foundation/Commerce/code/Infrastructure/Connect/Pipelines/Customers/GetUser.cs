@@ -52,14 +52,16 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
 
         protected void UpdateCustomer(CommerceUser commerceUser, UserProfile userProfile)
         {
-            commerceUser.ExternalId = userProfile["user_id"];
-            Assert.IsNotNullOrEmpty(commerceUser.ExternalId, "commerceUser.ExternalId");
+            commerceUser.ExternalId = userProfile[Sitecore.Commerce.Connect.CommerceServer.CommerceConstants.ProfilesStrings.UserIdProperty];
+            Assert.IsNotNullOrEmpty(commerceUser.ExternalId, nameof(commerceUser.ExternalId));
 
-            if (commerceUser.Customers == null || commerceUser.Customers.Count == 0)
+            if (commerceUser.Customers != null && commerceUser.Customers.Count != 0)
             {
-                var customers = new List<string> {commerceUser.ExternalId};
-                commerceUser.Customers = customers.AsReadOnly();
+                return;
             }
+
+            var customers = new List<string> {commerceUser.ExternalId};
+            commerceUser.Customers = customers.AsReadOnly();
         }
 
         protected UserProfile GetUserProfile(string userName)

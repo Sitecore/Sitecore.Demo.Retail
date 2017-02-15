@@ -32,47 +32,27 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
     public class ProductItemResolver
     {
         public const string ShopProductRouteName = "shop-product";
-
         public const string ShopProductWithCatalogRouteName = "shop-product-catalog";
-
         public const string ShopCategoryRouteName = "shop-category";
-
         public const string ShopCategoryWithCatalogRouteName = "shop-category-catalog";
-
         public const string ProductRouteName = "product";
-
         public const string ProductWithCatalogRouteName = "product-catalog";
-
         public const string CategoryRouteName = "category";
-
         public const string CategoryWithCatalogRouteName = "category-catalog";
-
         public const string IdField = "id";
-
         public const string ItemTypeField = "itemType";
-
         public const string CatalogField = "catalog";
-
+        public const string PathElementsField = "pathElements";
         public const string CategoryField = "category";
-
         public const string ProductItemType = "product";
-
         public const string CategoryItemType = "category";
-
         public const string CatalogItemType = "catalogitem";
-
         public const string NavigationItemName = "product catalog";
-
         public const string ProductUrlRoute = "product";
-
         public const string CategoryUrlRoute = "category";
-
         public const string ShopUrlRoute = "shop";
-
         public const string LandingUrlRoute = "landing";
-
         public const string BuyGiftCardUrlRoute = "buygiftcard";
-
         public static Item ResolveCatalogItem(string itemId, string catalogName, bool isProduct)
         {
             if (string.IsNullOrEmpty(itemId))
@@ -108,9 +88,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
                 if (routeData.Values[ItemTypeField].ToString() == CatalogItemType)
                 {
                     var currentStorefront = StorefrontManager.CurrentStorefront;
-                    var productCatalogItem =
-                        currentStorefront.HomeItem.Axes.GetDescendant(NavigationItemName + "/" +
-                                                                      routeData.Values["pathElements"]);
+                    var productCatalogItem = currentStorefront.HomeItem.Axes.GetDescendant(NavigationItemName + "/" + routeData.Values[PathElementsField]);
                     if (productCatalogItem != null)
                     {
                         data.IsProduct =
@@ -120,7 +98,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
                 }
                 else
                 {
-                    data.IsProduct = routeData.Values[ItemTypeField].ToString() == ProductItemType ? true : false;
+                    data.IsProduct = routeData.Values[ItemTypeField].ToString() == ProductItemType;
                 }
             }
             else

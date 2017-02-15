@@ -78,6 +78,24 @@ SharedFields:
   Hint: Forms Authentication
   Type: Checkbox
   Value: 1
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:p="p" xmlns:s="s"
+      p:p="1"
+      s:xsd="http://www.w3.org/2001/XMLSchema">
+      <d
+        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+        <r
+          uid="{485CEC8C-F20A-47C6-86B4-DF4425A6B8E0}">
+          <p:d />
+        </r>
+        <r
+          uid="{B2810CEE-47A7-4D42-8DCC-6FBB9996ADD4}"
+          p:after="*[1=2]" />
+      </d>
+    </r>
 - ID: "f605d200-01a0-4235-8886-391c4c906092"
   Hint: OperatingUnitNumber
   Value: 
@@ -117,7 +135,7 @@ Languages:
               p:before="*"
               s:ds="{F2DDEBC5-B7C1-4C8E-9DC9-169A60216B69}"
               s:id="{97459D5B-3C92-46C2-A329-138C1E277465}"
-              s:par="Background={EFA6AD59-AE21-4524-90F8-A92440B869AF}"
+              s:par="Background=%7bEFA6AD59-AE21-4524-90F8-A92440B869AF%7d"
               s:ph="/page-layout/section_8a1bbcac-f675-4ec3-acb2-f7d0b8abbed5/col-narrow-1_bca27930-e270-43e1-b347-06fb77ded99a" />
             <r
               uid="{E6EE01BA-DC88-4A94-8356-F4F9115A3C92}"
@@ -263,13 +281,23 @@ Languages:
               p:after="r[@uid='{8BE50F19-C969-4AC1-843F-3BCF8E4FB610}']"
               s:ds=""
               s:id="{1149A3C7-C69A-4E6B-A6C3-32687EC2F8D4}"
-              s:par="UseStaticPlaceholderNames&amp;Type=bg-media&amp;Media={656260C8-B8DE-484A-A25B-1FF7CC920752}&amp;Parallax=1"
+              s:par="Media=%7b656260C8-B8DE-484A-A25B-1FF7CC920752%7d&amp;Parallax=1"
               s:ph="page-layout" />
             <r
               uid="{8A1BBCAC-F675-4EC3-ACB2-F7D0B8ABBED5}"
               p:after="r[@uid='{2B3B12A8-7D16-4EF4-A9F8-99F264B3CA86}']"
               s:id="{1149A3C7-C69A-4E6B-A6C3-32687EC2F8D4}"
               s:ph="page-layout" />
+          </d>
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+            <r
+              uid="{485CEC8C-F20A-47C6-86B4-DF4425A6B8E0}">
+              <p:d />
+            </r>
+            <r
+              uid="{B2810CEE-47A7-4D42-8DCC-6FBB9996ADD4}"
+              p:after="*[1=2]" />
           </d>
         </r>
     - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"

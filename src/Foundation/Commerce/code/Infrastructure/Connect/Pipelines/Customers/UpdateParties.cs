@@ -48,9 +48,9 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
                 return;
             }
 
-            var preferredAddress = customerProfile["GeneralInfo.preferred_address"].Value as string;
+            var preferredAddress = customerProfile[Commerce.Constants.Profile.GeneralInfo.PreferredAddress].Value as string;
 
-            var profileValue = customerProfile["GeneralInfo.address_list"].Value as object[];
+            var profileValue = customerProfile[Commerce.Constants.Profile.GeneralInfo.AddressList].Value as object[];
             if (profileValue == null)
                 return;
 
@@ -76,12 +76,12 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
                 // Check if the IsPrimary address flag has been flipped.
                 if (((CommerceParty) partyToUpdate).IsPrimary)
                 {
-                    customerProfile["GeneralInfo.preferred_address"].Value = partyToUpdate.ExternalId;
+                    customerProfile[Commerce.Constants.Profile.GeneralInfo.PreferredAddress].Value = partyToUpdate.ExternalId;
                     customerProfile.Update();
                 }
                 else if (!string.IsNullOrWhiteSpace(preferredAddress) && preferredAddress.Equals(partyToUpdate.ExternalId, StringComparison.OrdinalIgnoreCase))
                 {
-                    customerProfile["GeneralInfo.preferred_address"].Value = DBNull.Value;
+                    customerProfile[Commerce.Constants.Profile.GeneralInfo.PreferredAddress].Value = DBNull.Value;
                     customerProfile.Update();
                 }
 

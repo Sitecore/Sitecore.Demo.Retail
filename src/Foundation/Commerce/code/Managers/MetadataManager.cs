@@ -45,12 +45,14 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         private static string GetCategoryTags(Item item)
         {
-            return string.Format(CultureInfo.InvariantCulture, "<link rel='canonical' href='{0}'/>", GetServerUrl() + "/category/" + item.Name);
+            var url = GetServerUrl() + "/category/" + item.Name;
+            return $"<link rel='canonical' href='{url}'/>";
         }
 
         private static string GetProductTags(Item item)
         {
-            return string.Format(CultureInfo.InvariantCulture, "<link rel='canonical' href='{0}'/>", GetServerUrl() + "/product/" + item.Name);
+            var url = GetServerUrl() + "/product/" + item.Name;
+            return $"<link rel='canonical' href='{url}'/>";
         }
 
         private static string GetServerUrl()

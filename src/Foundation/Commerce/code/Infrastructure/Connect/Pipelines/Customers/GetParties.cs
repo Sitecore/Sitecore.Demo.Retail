@@ -62,9 +62,9 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
                 return;
             }
 
-            var preferredAddress = customerProfile["GeneralInfo.preferred_address"].Value as string;
+            var preferredAddress = customerProfile[Commerce.Constants.Profile.GeneralInfo.PreferredAddress].Value as string;
 
-            var profileValue = customerProfile["GeneralInfo.address_list"].Value as object[];
+            var profileValue = customerProfile[Commerce.Constants.Profile.GeneralInfo.AddressList].Value as object[];
             if (profileValue != null)
             {
                 var e = profileValue.Select(i => i.ToString());

@@ -32,5 +32,28 @@ namespace Sitecore.Foundation.Commerce
                 public static readonly ID Name = new ID("{703310C3-2BC2-4781-93E7-331ABEF7EAAD}");
             }
         }
+
+        public static class HasRating
+        {
+            public class Fields
+            {
+                public const string Rating = "Rating";
+            }
+        }
+
+        public static class SecuredPage
+        {
+            public static readonly ID ID = new ID("{02CCCF95-7BE5-4549-81F9-AC97A22D6816}");
+        }
+
+        public static class NamedSearch
+        {
+            public static readonly ID ID = new ID("{F3C0CD6C-9FA9-442D-BD3A-5A25E292F2F7}");
+
+            public static class Fields
+            {
+                public static readonly ID Title = new ID("{439CDD2A-66A9-4D67-913A-5B696327C867");
+            }
+        }
     }
 }

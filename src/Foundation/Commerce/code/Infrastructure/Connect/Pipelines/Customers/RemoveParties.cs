@@ -45,9 +45,9 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
                 return;
             }
 
-            var preferredAddress = customerProfile["GeneralInfo.preferred_address"].Value as string;
+            var preferredAddress = customerProfile[Commerce.Constants.Profile.GeneralInfo.PreferredAddress].Value as string;
 
-            var profileValue = customerProfile["GeneralInfo.address_list"].Value as object[];
+            var profileValue = customerProfile[Commerce.Constants.Profile.GeneralInfo.AddressList].Value as object[];
             if (profileValue == null)
                 return;
             var e = profileValue.Select(i => i.ToString());
@@ -70,13 +70,13 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
                 addressList.Remove(foundId);
 
                 if (!addressList.Any())
-                    customerProfile["GeneralInfo.address_list"].Value = DBNull.Value;
+                    customerProfile[Commerce.Constants.Profile.GeneralInfo.AddressList].Value = DBNull.Value;
                 else
-                    customerProfile["GeneralInfo.address_list"].Value = addressList.Cast<object>().ToArray();
+                    customerProfile[Commerce.Constants.Profile.GeneralInfo.AddressList].Value = addressList.Cast<object>().ToArray();
 
                 // Prefered address check. If the address being deleted was the preferred address we must clear it from the customer profile.
                 if (!string.IsNullOrWhiteSpace(preferredAddress) && preferredAddress.Equals(partyToRemove.ExternalId, StringComparison.OrdinalIgnoreCase))
-                    customerProfile["GeneralInfo.preferred_address"].Value = DBNull.Value;
+                    customerProfile[Commerce.Constants.Profile.GeneralInfo.PreferredAddress].Value = DBNull.Value;
 
                 customerProfile.Update();
             }

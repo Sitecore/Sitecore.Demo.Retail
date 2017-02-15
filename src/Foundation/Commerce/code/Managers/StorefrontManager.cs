@@ -176,7 +176,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public static CurrencyInformationModel GetCurrencyInformation(string currency)
         {
-            var displayKey = string.Format(CultureInfo.InvariantCulture, "{0}_{1}", currency, Context.Language.Name);
+            var displayKey = $"{currency}_{Context.Language.Name}";
             var item = StorefrontConfigurationItem.Axes.GetItem(string.Concat(StorefrontConstants.KnowItemNames.CurrencyDisplay, "/", displayKey));
             if (item != null)
             {
@@ -208,7 +208,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             {
                 if (insertBracketsWhenNotFound)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "[{0}]", itemName);
+                    return $"[{itemName}]";
                 }
                 return itemName;
             }

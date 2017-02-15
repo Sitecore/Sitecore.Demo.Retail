@@ -82,7 +82,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public void SetErrors(string area, Exception exception)
         {
-            Errors.Add(string.Format(CultureInfo.InvariantCulture, "{0}: {1}", area, exception.Message));
+            Errors.Add($"{area}: {exception.Message}");
             Success = false;
         }
 

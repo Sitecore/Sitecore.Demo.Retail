@@ -16,7 +16,6 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
-using System.Globalization;
 using System.Text;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Search;
@@ -68,7 +67,7 @@ namespace Sitecore.Foundation.Commerce.Util
             Assert.IsNotNullOrEmpty(categoryDatasource, "Product Catalog item missing CategoryDatasource.");
             var parentPath = item.Paths.FullPath;
             var path = parentPath.Replace(categoryDatasource, string.Empty);
-            return string.Format(CultureInfo.InvariantCulture, "/{0}{1}", ProductItemResolver.NavigationItemName, path);
+            return $"/{ProductItemResolver.NavigationItemName}{path}";
         }
 
         public static string BuildProductLink(Item item, bool includeCatalog, bool includeFriendlyName)
@@ -206,8 +205,8 @@ namespace Sitecore.Foundation.Commerce.Util
         {
             Assert.ArgumentNotNull(item, nameof(item));
 
-            var categoryName = string.Empty;
-            var categoryId = string.Empty;
+            string categoryName;
+            string categoryId;
             var catalogName = ExtractCatalogName(item, includeCatalog);
 
             ExtractCatalogItemInfo(item, includeFriendlyName, out categoryId, out categoryName);
@@ -295,12 +294,7 @@ namespace Sitecore.Foundation.Commerce.Util
         public static string ExtractCategoryNameFromCurrentUrl()
         {
             var categoryFolder = WebUtil.GetUrlName(1);
-            if (string.IsNullOrEmpty(categoryFolder))
-            {
-                return ExtractItemIdFromCurrentUrl();
-            }
-
-            return ExtractItemId(categoryFolder);
+            return string.IsNullOrEmpty(categoryFolder) ? ExtractItemIdFromCurrentUrl() : ExtractItemId(categoryFolder);
         }
 
         public static string ExtractCatalogNameFromCurrentUrl()
@@ -309,22 +303,18 @@ namespace Sitecore.Foundation.Commerce.Util
             var linkProvider = LinkManager.Provider as CatalogLinkProvider;
 #pragma warning restore 618
 
-            if (linkProvider != null && linkProvider.IncludeCatalog)
+            if (linkProvider == null || !linkProvider.IncludeCatalog)
             {
-                var catalogName = WebUtil.GetUrlName(2);
-                if (!string.IsNullOrEmpty(catalogName))
-                {
-                    return catalogName;
-                }
-
-                catalogName = WebUtil.GetUrlName(1);
-                if (!string.IsNullOrEmpty(catalogName))
-                {
-                    return catalogName;
-                }
+                return StorefrontManager.CurrentStorefront.DefaultCatalog.Name;
+            }
+            var catalogName = WebUtil.GetUrlName(2);
+            if (!string.IsNullOrEmpty(catalogName))
+            {
+                return catalogName;
             }
 
-            return StorefrontManager.CurrentStorefront.DefaultCatalog.Name;
+            catalogName = WebUtil.GetUrlName(1);
+            return !string.IsNullOrEmpty(catalogName) ? catalogName : StorefrontManager.CurrentStorefront.DefaultCatalog.Name;
         }
 
         public static string ExtractItemId(string folder)
@@ -382,16 +372,10 @@ namespace Sitecore.Foundation.Commerce.Util
         {
             Assert.ArgumentNotNull(item, nameof(item));
 
-            if (includeCatalog)
-            {
-                return item[CommerceConstants.KnownFieldIds.CatalogName].ToLowerInvariant();
-            }
-
-            return string.Empty;
+            return includeCatalog ? item[CommerceConstants.KnownFieldIds.CatalogName].ToLowerInvariant() : string.Empty;
         }
 
-        private static void ExtractCatalogItemInfo(Item item, bool includeFriendlyName, out string itemName,
-            out string itemFriendlyName)
+        private static void ExtractCatalogItemInfo(Item item, bool includeFriendlyName, out string itemName, out string itemFriendlyName)
         {
             Assert.ArgumentNotNull(item, nameof(item));
 
@@ -413,30 +397,25 @@ namespace Sitecore.Foundation.Commerce.Util
 
         private static string EncodeUrlToken(string urlToken, bool removeInvalidPathCharacters)
         {
-            if (!string.IsNullOrEmpty(urlToken))
+            if (string.IsNullOrEmpty(urlToken))
             {
-                if (removeInvalidPathCharacters)
-                {
-                    foreach (var character in _invalidPathCharacters)
-                    {
-                        urlToken = urlToken.Replace(character, string.Empty);
-                    }
-                }
-
-                urlToken = Uri.EscapeDataString(urlToken).Replace(_urlTokenDelimiter, _encodedDelimiter);
+                return null;
             }
 
-            return urlToken;
+            if (removeInvalidPathCharacters)
+            {
+                foreach (var character in _invalidPathCharacters)
+                {
+                    urlToken = urlToken.Replace(character, string.Empty);
+                }
+            }
+
+            return Uri.EscapeDataString(urlToken).Replace(_urlTokenDelimiter, _encodedDelimiter);
         }
 
         private static string DecodeUrlToken(string urlToken)
         {
-            if (!string.IsNullOrEmpty(urlToken))
-            {
-                urlToken = Uri.UnescapeDataString(urlToken).Replace(_encodedDelimiter, _urlTokenDelimiter);
-            }
-
-            return urlToken;
+            return string.IsNullOrEmpty(urlToken) ? null : Uri.UnescapeDataString(urlToken).Replace(_encodedDelimiter, _urlTokenDelimiter);
         }
     }
 }

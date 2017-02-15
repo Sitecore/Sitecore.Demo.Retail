@@ -93,7 +93,7 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
             addressProfile.Update();
 
             ProfilePropertyListCollection<string> addressList;
-            var profileValue = customerProfile["GeneralInfo.address_list"].Value as object[];
+            var profileValue = customerProfile[Commerce.Constants.Profile.GeneralInfo.AddressList].Value as object[];
             if (profileValue != null)
             {
                 var e = profileValue.Select(i => i.ToString());
@@ -105,10 +105,10 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
             }
 
             addressList.Add(partyToAdd.ExternalId);
-            customerProfile["GeneralInfo.address_list"].Value = addressList.Cast<object>().ToArray();
+            customerProfile[Commerce.Constants.Profile.GeneralInfo.AddressList].Value = addressList.Cast<object>().ToArray();
 
             if (partyToAdd.IsPrimary)
-                customerProfile["GeneralInfo.preferred_address"].Value = partyToAdd.ExternalId;
+                customerProfile[Commerce.Constants.Profile.GeneralInfo.PreferredAddress].Value = partyToAdd.ExternalId;
 
             customerProfile.Update();
 
