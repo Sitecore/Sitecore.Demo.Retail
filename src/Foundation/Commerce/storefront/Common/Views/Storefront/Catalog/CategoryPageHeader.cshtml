@@ -10,14 +10,15 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-@model CategoryViewModel
+@using Sitecore.Foundation.SitecoreExtensions.Extensions
+@model Sitecore.Reference.Storefront.Models.CategoryViewModel
 @{
     if (Model == null)
     {
         return;
     }
     var productImage = Model.Images.FirstOrDefault();
-    var imageUrl = (productImage == null ? null : productImage.GetImageUrl(770, 625));
+    var imageUrl = productImage?.ImageUrl(770, 625);
 }
 
 <div class="jumbotron jumbotron-xl bg-media" style="background-image: url('@imageUrl')">

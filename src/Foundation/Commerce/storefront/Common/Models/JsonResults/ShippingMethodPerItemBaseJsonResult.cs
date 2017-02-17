@@ -15,50 +15,19 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Linq;
+using Sitecore.Commerce.Connect.CommerceServer;
+using Sitecore.Commerce.Entities.Shipping;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Connect.CommerceServer;
-    using Sitecore.Commerce.Entities.Shipping;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    /// <summary>
-    /// Defines the ShippingMethodPerItemBaseJsonResult class.
-    /// </summary>
-    /// <seealso cref="Sitecore.Reference.Storefront.Models.JsonResults.BaseJsonResult" />
     public class ShippingMethodPerItemBaseJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ShippingMethodPerItemBaseJsonResult"/> class.
-        /// </summary>
-        public ShippingMethodPerItemBaseJsonResult()
-            : base()
-        {
-        }
-
-        /// <summary>
-        /// Gets or sets the line identifier.
-        /// </summary>
-        /// <value>
-        /// The line identifier.
-        /// </value>
         public string LineId { get; set; }
 
-        /// <summary>
-        /// Gets or sets the shipping methods.
-        /// </summary>
-        /// <value>
-        /// The shipping methods.
-        /// </value>
         public IEnumerable<ShippingMethodBaseJsonResult> ShippingMethods { get; set; }
 
-        /// <summary>
-        /// Initilaizes the specified shipping method per item.
-        /// </summary>
-        /// <param name="shippingMethodPerItem">The shipping method per item.</param>
         public virtual void Initialize(ShippingMethodPerItem shippingMethodPerItem)
         {
             if (shippingMethodPerItem == null)
@@ -66,7 +35,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
                 return;
             }
 
-            this.LineId = shippingMethodPerItem.LineId;
+            LineId = shippingMethodPerItem.LineId;
 
             if (shippingMethodPerItem.ShippingMethods != null && shippingMethodPerItem.ShippingMethods.Any())
             {
@@ -80,7 +49,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
                     shippingMethodList.Add(jsonResult);
                 }
 
-                this.ShippingMethods = shippingMethodList;
+                ShippingMethods = shippingMethodList;
             }
         }
     }

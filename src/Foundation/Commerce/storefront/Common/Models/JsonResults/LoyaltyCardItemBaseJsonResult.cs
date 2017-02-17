@@ -15,68 +15,41 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using Sitecore.Commerce.Entities.LoyaltyPrograms;
+using Sitecore.Commerce.Services;
+using Sitecore.Diagnostics;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Entities.LoyaltyPrograms;
-    using Sitecore.Commerce.Services;
-    using Sitecore.Diagnostics;
-    using System.Collections.Generic;
-
-    /// <summary>
-    /// Json result for loyalty cards operations.
-    /// </summary>
     public class LoyaltyCardItemBaseJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LoyaltyCardItemBaseJsonResult"/> class.
-        /// </summary>
         public LoyaltyCardItemBaseJsonResult()
-            : base()
         {
-            this.RewardPoints = new List<LoyaltyRewardPointItemBaseJsonResult>();
+            RewardPoints = new List<LoyaltyRewardPointItemBaseJsonResult>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LoyaltyCardItemBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The service provider result.</param>
         public LoyaltyCardItemBaseJsonResult(ServiceProviderResult result)
             : base(result)
         {
-            this.RewardPoints = new List<LoyaltyRewardPointItemBaseJsonResult>();
+            RewardPoints = new List<LoyaltyRewardPointItemBaseJsonResult>();
         }
 
-        /// <summary>
-        /// Gets or sets the card number.
-        /// </summary>
-        /// <value>
-        /// The card number.
-        /// </value>
         public string CardNumber { get; set; }
 
-        /// <summary>
-        /// Gets or sets the reward points.
-        /// </summary>
-        /// <value>
-        /// The reward points.
-        /// </value>
         public List<LoyaltyRewardPointItemBaseJsonResult> RewardPoints { get; protected set; }
 
-        /// <summary>
-        /// Initializes the specified loyalty card.
-        /// </summary>
-        /// <param name="loyaltyCard">The loyalty card.</param>
         public virtual void Initialize(LoyaltyCard loyaltyCard)
         {
-            Assert.ArgumentNotNull(loyaltyCard, "loyaltyCard");
+            Assert.ArgumentNotNull(loyaltyCard, nameof(loyaltyCard));
 
-            this.CardNumber = loyaltyCard.CardNumber;
+            CardNumber = loyaltyCard.CardNumber;
 
             foreach (var point in loyaltyCard.RewardPoints)
             {
                 var result = new LoyaltyRewardPointItemBaseJsonResult();
                 result.Initialize(point);
-                this.RewardPoints.Add(result);
+                RewardPoints.Add(result);
             }
         }
     }

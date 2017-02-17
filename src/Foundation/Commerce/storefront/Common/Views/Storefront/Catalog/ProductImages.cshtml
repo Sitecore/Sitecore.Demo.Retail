@@ -10,8 +10,10 @@
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
 
-@using Sitecore.Reference.Storefront.Managers;
-@model ProductViewModel
+@using Sitecore.Foundation.SitecoreExtensions.Extensions
+@using Sitecore.Foundation.Commerce.Managers;
+@using Sitecore.Commerce.Connect.CommerceServer
+@model Sitecore.Reference.Storefront.Models.ProductViewModel
 @{
     if (Model == null)
     {
@@ -22,7 +24,7 @@
 <div id="C08-ProductImages" class="product-image-container">
     <div class="row">
         <div class="col-md-12 prod-img">
-            @using (Html.EditFrame(Model.Item.Paths.FullPath, CommerceConstants.KnownItemPaths.EditFrameImages))
+            @using (Html.BeginEditFrame(Model.Item.Paths.FullPath, CommerceConstants.KnownItemPaths.EditFrameImages))
             {
                 if (Model.Images == null || !Model.Images.Any())
                 {
@@ -37,7 +39,7 @@
                 }
                 else
                 {
-                    <img src="@Model.Images[0].GetImageUrl(770, 625)" class="img-responsive" alt="a" id="prod-large-view" />
+                    <img src="@(Model.Images[0]?.ImageUrl(770, 625))" class="img-responsive" alt="a" id="prod-large-view" />
                 }
             }
         </div>
@@ -48,7 +50,7 @@
             @foreach (var mediaItem in Model.Images)
             {
                 <div class="col-md-3 col-sm-3 col-xs-4">
-                    <a class="thumbnail" href="@mediaItem.GetImageUrl(770, 625)"><img src="@mediaItem.GetImageUrl(770/4, 625/4)" class="img-responsive" alt="a" /></a>
+                    <a class="thumbnail" href="@(mediaItem?.ImageUrl(770, 625))"><img src="@(mediaItem?.ImageUrl(770/4, 625/4))" class="img-responsive" alt="a" /></a>
                 </div>
             }
         </div>

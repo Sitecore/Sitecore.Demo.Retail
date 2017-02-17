@@ -15,178 +15,76 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
+using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
+using Sitecore.Commerce.Entities.WishLists;
+using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Extensions;
+using Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines;
+using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.SitecoreExtensions.Extensions;
+using Sitecore.Links;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Entities.WishLists;
-    using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
-    using Sitecore.Reference.Storefront.Extensions;
-    using Sitecore.Data.Items;
-    using Sitecore.Diagnostics;
-    using System;
-    using Sitecore.Reference.Storefront.Managers;
-    using Sitecore.Links;
-
-    /// <summary>
-    /// Json result for wish list header operations.
-    /// </summary>
     public class WishListItemBaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WishListItemBaseJsonResult" /> class.
-        /// </summary>
-        /// <param name="line">The line.</param>
-        /// <param name="wishListId">The wish list identifier.</param>
         public WishListItemBaseJsonResult(WishListLine line, string wishListId)
         {
-            Assert.ArgumentNotNull(line, "line");
-            Assert.ArgumentNotNullOrEmpty(wishListId, "wishListId");
+            Assert.ArgumentNotNull(line, nameof(line));
+            Assert.ArgumentNotNullOrEmpty(wishListId, nameof(wishListId));
 
-            var product = (CommerceCartProduct)line.Product;
-            var productItem = Sitecore.Reference.Storefront.SitecorePipelines.ProductItemResolver.ResolveCatalogItem(product.ProductId, product.ProductCatalog, true);
+            var product = (CommerceCartProduct) line.Product;
+            var productItem = ProductItemResolver.ResolveCatalogItem(product.ProductId, product.ProductCatalog, true);
 
             var currencyCode = StorefrontManager.GetCustomerCurrency();
 
-            this.DisplayName = product.DisplayName;
-            this.Color = product.Properties["Color"] as string;
-            this.LineDiscount = ((CommerceTotal)line.Total).LineItemDiscountAmount.ToString(Sitecore.Context.Language.CultureInfo);
-            this.Quantity = line.Quantity.ToString(Sitecore.Context.Language.CultureInfo);
-            this.LineTotal = line.Total.Amount.ToCurrency(currencyCode);
-            this.ExternalLineId = line.ExternalId;
-            this.ProductId = product.ProductId;
-            this.VariantId = product.ProductVariantId;
-            this.ProductCatalog = product.ProductCatalog;
-            this.WishListId = wishListId;
-            this.ProductUrl = product.ProductId.Equals(StorefrontManager.CurrentStorefront.GiftCardProductId, StringComparison.OrdinalIgnoreCase)
-              ? StorefrontManager.StorefrontUri("/buygiftcard")
-              : LinkManager.GetDynamicUrl(productItem);
+            DisplayName = product.DisplayName;
+            Color = product.Properties["Color"] as string;
+            LineDiscount = ((CommerceTotal) line.Total).LineItemDiscountAmount.ToString(Context.Language.CultureInfo);
+            Quantity = line.Quantity.ToString(Context.Language.CultureInfo);
+            LineTotal = line.Total.Amount.ToCurrency(currencyCode);
+            ExternalLineId = line.ExternalId;
+            ProductId = product.ProductId;
+            VariantId = product.ProductVariantId;
+            ProductCatalog = product.ProductCatalog;
+            WishListId = wishListId;
+            ProductUrl = product.ProductId.Equals(StorefrontManager.CurrentStorefront.GiftCardProductId, StringComparison.OrdinalIgnoreCase)
+                ? StorefrontManager.StorefrontUri("/buygiftcard")
+                : LinkManager.GetDynamicUrl(productItem);
 
             if (product.Price.Amount != 0M)
-            {
-                this.LinePrice = product.Price.Amount.ToCurrency(currencyCode);
-            }
-            
+                LinePrice = product.Price.Amount.ToCurrency(currencyCode);
+
             var imageInfo = product.Properties["_product_Images"] as string;
             if (imageInfo != null)
             {
                 var imageId = imageInfo.Split('|')[0];
-                MediaItem mediaItem = Sitecore.Context.Database.GetItem(imageId);
-                this.Image = mediaItem.GetImageUrl(100, 100);
+                MediaItem mediaItem = Context.Database.GetItem(imageId);
+                Image = mediaItem != null ? mediaItem.ImageUrl(100, 100) : string.Empty;
             }
 
             var giftCardAmount = line.GetPropertyValue("GiftCardAmount");
-            if (giftCardAmount != null)
-            {
-                decimal amount = System.Convert.ToDecimal(giftCardAmount, Sitecore.Context.Language.CultureInfo);
-                this.GiftCardAmount = amount.ToCurrency(currencyCode);
-            }
+            if (giftCardAmount == null)
+                return;
+            var amount = System.Convert.ToDecimal(giftCardAmount, Context.Language.CultureInfo);
+            GiftCardAmount = amount.ToCurrency(currencyCode);
         }
-        
-        /// <summary>
-        /// Gets or sets the image.
-        /// </summary>
-        /// <value>
-        /// The image.
-        /// </value>
+
         public string Image { get; set; }
-
-        /// <summary>
-        /// Gets or sets the display name.
-        /// </summary>
-        /// <value>
-        /// The display name.
-        /// </value>
         public string DisplayName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the color.
-        /// </summary>
-        /// <value>
-        /// The color.
-        /// </value>
         public string Color { get; set; }
-
-        /// <summary>
-        /// Gets or sets the line discount.
-        /// </summary>
-        /// <value>
-        /// The line discount.
-        /// </value>
         public string LineDiscount { get; set; }
-
-        /// <summary>
-        /// Gets or sets the quantity.
-        /// </summary>
-        /// <value>
-        /// The quantity.
-        /// </value>
         public string Quantity { get; set; }
-
-        /// <summary>
-        /// Gets or sets the line price.
-        /// </summary>
-        /// <value>
-        /// The line price.
-        /// </value>
         public string LinePrice { get; set; }
-
-        /// <summary>
-        /// Gets or sets the line total.
-        /// </summary>
-        /// <value>
-        /// The line total.
-        /// </value>
         public string LineTotal { get; set; }
-
-        /// <summary>
-        /// Gets or sets the external cart line identifier.
-        /// </summary>
-        /// <value>
-        /// The external cart line identifier.
-        /// </value>
         public string ExternalLineId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the product URL.
-        /// </summary>
-        /// <value>
-        /// The product URL.
-        /// </value>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")]
         public string ProductUrl { get; set; }
-
-        /// <summary>
-        /// Gets or sets the product identifier.
-        /// </summary>
-        /// <value>
-        /// The product identifier.
-        /// </value>
         public string ProductId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the variant identifier.
-        /// </summary>
-        /// <value>
-        /// The variant identifier.
-        /// </value>
         public string VariantId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the product catalog.
-        /// </summary>
-        /// <value>
-        /// The product catalog.
-        /// </value>
         public string ProductCatalog { get; set; }
-
-        /// <summary>
-        /// Gets or sets the gift card amount.
-        /// </summary>       
         public string GiftCardAmount { get; set; }
-
-        /// <summary>
-        /// Gets or sets the wish list identifier.
-        /// </summary>
-        /// <value>The wish list identifier.</value>
         public string WishListId { get; set; }
     }
 }

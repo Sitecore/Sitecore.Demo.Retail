@@ -10,8 +10,9 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 @using Sitecore.Collections
-@using Sitecore.Reference.Storefront.Managers
-@model RegisterModel
+@using Sitecore.Foundation.Commerce
+@using Sitecore.Foundation.Commerce.Managers
+@model Sitecore.Reference.Storefront.Models.RegisterModel
 @{
     var registering = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.Registering];
     var storefront = StorefrontManager.CurrentStorefront;

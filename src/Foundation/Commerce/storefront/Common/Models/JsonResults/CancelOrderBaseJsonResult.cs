@@ -15,42 +15,27 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Sitecore.Commerce.Services.Orders;
+using Sitecore.Diagnostics;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Diagnostics;
-    using Sitecore.Commerce.Services;
-    using Sitecore.Commerce.Services.Orders;
-
-    /// <summary>
-    /// Emits the Json result for an order cancellation.
-    /// </summary>
     public class CancelOrderBaseJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CancelOrderBaseJsonResult"/> class.
-        /// </summary>
         public CancelOrderBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CancelOrderBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The result.</param>
         public CancelOrderBaseJsonResult(VisitorCancelOrderResult result)
             : base(result)
         {
-            Assert.ArgumentNotNull(result, "result");
+            Assert.ArgumentNotNull(result, nameof(result));
             if (result.CancellationStatus != null)
             {
-                this.CancellationStatus = result.CancellationStatus.Name;
+                CancellationStatus = result.CancellationStatus.Name;
             }
         }
 
-        /// <summary>
-        /// Gets or sets the status of the order cancellation.
-        /// </summary>
         public string CancellationStatus { get; set; }
     }
 }

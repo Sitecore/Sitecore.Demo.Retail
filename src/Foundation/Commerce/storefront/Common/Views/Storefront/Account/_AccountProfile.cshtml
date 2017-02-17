@@ -9,12 +9,12 @@
 // either express or implied. See the License for the specific language governing permissions
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
+@using Sitecore.Foundation.Commerce.Managers
 @{
-    var storefront = Sitecore.Reference.Storefront.Managers.StorefrontManager.CurrentStorefront;
+    var storefront = StorefrontManager.CurrentStorefront;
     var email = string.IsNullOrEmpty(Sitecore.Context.User.Profile.Email) ? Sitecore.Context.User.Name : Sitecore.Context.User.Profile.Email;
 }
 
-@using Sitecore.Reference.Storefront.Managers;
 <div class="panel panel-default">
     <div class="panel-heading">
         <h2 class="panel-title">

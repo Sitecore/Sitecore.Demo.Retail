@@ -10,11 +10,8 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-@model ProductViewModel
-@using Sitecore.Reference.Storefront.Extensions
-@using Sitecore.Commerce.Entities.Inventory
-@using Sitecore.Reference.Storefront
-@using Sitecore.Reference.Storefront.Util
+@model Sitecore.Reference.Storefront.Models.ProductViewModel
+@using Sitecore.Foundation.SitecoreExtensions.Extensions
 @{
     if (Model == null)
     {
@@ -38,7 +35,7 @@
 
         if (Model.Images != null && Model.Images.Any())
         {
-            @Html.Hidden("ImageUrl", Model.Images[0].GetImageUrl(50, 50))
+            @Html.Hidden("ImageUrl", Model.Images[0]?.ImageUrl(50, 50))
         }
 
         <div class="form-group">

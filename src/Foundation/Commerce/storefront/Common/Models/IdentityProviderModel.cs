@@ -15,26 +15,17 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+using Sitecore.Data.Items;
+
 namespace Sitecore.Reference.Storefront.Models
 {
-    using System.ComponentModel.DataAnnotations;
-    using Data.Items;
-
-    /// <summary>
-    /// Used to represent an idewntity provider
-    /// </summary>
     public class IdentityProviderModel
     {
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>        
-        [Required]        
+        [Required]
         public string Name { get; set; }
 
-        /// <summary>
-        /// Gets or sets the image URI.
-        /// </summary>        
-        [Required]      
+        [Required]
         public MediaItem Image { get; set; }
     }
 }

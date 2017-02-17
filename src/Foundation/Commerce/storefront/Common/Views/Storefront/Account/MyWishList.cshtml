@@ -10,7 +10,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-@using Sitecore.Reference.Storefront.Managers
+@using Sitecore.Foundation.Commerce.Managers
 @{
     var addItemsToCartButtonLabel = Html.Sitecore().Field("Add Selected Items To Cart Button", Html.Sitecore().CurrentItem);
     var addItemsLoadingLabel = Html.Sitecore().Field("Add Selected Items To Cart Button Loading", Html.Sitecore().CurrentItem);
@@ -47,7 +47,7 @@
                         <thead>
                             <tr class="cart-header">
                                 <td>
-                                    <input type="checkbox" onclick=" selectAllItems(this) " id="selectAllItems">
+                                    <input type="checkbox" onclick="selectAllItems(this)" id="selectAllItems">
                                 </td>
                                 <td class="del-row">&nbsp;</td>
                                 <td class="hidden-sm hidden-xs">&nbsp;</td>
@@ -60,7 +60,7 @@
                         <tbody data-bind="foreach: lines">
                             <tr>
                                 <td class="cart-select">
-                                    <input type="checkbox" class="item-to-selected" onchange=" enableAddItemsToCart() " data-bind="attr: { name: externalLineId, 'data-productId': productId, 'data-variantId': variantId, 'data-catalog': productCatalog }">
+                                    <input type="checkbox" class="item-to-selected" onchange="enableAddItemsToCart()" data-bind="attr: { name: externalLineId, 'data-productId': productId, 'data-variantId': variantId, 'data-catalog': productCatalog }">
                                 </td>
                                 <td class="cart-delete"><a href="#" class="delete-item" data-bind="click: $parent.deleteItem"><span class="glyphicon glyphicon-remove-circle"></span></a></td>
                                 <td class="cart-image hidden-sm hidden-xs">

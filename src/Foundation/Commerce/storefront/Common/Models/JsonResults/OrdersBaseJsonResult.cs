@@ -15,61 +15,35 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using Sitecore.Commerce.Connect.CommerceServer;
+using Sitecore.Commerce.Entities.Orders;
+using Sitecore.Commerce.Services;
+using Sitecore.Diagnostics;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Connect.CommerceServer;
-    using Sitecore.Commerce.Entities.Orders;
-    using Sitecore.Commerce.Services;
-    using Sitecore.Diagnostics;
-    using System.Collections.Generic;
-
-    /// <summary>
-    /// Json result for orders operations.
-    /// </summary>
     public class OrdersBaseJsonResult : BaseJsonResult
     {
-        private readonly List<OrderHeaderItemBaseJsonResult> _orders = new List<OrderHeaderItemBaseJsonResult>();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OrdersBaseJsonResult"/> class.
-        /// </summary>
         public OrdersBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OrdersBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The service provider result.</param>
         public OrdersBaseJsonResult(ServiceProviderResult result)
             : base(result)
         {
-        }        
-
-        /// <summary>
-        /// Gets the orders.
-        /// </summary>
-        public List<OrderHeaderItemBaseJsonResult> Orders 
-        { 
-            get 
-            { 
-                return this._orders; 
-            } 
         }
 
-        /// <summary>
-        /// Initializes the specified order headers.
-        /// </summary>
-        /// <param name="orderHeaders">The order headers.</param>
+        public List<OrderHeaderItemBaseJsonResult> Orders { get; } = new List<OrderHeaderItemBaseJsonResult>();
+
         public virtual void Initialize(IEnumerable<OrderHeader> orderHeaders)
         {
-            Assert.ArgumentNotNull(orderHeaders, "orderHeaders");
+            Assert.ArgumentNotNull(orderHeaders, nameof(orderHeaders));
 
             foreach (var orderHeader in orderHeaders)
             {
                 var headerItem = CommerceTypeLoader.CreateInstance<OrderHeaderItemBaseJsonResult>(orderHeader);
-                this._orders.Add(headerItem);
+                Orders.Add(headerItem);
             }
         }
     }

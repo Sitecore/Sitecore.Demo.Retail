@@ -10,9 +10,9 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-@model ProductViewModel
+@model Sitecore.Reference.Storefront.Models.ProductViewModel
 @{
-    if (Model == null || Model.CustomerAverageRating == null)
+    if (Model == null)
     {
         return;
     }

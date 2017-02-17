@@ -15,167 +15,101 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Linq;
+using Sitecore.Commerce.Connect.CommerceServer;
+using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
+using Sitecore.Commerce.Entities.Carts;
+using Sitecore.Commerce.Services;
+using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.Commerce.Extensions;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
-    using Sitecore.Commerce.Entities.Carts;
-    using Sitecore.Commerce.Services;
-    using Sitecore.Commerce.Connect.CommerceServer;
-    using Sitecore.Reference.Storefront.Extensions;
-    using Sitecore.Reference.Storefront.Managers;
-
-    /// <summary>
-    /// Emits the Json result of a Cart request.
-    /// </summary>
     public class CartBaseJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CartBaseJsonResult"/> class.
-        /// </summary>
         public CartBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CartBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The result.</param>
         public CartBaseJsonResult(ServiceProviderResult result)
             : base(result)
         {
         }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the request is in preview mode.
-        /// </summary>
         public bool IsPreview { get; set; }
 
-        /// <summary>
-        /// Gets or sets the lines.
-        /// </summary>
-        /// <value>
-        /// The lines.
-        /// </value>
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is the desired behavior.")]
         public List<CartLineBaseJsonResult> Lines { get; set; }
 
-        /// <summary>
-        /// Gets or sets the list of cart adjustments.
-        /// </summary>
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is the desired behavior.")]
         public List<CartAdjustmentBaseJsonResult> Adjustments { get; set; }
 
-        /// <summary>
-        /// Gets or sets the sub total.
-        /// </summary>
-        /// <value>
-        /// The sub total.
-        /// </value>
         public string Subtotal { get; set; }
+
         public decimal SubtotalAmount { get; set; }
 
-        /// <summary>
-        /// Gets or sets the tax total.
-        /// </summary>
-        /// <value>
-        /// The tax total.
-        /// </value>
         public string TaxTotal { get; set; }
+
         public decimal TaxTotalAmount { get; set; }
 
-        /// <summary>
-        /// Gets or sets the total.
-        /// </summary>
-        /// <value>
-        /// The total.
-        /// </value>
         public string Total { get; set; }
 
-        /// <summary>
-        /// Gets or sets the total amount.
-        /// </summary>
-        /// <value>
-        /// The total amount.
-        /// </value>
         public decimal TotalAmount { get; set; }
 
-        /// <summary>
-        /// Gets or sets the discount.
-        /// </summary>
-        /// <value>
-        /// The discount.
-        /// </value>
         public string Discount { get; set; }
+
         public decimal DiscountAmount { get; set; }
 
-        /// <summary>
-        /// Gets or sets the shipping total.
-        /// </summary>
         public string ShippingTotal { get; set; }
+
         public decimal ShippingTotalAmount { get; set; }
 
-        /// <summary>
-        /// Gets or sets the promo codes.
-        /// </summary>
-        /// <value>
-        /// The promo codes.
-        /// </value>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public List<string> PromoCodes { get; set; }
 
-        /// <summary>
-        /// Initializes this object based on the data contained in the provided cart.
-        /// </summary>
-        /// <param name="cart">The cart used to initialize this object.</param>
         public virtual void Initialize(Cart cart)
         {
-            this.Lines = new List<CartLineBaseJsonResult>();
-            this.Adjustments = new List<CartAdjustmentBaseJsonResult>();
-            this.PromoCodes = new List<string>();
+            Lines = new List<CartLineBaseJsonResult>();
+            Adjustments = new List<CartAdjustmentBaseJsonResult>();
+            PromoCodes = new List<string>();
             var currencyCode = StorefrontManager.GetCustomerCurrency();
 
-            this.Subtotal = 0.0M.ToCurrency(currencyCode);
-            this.SubtotalAmount = 0.0M;
-            this.TaxTotal = 0.0M.ToCurrency(currencyCode);
-            this.TaxTotalAmount = 0.0M;
-            this.Total = 0.0M.ToCurrency(currencyCode);
-            this.TotalAmount = 0.0M;
-            this.Discount = 0.0M.ToCurrency(currencyCode);
-            this.DiscountAmount = 0.0M;
-            this.ShippingTotal = 0.0M.ToCurrency(currencyCode);
-            this.ShippingTotalAmount = 0.0M;
+            Subtotal = 0.0M.ToCurrency(currencyCode);
+            SubtotalAmount = 0.0M;
+            TaxTotal = 0.0M.ToCurrency(currencyCode);
+            TaxTotalAmount = 0.0M;
+            Total = 0.0M.ToCurrency(currencyCode);
+            TotalAmount = 0.0M;
+            Discount = 0.0M.ToCurrency(currencyCode);
+            DiscountAmount = 0.0M;
+            ShippingTotal = 0.0M.ToCurrency(currencyCode);
+            ShippingTotalAmount = 0.0M;
 
             if (cart == null)
             {
                 return;
             }
 
-            foreach (var line in (cart.Lines ?? Enumerable.Empty<CartLine>()))
+            foreach (var line in cart.Lines ?? Enumerable.Empty<CartLine>())
             {
                 var cartLine = CommerceTypeLoader.CreateInstance<CartLineBaseJsonResult>(line);
-                this.Lines.Add(cartLine);
+                Lines.Add(cartLine);
             }
 
-            foreach (var adjustment in (cart.Adjustments ?? Enumerable.Empty<CartAdjustment>()))
+            foreach (var adjustment in cart.Adjustments ?? Enumerable.Empty<CartAdjustment>())
             {
-                this.Adjustments.Add(new CartAdjustmentBaseJsonResult(adjustment));
+                Adjustments.Add(new CartAdjustmentBaseJsonResult(adjustment));
             }
 
-            var commerceTotal = (CommerceTotal)cart.Total;
-            this.Subtotal = commerceTotal.Subtotal.ToCurrency(currencyCode);
-            this.SubtotalAmount = commerceTotal.Subtotal;
-            this.TaxTotal = cart.Total.TaxTotal.Amount.ToCurrency(currencyCode);
-            this.TaxTotalAmount = cart.Total.TaxTotal.Amount;
-            this.Total = cart.Total.Amount.ToCurrency(currencyCode);
-            this.TotalAmount = cart.Total.Amount;
-            this.Discount = commerceTotal.OrderLevelDiscountAmount.ToCurrency(currencyCode);
-            this.DiscountAmount = commerceTotal.OrderLevelDiscountAmount;
-            this.ShippingTotal = commerceTotal.ShippingTotal.ToCurrency(currencyCode);
-            this.ShippingTotalAmount = commerceTotal.ShippingTotal;
+            var commerceTotal = (CommerceTotal) cart.Total;
+            Subtotal = commerceTotal.Subtotal.ToCurrency(currencyCode);
+            SubtotalAmount = commerceTotal.Subtotal;
+            TaxTotal = cart.Total.TaxTotal.Amount.ToCurrency(currencyCode);
+            TaxTotalAmount = cart.Total.TaxTotal.Amount;
+            Total = cart.Total.Amount.ToCurrency(currencyCode);
+            TotalAmount = cart.Total.Amount;
+            Discount = commerceTotal.OrderLevelDiscountAmount.ToCurrency(currencyCode);
+            DiscountAmount = commerceTotal.OrderLevelDiscountAmount;
+            ShippingTotal = commerceTotal.ShippingTotal.ToCurrency(currencyCode);
+            ShippingTotalAmount = commerceTotal.ShippingTotal;
         }
     }
 }

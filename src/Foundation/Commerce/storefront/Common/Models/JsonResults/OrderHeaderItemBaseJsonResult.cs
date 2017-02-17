@@ -15,57 +15,32 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
+using Sitecore.Commerce.Entities.Orders;
+using Sitecore.Foundation.Commerce.Extensions;
+using Sitecore.Foundation.Commerce.Managers;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Entities.Orders;
-    using Sitecore.Reference.Storefront.Managers;
-    using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
-    using Sitecore.Reference.Storefront.Extensions;
-
-    /// <summary>
-    /// Json result for order header operations.
-    /// </summary>
     public class OrderHeaderItemBaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OrderHeaderItemBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="header">The order header.</param>
         public OrderHeaderItemBaseJsonResult(OrderHeader header)
         {
-            this.ExternalId = header.ExternalId;
-            this.Status = StorefrontManager.GetOrderStatusName(header.Status);
-            this.LastModified = ((CommerceOrderHeader)header).LastModified.ToDisplayedDate();
-            this.DetailsUrl = string.Concat(StorefrontManager.StorefrontUri("/accountmanagement/myorder"), "?id=", header.ExternalId);
-            this.OrderId = header.ExternalId;
+            ExternalId = header.ExternalId;
+            Status = StorefrontManager.GetOrderStatusName(header.Status);
+            LastModified = ((CommerceOrderHeader) header).LastModified.ToDisplayedDate();
+            DetailsUrl = string.Concat(StorefrontManager.StorefrontUri("/accountmanagement/myorder"), "?id=", header.ExternalId);
+            OrderId = header.OrderID;
         }
 
-        /// <summary>
-        /// Gets or sets the external ID of the order header.
-        /// </summary>
         public string ExternalId { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets the order identifier.
-        /// </summary>
-        /// <value>
-        /// The order identifier.
-        /// </value>
         public string OrderId { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets the status of the order header.
-        /// </summary>
         public string Status { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets the last modified date of the order header
-        /// </summary>
         public string LastModified { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets the url for the order details
-        /// </summary>
         public string DetailsUrl { get; protected set; }
     }
 }

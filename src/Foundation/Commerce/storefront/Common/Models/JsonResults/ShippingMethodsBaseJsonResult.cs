@@ -15,44 +15,26 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using Sitecore.Commerce.Connect.CommerceServer;
+using Sitecore.Commerce.Entities.Shipping;
+using Sitecore.Commerce.Services.Shipping;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Connect.CommerceServer;
-    using Sitecore.Commerce.Entities.Shipping;
-    using Sitecore.Commerce.Services.Shipping;
-    using System.Collections.Generic;
-
-    /// <summary>
-    /// The Json result of a request to retrieve nearby store locations.
-    /// </summary>
     public class ShippingMethodsBaseJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ShippingMethodsBaseJsonResult"/> class.
-        /// </summary>
         public ShippingMethodsBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ShippingMethodsBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The service provider result.</param>
         public ShippingMethodsBaseJsonResult(GetShippingMethodsResult result)
             : base(result)
         {
-        } 
+        }
 
-        /// <summary>
-        /// Gets or sets the available order-level shipping methods.
-        /// </summary>
         public IEnumerable<ShippingMethodBaseJsonResult> ShippingMethods { get; set; }
 
-        /// <summary>
-        /// Initilizes the specified shipping methods.
-        /// </summary>
-        /// <param name="shippingMethods">The shipping methods.</param>        
         public virtual void Initialize(IEnumerable<ShippingMethod> shippingMethods)
         {
             if (shippingMethods == null)
@@ -70,7 +52,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
                 shippingMethodList.Add(jsonResult);
             }
 
-            this.ShippingMethods = shippingMethodList;
+            ShippingMethods = shippingMethodList;
         }
     }
 }

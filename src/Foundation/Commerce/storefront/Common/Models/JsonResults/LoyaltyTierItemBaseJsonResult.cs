@@ -15,87 +15,43 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Sitecore.Commerce.Entities.LoyaltyPrograms;
+using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Extensions;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Diagnostics;
-    using Sitecore.Commerce.Entities.LoyaltyPrograms;
-    using Sitecore.Reference.Storefront.Extensions;
-
-    /// <summary>
-    /// Json result for loyalty program tier operations.
-    /// </summary>
     public class LoyaltyTierItemBaseJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Gets or sets the description.
-        /// </summary>
-        /// <value>
-        /// The description.
-        /// </value>
         public string Description { get; set; }
 
-        /// <summary>
-        /// Gets or sets the tier identifier.
-        /// </summary>
-        /// <value>
-        /// The tier identifier.
-        /// </value>
         public string TierId { get; set; }
 
-        /// <summary>
-        /// Gets or sets the tier level.
-        /// </summary>
-        /// <value>
-        /// The tier level.
-        /// </value>
         public string TierLevel { get; set; }
 
-        /// <summary>
-        /// Gets or sets the valid from.
-        /// </summary>
-        /// <value>
-        /// The valid from.
-        /// </value>
         public string ValidFrom { get; set; }
 
-        /// <summary>
-        /// Gets or sets the valid to.
-        /// </summary>
-        /// <value>
-        /// The valid to.
-        /// </value>
         public string ValidTo { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance is elegible.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if this instance is elegible; otherwise, <c>false</c>.
-        /// </value>
         public bool IsElegible { get; set; }
 
-        /// <summary>
-        /// Initializes the specified tier.
-        /// </summary>
-        /// <param name="tier">The tier.</param>
-        /// <param name="cardTier">The card tier.</param>
         public virtual void Initialize(LoyaltyTier tier, LoyaltyCardTier cardTier)
         {
-            Assert.ArgumentNotNull(tier, "tier");
+            Assert.ArgumentNotNull(tier, nameof(tier));
 
-            this.TierId = tier.TierId;
-            this.Description = tier.Description;
-            this.TierLevel = tier.TierLevel.ToString(Sitecore.Context.Language.CultureInfo);
-            this.IsElegible = false;
+            TierId = tier.TierId;
+            Description = tier.Description;
+            TierLevel = tier.TierLevel.ToString(Context.Language.CultureInfo);
+            IsElegible = false;
 
             if (cardTier == null)
             {
                 return;
             }
 
-            this.ValidFrom = cardTier.ValidFrom.ToDisplayedDate();
-            this.ValidTo = cardTier.ValidTo.ToDisplayedDate();
-            this.IsElegible = true;
+            ValidFrom = cardTier.ValidFrom.ToDisplayedDate();
+            ValidTo = cardTier.ValidTo.ToDisplayedDate();
+            IsElegible = true;
         }
     }
 }

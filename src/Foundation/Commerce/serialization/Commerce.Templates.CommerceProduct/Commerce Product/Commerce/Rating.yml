@@ -1,5 +1,5 @@
 ﻿---
-ID: "00249671-a3cc-4572-8944-14ec30497fdf"
+ID: "3a66887e-98fa-4b80-a32e-fa314a2f6205"
 Parent: "616cad27-50c7-424b-b907-4b929cd9fc29"
 Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
 Path: /sitecore/templates/Commerce/Catalog/Commerce Product/Commerce/Rating
@@ -12,21 +12,11 @@ SharedFields:
 - ID: "21828437-ea4b-40a1-8c61-4ce60ea41db6"
   Hint: Validate Button
   Type: tree list
-  Value: |
-    {01D32219-86AD-4558-8F62-5516C74D111E}
-    {107646B5-FD8A-456F-9D46-B814331F1370}
-    {D14B2A10-3CA8-4690-8AE8-68B7A346BD6C}
-    {227CB1D6-51B3-4EEE-9836-D0891249A154}
-    {A57E946F-426E-4405-8F85-BAFB1734E497}
+  Value: "{A57E946F-426E-4405-8F85-BAFB1734E497}"
 - ID: "337e20e1-999a-4eea-85ad-b58a03ae75cc"
   Hint: Quick Action Bar
   Type: tree list
-  Value: |
-    {01D32219-86AD-4558-8F62-5516C74D111E}
-    {107646B5-FD8A-456F-9D46-B814331F1370}
-    {D14B2A10-3CA8-4690-8AE8-68B7A346BD6C}
-    {227CB1D6-51B3-4EEE-9836-D0891249A154}
-    {A57E946F-426E-4405-8F85-BAFB1734E497}
+  Value: "{A57E946F-426E-4405-8F85-BAFB1734E497}"
 - ID: "39847666-389d-409b-95bd-f2016f11eed5"
   Hint: Unversioned
   Type: Checkbox
@@ -46,12 +36,7 @@ SharedFields:
 - ID: "9c903e29-650d-4af2-b9bd-526d5c14a1a5"
   Hint: Validator Bar
   Type: tree list
-  Value: |
-    {01D32219-86AD-4558-8F62-5516C74D111E}
-    {107646B5-FD8A-456F-9D46-B814331F1370}
-    {D14B2A10-3CA8-4690-8AE8-68B7A346BD6C}
-    {227CB1D6-51B3-4EEE-9836-D0891249A154}
-    {A57E946F-426E-4405-8F85-BAFB1734E497}
+  Value: "{A57E946F-426E-4405-8F85-BAFB1734E497}"
 - ID: "a0f35a32-14b5-4147-9851-7e0bbdc17efc"
   Hint: Assign To All Product Types
   Type: Checkbox
@@ -88,11 +73,11 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20161106T231651Z
+      Value: 20170214T110438Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
-        default\Anonymous
+        sitecore\Admin
 - Language: en
   Fields:
   - ID: "19a69332-a23e-4e70-8d16-b2640cb24cc8"
@@ -106,11 +91,11 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20161106T231651Z
+      Value: 20170214T110438Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
-        default\Anonymous
+        sitecore\Admin
 - Language: "fr-FR"
   Fields:
   - ID: "19a69332-a23e-4e70-8d16-b2640cb24cc8"
@@ -124,11 +109,11 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20161106T231651Z
+      Value: 20170214T110439Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
-        default\Anonymous
+        sitecore\Admin
 - Language: "ja-JP"
   Fields:
   - ID: "19a69332-a23e-4e70-8d16-b2640cb24cc8"
@@ -142,8 +127,8 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20161106T231651Z
+      Value: 20170214T110439Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
-        default\Anonymous
+        sitecore\Admin

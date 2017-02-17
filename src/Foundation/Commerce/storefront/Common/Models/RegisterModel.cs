@@ -15,79 +15,45 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace Sitecore.Reference.Storefront.Models
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    /// <summary>
-    /// Defines the RegisterModel class.
-    /// </summary>
     public class RegisterModel
     {
-        /// <summary>
-        /// Gets or sets the user name
-        /// </summary>
         [Required]
-        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Please enter a valid e-mail address")]         
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Please enter a valid e-mail address")]
         [Display(Name = "Email")]
         public string UserName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the first name.
-        /// </summary>       
         [StringLength(25, ErrorMessage = "The {0} must be maximum {1} characters long.")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the last name.
-        /// </summary>   
         [StringLength(25, ErrorMessage = "The {0} must be maximum {1} characters long.")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the user's password
-        /// </summary>
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        /// <summary>
-        /// Gets or sets a check to make sure the user password is correct
-        /// </summary>
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        /// <summary>
-        /// Gets or sets the email of existing customer.
-        /// </summary>       
         [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Please enter a valid e-mail address of existing customer")]
         [Display(Name = "Email Of Existing Customer")]
         public string LinkupEmail { get; set; }
 
-        /// <summary>
-        /// Gets or sets the external identifier.
-        /// </summary>       
         public string ExternalId { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance is signup.
-        /// </summary>       
         public string SignupSelection { get; set; }
 
-        /// <summary>
-        /// Gets or sets the errors.
-        /// </summary>
-        /// <value>
-        /// The errors.
-        /// </value>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Required for serialization purpose.")]
         public List<string> Errors { get; set; }
     }
 }

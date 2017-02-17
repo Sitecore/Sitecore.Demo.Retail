@@ -9,43 +9,46 @@
 // either express or implied. See the License for the specific language governing permissions
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
-
-@using Sitecore.Reference.Storefront.Managers;
-@model RenderingModel
+@using Sitecore.Data.Fields
+@using Sitecore.Data.Items
+@using Sitecore.Foundation.Commerce
+@using Sitecore.Foundation.SitecoreExtensions.Extensions
+@using Sitecore.Foundation.Commerce.Managers
+@model Sitecore.Mvc.Presentation.RenderingModel
 @{
-    Sitecore.Data.Fields.MultilistField linksField = Model.Item.Fields["QuickLinks"];
-    Item[] links = linksField != null ? linksField.GetItems() : new Item[0];
+    MultilistField linksField = Model.Item.Fields["QuickLinks"];
+    var links = linksField != null ? linksField.GetItems() : new Item[0];
 
     var myAccountAlt = Model.Item["My Account Alt"];
 }
 <nav id="B05-TopBarLinks" class="quicklinks">
     <ul>
         @{
-            bool displayPipe = false;
+            var displayPipe = false;
 
             if (Request.IsAuthenticated)
             {
                 <li>
                     <a class="quicklink-space" id="UserNameLink" href="@StorefrontManager.StorefrontUri("/accountmanagement")" class="username" title="@myAccountAlt">@Sitecore.Context.User.LocalName</a>
                 </li>
-            
+
                 displayPipe = true;
             }
-            
-            for (int i = 0; i < links.Length; i++)
+
+            for (var i = 0; i < links.Length; i++)
             {
-                Item link = links[i];
+                var link = links[i];
 
-                Sitecore.Data.Fields.CheckboxField showWhenAuthenticated = link.Fields[StorefrontConstants.KnownFieldNames.ShowWhenAuthenticated];
-                Sitecore.Data.Fields.CheckboxField showAlways = link.Fields[StorefrontConstants.KnownFieldNames.ShowAlways];
-                Sitecore.Data.Fields.CheckboxField generateSecureLink = link.Fields[StorefrontConstants.KnownFieldNames.GenerateSecureLink];
+                CheckboxField showWhenAuthenticated = link.Fields[StorefrontConstants.KnownFieldNames.ShowWhenAuthenticated];
+                CheckboxField showAlways = link.Fields[StorefrontConstants.KnownFieldNames.ShowAlways];
+                CheckboxField generateSecureLink = link.Fields[StorefrontConstants.KnownFieldNames.GenerateSecureLink];
 
-                string linkString = link["Link"];
+                var linkString = link["Link"];
 
-                bool show =  (showAlways.Checked) || (showWhenAuthenticated.Checked && Request.IsAuthenticated) || (!showWhenAuthenticated.Checked && !Request.IsAuthenticated);
-            
+                var show = showAlways.Checked || showWhenAuthenticated.Checked && Request.IsAuthenticated || !showWhenAuthenticated.Checked && !Request.IsAuthenticated;
+
                 if (show)
-                { 
+                {
                     if (displayPipe)
                     {
                         <li class="quicklink-space"> | </li>
@@ -57,13 +60,15 @@
 
                     if (generateSecureLink.Checked)
                     {
-                        string anchorUrl = Helpers.GetAnchorFromLinkTag(link);
-                        string urlString = StorefrontManager.SecureStorefrontUri(anchorUrl);
-                        <li><a href="@urlString">@Html.Sitecore().Field("Text", link)</a></li>
+                        var anchorUrl = link.LinkFieldUrl(link.Fields["link"].ID);
+                        var urlString = StorefrontManager.SecureStorefrontUri(anchorUrl);
+                        <li>
+                            <a href="@urlString">@Html.Sitecore().Field("Text", link)</a>
+                        </li>
                     }
                     else
                     {
-                        <li>@Html.Sitecore().Field("Link", link, new { text = Html.Sitecore().Field("Text", link) })</li>
+                        <li>@Html.Sitecore().Field("Link", link, new {text = Html.Sitecore().Field("Text", link)})</li>
                     }
                 }
             }

@@ -9,67 +9,66 @@
     // either express or implied. See the License for the specific language governing permissions
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
-
-@using Sitecore.Reference.Storefront.Models;
-@using Sitecore.Reference.Storefront.Managers
-@model CustomerLinkupPendingViewModel
+@using Sitecore.Foundation.Commerce
+@using Sitecore.Foundation.Commerce.Managers
+@model Sitecore.Reference.Storefront.Models.CustomerLinkupPendingViewModel
 @{
     var activating = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.Activating];
-    var storefront = Sitecore.Reference.Storefront.Managers.StorefrontManager.CurrentStorefront;
- }
+    var storefront = StorefrontManager.CurrentStorefront;
+}
 @if (storefront.IsAXSite)
 {
-    if (@Model.Messages != null)
+    if (Model.Messages != null)
     {
         <div class="wrap-error">
             @foreach (var message in Model.Messages)
             {
-            <p>@message</p>
+                <p>@message</p>
             }
         </div>
     }
 
-    if (@Model.EmailAddressOfExistingCustomer != null || @Model.Messages.Count == 0)
+    if (Model.EmailAddressOfExistingCustomer != null || Model.Messages.Count == 0)
     {
         <h5 class="margin-bottom-15 msg-activate">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.ActivateText, Html.Sitecore().CurrentItem)</h5>
-        using (Ajax.BeginForm("FinalizeAccountLinkup", "Account", null, new AjaxOptions { OnBegin = "SetActivatingButton", OnSuccess = "ActivationSuccess", OnFailure = "ActivationFailure", HttpMethod = "Post" }, new { @id = "ActivationForm" }))
+        using (Ajax.BeginForm("FinalizeAccountLinkup", "Account", null, new AjaxOptions {OnBegin = "SetActivatingButton", OnSuccess = "ActivationSuccess", OnFailure = "ActivationFailure", HttpMethod = "Post"}, new {id = "ActivationForm"}))
         {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
 
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="EmailAddressOfExistingCustomer">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.EmailAddressOfExistingCustomer, Html.Sitecore().CurrentItem)</label><span class="required">*</span>
-                @Html.TextBoxFor(m => m.EmailAddressOfExistingCustomer,
-                             new
-                             {
-                                 placeholder = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.EmailAddressPlaceholder],
-                                 data_val_required = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.EmailMissingMessage],
-                                 @class = "form-control"
-                             })
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="EmailAddressOfExistingCustomer">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.EmailAddressOfExistingCustomer, Html.Sitecore().CurrentItem)</label><span class="required">*</span>
+                    @Html.TextBoxFor(m => m.EmailAddressOfExistingCustomer,
+                        new
+                        {
+                            placeholder = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.EmailAddressPlaceholder],
+                            data_val_required = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.EmailMissingMessage],
+                            @class = "form-control"
+                        })
 
-                @Html.ValidationMessageFor(m => m.EmailAddressOfExistingCustomer)
+                    @Html.ValidationMessageFor(m => m.EmailAddressOfExistingCustomer)
+                </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="ActivationCode">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.ActivationCode, Html.Sitecore().CurrentItem)</label><span class="required">*</span>
-                @Html.TextBoxFor(m => m.ActivationCode,
-                             new
-                             {
-                                 data_val_required = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.ActivationCodeMissingMessage],
-                                 @class = "form-control"
-                             })
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ActivationCode">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.ActivationCode, Html.Sitecore().CurrentItem)</label><span class="required">*</span>
+                    @Html.TextBoxFor(m => m.ActivationCode,
+                        new
+                        {
+                            data_val_required = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.ActivationCodeMissingMessage],
+                            @class = "form-control"
+                        })
 
-                @Html.ValidationMessageFor(m => m.ActivationCode)
+                    @Html.ValidationMessageFor(m => m.ActivationCode)
+                </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <button type="submit" id="activationButton" data-loading-text="@activating" class="btn btn-success">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.ActivateUser, Html.Sitecore().CurrentItem)</button>
-                <a class="btn btn-default" href="@StorefrontManager.StorefrontUri("/Login")">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.Cancel, Html.Sitecore().CurrentItem)</a>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <button type="submit" id="activationButton" data-loading-text="@activating" class="btn btn-success">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.ActivateUser, Html.Sitecore().CurrentItem)</button>
+                    <a class="btn btn-default" href="@StorefrontManager.StorefrontUri("/Login")">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.Cancel, Html.Sitecore().CurrentItem)</a>
+                </div>
             </div>
-        </div>
         }
     }
 }

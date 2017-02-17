@@ -11,6 +11,9 @@
     // -------------------------------------------------------------------------------------------*@
 
 @using Sitecore.Extensions
+@using Sitecore.Foundation.Commerce.Models
+@using Sitecore.Reference.Storefront.Models
+@using Sitecore.Commerce.Connect.CommerceServer
 @model Sitecore.Reference.Storefront.Models.RenderingModels.NavigationViewModel
 @{
     if (Model == null || Model.ChildCategories == null || !Model.ChildCategories.Any())

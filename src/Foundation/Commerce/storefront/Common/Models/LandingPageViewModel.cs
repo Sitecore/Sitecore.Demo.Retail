@@ -15,38 +15,30 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Web;
+using System.Web.Mvc;
+using System.Xml.Serialization;
+using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
+using Sitecore.Data.Fields;
+using Sitecore.Data.Items;
+using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Foundation.Commerce.Models.Search;
+using Sitecore.Mvc;
+using Sitecore.Mvc.Common;
+using Sitecore.Mvc.Presentation;
+
 namespace Sitecore.Reference.Storefront.Models
 {
-    using System.Globalization;
-    using System.Collections.Generic;
-    using System.Web;
-    using System.Web.Mvc;
-    using Sitecore.Mvc;
-    using Sitecore.Mvc.Common;
-    using Sitecore.Mvc.Presentation;
-    using Sitecore.Data.Fields;
-    using Sitecore.Data.Items;
-    using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
-    
-    /// <summary>
-    /// Used to represent a category
-    /// </summary>
-    public class LandingPageViewModel : Sitecore.Mvc.Presentation.RenderingModel
+    public class LandingPageViewModel : RenderingModel
     {
         private readonly Item _item;
         private List<MediaItem> _images;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LandingPageViewModel" /> class.
-        /// </summary>
         public LandingPageViewModel()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LandingPageViewModel"/> class.
-        /// </summary>
-        /// <param name="item">The item to initialize the class with</param>
         public LandingPageViewModel(Item item)
         {
             _item = item;
@@ -54,9 +46,6 @@ namespace Sitecore.Reference.Storefront.Models
             ChildCategories = new List<Item>();
         }
 
-        /// <summary>
-        /// Gets the item for the current model
-        /// </summary>
         public override Item Item
         {
             get
@@ -70,9 +59,6 @@ namespace Sitecore.Reference.Storefront.Models
             }
         }
 
-        /// <summary>
-        /// Gets the Product DisplayName.
-        /// </summary>
         public string DisplayName
         {
             get
@@ -86,50 +72,23 @@ namespace Sitecore.Reference.Storefront.Models
             }
         }
 
-        /// <summary>
-        /// Gets or sets the description
-        /// </summary>
         public string Description
         {
-            get
-            {
-                return Item["Description"];
-            }
+            get { return Item["Description"]; }
 
-            set
-            {
-                Item["Description"] = value;
-            }
+            set { Item["Description"] = value; }
         }
 
-        /// <summary>
-        /// Gets the description as an html string
-        /// </summary>
         public HtmlString DescriptionRender
         {
-            get
-            {
-                return PageContext.Current.HtmlHelper.Sitecore().Field("Description", Item);
-            }
+            get { return PageContext.Current.HtmlHelper.Sitecore().Field("Description", Item); }
         }
 
-        /// <summary>
-        /// Gets the associated product ids.
-        /// </summary>
-        /// <value>
-        /// The associated product ids.
-        /// </value>
         public string AssociatedProductIds
         {
-            get
-            {
-                return Item["AssociatedProducts"];
-            }
+            get { return Item["AssociatedProducts"]; }
         }
 
-        /// <summary>
-        /// Gets the description as a html string
-        /// </summary>
         public List<MediaItem> HeroImages
         {
             get
@@ -156,71 +115,22 @@ namespace Sitecore.Reference.Storefront.Models
             }
         }
 
-        /// <summary>
-        /// Gets or sets the list of facets
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is the desired behavior")]
-        public IEnumerable<CommerceQueryFacet> ChildProductFacets
-        {
-            get;
-            protected set;
-        }
+        public IEnumerable<CommerceQueryFacet> ChildProductFacets { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets the list of sortable fields
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is the desired behavior")]
-        public IEnumerable<CommerceQuerySort> SortFields
-        {
-            get;
-            protected set;
-        }
+        public IEnumerable<CommerceQuerySort> SortFields { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets the list of child products
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is the desired behavior")]
-        public List<Item> ChildProducts
-        {
-            get;
-            protected set;
-        }
+        public List<Item> ChildProducts { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets the list of child categories
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is the desired behavior")]
-        public List<Item> ChildCategories
-        {
-            get;
-            protected set;
-        }
+        public List<Item> ChildCategories { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets the pagination details for this category
-        /// </summary>
         public PaginationModel Pagination { get; set; }
 
-        /// <summary>
-        /// Gets the context for the current view
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnore]
+        [XmlIgnore]
         protected ViewContext CurrentViewContext
         {
-            get
-            {
-                return ContextService.Get().GetCurrentOrDefault<ViewContext>();
-            }
+            get { return ContextService.Get().GetCurrentOrDefault<ViewContext>(); }
         }
 
-        /// <summary>
-        /// Initializes the view model
-        /// </summary>
-        /// <param name="rendering">The rendering</param>
-        /// <param name="products">The list of child products</param>
-        /// <param name="childCategories">The list of child categories</param>
-        /// <param name="sortFields">The fields to allow sorting on</param>
-        /// <param name="searchOptions">Any search options used to find products in this category</param>
         public void Initialize(Rendering rendering, SearchResults products, CategorySearchResults childCategories, IEnumerable<CommerceQuerySort> sortFields, CommerceSearchOptions searchOptions)
         {
             base.Initialize(rendering);

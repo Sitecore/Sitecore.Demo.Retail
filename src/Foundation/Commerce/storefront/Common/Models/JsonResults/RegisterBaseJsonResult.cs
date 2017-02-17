@@ -15,50 +15,29 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Sitecore.Commerce.Entities.Customers;
+using Sitecore.Commerce.Services.Customers;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Commerce.Entities.Customers;
-    using Sitecore.Commerce.Services.Customers;
-
-    /// <summary>
-    /// Defines the RegisterJsonResult class.
-    /// </summary>
     public class RegisterBaseJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RegisterBaseJsonResult"/> class.
-        /// </summary>
         public RegisterBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RegisterBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The result.</param>
         public RegisterBaseJsonResult(CreateUserResult result)
             : base(result)
-        {            
+        {
         }
 
-        /// <summary>
-        /// Gets or sets the user name
-        /// </summary>
         public string UserName { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance is signup flow.
-        /// </summary>        
         public bool IsSignupFlow { get; set; }
 
-        /// <summary>
-        /// Initializes the specified user.
-        /// </summary>
-        /// <param name="user">The user.</param>
         public virtual void Initialize(CommerceUser user)
         {
-            this.UserName = user.UserName;                       
+            UserName = user.UserName;
         }
     }
 }

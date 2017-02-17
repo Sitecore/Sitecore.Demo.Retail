@@ -15,95 +15,48 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Sitecore.Commerce.Entities.LoyaltyPrograms;
+using Sitecore.Commerce.Services;
+using Sitecore.Diagnostics;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Diagnostics;
-    using System.Collections.Generic;
-    using Sitecore.Commerce.Services;
-    using Sitecore.Commerce.Entities.LoyaltyPrograms;
-    using System;
-    using System.Linq;
-
-    /// <summary>
-    /// Json result for loyalty program operations.
-    /// </summary>
     public class LoyaltyProgramItemBaseJsonResult : BaseJsonResult
     {
-        private readonly List<LoyaltyTierItemBaseJsonResult> _tiers = new List<LoyaltyTierItemBaseJsonResult>();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LoyaltyProgramItemBaseJsonResult"/> class.
-        /// </summary>
         public LoyaltyProgramItemBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LoyaltyProgramItemBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The service provider result.</param>
         public LoyaltyProgramItemBaseJsonResult(ServiceProviderResult result)
             : base(result)
         {
         }
 
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
         public string Name { get; set; }
 
-        /// <summary>
-        /// Gets or sets the description.
-        /// </summary>
-        /// <value>
-        /// The description.
-        /// </value>
         public string Description { get; set; }
 
-        /// <summary>
-        /// Gets or sets the program identifier.
-        /// </summary>
-        /// <value>
-        /// The program identifier.
-        /// </value>
         public string ProgramId { get; set; }
 
-        /// <summary>
-        /// Gets the loyalty tiers.
-        /// </summary>
-        /// <value>
-        /// The loyalty tiers.
-        /// </value>
-        public List<LoyaltyTierItemBaseJsonResult> LoyaltyTiers
-        {
-            get
-            {
-                return this._tiers;
-            }
-        }
-        
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LoyaltyProgramItemBaseJsonResult" /> class.
-        /// </summary>
-        /// <param name="program">The program.</param>
+        public List<LoyaltyTierItemBaseJsonResult> LoyaltyTiers { get; } = new List<LoyaltyTierItemBaseJsonResult>();
+
         public virtual void Initialize(LoyaltyProgramStatus program)
         {
-            Assert.ArgumentNotNull(program, "program");
+            Assert.ArgumentNotNull(program, nameof(program));
 
-            this.Name = program.Name;
-            this.Description = program.Description;
-            this.ProgramId = program.ExternalId;
+            Name = program.Name;
+            Description = program.Description;
+            ProgramId = program.ExternalId;
 
             foreach (var tier in program.LoyaltyTiers)
             {
                 var cardTier = program.LoyaltyCardTiers.FirstOrDefault(ct => ct.TierId.Equals(tier.TierId, StringComparison.OrdinalIgnoreCase));
                 var result = new LoyaltyTierItemBaseJsonResult();
                 result.Initialize(tier, cardTier);
-                this._tiers.Add(result);
+                LoyaltyTiers.Add(result);
             }
         }
     }

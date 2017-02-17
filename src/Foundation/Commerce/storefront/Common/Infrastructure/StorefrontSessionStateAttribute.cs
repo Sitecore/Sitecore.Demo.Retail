@@ -15,36 +15,19 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
+using System.Web.SessionState;
+
 namespace Sitecore.Reference.Storefront.Infrastructure
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Web.SessionState;
-
-    /// <summary>
-    /// Defines the StorefrontSessionStateAttribute class.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Method)]
     public sealed class StorefrontSessionStateAttribute : Attribute
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="StorefrontSessionStateAttribute"/> class.
-        /// </summary>
-        /// <param name="behavior">The behavior.</param>
         public StorefrontSessionStateAttribute(SessionStateBehavior behavior)
         {
-            this.Behavior = behavior;
+            Behavior = behavior;
         }
 
-        /// <summary>
-        /// Gets the behavior.
-        /// </summary>
-        /// <value>
-        /// The behavior.
-        /// </value>
         public SessionStateBehavior Behavior { get; private set; }
     }
 }

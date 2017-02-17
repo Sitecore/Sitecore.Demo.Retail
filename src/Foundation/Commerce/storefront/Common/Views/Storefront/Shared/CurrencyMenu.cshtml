@@ -11,7 +11,7 @@
     // -------------------------------------------------------------------------------------------*@
 
 @using Sitecore.Reference.Storefront.Models.RenderingModels;
-@using Sitecore.Reference.Storefront.Managers;
+@using Sitecore.Foundation.Commerce.Managers;
 
 @model CurrencyMenuViewModel
 @{
@@ -36,7 +36,7 @@
         {
             if (currentCustomerCurrency != currencyInfo.Name)
             {
-                var dispName = string.Format("{0} {1}", currencyInfo.Name, currencyInfo.Description);
+                var dispName = $"{currencyInfo.Name} {currencyInfo.Description}";
                 <li><a id="currencyButton-@currencyInfo.Name" href="#" onclick="SwitchToCurrency('@currencyInfo.Name')">@dispName</a></li>
             }
         }
@@ -45,10 +45,8 @@
 
 <script type="text/javascript">
     function SwitchToCurrency(currency) {
-        var payload = '{' +
-                '"currency":' + '"' + currency + '"' +
-              '}';
-        AJAXPost(StorefrontUri("api/storefront/catalog/switchcurrency"), payload, function (data, success, sender) {
+        var payload = '{"currency":"' + currency + '"}';
+        AJAXPost(StorefrontUri("api/storefront/catalog/switchcurrency"), payload, function (data) {
             ShowGlobalMessages(data);
             window.location.reload();
         });

@@ -12,7 +12,7 @@
 
 @model Sitecore.Reference.Storefront.Models.RenderingModels.ProductListHeaderViewModel
 @{
-    if (Model == null || Model.Pagination == null || Model.Pagination.TotalResultCount <= 0)
+    if (Model?.Pagination == null || Model.Pagination.TotalResultCount <= 0)
     {
         return;
     }

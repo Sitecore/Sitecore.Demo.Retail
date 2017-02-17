@@ -15,88 +15,39 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Sitecore.Commerce.Entities.LoyaltyPrograms;
+using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Extensions;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Diagnostics;
-    using Sitecore.Commerce.Entities.LoyaltyPrograms;
-    using Sitecore.Reference.Storefront.Extensions;
-
-    /// <summary>
-    /// Json result for loyalty transaction operations.
-    /// </summary>
     public class LoyaltyTransactionItemBaseJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Gets or sets the external identifier.
-        /// </summary>
-        /// <value>
-        /// The external identifier.
-        /// </value>
         public string ExternalId { get; set; }
 
-        /// <summary>
-        /// Gets or sets the entry time.
-        /// </summary>
-        /// <value>
-        /// The entry time.
-        /// </value>
         public string EntryTime { get; set; }
 
-        /// <summary>
-        /// Gets or sets the entry date.
-        /// </summary>
-        /// <value>
-        /// The entry date.
-        /// </value>
         public string EntryDate { get; set; }
 
-        /// <summary>
-        /// Gets or sets the type of the entry.
-        /// </summary>
-        /// <value>
-        /// The type of the entry.
-        /// </value>
         public string EntryType { get; set; }
 
-        /// <summary>
-        /// Gets or sets the expiration date.
-        /// </summary>
-        /// <value>
-        /// The expiration date.
-        /// </value>
         public string ExpirationDate { get; set; }
 
-        /// <summary>
-        /// Gets or sets the points.
-        /// </summary>
-        /// <value>
-        /// The points.
-        /// </value>
         public string Points { get; set; }
 
-        /// <summary>
-        /// Gets or sets the store.
-        /// </summary>
-        /// <value>
-        /// The store.
-        /// </value>
         public string Store { get; set; }
-        
-        /// <summary>
-        /// Initializes the specified transaction.
-        /// </summary>
-        /// <param name="transaction">The transaction.</param>
+
         public virtual void Initialize(LoyaltyCardTransaction transaction)
         {
-            Assert.ArgumentNotNull(transaction, "transaction");
+            Assert.ArgumentNotNull(transaction, nameof(transaction));
 
-            this.ExternalId = transaction.ExternalId;
-            this.EntryTime = transaction.EntryDateTime.ToShortTimeString();
-            this.EntryDate = transaction.EntryDateTime.ToDisplayedDate();
-            this.EntryType = transaction.EntryType.Name;
-            this.ExpirationDate = transaction.ExpirationDate.ToDisplayedDate();
-            this.Points = transaction.RewardPointAmount.ToString(Sitecore.Context.Language.CultureInfo);
-            this.Store = transaction.ShopName;
+            ExternalId = transaction.ExternalId;
+            EntryTime = transaction.EntryDateTime.ToShortTimeString();
+            EntryDate = transaction.EntryDateTime.ToDisplayedDate();
+            EntryType = transaction.EntryType.Name;
+            ExpirationDate = transaction.ExpirationDate.ToDisplayedDate();
+            Points = transaction.RewardPointAmount.ToString(Context.Language.CultureInfo);
+            Store = transaction.ShopName;
         }
     }
 }

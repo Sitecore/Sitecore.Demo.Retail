@@ -10,27 +10,27 @@
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
 @using Sitecore.Collections
-@model ProductViewModel
+@using Sitecore.Foundation.SitecoreExtensions.Extensions
+@using Sitecore.Commerce.Connect.CommerceServer
+@model Sitecore.Reference.Storefront.Models.ProductViewModel
 @{
     if (Model == null)
     {
         return;
     }
 
-    var itemType = Model.Item.ItemType();
-
-    var isCategory = itemType == StorefrontConstants.ItemTypes.Category;
+    var isCategory = Model.Item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate);
     var brand = Model.RenderField("Brand");
     var brandLength = brand.ToString().Length;
 }
 
 <div class="thumbnail">
-    @using (Html.EditFrame(Model.Item.Paths.FullPath, CommerceConstants.KnownItemPaths.EditFrameImages))
+    @using (Html.BeginEditFrame(Model.Item.Paths.FullPath, CommerceConstants.KnownItemPaths.EditFrameImages))
     {
         if (Model.Images != null && Model.Images.Count > 0)
         {
             <a href="@Model.GetLink()">
-                <img src="@Model.Images[0].GetImageUrl(300, 300)" class="img-responsive" alt="product image" title="@Model.DisplayName"/>
+                <img src="@(Model.Images[0]?.ImageUrl(300, 300))" class="img-responsive" alt="product image" title="@Model.DisplayName"/>
             </a>
         }
         else

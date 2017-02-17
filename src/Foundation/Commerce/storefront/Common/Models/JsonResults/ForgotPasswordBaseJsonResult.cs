@@ -15,50 +15,29 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Sitecore.Commerce.Services;
+using Sitecore.Diagnostics;
+
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    using Sitecore.Diagnostics;
-    using Sitecore.Commerce.Services;
-
-    /// <summary>
-    /// Defines the ForgotPasswordBaseJsonResult class.
-    /// </summary>
     public class ForgotPasswordBaseJsonResult : BaseJsonResult
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ForgotPasswordBaseJsonResult"/> class.
-        /// </summary>
         public ForgotPasswordBaseJsonResult()
-            : base()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ForgotPasswordBaseJsonResult"/> class.
-        /// </summary>
-        /// <param name="result">The result.</param>
         public ForgotPasswordBaseJsonResult(ServiceProviderResult result)
             : base(result)
-        {            
+        {
         }
 
-        /// <summary>
-        /// Gets or sets the name of the user.
-        /// </summary>
-        /// <value>
-        /// The name of the user.
-        /// </value>
         public string UserName { get; set; }
 
-        /// <summary>
-        /// Initializes the specified user name.
-        /// </summary>
-        /// <param name="userName">Name of the user.</param>
         public virtual void Initialize(string userName)
         {
-            Assert.ArgumentNotNullOrEmpty(userName, "userName");
+            Assert.ArgumentNotNullOrEmpty(userName, nameof(userName));
 
-            this.UserName = userName;
+            UserName = userName;
         }
     }
 }
