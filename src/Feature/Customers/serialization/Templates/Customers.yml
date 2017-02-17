@@ -1,0 +1,14 @@
+﻿---
+ID: "ed7fbb54-3045-4ed4-91a2-9015c9d7a84f"
+Parent: "e6a02d64-3709-439d-a721-35c5bb2a79f9"
+Template: "0437fee2-44c9-46a6-abe9-28858d9fee8c"
+Path: /sitecore/templates/Feature/Commerce/Customers
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170217T030857Z

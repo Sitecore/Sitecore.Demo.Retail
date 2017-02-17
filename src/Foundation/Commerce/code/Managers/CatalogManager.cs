@@ -81,8 +81,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         }
 
 
-        public CatalogResult VisitedCategoryPage([NotNull] CommerceStorefront storefront, [NotNull] string categoryId,
-            string categoryName)
+        public CatalogResult VisitedCategoryPage([NotNull] CommerceStorefront storefront, [NotNull] string categoryId, string categoryName)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
 
@@ -90,13 +89,11 @@ namespace Sitecore.Foundation.Commerce.Managers
             return CatalogServiceProvider.VisitedCategoryPage(request);
         }
 
-        public CatalogResult VisitedProductDetailsPage([NotNull] CommerceStorefront storefront,
-            [NotNull] string productId, string productName, string parentCategoryId, string parentCategoryName)
+        public CatalogResult VisitedProductDetailsPage([NotNull] CommerceStorefront storefront, [NotNull] string productId, string productName, string parentCategoryId, string parentCategoryName)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
 
-            var request = new VisitedProductDetailsPageRequest(storefront.ShopName, productId, productName,
-                parentCategoryId, parentCategoryName);
+            var request = new VisitedProductDetailsPageRequest(storefront.ShopName, productId, productName, parentCategoryId, parentCategoryName);
             return CatalogServiceProvider.VisitedProductDetailsPage(request);
         }
 

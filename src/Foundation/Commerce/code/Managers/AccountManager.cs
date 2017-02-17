@@ -279,8 +279,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             // Attempt to register the user
             try
             {
-                var request = new CreateUserRequest(inputModel.UserName, inputModel.Password, inputModel.UserName,
-                    storefront.ShopName);
+                var request = new CreateUserRequest(inputModel.UserName, inputModel.Password, inputModel.UserName, storefront.ShopName);
                 result = CustomerServiceProvider.CreateUser(request);
                 result.WriteToSitecoreLog();
 

@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r>
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -125,10 +125,6 @@ SharedFields:
         id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
         l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
         <r
-          id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
-          ph="center"
-          uid="{A2AE2D86-9268-48D0-B2D3-CEC4D3DE9DF4}" />
-        <r
           id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
           ph="middle"
           uid="{C050967E-A774-4D52-AD6B-7758F0329503}" />
@@ -152,22 +148,14 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
-              uid="{A2AE2D86-9268-48D0-B2D3-CEC4D3DE9DF4}"
-              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
-              s:ph="center" />
-            <r
-              uid="{C050967E-A774-4D52-AD6B-7758F0329503}"
-              s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
-              s:ph="middle" />
-            <r
-              uid="{5350B4C4-AA58-404F-966B-5144A9405214}"
-              s:id="{6F1E8623-CC25-411F-B967-8D9BE84EF9B1}"
-              s:ph="center" />
+              uid="{A2AE2D86-9268-48D0-B2D3-CEC4D3DE9DF4}">
+              <p:d />
+            </r>
           </d>
         </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
@@ -182,22 +170,14 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
-              uid="{A2AE2D86-9268-48D0-B2D3-CEC4D3DE9DF4}"
-              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
-              s:ph="center" />
-            <r
-              uid="{C050967E-A774-4D52-AD6B-7758F0329503}"
-              s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
-              s:ph="middle" />
-            <r
-              uid="{5350B4C4-AA58-404F-966B-5144A9405214}"
-              s:id="{6F1E8623-CC25-411F-B967-8D9BE84EF9B1}"
-              s:ph="center" />
+              uid="{A2AE2D86-9268-48D0-B2D3-CEC4D3DE9DF4}">
+              <p:d />
+            </r>
           </d>
         </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
@@ -212,22 +192,14 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
-              uid="{A2AE2D86-9268-48D0-B2D3-CEC4D3DE9DF4}"
-              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
-              s:ph="center" />
-            <r
-              uid="{C050967E-A774-4D52-AD6B-7758F0329503}"
-              s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
-              s:ph="middle" />
-            <r
-              uid="{5350B4C4-AA58-404F-966B-5144A9405214}"
-              s:id="{6F1E8623-CC25-411F-B967-8D9BE84EF9B1}"
-              s:ph="center" />
+              uid="{A2AE2D86-9268-48D0-B2D3-CEC4D3DE9DF4}">
+              <p:d />
+            </r>
           </d>
         </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
@@ -242,22 +214,14 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
-              uid="{A2AE2D86-9268-48D0-B2D3-CEC4D3DE9DF4}"
-              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
-              s:ph="center" />
-            <r
-              uid="{C050967E-A774-4D52-AD6B-7758F0329503}"
-              s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
-              s:ph="middle" />
-            <r
-              uid="{5350B4C4-AA58-404F-966B-5144A9405214}"
-              s:id="{6F1E8623-CC25-411F-B967-8D9BE84EF9B1}"
-              s:ph="center" />
+              uid="{A2AE2D86-9268-48D0-B2D3-CEC4D3DE9DF4}">
+              <p:d />
+            </r>
           </d>
         </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"

@@ -8,6 +8,10 @@ SharedFields:
 - ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
   Hint: __Icon
   Value: 
+- ID: "12537182-f35c-403f-afb5-747d55c450b8"
+  Hint: ShowInMenu
+  Type: Checkbox
+  Value: 1
 Languages:
 - Language: en
   Fields:
@@ -30,10 +34,6 @@ Languages:
         <p>Please read our <a href="~/link.aspx?_id=E0F37E53CA9B47F6897D625C709283EC&amp;_z=z">Legal Notice</a>&nbsp;and our <a href="~/link.aspx?_id=DD218F71CE4F492FBD60ED5C767FB319&amp;_z=z">Privacy Policy</a>.</p>
         <p>Copyright &copy; 2016 Sitecore<br />
         <small>&ldquo;Habitat Electronics&rdquo; as used here is for demonstration purposes only and to represent the software and services provided by Sitecore further described at www.sitecore.net.</small></p>
-    - ID: "12537182-f35c-403f-afb5-747d55c450b8"
-      Hint: ShowInMenu
-      Type: Checkbox
-      Value: 1
     - ID: "235ae392-97ac-4822-be38-837da3e7724e"
       Hint: SiteBrowserTitle
       Value: " - Habitat Retail"

@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r>
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -157,10 +157,6 @@ SharedFields:
         id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
         l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
         <r
-          id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
-          ph="middle"
-          uid="{085A49C4-978A-48E7-8C48-39676EF6063E}" />
-        <r
           id="{750A88C0-47FA-40D9-8B74-5D257EDE845B}"
           ph="center"
           uid="{B9181D0C-E0CC-4344-A3F7-DCE0B9174A4A}" />
@@ -197,18 +193,23 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
               uid="{59246F17-EC96-46F0-A632-BE4671929091}"
-              s:ds="{27B8B175-F0C5-4CB9-A91D-40A8C8516DC9}"
               s:par="" />
           </d>
           <d
             id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
+              uid="{085A49C4-978A-48E7-8C48-39676EF6063E}">
+              <p:d />
+            </r>
+            <r
               uid="{DF62B3B5-68B5-4D6C-8AD3-E5B82C2A3B36}"
+              p:after="*[1=2]"
               s:id="{0B0ECF42-1026-4DDA-866B-EEE84778E831}"
               s:ph="center" />
           </d>
@@ -262,18 +263,23 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
               uid="{59246F17-EC96-46F0-A632-BE4671929091}"
-              s:ds="{27B8B175-F0C5-4CB9-A91D-40A8C8516DC9}"
               s:par="" />
           </d>
           <d
             id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
+              uid="{085A49C4-978A-48E7-8C48-39676EF6063E}">
+              <p:d />
+            </r>
+            <r
               uid="{DF62B3B5-68B5-4D6C-8AD3-E5B82C2A3B36}"
+              p:after="*[1=2]"
               s:id="{0B0ECF42-1026-4DDA-866B-EEE84778E831}"
               s:ph="center" />
           </d>
@@ -327,18 +333,23 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
               uid="{59246F17-EC96-46F0-A632-BE4671929091}"
-              s:ds="{27B8B175-F0C5-4CB9-A91D-40A8C8516DC9}"
               s:par="" />
           </d>
           <d
             id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
+              uid="{085A49C4-978A-48E7-8C48-39676EF6063E}">
+              <p:d />
+            </r>
+            <r
               uid="{DF62B3B5-68B5-4D6C-8AD3-E5B82C2A3B36}"
+              p:after="*[1=2]"
               s:id="{0B0ECF42-1026-4DDA-866B-EEE84778E831}"
               s:ph="center" />
           </d>
@@ -392,18 +403,23 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
               uid="{59246F17-EC96-46F0-A632-BE4671929091}"
-              s:ds="{27B8B175-F0C5-4CB9-A91D-40A8C8516DC9}"
               s:par="" />
           </d>
           <d
             id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
+              uid="{085A49C4-978A-48E7-8C48-39676EF6063E}">
+              <p:d />
+            </r>
+            <r
               uid="{DF62B3B5-68B5-4D6C-8AD3-E5B82C2A3B36}"
+              p:after="*[1=2]"
               s:id="{0B0ECF42-1026-4DDA-866B-EEE84778E831}"
               s:ph="center" />
           </d>

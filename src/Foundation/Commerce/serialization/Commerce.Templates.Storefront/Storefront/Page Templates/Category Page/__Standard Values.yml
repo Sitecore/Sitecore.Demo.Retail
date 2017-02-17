@@ -64,7 +64,7 @@ SharedFields:
         <r
           ds=""
           id="{A2216CA7-B205-4042-A345-72117D0086C3}"
-          par="Background&amp;ContainerIsFluid&amp;UseStaticPlaceholderNames=1"
+          par="UseStaticPlaceholderNames=1"
           ph="page-layout"
           uid="{2D28265D-31BD-45F4-91DE-88154FD3010F}" />
         <r
@@ -149,10 +149,6 @@ SharedFields:
         id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
         l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
         <r
-          id="{CE3FE888-F9DA-41F1-9A56-4AF550E43067}"
-          ph="middle"
-          uid="{89E1D38F-1907-4D49-95F4-167A92D086B4}" />
-        <r
           id="{1CA6E4C1-B92E-48E4-941B-466057ABC752}"
           ph="left"
           uid="{79A552ED-DC24-4BBA-B5F3-1B2013C2E37A}" />
@@ -184,8 +180,15 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{CB175AA1-8CF5-4FFF-882E-CA75C7862BE5}"
-              s:ds="{105E330B-2D30-4C15-8993-B0E60B383FE4}" />
+              uid="{2D28265D-31BD-45F4-91DE-88154FD3010F}"
+              s:par="UseStaticPlaceholderNames=1" />
+          </d>
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+            <r
+              uid="{89E1D38F-1907-4D49-95F4-167A92D086B4}">
+              <p:d />
+            </r>
           </d>
         </r>
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
@@ -202,6 +205,21 @@ Languages:
   Versions:
   - Version: 1
     Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{5CD7D17E-B9AD-46B9-9B7C-925E2BFF59F7}"
+              p:before="*"
+              s:id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
+              s:ph="/footer/section" />
+          </d>
+        </r>
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
       Hint: Save percent lead
       Value: Save up to
@@ -225,8 +243,15 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{CB175AA1-8CF5-4FFF-882E-CA75C7862BE5}"
-              s:ds="{105E330B-2D30-4C15-8993-B0E60B383FE4}" />
+              uid="{2D28265D-31BD-45F4-91DE-88154FD3010F}"
+              s:par="UseStaticPlaceholderNames=1" />
+          </d>
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+            <r
+              uid="{89E1D38F-1907-4D49-95F4-167A92D086B4}">
+              <p:d />
+            </r>
           </d>
         </r>
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
@@ -252,8 +277,15 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{CB175AA1-8CF5-4FFF-882E-CA75C7862BE5}"
-              s:ds="{105E330B-2D30-4C15-8993-B0E60B383FE4}" />
+              uid="{2D28265D-31BD-45F4-91DE-88154FD3010F}"
+              s:par="UseStaticPlaceholderNames=1" />
+          </d>
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+            <r
+              uid="{89E1D38F-1907-4D49-95F4-167A92D086B4}">
+              <p:d />
+            </r>
           </d>
         </r>
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"

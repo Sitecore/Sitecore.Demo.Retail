@@ -11,7 +11,7 @@ SharedFields:
     <image mediaid="{9272BA9C-DBFC-40E0-B2D3-A0074FA6FC97}" />
 - ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
   Hint: Controller Action
-  Value: Product
+  Value: ProductRating
 - ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
   Hint: Controller
   Value: Catalog

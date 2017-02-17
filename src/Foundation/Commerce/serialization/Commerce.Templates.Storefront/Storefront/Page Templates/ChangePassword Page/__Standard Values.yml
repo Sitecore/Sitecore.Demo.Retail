@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r>
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -125,10 +125,6 @@ SharedFields:
         id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
         l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
         <r
-          id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
-          ph="middle"
-          uid="{2BA799C2-8912-4C07-93B4-B93183F80794}" />
-        <r
           id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
           ph="center"
           uid="{974B60AD-0909-4AE3-8B61-CEE3F1A4E8EA}" />
@@ -155,24 +151,19 @@ Languages:
           p:p="1"
           s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
-              uid="{2BA799C2-8912-4C07-93B4-B93183F80794}"
-              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
-              s:ph="middle" />
+              uid="{2BA799C2-8912-4C07-93B4-B93183F80794}">
+              <p:d />
+            </r>
             <r
               uid="{974B60AD-0909-4AE3-8B61-CEE3F1A4E8EA}"
               s:ds=""
-              s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
-              s:par=""
-              s:ph="center" />
+              s:par="" />
             <r
               uid="{4EF13732-1044-46C9-B49A-16BCEB1821C7}"
               s:ds=""
-              s:id="{BB67A786-B97E-4412-AC35-3BB650CBBB5C}"
-              s:par=""
-              s:ph="center" />
+              s:par="" />
           </d>
         </r>
     - ID: "18757981-e7f6-4ab1-95e6-4ca68b65d788"
@@ -224,24 +215,19 @@ Languages:
           p:p="1"
           s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
-              uid="{2BA799C2-8912-4C07-93B4-B93183F80794}"
-              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
-              s:ph="middle" />
+              uid="{2BA799C2-8912-4C07-93B4-B93183F80794}">
+              <p:d />
+            </r>
             <r
               uid="{974B60AD-0909-4AE3-8B61-CEE3F1A4E8EA}"
               s:ds=""
-              s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
-              s:par=""
-              s:ph="center" />
+              s:par="" />
             <r
               uid="{4EF13732-1044-46C9-B49A-16BCEB1821C7}"
               s:ds=""
-              s:id="{BB67A786-B97E-4412-AC35-3BB650CBBB5C}"
-              s:par=""
-              s:ph="center" />
+              s:par="" />
           </d>
         </r>
     - ID: "18757981-e7f6-4ab1-95e6-4ca68b65d788"
@@ -293,24 +279,19 @@ Languages:
           p:p="1"
           s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
-              uid="{2BA799C2-8912-4C07-93B4-B93183F80794}"
-              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
-              s:ph="middle" />
+              uid="{2BA799C2-8912-4C07-93B4-B93183F80794}">
+              <p:d />
+            </r>
             <r
               uid="{974B60AD-0909-4AE3-8B61-CEE3F1A4E8EA}"
               s:ds=""
-              s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
-              s:par=""
-              s:ph="center" />
+              s:par="" />
             <r
               uid="{4EF13732-1044-46C9-B49A-16BCEB1821C7}"
               s:ds=""
-              s:id="{BB67A786-B97E-4412-AC35-3BB650CBBB5C}"
-              s:par=""
-              s:ph="center" />
+              s:par="" />
           </d>
         </r>
     - ID: "18757981-e7f6-4ab1-95e6-4ca68b65d788"
@@ -362,24 +343,19 @@ Languages:
           p:p="1"
           s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-            s:l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
-              uid="{2BA799C2-8912-4C07-93B4-B93183F80794}"
-              s:id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
-              s:ph="middle" />
+              uid="{2BA799C2-8912-4C07-93B4-B93183F80794}">
+              <p:d />
+            </r>
             <r
               uid="{974B60AD-0909-4AE3-8B61-CEE3F1A4E8EA}"
               s:ds=""
-              s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
-              s:par=""
-              s:ph="center" />
+              s:par="" />
             <r
               uid="{4EF13732-1044-46C9-B49A-16BCEB1821C7}"
               s:ds=""
-              s:id="{BB67A786-B97E-4412-AC35-3BB650CBBB5C}"
-              s:par=""
-              s:ph="center" />
+              s:par="" />
           </d>
         </r>
     - ID: "18757981-e7f6-4ab1-95e6-4ca68b65d788"

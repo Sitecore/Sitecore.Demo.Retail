@@ -160,10 +160,6 @@ SharedFields:
         id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
         l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
         <r
-          id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
-          ph="middle"
-          uid="{EA52F493-D3A7-4FB8-B255-4B6768748E41}" />
-        <r
           ds="{1063CC9D-6ED9-4102-8D9E-82FACE2128F7}"
           id="{8BD15EC8-799B-4AA1-AEBB-45EC6678A57F}"
           ph="center"
@@ -192,6 +188,13 @@ Languages:
               p:after="*[1=2]"
               s:ph="top" />
           </d>
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+            <r
+              uid="{EA52F493-D3A7-4FB8-B255-4B6768748E41}">
+              <p:d />
+            </r>
+          </d>
         </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
@@ -209,13 +212,8 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{96CC7D47-0E17-493A-A8BD-B596996BD2CB}"
-              p:before="*"
-              s:id="{2658217E-196A-4041-8F81-B8AFA7E377EE}"
-              s:ph="/footer/section/col-huge_5cd7d17e-b9ad-46b9-9b7c-925e2bff59f7" />
-            <r
               uid="{5CD7D17E-B9AD-46B9-9B7C-925E2BFF59F7}"
-              p:after="r[@uid='{96CC7D47-0E17-493A-A8BD-B596996BD2CB}']"
+              p:before="*"
               s:id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
               s:ph="/footer/section" />
           </d>
@@ -244,12 +242,9 @@ Languages:
           <d
             id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
-              uid="{485CEC8C-F20A-47C6-86B4-DF4425A6B8E0}">
+              uid="{EA52F493-D3A7-4FB8-B255-4B6768748E41}">
               <p:d />
             </r>
-            <r
-              uid="{B2810CEE-47A7-4D42-8DCC-6FBB9996ADD4}"
-              p:after="*[1=2]" />
           </d>
         </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
@@ -276,12 +271,9 @@ Languages:
           <d
             id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
-              uid="{485CEC8C-F20A-47C6-86B4-DF4425A6B8E0}">
+              uid="{EA52F493-D3A7-4FB8-B255-4B6768748E41}">
               <p:d />
             </r>
-            <r
-              uid="{B2810CEE-47A7-4D42-8DCC-6FBB9996ADD4}"
-              p:after="*[1=2]" />
           </d>
         </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"

@@ -1,0 +1,18 @@
+﻿---
+ID: "b5b2d28c-8974-4529-a0c7-896d9bc54ca5"
+Parent: "d81ac026-07b6-4929-9588-40acbdc56435"
+Template: "c0a68a37-3c0a-4eeb-8f84-76a7df7c840e"
+Path: /sitecore/system/Modules/Web Forms for Marketers/Retail
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170217T032431Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

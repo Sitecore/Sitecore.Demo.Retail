@@ -123,7 +123,6 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Config\Include\zzz\Sitecore.Demo.Retail.config" />
     <None Include="Properties\PublishProfiles\commerce3.pubxml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <Content Include="Views\Retail\Layouts\Retail.cshtml" />

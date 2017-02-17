@@ -1,4 +1,0 @@
-ECHO OFF
-ECHO "EXE=%1"
-ECHO "CONFIG=%2"
-%1 -silent CSCONFIGXML="%2"

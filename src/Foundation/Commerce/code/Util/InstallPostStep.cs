@@ -91,7 +91,7 @@ namespace Sitecore.Foundation.Commerce.Util
 
                 if (item != null)
                 {
-                    plan.Name = $"{"Storefront"} {item.DisplayName}";
+                    plan.Name = $"Storefront {item.DisplayName}";
                     ItemManager.AddFromTemplate(plan.Name, ID.Parse(plan.EaPlanId), database.GetItem(CommerceConnectEaPlanParentId), ID.Parse(plan.ItemId));
                     continue;
                 }

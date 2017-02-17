@@ -19,9 +19,13 @@ SharedFields:
   Hint: __Thumbnail
   Value: |
     <image mediaid="{E6E11ED1-4815-43CE-ACDB-AA766E08A05F}" />
+- ID: "c81ed375-7c73-4815-8ea5-8ccfc4056929"
+  Hint: VaryByCurrency
+  Type: Checkbox
+  Value: 0
 - ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
   Hint: Controller Action
-  Value: MultipleProductLists
+  Value: RelatedProducts
 - ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
   Hint: Controller
   Value: Catalog

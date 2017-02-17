@@ -20,15 +20,17 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using Sitecore.Commerce.Connect.CommerceServer;
+using Sitecore.ContentSearch.Utilities;
 using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
 
 namespace Sitecore.Foundation.Commerce.Models
 {
     public class CommerceStorefront : SitecoreItemBase
     {
-        private string _shopName = "website";
+        private string _shopName = "storefront";
 
         public CommerceStorefront()
         {
@@ -38,10 +40,24 @@ namespace Sitecore.Foundation.Commerce.Models
         {
             InnerItem = item;
 
-            if (!string.IsNullOrWhiteSpace(Context.Site.Name))
+            SetShopNameBySiteContext();
+        }
+
+        private void SetShopNameBySiteContext()
+        {
+            if (Context.Site == null)
             {
-                _shopName = Context.Site.Name;
+                Log.Warn($"Cannot determine the Commerce ShopName. No SiteContext found", this);
+                return;
             }
+
+            var shopName = Context.Site.Properties["commerceShopName"];
+            if (string.IsNullOrWhiteSpace(shopName))
+            {
+                Log.Warn($"The site '{Context.Site.Name}' has no commerceShopName defined", this);
+                return;
+            }
+            _shopName = shopName;
         }
 
         public virtual Item RootItem => Context.Database.GetItem(Context.Site.RootPath);
@@ -63,8 +79,6 @@ namespace Sitecore.Foundation.Commerce.Models
             false);
 
         public virtual bool FormsAuthentication => MainUtil.GetBool(HomeItem[StorefrontConstants.KnownFieldNames.FormsAuthentication], false);
-
-        public virtual bool IsAXSite => !string.IsNullOrEmpty(HomeItem[StorefrontConstants.KnownFieldNames.OperatingUnitNumber]);
 
         public virtual string ShopName
         {

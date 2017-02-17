@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r>
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -153,10 +153,6 @@ SharedFields:
         id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
         l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
         <r
-          id="{A093583B-6870-44AD-B14E-54703B32E9B9}"
-          ph="middle"
-          uid="{72BA2DFF-7EC5-432A-9BBA-1A6641D1A4D1}" />
-        <r
           id="{E45FD475-ADD0-42A0-A297-ADFE98B47A4A}"
           ph="center"
           uid="{8473084D-CC59-4227-80A0-737703ECC6FF}" />
@@ -189,20 +185,24 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{9B706406-941F-4707-BBB1-A298CC0FEE82}">
+              uid="{93A1C3F2-8B63-43AF-AF7B-7CE6F269E9FB}"
+              p:after="r[@uid='{D420B79F-B0AE-4123-A8D5-1F330AA901C7}']"
+              s:par="">
+              <p:da
+                name="ph" />
+            </r>
+          </d>
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+            <r
+              uid="{72BA2DFF-7EC5-432A-9BBA-1A6641D1A4D1}">
               <p:d />
             </r>
-            <r
-              uid="{93A1C3F2-8B63-43AF-AF7B-7CE6F269E9FB}"
-              p:before="r[@uid='{890EB9AE-89DE-490F-8758-CACF59DFB432}']"
-              s:ds="{E48E2CCA-493D-410D-9B15-B2E1A0939730}"
-              s:id="{04ADF67D-1449-4DAC-A496-CA3B504AAF71}"
-              s:par=""
-              s:ph="shareandprint" />
           </d>
         </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
@@ -217,20 +217,24 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{9B706406-941F-4707-BBB1-A298CC0FEE82}">
+              uid="{93A1C3F2-8B63-43AF-AF7B-7CE6F269E9FB}"
+              p:after="r[@uid='{D420B79F-B0AE-4123-A8D5-1F330AA901C7}']"
+              s:par="">
+              <p:da
+                name="ph" />
+            </r>
+          </d>
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+            <r
+              uid="{72BA2DFF-7EC5-432A-9BBA-1A6641D1A4D1}">
               <p:d />
             </r>
-            <r
-              uid="{93A1C3F2-8B63-43AF-AF7B-7CE6F269E9FB}"
-              p:before="r[@uid='{890EB9AE-89DE-490F-8758-CACF59DFB432}']"
-              s:ds="{E48E2CCA-493D-410D-9B15-B2E1A0939730}"
-              s:id="{04ADF67D-1449-4DAC-A496-CA3B504AAF71}"
-              s:par=""
-              s:ph="shareandprint" />
           </d>
         </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
@@ -245,20 +249,24 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{9B706406-941F-4707-BBB1-A298CC0FEE82}">
+              uid="{93A1C3F2-8B63-43AF-AF7B-7CE6F269E9FB}"
+              p:after="r[@uid='{D420B79F-B0AE-4123-A8D5-1F330AA901C7}']"
+              s:par="">
+              <p:da
+                name="ph" />
+            </r>
+          </d>
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+            <r
+              uid="{72BA2DFF-7EC5-432A-9BBA-1A6641D1A4D1}">
               <p:d />
             </r>
-            <r
-              uid="{93A1C3F2-8B63-43AF-AF7B-7CE6F269E9FB}"
-              p:before="r[@uid='{890EB9AE-89DE-490F-8758-CACF59DFB432}']"
-              s:ds="{E48E2CCA-493D-410D-9B15-B2E1A0939730}"
-              s:id="{04ADF67D-1449-4DAC-A496-CA3B504AAF71}"
-              s:par=""
-              s:ph="shareandprint" />
           </d>
         </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
@@ -273,20 +281,24 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{9B706406-941F-4707-BBB1-A298CC0FEE82}">
+              uid="{93A1C3F2-8B63-43AF-AF7B-7CE6F269E9FB}"
+              p:after="r[@uid='{D420B79F-B0AE-4123-A8D5-1F330AA901C7}']"
+              s:par="">
+              <p:da
+                name="ph" />
+            </r>
+          </d>
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+            <r
+              uid="{72BA2DFF-7EC5-432A-9BBA-1A6641D1A4D1}">
               <p:d />
             </r>
-            <r
-              uid="{93A1C3F2-8B63-43AF-AF7B-7CE6F269E9FB}"
-              p:before="r[@uid='{890EB9AE-89DE-490F-8758-CACF59DFB432}']"
-              s:ds="{E48E2CCA-493D-410D-9B15-B2E1A0939730}"
-              s:id="{04ADF67D-1449-4DAC-A496-CA3B504AAF71}"
-              s:par=""
-              s:ph="shareandprint" />
           </d>
         </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"

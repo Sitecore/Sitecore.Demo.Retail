@@ -64,6 +64,7 @@ gulp.task("04-Apply-Xml-Transform", function () {
   return gulp.src(layerPathFilters)
     .pipe(foreach(function (stream, file) {
       var fileToTransform = file.path.replace(/.+code\\(.+)\.transform/, "$1");
+      fileToTransform = fileToTransform.replace(/.+legacy\\(.+)\.transform/, "$1");
       util.log("Applying configuration transform: " + file.path);
       return gulp.src("./scripts/applytransform.targets")
         .pipe(msbuild({
@@ -94,8 +95,7 @@ gulp.task("05-Sync-Unicorn", function (callback) {
 
 
 gulp.task("06-Deploy-Transforms", function () {
-  return gulp.src("./src/**/code/**/*.transform")
-      .pipe(gulp.dest(config.websiteRoot + "/temp/transforms"));
+  return gulp.src(["./src/**/code/**/*.transform", "./src/**/legacy/**/*.transform"]).pipe(gulp.dest(config.websiteRoot + "/temp/transforms"));
 });
 
 /*****************************
@@ -106,7 +106,7 @@ gulp.task("Copy-Local-Assemblies", function () {
   var files = config.sitecoreLibraries + "/**/*";
 
   var root = "./src";
-  var projects = root + "/**/code/bin";
+  var projects = [root + "/**/code/bin", root + "/**/legacy/bin"];
   return gulp.src(projects, { base: root })
     .pipe(foreach(function (stream, file) {
       console.log("copying to " + file.path);
@@ -124,7 +124,7 @@ var publishProjects = function (location, dest) {
   var targets = ["Build"];
 
   console.log("publish to " + dest + " folder");
-  return gulp.src([location + "/**/code/*.csproj", location + "/*.csproj"])
+  return gulp.src([location + "/**/code/*.csproj", location + "/**/legacy/*.csproj", location + "/*.csproj"])
     .pipe(foreach(function (stream, file) {
       return stream
         .pipe(debug({ title: "Building project:" }))
@@ -272,7 +272,7 @@ gulp.task("Auto-Publish-Views", function () {
 
 gulp.task("Auto-Publish-Assemblies", function () {
   var root = "./src";
-  var roots = [root + "/**/code/**/bin"];
+  var roots = [root + "/**/code/**/bin", root + "/**/legacy/**/bin"];
   var files = "/**/Sitecore.{Feature,Foundation,Habitat}.*.{dll,pdb}";;
   var destination = config.websiteRoot + "/bin/";
   gulp.src(roots, { base: root }).pipe(
