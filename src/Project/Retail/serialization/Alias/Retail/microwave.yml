@@ -1,0 +1,23 @@
+﻿---
+ID: "8142547c-89bf-41b5-aa3b-e3beff8442a8"
+Parent: "b26c7c39-2246-471a-b6cb-335a41b60eed"
+Template: "54bcffb7-8f46-4948-ae74-da5b6b5afa86"
+Path: /sitecore/system/Aliases/Retail/microwave
+DB: master
+SharedFields:
+- ID: "8cbab1df-cf26-4c80-9002-62aa153d1e4c"
+  Hint: Linked item
+  Value: |
+    <link linktype="internal" url="/Storefront/Home/Landing Pages/Google Microwave" id="{BDE903BD-A29D-480E-8706-F8B54A0232AB}" />
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170214T121627Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
