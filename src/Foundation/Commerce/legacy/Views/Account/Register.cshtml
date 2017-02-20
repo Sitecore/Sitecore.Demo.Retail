@@ -14,9 +14,7 @@
 @using Sitecore.Foundation.Commerce.Managers
 @model Sitecore.Reference.Storefront.Models.RegisterModel
 @{
-    var registering = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.Registering];
     var storefront = StorefrontManager.CurrentStorefront;
-    var isNewUser = Model == null || string.IsNullOrEmpty(Model.FirstName);
 }
 @using (Ajax.BeginForm("Register", "Account", null, new AjaxOptions
                                                     {
@@ -57,9 +55,6 @@
                                                        {
                                                            placeholder = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordPlaceholder],
                                                            data_val_required = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordMissingMessage],
-                                                           data_val_length_min = "6",
-                                                           data_val_length_max = "100",
-                                                           data_val_length = string.Format(Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordLengthMessage].ToString(), 6),
                                                            @class = "form-control new-user",
                                                            autocomplete = "off"
                                                        })
@@ -88,7 +83,7 @@
 
     <div class="row m-t-1">
         <div class="col-sm-6">
-            <button type="submit" id="registerButton" data-loading-text="@registering" class="btn btn-primary btn-lg btn-block">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.CreateUser, Html.Sitecore().CurrentItem)</button>
+            <button type="submit" id="registerButton" data-loading-text="@Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.Registering]" class="btn btn-primary btn-lg btn-block">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.CreateUser, Html.Sitecore().CurrentItem)</button>
         </div>
         <div class="col-sm-6">
             <a class="btn btn-default btn-lg btn-block" href="@StorefrontManager.StorefrontUri("/Login")">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.Cancel, Html.Sitecore().CurrentItem)</a>

@@ -25,12 +25,11 @@ using Sitecore.Diagnostics;
 using Sitecore.Security;
 using Sitecore.Security.Accounts;
 
-namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
+namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Customers
 {
     public class GetUser : GetUserFromSitecore
     {
-        public GetUser(IUserRepository userRepository)
-            : base(userRepository)
+        public GetUser(IUserRepository userRepository) : base(userRepository)
         {
         }
 
@@ -45,15 +44,16 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
 
             // if we found a user, add some addition info
             var userProfile = GetUserProfile(result.CommerceUser.UserName);
-            Assert.IsNotNull(userProfile, "profile");
+            Assert.IsNotNull(userProfile, $"Could not load the user profile for {result.CommerceUser.UserName}");
 
-            UpdateCustomer(result.CommerceUser, userProfile);
+            AssociateSitecoreUserWithCommerceUser(result.CommerceUser, userProfile);
         }
 
-        protected void UpdateCustomer(CommerceUser commerceUser, UserProfile userProfile)
+        protected void AssociateSitecoreUserWithCommerceUser(CommerceUser commerceUser, UserProfile sitecoreUser)
         {
-            commerceUser.ExternalId = userProfile[Sitecore.Commerce.Connect.CommerceServer.CommerceConstants.ProfilesStrings.UserIdProperty];
-            Assert.IsNotNullOrEmpty(commerceUser.ExternalId, nameof(commerceUser.ExternalId));
+            var externalId = sitecoreUser[Commerce.Constants.Profile.SitecoreProfile.UserId];
+            Assert.IsNotNullOrEmpty(externalId, $"The external id for the user {sitecoreUser.UserName} is empty.");
+            commerceUser.ExternalId = externalId;
 
             if (commerceUser.Customers != null && commerceUser.Customers.Count != 0)
             {

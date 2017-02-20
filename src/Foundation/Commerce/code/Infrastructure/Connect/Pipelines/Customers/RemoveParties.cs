@@ -23,7 +23,7 @@ using Sitecore.Commerce.Pipelines;
 using Sitecore.Commerce.Services.Customers;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
+namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Customers
 {
     public class RemoveParties : CustomerPipelineProcessor
     {

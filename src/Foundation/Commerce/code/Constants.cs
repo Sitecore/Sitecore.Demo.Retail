@@ -36,6 +36,11 @@
                 public const string TelNumber = "GeneralInfo.tel_number";
                 public const string AddressId = "GeneralInfo.address_id";
             }
+
+            public static class SitecoreProfile
+            {
+                public static string UserId = "user_id";
+            }
         }
     }
 }

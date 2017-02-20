@@ -20,7 +20,7 @@ using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Pipelines;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Arguments
+namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Arguments
 {
     public class TranslateEntityToCommerceAddressProfileRequest : CommerceRequest
     {

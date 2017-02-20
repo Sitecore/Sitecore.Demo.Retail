@@ -26,9 +26,9 @@ using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Pipelines;
 using Sitecore.Commerce.Services.Customers;
 using Sitecore.Diagnostics;
-using Sitecore.Foundation.Commerce.Connect.Pipelines.Arguments;
+using Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Arguments;
 
-namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
+namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Customers
 {
     public class GetParties : CustomerPipelineProcessor
     {

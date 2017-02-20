@@ -20,7 +20,7 @@ using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Pipelines;
 using Sitecore.Commerce.Pipelines;
 using Sitecore.Diagnostics;
-using Sitecore.Foundation.Commerce.Connect.Pipelines.Arguments;
+using Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Arguments;
 
 namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Customers
 {
@@ -49,21 +49,25 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Customer
 
         protected virtual void TranslateCommerceCustomerParty(CommerceParty party, Profile profile)
         {
-            profile[Constants.Profile.GeneralInfo.FirstName].Value = party.FirstName;
-            profile[Constants.Profile.GeneralInfo.LastName].Value = party.LastName;
-            profile[Constants.Profile.GeneralInfo.AddressName].Value = party.Name;
-            profile[Constants.Profile.GeneralInfo.AddressLine1].Value = party.Address1;
-            profile[Constants.Profile.GeneralInfo.AddressLine2].Value = party.Address2;
-            profile[Constants.Profile.GeneralInfo.City].Value = party.City;
+            profile[Commerce.Constants.Profile.GeneralInfo.FirstName].Value = party.FirstName;
+            profile[Commerce.Constants.Profile.GeneralInfo.LastName].Value = party.LastName;
+            profile[Commerce.Constants.Profile.GeneralInfo.AddressName].Value = party.Name;
+            profile[Commerce.Constants.Profile.GeneralInfo.AddressLine1].Value = party.Address1;
+            profile[Commerce.Constants.Profile.GeneralInfo.AddressLine2].Value = party.Address2;
+            profile[Commerce.Constants.Profile.GeneralInfo.City].Value = party.City;
             if (!string.IsNullOrEmpty(party.State))
-                profile[Constants.Profile.GeneralInfo.RegionCode].Value = party.State;
+            {
+                profile[Commerce.Constants.Profile.GeneralInfo.RegionCode].Value = party.State;
+            }
             else if (!string.IsNullOrEmpty(party.RegionCode))
-                profile[Constants.Profile.GeneralInfo.RegionCode].Value = party.RegionCode;
-            profile[Constants.Profile.GeneralInfo.RegionName].Value = party.RegionName;
-            profile[Constants.Profile.GeneralInfo.PostalCode].Value = party.ZipPostalCode;
-            profile[Constants.Profile.GeneralInfo.CountryCode].Value = party.CountryCode;
-            profile[Constants.Profile.GeneralInfo.CountryName].Value = party.Country;
-            profile[Constants.Profile.GeneralInfo.TelNumber].Value = party.PhoneNumber;
+            {
+                profile[Commerce.Constants.Profile.GeneralInfo.RegionCode].Value = party.RegionCode;
+            }
+            profile[Commerce.Constants.Profile.GeneralInfo.RegionName].Value = party.RegionName;
+            profile[Commerce.Constants.Profile.GeneralInfo.PostalCode].Value = party.ZipPostalCode;
+            profile[Commerce.Constants.Profile.GeneralInfo.CountryCode].Value = party.CountryCode;
+            profile[Commerce.Constants.Profile.GeneralInfo.CountryName].Value = party.Country;
+            profile[Commerce.Constants.Profile.GeneralInfo.TelNumber].Value = party.PhoneNumber;
 
             TranslateCommerceCustomerPartyCustomProperties(party, profile);
         }

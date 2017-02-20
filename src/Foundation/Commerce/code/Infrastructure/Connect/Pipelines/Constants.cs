@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Sitecore.Foundation.Commerce.Connect.Pipelines
+﻿namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines
 {
     public class Constants {
         public static class Pipelines

@@ -368,8 +368,8 @@ namespace Sitecore.Reference.Storefront.Controllers
                     result.SetErrors(response.ServiceProviderResult);
                     if (response.ServiceProviderResult.Success && response.Result != null)
                     {
-                        var orders = response.Result.ToList();
-                        recentOrders = orders.Where(order => (order as CommerceOrderHeader).LastModified > DateTime.Today.AddDays(-30)).Take(5).ToList();
+                        var orders = response.Result.Cast<CommerceOrderHeader>().ToList();
+                        recentOrders = orders.Where(order => order.LastModified > DateTime.Today.AddDays(-30)).Take(5).Cast<OrderHeader>().ToList();
                     }
                 }
 

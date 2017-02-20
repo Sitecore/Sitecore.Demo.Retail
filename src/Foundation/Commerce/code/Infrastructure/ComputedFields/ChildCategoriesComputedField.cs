@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using CommerceServer.Core.Catalog;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Catalog;
@@ -54,21 +55,12 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.ComputedFields
                 return string.Empty;
             }
 
-            var childCategoryItemList = new List<string>();
-
             var category = GetCategoryReadOnly(validatedItem.ID, validatedItem.Language.Name);
-            if (category != null)
+            if (category?.ChildCategories == null || category.ChildCategories.Count <= 0)
             {
-                if (category.ChildCategories != null && category.ChildCategories.Count > 0)
-                {
-                    foreach (var childCategory in category.ChildCategories)
-                    {
-                        childCategoryItemList.Add(childCategory.ExternalId.ToString());
-                    }
-                }
+                return new List<string>();
             }
-
-            return childCategoryItemList;
+            return category.ChildCategories.Select(childCategory => childCategory.ExternalId.ToString()).ToList();
         }
 
         protected virtual T GetVariantFieldValue<T>(Variant variant, string fieldName)
@@ -92,18 +84,15 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.ComputedFields
 
         private Category GetCategoryReadOnly(ID itemId, string language)
         {
-            Category category = null;
-
             var catalogRepository = CommerceTypeLoader.CreateInstance<ICatalogRepository>();
             var externalInfo = catalogRepository.GetExternalIdInformation(itemId.Guid);
 
-            if (externalInfo != null && externalInfo.CommerceItemType == CommerceItemType.Category)
+            if (externalInfo == null || externalInfo.CommerceItemType != CommerceItemType.Category)
             {
-                var culture = CommerceUtility.ConvertLanguageToCulture(language);
-                category = catalogRepository.GetCategoryReadOnly(externalInfo.CatalogName, externalInfo.CategoryName, culture);
+                return null;
             }
-
-            return category;
+            var culture = CommerceUtility.ConvertLanguageToCulture(language);
+            return catalogRepository.GetCategoryReadOnly(externalInfo.CatalogName, externalInfo.CategoryName, culture);
         }
     }
 }

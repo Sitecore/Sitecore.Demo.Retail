@@ -15,7 +15,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Customers
+namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Customers
 {
     public class UpdateCustomer : CustomerPipelineProcessor
     {
