@@ -64,15 +64,6 @@ namespace Sitecore.Foundation.Commerce.Managers
             return route;
         }
 
-        public static string ExternalUri(string externalLink)
-        {
-            if (HttpContext.Current.Request.IsSecureConnection && EnforceHttps)
-            {
-                return "https://" + externalLink;
-            }
-            return "http://" + externalLink;
-        }
-
         public static string GetCustomerCurrency()
         {
             // In the future we will get the current user currency but for now we simply return the home node default.
@@ -82,31 +73,6 @@ namespace Sitecore.Foundation.Commerce.Managers
         public static void SetCustomerCurrency(string currency)
         {
             // In the future we can set the currently selected user currency but for now we leave a place holder method.
-        }
-
-        public static string SelectExternalUri(string unsecuredConnection, string securedConnection)
-        {
-            if (HttpContext.Current.Request.IsSecureConnection && EnforceHttps)
-            {
-                return securedConnection;
-            }
-            return unsecuredConnection;
-        }
-
-        public static string SecureStorefrontUri(string route)
-        {
-            if (HttpContext.Current.Request.IsSecureConnection || !EnforceHttps)
-            {
-                return route;
-            }
-
-            if (!route.StartsWith("/", StringComparison.OrdinalIgnoreCase))
-            {
-                route = "/" + route;
-            }
-
-            
-            return $"{Uri.UriSchemeHttps}{Uri.SchemeDelimiter}{HttpContext.Current.Request.Url.Host}{route}";
         }
 
         public static HtmlString GetHtmlSystemMessage(string messageKey)

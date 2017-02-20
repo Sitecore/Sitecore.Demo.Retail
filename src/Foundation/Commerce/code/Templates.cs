@@ -41,11 +41,6 @@ namespace Sitecore.Foundation.Commerce
             }
         }
 
-        public static class SecuredPage
-        {
-            public static readonly ID ID = new ID("{02CCCF95-7BE5-4549-81F9-AC97A22D6816}");
-        }
-
         public static class NamedSearch
         {
             public static readonly ID ID = new ID("{F3C0CD6C-9FA9-442D-BD3A-5A25E292F2F7}");

@@ -4,6 +4,10 @@ Parent: "ed33ad84-9678-435d-831e-edbf938bfeeb"
 Template: "e269fbb5-3750-427a-9149-7aa950b49301"
 Path: /sitecore/templates/Storefront/Page Templates/ChangePassword Page/Labels
 DB: master
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 50
 Languages:
 - Language: en
   Versions:

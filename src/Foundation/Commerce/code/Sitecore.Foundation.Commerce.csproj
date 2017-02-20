@@ -219,7 +219,6 @@
     <Compile Include="Infrastructure\SitecorePipelines\ExcludeUrlTracking.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\ProductItemResolver.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\ResetContact.cs" />
-    <Compile Include="Infrastructure\SitecorePipelines\SecuredPageProcessor.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\VaryByCurrency.cs" />
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Managers\BaseManager.cs" />

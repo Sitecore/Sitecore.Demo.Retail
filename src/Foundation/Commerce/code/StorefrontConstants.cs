@@ -72,8 +72,6 @@ namespace Sitecore.Foundation.Commerce
 
             public static readonly string FillFormMessage = "Fill Form Message";
 
-            public static readonly string GenerateSecureLink = "Generate Secure Link";
-
             public static readonly string GuestCheckoutButton = "Guest Checkout Button";
 
             public static readonly string LastName = "Last Name";

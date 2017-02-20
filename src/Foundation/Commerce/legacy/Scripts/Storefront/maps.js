@@ -68,7 +68,7 @@ function ClickGeocode()
 function MakeGeocodeRequest()
 {
     // TODO: Når kunden skriver en ny adresse ind skal den første PIN fjernes
-    var geocodeRequest = "http://dev.virtualearth.net/REST/v1/Locations?query=" + encodeURI(document.getElementById('autocomplete').value) + "&output=json&jsonp=GeocodeCallback&key=" + Credentials;
+    var geocodeRequest = "//dev.virtualearth.net/REST/v1/Locations?query=" + encodeURI(document.getElementById('autocomplete').value) + "&output=json&jsonp=GeocodeCallback&key=" + Credentials;
     CallRestService(geocodeRequest);
 }
 

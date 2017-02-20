@@ -41,9 +41,6 @@
 
                 CheckboxField showWhenAuthenticated = link.Fields[StorefrontConstants.KnownFieldNames.ShowWhenAuthenticated];
                 CheckboxField showAlways = link.Fields[StorefrontConstants.KnownFieldNames.ShowAlways];
-                CheckboxField generateSecureLink = link.Fields[StorefrontConstants.KnownFieldNames.GenerateSecureLink];
-
-                var linkString = link["Link"];
 
                 var show = showAlways.Checked || showWhenAuthenticated.Checked && Request.IsAuthenticated || !showWhenAuthenticated.Checked && !Request.IsAuthenticated;
 
@@ -58,18 +55,7 @@
                         displayPipe = true;
                     }
 
-                    if (generateSecureLink.Checked)
-                    {
-                        var anchorUrl = link.LinkFieldUrl(link.Fields["link"].ID);
-                        var urlString = StorefrontManager.SecureStorefrontUri(anchorUrl);
-                        <li>
-                            <a href="@urlString">@Html.Sitecore().Field("Text", link)</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li>@Html.Sitecore().Field("Link", link, new {text = Html.Sitecore().Field("Text", link)})</li>
-                    }
+                    <li>@Html.Sitecore().Field("Link", link, new {text = Html.Sitecore().Field("Text", link)})</li>
                 }
             }
         }

@@ -45,25 +45,14 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         private static string GetCategoryTags(Item item)
         {
-            var url = GetServerUrl() + "/category/" + item.Name;
+            var url = "/category/" + item.Name;
             return $"<link rel='canonical' href='{url}'/>";
         }
 
         private static string GetProductTags(Item item)
         {
-            var url = GetServerUrl() + "/product/" + item.Name;
+            var url = "/product/" + item.Name;
             return $"<link rel='canonical' href='{url}'/>";
-        }
-
-        private static string GetServerUrl()
-        {
-            var serverUrl = WebUtil.GetServerUrl();
-            if (serverUrl.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
-            {
-                serverUrl = serverUrl.Replace(serverUrl.Substring(0, 8), "http://");
-            }
-
-            return serverUrl;
         }
     }
 }
