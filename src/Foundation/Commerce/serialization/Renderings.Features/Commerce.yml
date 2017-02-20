@@ -1,8 +1,8 @@
 ﻿---
-ID: "8522ba24-a176-4b75-9377-7291e526f6d8"
-Parent: "10d834a6-0706-4bba-a635-daa687d59614"
+ID: "10d834a6-0706-4bba-a635-daa687d59614"
+Parent: "da61ad50-8fdb-4252-a68f-b4470b1c9fe8"
 Template: "7ee0975b-0698-493e-b3a2-0b2ef33d0522"
-Path: /sitecore/layout/Renderings/Feature/Commerce/Customers
+Path: /sitecore/layout/Renderings/Feature/Commerce
 DB: master
 Languages:
 - Language: en
@@ -11,7 +11,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20170220T102209Z
+      Value: 20170220T102136Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
