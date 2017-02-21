@@ -21,7 +21,7 @@
 }
 
 <div class="text-right">
-    <a href="@StorefrontManager.StorefrontUri("/accountmanagement")" class="btn btn-default">
+    <a href="@("/accountmanagement")" class="btn btn-default">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> @Html.Sitecore().Field("Back To My Account Label", Html.Sitecore().CurrentItem)
     </a>
 </div>
@@ -91,7 +91,7 @@
         <button type="button" id="saveAddress" class="btn btn-primary" data-bind="click: saveAddress, enable: enableSave" data-loading-text="@savingLabel">
             @Html.Sitecore().Field("Save Changes Button", Html.Sitecore().CurrentItem)
         </button>
-        <a type="button" id="cancelChanges" class="btn btn-default m-r-1" href="@StorefrontManager.StorefrontUri("/accountmanagement")">
+        <a type="button" id="cancelChanges" class="btn btn-default m-r-1" href="@("/accountmanagement")">
             @Html.Sitecore().Field("Cancel Button", Html.Sitecore().CurrentItem)
         </a>
         <button type="button" id="deleteAddress" class="btn btn-default" data-bind="click: deleteAddress, enable: enableDelete" data-loading-text="@deletingLabel" data-text="@deleteButtonLabelText">

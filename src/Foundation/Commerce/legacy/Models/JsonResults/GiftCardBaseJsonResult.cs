@@ -20,6 +20,7 @@ using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -56,7 +57,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         {
             Assert.ArgumentNotNull(giftCard, nameof(giftCard));
 
-            var currencyCode = StorefrontManager.GetCustomerCurrency();
+            var currencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
 
             ExternalId = giftCard.ExternalId;
             Name = giftCard.Name;

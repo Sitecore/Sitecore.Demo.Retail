@@ -79,5 +79,3 @@ $(document).ready(function () {
         }
     );
 });
-
-var dontBlockUI = false;

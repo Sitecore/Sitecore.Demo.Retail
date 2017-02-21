@@ -1,0 +1,14 @@
+﻿---
+ID: "25e97171-33f0-446a-8901-2893f6cad67b"
+Parent: "b0a3f504-6aa6-42b7-99fe-8280d8cc01b1"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Foundation/Commerce/_CurrencyContext/Commerce
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170220T223729Z

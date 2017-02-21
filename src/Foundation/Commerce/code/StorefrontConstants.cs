@@ -120,8 +120,6 @@ namespace Sitecore.Foundation.Commerce
 
             public static readonly string UseIndexFileForProductStatusInLists = "Use Index File For Product Status In Lists";
 
-            public static readonly string FormsAuthentication = "Forms Authentication";
-
             public static readonly string OperatingUnitNumber = "OperatingUnitNumber";
 
             public static readonly string MapKey = "Map Key";
@@ -131,22 +129,6 @@ namespace Sitecore.Foundation.Commerce
             public static readonly string Title = "Title";
 
             public static readonly string ProductList = "Product List";
-
-            public static readonly string CurrencyDescription = "Currency Description";
-
-            public static readonly string CurrencySymbol = "Currency Symbol";
-
-            public static readonly string CurrencySymbolPosition = "Currency Symbol Position";
-
-            public static readonly string CurrencyNumberFormatCulture = "Currency Number Format Culture";
-
-            public static readonly string SupportedCurrencies = "Supported Currencies";
-
-            public static readonly string DefaultCurrency = "Default Currency";
-
-            public static readonly string NewContosoAccount = "New Contoso Account";
-
-            public static readonly string LinkContosoAccount = "Link Contoso Account";
 
             public static readonly string EmailAddressOfExistingCustomer = "Email Address Of Existing Customer";
 

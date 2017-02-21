@@ -23,6 +23,7 @@ using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines;
 using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Links;
 
@@ -38,7 +39,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             var product = (CommerceCartProduct) line.Product;
             var productItem = ProductItemResolver.ResolveCatalogItem(product.ProductId, product.ProductCatalog, true);
 
-            var currencyCode = StorefrontManager.GetCustomerCurrency();
+            var currencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
 
             DisplayName = product.DisplayName;
             Color = product.Properties["Color"] as string;
@@ -50,26 +51,19 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             VariantId = product.ProductVariantId;
             ProductCatalog = product.ProductCatalog;
             WishListId = wishListId;
-            ProductUrl = product.ProductId.Equals(StorefrontManager.CurrentStorefront.GiftCardProductId, StringComparison.OrdinalIgnoreCase)
-                ? StorefrontManager.StorefrontUri("/buygiftcard")
-                : LinkManager.GetDynamicUrl(productItem);
+            ProductUrl = LinkManager.GetDynamicUrl(productItem);
 
             if (product.Price.Amount != 0M)
                 LinePrice = product.Price.Amount.ToCurrency(currencyCode);
 
             var imageInfo = product.Properties["_product_Images"] as string;
-            if (imageInfo != null)
+            if (imageInfo == null)
             {
-                var imageId = imageInfo.Split('|')[0];
-                MediaItem mediaItem = Context.Database.GetItem(imageId);
-                Image = mediaItem != null ? mediaItem.ImageUrl(100, 100) : string.Empty;
-            }
-
-            var giftCardAmount = line.GetPropertyValue("GiftCardAmount");
-            if (giftCardAmount == null)
                 return;
-            var amount = System.Convert.ToDecimal(giftCardAmount, Context.Language.CultureInfo);
-            GiftCardAmount = amount.ToCurrency(currencyCode);
+            }
+            var imageId = imageInfo.Split('|')[0];
+            MediaItem mediaItem = Context.Database.GetItem(imageId);
+            Image = mediaItem != null ? mediaItem.ImageUrl(100, 100) : string.Empty;
         }
 
         public string Image { get; set; }
@@ -84,7 +78,6 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         public string ProductId { get; set; }
         public string VariantId { get; set; }
         public string ProductCatalog { get; set; }
-        public string GiftCardAmount { get; set; }
         public string WishListId { get; set; }
     }
 }

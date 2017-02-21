@@ -74,10 +74,28 @@ namespace Sitecore.Foundation.Commerce.Managers
                     return _currentCatalog;
                 }
 
-                _currentCatalog = StorefrontManager.CurrentStorefront.DefaultCatalog ?? new Catalog(Context.Database.GetItem(CommerceConstants.KnownItemIds.DefaultCatalog));
+                _currentCatalog = GetCurrentCatalog();
 
                 return _currentCatalog;
             }
+        }
+
+        public virtual Catalog GetCurrentCatalog()
+        {
+            //If this is not in a storefront then return the default catalog
+            if (StorefrontManager.CurrentStorefront?.HomeItem != null)
+            {
+                var catalogs = ((MultilistField) StorefrontManager.CurrentStorefront?.HomeItem.Fields["Catalogs"]).GetItems();
+                if (catalogs.Any())
+                {
+                    return new Catalog(catalogs.First());
+                }
+            }
+
+            var defaultCatalogContainer = Context.Database.GetItem(CommerceConstants.KnownItemIds.DefaultCatalog);
+            var catalogPath = defaultCatalogContainer.Fields["Catalog"].Source + "/" + defaultCatalogContainer.Fields["Catalog"].Value;
+            var defaultCatalog = Context.Database.GetItem(catalogPath);
+            return new Catalog(defaultCatalog);
         }
 
 

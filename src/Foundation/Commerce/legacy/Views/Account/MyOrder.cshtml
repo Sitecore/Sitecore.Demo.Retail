@@ -44,7 +44,7 @@
     <button type="button" class="btn btn-default" onclick="printPage()">
         <span class="glyphicon glyphicon-print"></span>
     </button>
-    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorders")" class="btn btn-default pull-right">
+    <a href="@("/accountmanagement/myorders")" class="btn btn-default pull-right">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> @Html.Sitecore().Field("View All Orders Label", Html.Sitecore().CurrentItem)
     </a>
 </div>
@@ -114,7 +114,7 @@
             }
 
             var isGiftCard = product.ProductId.Equals(StorefrontManager.CurrentStorefront.GiftCardProductId, StringComparison.OrdinalIgnoreCase);
-            var productUrl = isGiftCard ? StorefrontManager.StorefrontUri("/buygiftcard") : StorefrontManager.StorefrontUri("/product/" + product.ProductId);
+            var productUrl = isGiftCard ? "/buygiftcard" : "/product/" + product.ProductId;
             var lineShippingMethod = shipments.FirstOrDefault(s => s.LineIDs.Contains(cartLine.ExternalCartLineId)) as CommerceShippingInfo;
 
             var offers = string.Empty;
@@ -387,7 +387,7 @@
     </div>
 </div>
 <div class="m-b-1">
-    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorders")" class="btn btn-default pull-right">
+    <a href="@("/accountmanagement/myorders")" class="btn btn-default pull-right">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> @Html.Sitecore().Field("View All Orders Label", Html.Sitecore().CurrentItem)
     </a>
 </div>

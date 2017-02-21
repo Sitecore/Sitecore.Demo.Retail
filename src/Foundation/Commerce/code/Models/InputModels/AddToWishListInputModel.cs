@@ -35,7 +35,5 @@ namespace Sitecore.Foundation.Commerce.Models.InputModels
         public string WishListId { get; set; }
 
         public string WishListName { get; set; }
-
-        public decimal? GiftCardAmount { get; set; }
     }
 }
