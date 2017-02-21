@@ -63,9 +63,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
 
             var url = string.Empty;
 
-            var productCatalogLinkRequired =
-                WebUtil.GetRawUrl().IndexOf(ProductItemResolver.NavigationItemName, StringComparison.OrdinalIgnoreCase) >=
-                0;
+            var productCatalogLinkRequired = ProductItemResolver.IsProductCategoryUrl(WebUtil.GetRawUrl());
             if (productCatalogLinkRequired)
             {
                 url = CatalogUrlManager.BuildProductCatalogLink(item);

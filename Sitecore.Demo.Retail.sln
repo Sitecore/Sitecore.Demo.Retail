@@ -31,11 +31,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Customers", "Customers", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orders", "Orders", "{A796DED4-AE86-4E8F-BBAF-B57960008D59}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Products", "Products", "{37CE2FA3-8808-4304-930F-A37695B3A869}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{37CE2FA3-8808-4304-930F-A37695B3A869}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Feature.Commerce.Customers", "src\Feature\Customers\code\Sitecore.Feature.Commerce.Customers.csproj", "{ED23DC0F-4FFF-48E1-B9C8-E3AD73329661}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Reference.Storefront", "src\Foundation\Commerce\legacy\Sitecore.Reference.Storefront.csproj", "{8450F330-0271-4091-8809-C671CCD50671}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Feature.Commerce.Catalog", "src\Feature\Catalog\code\Sitecore.Feature.Commerce.Catalog.csproj", "{7031F757-2830-44E3-9639-AAD2DBA69A24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{8450F330-0271-4091-8809-C671CCD50671}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8450F330-0271-4091-8809-C671CCD50671}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8450F330-0271-4091-8809-C671CCD50671}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7031F757-2830-44E3-9639-AAD2DBA69A24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7031F757-2830-44E3-9639-AAD2DBA69A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7031F757-2830-44E3-9639-AAD2DBA69A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7031F757-2830-44E3-9639-AAD2DBA69A24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,5 +80,6 @@ Global
 		{37CE2FA3-8808-4304-930F-A37695B3A869} = {C847060A-D78A-4219-B5D2-088C20B4E3D5}
 		{ED23DC0F-4FFF-48E1-B9C8-E3AD73329661} = {BB79934E-63CC-4B38-A45F-768D912419E3}
 		{8450F330-0271-4091-8809-C671CCD50671} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
+		{7031F757-2830-44E3-9639-AAD2DBA69A24} = {37CE2FA3-8808-4304-930F-A37695B3A869}
 	EndGlobalSection
 EndGlobal

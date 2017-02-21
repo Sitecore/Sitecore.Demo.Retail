@@ -15,20 +15,31 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
+using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web.Mvc;
+using Sitecore.Commerce.Connect.CommerceServer;
+using Sitecore.Commerce.Connect.CommerceServer.Search;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.Commerce.Contacts;
+using Sitecore.ContentSearch;
+using Sitecore.ContentSearch.Linq;
+using Sitecore.ContentSearch.Linq.Utilities;
+using Sitecore.ContentSearch.SearchTypes;
+using Sitecore.ContentSearch.Utilities;
+using Sitecore.Data;
+using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Mvc.Presentation;
-using Sitecore.Reference.Storefront.Utils;
 
 namespace Sitecore.Reference.Storefront.Controllers
 {
     public class NavigationSearchController : BaseController
     {
-        public NavigationSearchController([NotNull] ContactFactory contactFactory)
-            : base(contactFactory)
+        public NavigationSearchController([NotNull] AccountManager accountManager, [NotNull] ContactFactory contactFactory) : base(accountManager, contactFactory)
         {
         }
 
@@ -44,10 +55,57 @@ namespace Sitecore.Reference.Storefront.Controllers
             {
                 return View(Enumerable.Empty<Category>());
             }
-            var response = SearchNavigation.GetNavigationCategories(dataSourceQuery, new CommerceSearchOptions());
+            var response = GetNavigationCategories(dataSourceQuery, new CommerceSearchOptions());
             var navigationResults = response.ResponseItems;
 
             return View(navigationResults.Select(result => new Category(result)));
+        }
+
+        private SearchResponse GetNavigationCategories(string navigationDataSource, CommerceSearchOptions searchOptions)
+        {
+            ID navigationId;
+            var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
+            var searchIndex = searchManager.GetIndex();
+
+            if (navigationDataSource.IsGuid())
+            {
+                navigationId = ID.Parse(navigationDataSource);
+            }
+            else
+            {
+                using (var context = searchIndex.CreateSearchContext())
+                {
+                    var query = LinqHelper.CreateQuery<SitecoreUISearchResultItem>(context, SearchStringModel.ParseDatasourceString(navigationDataSource)).Select(result => result.GetItem().ID);
+                    if (query.Any())
+                    {
+                        navigationId = query.First();
+                    }
+                    else
+                    {
+                        return new SearchResponse();
+                    }
+                }
+            }
+
+            using (var context = searchIndex.CreateSearchContext())
+            {
+                var searchResults = context.GetQueryable<CommerceBaseCatalogSearchResultItem>()
+                    .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Category)
+                    .Where(item => item.Language == Context.Language.Name)
+                    .Where(item => item.CommerceAncestorIds.Contains(navigationId))
+                    .Select(p => new CommerceBaseCatalogSearchResultItem
+                    {
+                        ItemId = p.ItemId,
+                        Uri = p.Uri
+                    });
+
+                searchResults = searchManager.AddSearchOptionsToQuery(searchResults, searchOptions);
+
+                var results = searchResults.GetResults();
+                var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);
+
+                return response;
+            }
         }
     }
 }

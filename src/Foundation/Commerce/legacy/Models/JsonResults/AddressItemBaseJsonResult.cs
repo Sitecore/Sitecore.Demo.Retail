@@ -63,7 +63,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             ZipPostalCode = address.ZipPostalCode;
             Country = address.Country;
             FullAddress = string.Concat(address.Address1, ", ", address.City, ", ", address.ZipPostalCode);
-            DetailsUrl = string.Concat(StorefrontManager.StorefrontUri("/accountmanagement/addressbook"), "?id=", address.ExternalId);
+            DetailsUrl = string.Concat("/accountmanagement/addressbook", "?id=", address.ExternalId);
         }
     }
 }

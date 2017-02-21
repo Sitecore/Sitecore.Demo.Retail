@@ -20,6 +20,7 @@ using System.Web.Mvc;
 using Sitecore.Commerce.Contacts;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Mvc.Presentation;
 using Sitecore.Reference.Storefront.Models.JsonResults;
 
@@ -29,7 +30,7 @@ namespace Sitecore.Reference.Storefront.Controllers
     {
         private readonly RenderingModel _model;
 
-        public SharedController([NotNull] ContactFactory contactFactory, [NotNull] CatalogManager catalogManager) : base(contactFactory)
+        public SharedController([NotNull] AccountManager accountManager, [NotNull] ContactFactory contactFactory, [NotNull] CatalogManager catalogManager) : base(accountManager, contactFactory)
         {
             Assert.ArgumentNotNull(catalogManager, nameof(catalogManager));
 
@@ -106,7 +107,7 @@ namespace Sitecore.Reference.Storefront.Controllers
 
             try
             {
-                var result = CatalogManager.RaiseCultureChosenPageEvent(CurrentStorefront, culture);
+                var result = CatalogManager.RaiseCultureChosenPageEvent(StorefrontManager.CurrentStorefront, culture);
                 success = result.Result;
             }
             catch (Exception e)

@@ -188,11 +188,6 @@ namespace Sitecore.Foundation.Commerce.Managers
                 Quantity = model.Quantity == null ? 1 : (uint) model.Quantity
             };
 
-            if (line.Product.ProductId.Equals(storefront.GiftCardProductId, StringComparison.OrdinalIgnoreCase))
-            {
-                line.Properties.Add("GiftCardAmount", model.GiftCardAmount);
-            }
-
             // create wish list
             if (model.WishListId == null && !string.IsNullOrEmpty(model.WishListName))
             {

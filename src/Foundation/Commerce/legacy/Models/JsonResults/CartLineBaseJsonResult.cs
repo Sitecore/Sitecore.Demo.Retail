@@ -24,6 +24,7 @@ using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines;
 using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Links;
@@ -42,7 +43,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
                 Image = line.Images[0] != null ? line.Images[0].ImageUrl(100, 100) : string.Empty;
             }
 
-            var userCurrency = StorefrontManager.GetCustomerCurrency();
+            var userCurrency = StorefrontManager.CurrentStorefront.DefaultCurrency;
 
             DisplayName = product.DisplayName;
             Color = product.Properties["Color"] as string;
@@ -51,7 +52,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             LinePrice = product.Price.Amount.ToCurrency(GetCurrencyCode(userCurrency, product.Price.CurrencyCode));
             LineTotal = line.Total.Amount.ToCurrency(GetCurrencyCode(userCurrency, line.Total.CurrencyCode));
             ExternalCartLineId = StringUtility.RemoveCurlyBrackets(line.ExternalCartLineId);
-            ProductUrl = product.ProductId.Equals(StorefrontManager.CurrentStorefront.GiftCardProductId, StringComparison.OrdinalIgnoreCase) ? StorefrontManager.StorefrontUri("/buygiftcard") : LinkManager.GetDynamicUrl(productItem);
+            ProductUrl = LinkManager.GetDynamicUrl(productItem);
 
             DiscountOfferNames = line.Adjustments.Select(a => a.Description).ToList();
         }

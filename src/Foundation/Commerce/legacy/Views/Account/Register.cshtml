@@ -12,7 +12,7 @@
 @using Sitecore.Collections
 @using Sitecore.Foundation.Commerce
 @using Sitecore.Foundation.Commerce.Managers
-@model Sitecore.Reference.Storefront.Models.RegisterModel
+@model Sitecore.Reference.Storefront.Models.RegisterViewModel
 @{
     var storefront = StorefrontManager.CurrentStorefront;
 }
@@ -45,48 +45,45 @@
         @Html.ValidationMessageFor(m => m.UserName)
     </div>
 
-    if (storefront.FormsAuthentication)
-    {
-        <div class="row">
-            <div class="col-md-6 col-sm-6">
-                <div class="form-group">
-                    <label for="Password">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.Password, Html.Sitecore().CurrentItem)</label><span class="required">*</span>
-                    @Html.PasswordFor(m => m.Password, new
-                                                       {
-                                                           placeholder = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordPlaceholder],
-                                                           data_val_required = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordMissingMessage],
-                                                           @class = "form-control new-user",
-                                                           autocomplete = "off"
-                                                       })
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            <div class="form-group">
+                <label for="Password">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.Password, Html.Sitecore().CurrentItem)</label><span class="required">*</span>
+                @Html.PasswordFor(m => m.Password, new
+                                                    {
+                                                        placeholder = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordPlaceholder],
+                                                        data_val_required = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordMissingMessage],
+                                                        @class = "form-control new-user",
+                                                        autocomplete = "off"
+                                                    })
 
-                    @Html.ValidationMessageFor(m => m.Password)
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6">
-                <div class="form-group">
-                    <label for="ConfirmPassword">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.PasswordAgain, Html.Sitecore().CurrentItem)</label><span class="required">*</span>
-                    @Html.PasswordFor(m => m.ConfirmPassword, new
-                                                              {
-                                                                  placeholder = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordPlaceholder],
-                                                                  data_val_required = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordMissingMessage],
-                                                                  data_val_equalto_other = "*.Password",
-                                                                  data_val_equalto = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordsDoNotMatchMessage],
-                                                                  @class = "form-control new-user",
-                                                                  autocomplete = "off"
-                                                              })
-
-                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
-                </div>
+                @Html.ValidationMessageFor(m => m.Password)
             </div>
         </div>
-    }
+        <div class="col-md-6 col-sm-6">
+            <div class="form-group">
+                <label for="ConfirmPassword">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.PasswordAgain, Html.Sitecore().CurrentItem)</label><span class="required">*</span>
+                @Html.PasswordFor(m => m.ConfirmPassword, new
+                                                            {
+                                                                placeholder = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordPlaceholder],
+                                                                data_val_required = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordMissingMessage],
+                                                                data_val_equalto_other = "*.Password",
+                                                                data_val_equalto = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordsDoNotMatchMessage],
+                                                                @class = "form-control new-user",
+                                                                autocomplete = "off"
+                                                            })
+
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </div>
+        </div>
+    </div>
 
     <div class="row m-t-1">
         <div class="col-sm-6">
             <button type="submit" id="registerButton" data-loading-text="@Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.Registering]" class="btn btn-primary btn-lg btn-block">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.CreateUser, Html.Sitecore().CurrentItem)</button>
         </div>
         <div class="col-sm-6">
-            <a class="btn btn-default btn-lg btn-block" href="@StorefrontManager.StorefrontUri("/Login")">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.Cancel, Html.Sitecore().CurrentItem)</a>
+            <a class="btn btn-default btn-lg btn-block" href="@("/Login")">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.Cancel, Html.Sitecore().CurrentItem)</a>
         </div>
     </div>
 }

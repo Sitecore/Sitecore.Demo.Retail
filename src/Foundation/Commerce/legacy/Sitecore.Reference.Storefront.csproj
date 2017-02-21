@@ -213,7 +213,6 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
-    <Compile Include="Controllers\CSBaseController.cs" />
     <Compile Include="Controllers\NavigationSearchController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\StorefrontSearchController.cs" />
@@ -234,9 +233,8 @@
     <Compile Include="Models\JsonResults\ShippingMethodPerItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\ShippingMethodsJsonResult.cs" />
     <Compile Include="Models\JsonResults\ShippingOptionBaseJsonResult.cs" />
-    <Compile Include="Models\FederatedSignoutModel.cs" />
+    <Compile Include="Models\FederatedSignOutViewModel.cs" />
     <Compile Include="Models\OrderConfirmationViewModel.cs" />
-    <Compile Include="Models\RenderingModels\CurrencyMenuViewModel.cs" />
     <Compile Include="Models\JsonResults\AddressItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\AddressListItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\AvailableStatesBaseJsonResult.cs" />
@@ -269,45 +267,39 @@
     <Compile Include="Models\JsonResults\WishListItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\WishListBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\WishListsBaseJsonResult.cs" />
-    <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\RegisterModel.cs" />
-    <Compile Include="Models\RenderingModels\CartRenderingModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\CartRenderingModel.cs" />
     <Compile Include="Models\ProductSearchResultViewModel.cs" />
-    <Compile Include="Models\RenderingModels\MultipleProductSearchResultsViewModel.cs" />
+    <Compile Include="Models\MultipleProductSearchResultsViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
-    <Compile Include="Models\CustomCommerceCartLine.cs" />
+    <Compile Include="Models\CommerceCartLineWithImages.cs" />
     <Compile Include="Models\JsonResults\BaseJsonResult.cs" />
     <Compile Include="Models\LandingPageViewModel.cs" />
     <Compile Include="Models\NoDataSourceViewModel.cs" />
     <Compile Include="Models\PaginationModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\RelatedCatalogItemsViewModel.cs" />
-    <Compile Include="Models\RenderingModels\NavigationViewModel.cs" />
-    <Compile Include="Models\RenderingModels\PaginationViewModel.cs" />
-    <Compile Include="Models\RenderingModels\ProductFacetsViewModel.cs" />
-    <Compile Include="Models\RenderingModels\ProductListHeaderViewModel.cs" />
-    <Compile Include="Models\SearchBarModel.cs" />
+    <Compile Include="Models\NavigationViewModel.cs" />
+    <Compile Include="Models\PaginationViewModel.cs" />
+    <Compile Include="Models\ProductFacetsViewModel.cs" />
+    <Compile Include="Models\ProductListHeaderViewModel.cs" />
+    <Compile Include="Models\SearchBarViewModel.cs" />
     <Compile Include="Models\SiteContentSearchResultsViewModel.cs" />
     <Compile Include="Models\SiteContentViewModel.cs" />
-    <Compile Include="Models\SitecoreItemModels\CommerceServerStorefront.cs" />
     <Compile Include="Models\VariantPropertiesEqualityComparer.cs" />
     <Compile Include="Models\VariantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\InitializeBundles.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\InitializeControllerFactory.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\InitializeRoutes.cs" />
-    <Compile Include="Utils\SearchNavigation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Content Include="App_Config\CommerceServer.Core.config.disabled" />
     <Content Include="App_Config\Include\Reference.Storefront\Reference.Storefront.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Config\Include\Reference.Storefront\Reference.Storefront.Index.Lucene.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="MergeFiles\Merge.Commerce.Storefront.config">
       <SubType>Designer</SubType>
     </Content>
     <None Include="packages.config">
@@ -348,13 +340,10 @@
     <Content Include="Views\Catalog\_ProductSummary.cshtml" />
     <Content Include="Views\Catalog\_RelatedCatalogItemsSlide.cshtml" />
     <Content Include="Views\Catalog\_SiteContentSummary.cshtml" />
-    <Content Include="Views\Catalog\AddGiftCardToCart.cshtml" />
     <Content Include="Views\Catalog\AddToCart.cshtml" />
     <Content Include="Views\Catalog\CategoryPageHeader.cshtml" />
     <Content Include="Views\Catalog\CheckGiftCardBalance.cshtml" />
     <Content Include="Views\Catalog\ChildCategoryNavigation.cshtml" />
-    <Content Include="Views\Catalog\GiftCardInformation.cshtml" />
-    <Content Include="Views\Catalog\GiftCardPresentation.cshtml" />
     <Content Include="Views\StorefrontSearch\ProductSearchResultsFacets.cshtml" />
     <Content Include="Views\Catalog\ProductImages.cshtml" />
     <Content Include="Views\Catalog\ProductInformation.cshtml" />
@@ -382,7 +371,6 @@
     <Content Include="Views\Checkout\StartCheckout.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_PrintLayout.cshtml" />
-    <Content Include="Views\Shared\CurrencyMenu.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\ErrorImage.cshtml" />
     <Content Include="Views\Shared\ErrorsSummary.cshtml" />
@@ -455,7 +443,6 @@
     <Content Include="Scripts\number-polyfill.js" />
     <Content Include="Scripts\number-polyfill.min.js" />
     <Content Include="Scripts\Storefront\order.js" />
-    <Content Include="Scripts\plugins.js" />
     <Content Include="Scripts\Storefront\addresses.js" />
     <Content Include="Scripts\Storefront\bootstrap.js" />
     <Content Include="Scripts\Storefront\bootstrap.min.js" />
@@ -513,9 +500,8 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>::Delete the CommerceServer assemblies as they create problems if deployed
-::For deployment purposes, the Sitecore.Commerce.Connect.CommerceServer assembly has CopyLocal=false
-del "$(TargetDir)\CommerceServer.*.dll"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

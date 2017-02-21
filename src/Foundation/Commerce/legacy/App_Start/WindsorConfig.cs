@@ -31,7 +31,7 @@ namespace Sitecore.Reference.Storefront
 
         static WindsorConfig()
         {
-            Container = new WindsorContainer().Install(FromAssembly.This());
+            Container = Sitecore.Foundation.Commerce.WindsorConfig.Container.Install(FromAssembly.This());
         }
 
         public static void ConfigureContainer()
@@ -40,7 +40,6 @@ namespace Sitecore.Reference.Storefront
 
         public static void ReleaseContainer()
         {
-            Container.Dispose();
         }
     }
 }

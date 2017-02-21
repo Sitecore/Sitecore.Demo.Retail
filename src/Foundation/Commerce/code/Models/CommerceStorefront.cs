@@ -25,6 +25,7 @@ using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Foundation.Commerce.Models
 {
@@ -60,25 +61,21 @@ namespace Sitecore.Foundation.Commerce.Models
             _shopName = shopName;
         }
 
-        public virtual Item RootItem => Context.Database.GetItem(Context.Site.RootPath);
-
         public virtual Item HomeItem => InnerItem;
 
-        public virtual Item GlobalItem => Context.Database.GetItem(Context.Site.RootPath + "/Global");
+        public virtual Item GlobalItem => InnerItem.Database.GetItem(Context.Site.RootPath + "/Global");
 
         public virtual string SenderEmailAddress
         {
             get
             {
                 var email = HomeItem.Fields[StorefrontConstants.KnownFieldNames.SenderEmailAddress];
-                return email?.ToString() ?? string.Empty;
+                return email?.ToString() ?? String.Empty;
             }
         }
 
         public virtual bool UseIndexFileForProductStatusInLists => MainUtil.GetBool(HomeItem[StorefrontConstants.KnownFieldNames.UseIndexFileForProductStatusInLists],
             false);
-
-        public virtual bool FormsAuthentication => MainUtil.GetBool(HomeItem[StorefrontConstants.KnownFieldNames.FormsAuthentication], false);
 
         public virtual string ShopName
         {
@@ -86,99 +83,19 @@ namespace Sitecore.Foundation.Commerce.Models
             set { _shopName = value; }
         }
 
-        public virtual string DefaultCartName { get; set; } = CommerceConstants.CartSettings.DefaultCartName;
-
-        public virtual Catalog DefaultCatalog
-        {
-            get
-            {
-                //If this is not in a storefront then return the default catalog
-                if (InnerItem == null)
-                {
-                    var defaultCatalogContainer =
-                        Context.Database.GetItem(CommerceConstants.KnownItemIds.DefaultCatalog);
-                    var catalogPath = defaultCatalogContainer.Fields["Catalog"].Source + "/" +
-                                      defaultCatalogContainer.Fields["Catalog"].Value;
-                    var defaultCatalog = Context.Database.GetItem(catalogPath);
-                    return new Catalog(defaultCatalog);
-                }
-
-                //Get list of all related catalogs
-                var catalogs = InnerItem.Fields["Catalogs"].Value;
-                var catalogArray = catalogs.Split("|".ToCharArray());
-                if (catalogArray.Length == 0)
-                {
-                    return null;
-                }
-
-                //Return first catalog
-                var catalogItem = Context.Database.GetItem(catalogArray[0]);
-                return new Catalog(catalogItem);
-            }
-        }
-
-        public virtual string GiftCardProductId
-        {
-            get { return InnerItem == null ? "22565422120" : InnerItem["GiftCardProductId"]; }
-        }
-
-        public virtual string GiftCardAmountOptions
-        {
-            get { return InnerItem == null ? "10|20|25|50|100" : InnerItem["GiftCardAmountOptions"]; }
-        }
-
         public virtual string DefaultProductId => InnerItem == null ? "22565422120" : InnerItem["DefaultProductId"];
 
-        public virtual bool SupportsWishLists => true;
+        public bool SupportsWishLists => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsWishLists], false);
 
-        public virtual bool SupportsLoyaltyPrograms => true;
+        public bool SupportsLoyaltyPrograms => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsLoyaltyProgram], false);
 
-        public virtual bool SupportsGiftCardPayment => true;
+        public bool SupportsGiftCardPayment => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsGirstCardPayment], false);
 
-        public virtual int MaxNumberOfAddresses
-        {
-            get { return MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfAddresses], 10); }
-        }
+        public virtual int MaxNumberOfAddresses => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfAddresses], 10);
 
         public virtual int MaxNumberOfWishLists => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfWishLists], 10);
 
         public virtual int MaxNumberOfWishListItems => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfWishListItems], 10);
-
-        public virtual string DefaultCurrency
-        {
-            get
-            {
-                var linkedCurrency = HomeItem[StorefrontConstants.KnownFieldNames.DefaultCurrency];
-                if (!string.IsNullOrWhiteSpace(linkedCurrency))
-                {
-                    return Context.Database.GetItem(ID.Parse(linkedCurrency)).Name;
-                }
-
-                throw new ConfigurationErrorsException("Default currency not set on the store");
-            }
-        }
-
-        public virtual List<string> SupportedCurrencies
-        {
-            get
-            {
-                var returnValues = new List<string>();
-
-                MultilistField supportedCurrenciesList = HomeItem.Fields[StorefrontConstants.KnownFieldNames.SupportedCurrencies];
-                if (supportedCurrenciesList != null)
-                {
-                    returnValues.AddRange(
-                        supportedCurrenciesList.TargetIDs.Select(id => HomeItem.Database.GetItem(id).Name));
-                }
-
-                return returnValues;
-            }
-        }
-
-        public virtual bool IsSupportedCurrency(string currency)
-        {
-            return SupportedCurrencies.Exists(x => x.Equals(currency, StringComparison.OrdinalIgnoreCase));
-        }
 
         public virtual string Title()
         {
@@ -194,5 +111,21 @@ namespace Sitecore.Foundation.Commerce.Models
         {
             return HomeItem[StorefrontConstants.KnownFieldNames.MapKey];
         }
+
+        public string DefaultCurrency
+        {
+            get
+            {
+                var currencyItem = CurrencyContextItem?.TargetItem(Templates.CurrencyContext.Fields.DefaultCurrency);
+                if (currencyItem == null)
+                {
+                    throw new ConfigurationErrorsException("Default currency not set on the store");
+                }
+
+                return currencyItem.Name;
+            }
+        }
+
+        private Item CurrencyContextItem => InnerItem.GetAncestorOrSelfOfTemplate(Templates.CurrencyContext.ID);
     }
 }

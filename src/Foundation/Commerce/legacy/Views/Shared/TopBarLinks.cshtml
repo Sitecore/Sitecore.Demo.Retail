@@ -29,7 +29,7 @@
             if (Request.IsAuthenticated)
             {
                 <li>
-                    <a class="quicklink-space" id="UserNameLink" href="@StorefrontManager.StorefrontUri("/accountmanagement")" class="username" title="@myAccountAlt">@Sitecore.Context.User.LocalName</a>
+                    <a class="quicklink-space" id="UserNameLink" href="@("/accountmanagement")" class="username" title="@myAccountAlt">@Sitecore.Context.User.LocalName</a>
                 </li>
 
                 displayPipe = true;

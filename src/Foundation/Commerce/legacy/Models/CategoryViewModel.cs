@@ -150,7 +150,7 @@ namespace Sitecore.Reference.Storefront.Models
 
         public string GetLink()
         {
-            return Item.Name.Equals(StorefrontManager.CurrentStorefront.GiftCardProductId, StringComparison.OrdinalIgnoreCase) ? StorefrontManager.StorefrontUri("/buygiftcard") : LinkManager.GetDynamicUrl(Item).TrimEnd('/');
+            return LinkManager.GetDynamicUrl(Item).TrimEnd('/');
         }
     }
 }

@@ -17,7 +17,7 @@
         <div class="col-md-12">
             <h2>
                 <span class="back-to-myaccount pull-right">
-                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement")">
+                    <a href="@("/accountmanagement")">
                         <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> @Html.Sitecore().Field("Back To My Account Label", Html.Sitecore().CurrentItem)
                     </a>
                 </span>
@@ -129,7 +129,7 @@
             @Html.Sitecore().Field("Loyalty Cards Empty Text", Html.Sitecore().CurrentItem)
         </div>
         <div class="col-md-12 border-top">
-            <a href="@StorefrontManager.StorefrontUri("/accountmanagement")" class="btn btn-default">@Html.Sitecore().Field("Back To My Account Label", Html.Sitecore().CurrentItem)</a>
+            <a href="@("/accountmanagement")" class="btn btn-default">@Html.Sitecore().Field("Back To My Account Label", Html.Sitecore().CurrentItem)</a>
         </div>
     </div>
 </div>

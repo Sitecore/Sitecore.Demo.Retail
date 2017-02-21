@@ -47,13 +47,13 @@
         </thead>
         <tbody data-bind="foreach: orders">
             <tr data-bind="css: {'odd': $index() % 2 == 0}">
-                <td><a href="@StorefrontManager.StorefrontUri("/accountmanagement/loyaltycards")" data-bind="text: CardNumber"></a></td>
-                <td><a href="@StorefrontManager.StorefrontUri("/accountmanagement/loyaltycards")"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></td>
+                <td><a href="@("/accountmanagement/loyaltycards")" data-bind="text: CardNumber"></a></td>
+                <td><a href="@("/accountmanagement/loyaltycards")"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></td>
             </tr>
         </tbody>
     </table>
     <div class="panel-footer" data-bind="visible: isNotEmpty" style="display: none">
-        <a href="@StorefrontManager.StorefrontUri("/accountmanagement/loyaltycards")" class="view-all btn btn-default">
+        <a href="@("/accountmanagement/loyaltycards")" class="view-all btn btn-default">
             @Html.Sitecore().Field("View Details Label", Html.Sitecore().CurrentItem) <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         </a>
     </div>

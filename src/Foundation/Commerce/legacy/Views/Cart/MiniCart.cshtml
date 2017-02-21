@@ -47,8 +47,8 @@
             </strong>
         </div>
         <div>
-            <button type="button" id="rsf-btn-checkout" onclick="window.location.href = '@StorefrontManager.StorefrontUri("/Checkout")'" class="btn btn-block btn-primary">@Html.Sitecore().Field("CheckoutLabel", Html.Sitecore().CurrentItem)</button>
-            <a class="btn btn-block btn-default" href="@StorefrontManager.StorefrontUri("/ShoppingCart")">@Html.Sitecore().Field("ViewCartLabel", Html.Sitecore().CurrentItem)</a>
+            <button type="button" id="rsf-btn-checkout" onclick="window.location.href = '@("/Checkout")'" class="btn btn-block btn-primary">@Html.Sitecore().Field("CheckoutLabel", Html.Sitecore().CurrentItem)</button>
+            <a class="btn btn-block btn-default" href="@("/ShoppingCart")">@Html.Sitecore().Field("ViewCartLabel", Html.Sitecore().CurrentItem)</a>
         </div>
     </div>
 </li>
