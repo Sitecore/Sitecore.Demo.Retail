@@ -27,6 +27,7 @@ using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
 using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Reference.Storefront.Infrastructure;
@@ -34,7 +35,7 @@ using Sitecore.Reference.Storefront.Models.JsonResults;
 
 namespace Sitecore.Reference.Storefront.Controllers
 {
-    public class CartController : CSBaseController
+    public class CartController : BaseController
     {
         public CartController([NotNull] CartManager cartManager, [NotNull] AccountManager accountManager, [NotNull] ContactFactory contactFactory) : base(accountManager, contactFactory)
         {
@@ -71,7 +72,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         {
             try
             {
-                var response = CartManager.GetCurrentCart(CurrentStorefront, CurrentVisitorContext, updateCart);
+                var response = CartManager.GetCurrentCart(StorefrontManager.CurrentStorefront, CurrentVisitorContext, updateCart);
                 var result = new MiniCartBaseJsonResult(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
@@ -104,7 +105,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                 // The following condition stops the creation of empty carts on startup.
                 if (cart == null && CartCookieHelper.DoesCookieExistForCustomer(id))
                 {
-                    var response = CartManager.GetCurrentCart(CurrentStorefront, CurrentVisitorContext, true);
+                    var response = CartManager.GetCurrentCart(StorefrontManager.CurrentStorefront, CurrentVisitorContext, true);
                     cartResult = new CSCartBaseJsonResult(response.ServiceProviderResult);
                     if (response.ServiceProviderResult.Success && response.Result != null)
                     {
@@ -147,7 +148,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.AddLineItemsToCart(CurrentStorefront, CurrentVisitorContext, new List<AddCartLineInputModel> {inputModel});
+                var response = CartManager.AddLineItemsToCart(StorefrontManager.CurrentStorefront, CurrentVisitorContext, new List<AddCartLineInputModel> {inputModel});
                 var result = new BaseJsonResult(response.ServiceProviderResult);
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -175,7 +176,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.AddLineItemsToCart(CurrentStorefront, CurrentVisitorContext, inputModels);
+                var response = CartManager.AddLineItemsToCart(StorefrontManager.CurrentStorefront, CurrentVisitorContext, inputModels);
                 var result = new BaseJsonResult(response.ServiceProviderResult);
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -203,7 +204,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.RemoveLineItemFromCart(CurrentStorefront, CurrentVisitorContext, model.ExternalCartLineId);
+                var response = CartManager.RemoveLineItemFromCart(StorefrontManager.CurrentStorefront, CurrentVisitorContext, model.ExternalCartLineId);
                 var result = new CSCartBaseJsonResult(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
@@ -236,7 +237,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.ChangeLineQuantity(CurrentStorefront, CurrentVisitorContext, inputModel);
+                var response = CartManager.ChangeLineQuantity(StorefrontManager.CurrentStorefront, CurrentVisitorContext, inputModel);
                 var result = new CSCartBaseJsonResult(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
@@ -277,7 +278,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.AddPromoCodeToCart(CurrentStorefront, CurrentVisitorContext, model.PromoCode);
+                var response = CartManager.AddPromoCodeToCart(StorefrontManager.CurrentStorefront, CurrentVisitorContext, model.PromoCode);
                 var result = new CSCartBaseJsonResult(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
@@ -310,7 +311,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.RemovePromoCodeFromCart(CurrentStorefront, CurrentVisitorContext, model.PromoCode);
+                var response = CartManager.RemovePromoCodeFromCart(StorefrontManager.CurrentStorefront, CurrentVisitorContext, model.PromoCode);
                 var result = new CSCartBaseJsonResult(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {

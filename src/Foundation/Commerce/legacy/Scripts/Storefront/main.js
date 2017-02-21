@@ -51,7 +51,6 @@ function AJAXCall(callType, url, data, responseFunction, sender) {
         contentType: "application/json; charset=utf-8",
         data: data,
         success: function (data) {
-            dontBlockUI = false;
             if (responseFunction != null) {
                 responseFunction(data, true, sender);
             }
@@ -64,22 +63,7 @@ function AJAXCall(callType, url, data, responseFunction, sender) {
     });
 }
 
-// General helper methods
-// -
 function StorefrontUri(route) {
-    //var currentLocation = window.location;
-    //var localpathArray = currentLocation.pathname.split("/");
-
-    //var storefrontRouteKey = localpathArray[2];
-    ////Check if our storefronts key is the route key
-    ////This means that a localization key is in the URL
-    //if (storefrontRouteKey.toLowerCase() == "storefronts") {
-    //    //If it has an additional key in the route then slide one over
-    //    storefrontRouteKey = localpathArray[3];
-    //    return "/" + localpathArray[2] + "/" + storefrontRouteKey + "/" + route;
-    //}
-
-    //return "/" + localpathArray[1] + "/" + storefrontRouteKey + "/" + route;
     return "/" + route;
 }
 

@@ -30,15 +30,9 @@ namespace Sitecore.Foundation.Commerce.Models
         private const string IsProductKey = "_IsProduct";
         private const string UrlContainsCategoryKey = "_UrlContainsCategory";
 
-        public virtual HttpContext CurrentContext
-        {
-            get { return HttpContext.Current; }
-        }
+        public virtual HttpContext CurrentContext => HttpContext.Current;
 
-        public virtual IDictionary Items
-        {
-            get { return HttpContext.Current.Items; }
-        }
+        public virtual IDictionary Items => HttpContext.Current.Items;
 
         public virtual Item CurrentCatalogItem 
         { 
@@ -49,13 +43,11 @@ namespace Sitecore.Foundation.Commerce.Models
 
             set
             {
-                Item item = value as Item;
-
-                this.Items[CurrentCatalogItemKey] = item;
-                if (item != null)
+                this.Items[CurrentCatalogItemKey] = value;
+                if (value != null)
                 {
-                    this.Items[IsCategoryKey] = (item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate));
-                    this.Items[IsProductKey] = (item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductTemplate));
+                    this.Items[IsCategoryKey] = (value.IsDerived(CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate));
+                    this.Items[IsProductKey] = (value.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductTemplate));
                 }
                 else
                 {
@@ -65,27 +57,15 @@ namespace Sitecore.Foundation.Commerce.Models
             }
         }
 
-        public virtual bool IsCategory
-        {
-            get
-            {
-                return (this.Items[IsCategoryKey] != null) ? (bool)this.Items[IsCategoryKey] : false;
-            }
-        }
+        public virtual bool IsCategory => (bool?) Items[IsCategoryKey] ?? false;
 
-        public virtual bool IsProduct
-        {
-            get
-            {
-                return (this.Items[IsProductKey] != null) ? (bool)this.Items[IsProductKey] : false;
-            }
-        }
+        public virtual bool IsProduct => (bool?) Items[IsProductKey] ?? false;
 
         public virtual bool UrlContainsCategory
         {
             get
             {
-                return (this.Items[UrlContainsCategoryKey] != null) ? (bool)this.Items[UrlContainsCategoryKey] : false;
+                return (bool?) Items[UrlContainsCategoryKey] ?? false;
             }
 
             set

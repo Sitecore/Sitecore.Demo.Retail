@@ -42,30 +42,42 @@ namespace Sitecore.Reference.Storefront.Controllers
         private VisitorContext _currentVisitorContext;
         private ISiteContext _siteContext;
 
-        public BaseController(ContactFactory contactFactory)
+        public BaseController([NotNull] AccountManager accountManager, [NotNull] ContactFactory contactFactory)
         {
             Assert.ArgumentNotNull(contactFactory, nameof(contactFactory));
+            Assert.ArgumentNotNull(accountManager, nameof(accountManager));
 
             ContactFactory = contactFactory;
+            AccountManager = accountManager;
         }
 
+        public AccountManager AccountManager { get; set; }
+
         public ContactFactory ContactFactory { get; }
+
         public ISiteContext CurrentSiteContext => _siteContext ?? (_siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>());
 
-        public virtual VisitorContext CurrentVisitorContext => _currentVisitorContext ?? (_currentVisitorContext = new VisitorContext(ContactFactory));
-
-        public CommerceStorefront CurrentStorefront => StorefrontManager.CurrentStorefront;
-
-        public ICommerceSearchManager CurrentSearchManager => _currentSearchManager ??
-                                                              (_currentSearchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>());
-
-        protected Rendering CurrentRendering => RenderingContext.Current.Rendering;
-
-        protected Item Item
+        public virtual VisitorContext CurrentVisitorContext
         {
-            get { return RenderingContext.Current.Rendering.Item; }
+            get
+            {
+                // Setup the visitor context only once per HttpRequest.
+                var siteContext = CurrentSiteContext;
+                var visitorContext = siteContext.Items["__visitorContext"] as VisitorContext;
+                if (visitorContext != null)
+                {
+                    return visitorContext;
+                }
+                visitorContext = new VisitorContext(ContactFactory);
+                if (Context.User.IsAuthenticated && !Context.User.Profile.IsAdministrator)
+                {
+                    visitorContext.SetCommerceUser(AccountManager.ResolveCommerceUser().Result);
+                }
 
-            set { RenderingContext.Current.Rendering.Item = value; }
+                siteContext.Items["__visitorContext"] = visitorContext;
+
+                return visitorContext;
+            }
         }
 
         public virtual void ValidateModel(BaseJsonResult result)

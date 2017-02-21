@@ -15,6 +15,7 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -94,7 +95,7 @@ namespace Sitecore.Reference.Storefront.Models
 
         public HtmlString DisplayNameRender => PageContext.Current.HtmlHelper.Sitecore().Field(FieldIDs.DisplayName.ToString(), Item);
 
-        public string ListPriceWithCurrency => ListPrice.HasValue ? ListPrice.ToCurrency(StorefrontManager.GetCustomerCurrency()) : string.Empty;
+        public string ListPriceWithCurrency => ListPrice.HasValue ? ListPrice.ToCurrency(StorefrontManager.CurrentStorefront.DefaultCurrency) : string.Empty;
 
         public decimal CustomerAverageRating { get; set; }
 
@@ -133,13 +134,13 @@ namespace Sitecore.Reference.Storefront.Models
             }
         }
 
-        public string AdjustedPriceWithCurrency => AdjustedPrice.HasValue ? AdjustedPrice.ToCurrency(StorefrontManager.GetCustomerCurrency()) : string.Empty;
+        public string AdjustedPriceWithCurrency => AdjustedPrice.HasValue ? AdjustedPrice.ToCurrency(StorefrontManager.CurrentStorefront.DefaultCurrency) : string.Empty;
 
         public decimal SavingsPercentage => CalculateSavingsPercentage(AdjustedPrice, ListPrice);
 
-        public string LowestPricedVariantAdjustedPriceWithCurrency => LowestPricedVariantAdjustedPrice.HasValue ? LowestPricedVariantAdjustedPrice.ToCurrency(StorefrontManager.GetCustomerCurrency()) : string.Empty;
+        public string LowestPricedVariantAdjustedPriceWithCurrency => LowestPricedVariantAdjustedPrice.HasValue ? LowestPricedVariantAdjustedPrice.ToCurrency(StorefrontManager.CurrentStorefront.DefaultCurrency) : string.Empty;
 
-        public string LowestPricedVariantListPriceWithCurrency => LowestPricedVariantListPrice.HasValue ? LowestPricedVariantListPrice.ToCurrency(StorefrontManager.GetCustomerCurrency()) : string.Empty;
+        public string LowestPricedVariantListPriceWithCurrency => LowestPricedVariantListPrice.HasValue ? LowestPricedVariantListPrice.ToCurrency(StorefrontManager.CurrentStorefront.DefaultCurrency) : string.Empty;
 
         public decimal VariantSavingsPercentage => CalculateSavingsPercentage(LowestPricedVariantAdjustedPrice, LowestPricedVariantListPrice);
 
@@ -156,12 +157,6 @@ namespace Sitecore.Reference.Storefront.Models
         }
 
         public decimal? Quantity { get; set; }
-
-        [Required]
-        [Display(Name = "Gift Card Amount")]
-        public decimal? GiftCardAmount { get; set; }
-
-        public List<KeyValuePair<string, decimal?>> GiftCardAmountOptions { get; set; }
 
         public double StockCount { get; set; }
 
@@ -227,7 +222,7 @@ namespace Sitecore.Reference.Storefront.Models
             }
         }
 
-        public string ProductUrl => ProductId.Equals(StorefrontManager.CurrentStorefront.GiftCardProductId, StringComparison.OrdinalIgnoreCase) ? StorefrontManager.StorefrontUri("/buygiftcard") : LinkManager.GetDynamicUrl(Item);
+        public string ProductUrl => LinkManager.GetDynamicUrl(Item);
 
         public string ProductId => Item.Name;
 
@@ -248,6 +243,15 @@ namespace Sitecore.Reference.Storefront.Models
 
         public string StockStatusName { get; set; }
         IEnumerable<IProductVariant> IInventoryProduct.Variants => Variants;
+
+        public List<VariantViewModel> DistinctColourVariants
+        {
+            get
+            {
+                return Variants.Where(variant => !string.IsNullOrWhiteSpace(variant.ProductColor)).Distinct(new VariantPropertiesEqualityComparer(VariantPropertiesComparisonProperty.ProductColor)).ToList();
+                
+            }
+        }
 
         public void Initialize(Rendering rendering, List<VariantViewModel> variants)
         {
@@ -271,7 +275,7 @@ namespace Sitecore.Reference.Storefront.Models
 
         public string GetLink()
         {
-            return ProductId.Equals(StorefrontManager.CurrentStorefront.GiftCardProductId, StringComparison.OrdinalIgnoreCase) ? StorefrontManager.StorefrontUri("/buygiftcard") : LinkManager.GetDynamicUrl(Item);
+            return LinkManager.GetDynamicUrl(Item);
         }
 
         public decimal CalculateSavingsPercentage(decimal? adjustedPrice, decimal? listPrice)

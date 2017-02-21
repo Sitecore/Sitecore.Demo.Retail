@@ -12,50 +12,43 @@
 
 function WishListHeaderViewModel(wishListHeader) {
     var self = this;
-    var populate = wishListHeader != null ? true : false;
-
-    self.externalId = populate ? ko.observable(wishListHeader.ExternalId) : ko.observable();
-    self.name = populate ? ko.observable(wishListHeader.Name) : ko.observable();
-    self.isFavorite = populate ? ko.observable(wishListHeader.IsFavorite) : ko.observable();
-    self.detailsUrl = populate ? ko.observable(wishListHeader.DetailsUrl) : ko.observable();
+    self.externalId = wishListHeader == null ? ko.observable() : ko.observable(wishListHeader.ExternalId);
+    self.name = wishListHeader != null ? ko.observable(wishListHeader.Name) : ko.observable();
+    self.isFavorite = wishListHeader != null ? ko.observable(wishListHeader.IsFavorite) : ko.observable();
+    self.detailsUrl = wishListHeader != null ? ko.observable(wishListHeader.DetailsUrl) : ko.observable();
     self.showEditName = ko.observable(false);
 }
 
 function WishListLineViewModel(wishListLine) {
     var self = this;
-    var populate = wishListLine != null ? true : false;
-
-    self.image = populate ? ko.observable(wishListLine.Image) : ko.observable();
-    self.displayName = populate ? ko.observable(wishListLine.DisplayName) : ko.observable();
-    self.color = populate ? ko.observable(wishListLine.Color) : ko.observable();
-    self.lineDiscount = populate ? ko.observable(wishListLine.LineDiscount) : ko.observable();
-    self.quantity = populate ? ko.observable(wishListLine.Quantity) : ko.observable();
-    self.linePrice = populate ? ko.observable(wishListLine.LinePrice) : ko.observable();
-    self.lineTotal = populate ? ko.observable(wishListLine.LineTotal) : ko.observable();
-    self.externalLineId = populate ? ko.observable(wishListLine.ExternalLineId) : ko.observable();
-    self.productUrl = populate ? ko.observable(wishListLine.ProductUrl) : ko.observable();
-    self.productId = populate ? ko.observable(wishListLine.ProductId) : ko.observable();
-    self.variantId = populate ? ko.observable(wishListLine.VariantId) : ko.observable();
-    self.productCatalog = populate ? ko.observable(wishListLine.ProductCatalog) : ko.observable();
-    self.wishListId = populate ? ko.observable(wishListLine.WishListId) : ko.observable();
-    self.giftCardAmount = populate ? ko.observable(wishListLine.GiftCardAmount) : ko.observable();
+    self.image = wishListLine != null ? ko.observable(wishListLine.Image) : ko.observable();
+    self.displayName = wishListLine != null ? ko.observable(wishListLine.DisplayName) : ko.observable();
+    self.color = wishListLine != null ? ko.observable(wishListLine.Color) : ko.observable();
+    self.lineDiscount = wishListLine != null ? ko.observable(wishListLine.LineDiscount) : ko.observable();
+    self.quantity = wishListLine != null ? ko.observable(wishListLine.Quantity) : ko.observable();
+    self.linePrice = wishListLine != null ? ko.observable(wishListLine.LinePrice) : ko.observable();
+    self.lineTotal = wishListLine != null ? ko.observable(wishListLine.LineTotal) : ko.observable();
+    self.externalLineId = wishListLine != null ? ko.observable(wishListLine.ExternalLineId) : ko.observable();
+    self.productUrl = wishListLine != null ? ko.observable(wishListLine.ProductUrl) : ko.observable();
+    self.productId = wishListLine != null ? ko.observable(wishListLine.ProductId) : ko.observable();
+    self.variantId = wishListLine != null ? ko.observable(wishListLine.VariantId) : ko.observable();
+    self.productCatalog = wishListLine != null ? ko.observable(wishListLine.ProductCatalog) : ko.observable();
+    self.wishListId = wishListLine != null ? ko.observable(wishListLine.WishListId) : ko.observable();
 }
 
 function WishListViewModel(wishList) {
     var self = this;
-    var populate = wishList != null ? true : false;
-
     self.lines = ko.observableArray();
-    if (populate) {
+    if (wishList != null) {
         $(wishList.Lines).each(function () {
             self.lines.push(new WishListLineViewModel(this));
         });
     }
 
     self.showLoader = ko.observable(false);
-    self.name = populate ? ko.observable(wishList.Name) : ko.observable();
-    self.externalId = populate ? ko.observable(wishList.ExternalId) : ko.observable();
-    self.isFavorite = populate ? ko.observable(wishList.IsFavorite) : ko.observable();
+    self.name = wishList != null ? ko.observable(wishList.Name) : ko.observable();
+    self.externalId = wishList != null ? ko.observable(wishList.ExternalId) : ko.observable();
+    self.isFavorite = wishList != null ? ko.observable(wishList.IsFavorite) : ko.observable();
     self.isNotEmpty = ko.computed({
         read: function () { return self.lines().length !== 0 && self.showLoader() === false },
         write: function () { }

@@ -23,6 +23,7 @@ using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Commerce.Services;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Extensions;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -70,7 +71,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             Lines = new List<CartLineBaseJsonResult>();
             Adjustments = new List<CartAdjustmentBaseJsonResult>();
             PromoCodes = new List<string>();
-            var currencyCode = StorefrontManager.GetCustomerCurrency();
+            var currencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
 
             Subtotal = 0.0M.ToCurrency(currencyCode);
             SubtotalAmount = 0.0M;

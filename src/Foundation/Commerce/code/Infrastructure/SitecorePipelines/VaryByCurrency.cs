@@ -17,6 +17,7 @@
 
 using System.Web;
 using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Mvc.Pipelines.Response.RenderRendering;
 
 namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
@@ -40,11 +41,11 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
             // When no cache key is present, we generate a full cache key; Otherwise we append to the existing ones.
             if (string.IsNullOrWhiteSpace(args.CacheKey))
             {
-                args.CacheKey = $"_#varyByCurrency_{Context.Site.Name}_{Context.Language.Name}_{HttpContext.Current.Request.Url.AbsoluteUri}_{args.Rendering.RenderingItem.ID}_{StorefrontManager.GetCustomerCurrency()}";
+                args.CacheKey = $"_#varyByCurrency_{Context.Site.Name}_{Context.Language.Name}_{HttpContext.Current.Request.Url.AbsoluteUri}_{args.Rendering.RenderingItem.ID}_{StorefrontManager.CurrentStorefront.DefaultCurrency}";
             }
             else
             {
-                args.CacheKey = $"_#varybyCurrency_{args.CacheKey}_{args.Rendering.RenderingItem.ID}_{StorefrontManager.GetCustomerCurrency()}";
+                args.CacheKey = $"_#varybyCurrency_{args.CacheKey}_{args.Rendering.RenderingItem.ID}_{StorefrontManager.CurrentStorefront.DefaultCurrency}";
             }
         }
     }

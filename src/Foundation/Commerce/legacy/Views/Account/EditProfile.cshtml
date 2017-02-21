@@ -37,7 +37,7 @@
 }
 
 <div class="text-right p-b-1">
-    <a href="@StorefrontManager.StorefrontUri("/accountmanagement")" class="btn btn-default">
+    <a href="@("/accountmanagement")" class="btn btn-default">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> @backtoMyAccount
     </a>
 </div>
@@ -129,7 +129,7 @@
             </div>
             <div class="col-md-12 m-t-1">
                 <input type="submit" data-loading-text="@savingChanges" value="@saveChanges" class="btn btn-primary" id="saveProfileChangesButton" />
-                <a type="button" href="@StorefrontManager.StorefrontUri("/accountmanagement")" class="btn btn-default">@cancel</a>
+                <a type="button" href="@("/accountmanagement")" class="btn btn-default">@cancel</a>
             </div>
         </div>
     </div>

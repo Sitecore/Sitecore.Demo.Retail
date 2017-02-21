@@ -16,25 +16,24 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
+using System.Configuration;
 using System.Globalization;
 using System.Web;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Configuration;
+using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Util;
+using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
     public static class StorefrontManager
     {
         public static ISiteContext CurrentSiteContext => CommerceTypeLoader.CreateInstance<ISiteContext>();
-
-        public static bool EnforceHttps { get; set; } = System.Convert.ToBoolean(Settings.GetSetting("Storefront.EnforceHTTPS", "true"), CultureInfo.InvariantCulture);
-
-        public static bool ReadOnlySessionStateBehaviorEnabled { get; set; } = System.Convert.ToBoolean(Settings.GetSetting("Storefront.ReadOnlySessionStateBehaviorEnabled", "true"), CultureInfo.InvariantCulture);
 
         public static CommerceStorefront CurrentStorefront
         {
@@ -56,24 +55,6 @@ namespace Sitecore.Foundation.Commerce.Managers
         public static Item CommerceItem => Context.Database.GetItem("/sitecore/Commerce");
 
         public static Item StorefrontConfigurationItem => Context.Database.GetItem("/sitecore/Commerce/Storefront Configuration");
-
-        public static string StorefrontHome => "/";
-
-        public static string StorefrontUri(string route)
-        {
-            return route;
-        }
-
-        public static string GetCustomerCurrency()
-        {
-            // In the future we will get the current user currency but for now we simply return the home node default.
-            return CurrentStorefront.DefaultCurrency;
-        }
-
-        public static void SetCustomerCurrency(string currency)
-        {
-            // In the future we can set the currently selected user currency but for now we leave a place holder method.
-        }
 
         public static HtmlString GetHtmlSystemMessage(string messageKey)
         {
@@ -172,11 +153,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             var item = CurrentStorefront.GlobalItem.Axes.GetItem(string.Concat(StorefrontConstants.KnowItemNames.Lookups, "/", tableName, "/", itemName));
             if (item == null)
             {
-                if (insertBracketsWhenNotFound)
-                {
-                    return $"[{itemName}]";
-                }
-                return itemName;
+                return insertBracketsWhenNotFound ? $"[{itemName}]" : itemName;
             }
 
             lookupItem = item;

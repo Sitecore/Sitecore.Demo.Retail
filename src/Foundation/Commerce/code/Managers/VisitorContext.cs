@@ -51,8 +51,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         {
             get
             {
-                if (Tracker.Current != null && Tracker.Current.Contact != null &&
-                    Tracker.Current.Contact.ContactId != Guid.Empty)
+                if (Tracker.Current != null && Tracker.Current.Contact != null && Tracker.Current.Contact.ContactId != Guid.Empty)
                 {
                     return Tracker.Current.Contact.ContactId.ToString();
                 }
@@ -71,12 +70,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         {
             get
             {
-                if (Context.User.IsAuthenticated)
-                {
-                    return Guid.NewGuid().ToString();
-                }
-
-                return CartCookieHelper.GetAnonymousCartIdFromCookie();
+                return Context.User.IsAuthenticated ? Guid.NewGuid().ToString() : CartCookieHelper.GetAnonymousCartIdFromCookie();
             }
         }
 

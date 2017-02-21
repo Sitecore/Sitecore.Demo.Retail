@@ -12,9 +12,10 @@
 
 @using Sitecore.Reference.Storefront;
 @using Sitecore.Foundation.Commerce.Managers;
+@using Sitecore.Foundation.Commerce.Models
 
 @{
-  var currencyCode = StorefrontManager.GetCustomerCurrency();
+  var currencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
   var currencyDecimalSeparator = Sitecore.Context.Language.CultureInfo.NumberFormat.CurrencyDecimalSeparator;
   var currencyGroupSeparator = Sitecore.Context.Language.CultureInfo.NumberFormat.CurrencyGroupSeparator;
 

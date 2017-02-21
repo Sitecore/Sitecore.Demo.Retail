@@ -33,7 +33,7 @@ namespace Sitecore.Reference.Storefront.Infrastructure.SitecorePipelines
             RegisterBundles(BundleTable.Bundles);
         }
 
-        private void RegisterBundles(BundleCollection bundles)
+        private static void RegisterBundles(BundleCollection bundles)
         {
             BundleTable.EnableOptimizations = true;
 

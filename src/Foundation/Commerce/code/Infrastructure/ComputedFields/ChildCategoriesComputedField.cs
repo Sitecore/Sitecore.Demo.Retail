@@ -32,18 +32,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.ComputedFields
 {
     public class ChildCategoriesComputedField : BaseCommerceComputedField
     {
-        private readonly Lazy<IEnumerable<ID>> _validTemplates = new Lazy<IEnumerable<ID>>(() =>
-        {
-            return new List<ID>
-            {
-                CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate
-            };
-        });
-
-        protected override IEnumerable<ID> ValidTemplates
-        {
-            get { return _validTemplates.Value; }
-        }
+        protected override IEnumerable<ID> ValidTemplates { get; } = new[] { CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate };
 
         public override object ComputeValue(IIndexable indexable)
         {
@@ -65,21 +54,22 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.ComputedFields
 
         protected virtual T GetVariantFieldValue<T>(Variant variant, string fieldName)
         {
-            if (variant.DataRow.Table.Columns.Contains(fieldName))
+            if (!variant.DataRow.Table.Columns.Contains(fieldName))
             {
-                var variantValue = variant[fieldName];
-                if (variantValue != null)
-                {
-                    if (variantValue is T)
-                    {
-                        return (T) variantValue;
-                    }
-
-                    return (T) System.Convert.ChangeType(variantValue, typeof(T), CultureInfo.InvariantCulture);
-                }
+                return default(T);
+            }
+            var variantValue = variant[fieldName];
+            if (variantValue == null)
+            {
+                return default(T);
             }
 
-            return default(T);
+            if (variantValue is T)
+            {
+                return (T) variantValue;
+            }
+
+            return (T) System.Convert.ChangeType(variantValue, typeof(T), CultureInfo.InvariantCulture);
         }
 
         private Category GetCategoryReadOnly(ID itemId, string language)

@@ -15,11 +15,13 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
 using System.Web;
 using System.Web.Routing;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Data;
 using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Util;
@@ -31,28 +33,20 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
 {
     public class ProductItemResolver
     {
-        public const string ShopProductRouteName = "shop-product";
-        public const string ShopProductWithCatalogRouteName = "shop-product-catalog";
-        public const string ShopCategoryRouteName = "shop-category";
-        public const string ShopCategoryWithCatalogRouteName = "shop-category-catalog";
-        public const string ProductRouteName = "product";
-        public const string ProductWithCatalogRouteName = "product-catalog";
-        public const string CategoryRouteName = "category";
-        public const string CategoryWithCatalogRouteName = "category-catalog";
-        public const string IdField = "id";
-        public const string ItemTypeField = "itemType";
-        public const string CatalogField = "catalog";
-        public const string PathElementsField = "pathElements";
-        public const string CategoryField = "category";
-        public const string ProductItemType = "product";
-        public const string CategoryItemType = "category";
-        public const string CatalogItemType = "catalogitem";
-        public const string NavigationItemName = "product catalog";
+        private CatalogManager CatalogManager { get; }
+
         public const string ProductUrlRoute = "product";
         public const string CategoryUrlRoute = "category";
         public const string ShopUrlRoute = "shop";
-        public const string LandingUrlRoute = "landing";
-        public const string BuyGiftCardUrlRoute = "buygiftcard";
+
+        public const string NavigationItemName = "product catalog";
+        private const string LandingUrlRoute = "landing";
+
+        public ProductItemResolver()
+        {
+            CatalogManager = WindsorConfig.Container.Resolve<CatalogManager>();
+        }
+
         public static Item ResolveCatalogItem(string itemId, string catalogName, bool isProduct)
         {
             if (string.IsNullOrEmpty(itemId))
@@ -83,22 +77,21 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
         {
             var data = new CatalogRouteData();
 
-            if (routeData.Values.ContainsKey(ItemTypeField))
+            if (routeData.Values.ContainsKey("itemType"))
             {
-                if (routeData.Values[ItemTypeField].ToString() == CatalogItemType)
+                if (routeData.Values["itemType"].ToString() == "catalogitem")
                 {
                     var currentStorefront = StorefrontManager.CurrentStorefront;
-                    var productCatalogItem = currentStorefront.HomeItem.Axes.GetDescendant(NavigationItemName + "/" + routeData.Values[PathElementsField]);
+                    var productCatalogItem = currentStorefront.HomeItem.Axes.GetDescendant(NavigationItemName + "/" + routeData.Values["pathElements"]);
                     if (productCatalogItem != null)
                     {
-                        data.IsProduct =
-                            productCatalogItem.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductTemplate);
+                        data.IsProduct = productCatalogItem.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductTemplate);
                         data.Id = productCatalogItem.Name;
                     }
                 }
                 else
                 {
-                    data.IsProduct = routeData.Values[ItemTypeField].ToString() == ProductItemType;
+                    data.IsProduct = routeData.Values["itemType"].ToString() == "product";
                 }
             }
             else
@@ -106,9 +99,9 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
                 return null;
             }
 
-            if (routeData.Values.ContainsKey(IdField))
+            if (routeData.Values.ContainsKey("id"))
             {
-                data.Id = CatalogUrlManager.ExtractItemId(routeData.Values[IdField].ToString());
+                data.Id = CatalogUrlManager.ExtractItemId(routeData.Values["id"].ToString());
             }
             else
             {
@@ -118,14 +111,14 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
                 }
             }
 
-            if (routeData.Values.ContainsKey(CatalogField))
+            if (routeData.Values.ContainsKey("catalog"))
             {
-                data.Catalog = routeData.Values[CatalogField].ToString();
+                data.Catalog = routeData.Values["catalog"].ToString();
             }
 
             if (string.IsNullOrEmpty(data.Catalog))
             {
-                var defaultCatalog = StorefrontManager.CurrentStorefront.DefaultCatalog;
+                var defaultCatalog = CatalogManager.CurrentCatalog;
 
                 if (defaultCatalog != null)
                 {
@@ -133,7 +126,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
                 }
             }
 
-            if (routeData.Values.ContainsKey(CategoryField))
+            if (routeData.Values.ContainsKey("category"))
             {
                 var siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>();
 
@@ -179,6 +172,26 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
                     WebUtil.Redirect("~/");
                 }
             }
+        }
+
+        public static bool IsProductCategoryUrl(string url)
+        {
+            return url.IndexOf(NavigationItemName, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        public static Item GetProductCatalogRoot()
+        {
+            return StorefrontManager.CurrentStorefront.HomeItem.Axes.GetChild(NavigationItemName);
+        }
+
+        public static string GetProductCatalogUrl(Item productItem)
+        {
+            var productCatalogItem = ProductItemResolver.GetProductCatalogRoot();
+            var categoryDatasource = productCatalogItem["CategoryDatasource"];
+            Assert.IsNotNullOrEmpty(categoryDatasource, "Product Catalog item missing CategoryDatasource.");
+            var parentPath = productItem.Paths.FullPath;
+            var path = parentPath.Replace(categoryDatasource, string.Empty);
+            return $"/{ProductItemResolver.NavigationItemName}{path}";
         }
     }
 }

@@ -34,7 +34,5 @@ namespace Sitecore.Foundation.Commerce.Models.InputModels
         public string ImageUrl { get; set; }
 
         public string ProductUrl { get; set; }
-
-        public decimal? GiftCardAmount { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             ExternalId = header.ExternalId;
             Name = header.Name;
             IsFavorite = header.IsFavorite;
-            DetailsUrl = string.Concat(StorefrontManager.StorefrontUri("/accountmanagement/mywishlist"), "?id=", header.ExternalId);
+            DetailsUrl = string.Concat("/accountmanagement/mywishlist", "?id=", header.ExternalId);
         }
 
         public string ExternalId { get; protected set; }
