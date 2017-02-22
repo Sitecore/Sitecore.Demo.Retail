@@ -412,7 +412,9 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\autoNumeric.js" />
     <Content Include="Scripts\bootstrap-1.2.1.js" />

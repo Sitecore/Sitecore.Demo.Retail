@@ -21,6 +21,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Sitecore.Commerce.Entities.Inventory;
+using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Foundation.Commerce.Extensions;
@@ -79,10 +80,11 @@ namespace Sitecore.Reference.Storefront.Models
                         _images.Add(mediaItem);
                     }
                 }
-
                 return _images;
             }
         }
+
+        public MediaItem OnSaleOverlayImage => StorefrontManager.CurrentStorefront.OnSaleOverlayImage;
 
         public string DisplayName
         {
@@ -144,7 +146,8 @@ namespace Sitecore.Reference.Storefront.Models
 
         public decimal VariantSavingsPercentage => CalculateSavingsPercentage(LowestPricedVariantAdjustedPrice, LowestPricedVariantListPrice);
 
-        public bool IsOnSale => AdjustedPrice.HasValue && ListPrice.HasValue && AdjustedPrice < ListPrice;
+        //public bool IsOnSale => AdjustedPrice.HasValue && ListPrice.HasValue && AdjustedPrice < ListPrice;
+        public bool IsOnSale => !Item["OnSale"].Equals("0");
 
         public bool IsProduct
         {
