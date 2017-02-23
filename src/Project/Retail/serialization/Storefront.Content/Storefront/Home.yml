@@ -56,6 +56,9 @@ SharedFields:
 - ID: "cc553205-a4d2-4feb-b722-9b41e9fa5271"
   Hint: TrackingCookieName
   Value: _visitor
+- ID: "cd92dff9-ae15-443c-8de5-661d23b5ac6c"
+  Hint: On Sale Overlay Image
+  Value: "{CDD9F63A-2FF1-442C-87E1-286C98D506E1}"
 - ID: "e00b561c-503b-47af-979f-d6c0c911721d"
   Hint: IdKeyName
   Value: visitorId
