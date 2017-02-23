@@ -146,7 +146,6 @@ namespace Sitecore.Reference.Storefront.Models
 
         public decimal VariantSavingsPercentage => CalculateSavingsPercentage(LowestPricedVariantAdjustedPrice, LowestPricedVariantListPrice);
 
-        //public bool IsOnSale => AdjustedPrice.HasValue && ListPrice.HasValue && AdjustedPrice < ListPrice;
         public bool IsOnSale => !Item["OnSale"].Equals("0");
 
         public bool IsProduct
