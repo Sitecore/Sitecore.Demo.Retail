@@ -18,6 +18,7 @@
 using Sitecore.Commerce.Entities.LoyaltyPrograms;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Extensions;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -37,7 +38,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public string Store { get; set; }
 
-        public virtual void Initialize(LoyaltyCardTransaction transaction)
+        public void Initialize(LoyaltyCardTransaction transaction)
         {
             Assert.ArgumentNotNull(transaction, nameof(transaction));
 

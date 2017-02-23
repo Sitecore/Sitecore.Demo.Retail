@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using Sitecore.Commerce.Entities.LoyaltyPrograms;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -35,7 +36,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public List<LoyaltyCardItemBaseJsonResult> LoyaltyCards { get; } = new List<LoyaltyCardItemBaseJsonResult>();
 
-        public virtual void Initialize(IEnumerable<LoyaltyCard> loyaltyCards)
+        public void Initialize(IEnumerable<LoyaltyCard> loyaltyCards)
         {
             Assert.ArgumentNotNull(loyaltyCards, nameof(loyaltyCards));
 

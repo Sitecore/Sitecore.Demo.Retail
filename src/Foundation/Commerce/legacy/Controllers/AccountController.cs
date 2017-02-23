@@ -35,15 +35,17 @@ using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
+using Sitecore.Foundation.Commerce.Repositories;
 using Sitecore.Foundation.Dictionary.Repositories;
 using Sitecore.Links;
+using Sitecore.Mvc.Controllers;
 using Sitecore.Reference.Storefront.Infrastructure;
 using Sitecore.Reference.Storefront.Models;
 using Sitecore.Reference.Storefront.Models.JsonResults;
 
 namespace Sitecore.Reference.Storefront.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : SitecoreController
     {
         public enum ManageMessageId
         {
@@ -54,14 +56,18 @@ namespace Sitecore.Reference.Storefront.Controllers
             RemoveLoginSuccess
         }
 
-        public AccountController([NotNull] OrderManager orderManager, [NotNull] AccountManager accountManager, [NotNull] ContactFactory contactFactory) : base(accountManager, contactFactory)
+        public AccountController([NotNull] OrderManager orderManager, [NotNull] AccountManager accountManager, VisitorContextRepository visitorContextRepository)
         {
             Assert.ArgumentNotNull(orderManager, nameof(orderManager));
 
             OrderManager = orderManager;
+            AccountManager = accountManager;
+            VisitorContextRepository = visitorContextRepository;
         }
 
-        public OrderManager OrderManager { get; protected set; }
+        private OrderManager OrderManager { get; set; }
+        private AccountManager AccountManager { get; }
+        private VisitorContextRepository VisitorContextRepository { get; }
 
 
         [Authorize]
@@ -73,15 +79,13 @@ namespace Sitecore.Reference.Storefront.Controllers
             try
             {
                 Assert.ArgumentNotNull(inputModel, nameof(inputModel));
-                var validationResult = new BaseJsonResult();
-
-                ValidateModel(validationResult);
+                var validationResult = this.CreateJsonResult();
                 if (validationResult.HasErrors)
                 {
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = OrderManager.Reorder(StorefrontManager.CurrentStorefront, CurrentVisitorContext, inputModel);
+                var response = OrderManager.Reorder(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
                 var result = new BaseJsonResult(response.ServiceProviderResult);
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -101,15 +105,13 @@ namespace Sitecore.Reference.Storefront.Controllers
             try
             {
                 Assert.ArgumentNotNull(inputModel, nameof(inputModel));
-                var validationResult = new CancelOrderBaseJsonResult();
-
-                ValidateModel(validationResult);
+                var validationResult = this.CreateJsonResult<CancelOrderBaseJsonResult>();
                 if (validationResult.HasErrors)
                 {
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = OrderManager.CancelOrder(StorefrontManager.CurrentStorefront, CurrentVisitorContext, inputModel);
+                var response = OrderManager.CancelOrder(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
                 var result = new CancelOrderBaseJsonResult(response.ServiceProviderResult);
 
                 return Json(result, JsonRequestBehavior.AllowGet);
@@ -236,21 +238,19 @@ namespace Sitecore.Reference.Storefront.Controllers
             try
             {
                 Assert.ArgumentNotNull(inputModel, nameof(inputModel));
-                var result = new RegisterBaseJsonResult();
-
-                ValidateModel(result);
+                var result = this.CreateJsonResult<RegisterBaseJsonResult>();
                 if (result.HasErrors)
                 {
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
 
-                var anonymousVisitorId = CurrentVisitorContext.UserId;
+                var anonymousVisitorId = VisitorContextRepository.GetCurrent().UserId;
 
                 var response = AccountManager.RegisterUser(StorefrontManager.CurrentStorefront, inputModel);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
                     result.Initialize(response.Result);
-                    AccountManager.Login(StorefrontManager.CurrentStorefront, CurrentVisitorContext, anonymousVisitorId, response.Result.UserName, inputModel.Password, false);
+                    AccountManager.Login(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), anonymousVisitorId, response.Result.UserName, inputModel.Password, false);
                 }
                 else
                 {
@@ -272,9 +272,9 @@ namespace Sitecore.Reference.Storefront.Controllers
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult Login(LoginViewModel model)
         {
-            var anonymousVisitorId = CurrentVisitorContext.UserId;
+            var anonymousVisitorId = VisitorContextRepository.GetCurrent().UserId;
 
-            if (ModelState.IsValid && AccountManager.Login(StorefrontManager.CurrentStorefront, CurrentVisitorContext, anonymousVisitorId, UpdateUserName(model.UserName), model.Password, model.RememberMe))
+            if (ModelState.IsValid && AccountManager.Login(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), anonymousVisitorId, UpdateUserName(model.UserName), model.Password, model.RememberMe))
             {
                 return RedirectToLocal("/");
             }
@@ -293,19 +293,17 @@ namespace Sitecore.Reference.Storefront.Controllers
             try
             {
                 Assert.ArgumentNotNull(inputModel, nameof(inputModel));
-                var result = new ChangePasswordBaseJsonResult();
-
-                ValidateModel(result);
+                var result = this.CreateJsonResult<ChangePasswordBaseJsonResult>();
                 if (result.HasErrors)
                 {
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = AccountManager.UpdateUserPassword(StorefrontManager.CurrentStorefront, CurrentVisitorContext, inputModel);
+                var response = AccountManager.UpdateUserPassword(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
                 result = new ChangePasswordBaseJsonResult(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success)
                 {
-                    result.Initialize(CurrentVisitorContext.UserName);
+                    result.Initialize(VisitorContextRepository.GetCurrent().UserName);
                 }
 
                 return Json(result);
@@ -340,7 +338,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                 return Redirect("/login");
             }
 
-            var response = OrderManager.GetOrderDetails(StorefrontManager.CurrentStorefront, CurrentVisitorContext, id);
+            var response = OrderManager.GetOrderDetails(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), id);
             ViewBag.IsItemShipping = response.Result.Shipping != null && response.Result.Shipping.Count > 1 && response.Result.Lines.Count > 1;
             return View(response.Result);
         }
@@ -451,15 +449,14 @@ namespace Sitecore.Reference.Storefront.Controllers
             {
                 Assert.ArgumentNotNull(model, nameof(model));
 
-                var validationResult = new BaseJsonResult();
-                ValidateModel(validationResult);
+                var validationResult = this.CreateJsonResult();
                 if (validationResult.HasErrors)
                 {
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
                 var addresses = new List<CommerceParty>();
-                var response = AccountManager.RemovePartiesFromCurrentUser(StorefrontManager.CurrentStorefront, CurrentVisitorContext, model.ExternalId);
+                var response = AccountManager.RemovePartiesFromCurrentUser(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), model.ExternalId);
                 var result = new AddressListItemJsonResult(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success)
                 {
@@ -486,8 +483,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             {
                 Assert.ArgumentNotNull(model, nameof(model));
 
-                var validationResult = new BaseJsonResult();
-                ValidateModel(validationResult);
+                var validationResult = this.CreateJsonResult();
                 if (validationResult.HasErrors)
                 {
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
@@ -568,9 +564,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             try
             {
                 Assert.ArgumentNotNull(model, nameof(model));
-                var result = new ProfileBaseJsonResult();
-
-                ValidateModel(result);
+                var result = this.CreateJsonResult<ProfileBaseJsonResult>();
                 if (result.HasErrors)
                 {
                     return Json(result, JsonRequestBehavior.AllowGet);
@@ -581,12 +575,12 @@ namespace Sitecore.Reference.Storefront.Controllers
                     return Json(result);
                 }
 
-                var response = AccountManager.UpdateUser(StorefrontManager.CurrentStorefront, CurrentVisitorContext, model);
+                var response = AccountManager.UpdateUser(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), model);
                 result.SetErrors(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && !string.IsNullOrWhiteSpace(model.Password) && !string.IsNullOrWhiteSpace(model.PasswordRepeat))
                 {
                     var changePasswordModel = new ChangePasswordInputModel {NewPassword = model.Password, ConfirmPassword = model.PasswordRepeat};
-                    var passwordChangeResponse = AccountManager.UpdateUserPassword(StorefrontManager.CurrentStorefront, CurrentVisitorContext, changePasswordModel);
+                    var passwordChangeResponse = AccountManager.UpdateUserPassword(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), changePasswordModel);
                     result.SetErrors(passwordChangeResponse.ServiceProviderResult);
                     if (passwordChangeResponse.ServiceProviderResult.Success)
                     {
@@ -644,9 +638,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             try
             {
                 Assert.ArgumentNotNull(model, nameof(model));
-                var result = new ForgotPasswordBaseJsonResult();
-
-                ValidateModel(result);
+                var result = this.CreateJsonResult<ForgotPasswordBaseJsonResult>();
                 if (result.HasErrors)
                 {
                     return Json(result, JsonRequestBehavior.AllowGet);
@@ -668,7 +660,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             }
         }
 
-        public virtual string UpdateUserName(string userName)
+        public string UpdateUserName(string userName)
         {
             var defaultDomain = CommerceServerSitecoreConfig.Current.DefaultCommerceUsersDomain;
             if (string.IsNullOrWhiteSpace(defaultDomain))
@@ -705,7 +697,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         private List<CommerceParty> AllAddresses(AddressListItemJsonResult result)
         {
             var addresses = new List<CommerceParty>();
-            var response = AccountManager.GetCurrentCustomerParties(StorefrontManager.CurrentStorefront, CurrentVisitorContext);
+            var response = AccountManager.GetCurrentCustomerParties(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent());
             if (response.ServiceProviderResult.Success && response.Result != null)
             {
                 addresses = response.Result.ToList();

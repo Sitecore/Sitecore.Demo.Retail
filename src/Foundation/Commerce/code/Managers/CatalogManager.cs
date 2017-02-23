@@ -38,6 +38,7 @@ using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.Search;
+using Sitecore.Foundation.Commerce.Repositories;
 using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Mvc.Presentation;
@@ -48,7 +49,7 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         private Catalog _currentCatalog;
 
-        public CatalogManager([NotNull] CatalogServiceProvider catalogServiceProvider, [NotNull] GlobalizationServiceProvider globalizationServiceProvider, [NotNull] PricingManager pricingManager, [NotNull] InventoryManager inventoryManager)
+        public CatalogManager([NotNull] CatalogServiceProvider catalogServiceProvider, [NotNull] GlobalizationServiceProvider globalizationServiceProvider, [NotNull] PricingManager pricingManager, [NotNull] InventoryManager inventoryManager, SiteContextRepository siteContextRepository)
         {
             Assert.ArgumentNotNull(catalogServiceProvider, nameof(catalogServiceProvider));
             Assert.ArgumentNotNull(pricingManager, nameof(pricingManager));
@@ -58,11 +59,13 @@ namespace Sitecore.Foundation.Commerce.Managers
             GlobalizationServiceProvider = globalizationServiceProvider;
             PricingManager = pricingManager;
             InventoryManager = inventoryManager;
+            SiteContextRepository = siteContextRepository;
         }
 
         public CatalogServiceProvider CatalogServiceProvider { get; protected set; }
         public GlobalizationServiceProvider GlobalizationServiceProvider { get; protected set; }
         public InventoryManager InventoryManager { get; protected set; }
+        public SiteContextRepository SiteContextRepository { get; }
         public PricingManager PricingManager { get; protected set; }
 
         public Catalog CurrentCatalog
@@ -80,7 +83,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
         }
 
-        public virtual Catalog GetCurrentCatalog()
+        public Catalog GetCurrentCatalog()
         {
             //If this is not in a storefront then return the default catalog
             if (StorefrontManager.CurrentStorefront?.HomeItem != null)
@@ -208,14 +211,14 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             var virtualCategoryCacheKey = $"VirtualCategory_{categoryId}";
 
-            if (CurrentSiteContext.Items.Contains(virtualCategoryCacheKey))
+            if (SiteContextRepository.GetCurrent().Items.Contains(virtualCategoryCacheKey))
             {
-                currentCategory = CurrentSiteContext.Items[virtualCategoryCacheKey] as Category;
+                currentCategory = SiteContextRepository.GetCurrent().Items[virtualCategoryCacheKey] as Category;
             }
             else
             {
                 currentCategory = GetCategory(categoryId);
-                CurrentSiteContext.Items.Add(virtualCategoryCacheKey, currentCategory);
+                SiteContextRepository.GetCurrent().Items.Add(virtualCategoryCacheKey, currentCategory);
             }
 
             return currentCategory;
@@ -239,7 +242,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return category;
         }
 
-        public virtual void GetProductPrice([NotNull] VisitorContext visitorContext, ICatalogProduct productViewModel)
+        public void GetProductPrice([NotNull] VisitorContext visitorContext, ICatalogProduct productViewModel)
         {
             if (productViewModel == null)
             {
@@ -279,7 +282,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
         }
 
-        public virtual void GetProductBulkPrices([NotNull] VisitorContext visitorContext, IEnumerable<ICatalogProduct> productViewModels)
+        public void GetProductBulkPrices([NotNull] VisitorContext visitorContext, IEnumerable<ICatalogProduct> productViewModels)
         {
             if (productViewModels == null || !productViewModels.Any())
             {
@@ -311,14 +314,14 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
         }
 
-        public virtual decimal GetProductRating(Item productItem)
+        public decimal GetProductRating(Item productItem)
         {
             var ratingString = productItem[Templates.HasRating.Fields.Rating];
             decimal rating;
             return decimal.TryParse(ratingString, out rating) ? rating : 0;
         }
 
-        public virtual ManagerResponse<CatalogResult, bool> VisitedProductDetailsPage(
+        public ManagerResponse<CatalogResult, bool> VisitedProductDetailsPage(
             [NotNull] CommerceStorefront storefront)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
@@ -334,7 +337,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CatalogResult, bool>(result, result.Success);
         }
 
-        public virtual ManagerResponse<CatalogResult, bool> FacetApplied([NotNull] CommerceStorefront storefront,
+        public ManagerResponse<CatalogResult, bool> FacetApplied([NotNull] CommerceStorefront storefront,
             string facet, bool isApplied)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
@@ -346,7 +349,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CatalogResult, bool>(result, result.Success);
         }
 
-        public virtual ManagerResponse<CatalogResult, bool> SortOrderApplied([NotNull] CommerceStorefront storefront,
+        public ManagerResponse<CatalogResult, bool> SortOrderApplied([NotNull] CommerceStorefront storefront,
             string sortKey, CommerceConstants.SortDirection? sortDirection)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
@@ -373,8 +376,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CatalogResult, bool>(result, result.Success);
         }
 
-        public virtual ManagerResponse<CatalogResult, bool> RegisterSearchEvent([NotNull] CommerceStorefront storefront,
-            string searchKeyword, int numberOfHits)
+        public ManagerResponse<CatalogResult, bool> RegisterSearchEvent([NotNull] CommerceStorefront storefront, string searchKeyword, int numberOfHits)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNullOrEmpty(searchKeyword, nameof(searchKeyword));
@@ -386,7 +388,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CatalogResult, bool>(result, result.Success);
         }
 
-        public virtual ManagerResponse<GlobalizationResult, bool> RaiseCultureChosenPageEvent(
+        public ManagerResponse<GlobalizationResult, bool> RaiseCultureChosenPageEvent(
             [NotNull] CommerceStorefront storefront, string culture)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));

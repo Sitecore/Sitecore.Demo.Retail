@@ -207,7 +207,7 @@ SharedFields:
         <r
           uid="{73D00F74-0956-495D-B055-DDCF76AE26A3}"
           p:after="r[@uid='{897C99D8-9A09-4A4B-8336-B7D0E95FA84F}']"
-          s:id="{6B1D4310-5FE1-4523-943F-B7F44CCA0179}"
+          s:id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}"
           s:ph="/page-layout/section/col-narrow-1" />
         <r
           uid="{65003F87-E7CF-4CE9-A237-63A5FC0BA4D3}"
@@ -307,7 +307,7 @@ SharedFields:
         <r
           uid="{5A82789B-26EB-4727-87A7-FB19E5C08986}"
           p:before="*"
-          s:id="{6B1D4310-5FE1-4523-943F-B7F44CCA0179}"
+          s:id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}"
           s:ph="left" />
         <r
           uid="{E5A0168F-394B-4487-8F7E-91A23A8760E4}"

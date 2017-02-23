@@ -1,0 +1,37 @@
+﻿---
+ID: "d3fcd548-7fa3-49d1-bb81-e025fd7b62aa"
+Parent: "8817567e-830e-4b71-b072-fe7681ec832f"
+Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
+Path: /sitecore/layout/Renderings/Feature/Commerce/Catalog/ProductSearchResultsFacets
+DB: master
+SharedFields:
+- ID: "11490da4-bbc2-4397-8df2-6db2ef445081"
+  Hint: VaryByUrlPath
+  Type: Checkbox
+  Value: 1
+- ID: "308e88f5-cd6e-4f8f-bafe-95a47dedefdc"
+  Hint: Editable
+  Type: Checkbox
+  Value: 0
+- ID: "3d08db46-2267-41b0-bc52-be69fd618633"
+  Hint: Cacheable
+  Type: Checkbox
+  Value: 1
+- ID: "c7c26117-dbb1-42b2-ab5e-f7223845cca3"
+  Hint: __Thumbnail
+  Value: |
+    <image mediaid="{967EBD04-9263-4342-9B6B-EE89D20DDCAF}" />
+- ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
+  Hint: Controller Action
+  Value: ProductSearchResultsFacets
+- ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
+  Hint: Controller
+  Value: ProductSearch
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141023T062329

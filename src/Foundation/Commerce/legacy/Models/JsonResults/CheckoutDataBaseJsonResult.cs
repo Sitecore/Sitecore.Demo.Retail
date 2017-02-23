@@ -22,6 +22,7 @@ using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Entities.Payments;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Commerce.Services;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -66,7 +67,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public CartBaseJsonResult Cart { get; set; }
 
-        public virtual void InitializeShippingOptions(IEnumerable<ShippingOption> shippingOptions)
+        public void InitializeShippingOptions(IEnumerable<ShippingOption> shippingOptions)
         {
             if (shippingOptions == null)
             {
@@ -86,7 +87,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             OrderShippingOptions = shippingOptionList;
         }
 
-        public virtual void InitializeLineItemShippingOptions(IEnumerable<LineShippingOption> lineItemShippingOptionList)
+        public void InitializeLineItemShippingOptions(IEnumerable<LineShippingOption> lineItemShippingOptionList)
         {
             if (lineItemShippingOptionList != null && lineItemShippingOptionList.Any())
             {

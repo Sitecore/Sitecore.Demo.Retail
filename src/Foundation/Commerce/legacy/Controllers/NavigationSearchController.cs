@@ -33,16 +33,13 @@ using Sitecore.Data;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Reference.Storefront.Controllers
 {
-    public class NavigationSearchController : BaseController
+    public class NavigationSearchController : SitecoreController
     {
-        public NavigationSearchController([NotNull] AccountManager accountManager, [NotNull] ContactFactory contactFactory) : base(accountManager, contactFactory)
-        {
-        }
-
         public string IndexName { get; set; }
 
         [HttpGet]

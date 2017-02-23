@@ -19,6 +19,7 @@ using System;
 using System.Globalization;
 using Sitecore.Commerce.Services.Payments;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {

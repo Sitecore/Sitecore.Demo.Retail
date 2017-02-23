@@ -17,6 +17,7 @@
 
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {

@@ -69,7 +69,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         public string ProductUrl { get; set; }
         public IEnumerable<ShippingOptionBaseJsonResult> ShippingOptions { get; set; }
 
-        public virtual void SetShippingOptions(IEnumerable<ShippingOption> shippingOptions)
+        public void SetShippingOptions(IEnumerable<ShippingOption> shippingOptions)
         {
             if (shippingOptions == null)
             {

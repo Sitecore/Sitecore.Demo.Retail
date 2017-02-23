@@ -61,11 +61,11 @@ namespace Sitecore.Foundation.Commerce.Models
             _shopName = shopName;
         }
 
-        public virtual Item HomeItem => InnerItem;
+        public Item HomeItem => InnerItem;
 
-        public virtual Item GlobalItem => InnerItem.Database.GetItem(Context.Site.RootPath + "/Global");
+        public Item GlobalItem => InnerItem.Database.GetItem(Context.Site.RootPath + "/Global");
 
-        public virtual string SenderEmailAddress
+        public string SenderEmailAddress
         {
             get
             {
@@ -74,16 +74,16 @@ namespace Sitecore.Foundation.Commerce.Models
             }
         }
 
-        public virtual bool UseIndexFileForProductStatusInLists => MainUtil.GetBool(HomeItem[StorefrontConstants.KnownFieldNames.UseIndexFileForProductStatusInLists],
+        public bool UseIndexFileForProductStatusInLists => MainUtil.GetBool(HomeItem[StorefrontConstants.KnownFieldNames.UseIndexFileForProductStatusInLists],
             false);
 
-        public virtual string ShopName
+        public string ShopName
         {
             get { return _shopName; }
             set { _shopName = value; }
         }
 
-        public virtual string DefaultProductId => InnerItem == null ? "22565422120" : InnerItem["DefaultProductId"];
+        public string DefaultProductId => InnerItem == null ? "22565422120" : InnerItem["DefaultProductId"];
 
         public bool SupportsWishLists => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsWishLists], false);
 
@@ -91,23 +91,23 @@ namespace Sitecore.Foundation.Commerce.Models
 
         public bool SupportsGiftCardPayment => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsGirstCardPayment], false);
 
-        public virtual int MaxNumberOfAddresses => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfAddresses], 10);
+        public int MaxNumberOfAddresses => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfAddresses], 10);
 
-        public virtual int MaxNumberOfWishLists => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfWishLists], 10);
+        public int MaxNumberOfWishLists => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfWishLists], 10);
 
-        public virtual int MaxNumberOfWishListItems => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfWishListItems], 10);
+        public int MaxNumberOfWishListItems => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfWishListItems], 10);
 
-        public virtual string Title()
+        public string Title()
         {
             return InnerItem == null ? "default" : InnerItem[StorefrontConstants.ItemFields.Title];
         }
 
-        public virtual string NameTitle()
+        public string NameTitle()
         {
             return InnerItem == null ? "default" : InnerItem["Name Title"];
         }
 
-        public virtual string GetMapKey()
+        public string GetMapKey()
         {
             return HomeItem[StorefrontConstants.KnownFieldNames.MapKey];
         }

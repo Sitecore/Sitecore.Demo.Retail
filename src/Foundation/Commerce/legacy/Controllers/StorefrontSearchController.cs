@@ -35,113 +35,36 @@ using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Foundation.Commerce.Repositories;
+using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using Sitecore.Reference.Storefront.Models;
 
 namespace Sitecore.Reference.Storefront.Controllers
 {
-    public class StorefrontSearchController : BaseController
+    public class StorefrontSearchController : SitecoreController
     {
         private const string ChangeSiteContentPageSizeClass = "changeSiteContentPageSize";
         private const string CurrentCategoryViewModelKeyName = "CurrentCategoryViewModel";
-        private const string CurrentSearchProductResultsKeyName = "CurrentSearchProductResults";
         private const string CurrentSearchContentResultsKeyName = "CurrentSearchContentResults";
         private const string CurrentSearchInfoKeyName = "CurrentSearchInfo";
 
-        public StorefrontSearchController([NotNull] AccountManager accountManager, [NotNull] CatalogManager catalogManager, [NotNull] ContactFactory contactFactory) : base(accountManager, contactFactory)
+        public StorefrontSearchController([NotNull] CatalogManager catalogManager, [NotNull] SiteContextRepository siteContextRepository)
         {
             Assert.ArgumentNotNull(catalogManager, nameof(catalogManager));
-            Assert.ArgumentNotNull(contactFactory, nameof(contactFactory));
+            Assert.ArgumentNotNull(siteContextRepository, nameof(siteContextRepository));
 
             CatalogManager = catalogManager;
+            SiteContextRepository = siteContextRepository;
         }
 
-        public CatalogManager CatalogManager { get; protected set; }
+        private CatalogManager CatalogManager { get; set; }
+        private SiteContextRepository SiteContextRepository { get; }
 
         public ActionResult SearchBar([Bind(Prefix = StorefrontConstants.QueryStrings.SearchKeyword)] string searchKeyword)
         {
             var model = new SearchBarViewModel {SearchKeyword = searchKeyword};
             return View(model);
-        }
-
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public ActionResult SearchEvent(
-            [Bind(Prefix = StorefrontConstants.QueryStrings.SearchKeyword)] string searchKeyword,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Paging)] int? pageNumber,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Facets)] string facetValues,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Sort)] string sortField,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.PageSize)] int? pageSize,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.SortDirection)] CommerceConstants.SortDirection? sortDirection)
-        {
-            var searchInfo = GetSearchInfo(searchKeyword, pageNumber, facetValues, sortField, pageSize, sortDirection);
-            if (searchInfo.SearchOptions != null)
-            {
-                var searchResult = GetChildProducts(searchInfo.SearchOptions, searchKeyword, searchInfo.Catalog.Name);
-
-                if (!string.IsNullOrWhiteSpace(searchKeyword))
-                {
-                    CatalogManager.RegisterSearchEvent(StorefrontManager.CurrentStorefront, searchKeyword, searchResult.TotalItemCount);
-                }
-            }
-
-            return View();
-        }
-
-        public ActionResult ProductSearchResultsFacets(
-            [Bind(Prefix = StorefrontConstants.QueryStrings.SearchKeyword)] string searchKeyword,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Paging)] int? pageNumber,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Facets)] string facetValues,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Sort)] string sortField,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.PageSize)] int? pageSize,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.SortDirection)] CommerceConstants.SortDirection? sortDirection)
-        {
-            if (searchKeyword == null)
-            {
-                searchKeyword = string.Empty;
-            }
-
-            var searchInfo = GetSearchInfo(searchKeyword, pageNumber, facetValues, sortField, pageSize, sortDirection);
-            var viewModel = GetProductFacetsViewModel(searchInfo.SearchOptions, searchKeyword, searchInfo.Catalog.Name, RenderingContext.Current.Rendering);
-            return View(viewModel);
-        }
-
-        public ActionResult ProductSearchResultsListHeader(
-            [Bind(Prefix = StorefrontConstants.QueryStrings.SearchKeyword)] string searchKeyword,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Paging)] int? pageNumber,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Facets)] string facetValues,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Sort)] string sortField,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.PageSize)] int? pageSize,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.SortDirection)] CommerceConstants.SortDirection? sortDirection)
-        {
-            var searchInfo = GetSearchInfo(searchKeyword, pageNumber, facetValues, sortField, pageSize, sortDirection);
-            var viewModel = GetProductListHeaderViewModel(searchInfo.SearchOptions, searchInfo.SortFields, searchInfo.SearchKeyword, searchInfo.Catalog.Name, RenderingContext.Current.Rendering);
-            return View(viewModel);
-        }
-
-        public ActionResult ProductSearchResultsList(
-            [Bind(Prefix = StorefrontConstants.QueryStrings.SearchKeyword)] string searchKeyword,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Paging)] int? pageNumber,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Facets)] string facetValues,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Sort)] string sortField,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.PageSize)] int? pageSize,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.SortDirection)] CommerceConstants.SortDirection? sortDirection)
-        {
-            var searchInfo = GetSearchInfo(searchKeyword, pageNumber, facetValues, sortField, pageSize, sortDirection);
-            var viewModel = GetProductListViewModel(searchInfo.SearchOptions, searchInfo.SortFields, searchInfo.SearchKeyword, searchInfo.Catalog.Name, RenderingContext.Current.Rendering);
-            return View(viewModel);
-        }
-
-        public ActionResult ProductSearchResultsPagination(
-            [Bind(Prefix = StorefrontConstants.QueryStrings.SearchKeyword)] string searchKeyword,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Paging)] int? pageNumber,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Facets)] string facetValues,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.Sort)] string sortField,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.PageSize)] int? pageSize,
-            [Bind(Prefix = StorefrontConstants.QueryStrings.SortDirection)] CommerceConstants.SortDirection? sortDirection)
-        {
-            var searchInfo = GetSearchInfo(searchKeyword, pageNumber, facetValues, sortField, pageSize, sortDirection);
-            var viewModel = GetPaginationViewModel(searchInfo.SearchOptions, searchInfo.SearchKeyword, searchInfo.Catalog.Name, RenderingContext.Current.Rendering);
-            return View(viewModel);
         }
 
         public ActionResult SiteContentSearchResultsList(
@@ -174,116 +97,11 @@ namespace Sitecore.Reference.Storefront.Controllers
             return View(viewModel);
         }
 
-        protected virtual ProductListHeaderViewModel GetProductListHeaderViewModel(CommerceSearchOptions productSearchOptions, IEnumerable<CommerceQuerySort> sortFields, string searchKeyword, string catalogName, Rendering rendering)
+        private SearchResults GetSiteContentSearchResults(CommerceSearchOptions searchOptions, string searchKeyword, Rendering rendering)
         {
-            var viewModel = new ProductListHeaderViewModel();
-
-            SearchResults childProducts = null;
-            if (productSearchOptions != null)
+            if (SiteContextRepository.GetCurrent().Items[CurrentSearchContentResultsKeyName] != null)
             {
-                childProducts = GetChildProducts(productSearchOptions, searchKeyword, catalogName);
-            }
-
-            viewModel.Initialize(rendering, childProducts, sortFields, productSearchOptions);
-            return viewModel;
-        }
-
-        protected virtual ProductFacetsViewModel GetProductFacetsViewModel(CommerceSearchOptions productSearchOptions, string searchKeyword, string catalogName, Rendering rendering)
-        {
-            var viewModel = new ProductFacetsViewModel();
-
-            SearchResults childProducts = null;
-            if (productSearchOptions != null)
-            {
-                childProducts = GetChildProducts(productSearchOptions, searchKeyword, catalogName);
-            }
-
-            viewModel.Initialize(rendering, childProducts, productSearchOptions);
-
-            return viewModel;
-        }
-
-        protected virtual PaginationViewModel GetPaginationViewModel(CommerceSearchOptions productSearchOptions, string searchKeyword, string catalogName, Rendering rendering)
-        {
-            var viewModel = new PaginationViewModel();
-
-            SearchResults childProducts = null;
-            if (productSearchOptions != null)
-            {
-                childProducts = GetChildProducts(productSearchOptions, searchKeyword, catalogName);
-            }
-
-            viewModel.Initialize(rendering, childProducts, productSearchOptions);
-            return viewModel;
-        }
-
-        protected virtual CategoryViewModel GetProductListViewModel(CommerceSearchOptions productSearchOptions, IEnumerable<CommerceQuerySort> sortFields, string searchKeyword, string catalogName, Rendering rendering)
-        {
-            if (CurrentSiteContext.Items[CurrentCategoryViewModelKeyName] == null)
-            {
-                var categoryViewModel = new CategoryViewModel();
-
-                var childProducts = GetChildProducts(productSearchOptions, searchKeyword, catalogName);
-
-                categoryViewModel.Initialize(rendering, childProducts, sortFields, productSearchOptions);
-                if (childProducts != null && childProducts.SearchResultItems.Count > 0)
-                {
-                    CatalogManager.GetProductBulkPrices(CurrentVisitorContext, categoryViewModel.ChildProducts);
-                    CatalogManager.InventoryManager.GetProductsStockStatusForList(StorefrontManager.CurrentStorefront, categoryViewModel.ChildProducts);
-                    foreach (var productViewModel in categoryViewModel.ChildProducts)
-                    {
-                        var productItem = childProducts.SearchResultItems.Single(item => item.Name == productViewModel.ProductId);
-                        productViewModel.CustomerAverageRating = CatalogManager.GetProductRating(productItem);
-                    }
-                }
-
-                CurrentSiteContext.Items[CurrentCategoryViewModelKeyName] = categoryViewModel;
-            }
-
-            var viewModel = (CategoryViewModel) CurrentSiteContext.Items[CurrentCategoryViewModelKeyName];
-            return viewModel;
-        }
-
-        protected SearchResults GetChildProducts(CommerceSearchOptions searchOptions, string searchKeyword, string catalogName)
-        {
-            if (CurrentSiteContext.Items[CurrentSearchProductResultsKeyName] != null)
-            {
-                return (SearchResults) CurrentSiteContext.Items[CurrentSearchProductResultsKeyName];
-            }
-
-            Assert.ArgumentNotNull(searchKeyword, nameof(searchKeyword));
-            Assert.ArgumentNotNull(searchKeyword, nameof(searchKeyword));
-            Assert.ArgumentNotNull(searchKeyword, nameof(searchKeyword));
-
-            var returnList = new List<Item>();
-            var totalPageCount = 0;
-            var totalProductCount = 0;
-            var facets = Enumerable.Empty<CommerceQueryFacet>();
-
-            if (RenderingContext.Current.Rendering.Item != null && !string.IsNullOrEmpty(searchKeyword.Trim()))
-            {
-                SearchResponse searchResponse = null;
-                searchResponse = SearchCatalogItemsByKeyword(searchKeyword, catalogName, searchOptions);
-
-                if (searchResponse != null)
-                {
-                    returnList.AddRange(searchResponse.ResponseItems);
-                    totalProductCount = searchResponse.TotalItemCount;
-                    totalPageCount = searchResponse.TotalPageCount;
-                    facets = searchResponse.Facets;
-                }
-            }
-
-            var results = new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex, facets);
-            CurrentSiteContext.Items[CurrentSearchProductResultsKeyName] = results;
-            return results;
-        }
-
-        protected virtual SearchResults GetSiteContentSearchResults(CommerceSearchOptions searchOptions, string searchKeyword, Rendering rendering)
-        {
-            if (CurrentSiteContext.Items[CurrentSearchContentResultsKeyName] != null)
-            {
-                return (SearchResults) CurrentSiteContext.Items[CurrentSearchContentResultsKeyName];
+                return (SearchResults)SiteContextRepository.GetCurrent().Items[CurrentSearchContentResultsKeyName];
             }
 
             var searchResults = new SearchResults();
@@ -293,11 +111,11 @@ namespace Sitecore.Reference.Storefront.Controllers
                 searchResults = new SearchResults(searchResponse.ResponseItems, searchResponse.TotalItemCount, searchResponse.TotalPageCount, searchOptions.StartPageIndex, searchResponse.Facets);
             }
 
-            CurrentSiteContext.Items[CurrentSearchContentResultsKeyName] = searchResults;
+            SiteContextRepository.GetCurrent().Items[CurrentSearchContentResultsKeyName] = searchResults;
             return searchResults;
         }
 
-        protected virtual SiteContentSearchResultsViewModel GetSiteContentListViewModel(CommerceSearchOptions searchOptions, string searchKeyword, Rendering rendering)
+        private SiteContentSearchResultsViewModel GetSiteContentListViewModel(CommerceSearchOptions searchOptions, string searchKeyword, Rendering rendering)
         {
             var model = new SiteContentSearchResultsViewModel();
             model.Initialize(rendering);
@@ -313,7 +131,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             return model;
         }
 
-        protected virtual PaginationViewModel GetSiteContentPaginationModel(CommerceSearchOptions searchOptions, string searchKeyword, Rendering rendering)
+        private PaginationViewModel GetSiteContentPaginationModel(CommerceSearchOptions searchOptions, string searchKeyword, Rendering rendering)
         {
             var viewModel = new PaginationViewModel();
 
@@ -329,9 +147,9 @@ namespace Sitecore.Reference.Storefront.Controllers
             return viewModel;
         }
 
-        protected virtual ProductListHeaderViewModel GetSiteContentListHeaderViewModel(CommerceSearchOptions searchOptions, string searchKeyword, Rendering rendering)
+        private SiteContentListHeaderViewModel GetSiteContentListHeaderViewModel(CommerceSearchOptions searchOptions, string searchKeyword, Rendering rendering)
         {
-            var viewModel = new ProductListHeaderViewModel {PageSizeClass = ChangeSiteContentPageSizeClass};
+            var viewModel = new SiteContentListHeaderViewModel { PageSizeClass = ChangeSiteContentPageSizeClass};
             SearchResults searchResults = null;
             if (searchOptions != null)
             {
@@ -343,7 +161,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             return viewModel;
         }
 
-        protected void UpdateOptionsWithFacets(IEnumerable<CommerceQueryFacet> facets, string valueQueryString, CommerceSearchOptions productSearchOptions)
+        private void UpdateOptionsWithFacets(IEnumerable<CommerceQueryFacet> facets, string valueQueryString, CommerceSearchOptions productSearchOptions)
         {
             if (facets != null && facets.Any())
             {
@@ -375,7 +193,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             }
         }
 
-        protected void UpdateOptionsWithSorting(string sortField, CommerceConstants.SortDirection? sortDirection, CommerceSearchOptions productSearchOptions)
+        private void UpdateOptionsWithSorting(string sortField, CommerceConstants.SortDirection? sortDirection, CommerceSearchOptions productSearchOptions)
         {
             if (!string.IsNullOrEmpty(sortField))
             {
@@ -393,9 +211,9 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         private SearchInfo GetSearchInfo(string searchKeyword, int? pageNumber, string facetValues, string sortField, int? pageSize, CommerceConstants.SortDirection? sortDirection)
         {
-            if (CurrentSiteContext.Items[CurrentSearchInfoKeyName] != null)
+            if (SiteContextRepository.GetCurrent().Items[CurrentSearchInfoKeyName] != null)
             {
-                return (SearchInfo) CurrentSiteContext.Items[CurrentSearchInfoKeyName];
+                return (SearchInfo)SiteContextRepository.GetCurrent().Items[CurrentSearchInfoKeyName];
             }
 
             var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
@@ -417,7 +235,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             UpdateOptionsWithSorting(sortField, sortDirection, productSearchOptions);
             searchInfo.SearchOptions = productSearchOptions;
 
-            CurrentSiteContext.Items[CurrentSearchInfoKeyName] = searchInfo;
+            SiteContextRepository.GetCurrent().Items[CurrentSearchInfoKeyName] = searchInfo;
             return searchInfo;
         }
 
@@ -458,14 +276,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             var termList = searchPhrase.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var term in termList)
             {
-                if (predicate == null)
-                {
-                    predicate = PredicateBuilder.Create<SearchResultItem>(item => item.Content.Contains(term));
-                }
-                else
-                {
-                    predicate = predicate.And(item => item.Content.Contains(term));
-                }
+                predicate = predicate == null ? PredicateBuilder.Create<SearchResultItem>(item => item.Content.Contains(term)) : predicate.And(item => item.Content.Contains(term));
             }
 
             return predicate;

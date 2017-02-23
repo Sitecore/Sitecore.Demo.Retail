@@ -23,7 +23,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
 {
     public class ResetContact
     {
-        public virtual void Process(PipelineArgs args)
+        public void Process(PipelineArgs args)
         {
             var trackerArgs = (InitializeTrackerArgs) args;
 

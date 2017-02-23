@@ -47,7 +47,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Customer
             }
         }
 
-        protected virtual void TranslateCommerceCustomerParty(CommerceParty party, Profile profile)
+        private void TranslateCommerceCustomerParty(CommerceParty party, Profile profile)
         {
             profile[Commerce.Constants.Profile.GeneralInfo.FirstName].Value = party.FirstName;
             profile[Commerce.Constants.Profile.GeneralInfo.LastName].Value = party.LastName;
@@ -72,7 +72,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Customer
             TranslateCommerceCustomerPartyCustomProperties(party, profile);
         }
 
-        protected virtual void TranslateCommerceCustomerPartyCustomProperties(CommerceParty party, Profile profile)
+        private void TranslateCommerceCustomerPartyCustomProperties(CommerceParty party, Profile profile)
         {
         }
 

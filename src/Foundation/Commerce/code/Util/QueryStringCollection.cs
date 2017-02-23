@@ -20,8 +20,10 @@ using System.Collections.Specialized;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Web;
+using System.Web.Mvc;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Foundation.Commerce.Repositories;
 
 namespace Sitecore.Foundation.Commerce.Util
 {
@@ -129,7 +131,7 @@ namespace Sitecore.Foundation.Commerce.Util
 
         public QueryStringCollection FromCurrent()
         {
-            var siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>();
+            var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().GetCurrent();
             return new QueryStringCollection(siteContext.CurrentContext.Request.Url.ToString());
         }
 

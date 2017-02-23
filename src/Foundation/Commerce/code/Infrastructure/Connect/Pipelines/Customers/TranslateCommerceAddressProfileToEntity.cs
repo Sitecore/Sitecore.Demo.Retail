@@ -45,7 +45,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Customer
                 TranslateToCustomParty(request.SourceProfile, request.DestinationParty);
         }
 
-        protected virtual void TranslateToCommerceParty(Profile profile, CommerceParty party)
+        private void TranslateToCommerceParty(Profile profile, CommerceParty party)
         {
             party.ExternalId = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.AddressId);
             party.FirstName = Get<string>(profile, Commerce.Constants.Profile.GeneralInfo.FirstName);
@@ -65,11 +65,11 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Customer
             TranslateToCommercePartyCustomProperties(profile, party);
         }
 
-        protected virtual void TranslateToCommercePartyCustomProperties(Profile profile, CommerceParty party)
+        private void TranslateToCommercePartyCustomProperties(Profile profile, CommerceParty party)
         {
         }
 
-        protected virtual void TranslateToCustomParty(Profile profile, Party party)
+        private void TranslateToCustomParty(Profile profile, Party party)
         {
         }
 

@@ -5,6 +5,7 @@
 @using Sitecore.Foundation.Commerce.Managers
 @using Sitecore.Foundation.Commerce.Models
 @using Sitecore.Commerce.Connect.CommerceServer.Orders.Models
+@using Sitecore.Foundation.Commerce.Repositories
 @inherits WebViewPage
 @{
     Layout = null;
@@ -50,7 +51,7 @@
         var currentCategory;
 
         @{
-            var siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>();
+            var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().GetCurrent();
             bool isCategory = siteContext.IsCategory;
             var catalogItem = siteContext.CurrentCatalogItem;
             if (isCategory && catalogItem != null)

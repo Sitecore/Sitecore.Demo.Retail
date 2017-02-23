@@ -56,7 +56,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public ContactFactory ContactFactory { get; protected set; }
 
-        public virtual void GetProductsStockStatusForList([NotNull] CommerceStorefront storefront, IEnumerable<IInventoryProduct> productViewModels)
+        public void GetProductsStockStatusForList([NotNull] CommerceStorefront storefront, IEnumerable<IInventoryProduct> productViewModels)
         {
             if (!StorefrontManager.CurrentStorefront.UseIndexFileForProductStatusInLists)
             {
@@ -177,7 +177,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         }
 
 
-        public virtual void GetProductsStockStatus([NotNull] CommerceStorefront storefront, IEnumerable<IInventoryProduct> productViewModels)
+        public void GetProductsStockStatus([NotNull] CommerceStorefront storefront, IEnumerable<IInventoryProduct> productViewModels)
         {
             if (productViewModels == null || !productViewModels.Any())
             {
@@ -237,7 +237,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
         }
 
-        public virtual ManagerResponse<GetStockInformationResult, IEnumerable<StockInformation>> GetStockInformation([NotNull] CommerceStorefront storefront, IEnumerable<InventoryProduct> products, StockDetailsLevel detailsLevel)
+        public ManagerResponse<GetStockInformationResult, IEnumerable<StockInformation>> GetStockInformation([NotNull] CommerceStorefront storefront, IEnumerable<InventoryProduct> products, StockDetailsLevel detailsLevel)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(products, nameof(products));
@@ -251,7 +251,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetStockInformationResult, IEnumerable<StockInformation>>(result, result.StockInformation ?? new List<StockInformation>());
         }
 
-        public virtual ManagerResponse<GetPreOrderableInformationResult, IEnumerable<OrderableInformation>> GetPreOrderableInformation([NotNull] CommerceStorefront storefront, IEnumerable<InventoryProduct> products)
+        public ManagerResponse<GetPreOrderableInformationResult, IEnumerable<OrderableInformation>> GetPreOrderableInformation([NotNull] CommerceStorefront storefront, IEnumerable<InventoryProduct> products)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(products, nameof(products));
@@ -263,7 +263,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetPreOrderableInformationResult, IEnumerable<OrderableInformation>>(result, !result.Success || result.OrderableInformation == null ? new List<OrderableInformation>() : result.OrderableInformation);
         }
 
-        public virtual ManagerResponse<GetBackOrderableInformationResult, IEnumerable<OrderableInformation>> GetBackOrderableInformation([NotNull] CommerceStorefront storefront, IEnumerable<InventoryProduct> products)
+        public ManagerResponse<GetBackOrderableInformationResult, IEnumerable<OrderableInformation>> GetBackOrderableInformation([NotNull] CommerceStorefront storefront, IEnumerable<InventoryProduct> products)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(products, nameof(products));
@@ -275,7 +275,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetBackOrderableInformationResult, IEnumerable<OrderableInformation>>(result, !result.Success || result.OrderableInformation == null ? new List<OrderableInformation>() : result.OrderableInformation);
         }
 
-        public virtual ManagerResponse<VisitedProductStockStatusResult, bool> VisitedProductStockStatus([NotNull] CommerceStorefront storefront, StockInformation stockInformation, string location)
+        public ManagerResponse<VisitedProductStockStatusResult, bool> VisitedProductStockStatus([NotNull] CommerceStorefront storefront, StockInformation stockInformation, string location)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(stockInformation, nameof(stockInformation));
@@ -287,7 +287,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<VisitedProductStockStatusResult, bool>(result, result.Success);
         }
 
-        public virtual ManagerResponse<VisitorSignUpForStockNotificationResult, bool> VisitorSignupForStockNotification([NotNull] CommerceStorefront storefront, SignUpForNotificationInputModel model, string location)
+        public ManagerResponse<VisitorSignUpForStockNotificationResult, bool> VisitorSignupForStockNotification([NotNull] CommerceStorefront storefront, SignUpForNotificationInputModel model, string location)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(model, nameof(model));

@@ -39,7 +39,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public PricingServiceProvider PricingServiceProvider { get; protected set; }
 
-        public virtual ManagerResponse<GetProductPricesResult, IDictionary<string, Price>> GetProductPrices([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string catalogName, string productId, bool includeVariants, params string[] priceTypeIds)
+        public ManagerResponse<GetProductPricesResult, IDictionary<string, Price>> GetProductPrices([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string catalogName, string productId, bool includeVariants, params string[] priceTypeIds)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
 
@@ -66,7 +66,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetProductPricesResult, IDictionary<string, Price>>(result, result.Prices ?? new Dictionary<string, Price>());
         }
 
-        public virtual ManagerResponse<GetProductBulkPricesResult, IDictionary<string, Price>> GetProductBulkPrices([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string catalogName, IEnumerable<string> productIds, params string[] priceTypeIds)
+        public ManagerResponse<GetProductBulkPricesResult, IDictionary<string, Price>> GetProductBulkPrices([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string catalogName, IEnumerable<string> productIds, params string[] priceTypeIds)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
 
@@ -89,7 +89,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetProductBulkPricesResult, IDictionary<string, Price>>(result, result.Prices ?? new Dictionary<string, Price>());
         }
 
-        public virtual ManagerResponse<GetSupportedCurrenciesResult, IReadOnlyCollection<string>> GetSupportedCurrencies(CommerceStorefront storefront, string catalogName)
+        public ManagerResponse<GetSupportedCurrenciesResult, IReadOnlyCollection<string>> GetSupportedCurrencies(CommerceStorefront storefront, string catalogName)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
 
@@ -99,7 +99,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetSupportedCurrenciesResult, IReadOnlyCollection<string>>(result, result.Currencies);
         }
 
-        public virtual ManagerResponse<ServiceProviderResult, bool> CurrencyChosenPageEvent(CommerceStorefront storefront, string currency)
+        public ManagerResponse<ServiceProviderResult, bool> CurrencyChosenPageEvent(CommerceStorefront storefront, string currency)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNullOrEmpty(currency, nameof(currency));

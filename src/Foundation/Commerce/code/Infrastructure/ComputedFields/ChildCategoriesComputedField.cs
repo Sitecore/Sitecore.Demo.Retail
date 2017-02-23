@@ -52,7 +52,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.ComputedFields
             return category.ChildCategories.Select(childCategory => childCategory.ExternalId.ToString()).ToList();
         }
 
-        protected virtual T GetVariantFieldValue<T>(Variant variant, string fieldName)
+        private T GetVariantFieldValue<T>(Variant variant, string fieldName)
         {
             if (!variant.DataRow.Table.Columns.Contains(fieldName))
             {

@@ -18,6 +18,7 @@
 using Sitecore.Commerce.Entities.LoyaltyPrograms;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Extensions;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -35,7 +36,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public bool IsElegible { get; set; }
 
-        public virtual void Initialize(LoyaltyTier tier, LoyaltyCardTier cardTier)
+        public void Initialize(LoyaltyTier tier, LoyaltyCardTier cardTier)
         {
             Assert.ArgumentNotNull(tier, nameof(tier));
 

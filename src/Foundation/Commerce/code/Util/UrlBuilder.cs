@@ -17,14 +17,15 @@
 
 using System;
 using System.Web;
-using Sitecore.Commerce.Connect.CommerceServer;
-using Sitecore.Foundation.Commerce.Models;
+using System.Web.Mvc;
+using Sitecore.Foundation.Commerce.Repositories;
 
 namespace Sitecore.Foundation.Commerce.Util
 {
     public class UrlBuilder : UriBuilder
     {
-        public UrlBuilder() {
+        public UrlBuilder()
+        {
         }
 
         public UrlBuilder(string uri) : base(uri)
@@ -62,7 +63,7 @@ namespace Sitecore.Foundation.Commerce.Util
         {
             get
             {
-                var siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>();
+                var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().GetCurrent();
                 return new UrlBuilder(siteContext.CurrentContext.Request.Url);
             }
         }

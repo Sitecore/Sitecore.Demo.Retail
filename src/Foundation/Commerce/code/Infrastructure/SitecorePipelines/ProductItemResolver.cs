@@ -17,6 +17,7 @@
 
 using System;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.Routing;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Data;
@@ -24,15 +25,18 @@ using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Foundation.Commerce.Repositories;
 using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Pipelines;
+using Sitecore.Pipelines.HttpRequest;
 using Sitecore.Web;
 
 namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
 {
-    public class ProductItemResolver
+    public class ProductItemResolver : HttpRequestProcessor
     {
+        public SiteContextRepository SiteContextRepository { get; }
         private CatalogManager CatalogManager { get; }
 
         public const string ProductUrlRoute = "product";
@@ -44,7 +48,8 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
 
         public ProductItemResolver()
         {
-            CatalogManager = WindsorConfig.Container.Resolve<CatalogManager>();
+            SiteContextRepository = DependencyResolver.Current.GetService<SiteContextRepository>();
+            CatalogManager = DependencyResolver.Current.GetService<CatalogManager>();
         }
 
         public static Item ResolveCatalogItem(string itemId, string catalogName, bool isProduct)
@@ -73,7 +78,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
             return foundItem;
         }
 
-        public virtual CatalogRouteData GetRouteDataValue(RouteData routeData)
+        public CatalogRouteData GetRouteDataValue(RouteData routeData)
         {
             var data = new CatalogRouteData();
 
@@ -128,30 +133,25 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
 
             if (routeData.Values.ContainsKey("category"))
             {
-                var siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>();
-
-                siteContext.UrlContainsCategory = true;
+                SiteContextRepository.GetCurrent().UrlContainsCategory = true;
             }
 
             return data;
         }
 
-        public virtual CatalogRouteData GetCatalogItemFromIncomingRequest()
+        public CatalogRouteData GetCatalogItemFromIncomingRequest()
         {
-            var siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>();
-            var routeData = RouteTable.Routes.GetRouteData(new HttpContextWrapper(siteContext.CurrentContext));
-
-            if (routeData != null)
+            var routeData = RouteTable.Routes.GetRouteData(new HttpContextWrapper(SiteContextRepository.GetCurrent().CurrentContext));
+            if (routeData == null)
             {
-                var data = GetRouteDataValue(routeData);
-
-                return data;
+                return null;
             }
+            var data = GetRouteDataValue(routeData);
 
-            return null;
+            return data;
         }
 
-        public virtual void Process(PipelineArgs args)
+        public override void Process(HttpRequestArgs args)
         {
             if (Context.Item != null)
             {
@@ -160,17 +160,16 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
 
             var routeData = GetCatalogItemFromIncomingRequest();
 
-            if (routeData != null)
+            if (routeData == null)
             {
-                var siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>();
+                return;
+            }
+            Context.Item = ResolveCatalogItem(routeData.Id, routeData.Catalog, routeData.IsProduct);
+            SiteContextRepository.GetCurrent().CurrentCatalogItem = Context.Item;
 
-                Context.Item = ResolveCatalogItem(routeData.Id, routeData.Catalog, routeData.IsProduct);
-                siteContext.CurrentCatalogItem = Context.Item;
-
-                if (Context.Item == null)
-                {
-                    WebUtil.Redirect("~/");
-                }
+            if (Context.Item == null)
+            {
+                WebUtil.Redirect("~/");
             }
         }
 

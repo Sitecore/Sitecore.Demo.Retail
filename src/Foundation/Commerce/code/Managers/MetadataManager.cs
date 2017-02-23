@@ -15,13 +15,10 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System;
-using System.Globalization;
 using System.Web;
-using Sitecore.Commerce.Connect.CommerceServer;
+using System.Web.Mvc;
 using Sitecore.Data.Items;
-using Sitecore.Foundation.Commerce.Models;
-using Sitecore.Web;
+using Sitecore.Foundation.Commerce.Repositories;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
@@ -29,7 +26,7 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         public static HtmlString GetTags()
         {
-            var siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>();
+            var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().GetCurrent();
 
             if (siteContext.IsCategory)
             {

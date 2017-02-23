@@ -15,31 +15,24 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System;
-using System.Configuration;
-using System.Globalization;
 using System.Web;
+using System.Web.Mvc;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Entities.Inventory;
-using Sitecore.Configuration;
-using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Models;
-using Sitecore.Foundation.Commerce.Util;
-using Sitecore.Foundation.SitecoreExtensions.Extensions;
+using Sitecore.Foundation.Commerce.Repositories;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
     public static class StorefrontManager
     {
-        public static ISiteContext CurrentSiteContext => CommerceTypeLoader.CreateInstance<ISiteContext>();
-
         public static CommerceStorefront CurrentStorefront
         {
             get
             {
-                var siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>();
+                var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().GetCurrent();
                 var path = Context.Site.RootPath + Context.Site.StartItem;
                 if (siteContext.CurrentContext.Items.Contains(path))
                 {

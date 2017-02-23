@@ -21,6 +21,7 @@ using System.Linq;
 using Sitecore.Commerce.Entities.LoyaltyPrograms;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -43,7 +44,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public List<LoyaltyTierItemBaseJsonResult> LoyaltyTiers { get; } = new List<LoyaltyTierItemBaseJsonResult>();
 
-        public virtual void Initialize(LoyaltyProgramStatus program)
+        public void Initialize(LoyaltyProgramStatus program)
         {
             Assert.ArgumentNotNull(program, nameof(program));
 

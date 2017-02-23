@@ -71,7 +71,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Customer
             }
         }
 
-        protected virtual Party ProcessCommerceParty(AddPartiesResult result, Profile customerProfile, CommerceParty partyToAdd)
+        private Party ProcessCommerceParty(AddPartiesResult result, Profile customerProfile, CommerceParty partyToAdd)
         {
             Assert.ArgumentNotNull(partyToAdd, nameof(partyToAdd));
             Assert.ArgumentNotNull(partyToAdd.Name, nameof(partyToAdd.Name));

@@ -37,7 +37,7 @@ namespace Sitecore.Foundation.Commerce.Repositories
             return GetCountryItem(countryCode)?.Children.Where(i => i.IsDerived(Templates.Region.ID));
         }
 
-        protected virtual Item GetCountriesRoot()
+        private Item GetCountriesRoot()
         {
             var commerceRoot = Sitecore.Context.Database.GetItem(CommerceConstants.KnownItemPaths.CommerceFolder);
             return commerceRoot?.Children.FirstOrDefault(i => i.IsDerived(Templates.CountryFolder.ID));
