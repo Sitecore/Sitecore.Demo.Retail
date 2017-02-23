@@ -14,6 +14,7 @@ var nugetRestore = require('gulp-nuget-restore');
 var fs = require('fs');
 var unicorn = require("./scripts/unicorn.js");
 var habitat = require("./scripts/habitat.js");
+var exec = require("child_process").exec;
 
 module.exports.config = config;
 
@@ -287,4 +288,83 @@ gulp.task("Auto-Publish-Assemblies", function () {
       return stream;
     })
   );
+});
+
+/*****************************
+ Commerce
+*****************************/
+gulp.task("Install-Commerce", function (callback) {
+    var options = { maxBuffer: 4024 * 1024 };
+    return exec("powershell -executionpolicy unrestricted -file .\\install-commerce.ps1", options, function (err, stdout, stderr) {
+        if (err) {
+            console.error(`exec error: ${err}`);
+            throw err;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+        callback();
+    });
+});
+
+gulp.task("Uninstall-Commerce", function (callback) {
+    var options = { maxBuffer: 1024 * 1024 };
+    return exec("powershell -executionpolicy unrestricted -file .\\uninstall-commerce.ps1", options, function (err, stdout, stderr) {
+        if (err) {
+            console.error(`exec error: ${err}`);
+            throw err;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+        callback();
+    });
+});
+
+
+gulp.task("Import-CSCatalog", function (callback) {
+    var dataPath = config.commerceDatabasePath + "\\Catalog.xml";
+    var command = "\"& {Import-Module CSPS; Import-CSCatalog -Name " + config.commerceServerSiteName + " -File " + dataPath + " -ImportSchemaChanges $true -Mode Full}\""
+    var cmd = "powershell -executionpolicy unrestricted -command " + command
+    var options = { maxBuffer: 1024 * 1024 };
+    console.log(`cmd: ${cmd}`);
+    return exec(cmd, options, function (err, stdout, stderr) {
+        if (err) {
+            console.error(`exec error: ${err}`);
+            throw err;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+        callback();
+    });
+});
+
+gulp.task("Export-CSCatalog", function (callback) {
+    var dataPath = config.commerceDatabasePath + "\\Catalog.xml";
+    var command = "\"& {Import-Module CSPS; Export-CSCatalog -Name " + config.commerceServerSiteName + " -File " + dataPath + " -SchemaExportType All -Mode Full}\""
+    var cmd = "powershell -executionpolicy unrestricted -command " + command
+    var options = { maxBuffer: 1024 * 1024 };
+    console.log(`cmd: ${cmd}`);
+    return exec(cmd, options, function (err, stdout, stderr) {
+        if (err) {
+            console.error(`exec error: ${err}`);
+            throw err;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+        callback();
+    });
+});
+
+gulp.task("Import-CSInventory", function (callback) {
+    var dataPath = config.commerceDatabasePath + "\\Inventory.xml";
+    var command = "& {Import-Module CSPS; Import-CSInventory -Name " + config.commerceServerSiteName + " -File " + dataPath + " -ImportSchemaChanges $true -Mode Full}"
+    var options = { maxBuffer: 1024 * 1024 };
+    return exec("powershell -executionpolicy unrestricted -command \"" + command + "\"", options, function (err, stdout, stderr) {
+        if (err) {
+            console.error(`exec error: ${err}`);
+            throw err;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+        callback();
+    });
 });
