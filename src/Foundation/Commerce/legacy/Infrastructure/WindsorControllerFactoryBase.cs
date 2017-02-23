@@ -71,48 +71,7 @@ namespace Sitecore.Reference.Storefront.Infrastructure
 
         protected override SessionStateBehavior GetControllerSessionBehavior(RequestContext requestContext, Type controllerType)
         {
-            if (!StorefrontManager.ReadOnlySessionStateBehaviorEnabled)
-            {
-                return SessionStateBehavior.Required;
-            }
-
-            var actionName = requestContext.RouteData.Values["action"].ToString();
-            MethodInfo actionMethodInfo;
-
-            try
-            {
-                actionMethodInfo = controllerType.GetMethod(actionName, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
-            }
-            catch (AmbiguousMatchException /* matchExc */)
-            {
-                var httpRequestTypeAttr =
-                    requestContext.HttpContext.Request.RequestType.Equals("POST")
-                        ? typeof(HttpPostAttribute)
-                        : typeof(HttpGetAttribute);
-
-                actionMethodInfo =
-                    controllerType.GetMethods().FirstOrDefault(
-                        mi =>
-                            mi.Name.Equals(actionName, StringComparison.CurrentCultureIgnoreCase) && mi.GetCustomAttributes(httpRequestTypeAttr, false).Length > 0);
-            }
-
-            if (actionMethodInfo != null)
-            {
-                var actionSessionStateAttr = actionMethodInfo.GetCustomAttributes(typeof(StorefrontSessionStateAttribute), false)
-                    .OfType<StorefrontSessionStateAttribute>()
-                    .FirstOrDefault();
-
-                if (actionSessionStateAttr != null)
-                {
-                    Debug.WriteLine("{0}: {1}", actionName, actionSessionStateAttr.Behavior);
-                    return actionSessionStateAttr.Behavior;
-                }
-            }
-
-            var defaultBehavior = base.GetControllerSessionBehavior(requestContext, controllerType);
-            Debug.WriteLine("{0}: {1}", actionName, defaultBehavior);
-
-            return defaultBehavior;
+            return SessionStateBehavior.Required;
         }
     }
 }

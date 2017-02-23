@@ -16,6 +16,7 @@
 // -------------------------------------------------------------------------------------------
 
 using Sitecore.Data.Items;
+using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Foundation.Commerce.Models
 {
@@ -24,10 +25,10 @@ namespace Sitecore.Foundation.Commerce.Models
         public CurrencyInformationModel(Item item)
         {
             this.Name = item.Name;
-            this.Description = item[StorefrontConstants.KnownFieldNames.CurrencyDescription];
-            this.Symbol = item[StorefrontConstants.KnownFieldNames.CurrencySymbol];
-            this.SymbolPosition = MainUtil.GetInt(item[StorefrontConstants.KnownFieldNames.CurrencySymbolPosition], 3);
-            this.CurrencyNumberFormatCulture = item[StorefrontConstants.KnownFieldNames.CurrencyNumberFormatCulture];
+            this.Description = item[Templates.Currency.Fields.Description];
+            this.Symbol = item[Templates.Currency.Fields.Symbol];
+            this.SymbolPosition = item.GetInteger(Templates.Currency.Fields.SymbolPosition) ?? 3;
+            this.CurrencyNumberFormatCulture = item[Templates.Currency.Fields.NumberFormatCulture];
         }
 
         public string Name { get; set; }

@@ -23,16 +23,13 @@
     </div>
     <div class="panel-body">
         <p>
-            <a href="@StorefrontManager.StorefrontUri("/accountmanagement/EditProfile")">@email</a>
+            <a href="@("/accountmanagement/EditProfile")">@email</a>
         </p>
-        <a href="@StorefrontManager.StorefrontUri("/accountmanagement/EditProfile")" class="btn btn-default">
+        <a href="@("/accountmanagement/EditProfile")" class="btn btn-default">
             @Html.Sitecore().Field("View Details Label", Html.Sitecore().CurrentItem) <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         </a>
-        @if (storefront.FormsAuthentication)
-        {
-            <a class="btn btn-default" href="@StorefrontManager.StorefrontUri("/accountmanagement/ChangePassword")">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> @Html.Sitecore().Field("Change Password Label", Html.Sitecore().CurrentItem)
-            </a>
-        }
+        <a class="btn btn-default" href="@("/accountmanagement/ChangePassword")">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> @Html.Sitecore().Field("Change Password Label", Html.Sitecore().CurrentItem)
+        </a>
     </div>
 </div>

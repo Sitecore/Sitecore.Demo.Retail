@@ -12,21 +12,6 @@ SharedFields:
 - ID: "0ccf5ac9-fa08-4421-9651-707b33193f8e"
   Hint: CookieExpiryInDays
   Value: 2
-- ID: "0d2d45c1-783b-4a72-a797-f5907bc37cfe"
-  Hint: DefaultCartName
-  Value: Default
-- ID: "239412bd-046d-4c97-98ba-17b5fb07f004"
-  Hint: ShopName
-  Value: website
-- ID: "268036a9-3394-4964-8cb3-ac4ca68bf4b4"
-  Hint: RouteKey
-  Value: contoso
-- ID: "2f3dffc4-3648-4183-8741-1cc97a04937c"
-  Hint: GiftCardProductId
-  Value: 22565422120
-- ID: "51cdf89d-e4e6-438b-a6cf-75747529cafd"
-  Hint: GiftCardAmountOptions
-  Value: 10|20|25|50|100
 - ID: "5585a30d-b115-4753-93ce-422c3455deb2"
   Hint: ShowInNavigation
   Type: Checkbox
@@ -71,13 +56,12 @@ SharedFields:
 - ID: "cc553205-a4d2-4feb-b722-9b41e9fa5271"
   Hint: TrackingCookieName
   Value: _visitor
+- ID: "cd92dff9-ae15-443c-8de5-661d23b5ac6c"
+  Hint: On Sale Overlay Image
+  Value: "{CDD9F63A-2FF1-442C-87E1-286C98D506E1}"
 - ID: "e00b561c-503b-47af-979f-d6c0c911721d"
   Hint: IdKeyName
   Value: visitorId
-- ID: "eebcd18a-6447-4dec-9c57-12faf4714034"
-  Hint: Forms Authentication
-  Type: Checkbox
-  Value: 1
 - ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
   Hint: __Renderings
   Type: layout

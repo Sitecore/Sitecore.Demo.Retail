@@ -27,11 +27,17 @@ namespace Sitecore.Foundation.Commerce
 {
     public static class WindsorConfig
     {
-        internal static readonly IWindsorContainer Container;
+        private static IWindsorContainer _container;
+
+        public static IWindsorContainer Container
+        {
+            get { return _container ?? (_container = new WindsorContainer()); }
+            set { _container = value; }
+        }
 
         static WindsorConfig()
         {
-            Container = new WindsorContainer().Install(FromAssembly.This());
+            Container = Container.Install(FromAssembly.This());
         }
 
         public static void ConfigureContainer()

@@ -20,7 +20,7 @@
     <div class="row" id="wishListsSection">
         <div class="col-md-12 border-bottom">
             <h2>
-                <a href="@StorefrontManager.StorefrontUri("/accountmanagement/mywishlists")" class="view-all pull-right">
+                <a href="@("/accountmanagement/mywishlists")" class="view-all pull-right">
                     <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> @Html.Sitecore().Field("Back To My Wish Lists Label", Html.Sitecore().CurrentItem)
                 </a>
             </h2>
@@ -79,7 +79,6 @@
                                 </td>
                                 <td class="cart-price">
                                     <span data-bind="text: linePrice, visible: linePrice != null" pid="price"></span>
-                                    <span data-bind="text: giftCardAmount, visible: giftCardAmount != null" pid="giftCardAmount"></span>
                                 </td>
                                 <td class="cart-quantity text-center" style="width: 10%;">
                                     <input type="number" class="form-control" data-bind="value: quantity, event: {change: $parent.updateItem }, attr: { id: productId }" pid="quantity">

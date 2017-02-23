@@ -151,7 +151,6 @@ function addToWishList(id) {
     formData.VariantId = $("#VariantId").length > 0 ? $("#VariantId").val() : "";
     formData.ProductCatalog = $("#CatalogName").val();
     formData.Quantity = $("#Quantity").val();
-    formData.GiftCardAmount = $("#GiftCard-Amount").length > 0 ? $("#GiftCard-Amount").val() : "";
     formData.WishListId = wishListId;
     formData.WishListName = wishListName;
 

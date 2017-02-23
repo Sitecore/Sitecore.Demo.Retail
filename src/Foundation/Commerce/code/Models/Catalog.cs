@@ -16,6 +16,8 @@
 // -------------------------------------------------------------------------------------------
 
 using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
+using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Foundation.Commerce.Models
 {
@@ -23,22 +25,11 @@ namespace Sitecore.Foundation.Commerce.Models
     {
         public Catalog(Item item)
         {
+            Assert.IsTrue(item.IsDerived(Sitecore.Commerce.Connect.CommerceServer.CommerceConstants.KnownTemplateIds.CommerceCatalogTemplate), $"Not a valid item. Must derive from {Sitecore.Commerce.Connect.CommerceServer.CommerceConstants.KnownTemplateIds.CommerceCatalogTemplate}");
+
             InnerItem = item;
         }
 
-        public string Name
-        {
-            get { return InnerItem.Name; }
-        }
-
-        public string Title()
-        {
-            return InnerItem[StorefrontConstants.ItemFields.Title];
-        }
-
-        public string NameTitle()
-        {
-            return InnerItem["Name Title"];
-        }
+        public string Name => InnerItem.Name;
     }
 }

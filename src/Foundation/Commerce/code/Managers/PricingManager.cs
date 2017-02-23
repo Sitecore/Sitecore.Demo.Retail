@@ -59,7 +59,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
 
             request.IncludeVariantPrices = includeVariants;
-            request.CurrencyCode = StorefrontManager.GetCustomerCurrency();
+            request.CurrencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
             var result = this.PricingServiceProvider.GetProductPrices(request);
 
             result.WriteToSitecoreLog();
@@ -77,7 +77,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             var request = new Sitecore.Commerce.Engine.Connect.Services.Prices.GetProductBulkPricesRequest(catalogName, productIds, priceTypeIds)
             {
-                CurrencyCode = StorefrontManager.GetCustomerCurrency(),
+                CurrencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency,
                 DateTime = this.GetCurrentDate()
             };
 

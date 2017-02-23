@@ -50,5 +50,29 @@ namespace Sitecore.Foundation.Commerce
                 public static readonly ID Title = new ID("{439CDD2A-66A9-4D67-913A-5B696327C867");
             }
         }
+
+        public static class CurrencyContext
+        {
+            public static readonly ID ID = new ID("{B0A3F504-6AA6-42B7-99FE-8280D8CC01B1}");
+
+            public static class Fields
+            {
+                public static readonly ID DefaultCurrency = new ID("{7315350F-F3B5-4740-A227-186F7A2BA9F7}");
+            }
+        }
+
+        public static class Currency
+        {
+            public static readonly ID ID = new ID("{BA255355-225E-4EA7-AAF7-C4A05E8FF7A1");
+
+            public static class Fields
+            {
+                public static readonly ID Description = new ID("{106D1A2D-66E0-429D-B601-07019BECA165}");
+                public static readonly ID Symbol = new ID("{083DB23D-64D5-48F7-9F2A-710C5612A4A4}");
+                public static readonly ID SymbolPosition = new ID("{21D2DAA4-1FC3-4EA6-B75F-608CB27770FF}");
+                public static readonly ID NumberFormatCulture = new ID("{1B863C74-D174-4691-B89A-BF30884B3932}");
+            }
+
+        }
     }
 }

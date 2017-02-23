@@ -59,7 +59,7 @@
         </tbody>
     </table>
     <div class="panel-footer" data-bind="visible: isNotEmpty" style="display: none">
-        <a href="@StorefrontManager.StorefrontUri("/accountmanagement/mywishlists")" class="view-all btn btn-default">
+        <a href="@("/accountmanagement/mywishlists")" class="view-all btn btn-default">
             @Html.Sitecore().Field("View All Label", Html.Sitecore().CurrentItem) <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         </a>
     </div>

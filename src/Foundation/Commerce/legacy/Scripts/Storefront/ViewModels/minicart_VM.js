@@ -68,7 +68,7 @@ function initMiniShoppingCart(sectionId) {
     });
 }
 
-function UpdateMiniCart(updateCart) {
+function UpdateMiniCart() {
     ClearGlobalMessages();
     AJAXPost(StorefrontUri("api/storefront/cart/getcurrentcart"), null, function (data, success, sender) {
         if (success && data.Success) {
@@ -80,8 +80,6 @@ function UpdateMiniCart(updateCart) {
 }
 
 function initCartAmount(updateAmount) {
-    dontBlockUI = true;
-
     var data = null;
     if (updateAmount != undefined && updateAmount) {
         data = '{ "updateCart" : true}';

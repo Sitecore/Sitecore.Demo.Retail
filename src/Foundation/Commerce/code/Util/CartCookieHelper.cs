@@ -71,8 +71,7 @@ namespace Sitecore.Foundation.Commerce.Util
             if (cartCookie == null || string.IsNullOrEmpty(cartCookie.Value))
             {
                 var cartId = Guid.NewGuid().ToString();
-                cartCookie = new HttpCookie(AnonymousCartCookieName, cartId);
-                cartCookie.HttpOnly = true;
+                cartCookie = new HttpCookie(AnonymousCartCookieName, cartId) {HttpOnly = true};
                 HttpContext.Current.Response.SetCookie(cartCookie);
                 return cartId;
             }

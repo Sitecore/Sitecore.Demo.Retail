@@ -69,54 +69,54 @@ namespace Sitecore.Reference.Storefront
                     new {controller = apiInfo.Controller, action = apiInfo.Action, id = UrlParameter.Optional});
 
             routes.MapRoute(
-                ProductItemResolver.ShopCategoryRouteName,
-                ProductItemResolver.ShopUrlRoute + "/{" + ProductItemResolver.IdField + "}",
-                new {id = UrlParameter.Optional, itemType = ProductItemResolver.CategoryItemType});
+                "shop-category",
+                ProductItemResolver.ShopUrlRoute + "/{id}",
+                new {id = UrlParameter.Optional, itemType = CategoryItemType});
 
             routes.MapRoute(
-                ProductItemResolver.ShopProductRouteName,
-                ProductItemResolver.ShopUrlRoute + "/{" + ProductItemResolver.CategoryField + "}/{" + ProductItemResolver.IdField + "}",
-                new {id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType});
+                "shop-product",
+                ProductItemResolver.ShopUrlRoute + "/{category}/{id}",
+                new {id = UrlParameter.Optional, itemType = "product"});
 
             routes.MapRoute(
-                ProductItemResolver.ShopCategoryWithCatalogRouteName,
-                "{catalog}/" + ProductItemResolver.ShopUrlRoute + "/{" + ProductItemResolver.IdField + "}",
-                new {id = UrlParameter.Optional, itemType = ProductItemResolver.CategoryItemType});
+                "shop-category-catalog",
+                "{catalog}/" + ProductItemResolver.ShopUrlRoute + "/{id}",
+                new {id = UrlParameter.Optional, itemType = CategoryItemType});
 
             routes.MapRoute(
-                ProductItemResolver.ShopProductWithCatalogRouteName,
-                "{catalog}/" + ProductItemResolver.ShopUrlRoute + "/{" + ProductItemResolver.CategoryField + "}/{" + ProductItemResolver.IdField + "}",
-                new {id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType});
+                "shop-product-catalog",
+                "{catalog}/" + ProductItemResolver.ShopUrlRoute + "/{category}/{id}",
+                new {id = UrlParameter.Optional, itemType = "product"});
 
             routes.MapRoute(
-                ProductItemResolver.CategoryRouteName,
-                ProductItemResolver.CategoryUrlRoute + "/{" + ProductItemResolver.IdField + "}",
-                new {id = UrlParameter.Optional, itemType = ProductItemResolver.CategoryItemType});
+                "category",
+                ProductItemResolver.CategoryUrlRoute + "/{id}",
+                new {id = UrlParameter.Optional, itemType = CategoryItemType});
 
             routes.MapRoute(
-                ProductItemResolver.ProductRouteName,
-                ProductItemResolver.ProductUrlRoute + "/{" + ProductItemResolver.IdField + "}",
-                new {id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType});
+                "product",
+                ProductItemResolver.ProductUrlRoute + "/{id}",
+                new {id = UrlParameter.Optional, itemType = "product"});
 
             routes.MapRoute(
                 "ProductAction",
-                ProductItemResolver.ProductUrlRoute + "/{action}/{" + ProductItemResolver.IdField + "}",
-                new {controller = "Catalog", id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType});
+                ProductItemResolver.ProductUrlRoute + "/{action}/{id}",
+                new {controller = "Catalog", id = UrlParameter.Optional, itemType = "product"});
 
             routes.MapRoute(
-                ProductItemResolver.CategoryWithCatalogRouteName,
-                "{catalog}/" + ProductItemResolver.CategoryUrlRoute + "/{" + ProductItemResolver.IdField + "}",
-                new {id = UrlParameter.Optional, itemType = ProductItemResolver.CategoryItemType});
+                "category-catalog",
+                "{catalog}/" + ProductItemResolver.CategoryUrlRoute + "/{id}",
+                new {id = UrlParameter.Optional, itemType = CategoryItemType});
 
             routes.MapRoute(
-                ProductItemResolver.ProductWithCatalogRouteName,
-                "{catalog}/" + ProductItemResolver.ProductUrlRoute + "/{" + ProductItemResolver.IdField + "}",
-                new {id = UrlParameter.Optional, itemType = ProductItemResolver.ProductItemType});
+                "product-catalog",
+                "{catalog}/" + ProductItemResolver.ProductUrlRoute + "/{id}",
+                new {id = UrlParameter.Optional, itemType = "product"});
 
             routes.MapRoute(
                 "catalogitem-all",
-                ProductItemResolver.NavigationItemName + "/{*" + ProductItemResolver.PathElementsField + "}",
-                new {itemType = ProductItemResolver.CatalogItemType});
+                ProductItemResolver.NavigationItemName + "/{*pathElements}",
+                new {itemType = "catalogitem"});
 
             routes.MapRoute(
                 "logoff",
@@ -142,5 +142,6 @@ namespace Sitecore.Reference.Storefront
             public string Url => "api/storefront/" + (this.Controller.ToLower(CultureInfo.InvariantCulture) + "/" + this.Action.ToLower(CultureInfo.InvariantCulture));
         }
 
+        public const string CategoryItemType = "category";
     }
 }

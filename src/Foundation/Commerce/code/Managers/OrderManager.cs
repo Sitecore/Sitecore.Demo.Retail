@@ -158,8 +158,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetVisitorOrdersResult, IEnumerable<OrderHeader>>(result, new List<OrderHeader>());
         }
 
-        public ManagerResponse<CartResult, CommerceCart> Reorder([NotNull] CommerceStorefront storefront,
-            [NotNull] VisitorContext visitorContext, ReorderInputModel inputModel)
+        public ManagerResponse<CartResult, CommerceCart> Reorder([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, ReorderInputModel inputModel)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
@@ -171,7 +170,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 CustomerId = visitorContext.GetCustomerId(),
                 OrderId = inputModel.OrderId,
                 ReorderLineExternalIds = inputModel.ReorderLineExternalIds,
-                CartName = storefront.DefaultCartName,
+                CartName = CommerceConstants.CartSettings.DefaultCartName,
                 OrderShippingPreferenceType = ShippingOptionType.ShipToAddress
             };
 
@@ -180,8 +179,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CartResult, CommerceCart>(result, result.Cart as CommerceCart);
         }
 
-        public ManagerResponse<VisitorCancelOrderResult, bool> CancelOrder([NotNull] CommerceStorefront storefront,
-            [NotNull] VisitorContext visitorContext, CancelOrderInputModel inputModel)
+        public ManagerResponse<VisitorCancelOrderResult, bool> CancelOrder([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, CancelOrderInputModel inputModel)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));

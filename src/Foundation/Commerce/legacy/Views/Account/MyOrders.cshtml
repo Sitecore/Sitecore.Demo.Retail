@@ -17,7 +17,7 @@
 @model List<OrderHeader>
 
 <div class="text-right">
-    <a href="@StorefrontManager.StorefrontUri("/accountmanagement")" class="btn btn-default">
+    <a href="@("/accountmanagement")" class="btn btn-default">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> @Html.Sitecore().Field("Back To My Account Label", Html.Sitecore().CurrentItem)
     </a>
 </div>
@@ -41,16 +41,16 @@
             }
             <tr>
                 <td>
-                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.ExternalId">@commerceOrder.OrderID</a>
+                    <a href="@("/accountmanagement/myorder")?id=@order.ExternalId">@commerceOrder.OrderID</a>
                 </td>
                 <td>
-                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.ExternalId">@commerceOrder.LastModified.ToDisplayedDate()</a>
+                    <a href="@("/accountmanagement/myorder")?id=@order.ExternalId">@commerceOrder.LastModified.ToDisplayedDate()</a>
                 </td>
                 <td>
-                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.ExternalId">@StorefrontManager.GetOrderStatusName(commerceOrder.Status)</a>
+                    <a href="@("/accountmanagement/myorder")?id=@order.ExternalId">@StorefrontManager.GetOrderStatusName(commerceOrder.Status)</a>
                 </td>
                 <td>
-                    <a href="@StorefrontManager.StorefrontUri("/accountmanagement/myorder")?id=@order.ExternalId"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                    <a href="@("/accountmanagement/myorder")?id=@order.ExternalId"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
                 </td>
             </tr>
         }

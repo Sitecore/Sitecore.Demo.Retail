@@ -29,7 +29,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             ExternalId = header.ExternalId;
             Status = StorefrontManager.GetOrderStatusName(header.Status);
             LastModified = ((CommerceOrderHeader) header).LastModified.ToDisplayedDate();
-            DetailsUrl = string.Concat(StorefrontManager.StorefrontUri("/accountmanagement/myorder"), "?id=", header.ExternalId);
+            DetailsUrl = string.Concat("/accountmanagement/myorder", "?id=", header.ExternalId);
             OrderId = header.OrderID;
         }
 

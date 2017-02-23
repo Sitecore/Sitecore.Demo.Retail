@@ -46,28 +46,17 @@ namespace Sitecore.Foundation.Commerce.Util
         {
             get
             {
-                if (Context.Language != null)
+                if (Context.Language == null)
                 {
-                    if (Context.Site == null ||
-                        !string.Equals(Context.Language.Name, Context.Site.Language, StringComparison.OrdinalIgnoreCase))
-                    {
-                        return true;
-                    }
+                    return false;
                 }
-
-                return false;
+                return Context.Site == null || !string.Equals(Context.Language.Name, Context.Site.Language, StringComparison.OrdinalIgnoreCase);
             }
         }
 
-        public static string BuildProductCatalogLink(Item item)
+        public static string BuildProductCatalogLink(Item productItem)
         {
-            var productCatalogItem =
-                StorefrontManager.CurrentStorefront.HomeItem.Axes.GetChild(ProductItemResolver.NavigationItemName);
-            var categoryDatasource = productCatalogItem["CategoryDatasource"];
-            Assert.IsNotNullOrEmpty(categoryDatasource, "Product Catalog item missing CategoryDatasource.");
-            var parentPath = item.Paths.FullPath;
-            var path = parentPath.Replace(categoryDatasource, string.Empty);
-            return $"/{ProductItemResolver.NavigationItemName}{path}";
+            return ProductItemResolver.GetProductCatalogUrl(productItem);
         }
 
         public static string BuildProductLink(Item item, bool includeCatalog, bool includeFriendlyName)
@@ -108,34 +97,24 @@ namespace Sitecore.Foundation.Commerce.Util
                 route.Append("/");
             }
 
-            var isGiftCard = itemName == StorefrontManager.CurrentStorefront.GiftCardProductId;
-            if (isGiftCard)
+            if (!string.IsNullOrEmpty(catalogName))
             {
-                route.Append(ProductItemResolver.LandingUrlRoute);
+                route.Append(EncodeUrlToken(catalogName, true));
                 route.Append("/");
-                route.Append(ProductItemResolver.BuyGiftCardUrlRoute);
-            }
-            else
-            {
-                if (!string.IsNullOrEmpty(catalogName))
-                {
-                    route.Append(EncodeUrlToken(catalogName, true));
-                    route.Append("/");
-                }
-
-                route.Append(root);
-                route.Append("/");
-
-                if (!string.IsNullOrEmpty(itemFriendlyName))
-                {
-                    route.Append(EncodeUrlToken(itemFriendlyName, true));
-                    route.Append(_urlTokenDelimiter);
-                }
-
-                route.Append(EncodeUrlToken(itemName, false));
             }
 
-            var url = StorefrontManager.StorefrontUri(route.ToString());
+            route.Append(root);
+            route.Append("/");
+
+            if (!string.IsNullOrEmpty(itemFriendlyName))
+            {
+                route.Append(EncodeUrlToken(itemFriendlyName, true));
+                route.Append(_urlTokenDelimiter);
+            }
+
+            route.Append(EncodeUrlToken(itemName, false));
+
+            var url = route.ToString();
             return url;
         }
 
@@ -229,60 +208,50 @@ namespace Sitecore.Foundation.Commerce.Util
                 route.Append("/");
             }
 
-            var isGiftCard = productId == StorefrontManager.CurrentStorefront.GiftCardProductId;
-            if (isGiftCard)
+            if (!string.IsNullOrEmpty(catalogName))
             {
-                route.Append(ProductItemResolver.LandingUrlRoute);
+                route.Append(EncodeUrlToken(catalogName, true));
                 route.Append("/");
-                route.Append(ProductItemResolver.BuyGiftCardUrlRoute);
             }
-            else
-            {
-                if (!string.IsNullOrEmpty(catalogName))
-                {
-                    route.Append(EncodeUrlToken(catalogName, true));
-                    route.Append("/");
-                }
 
-                route.Append(ProductItemResolver.ShopUrlRoute);
+            route.Append(ProductItemResolver.ShopUrlRoute);
+            route.Append("/");
+
+            if (!string.IsNullOrEmpty(categoryName))
+            {
+                route.Append(EncodeUrlToken(categoryName, true));
+                route.Append(_urlTokenDelimiter);
+            }
+
+            route.Append(EncodeUrlToken(categoryId, false));
+
+            if (!string.IsNullOrEmpty(productId))
+            {
                 route.Append("/");
 
-                if (!string.IsNullOrEmpty(categoryName))
+                if (!string.IsNullOrEmpty(productName))
                 {
-                    route.Append(EncodeUrlToken(categoryName, true));
+                    route.Append(EncodeUrlToken(productName, true));
                     route.Append(_urlTokenDelimiter);
                 }
 
-                route.Append(EncodeUrlToken(categoryId, false));
+                route.Append(EncodeUrlToken(productId, false));
 
-                if (!string.IsNullOrEmpty(productId))
+                if (!string.IsNullOrEmpty(variantId))
                 {
                     route.Append("/");
 
-                    if (!string.IsNullOrEmpty(productName))
+                    if (!string.IsNullOrEmpty(variantName))
                     {
-                        route.Append(EncodeUrlToken(productName, true));
+                        route.Append(EncodeUrlToken(variantName, true));
                         route.Append(_urlTokenDelimiter);
                     }
 
-                    route.Append(EncodeUrlToken(productId, false));
-
-                    if (!string.IsNullOrEmpty(variantId))
-                    {
-                        route.Append("/");
-
-                        if (!string.IsNullOrEmpty(variantName))
-                        {
-                            route.Append(EncodeUrlToken(variantName, true));
-                            route.Append(_urlTokenDelimiter);
-                        }
-
-                        route.Append(EncodeUrlToken(variantId, false));
-                    }
+                    route.Append(EncodeUrlToken(variantId, false));
                 }
             }
 
-            var url = StorefrontManager.StorefrontUri(route.ToString());
+            var url = route.ToString();
             return url;
         }
 
@@ -295,26 +264,6 @@ namespace Sitecore.Foundation.Commerce.Util
         {
             var categoryFolder = WebUtil.GetUrlName(1);
             return string.IsNullOrEmpty(categoryFolder) ? ExtractItemIdFromCurrentUrl() : ExtractItemId(categoryFolder);
-        }
-
-        public static string ExtractCatalogNameFromCurrentUrl()
-        {
-#pragma warning disable 618
-            var linkProvider = LinkManager.Provider as CatalogLinkProvider;
-#pragma warning restore 618
-
-            if (linkProvider == null || !linkProvider.IncludeCatalog)
-            {
-                return StorefrontManager.CurrentStorefront.DefaultCatalog.Name;
-            }
-            var catalogName = WebUtil.GetUrlName(2);
-            if (!string.IsNullOrEmpty(catalogName))
-            {
-                return catalogName;
-            }
-
-            catalogName = WebUtil.GetUrlName(1);
-            return !string.IsNullOrEmpty(catalogName) ? catalogName : StorefrontManager.CurrentStorefront.DefaultCatalog.Name;
         }
 
         public static string ExtractItemId(string folder)
