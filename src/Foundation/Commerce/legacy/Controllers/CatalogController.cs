@@ -213,7 +213,11 @@ namespace Sitecore.Reference.Storefront.Controllers
             UpdateOptionsWithFacets(currentCategory.RequiredFacets, facetValues, productSearchOptions);
             UpdateOptionsWithSorting(sortField, sortDirection, productSearchOptions);
 
-            var viewModel = GetCategoryViewModel(productSearchOptions, currentCategory.SortFields, currentCategory.InnerItem, RenderingContext.Current.Rendering, currentCategory.InnerItem.DisplayName);
+            var viewModel = GetCategoryViewModel(productSearchOptions, 
+                currentCategory.SortFields,
+                currentCategory.InnerItem, 
+                RenderingContext.Current.Rendering, 
+                currentCategory.InnerItem.DisplayName);
 
             return View(viewModel);
         }
@@ -725,7 +729,7 @@ namespace Sitecore.Reference.Storefront.Controllers
 
                 foreach (var productViewModel in categoryViewModel.ChildProducts)
                 {
-                    var productItem = childProducts.SearchResultItems.Where(item => item.Name == productViewModel.ProductId).Single();
+                    var productItem = childProducts.SearchResultItems.Single(item => item.Name == productViewModel.ProductId);
                     productViewModel.CustomerAverageRating = CatalogManager.GetProductRating(productItem);
                 }
             }
