@@ -40,7 +40,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Feature.Commerce.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Reference.Storefront", "src\Foundation\Commerce\legacy\Sitecore.Reference.Storefront.csproj", "{8450F330-0271-4091-8809-C671CCD50671}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{C01BE502-C648-4368-84FC-3F2B212541BC}"
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Feature.Commerce.Catalog", "src\Feature\Catalog\code\Sitecore.Feature.Commerce.Catalog.csproj", "{7031F757-2830-44E3-9639-AAD2DBA69A24}"
 EndProject
 Global
