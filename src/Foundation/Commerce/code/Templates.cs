@@ -41,16 +41,6 @@ namespace Sitecore.Foundation.Commerce
             }
         }
 
-        public static class NamedSearch
-        {
-            public static readonly ID ID = new ID("{F3C0CD6C-9FA9-442D-BD3A-5A25E292F2F7}");
-
-            public static class Fields
-            {
-                public static readonly ID Title = new ID("{439CDD2A-66A9-4D67-913A-5B696327C867");
-            }
-        }
-
         public static class CurrencyContext
         {
             public static readonly ID ID = new ID("{B0A3F504-6AA6-42B7-99FE-8280D8CC01B1}");
@@ -73,6 +63,48 @@ namespace Sitecore.Foundation.Commerce
                 public static readonly ID NumberFormatCulture = new ID("{1B863C74-D174-4691-B89A-BF30884B3932}");
             }
 
+        }
+
+        public static class IncludeInCommerceSearchResults
+        {
+            public static readonly ID ID = new ID("{D40A2D89-5AA5-4C9F-BA46-1216E95A13F7}");
+
+            public static class Fields
+            {
+                public static readonly ID DisplayInSearchResults = new ID("{32B3C63B-B71B-4845-A83F-D91E57AEA220}");
+            }
+        }
+
+        /// <summary>
+        /// Default Sitecore Commerce Templates
+        /// </summary>
+        public static class Commerce
+        {
+            public static class SearchSettings
+            {
+                public static readonly ID ID = new ID("{CB5F3E43-EAF7-4EDB-8235-674745D95059}");
+
+                public static class Fields
+                {
+                    public static readonly ID DefaultBucketQuery = new ID("{AC51462C-8A8D-493B-9492-34D1F26F20F1}");
+                    public static readonly ID PersistentBucketFilter = new ID("{C7815F60-96E1-40CB-BB06-B5F833F73B61}");
+                }
+            }
+
+            public static class NavigationItem
+            {
+                public static readonly ID ID = new ID("{E55834FB-7C93-44A2-87C0-62BEBA282CED}");
+
+                public static class Fields
+                {
+                    public static readonly ID CategoryDatasource = new ID("{2882072B-E310-406B-8DD9-B22C9EA4A0F3}");
+                }
+            }
+
+            public static class DynamicCategory
+            {
+                public static readonly ID ID = new ID("{6820281F-3BB3-41B4-8C93-7771EEA496D0}");
+            }
         }
     }
 }

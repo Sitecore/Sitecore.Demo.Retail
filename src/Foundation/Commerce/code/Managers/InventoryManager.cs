@@ -42,7 +42,7 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         private readonly CommerceContextBase _obecContext;
 
-        public InventoryManager([NotNull] InventoryServiceProvider inventoryServiceProvider, [NotNull] ContactFactory contactFactory)
+        public InventoryManager([NotNull] InventoryServiceProvider inventoryServiceProvider, [NotNull] ContactFactory contactFactory, ICommerceSearchManager commerceSearchManager)
         {
             Assert.ArgumentNotNull(inventoryServiceProvider, nameof(inventoryServiceProvider));
             Assert.ArgumentNotNull(contactFactory, nameof(contactFactory));
@@ -50,11 +50,14 @@ namespace Sitecore.Foundation.Commerce.Managers
             InventoryServiceProvider = inventoryServiceProvider;
             ContactFactory = contactFactory;
             _obecContext = (CommerceContextBase) Factory.CreateObject("commerceContext", true);
+            CommerceSearchManager = commerceSearchManager;
         }
 
-        public InventoryServiceProvider InventoryServiceProvider { get; protected set; }
+        private ICommerceSearchManager CommerceSearchManager { get; set; }
 
-        public ContactFactory ContactFactory { get; protected set; }
+        private InventoryServiceProvider InventoryServiceProvider { get; set; }
+
+        private ContactFactory ContactFactory { get; set; }
 
         public void GetProductsStockStatusForList([NotNull] CommerceStorefront storefront, IEnumerable<IInventoryProduct> productViewModels)
         {
@@ -76,8 +79,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 return;
             }
 
-            var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
-            var searchIndex = searchManager.GetIndex();
+            var searchIndex = CommerceSearchManager.GetIndex();
 
             using (var context = searchIndex.CreateSearchContext())
             {

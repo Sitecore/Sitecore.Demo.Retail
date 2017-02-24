@@ -78,7 +78,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
             foreach (var shippingOption in shippingOptions)
             {
-                var jsonResult = CommerceTypeLoader.CreateInstance<ShippingOptionBaseJsonResult>();
+                var jsonResult = new ShippingOptionBaseJsonResult();
 
                 jsonResult.Initialize(shippingOption);
                 shippingOptionList.Add(jsonResult);
@@ -89,27 +89,33 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public void InitializeLineItemShippingOptions(IEnumerable<LineShippingOption> lineItemShippingOptionList)
         {
-            if (lineItemShippingOptionList != null && lineItemShippingOptionList.Any())
+            if (lineItemShippingOptionList == null)
             {
-                var lineShippingOptionList = new List<LineShippingOptionBaseJsonResult>();
+                return;
+            }
+            var lineShippingOptions = lineItemShippingOptionList as LineShippingOption[] ?? lineItemShippingOptionList.ToArray();
+            if (!lineShippingOptions.Any())
+            {
+                return;
+            }
+            var lineShippingOptionList = new List<LineShippingOptionBaseJsonResult>();
 
-                foreach (var lineShippingOption in lineItemShippingOptionList)
+            foreach (var lineShippingOption in lineShippingOptions)
+            {
+                var jsonResult = new LineShippingOptionBaseJsonResult();
+
+                jsonResult.Initialize(lineShippingOption);
+                lineShippingOptionList.Add(jsonResult);
+            }
+
+            LineShippingOptions = lineShippingOptionList;
+
+            foreach (var line in Cart.Lines)
+            {
+                var lineShippingOption = lineShippingOptions.FirstOrDefault(l => l.LineId.Equals(line.ExternalCartLineId, StringComparison.OrdinalIgnoreCase));
+                if (lineShippingOption != null)
                 {
-                    var jsonResult = CommerceTypeLoader.CreateInstance<LineShippingOptionBaseJsonResult>();
-
-                    jsonResult.Initialize(lineShippingOption);
-                    lineShippingOptionList.Add(jsonResult);
-                }
-
-                LineShippingOptions = lineShippingOptionList;
-
-                foreach (var line in Cart.Lines)
-                {
-                    var lineShippingOption = lineItemShippingOptionList.FirstOrDefault(l => l.LineId.Equals(line.ExternalCartLineId, StringComparison.OrdinalIgnoreCase));
-                    if (lineShippingOption != null)
-                    {
-                        line.SetShippingOptions(lineShippingOption.ShippingOptions);
-                    }
+                    line.SetShippingOptions(lineShippingOption.ShippingOptions);
                 }
             }
         }

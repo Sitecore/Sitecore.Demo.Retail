@@ -39,16 +39,18 @@ namespace Sitecore.Reference.Storefront.Controllers
 {
     public class CartController : SitecoreController
     {
-        public CartController([NotNull] CartManager cartManager, [NotNull] AccountManager accountManager, [NotNull] ContactFactory contactFactory, VisitorContextRepository visitorContextRepository)
+        public CartController([NotNull] CartManager cartManager, [NotNull] AccountManager accountManager, [NotNull] ContactFactory contactFactory, VisitorContextRepository visitorContextRepository, CartCacheHelper cartCacheHelper)
         {
             Assert.ArgumentNotNull(cartManager, nameof(cartManager));
 
             CartManager = cartManager;
             VisitorContextRepository = visitorContextRepository;
+            CartCacheHelper = cartCacheHelper;
         }
 
         public CartManager CartManager { get; protected set; }
         public VisitorContextRepository VisitorContextRepository { get; }
+        public CartCacheHelper CartCacheHelper { get; }
 
         [HttpGet]
         public override ActionResult Index()
@@ -102,8 +104,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             try
             {
                 var id = VisitorContextRepository.GetCurrent().GetCustomerId();
-                var cartCache = CommerceTypeLoader.CreateInstance<CartCacheHelper>();
-                var cart = cartCache.GetCart(id);
+                var cart = CartCacheHelper.GetCart(id);
                 CSCartBaseJsonResult cartResult;
 
                 // The following condition stops the creation of empty carts on startup.
@@ -116,7 +117,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                         cartResult.Initialize(response.ServiceProviderResult.Cart);
                         if (response.ServiceProviderResult.Cart != null)
                         {
-                            cartCache.AddCartToCache(response.ServiceProviderResult.Cart as CommerceCart);
+                            CartCacheHelper.AddCartToCache(response.ServiceProviderResult.Cart as CommerceCart);
                         }
                     }
                 }
@@ -247,8 +248,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                     {
                         // We clear the cart from the cache when basket errors are detected.  This stops the message from being displayed over and over as the
                         // cart will be retrieved again from CS and the pipelines will be executed.
-                        var cartCache = CommerceTypeLoader.CreateInstance<CartCacheHelper>();
-                        cartCache.InvalidateCartCache(VisitorContextRepository.GetCurrent().GetCustomerId());
+                        CartCacheHelper.InvalidateCartCache(VisitorContextRepository.GetCurrent().GetCustomerId());
                     }
                 }
 

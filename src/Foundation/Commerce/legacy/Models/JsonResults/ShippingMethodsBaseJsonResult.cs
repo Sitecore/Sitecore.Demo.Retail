@@ -47,7 +47,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
             foreach (var shippingMethod in shippingMethods)
             {
-                var jsonResult = CommerceTypeLoader.CreateInstance<ShippingMethodBaseJsonResult>();
+                var jsonResult = new ShippingMethodBaseJsonResult();
 
                 jsonResult.Initialize(shippingMethod);
                 shippingMethodList.Add(jsonResult);

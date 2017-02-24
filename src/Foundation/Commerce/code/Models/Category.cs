@@ -46,11 +46,6 @@ namespace Sitecore.Foundation.Commerce.Models
             }
         }
 
-        public string NameTitle()
-        {
-            return this.InnerItem["Name Title"];
-        }
-
         public string Title()
         {
             return this.InnerItem[StorefrontConstants.ItemFields.Title];

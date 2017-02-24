@@ -40,6 +40,13 @@ namespace Sitecore.Reference.Storefront.Controllers
 {
     public class NavigationSearchController : SitecoreController
     {
+        public ICommerceSearchManager CommerceSearchManager { get; }
+
+        public NavigationSearchController(ICommerceSearchManager commerceSearchManager)
+        {
+            CommerceSearchManager = commerceSearchManager;
+        }
+
         public string IndexName { get; set; }
 
         [HttpGet]
@@ -61,8 +68,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         private SearchResponse GetNavigationCategories(string navigationDataSource, CommerceSearchOptions searchOptions)
         {
             ID navigationId;
-            var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
-            var searchIndex = searchManager.GetIndex();
+            var searchIndex = CommerceSearchManager.GetIndex();
 
             if (navigationDataSource.IsGuid())
             {
@@ -96,7 +102,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                         Uri = p.Uri
                     });
 
-                searchResults = searchManager.AddSearchOptionsToQuery(searchResults, searchOptions);
+                searchResults = CommerceSearchManager.AddSearchOptionsToQuery(searchResults, searchOptions);
 
                 var results = searchResults.GetResults();
                 var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);

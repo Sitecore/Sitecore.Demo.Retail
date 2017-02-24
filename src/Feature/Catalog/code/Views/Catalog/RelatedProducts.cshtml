@@ -9,38 +9,43 @@
     // either express or implied. See the License for the specific language governing permissions
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
+@using Sitecore.Feature.Commerce.Catalog
 @using Sitecore.Feature.Commerce.Catalog.Models
+@using Sitecore.Foundation.SitecoreExtensions.Extensions
 @model MultipleProductSearchResultsViewModel
 @{
-    if (Model == null || Model.ProductSearchResults == null || !Model.ProductSearchResults.Any())
+    if (Model?.ProductSearchResults == null || !Model.ProductSearchResults.Any())
     {
         return;
     }
 
-    Func<ProductSearchResultViewModel, string> getId = product => product.DisplayName.Replace(' ', '-').ToLowerInvariant();
+    var idList = new List<string>();
 }
 
 <ul class="nav nav-tabs nav-justified" role="tablist">
-    @{
-        foreach (var productSearchResult in Model.ProductSearchResults)
-        {
-            var active = Model.ProductSearchResults.IndexOf(productSearchResult) == 0;
-            <li role="presentation" class=@(active ? "active" : "")>
-                <a href="#tab-@getId(productSearchResult)" role="tab" data-toggle="tab">
-                    @productSearchResult.NamedSearchItemDisplayNameRender
-                </a>
-            </li>
-        }
+
+    @for (var index = 0; index < Model.ProductSearchResults.Count; index++)
+    {
+        var productSearchResult = Model.ProductSearchResults[index];
+        idList.Add(Guid.NewGuid().ToString("N"));
+        var active = Model.ProductSearchResults.IndexOf(productSearchResult) == 0;
+        <li role="presentation" class=@(active ? "active" : "")>
+            <a href="#tab-@idList[index]" role="tab" data-toggle="tab">
+                @productSearchResult.Title
+            </a>
+        </li>
+        index++;
     }
+
 </ul>
 <div class="tab-content">
-    @{
-        foreach (var productSearchResult in Model.ProductSearchResults)
-        {
-            var active = Model.ProductSearchResults.IndexOf(productSearchResult) == 0;
-            <div role="tabpanel" class="tab-pane @(active ? "active" : "")" id="tab-@getId(productSearchResult)">
-                @Html.Partial("_FourProductSlide", productSearchResult)
-            </div>
-        }
+    @for (var index = 0; index < Model.ProductSearchResults.Count; index++)
+    {
+        var productSearchResult = Model.ProductSearchResults[index];
+        var active = Model.ProductSearchResults.IndexOf(productSearchResult) == 0;
+        <div role="tabpanel" class="tab-pane @(active ? "active" : "")" id="tab-@idList[index]">
+            @Html.Partial("_FourProductSlide", productSearchResult)
+        </div>
     }
+
 </div>

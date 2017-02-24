@@ -23,18 +23,22 @@ using Sitecore.Commerce.Services.Prices;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Web;
+using GetProductBulkPricesRequest = Sitecore.Commerce.Engine.Connect.Services.Prices.GetProductBulkPricesRequest;
+using GetProductPricesRequest = Sitecore.Commerce.Engine.Connect.Services.Prices.GetProductPricesRequest;
+using GetSupportedCurrenciesRequest = Sitecore.Foundation.Commerce.Infrastructure.Connect.Arguments.GetSupportedCurrenciesRequest;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
     public class PricingManager : BaseManager
     {
-        private static readonly string[] _defaultPriceTypeIds = { PriceTypes.List, PriceTypes.Adjusted, PriceTypes.LowestPricedVariant, PriceTypes.LowestPricedVariantListPrice, PriceTypes.HighestPricedVariant };
+        private static readonly string[] _defaultPriceTypeIds = {PriceTypes.List, PriceTypes.Adjusted, PriceTypes.LowestPricedVariant, PriceTypes.LowestPricedVariantListPrice, PriceTypes.HighestPricedVariant};
 
         public PricingManager([NotNull] PricingServiceProvider pricingServiceProvider)
         {
             Assert.ArgumentNotNull(pricingServiceProvider, nameof(pricingServiceProvider));
 
-            this.PricingServiceProvider = pricingServiceProvider;
+            PricingServiceProvider = pricingServiceProvider;
         }
 
         public PricingServiceProvider PricingServiceProvider { get; protected set; }
@@ -48,40 +52,42 @@ namespace Sitecore.Foundation.Commerce.Managers
                 priceTypeIds = _defaultPriceTypeIds;
             }
 
-            var request = new Sitecore.Commerce.Engine.Connect.Services.Prices.GetProductPricesRequest(catalogName, productId, priceTypeIds)
+            var request = new GetProductPricesRequest(catalogName, productId, priceTypeIds)
             {
-                DateTime = this.GetCurrentDate()
+                DateTime = GetCurrentDate()
             };
 
-            if (Sitecore.Context.User.IsAuthenticated)
+            if (Context.User.IsAuthenticated)
             {
                 request.UserId = visitorContext.GetCustomerId();
             }
 
             request.IncludeVariantPrices = includeVariants;
             request.CurrencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
-            var result = this.PricingServiceProvider.GetProductPrices(request);
+            var result = PricingServiceProvider.GetProductPrices(request);
 
             result.WriteToSitecoreLog();
             return new ManagerResponse<GetProductPricesResult, IDictionary<string, Price>>(result, result.Prices ?? new Dictionary<string, Price>());
         }
 
-        public ManagerResponse<GetProductBulkPricesResult, IDictionary<string, Price>> GetProductBulkPrices([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string catalogName, IEnumerable<string> productIds, params string[] priceTypeIds)
+        public ManagerResponse<GetProductBulkPricesResult, IDictionary<string, Price>> GetProductBulkPrices([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string catalogName, [NotNull] IEnumerable<string> productIds, params string[] priceTypeIds)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
+            Assert.ArgumentNotNull(catalogName, nameof(catalogName));
+            Assert.ArgumentNotNull(productIds, nameof(productIds));
 
             if (priceTypeIds == null)
             {
                 priceTypeIds = _defaultPriceTypeIds;
             }
 
-            var request = new Sitecore.Commerce.Engine.Connect.Services.Prices.GetProductBulkPricesRequest(catalogName, productIds, priceTypeIds)
+            var request = new GetProductBulkPricesRequest(catalogName, productIds, priceTypeIds)
             {
                 CurrencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency,
-                DateTime = this.GetCurrentDate()
+                DateTime = GetCurrentDate()
             };
 
-            var result = this.PricingServiceProvider.GetProductBulkPrices(request);
+            var result = PricingServiceProvider.GetProductBulkPrices(request);
 
             // Currently, both Categories and Products are passed in and are waiting for a fix to filter the categories out. Until then, this code is commented
             // out as it generates an unecessary Error event indicating the product cannot be found.
@@ -93,8 +99,8 @@ namespace Sitecore.Foundation.Commerce.Managers
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
 
-            var request = new Sitecore.Foundation.Commerce.Connect.Arguments.GetSupportedCurrenciesRequest(storefront.ShopName, catalogName);
-            var result = this.PricingServiceProvider.GetSupportedCurrencies(request);
+            var request = new GetSupportedCurrenciesRequest(storefront.ShopName, catalogName);
+            var result = PricingServiceProvider.GetSupportedCurrencies(request);
 
             return new ManagerResponse<GetSupportedCurrenciesResult, IReadOnlyCollection<string>>(result, result.Currencies);
         }
@@ -105,15 +111,15 @@ namespace Sitecore.Foundation.Commerce.Managers
             Assert.ArgumentNotNullOrEmpty(currency, nameof(currency));
 
             var request = new CurrencyChosenRequest(storefront.ShopName, currency);
-            var result = this.PricingServiceProvider.CurrencyChosen(request);
+            var result = PricingServiceProvider.CurrencyChosen(request);
 
             return new ManagerResponse<ServiceProviderResult, bool>(result, result.Success);
         }
 
         private DateTime GetCurrentDate()
         {
-            var dateCookieValue = Sitecore.Web.WebUtil.GetCookieValue(Sitecore.Context.Site.GetCookieKey(Sitecore.Constants.PreviewDateCookieName));
-            return !string.IsNullOrEmpty(dateCookieValue) ? Sitecore.DateUtil.ToUniversalTime(DateUtil.IsoDateToDateTime(dateCookieValue)) : DateTime.UtcNow;
+            var dateCookieValue = WebUtil.GetCookieValue(Context.Site.GetCookieKey(Sitecore.Constants.PreviewDateCookieName));
+            return !string.IsNullOrEmpty(dateCookieValue) ? DateUtil.ToUniversalTime(DateUtil.IsoDateToDateTime(dateCookieValue)) : DateTime.UtcNow;
         }
     }
 }

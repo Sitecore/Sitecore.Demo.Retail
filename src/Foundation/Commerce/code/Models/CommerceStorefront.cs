@@ -15,14 +15,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using Sitecore.Commerce.Connect.CommerceServer;
-using Sitecore.ContentSearch.Utilities;
-using Sitecore.Data;
-using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
@@ -31,34 +24,11 @@ namespace Sitecore.Foundation.Commerce.Models
 {
     public class CommerceStorefront : SitecoreItemBase
     {
-        private string _shopName = "storefront";
-
-        public CommerceStorefront()
-        {
-        }
-
         public CommerceStorefront(Item item)
         {
             InnerItem = item;
 
             SetShopNameBySiteContext();
-        }
-
-        private void SetShopNameBySiteContext()
-        {
-            if (Context.Site == null)
-            {
-                Log.Warn($"Cannot determine the Commerce ShopName. No SiteContext found", this);
-                return;
-            }
-
-            var shopName = Context.Site.Properties["commerceShopName"];
-            if (string.IsNullOrWhiteSpace(shopName))
-            {
-                Log.Warn($"The site '{Context.Site.Name}' has no commerceShopName defined", this);
-                return;
-            }
-            _shopName = shopName;
         }
 
         public Item HomeItem => InnerItem;
@@ -70,18 +40,13 @@ namespace Sitecore.Foundation.Commerce.Models
             get
             {
                 var email = HomeItem.Fields[StorefrontConstants.KnownFieldNames.SenderEmailAddress];
-                return email?.ToString() ?? String.Empty;
+                return email?.ToString() ?? string.Empty;
             }
         }
 
-        public bool UseIndexFileForProductStatusInLists => MainUtil.GetBool(HomeItem[StorefrontConstants.KnownFieldNames.UseIndexFileForProductStatusInLists],
-            false);
+        public bool UseIndexFileForProductStatusInLists => MainUtil.GetBool(HomeItem[StorefrontConstants.KnownFieldNames.UseIndexFileForProductStatusInLists], false);
 
-        public string ShopName
-        {
-            get { return _shopName; }
-            set { _shopName = value; }
-        }
+        public string ShopName { get; set; } = "storefront";
 
         public string DefaultProductId => InnerItem == null ? "22565422120" : InnerItem["DefaultProductId"];
 
@@ -96,21 +61,6 @@ namespace Sitecore.Foundation.Commerce.Models
         public int MaxNumberOfWishLists => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfWishLists], 10);
 
         public int MaxNumberOfWishListItems => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfWishListItems], 10);
-
-        public string Title()
-        {
-            return InnerItem == null ? "default" : InnerItem[StorefrontConstants.ItemFields.Title];
-        }
-
-        public string NameTitle()
-        {
-            return InnerItem == null ? "default" : InnerItem["Name Title"];
-        }
-
-        public string GetMapKey()
-        {
-            return HomeItem[StorefrontConstants.KnownFieldNames.MapKey];
-        }
 
         public string DefaultCurrency
         {
@@ -127,5 +77,32 @@ namespace Sitecore.Foundation.Commerce.Models
         }
 
         private Item CurrencyContextItem => InnerItem.GetAncestorOrSelfOfTemplate(Templates.CurrencyContext.ID);
+
+        private void SetShopNameBySiteContext()
+        {
+            if (Context.Site == null)
+            {
+                Log.Warn($"Cannot determine the Commerce ShopName. No SiteContext found", this);
+                return;
+            }
+
+            var shopName = Context.Site.Properties["commerceShopName"];
+            if (string.IsNullOrWhiteSpace(shopName))
+            {
+                Log.Warn($"The site '{Context.Site.Name}' has no commerceShopName defined", this);
+                return;
+            }
+            ShopName = shopName;
+        }
+
+        public string Title()
+        {
+            return InnerItem == null ? "default" : InnerItem[StorefrontConstants.ItemFields.Title];
+        }
+
+        public string GetMapKey()
+        {
+            return HomeItem[StorefrontConstants.KnownFieldNames.MapKey];
+        }
     }
 }

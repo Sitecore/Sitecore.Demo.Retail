@@ -24,7 +24,7 @@ using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Reference.Storefront.Models
 {
-    public class SiteContentListHeaderViewModel : RenderingModel
+    public class SiteContentListHeaderViewModel
     {
         private const string DefaultPageSizeClass = "changePageSize";
 
@@ -39,10 +39,8 @@ namespace Sitecore.Reference.Storefront.Models
 
         public string PageSizeClass { get; set; }
 
-        public void Initialize(Rendering rendering, SearchResults products, IEnumerable<CommerceQuerySort> sortFields, CommerceSearchOptions searchOptions)
+        public void Initialize(SearchResults products, IEnumerable<CommerceQuerySort> sortFields, CommerceSearchOptions searchOptions)
         {
-            base.Initialize(rendering);
-
             if (products != null && searchOptions != null)
             {
                 var itemsPerPage = searchOptions.NumberOfItemsToReturn;

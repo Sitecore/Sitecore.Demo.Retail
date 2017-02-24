@@ -39,11 +39,13 @@ namespace Sitecore.Foundation.Commerce.Managers
                     return siteContext.CurrentContext.Items[path] as CommerceStorefront;
                 }
 
-                var storefront = CommerceTypeLoader.CreateInstance<CommerceStorefront>(Context.Database.GetItem(path));
+                var storefront = new CommerceStorefront(Context.Database.GetItem(path));
                 siteContext.CurrentContext.Items[path] = storefront;
                 return (CommerceStorefront) siteContext.CurrentContext.Items[path];
             }
         }
+
+        public static IProductResolver ProductResolver => DependencyResolver.Current.GetService<IProductResolver>();
 
         public static Item CommerceItem => Context.Database.GetItem("/sitecore/Commerce");
 

@@ -18,15 +18,16 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Web.Mvc;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Catalog;
 using Sitecore.Commerce.Connect.CommerceServer.Catalog.Pipelines;
 using Sitecore.Commerce.Pipelines;
 using Sitecore.Commerce.Services.Prices;
 using Sitecore.Diagnostics;
-using GetSupportedCurrenciesRequest = Sitecore.Foundation.Commerce.Connect.Arguments.GetSupportedCurrenciesRequest;
+using GetSupportedCurrenciesRequest = Sitecore.Foundation.Commerce.Infrastructure.Connect.Arguments.GetSupportedCurrenciesRequest;
 
-namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Prices
+namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Prices
 {
     public class GetSupportedCurrencies : PricePipelineProcessor
     {
@@ -56,7 +57,7 @@ namespace Sitecore.Foundation.Commerce.Connect.Pipelines.Prices
 
             Assert.ArgumentNotNullOrEmpty(request.CatalogName, nameof(request.CatalogName));
 
-            var catalogRepository = CommerceTypeLoader.CreateInstance<ICatalogRepository>();
+            var catalogRepository = DependencyResolver.Current.GetService<ICatalogRepository>();
 
             var catalog = catalogRepository.GetCatalogReadOnly(request.CatalogName);
 

@@ -214,9 +214,7 @@
     <Compile Include="Extensions\ValidateJsonAntiForgeryTokenAttribute.cs" />
     <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\ApplyVaryByUrlPath.cs" />
-    <Compile Include="Infrastructure\SitecorePipelines\CatalogLinkProvider.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\ExcludeUrlTracking.cs" />
-    <Compile Include="Infrastructure\SitecorePipelines\ProductItemResolver.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\ResetContact.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\VaryByCurrency.cs" />
     <Compile Include="Managers\AccountManager.cs" />
@@ -224,6 +222,8 @@
     <Compile Include="Managers\CartManager.cs" />
     <Compile Include="Managers\CatalogManager.cs" />
     <Compile Include="Managers\GiftCardManager.cs" />
+    <Compile Include="Models\ApiControllerMapping.cs" />
+    <Compile Include="Models\IProductResolver.cs" />
     <Compile Include="Models\BaseJsonResult.cs" />
     <Compile Include="Models\CatalogRouteData.cs" />
     <Compile Include="Models\ICatalogCategory.cs" />
@@ -302,7 +302,6 @@
     <Compile Include="Templates.cs" />
     <Compile Include="Util\CartCacheHelper.cs" />
     <Compile Include="Util\CartCookieHelper.cs" />
-    <Compile Include="Util\CatalogUrlManager.cs" />
     <Compile Include="Util\CategoryCookieHelper.cs" />
     <Compile Include="Util\EaPlanInfo.cs" />
     <Compile Include="Util\InstallPostStep.cs" />

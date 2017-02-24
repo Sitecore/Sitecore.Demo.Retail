@@ -33,12 +33,12 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.ComputedFields
             Assert.ArgumentNotNull(itemToIndex, nameof(itemToIndex));
 
             var item = itemToIndex as SitecoreIndexableItem;
-            if (item?.Item == null)
+            if (item?.Item == null || !item.Item.IsDerived(Templates.IncludeInCommerceSearchResults.ID))
             {
                 return false;
             }
 
-            return item.Item.HasLayout() && item.Item[StorefrontConstants.ItemFields.DisplayInSearchResults] == "1";
+            return item.Item.HasLayout() && item.Item.Fields[Templates.IncludeInCommerceSearchResults.Fields.DisplayInSearchResults].IsChecked();
         }
     }
 }

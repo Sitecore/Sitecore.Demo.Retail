@@ -17,7 +17,7 @@
 @using Sitecore.Foundation.Commerce.Repositories
 @model Sitecore.Feature.Commerce.Catalog.Models.NavigationViewModel
 @{
-    if (Model == null || Model.ChildCategories == null || !Model.ChildCategories.Any())
+    if (Model?.ChildCategories == null || !Model.ChildCategories.Any())
     {
         return;
     }

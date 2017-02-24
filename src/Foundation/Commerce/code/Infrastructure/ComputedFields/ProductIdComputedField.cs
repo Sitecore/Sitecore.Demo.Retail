@@ -28,24 +28,17 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.ComputedFields
 {
     public class ProductIdComputedField : BaseCommerceComputedField
     {
-        private readonly Lazy<IEnumerable<ID>> _validTemplates = new Lazy<IEnumerable<ID>>(() => new List<ID>
+        protected override IEnumerable<ID> ValidTemplates { get; } = new List<ID>
         {
             CommerceConstants.KnownTemplateIds.CommerceProductTemplate
-        });
-
-        protected override IEnumerable<ID> ValidTemplates => _validTemplates.Value;
+        };
 
         public override object ComputeValue(IIndexable indexable)
         {
             Assert.ArgumentNotNull(indexable, nameof(indexable));
             var validatedItem = GetValidatedItem(indexable);
 
-            if (validatedItem == null || string.IsNullOrWhiteSpace(validatedItem.Name))
-            {
-                return string.Empty;
-            }
-
-            return validatedItem.Name.ToLower(CultureInfo.InvariantCulture);
+            return string.IsNullOrWhiteSpace(validatedItem?.Name) ? string.Empty : validatedItem.Name.ToLower(CultureInfo.InvariantCulture);
         }
     }
 }

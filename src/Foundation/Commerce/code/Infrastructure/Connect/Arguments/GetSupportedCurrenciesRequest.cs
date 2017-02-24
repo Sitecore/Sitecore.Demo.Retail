@@ -17,7 +17,7 @@
 
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Foundation.Commerce.Connect.Arguments
+namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Arguments
 {
     public class GetSupportedCurrenciesRequest : Sitecore.Commerce.Services.Prices.GetSupportedCurrenciesRequest
     {

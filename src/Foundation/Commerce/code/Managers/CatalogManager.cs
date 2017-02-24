@@ -49,7 +49,7 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         private Catalog _currentCatalog;
 
-        public CatalogManager([NotNull] CatalogServiceProvider catalogServiceProvider, [NotNull] GlobalizationServiceProvider globalizationServiceProvider, [NotNull] PricingManager pricingManager, [NotNull] InventoryManager inventoryManager, SiteContextRepository siteContextRepository)
+        public CatalogManager([NotNull] CatalogServiceProvider catalogServiceProvider, [NotNull] GlobalizationServiceProvider globalizationServiceProvider, [NotNull] PricingManager pricingManager, [NotNull] InventoryManager inventoryManager, SiteContextRepository siteContextRepository, ICommerceSearchManager commerceSearchManager)
         {
             Assert.ArgumentNotNull(catalogServiceProvider, nameof(catalogServiceProvider));
             Assert.ArgumentNotNull(pricingManager, nameof(pricingManager));
@@ -60,8 +60,10 @@ namespace Sitecore.Foundation.Commerce.Managers
             PricingManager = pricingManager;
             InventoryManager = inventoryManager;
             SiteContextRepository = siteContextRepository;
+            CommerceSearchManager = commerceSearchManager;
         }
 
+        public ICommerceSearchManager CommerceSearchManager { get; set; }
         public CatalogServiceProvider CatalogServiceProvider { get; protected set; }
         public GlobalizationServiceProvider GlobalizationServiceProvider { get; protected set; }
         public InventoryManager InventoryManager { get; protected set; }
@@ -121,6 +123,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         public SearchResults GetProductSearchResults(Item dataSource, CommerceSearchOptions productSearchOptions)
         {
             Assert.ArgumentNotNull(productSearchOptions, nameof(productSearchOptions));
+            Assert.ArgumentCondition(dataSource.IsDerived(Templates.Commerce.SearchSettings.ID), nameof(dataSource), "Item must derive from the CommerceSearchSettings template");
 
             if (dataSource == null)
             {
@@ -130,98 +133,20 @@ namespace Sitecore.Foundation.Commerce.Managers
             var totalProductCount = 0;
             var totalPageCount = 0;
 
-            if (dataSource.IsDerived(Templates.NamedSearch.ID))
+            var returnList = new List<Item>();
+            IEnumerable<CommerceQueryFacet> facets = null;
+            var searchOptions = new CommerceSearchOptions(-1, 0);
+            var searchResponse = FindCatalogItems(dataSource, searchOptions);
+            if (searchResponse != null)
             {
-                var returnList = new List<Item>();
-                IEnumerable<CommerceQueryFacet> facets = null;
-                var searchOptions = new CommerceSearchOptions(-1, 0);
-                var searchResponse = FindCatalogItems(dataSource, searchOptions);
-                if (searchResponse != null)
-                {
-                    returnList.AddRange(searchResponse.ResponseItems);
+                returnList.AddRange(searchResponse.ResponseItems);
 
-                    totalProductCount = searchResponse.TotalItemCount;
-                    totalPageCount = searchResponse.TotalPageCount;
-                    facets = searchResponse.Facets;
-                }
-
-                return new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex, facets);
+                totalProductCount = searchResponse.TotalItemCount;
+                totalPageCount = searchResponse.TotalPageCount;
+                facets = searchResponse.Facets;
             }
 
-            var childProducts = GetChildProducts(productSearchOptions, dataSource).SearchResultItems;
-            return new SearchResults(childProducts, totalProductCount, totalPageCount,
-                productSearchOptions.StartPageIndex, new List<CommerceQueryFacet>());
-        }
-
-        public MultipleProductSearchResults GetMultipleProductSearchResults(BaseItem dataSource, CommerceSearchOptions productSearchOptions)
-        {
-            Assert.ArgumentNotNull(productSearchOptions, nameof(productSearchOptions));
-
-            MultilistField searchesField = dataSource.Fields[StorefrontConstants.KnownFieldNames.NamedSearches];
-            var searches = searchesField.GetItems();
-            var productsSearchResults = new List<SearchResults>();
-            foreach (var search in searches)
-            {
-                if (search.IsDerived(Templates.NamedSearch.ID))
-                {
-                    var productsSearchResult = GetProductSearchResults(search, productSearchOptions);
-                    if (productsSearchResult == null)
-                    {
-                        continue;
-                    }
-                    productsSearchResult.NamedSearchItem = search;
-                    productsSearchResult.DisplayName = search[Templates.NamedSearch.Fields.Title];
-                    productsSearchResults.Add(productsSearchResult);
-                }
-                else if (search.IsDerived(StorefrontConstants.KnownTemplateItemIds.SelectedProducts))
-                {
-                    var itemCount = 0;
-                    var staticSearchList = new SearchResults
-                    {
-                        DisplayName = search[StorefrontConstants.KnownFieldNames.Title],
-                        NamedSearchItem = search
-                    };
-
-                    MultilistField productListField = search.Fields[StorefrontConstants.KnownFieldNames.ProductList];
-                    var productList = productListField.GetItems();
-                    foreach (var productItem in productList)
-                    {
-                        if (productItem.IsDerived(CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate) ||
-                            productItem.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductTemplate))
-                        {
-                            staticSearchList.SearchResultItems.Add(productItem);
-
-                            itemCount++;
-                        }
-                    }
-
-                    staticSearchList.TotalItemCount = itemCount;
-                    staticSearchList.TotalPageCount = itemCount;
-                    productsSearchResults.Add(staticSearchList);
-                }
-            }
-            return new MultipleProductSearchResults(productsSearchResults);
-        }
-
-        public Category GetCurrentCategoryByUrl()
-        {
-            Category currentCategory;
-
-            var categoryId = CatalogUrlManager.ExtractItemIdFromCurrentUrl();
-
-            var virtualCategoryCacheKey = $"VirtualCategory_{categoryId}";
-
-            if (SiteContextRepository.GetCurrent().Items.Contains(virtualCategoryCacheKey))
-            {
-                currentCategory = SiteContextRepository.GetCurrent().Items[virtualCategoryCacheKey] as Category;
-            }
-            else
-            {
-                currentCategory = GetCategory(categoryId);
-                SiteContextRepository.GetCurrent().Items.Add(virtualCategoryCacheKey, currentCategory);
-            }
-
-            return currentCategory;
+            return new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex, facets);
         }
 
         public Category GetCategory(string categoryId)
@@ -234,9 +159,9 @@ namespace Sitecore.Foundation.Commerce.Managers
         {
             var category = new Category(item)
             {
-                RequiredFacets = CurrentSearchManager.GetFacetFieldsForItem(item).ToList(),
-                SortFields = CurrentSearchManager.GetSortFieldsForItem(item).ToList(),
-                ItemsPerPage = CurrentSearchManager.GetItemsPerPageForItem(item)
+                RequiredFacets = CommerceSearchManager.GetFacetFieldsForItem(item).ToList(),
+                SortFields = CommerceSearchManager.GetSortFieldsForItem(item).ToList(),
+                ItemsPerPage = CommerceSearchManager.GetItemsPerPageForItem(item)
             };
 
             return category;
@@ -282,35 +207,36 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
         }
 
-        public void GetProductBulkPrices([NotNull] VisitorContext visitorContext, IEnumerable<ICatalogProduct> productViewModels)
+        public void GetProductBulkPrices([NotNull] VisitorContext visitorContext, IEnumerable<ICatalogProduct> catalogProducts)
         {
-            if (productViewModels == null || !productViewModels.Any())
+            var catalogProductsArray = catalogProducts as ICatalogProduct[] ?? catalogProducts?.ToArray();
+            if (catalogProductsArray == null || !catalogProductsArray.Any())
             {
                 return;
             }
 
-            var catalogName = productViewModels.Select(p => p.CatalogName).First();
-            var productIds = productViewModels.Select(p => p.ProductId).ToList();
+            var catalogName = catalogProductsArray.Select(p => p.CatalogName).First();
+            var productIds = catalogProductsArray.Select(p => p.ProductId).ToList();
 
             var pricesResponse = PricingManager.GetProductBulkPrices(StorefrontManager.CurrentStorefront, visitorContext, catalogName, productIds, null);
             var prices = pricesResponse?.Result ?? new Dictionary<string, Price>();
 
-            foreach (var productViewModel in productViewModels)
+            foreach (var product in catalogProductsArray)
             {
                 Price price;
-                if (!prices.Any() || !prices.TryGetValue(productViewModel.ProductId, out price))
+                if (!prices.Any() || !prices.TryGetValue(product.ProductId, out price))
                 {
                     continue;
                 }
 
                 var extendedPrice = (ExtendedCommercePrice) price;
 
-                productViewModel.ListPrice = extendedPrice.Amount;
-                productViewModel.AdjustedPrice = extendedPrice.ListPrice;
+                product.ListPrice = extendedPrice.Amount;
+                product.AdjustedPrice = extendedPrice.ListPrice;
 
-                productViewModel.LowestPricedVariantAdjustedPrice = extendedPrice.LowestPricedVariant;
-                productViewModel.LowestPricedVariantListPrice = extendedPrice.LowestPricedVariantListPrice;
-                productViewModel.HighestPricedVariantAdjustedPrice = extendedPrice.HighestPricedVariant;
+                product.LowestPricedVariantAdjustedPrice = extendedPrice.LowestPricedVariant;
+                product.LowestPricedVariantListPrice = extendedPrice.LowestPricedVariantListPrice;
+                product.HighestPricedVariantAdjustedPrice = extendedPrice.HighestPricedVariant;
             }
         }
 
@@ -319,22 +245,6 @@ namespace Sitecore.Foundation.Commerce.Managers
             var ratingString = productItem[Templates.HasRating.Fields.Rating];
             decimal rating;
             return decimal.TryParse(ratingString, out rating) ? rating : 0;
-        }
-
-        public ManagerResponse<CatalogResult, bool> VisitedProductDetailsPage(
-            [NotNull] CommerceStorefront storefront)
-        {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-
-            var productId = CatalogUrlManager.ExtractItemIdFromCurrentUrl();
-            var parentCategoryName = CatalogUrlManager.ExtractCategoryNameFromCurrentUrl();
-            var request = new VisitedProductDetailsPageRequest(storefront.ShopName, productId, productId,
-                parentCategoryName, parentCategoryName);
-
-            var result = CatalogServiceProvider.VisitedProductDetailsPage(request);
-            result.WriteToSitecoreLog();
-
-            return new ManagerResponse<CatalogResult, bool>(result, result.Success);
         }
 
         public ManagerResponse<CatalogResult, bool> FacetApplied([NotNull] CommerceStorefront storefront,
@@ -388,28 +298,25 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CatalogResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<GlobalizationResult, bool> RaiseCultureChosenPageEvent(
-            [NotNull] CommerceStorefront storefront, string culture)
+        public ManagerResponse<GlobalizationResult, bool> RaiseCultureChosenPageEvent([NotNull] CommerceStorefront storefront, string culture)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNullOrEmpty(culture, nameof(culture));
 
-            var result =
-                GlobalizationServiceProvider.CultureChosen(new CultureChosenRequest(storefront.ShopName, culture));
+            var result = GlobalizationServiceProvider.CultureChosen(new CultureChosenRequest(storefront.ShopName, culture));
 
             return new ManagerResponse<GlobalizationResult, bool>(result, result.Success);
         }
 
-        public SearchResponse FindCatalogItems(Item bucketQuery, CommerceSearchOptions searchOptions)
+        public SearchResponse FindCatalogItems(Item queryItem, CommerceSearchOptions searchOptions)
         {
-            Assert.ArgumentNotNull(bucketQuery, nameof(bucketQuery));
+            Assert.ArgumentNotNull(queryItem, nameof(queryItem));
             Assert.ArgumentNotNull(searchOptions, nameof(searchOptions));
 
-            var defaultBucketQuery = bucketQuery[CommerceConstants.KnownSitecoreFieldNames.DefaultBucketQuery];
-            var persistentBucketFilter = CleanLanguageFromFilter(bucketQuery[CommerceConstants.KnownSitecoreFieldNames.PersistentBucketFilter]);
+            var defaultBucketQuery = queryItem[Templates.Commerce.SearchSettings.Fields.DefaultBucketQuery];
+            var persistentBucketFilter = CleanLanguageFromFilter(queryItem[Templates.Commerce.SearchSettings.Fields.PersistentBucketFilter]);
 
-            var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
-            var searchIndex = searchManager.GetIndex();
+            var searchIndex = CommerceSearchManager.GetIndex();
 
             var defaultQuery = defaultBucketQuery.Replace("&", ";");
             var persistentQuery = persistentBucketFilter.Replace("&", ";");
@@ -422,7 +329,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 {
                     var query = LinqHelper.CreateQuery<SitecoreUISearchResultItem>(context, searchStringModel).Where(item => item.Language == Context.Language.Name);
 
-                    query = searchManager.AddSearchOptionsToQuery(query, searchOptions);
+                    query = CommerceSearchManager.AddSearchOptionsToQuery(query, searchOptions);
 
                     var results = query.GetResults();
                     var response = SearchResponse.CreateFromUISearchResultsItems(searchOptions, results);
@@ -451,57 +358,50 @@ namespace Sitecore.Foundation.Commerce.Managers
         }
 
 
-        protected SearchResults GetChildProducts(CommerceSearchOptions searchOptions, Item categoryItem)
+        public SearchResults GetChildProducts(CommerceSearchOptions searchOptions, Item categoryItem)
         {
             IEnumerable<CommerceQueryFacet> facets = null;
             var returnList = new List<Item>();
             var totalPageCount = 0;
             var totalProductCount = 0;
 
-            if (RenderingContext.Current.Rendering.Item != null)
+            var searchResponse = GetCategoryProducts(categoryItem, searchOptions);
+
+            if (searchResponse != null)
             {
-                SearchResponse searchResponse;
-                if (categoryItem.IsDerived(CommerceConstants.KnownTemplateIds.CommerceDynamicCategoryTemplate) || categoryItem.IsDerived(Templates.NamedSearch.ID))
-                {
-                    searchResponse = FindCatalogItems(categoryItem, searchOptions);
-                }
-                else
-                {
-                    searchResponse = GetCategoryProducts(categoryItem.ID, searchOptions);
-                }
+                returnList.AddRange(searchResponse.ResponseItems);
 
-                if (searchResponse != null)
-                {
-                    returnList.AddRange(searchResponse.ResponseItems);
-
-                    totalProductCount = searchResponse.TotalItemCount;
-                    totalPageCount = searchResponse.TotalPageCount;
-                    facets = searchResponse.Facets;
-                }
+                totalProductCount = searchResponse.TotalItemCount;
+                totalPageCount = searchResponse.TotalPageCount;
+                facets = searchResponse.Facets;
             }
 
             var results = new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex, facets);
             return results;
         }
 
-        public static SearchResponse GetCategoryProducts(ID categoryId, CommerceSearchOptions searchOptions)
+        public SearchResponse GetCategoryProducts(Item categoryItem, CommerceSearchOptions searchOptions)
         {
-            var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
-            var searchIndex = searchManager.GetIndex();
+            if (categoryItem.IsDerived(Templates.Commerce.DynamicCategory.ID))
+            {
+                return FindCatalogItems(categoryItem, searchOptions);
+            }
+
+            var searchIndex = CommerceSearchManager.GetIndex();
 
             using (var context = searchIndex.CreateSearchContext())
             {
                 var searchResults = context.GetQueryable<CommerceProductSearchResultItem>()
                     .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product)
                     .Where(item => item.Language == Context.Language.Name)
-                    .Where(item => item.CommerceAncestorIds.Contains(categoryId))
+                    .Where(item => item.CommerceAncestorIds.Contains(categoryItem.ID))
                     .Select(p => new CommerceProductSearchResultItem
                     {
                         ItemId = p.ItemId,
                         Uri = p.Uri
                     });
 
-                searchResults = searchManager.AddSearchOptionsToQuery(searchResults, searchOptions);
+                searchResults = CommerceSearchManager.AddSearchOptionsToQuery(searchResults, searchOptions);
 
                 var results = searchResults.GetResults();
                 var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);
@@ -539,13 +439,12 @@ namespace Sitecore.Foundation.Commerce.Managers
             return newFilter.ToString();
         }
 
-        public static Item GetCategory(string categoryName, string catalogName)
+        public Item GetCategory(string categoryName, string catalogName)
         {
             Assert.ArgumentNotNullOrEmpty(catalogName, nameof(catalogName));
 
             Item result = null;
-            var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
-            var searchIndex = searchManager.GetIndex(catalogName);
+            var searchIndex = CommerceSearchManager.GetIndex(catalogName);
 
             using (var context = searchIndex.CreateSearchContext())
             {
@@ -570,13 +469,12 @@ namespace Sitecore.Foundation.Commerce.Managers
             return result;
         }
 
-        public static Item GetProduct(string productId, string catalogName)
+        public Item GetProduct(string productId, string catalogName)
         {
             Assert.ArgumentNotNullOrEmpty(catalogName, nameof(catalogName));
 
             Item result = null;
-            var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
-            var searchIndex = searchManager.GetIndex(catalogName);
+            var searchIndex = CommerceSearchManager.GetIndex(catalogName);
 
             using (var context = searchIndex.CreateSearchContext())
             {
@@ -602,12 +500,11 @@ namespace Sitecore.Foundation.Commerce.Managers
             return result;
         }
 
-        public static CategorySearchResults GetCategoryChildCategories(ID categoryId, CommerceSearchOptions searchOptions)
+        public CategorySearchResults GetCategoryChildCategories(ID categoryId, CommerceSearchOptions searchOptions)
         {
             var childCategoryList = new List<Item>();
 
-            var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
-            var searchIndex = searchManager.GetIndex();
+            var searchIndex = CommerceSearchManager.GetIndex();
 
             using (var context = searchIndex.CreateSearchContext())
             {

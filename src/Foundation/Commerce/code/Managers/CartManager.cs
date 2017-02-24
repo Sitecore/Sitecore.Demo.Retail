@@ -43,18 +43,21 @@ namespace Sitecore.Foundation.Commerce.Managers
 {
     public class CartManager : BaseManager
     {
-        public CartManager([NotNull] InventoryManager inventoryManager, [NotNull] CommerceCartServiceProvider cartServiceProvider)
+        public CartManager([NotNull] InventoryManager inventoryManager, [NotNull] CommerceCartServiceProvider cartServiceProvider, CartCacheHelper cartCacheHelper)
         {
             Assert.ArgumentNotNull(inventoryManager, nameof(inventoryManager));
             Assert.ArgumentNotNull(cartServiceProvider, nameof(cartServiceProvider));
 
             InventoryManager = inventoryManager;
             CartServiceProvider = cartServiceProvider;
+            CartCacheHelper = cartCacheHelper;
         }
 
-        public InventoryManager InventoryManager { get; protected set; }
+        private CartCacheHelper CartCacheHelper { get; set; }
 
-        public CartServiceProvider CartServiceProvider { get; protected set; }
+        private InventoryManager InventoryManager { get; set; }
+
+        private CartServiceProvider CartServiceProvider { get; set; }
 
         public ManagerResponse<CartResult, CommerceCart> GetCurrentCart([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, bool refresh = false)
         {
@@ -63,13 +66,12 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public ManagerResponse<CartResult, CommerceCart> GetCurrentCart([NotNull] CommerceStorefront storefront, [NotNull] string customerId, bool refresh = false)
         {
-            var cartCache = CommerceTypeLoader.CreateInstance<CartCacheHelper>();
             if (refresh)
             {
-                cartCache.InvalidateCartCache(customerId);
+                CartCacheHelper.InvalidateCartCache(customerId);
             }
 
-            var cart = cartCache.GetCart(customerId);
+            var cart = CartCacheHelper.GetCart(customerId);
             if (cart != null)
             {
                 var result = new CartResult {Cart = cart};
@@ -82,7 +84,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             {
                 cart = cartResult.Cart as CommerceCart;
                 cartResult.Cart = cart;
-                cartCache.AddCartToCache(cart);
+                CartCacheHelper.AddCartToCache(cart);
             }
             else
             {
@@ -113,10 +115,9 @@ namespace Sitecore.Foundation.Commerce.Managers
             var updateCartResult = UpdateCart(storefront, visitorContext, cart, changes);
             if (updateCartResult.ServiceProviderResult.Success)
             {
-                var cartCache = CommerceTypeLoader.CreateInstance<CartCacheHelper>();
                 var customerId = visitorContext.GetCustomerId();
 
-                cartCache.InvalidateCartCache(customerId);
+                CartCacheHelper.InvalidateCartCache(customerId);
             }
 
             return new ManagerResponse<CartResult, bool>(updateCartResult.ServiceProviderResult, updateCartResult.ServiceProviderResult.Success);
@@ -160,8 +161,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 lines.Add(cartLine);
             }
 
-            var cartCache = CommerceTypeLoader.CreateInstance<CartCacheHelper>();
-            cartCache.InvalidateCartCache(visitorContext.GetCustomerId());
+            CartCacheHelper.InvalidateCartCache(visitorContext.GetCustomerId());
 
             var cart = cartResult.Cart as CommerceCart;
             var addLinesRequest = new AddCartLinesRequest(cart, lines);
@@ -169,7 +169,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             var addLinesResult = CartServiceProvider.AddCartLines(addLinesRequest);
             if (addLinesResult.Success && addLinesResult.Cart != null)
             {
-                cartCache.AddCartToCache(addLinesResult.Cart as CommerceCart);
+                CartCacheHelper.AddCartToCache(addLinesResult.Cart as CommerceCart);
             }
 
             AddBasketErrorsToResult(addLinesResult.Cart as CommerceCart, addLinesResult);
@@ -190,8 +190,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 return new ManagerResponse<CartResult, CommerceCart>(cartResult, cartResult.Cart as CommerceCart);
             }
 
-            var cartCache = CommerceTypeLoader.CreateInstance<CartCacheHelper>();
-            cartCache.InvalidateCartCache(visitorContext.GetCustomerId());
+            CartCacheHelper.InvalidateCartCache(visitorContext.GetCustomerId());
 
             var cart = cartResult.Cart as CommerceCart;
             var lineToRemove = cart.Lines.SingleOrDefault(cl => cl.ExternalCartLineId == externalCartLineId);
@@ -205,7 +204,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             var removeLinesResult = CartServiceProvider.RemoveCartLines(removeLinesRequest);
             if (removeLinesResult.Success && removeLinesResult.Cart != null)
             {
-                cartCache.AddCartToCache(removeLinesResult.Cart as CommerceCart);
+                CartCacheHelper.AddCartToCache(removeLinesResult.Cart as CommerceCart);
             }
 
             AddBasketErrorsToResult(removeLinesResult.Cart as CommerceCart, removeLinesResult);
@@ -227,8 +226,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 return new ManagerResponse<CartResult, CommerceCart>(cartResult, cartResult.Cart as CommerceCart);
             }
 
-            var cartCache = CommerceTypeLoader.CreateInstance<CartCacheHelper>();
-            cartCache.InvalidateCartCache(visitorContext.GetCustomerId());
+            CartCacheHelper.InvalidateCartCache(visitorContext.GetCustomerId());
 
             var cart = cartResult.Cart;
             var result = new CartResult {Cart = cart, Success = true};
@@ -247,7 +245,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             if (result.Success && result.Cart != null)
             {
-                cartCache.AddCartToCache(result.Cart as CommerceCart);
+                CartCacheHelper.AddCartToCache(result.Cart as CommerceCart);
             }
 
             AddBasketErrorsToResult(result.Cart as CommerceCart, result);
@@ -268,8 +266,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 return new ManagerResponse<AddPromoCodeResult, CommerceCart>(result, cartResult.Cart as CommerceCart);
             }
 
-            var cartCache = CommerceTypeLoader.CreateInstance<CartCacheHelper>();
-            cartCache.InvalidateCartCache(visitorContext.GetCustomerId());
+            CartCacheHelper.InvalidateCartCache(visitorContext.GetCustomerId());
 
             var cart = cartResult.Cart as CommerceCart;
             var request = new AddPromoCodeRequest(cart, promoCode);
@@ -277,7 +274,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             result = ((CommerceCartServiceProvider) CartServiceProvider).AddPromoCode(request);
             if (result.Success && result.Cart != null)
             {
-                cartCache.AddCartToCache(result.Cart as CommerceCart);
+                CartCacheHelper.AddCartToCache(result.Cart as CommerceCart);
             }
 
             result.WriteToSitecoreLog();
@@ -301,15 +298,14 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             var cart = cartResult.Cart as CommerceCart;
 
-            var cartCache = CommerceTypeLoader.CreateInstance<CartCacheHelper>();
-            cartCache.InvalidateCartCache(visitorContext.GetCustomerId());
+            CartCacheHelper.InvalidateCartCache(visitorContext.GetCustomerId());
 
             var request = new RemovePromoCodeRequest(cart, promoCode);
             RefreshCart(request, true); // We need the CS pipelines to run.
             result = ((CommerceCartServiceProvider) CartServiceProvider).RemovePromoCode(request);
             if (result.Success && result.Cart != null)
             {
-                cartCache.AddCartToCache(result.Cart as CommerceCart);
+                CartCacheHelper.AddCartToCache(result.Cart as CommerceCart);
             }
 
             result.WriteToSitecoreLog();
@@ -347,13 +343,12 @@ namespace Sitecore.Foundation.Commerce.Managers
                 }
             }
 
-            var cartCache = CommerceTypeLoader.CreateInstance<CartCacheHelper>();
-            cartCache.InvalidateCartCache(visitorContext.GetCustomerId());
+            CartCacheHelper.InvalidateCartCache(visitorContext.GetCustomerId());
 
             result = AddShippingInfoToCart(cart, orderPreferenceType, internalShippingList);
             if (result.Success && result.Cart != null)
             {
-                cartCache.AddCartToCache(result.Cart as CommerceCart);
+                CartCacheHelper.AddCartToCache(result.Cart as CommerceCart);
             }
 
             return new ManagerResponse<AddShippingInfoResult, CommerceCart>(result, result.Cart as CommerceCart);
@@ -448,9 +443,8 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             if (result.Success && result.Cart != null)
             {
-                var cartCache = CommerceTypeLoader.CreateInstance<CartCacheHelper>();
-                cartCache.InvalidateCartCache(anonymousVisitorId);
-                cartCache.AddCartToCache(result.Cart as CommerceCart);
+                CartCacheHelper.InvalidateCartCache(anonymousVisitorId);
+                CartCacheHelper.AddCartToCache(result.Cart as CommerceCart);
             }
 
             return new ManagerResponse<CartResult, CommerceCart>(result, result.Cart as CommerceCart);

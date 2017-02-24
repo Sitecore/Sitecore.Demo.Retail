@@ -37,7 +37,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             Assert.ArgumentNotNullOrEmpty(wishListId, nameof(wishListId));
 
             var product = (CommerceCartProduct) line.Product;
-            var productItem = ProductItemResolver.ResolveCatalogItem(product.ProductId, product.ProductCatalog, true);
+            var productItem = StorefrontManager.ProductResolver.ResolveProductItem(product.ProductId, product.ProductCatalog);
 
             var currencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
 

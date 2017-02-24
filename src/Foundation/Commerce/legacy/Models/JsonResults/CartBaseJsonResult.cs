@@ -33,8 +33,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         {
         }
 
-        public CartBaseJsonResult(ServiceProviderResult result)
-            : base(result)
+        public CartBaseJsonResult(ServiceProviderResult result) : base(result)
         {
         }
 
@@ -91,7 +90,10 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
             foreach (var line in cart.Lines ?? Enumerable.Empty<CartLine>())
             {
-                var cartLine = CommerceTypeLoader.CreateInstance<CartLineBaseJsonResult>(line);
+                var product = (CommerceCartProduct) line.Product;
+                var productItem = StorefrontManager.ProductResolver.ResolveProductItem(product.ProductId, product.ProductCatalog);
+
+                var cartLine = new CartLineBaseJsonResult(line, productItem);
                 Lines.Add(cartLine);
             }
 

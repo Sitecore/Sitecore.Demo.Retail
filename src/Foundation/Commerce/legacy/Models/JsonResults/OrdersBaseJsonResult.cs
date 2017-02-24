@@ -43,7 +43,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
             foreach (var orderHeader in orderHeaders)
             {
-                var headerItem = CommerceTypeLoader.CreateInstance<OrderHeaderItemBaseJsonResult>(orderHeader);
+                var headerItem = new OrderHeaderItemBaseJsonResult(orderHeader);
                 Orders.Add(headerItem);
             }
         }

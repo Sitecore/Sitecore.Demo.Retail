@@ -182,7 +182,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
 
-                result.Initialize(string.Concat("checkout/OrderConfirmation", "?confirmationId=", response.Result.OrderID));
+                result.Initialize($"checkout/OrderConfirmation?{StorefrontConstants.QueryStrings.ConfirmationId}={response.Result.OrderID}");
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
@@ -411,7 +411,7 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         private void AddShippingMethodsToResult(CheckoutDataBaseJsonResult result)
         {
-            var shippingMethodJsonResult = CommerceTypeLoader.CreateInstance<ShippingMethodBaseJsonResult>();
+            var shippingMethodJsonResult = new ShippingMethodBaseJsonResult();
 
             var response = ShippingManager.GetShippingMethods(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), new GetShippingMethodsInputModel {ShippingPreferenceType = ShippingOptionType.None.Name});
             if (response.ServiceProviderResult.Success && response.Result.Count > 0)
@@ -421,7 +421,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                 return;
             }
 
-            var shippingToStoreJsonResult = CommerceTypeLoader.CreateInstance<ShippingMethodBaseJsonResult>();
+            var shippingToStoreJsonResult = new ShippingMethodBaseJsonResult();
 
             result.EmailDeliveryMethod = shippingMethodJsonResult;
             result.ShipToStoreDeliveryMethod = shippingToStoreJsonResult;
