@@ -1,0 +1,69 @@
+{
+    "resources": [ 
+        [   {   "id": "install",
+                "path": "C:\\Websites\\habitat.dev.local\\Install",
+                "files": [
+                    [   {   "id": "commerceInstaller", "fileName": "CommerceServer-11.4.148.exe"}   ]
+                ]   
+            }   
+        ],
+        [   {   "id": "dacpac",
+                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Project\\Retail\\Database",
+                "files": [
+                    [   {   "id": "dacpac", "fileName": "Commerce.Storefront.ProfileDatabase.dacpac", "databaseId": "CommerceProfilesDB"  }   ]
+                ]   
+            }   
+        ],
+        [   {   "id": "commerceServerResources",
+                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Project\\Retail\\Database",
+                "files": [
+                    [   {   "id": "catalog",      "fileName": "Catalog.xml"   }   ],
+				    [   {   "id": "inventory",    "fileName": "Inventory.xml" }   ],
+				    [	{   "id": "profiles",     "fileName": "Profiles.xml"  }   ]
+                ]   
+            }   
+        ]
+    ],
+    "accounts": [
+        [   {   "id": "runTime", "Domain":  ".", "username": "svcRunTimeUser", "password": "pass@word1", "fullname": "svcRunTimeUser", "description": "Commerce Server Run Time Service Account", "defaultGroupMembership":  "Administrators"  }   ]
+    ],
+    "iis": {
+        "appPools": [
+            [   {   "id": "commerceServerServices", "name": "CSServices", "managedRuntimeVersion": "v4.0", "accountId": "runTime" }   ],
+            [   {   "id": "commerceEngine", "name": "CommerceEngine", "managedRuntimeVersion": "", "accountId": "runTime" }   ]
+
+        ],
+        "websites": [
+            [   {   "id": "commerceServerServices", 
+                    "siteName": "CSServices", 
+                    "physicalPath": "C:\\Websites\\habitat.dev.local\\CSServices" ,
+                    "appPoolId":  "commerceServerServices",
+                    "bindings": [
+                        [   {   "protocol": "http", "ipAddress": "*", "port": "1004", "hostName": "CSServices"  }   ]
+                    ]
+                }
+            ],
+            [   {   "id": "commerceEngine", 
+                    "siteName": "CommerceEngine", 
+                    "physicalPath": "C:\\Websites\\habitat.dev.local\\CommerceEngine" ,
+                    "appPoolId":  "commerceEngine",
+                    "bindings": [
+                        [   {   "protocol": "http", "ipAddress": "*", "port": "5000", "hostName": "CommerceEngine"  }   ]
+                    ]
+                }
+            ]
+        ],
+        "hostEntries": [
+            [   {   "ipAddress": "127.0.0.1", "hostName": "CSServices", "description": "Commerce server services site"   }   ]
+        ]
+    },
+    "databases": [
+        [   {   "id": "commerceAdminDB", "server": ".", "name": "MSCS_Admin"    }   ],
+        [   {   "id": "commerceCatalogDB", "server": ".", "name": "demo.local_CommerceServer.ProductCatalog"    }   ],
+        [   {   "id": "commerceProfilesDB", "server": ".", "name": "demo.local_CommerceServer.Profiles"    }   ]
+    ],
+    "sitecoreCommerce": {
+        "csInstallerConfig":  {   "adminDatabaseId": "commerceAdminDB", "windowsSecurity": "yes", "username": "", "password": "", "stagingServiceAccountId": "runTime" },
+        "csSite":  {   "name": "Habitat", "catalogDatabaseId": "commerceCatalogDB", "profileDatabaseId": "CommerceProfilesDB", "csServicesWebsiteId": "commerceServerServices", "runTimeAppPoolId": "commerceServerServices", "catalogAppPoolId": "commerceServerServices", "profilesAppPoolId": "commerceServerServices" }
+    }
+}

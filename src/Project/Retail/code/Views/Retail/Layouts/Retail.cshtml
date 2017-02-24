@@ -1,13 +1,21 @@
 ﻿@using Sitecore.Commerce.Connect.CommerceServer
+@using Sitecore.Commerce.Connect.CommerceServer.Orders.Models
 @using Sitecore.Foundation.Assets.Models
 @using Sitecore.Foundation.Assets.Services
-@using Sitecore.Mvc.Analytics.Extensions
 @using Sitecore.Foundation.Commerce.Managers
 @using Sitecore.Foundation.Commerce.Models
-@using Sitecore.Commerce.Connect.CommerceServer.Orders.Models
+@using Sitecore.Foundation.Commerce.Util;
+@using Sitecore.Mvc.Analytics.Extensions
 @inherits WebViewPage
+
 @{
     Layout = null;
+
+    var url = CatalogUrlManager.GetAdjustedProductUrl(Sitecore.Context.Item);
+    if (url != null)
+    {
+        Response.Redirect(url);
+    }
 }
 <!DOCTYPE html>
 <!--[if IE 9]><html lang="en" class="ie9 no-js"><![endif]-->

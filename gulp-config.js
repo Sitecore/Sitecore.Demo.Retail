@@ -6,7 +6,9 @@ module.exports = function() {
     licensePath: instanceRoot + "\\Data\\license.xml",
     solutionName: "Sitecore.Demo.Retail",
     buildConfiguration: "Debug",
-    runCleanBuilds: false
+    runCleanBuilds: false,
+    commerceServerSiteName: "Habitat",
+    commerceDatabasePath: ".\\src\\Project\\Retail\\Database"
   };
   return config;
 }
