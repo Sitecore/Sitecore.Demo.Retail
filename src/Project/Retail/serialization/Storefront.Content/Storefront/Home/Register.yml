@@ -49,9 +49,6 @@ Languages:
     - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
       Hint: __Workflow state
       Value: "{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}"
-    - ID: "4a0074f0-ea1a-4b5b-8044-08496cc87b84"
-      Hint: Link Contoso Account
-      Value: Link Account
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
@@ -71,9 +68,6 @@ Languages:
     - ID: "96760d29-01c8-4158-b80d-8ae8b3427ef3"
       Hint: Password Again
       Value: Confirm Password
-    - ID: "ac9d404b-16e2-4f92-afdc-41c42c93ad22"
-      Hint: New Contoso Account
-      Value: New Account
     - ID: "b5f1b2be-f451-4196-9b19-3b8c3addc0e4"
       Hint: First Name Missing Message
       Value: The First name is required.

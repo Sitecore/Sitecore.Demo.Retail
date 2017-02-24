@@ -85,7 +85,17 @@ namespace Sitecore.Foundation.Commerce.Models
 
         public virtual string DefaultProductId => InnerItem == null ? "22565422120" : InnerItem["DefaultProductId"];
 
-        public MediaItem OnSaleOverlayImage => Context.Database.GetItem(new ID(InnerItem["On Sale Overlay Image"]));
+        public MediaItem OnSaleOverlayImage
+        {
+            get
+            {
+                var id = InnerItem["On Sale Overlay Image"];
+                Guid guid;
+                if (!Guid.TryParse(id, out guid))
+                    return null;
+                return Context.Database.GetItem(new ID(guid));
+            }
+        }
 
         public bool SupportsWishLists => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsWishLists], false);
 

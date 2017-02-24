@@ -366,5 +366,45 @@ namespace Sitecore.Foundation.Commerce.Util
         {
             return string.IsNullOrEmpty(urlToken) ? null : Uri.UnescapeDataString(urlToken).Replace(_encodedDelimiter, _urlTokenDelimiter);
         }
+
+        public static string GetAdjustedProductUrl(Item item)
+        {
+            if (!item.Paths.FullPath.StartsWith("/sitecore/Commerce/Catalog Management/Catalogs/"))
+                return null;
+
+            string url = null;
+            var category = GetCategory(item);
+            if (category != null)
+                url = $"/shop/{category.Name}_{category.Name}/{item["__Display name"]}_{item.Name}";
+            return url;
+        }
+
+        private static Item GetCategory(Item item)
+        {
+            if (item == null)
+                return null;
+
+            var origItem = item;
+            var catelog = ProductItemResolver.GetProductCatalogRoot();
+
+            // Go up the tree until you find the item whose parent is the catelog.
+            // That item is the category.
+            while (item.Parent.Paths.FullPath != "/sitecore")
+            {
+                item = item.Parent;
+                if (item.Parent.ID == catelog.ID)
+                    return item;
+            }
+
+            // At this point, the Sitecore.Context.Item is duplicate item found outside
+            // the catelog.  Looks like we have to do things the hard / wrong way...
+            foreach (Item category in catelog.Children)
+                foreach (Item product in category.Children)
+                    if (product.ID == origItem.ID)
+                        return category;
+
+            return null;
+        }
+
     }
 }

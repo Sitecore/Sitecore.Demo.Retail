@@ -25,7 +25,7 @@
 }
 
 <div class="thumbnail">
-    @if (Model.IsOnSale)
+    @if (Model.IsOnSale && Model.OnSaleOverlayImage != null)
     {
         <div style="position: absolute; top: 20; left: 25;">
             <img src="@(Model.OnSaleOverlayImage.ImageUrl(50,50))" alt="On sale!"/>

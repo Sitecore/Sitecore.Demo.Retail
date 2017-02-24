@@ -1,0 +1,38 @@
+﻿---
+ID: "042611f9-6c25-4dbf-8a69-ef1bf91286ca"
+Parent: "bd726323-e745-47d0-99f7-d25a870fe211"
+Template: "2c0b92b7-6f32-48ac-a880-14a07995f118"
+Path: /sitecore/system/Social/Accounts/Alex Habitat Facebook Account
+DB: master
+SharedFields:
+- ID: "07554386-05b8-41f2-91f6-300770b42fcd"
+  Hint: Roles
+  Value: |
+    sitecore\Sitecore Client Authoring
+- ID: "205d2427-99ae-4012-8200-011745c48d30"
+  Hint: AccessTokenSecret
+  Value: EAAJ6sQNT7iwBAAauaLQcMqHyvJ4jefsfJgGZC4d77sJC5z66RQ2Nn3moS00294jUlFoJTkQrSm2MrUz6PTNcOgimJt1woxkDjF6IpAbKjT2adFuZB6ESR9aSbZAAMYZAP2bTDeb6p8apyDeJUZB5tKEetsKeNMQaY7LVG64nXHAZDZD
+- ID: "26491425-aa5c-40f9-9e0b-c766d273c17e"
+  Hint: Application
+  Value: "{EF2378C6-1D16-4A89-B845-B99948B95B52}"
+- ID: "893ca71d-2cc2-42c0-aad5-02609d9e8200"
+  Hint: AccessToken
+  Value: 117227745466905x
+- ID: "8bfa1d0d-46b5-4c99-b40f-eac683c1c9d3"
+  Hint: LastRenewalDate
+  Value: 20170221T193826Z
+- ID: "a77ed059-b590-4518-8b51-d7397fc0dae9"
+  Hint: Workflow
+  Value: "{D7545D99-5DF2-4BE6-872B-2E66D8DFEE8D}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170221T193826Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
