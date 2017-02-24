@@ -50,6 +50,10 @@ namespace Sitecore.Foundation.Commerce.Models
 
         public string DefaultProductId => InnerItem == null ? "22565422120" : InnerItem["DefaultProductId"];
 
+        public MediaItem OnSaleOverlayImage => string.IsNullOrWhiteSpace(InnerItem["On Sale Overlay Image"]) 
+            ? null 
+            : Context.Database.GetItem(new ID(InnerItem["On Sale Overlay Image"]));
+
         public bool SupportsWishLists => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsWishLists], false);
 
         public bool SupportsLoyaltyPrograms => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsLoyaltyProgram], false);

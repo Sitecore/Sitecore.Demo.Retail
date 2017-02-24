@@ -26,6 +26,8 @@ using Sitecore.Foundation.Commerce.Repositories;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
+    using Sitecore.Links;
+
     public static class StorefrontManager
     {
         public static CommerceStorefront CurrentStorefront
@@ -50,6 +52,8 @@ namespace Sitecore.Foundation.Commerce.Managers
         public static Item CommerceItem => Context.Database.GetItem("/sitecore/Commerce");
 
         public static Item StorefrontConfigurationItem => Context.Database.GetItem("/sitecore/Commerce/Storefront Configuration");
+
+        public static string StorefrontHome => LinkManager.GetItemUrl(CurrentStorefront.HomeItem);
 
         public static HtmlString GetHtmlSystemMessage(string messageKey)
         {

@@ -172,9 +172,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="App_Config\Include\Foundation\Sitecore.Foundation.Commerce.Customer.config">
+    <Content Include="App_Config\Include\Foundation\Sitecore.Foundation.Commerce.Customer.config" />
+    <None Include="web.config.transform">
       <SubType>Designer</SubType>
-    </Content>
+    </None>
     <Content Include="App_Config\Include\Foundation\Sitecore.Foundation.Commerce.Lucene.config">
       <SubType>Designer</SubType>
     </Content>

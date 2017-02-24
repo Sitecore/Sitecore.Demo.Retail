@@ -259,7 +259,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             UpdateOptionsWithFacets(currentCategory.RequiredFacets, facetValues, productSearchOptions);
             UpdateOptionsWithSorting(sortField, sortDirection, productSearchOptions);
 
-            var viewModel = GetCategoryViewModel(productSearchOptions, currentCategory.SortFields, currentCategory.InnerItem, RenderingContext.Current.Rendering, currentCategory.InnerItem.DisplayName);
+            var viewModel = GetCategoryViewModel(productSearchOptions, 
+                currentCategory.SortFields,
+                currentCategory.InnerItem, 
+                RenderingContext.Current.Rendering, 
+                currentCategory.InnerItem.DisplayName);
 
             return View(viewModel);
         }
