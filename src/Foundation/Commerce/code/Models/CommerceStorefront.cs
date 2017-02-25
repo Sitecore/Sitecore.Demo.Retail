@@ -16,6 +16,7 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Configuration;
+using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
@@ -50,9 +51,7 @@ namespace Sitecore.Foundation.Commerce.Models
 
         public string DefaultProductId => InnerItem == null ? "22565422120" : InnerItem["DefaultProductId"];
 
-        public MediaItem OnSaleOverlayImage => string.IsNullOrWhiteSpace(InnerItem["On Sale Overlay Image"]) 
-            ? null 
-            : Context.Database.GetItem(new ID(InnerItem["On Sale Overlay Image"]));
+        public MediaItem OnSaleOverlayImage => string.IsNullOrWhiteSpace(InnerItem["On Sale Overlay Image"])  ? null : Context.Database.GetItem(new ID(InnerItem["On Sale Overlay Image"]));
 
         public bool SupportsWishLists => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsWishLists], false);
 
