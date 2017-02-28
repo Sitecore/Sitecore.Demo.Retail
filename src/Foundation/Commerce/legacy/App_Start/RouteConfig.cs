@@ -16,107 +16,51 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines;
-using Sitecore.Foundation.Commerce.Util;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront
 {
     public static class RouteConfig
     {
-        private static readonly List<ApiInfo> _apiInfoList = new List<ApiInfo>
+        private static readonly List<ApiControllerMapping> _apiInfoList = new List<ApiControllerMapping>
         {
-            new ApiInfo("account-getcurrentuser", "Account", "GetCurrentUser"),
-            new ApiInfo("account-register", "Account", "Register"),
-            new ApiInfo("account-addresslist", "Account", "AddressList"),
-            new ApiInfo("account-recentorders", "Account", "RecentOrders"),
-            new ApiInfo("account-reorder", "Account", "Reorder"),
-            new ApiInfo("account-cancelorder", "Account", "CancelOrder"),
-            new ApiInfo("account-addressdelete", "Account", "AddressDelete"),
-            new ApiInfo("account-addressmodify", "Account", "AddressModify"),
-            new ApiInfo("account-updateprofile", "Account", "UpdateProfile"),
-            new ApiInfo("account-changepassword", "Account", "ChangePassword"),
-            new ApiInfo("cart-addcartline", "Cart", "AddCartLine"),
-            new ApiInfo("cart-applydiscount", "Cart", "ApplyDiscount"),
-            new ApiInfo("cart-deletelineitem", "Cart", "DeleteLineItem"),
-            new ApiInfo("cart-getcurrentcart", "Cart", "GetCurrentCart"),
-            new ApiInfo("cart-removediscount", "Cart", "RemoveDiscount"),
-            new ApiInfo("cart-updatelineitem", "Cart", "UpdateLineItem"),
-            new ApiInfo("cart-updateminicart", "Cart", "UpdateMiniCart"),
-            new ApiInfo("catalog-facetapplied", "Catalog", "FacetApplied"),
-            new ApiInfo("catalog-getproductstockinfo", "Catalog", "GetCurrentProductStockInfo"),
-            new ApiInfo("catalog-checkgiftcardbalance", "Catalog", "CheckGiftCardBalance"),
-            new ApiInfo("catalog-signupforbackinstocknotification", "Catalog", "SignUpForBackInStockNotification"),
-            new ApiInfo("catalog-sortorderapplied", "Catalog", "SortOrderApplied"),
-            new ApiInfo("catalog-switchcurrency", "Catalog", "SwitchCurrency"),
-            new ApiInfo("checkout-getavailablestates", "Checkout", "GetAvailableStates"),
-            new ApiInfo("checkout-getcheckoutdata", "Checkout", "GetCheckoutData"),
-            new ApiInfo("checkout-getshippingmethods", "Checkout", "GetShippingMethods"),
-            new ApiInfo("checkout-setshippingmethod", "Checkout", "SetShippingMethods"),
-            new ApiInfo("checkout-setpaymentmethod", "Checkout", "SetPaymentMethods"),
-            new ApiInfo("checkout-submitorder", "Checkout", "SubmitOrder"),
-            new ApiInfo("global-culturechosen", "Shared", "CultureChosen")
+            new ApiControllerMapping("account-getcurrentuser", "Account", "GetCurrentUser"),
+            new ApiControllerMapping("account-register", "Account", "Register"),
+            new ApiControllerMapping("account-addresslist", "Account", "AddressList"),
+            new ApiControllerMapping("account-recentorders", "Account", "RecentOrders"),
+            new ApiControllerMapping("account-reorder", "Account", "Reorder"),
+            new ApiControllerMapping("account-cancelorder", "Account", "CancelOrder"),
+            new ApiControllerMapping("account-addressdelete", "Account", "AddressDelete"),
+            new ApiControllerMapping("account-addressmodify", "Account", "AddressModify"),
+            new ApiControllerMapping("account-updateprofile", "Account", "UpdateProfile"),
+            new ApiControllerMapping("account-changepassword", "Account", "ChangePassword"),
+            new ApiControllerMapping("cart-addcartline", "Cart", "AddCartLine"),
+            new ApiControllerMapping("cart-applydiscount", "Cart", "ApplyDiscount"),
+            new ApiControllerMapping("cart-deletelineitem", "Cart", "DeleteLineItem"),
+            new ApiControllerMapping("cart-getcurrentcart", "Cart", "GetCurrentCart"),
+            new ApiControllerMapping("cart-removediscount", "Cart", "RemoveDiscount"),
+            new ApiControllerMapping("cart-updatelineitem", "Cart", "UpdateLineItem"),
+            new ApiControllerMapping("cart-updateminicart", "Cart", "UpdateMiniCart"),
+            new ApiControllerMapping("checkout-getavailablestates", "Checkout", "GetAvailableStates"),
+            new ApiControllerMapping("checkout-getcheckoutdata", "Checkout", "GetCheckoutData"),
+            new ApiControllerMapping("checkout-getshippingmethods", "Checkout", "GetShippingMethods"),
+            new ApiControllerMapping("checkout-setshippingmethod", "Checkout", "SetShippingMethods"),
+            new ApiControllerMapping("checkout-setpaymentmethod", "Checkout", "SetPaymentMethods"),
+            new ApiControllerMapping("checkout-submitorder", "Checkout", "SubmitOrder"),
+            new ApiControllerMapping("global-culturechosen", "Shared", "CultureChosen")
         };
 
         public static void RegisterRoutes(RouteCollection routes)
         {
             foreach (var apiInfo in _apiInfoList)
+            {
                 routes.MapRoute(
                     apiInfo.Name,
                     apiInfo.Url,
                     new {controller = apiInfo.Controller, action = apiInfo.Action, id = UrlParameter.Optional});
-
-            routes.MapRoute(
-                "shop-category",
-                ProductItemResolver.ShopUrlRoute + "/{id}",
-                new {id = UrlParameter.Optional, itemType = CategoryItemType});
-
-            routes.MapRoute(
-                "shop-product",
-                ProductItemResolver.ShopUrlRoute + "/{category}/{id}",
-                new {id = UrlParameter.Optional, itemType = "product"});
-
-            routes.MapRoute(
-                "shop-category-catalog",
-                "{catalog}/" + ProductItemResolver.ShopUrlRoute + "/{id}",
-                new {id = UrlParameter.Optional, itemType = CategoryItemType});
-
-            routes.MapRoute(
-                "shop-product-catalog",
-                "{catalog}/" + ProductItemResolver.ShopUrlRoute + "/{category}/{id}",
-                new {id = UrlParameter.Optional, itemType = "product"});
-
-            routes.MapRoute(
-                "category",
-                ProductItemResolver.CategoryUrlRoute + "/{id}",
-                new {id = UrlParameter.Optional, itemType = CategoryItemType});
-
-            routes.MapRoute(
-                "product",
-                ProductItemResolver.ProductUrlRoute + "/{id}",
-                new {id = UrlParameter.Optional, itemType = "product"});
-
-            routes.MapRoute(
-                "ProductAction",
-                ProductItemResolver.ProductUrlRoute + "/{action}/{id}",
-                new {controller = "Catalog", id = UrlParameter.Optional, itemType = "product"});
-
-            routes.MapRoute(
-                "category-catalog",
-                "{catalog}/" + ProductItemResolver.CategoryUrlRoute + "/{id}",
-                new {id = UrlParameter.Optional, itemType = CategoryItemType});
-
-            routes.MapRoute(
-                "product-catalog",
-                "{catalog}/" + ProductItemResolver.ProductUrlRoute + "/{id}",
-                new {id = UrlParameter.Optional, itemType = "product"});
-
-            routes.MapRoute(
-                "catalogitem-all",
-                ProductItemResolver.NavigationItemName + "/{*pathElements}",
-                new {itemType = "catalogitem"});
+            }
 
             routes.MapRoute(
                 "logoff",
@@ -124,24 +68,5 @@ namespace Sitecore.Reference.Storefront
                 new {controller = "Account", action = "LogOff", storefront = UrlParameter.Optional}
             );
         }
-        private class ApiInfo
-        {
-            public ApiInfo(string name, string controller, string action)
-            {
-                this.Name = name;
-                this.Controller = controller;
-                this.Action = action;
-            }
-
-            public string Name { get; private set; }
-
-            public string Controller { get; private set; }
-
-            public string Action { get; private set; }
-
-            public string Url => "api/storefront/" + (this.Controller.ToLower(CultureInfo.InvariantCulture) + "/" + this.Action.ToLower(CultureInfo.InvariantCulture));
-        }
-
-        public const string CategoryItemType = "category";
     }
 }

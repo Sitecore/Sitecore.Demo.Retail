@@ -17,6 +17,7 @@
 
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -33,7 +34,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public bool WasUpdated { get; set; }
 
-        public virtual void Initialize(bool wasUpdated)
+        public void Initialize(bool wasUpdated)
         {
             Assert.ArgumentNotNull(wasUpdated, nameof(wasUpdated));
 

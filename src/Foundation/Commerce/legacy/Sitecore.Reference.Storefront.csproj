@@ -80,6 +80,10 @@
       <HintPath>..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -207,20 +211,15 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WindsorConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CartController.cs" />
-    <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\NavigationSearchController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\StorefrontSearchController.cs" />
-    <Compile Include="Infrastructure\DependenciesInstaller.cs" />
+    <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\RegisterDataModelExtensionsBase.cs" />
     <Compile Include="Infrastructure\StorefrontSessionStateAttribute.cs" />
-    <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
-    <Compile Include="Infrastructure\WindsorControllerFactoryBase.cs" />
     <Compile Include="Models\CustomerLinkupPendingViewModel.cs" />
     <Compile Include="Models\IdentityProviderModel.cs" />
     <Compile Include="Models\JsonResults\AddressItemJsonResult.cs" />
@@ -250,9 +249,6 @@
     <Compile Include="Models\JsonResults\RegisterBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\ChangePasswordBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\ShippingMethodsBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\StockInfoListBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\StockInfoBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\GiftCardBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\LoyaltyProgramItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\LoyaltyTierItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\LoyaltyTransactionItemBaseJsonResult.cs" />
@@ -268,30 +264,17 @@
     <Compile Include="Models\JsonResults\WishListBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\WishListsBaseJsonResult.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\SiteContentListHeaderViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\CartRenderingModel.cs" />
-    <Compile Include="Models\ProductSearchResultViewModel.cs" />
-    <Compile Include="Models\MultipleProductSearchResultsViewModel.cs" />
-    <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\CommerceCartLineWithImages.cs" />
-    <Compile Include="Models\JsonResults\BaseJsonResult.cs" />
-    <Compile Include="Models\LandingPageViewModel.cs" />
     <Compile Include="Models\NoDataSourceViewModel.cs" />
-    <Compile Include="Models\PaginationModel.cs" />
-    <Compile Include="Models\ProductViewModel.cs" />
-    <Compile Include="Models\RelatedCatalogItemsViewModel.cs" />
-    <Compile Include="Models\NavigationViewModel.cs" />
     <Compile Include="Models\PaginationViewModel.cs" />
-    <Compile Include="Models\ProductFacetsViewModel.cs" />
-    <Compile Include="Models\ProductListHeaderViewModel.cs" />
     <Compile Include="Models\SearchBarViewModel.cs" />
     <Compile Include="Models\SiteContentSearchResultsViewModel.cs" />
     <Compile Include="Models\SiteContentViewModel.cs" />
-    <Compile Include="Models\VariantPropertiesEqualityComparer.cs" />
-    <Compile Include="Models\VariantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\InitializeBundles.cs" />
-    <Compile Include="Infrastructure\SitecorePipelines\InitializeControllerFactory.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\InitializeRoutes.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -336,23 +319,6 @@
     <Content Include="Views\Account\MyWishLists.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\UserPendingActivation.cshtml" />
-    <Content Include="Views\Catalog\_FourProductSlide.cshtml" />
-    <Content Include="Views\Catalog\_ProductSummary.cshtml" />
-    <Content Include="Views\Catalog\_RelatedCatalogItemsSlide.cshtml" />
-    <Content Include="Views\Catalog\_SiteContentSummary.cshtml" />
-    <Content Include="Views\Catalog\AddToCart.cshtml" />
-    <Content Include="Views\Catalog\CategoryPageHeader.cshtml" />
-    <Content Include="Views\Catalog\CheckGiftCardBalance.cshtml" />
-    <Content Include="Views\Catalog\ChildCategoryNavigation.cshtml" />
-    <Content Include="Views\StorefrontSearch\ProductSearchResultsFacets.cshtml" />
-    <Content Include="Views\Catalog\ProductImages.cshtml" />
-    <Content Include="Views\Catalog\ProductInformation.cshtml" />
-    <Content Include="Views\StorefrontSearch\ProductSearchResultsList.cshtml" />
-    <Content Include="Views\StorefrontSearch\ProductSearchResultsListHeader.cshtml" />
-    <Content Include="Views\Catalog\ProductPresentation.cshtml" />
-    <Content Include="Views\Catalog\ProductRating.cshtml" />
-    <Content Include="Views\Catalog\ProductRecommendation.cshtml" />
-    <Content Include="Views\Catalog\RelatedCatalogItems.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsList.cshtml" />
     <Content Include="Views\Checkout\_Billing.cshtml" />
     <Content Include="Views\Checkout\_ByItem_SendByEmail.cshtml" />
@@ -376,10 +342,8 @@
     <Content Include="Views\Shared\ErrorsSummary.cshtml" />
     <Content Include="Views\Shared\LanguageSelector.cshtml" />
     <Content Include="Views\Cart\MiniCart.cshtml" />
-    <Content Include="Views\Shared\Navigation.cshtml" />
     <Content Include="Views\Shared\NavigationButtons.cshtml" />
     <Content Include="Views\Shared\NoDatasource.cshtml" />
-    <Content Include="Views\StorefrontSearch\ProductSearchResultsPagination.cshtml" />
     <Content Include="Views\Shared\PrintOnly.cshtml" />
     <Content Include="Views\Shared\SearchBar.cshtml" />
     <Content Include="Views\Shared\SearchEvent.cshtml" />
@@ -394,13 +358,8 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Account\MyOrder.cshtml" />
     <Content Include="Views\Account\MyOrders.cshtml" />
-    <Content Include="Views\Catalog\RelatedProducts.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsListHeader.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsPagination.cshtml" />
-    <Content Include="Views\Catalog\ProductListHeader.cshtml" />
-    <Content Include="Views\Catalog\ProductList.cshtml" />
-    <Content Include="Views\Catalog\Pagination.cshtml" />
-    <Content Include="Views\Catalog\ProductFacets.cshtml" />
     <None Include="Views\Web.config">
       <SubType>Designer</SubType>
     </None>
@@ -478,6 +437,10 @@
     <Content Include="Scripts\_references.js" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DependencyInjection\code\Sitecore.Foundation.DependencyInjection.csproj">
+      <Project>{366148b7-2392-4f42-80d6-786b7a3682ae}</Project>
+      <Name>Sitecore.Foundation.DependencyInjection</Name>
+    </ProjectReference>
     <ProjectReference Include="..\code\Sitecore.Foundation.Commerce.csproj">
       <Project>{662345ac-23ee-4125-87a6-0785795c2409}</Project>
       <Name>Sitecore.Foundation.Commerce</Name>

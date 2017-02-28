@@ -17,6 +17,7 @@
 
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -32,7 +33,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public string ShopName { get; set; }
 
-        public virtual void Initialize(ShippingOption shippingOption)
+        public void Initialize(ShippingOption shippingOption)
         {
             if (shippingOption == null)
             {

@@ -23,16 +23,15 @@ using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Reference.Storefront.Models
 {
-    public class PaginationViewModel : RenderingModel
+    public class ContentPaginationViewModel
     {
         public PaginationModel Pagination { get; set; }
 
         public string QueryStringToken { get; set; }
 
-        public void Initialize(Rendering rendering, SearchResults products, CommerceSearchOptions searchOptions)
+        public void Initialize(SearchResults products, CommerceSearchOptions searchOptions)
         {
-            base.Initialize(rendering);
-            QueryStringToken = StorefrontConstants.QueryStrings.Paging;
+            QueryStringToken = StorefrontConstants.QueryStrings.SiteContentPaging;
 
             var itemsPerPage = searchOptions?.NumberOfItemsToReturn ?? 20;
 

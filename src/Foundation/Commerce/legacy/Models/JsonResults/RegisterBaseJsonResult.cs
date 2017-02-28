@@ -17,6 +17,7 @@
 
 using Sitecore.Commerce.Entities.Customers;
 using Sitecore.Commerce.Services.Customers;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -35,7 +36,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public bool IsSignupFlow { get; set; }
 
-        public virtual void Initialize(CommerceUser user)
+        public void Initialize(CommerceUser user)
         {
             UserName = user.UserName;
         }

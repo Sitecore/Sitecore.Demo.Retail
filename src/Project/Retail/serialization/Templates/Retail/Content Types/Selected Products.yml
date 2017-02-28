@@ -1,0 +1,24 @@
+﻿---
+ID: "f1905c25-cf3a-4d6e-b8e5-7b047db107bc"
+Parent: "5ac4eb6e-0f98-4a6a-ae95-c13557766425"
+Template: "ab86861a-6030-46c5-b394-e8f99e8b87db"
+Path: /sitecore/templates/Project/Retail/Content Types/Selected Products
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Control/32x32/checkbox_b.png
+- ID: "12c33f3f-86c5-43a5-aeb4-5598cec45116"
+  Hint: __Base template
+  Type: tree list
+  Value: |
+    {1930BBEB-7805-471A-A3BE-4858AC7CF696}
+    {A45D0030-79F2-4DBF-9A74-226A33C58249}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170223T112446Z

@@ -26,7 +26,7 @@ namespace Sitecore.Foundation.Commerce.Util
 {
     public class CartCacheHelper
     {
-        public virtual void InvalidateCartCache([NotNull] string customerId)
+        public void InvalidateCartCache([NotNull] string customerId)
         {
             var cacheProvider = GetCacheProvider();
             var id = GetCustomerId(customerId);
@@ -41,7 +41,7 @@ namespace Sitecore.Foundation.Commerce.Util
             CartCookieHelper.DeleteCartCookieForCustomer(id);
         }
 
-        public virtual void AddCartToCache(CommerceCart cart)
+        public void AddCartToCache(CommerceCart cart)
         {
             var cacheProvider = GetCacheProvider();
             var id = GetCustomerId(cart.CustomerId);
@@ -55,7 +55,7 @@ namespace Sitecore.Foundation.Commerce.Util
             CartCookieHelper.CreateCartCookieForCustomer(id);
         }
 
-        public virtual CommerceCart GetCart([NotNull] string customerId)
+        public CommerceCart GetCart([NotNull] string customerId)
         {
             var cacheProvider = GetCacheProvider();
 
@@ -71,7 +71,7 @@ namespace Sitecore.Foundation.Commerce.Util
             return cart;
         }
 
-        protected virtual string GetCustomerId([NotNull] string customerId)
+        private string GetCustomerId([NotNull] string customerId)
         {
             Guid csCustomerId;
             return Guid.TryParse(customerId, out csCustomerId) ? Guid.Parse(customerId).ToString("D") : customerId;

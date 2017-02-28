@@ -43,11 +43,49 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.1.0.0\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Commerce">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Commerce.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Commerce.Connect.CommerceServer">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.ContentSearch.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Linq, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.ContentSearch.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Foundation.Alerts">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Alerts.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.Dictionary">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
     </Reference>
@@ -60,6 +98,11 @@
     <Reference Include="Sitecore.Mvc">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -69,6 +112,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -104,19 +151,77 @@
     <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Catalog.config" />
     <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Catalog.Serialization.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="Views\Catalog\_FourProductSlide.cshtml" />
+    <Content Include="Views\Catalog\_ProductSummary.cshtml" />
+    <Content Include="Views\Catalog\_RelatedCatalogItemsSlide.cshtml" />
+    <Content Include="Views\Catalog\AddToCart.cshtml" />
+    <Content Include="Views\Catalog\CategoryPageHeader.cshtml" />
+    <Content Include="Views\Catalog\CheckGiftCardBalance.cshtml" />
+    <Content Include="Views\Catalog\ChildCategoryNavigation.cshtml" />
+    <Content Include="Views\Catalog\Pagination.cshtml" />
+    <Content Include="Views\Catalog\ProductFacets.cshtml" />
+    <Content Include="Views\Catalog\ProductImages.cshtml" />
+    <Content Include="Views\Catalog\ProductInformation.cshtml" />
+    <Content Include="Views\Catalog\ProductList.cshtml" />
+    <Content Include="Views\Catalog\ProductListHeader.cshtml" />
+    <Content Include="Views\Catalog\ProductRating.cshtml" />
+    <Content Include="Views\Catalog\ProductRecommendation.cshtml" />
+    <Content Include="Views\Catalog\RelatedCatalogItems.cshtml" />
+    <Content Include="Views\Catalog\RelatedProducts.cshtml" />
+    <Content Include="Views\Catalog\Navigation.cshtml" />
+    <Content Include="Views\ProductSearch\ProductSearchResultsPagination.cshtml" />
+    <Content Include="Views\ProductSearch\ProductSearchResultsFacets.cshtml" />
+    <Content Include="Views\ProductSearch\ProductSearchResultsList.cshtml" />
+    <Content Include="Views\ProductSearch\ProductSearchResultsListHeader.cshtml" />
     <None Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\CatalogContextFactory.cs" />
+    <Compile Include="Models\RelationshipViewModel.cs" />
+    <Compile Include="Models\RouteItemType.cs" />
+    <Compile Include="Models\CatalogRouteData.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Controllers\CatalogController.cs" />
+    <Compile Include="Controllers\ProductSearchController.cs" />
+    <Compile Include="Extensions\UrlHelperExtensions.cs" />
+    <Compile Include="Infrastructure\Pipelines\InitializeRoutes.cs" />
+    <Compile Include="Infrastructure\Pipelines\ProductItemResolver.cs" />
+    <Compile Include="Infrastructure\Provider\CatalogLinkProvider.cs" />
+    <Compile Include="Infrastructure\ServicesConfigurator.cs" />
+    <Compile Include="Models\CatalogRouteRoot.cs" />
+    <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\JsonResults\GiftCardBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\StockInfoBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\StockInfoListBaseJsonResult.cs" />
+    <Compile Include="Models\MultipleProductSearchResultsViewModel.cs" />
+    <Compile Include="Models\NavigationViewModel.cs" />
+    <Compile Include="Models\PaginationViewModel.cs" />
+    <Compile Include="Models\ProductFacetsViewModel.cs" />
+    <Compile Include="Models\ProductListHeaderViewModel.cs" />
+    <Compile Include="Models\ProductSearchResultViewModel.cs" />
+    <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\RelatedCatalogItemsViewModel.cs" />
+    <Compile Include="Models\VariantPropertiesEqualityComparer.cs" />
+    <Compile Include="Models\VariantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CatalogUrlService.cs" />
+    <Compile Include="Templates.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\web.config" />
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\Commerce\Catalog\" />
+    <ProjectReference Include="..\..\..\Foundation\Commerce\code\Sitecore.Foundation.Commerce.csproj">
+      <Project>{662345ac-23ee-4125-87a6-0785795c2409}</Project>
+      <Name>Sitecore.Foundation.Commerce</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Foundation\DependencyInjection\code\Sitecore.Foundation.DependencyInjection.csproj">
+      <Project>{366148B7-2392-4F42-80D6-786B7A3682AE}</Project>
+      <Name>Sitecore.Foundation.DependencyInjection</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

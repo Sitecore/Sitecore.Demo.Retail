@@ -20,6 +20,7 @@ using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -36,13 +37,13 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public List<OrderHeaderItemBaseJsonResult> Orders { get; } = new List<OrderHeaderItemBaseJsonResult>();
 
-        public virtual void Initialize(IEnumerable<OrderHeader> orderHeaders)
+        public void Initialize(IEnumerable<OrderHeader> orderHeaders)
         {
             Assert.ArgumentNotNull(orderHeaders, nameof(orderHeaders));
 
             foreach (var orderHeader in orderHeaders)
             {
-                var headerItem = CommerceTypeLoader.CreateInstance<OrderHeaderItemBaseJsonResult>(orderHeader);
+                var headerItem = new OrderHeaderItemBaseJsonResult(orderHeader);
                 Orders.Add(headerItem);
             }
         }

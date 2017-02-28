@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using Sitecore.Commerce.Entities.WishLists;
 using Sitecore.Commerce.Services;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -40,7 +41,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public List<WishListItemBaseJsonResult> Lines { get; } = new List<WishListItemBaseJsonResult>();
 
-        public virtual void Initialize(WishList wishList)
+        public void Initialize(WishList wishList)
         {
             if (wishList == null)
             {

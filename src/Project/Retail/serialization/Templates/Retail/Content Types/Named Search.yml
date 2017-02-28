@@ -1,0 +1,24 @@
+﻿---
+ID: "dcf0567f-b98f-4f5b-9ac8-4d5b91b0404f"
+Parent: "5ac4eb6e-0f98-4a6a-ae95-c13557766425"
+Template: "ab86861a-6030-46c5-b394-e8f99e8b87db"
+Path: /sitecore/templates/Project/Retail/Content Types/Named Search
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Applications/16x16/find.png
+- ID: "12c33f3f-86c5-43a5-aeb4-5598cec45116"
+  Hint: __Base template
+  Type: tree list
+  Value: |
+    {1930BBEB-7805-471A-A3BE-4858AC7CF696}
+    {F3C0CD6C-9FA9-442D-BD3A-5A25E292F2F7}
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170223T105241Z

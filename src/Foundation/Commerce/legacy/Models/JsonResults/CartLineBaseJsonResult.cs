@@ -20,7 +20,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
+using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Commerce.Entities.Shipping;
+using Sitecore.Data.Items;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines;
 using Sitecore.Foundation.Commerce.Managers;
@@ -33,15 +35,16 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
     public class CartLineBaseJsonResult : BaseJsonResult
     {
-        public CartLineBaseJsonResult(CommerceCartLineWithImages line)
+        public CartLineBaseJsonResult(CartLine line, Item productItem)
         {
             var product = (CommerceCartProduct) line.Product;
-            var productItem = ProductItemResolver.ResolveCatalogItem(product.ProductId, product.ProductCatalog, true);
 
-            if (line.Images.Count > 0)
+            var lineWithImages = line as CommerceCartLineWithImages;
+            if (lineWithImages?.Images.Count > 0)
             {
-                Image = line.Images[0] != null ? line.Images[0].ImageUrl(100, 100) : string.Empty;
+                Image = lineWithImages.Images[0] != null ? lineWithImages.Images[0].ImageUrl(100, 100) : string.Empty;
             }
+
 
             var userCurrency = StorefrontManager.CurrentStorefront.DefaultCurrency;
 
@@ -69,7 +72,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         public string ProductUrl { get; set; }
         public IEnumerable<ShippingOptionBaseJsonResult> ShippingOptions { get; set; }
 
-        public virtual void SetShippingOptions(IEnumerable<ShippingOption> shippingOptions)
+        public void SetShippingOptions(IEnumerable<ShippingOption> shippingOptions)
         {
             if (shippingOptions == null)
             {
@@ -80,7 +83,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
             foreach (var shippingOption in shippingOptions)
             {
-                var jsonResult = CommerceTypeLoader.CreateInstance<ShippingOptionBaseJsonResult>();
+                var jsonResult = new ShippingOptionBaseJsonResult();
 
                 jsonResult.Initialize(shippingOption);
                 shippingOptionList.Add(jsonResult);

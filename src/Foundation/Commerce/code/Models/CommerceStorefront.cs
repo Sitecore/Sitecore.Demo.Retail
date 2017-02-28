@@ -15,12 +15,9 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using Sitecore.Commerce.Connect.CommerceServer;
-using Sitecore.ContentSearch.Utilities;
 using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
@@ -31,17 +28,88 @@ namespace Sitecore.Foundation.Commerce.Models
 {
     public class CommerceStorefront : SitecoreItemBase
     {
-        private string _shopName = "storefront";
-
-        public CommerceStorefront()
-        {
-        }
-
         public CommerceStorefront(Item item)
         {
             InnerItem = item;
 
             SetShopNameBySiteContext();
+        }
+
+        public Item HomeItem => InnerItem;
+
+        public Item GlobalItem => InnerItem.Database.GetItem(Context.Site.RootPath + "/Global");
+
+        public string SenderEmailAddress
+        {
+            get
+            {
+                var email = HomeItem.Fields[StorefrontConstants.KnownFieldNames.SenderEmailAddress];
+                return email?.ToString() ?? string.Empty;
+            }
+        }
+
+        public bool UseIndexFileForProductStatusInLists => MainUtil.GetBool(HomeItem[StorefrontConstants.KnownFieldNames.UseIndexFileForProductStatusInLists], false);
+
+        public string ShopName { get; set; } = "storefront";
+
+        public string DefaultProductId
+        {
+            get
+            {
+                var defaultProductId = CatalogContextItem[Templates.CatalogContext.Fields.DefaultProductId];
+                if (string.IsNullOrEmpty(defaultProductId))
+                    throw new ConfigurationErrorsException("No default product has been set on the catalog context");
+                return defaultProductId;
+            }
+        }
+
+        public MediaItem OnSaleOverlayImage => string.IsNullOrWhiteSpace(InnerItem["On Sale Overlay Image"])  ? null : Context.Database.GetItem(new ID(InnerItem["On Sale Overlay Image"]));
+
+        public int MaxNumberOfAddresses => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfAddresses], 10);
+
+        public int MaxNumberOfWishLists => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfWishLists], 10);
+
+        public int MaxNumberOfWishListItems => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfWishListItems], 10);
+
+        public string DefaultCurrency
+        {
+            get
+            {
+                var currencyItem = CurrencyContextItem?.TargetItem(Templates.CurrencyContext.Fields.DefaultCurrency);
+                if (currencyItem == null)
+                {
+                    throw new ConfigurationErrorsException("Default currency not set on the store");
+                }
+
+                return currencyItem.Name;
+            }
+        }
+
+        private Item CurrencyContextItem
+        {
+            get
+            {
+                var contextItem = InnerItem.GetAncestorOrSelfOfTemplate(Templates.CurrencyContext.ID);
+                if (contextItem == null)
+                    throw new ConfigurationErrorsException("Cannot determine the CurrencyContext for the commerce storefront");
+                return contextItem;
+            }
+        }
+
+        private Item CatalogContextItem
+        {
+            get
+            {
+                var contextItem = InnerItem.GetAncestorOrSelfOfTemplate(Templates.CatalogContext.ID);
+                if (contextItem == null)
+                    throw new ConfigurationErrorsException("Cannot determine the CatalogContext for the commerce storefront");
+                return contextItem;
+            }
+        }
+
+        public Catalog[] GetCatalogs()
+        {
+            return ((MultilistField)CatalogContextItem.Fields[Templates.CatalogContext.Fields.Catalogs]).GetItems().Select(c => new Catalog(c)).ToArray();
         }
 
         private void SetShopNameBySiteContext()
@@ -58,78 +126,17 @@ namespace Sitecore.Foundation.Commerce.Models
                 Log.Warn($"The site '{Context.Site.Name}' has no commerceShopName defined", this);
                 return;
             }
-            _shopName = shopName;
+            ShopName = shopName;
         }
 
-        public virtual Item HomeItem => InnerItem;
-
-        public virtual Item GlobalItem => InnerItem.Database.GetItem(Context.Site.RootPath + "/Global");
-
-        public virtual string SenderEmailAddress
-        {
-            get
-            {
-                var email = HomeItem.Fields[StorefrontConstants.KnownFieldNames.SenderEmailAddress];
-                return email?.ToString() ?? String.Empty;
-            }
-        }
-
-        public virtual bool UseIndexFileForProductStatusInLists => MainUtil.GetBool(HomeItem[StorefrontConstants.KnownFieldNames.UseIndexFileForProductStatusInLists],
-            false);
-
-        public virtual string ShopName
-        {
-            get { return _shopName; }
-            set { _shopName = value; }
-        }
-
-        public virtual string DefaultProductId => InnerItem == null ? "22565422120" : InnerItem["DefaultProductId"];
-
-        public MediaItem OnSaleOverlayImage => string.IsNullOrWhiteSpace(InnerItem["On Sale Overlay Image"]) 
-            ? null 
-            : Context.Database.GetItem(new ID(InnerItem["On Sale Overlay Image"]));
-
-        public bool SupportsWishLists => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsWishLists], false);
-
-        public bool SupportsLoyaltyPrograms => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsLoyaltyProgram], false);
-
-        public bool SupportsGiftCardPayment => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsGirstCardPayment], false);
-
-        public virtual int MaxNumberOfAddresses => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfAddresses], 10);
-
-        public virtual int MaxNumberOfWishLists => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfWishLists], 10);
-
-        public virtual int MaxNumberOfWishListItems => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfWishListItems], 10);
-
-        public virtual string Title()
+        public string Title()
         {
             return InnerItem == null ? "default" : InnerItem[StorefrontConstants.ItemFields.Title];
         }
 
-        public virtual string NameTitle()
-        {
-            return InnerItem == null ? "default" : InnerItem["Name Title"];
-        }
-
-        public virtual string GetMapKey()
+        public string GetMapKey()
         {
             return HomeItem[StorefrontConstants.KnownFieldNames.MapKey];
         }
-
-        public string DefaultCurrency
-        {
-            get
-            {
-                var currencyItem = CurrencyContextItem?.TargetItem(Templates.CurrencyContext.Fields.DefaultCurrency);
-                if (currencyItem == null)
-                {
-                    throw new ConfigurationErrorsException("Default currency not set on the store");
-                }
-
-                return currencyItem.Name;
-            }
-        }
-
-        private Item CurrencyContextItem => InnerItem.GetAncestorOrSelfOfTemplate(Templates.CurrencyContext.ID);
     }
 }

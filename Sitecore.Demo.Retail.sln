@@ -42,6 +42,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Reference.Storefro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Feature.Commerce.Catalog", "src\Feature\Catalog\code\Sitecore.Feature.Commerce.Catalog.csproj", "{7031F757-2830-44E3-9639-AAD2DBA69A24}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DependencyInjection", "DependencyInjection", "{A17F2B02-CD42-43C7-BAF6-823A87E3CA5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Foundation.DependencyInjection", "src\Foundation\DependencyInjection\code\Sitecore.Foundation.DependencyInjection.csproj", "{366148B7-2392-4F42-80D6-786B7A3682AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "engine", "engine", "{2B87ACDB-EFC7-4732-9782-D1029030F621}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +74,10 @@ Global
 		{7031F757-2830-44E3-9639-AAD2DBA69A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7031F757-2830-44E3-9639-AAD2DBA69A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7031F757-2830-44E3-9639-AAD2DBA69A24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{366148B7-2392-4F42-80D6-786B7A3682AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{366148B7-2392-4F42-80D6-786B7A3682AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{366148B7-2392-4F42-80D6-786B7A3682AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{366148B7-2392-4F42-80D6-786B7A3682AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,5 +94,8 @@ Global
 		{ED23DC0F-4FFF-48E1-B9C8-E3AD73329661} = {BB79934E-63CC-4B38-A45F-768D912419E3}
 		{8450F330-0271-4091-8809-C671CCD50671} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
 		{7031F757-2830-44E3-9639-AAD2DBA69A24} = {37CE2FA3-8808-4304-930F-A37695B3A869}
+		{A17F2B02-CD42-43C7-BAF6-823A87E3CA5B} = {A65C1E2B-A56A-4E86-B928-23176FC86DB8}
+		{366148B7-2392-4F42-80D6-786B7A3682AE} = {A17F2B02-CD42-43C7-BAF6-823A87E3CA5B}
+		{2B87ACDB-EFC7-4732-9782-D1029030F621} = {F12F210F-76B3-4142-8AB9-06677BCAED1E}
 	EndGlobalSection
 EndGlobal

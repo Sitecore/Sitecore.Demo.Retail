@@ -40,10 +40,6 @@ namespace Sitecore.Foundation.Commerce.Models
             CurrentPageNumber = currentPageNumber;
         }
 
-        public string DisplayName { get; set; }
-
-        public Item NamedSearchItem { get; set; }
-
         public List<Item> SearchResultItems
         {
             get { return _searchResultItems; }
@@ -59,6 +55,9 @@ namespace Sitecore.Foundation.Commerce.Models
 
         public int TotalPageCount { get; set; }
 
+        public int CurrentPageNumber { get; set; }
+        public string Title { get; set; }
+
         public IEnumerable<CommerceQueryFacet> Facets
         {
             get { return _facets; }
@@ -70,6 +69,5 @@ namespace Sitecore.Foundation.Commerce.Models
             }
         }
 
-        public int CurrentPageNumber { get; set; }
     }
 }

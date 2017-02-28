@@ -81,7 +81,7 @@ namespace Sitecore.Foundation.Commerce.Util
             postStep.Run(output, metadata);
         }
 
-        protected virtual void CreateEaPlans()
+        private void CreateEaPlans()
         {
             var database = Context.ContentDatabase ?? Database.GetDatabase("master");
 
@@ -100,7 +100,7 @@ namespace Sitecore.Foundation.Commerce.Util
             }
         }
 
-        protected virtual void DeployEaPlans()
+        private void DeployEaPlans()
         {
             foreach (var planInfo in _eaPlanInfos)
             {

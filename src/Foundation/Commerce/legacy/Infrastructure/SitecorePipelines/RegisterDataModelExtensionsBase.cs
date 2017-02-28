@@ -23,7 +23,7 @@ namespace Sitecore.Reference.Storefront.Infrastructure.SitecorePipelines
 {
     public class RegisterDataModelExtensionsBase
     {
-        public virtual void Process(PipelineArgs args)
+        public void Process(PipelineArgs args)
         {
             MongoDbObjectMapper.Instance.RegisterModelExtension<CommerceCartLineWithImages>();
         }

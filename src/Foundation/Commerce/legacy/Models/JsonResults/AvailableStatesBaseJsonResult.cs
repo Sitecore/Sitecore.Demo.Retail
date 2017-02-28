@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -34,7 +35,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public Dictionary<string, string> States { get; set; }
 
-        public virtual void Initialize(Dictionary<string, string> states)
+        public void Initialize(Dictionary<string, string> states)
         {
             Assert.ArgumentNotNull(states, nameof(states));
 

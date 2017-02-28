@@ -42,12 +42,6 @@ namespace Sitecore.Foundation.Commerce
 
             public const string ShippingOptionsLocationPath = "Shipping Options location path";
 
-            public const string SupportsWishLists = "Supports Wishlists";
-
-            public const string SupportsLoyaltyProgram = "Supports Loyalty Program ";
-
-            public const string SupportsGirstCardPayment = "Supports Girft Card Payment";
-
             public const string Value = "Value";
         }
     }

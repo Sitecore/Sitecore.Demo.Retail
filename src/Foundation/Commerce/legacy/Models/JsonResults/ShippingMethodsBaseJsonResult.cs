@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Commerce.Services.Shipping;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -35,7 +36,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public IEnumerable<ShippingMethodBaseJsonResult> ShippingMethods { get; set; }
 
-        public virtual void Initialize(IEnumerable<ShippingMethod> shippingMethods)
+        public void Initialize(IEnumerable<ShippingMethod> shippingMethods)
         {
             if (shippingMethods == null)
             {
@@ -46,7 +47,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
             foreach (var shippingMethod in shippingMethods)
             {
-                var jsonResult = CommerceTypeLoader.CreateInstance<ShippingMethodBaseJsonResult>();
+                var jsonResult = new ShippingMethodBaseJsonResult();
 
                 jsonResult.Initialize(shippingMethod);
                 shippingMethodList.Add(jsonResult);

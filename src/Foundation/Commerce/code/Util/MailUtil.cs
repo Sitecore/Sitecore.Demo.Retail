@@ -33,7 +33,7 @@ namespace Sitecore.Foundation.Commerce.Util
         private string _mailSubject = string.Empty;
         private string _mailTo = string.Empty;
 
-        public virtual bool SendMail([NotNull] MailTemplate mailTemplate)
+        public bool SendMail([NotNull] MailTemplate mailTemplate)
         {
             Assert.ArgumentNotNull(mailTemplate, nameof(mailTemplate));
             Assert.ArgumentNotNull(mailTemplate.ToEmail, nameof(mailTemplate.ToEmail));
@@ -42,7 +42,7 @@ namespace Sitecore.Foundation.Commerce.Util
             return SendMail(mailTemplate.ToEmail, mailTemplate.FromEmail, mailTemplate.Subject, mailTemplate.Body, string.Empty);
         }
 
-        public virtual bool SendMail([NotNull] string templateName, [NotNull] string toEmail, [NotNull] string fromEmail, [NotNull] object subjectParameters, [NotNull] object[] bodyParameters)
+        public bool SendMail([NotNull] string templateName, [NotNull] string toEmail, [NotNull] string fromEmail, [NotNull] object subjectParameters, [NotNull] object[] bodyParameters)
         {
             Assert.ArgumentNotNull(templateName, nameof(templateName));
             Assert.ArgumentNotNull(toEmail, nameof(toEmail));
@@ -83,7 +83,7 @@ namespace Sitecore.Foundation.Commerce.Util
             return SendMail(toEmail, fromEmail, subject, body, string.Empty);
         }
 
-        public virtual bool SendMail([NotNull] string toEmail, [NotNull] string fromEmail, [NotNull] string subject, [NotNull] string body, [NotNull] string attachmentFileName)
+        public bool SendMail([NotNull] string toEmail, [NotNull] string fromEmail, [NotNull] string subject, [NotNull] string body, [NotNull] string attachmentFileName)
         {
             Assert.ArgumentNotNull(toEmail, nameof(toEmail));
             Assert.ArgumentNotNull(fromEmail, nameof(fromEmail));
@@ -100,7 +100,7 @@ namespace Sitecore.Foundation.Commerce.Util
             return SendMail();
         }
 
-        protected virtual bool SendMail()
+        private bool SendMail()
         {
             var message = new MailMessage
             {

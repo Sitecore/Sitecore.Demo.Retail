@@ -40,7 +40,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public string Total { get; set; }
 
-        public virtual void Initialize(Cart cart)
+        public void Initialize(Cart cart)
         {
             Assert.ArgumentNotNull(cart, nameof(cart));
 

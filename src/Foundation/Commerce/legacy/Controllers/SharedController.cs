@@ -21,16 +21,17 @@ using Sitecore.Commerce.Contacts;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using Sitecore.Reference.Storefront.Models.JsonResults;
 
 namespace Sitecore.Reference.Storefront.Controllers
 {
-    public class SharedController : BaseController
+    public class SharedController : SitecoreController
     {
         private readonly RenderingModel _model;
 
-        public SharedController([NotNull] AccountManager accountManager, [NotNull] ContactFactory contactFactory, [NotNull] CatalogManager catalogManager) : base(accountManager, contactFactory)
+        public SharedController([NotNull] CatalogManager catalogManager)
         {
             Assert.ArgumentNotNull(catalogManager, nameof(catalogManager));
 
@@ -48,11 +49,6 @@ namespace Sitecore.Reference.Storefront.Controllers
                 _model.Initialize(RenderingContext.Current.Rendering);
                 return _model;
             }
-        }
-
-        public ActionResult Breadcrumbs()
-        {
-            return View();
         }
 
         public ActionResult Error()

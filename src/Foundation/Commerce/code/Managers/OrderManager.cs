@@ -38,18 +38,20 @@ namespace Sitecore.Foundation.Commerce.Managers
 {
     public class OrderManager : BaseManager
     {
-        public OrderManager(OrderServiceProvider orderServiceProvider, [NotNull] CartManager cartManager)
+        public OrderManager(OrderServiceProvider orderServiceProvider, [NotNull] CartManager cartManager, CartCacheHelper cartCacheHelper)
         {
             Assert.ArgumentNotNull(orderServiceProvider, nameof(orderServiceProvider));
             Assert.ArgumentNotNull(cartManager, nameof(cartManager));
 
             OrderServiceProvider = orderServiceProvider;
             CartManager = cartManager;
+            CartCacheHelper = cartCacheHelper;
         }
 
         public OrderServiceProvider OrderServiceProvider { get; protected set; }
 
         public CartManager CartManager { get; protected set; }
+        public CartCacheHelper CartCacheHelper { get; }
 
         public ManagerResponse<SubmitVisitorOrderResult, CommerceOrder> SubmitVisitorOrder([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] SubmitOrderInputModel inputModel)
         {
@@ -84,8 +86,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             errorResult = OrderServiceProvider.SubmitVisitorOrder(request);
             if (errorResult.Success && errorResult.Order != null && errorResult.CartWithErrors == null)
             {
-                var cartCache = CommerceTypeLoader.CreateInstance<CartCacheHelper>();
-                cartCache.InvalidateCartCache(visitorContext.GetCustomerId());
+                CartCacheHelper.InvalidateCartCache(visitorContext.GetCustomerId());
 
                 var mailUtil = new MailUtil();
 

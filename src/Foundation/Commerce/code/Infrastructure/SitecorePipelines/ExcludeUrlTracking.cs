@@ -30,7 +30,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
         private static List<string> _urlsToExclude;
         private static readonly object _urlToExcludeLock = new object();
 
-        public virtual void Process(PipelineArgs args)
+        public void Process(PipelineArgs args)
         {
             var arguments = (StartTrackingArgs) args;
 
@@ -45,7 +45,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
             }
         }
 
-        protected virtual void LoadExclusionList()
+        private void LoadExclusionList()
         {
             if (_urlsToExclude == null)
             {

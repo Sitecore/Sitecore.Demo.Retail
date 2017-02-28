@@ -19,6 +19,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Web.Mvc;
 using CommerceServer.Core.Catalog;
 using Newtonsoft.Json;
 using Sitecore.Commerce.Connect.CommerceServer;
@@ -61,7 +62,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.ComputedFields
             return JsonConvert.SerializeObject(variantInfoList);
         }
 
-        protected virtual T GetVariantFieldValue<T>(Variant variant, string fieldName)
+        private T GetVariantFieldValue<T>(Variant variant, string fieldName)
         {
             if (!variant.DataRow.Table.Columns.Contains(fieldName))
             {
@@ -84,7 +85,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.ComputedFields
 
         private IEnumerable<Variant> GetChildVariantsReadOnly(ID itemId, string language)
         {
-            var catalogRepository = CommerceTypeLoader.CreateInstance<ICatalogRepository>();
+            var catalogRepository = DependencyResolver.Current.GetService<ICatalogRepository>();
             var externalInfo = catalogRepository.GetExternalIdInformation(itemId.Guid);
             if (externalInfo == null || externalInfo.CommerceItemType != CommerceItemType.ProductFamily)
             {

@@ -17,6 +17,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using Sitecore.Commerce.Services.Customers;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -43,7 +44,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         [Display(Name = "Telephone")]
         public string TelephoneNumber { get; set; }
 
-        public virtual void Initialize(UpdateUserResult result)
+        public void Initialize(UpdateUserResult result)
         {
             if (result.CommerceUser != null)
             {

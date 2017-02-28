@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Mvc.Extensions;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
@@ -29,8 +30,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         {
         }
 
-        public AddressListItemBaseJsonResult(ServiceProviderResult result)
-            : base(result)
+        public AddressListItemBaseJsonResult(ServiceProviderResult result) : base(result)
         {
         }
 

@@ -33,14 +33,18 @@ using Sitecore.Data;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Reference.Storefront.Controllers
 {
-    public class NavigationSearchController : BaseController
+    public class NavigationSearchController : SitecoreController
     {
-        public NavigationSearchController([NotNull] AccountManager accountManager, [NotNull] ContactFactory contactFactory) : base(accountManager, contactFactory)
+        public ICommerceSearchManager CommerceSearchManager { get; }
+
+        public NavigationSearchController(ICommerceSearchManager commerceSearchManager)
         {
+            CommerceSearchManager = commerceSearchManager;
         }
 
         public string IndexName { get; set; }
@@ -64,8 +68,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         private SearchResponse GetNavigationCategories(string navigationDataSource, CommerceSearchOptions searchOptions)
         {
             ID navigationId;
-            var searchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>();
-            var searchIndex = searchManager.GetIndex();
+            var searchIndex = CommerceSearchManager.GetIndex();
 
             if (navigationDataSource.IsGuid())
             {
@@ -99,7 +102,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                         Uri = p.Uri
                     });
 
-                searchResults = searchManager.AddSearchOptionsToQuery(searchResults, searchOptions);
+                searchResults = CommerceSearchManager.AddSearchOptionsToQuery(searchResults, searchOptions);
 
                 var results = searchResults.GetResults();
                 var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);

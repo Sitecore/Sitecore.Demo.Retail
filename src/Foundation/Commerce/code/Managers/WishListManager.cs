@@ -49,7 +49,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public InventoryManager InventoryManager { get; protected set; }
 
-        public virtual ManagerResponse<CreateWishListResult, WishList> CreateWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string wishListName)
+        public ManagerResponse<CreateWishListResult, WishList> CreateWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string wishListName)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
@@ -62,7 +62,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CreateWishListResult, WishList>(result, result.WishList);
         }
 
-        public virtual ManagerResponse<GetWishListResult, WishList> GetWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId)
+        public ManagerResponse<GetWishListResult, WishList> GetWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
@@ -80,7 +80,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetWishListResult, WishList>(result, result.WishList);
         }
 
-        public virtual ManagerResponse<GetWishListsResult, IEnumerable<WishListHeader>> GetWishLists([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext)
+        public ManagerResponse<GetWishListsResult, IEnumerable<WishListHeader>> GetWishLists([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
@@ -92,7 +92,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetWishListsResult, IEnumerable<WishListHeader>>(result, result.WishLists.ToList());
         }
 
-        public virtual ManagerResponse<DeleteWishListResult, WishList> DeleteWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId)
+        public ManagerResponse<DeleteWishListResult, WishList> DeleteWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
@@ -105,7 +105,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<DeleteWishListResult, WishList>(result, result.WishList);
         }
 
-        public virtual ManagerResponse<RemoveWishListLinesResult, WishList> RemoveWishListLines([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId, IEnumerable<WishListLineInputModel> models)
+        public ManagerResponse<RemoveWishListLinesResult, WishList> RemoveWishListLines([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId, IEnumerable<WishListLineInputModel> models)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
@@ -120,7 +120,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<RemoveWishListLinesResult, WishList>(result, result.WishList);
         }
 
-        public virtual ManagerResponse<UpdateWishListLinesResult, WishList> UpdateWishListLines([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId, IEnumerable<WishListLine> lines)
+        public ManagerResponse<UpdateWishListLinesResult, WishList> UpdateWishListLines([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId, IEnumerable<WishListLine> lines)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
@@ -138,7 +138,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<UpdateWishListLinesResult, WishList>(result, result.WishList);
         }
 
-        public virtual ManagerResponse<UpdateWishListLinesResult, WishList> UpdateWishListLine([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] WishListLineInputModel model)
+        public ManagerResponse<UpdateWishListLinesResult, WishList> UpdateWishListLine([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] WishListLineInputModel model)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
@@ -155,7 +155,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return UpdateWishListLines(storefront, visitorContext, model.WishListId, new List<WishListLine> {wishListLine});
         }
 
-        public virtual ManagerResponse<AddLinesToWishListResult, WishList> AddLinesToWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId, IEnumerable<WishListLine> lines)
+        public ManagerResponse<AddLinesToWishListResult, WishList> AddLinesToWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string wishListId, IEnumerable<WishListLine> lines)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
@@ -169,7 +169,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<AddLinesToWishListResult, WishList>(result, result.WishList);
         }
 
-        public virtual ManagerResponse<AddLinesToWishListResult, WishList> AddLinesToWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, AddToWishListInputModel model)
+        public ManagerResponse<AddLinesToWishListResult, WishList> AddLinesToWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, AddToWishListInputModel model)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
@@ -205,7 +205,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<AddLinesToWishListResult, WishList>(result.ServiceProviderResult, result.ServiceProviderResult.WishList);
         }
 
-        public virtual ManagerResponse<UpdateWishListResult, WishList> UpdateWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, UpdateWishListInputModel model)
+        public ManagerResponse<UpdateWishListResult, WishList> UpdateWishList([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, UpdateWishListInputModel model)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
@@ -218,7 +218,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<UpdateWishListResult, WishList>(result, result.WishList);
         }
 
-        protected virtual void PopulateStockInformation(CommerceStorefront storefront, WishList wishList)
+        private void PopulateStockInformation(CommerceStorefront storefront, WishList wishList)
         {
             var productList = wishList.Lines.Select(line => new CommerceInventoryProduct {ProductId = line.Product.ProductId, CatalogName = ((CommerceCartProduct) line.Product).ProductCatalog}).ToList();
 

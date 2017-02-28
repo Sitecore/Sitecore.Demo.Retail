@@ -10,17 +10,18 @@
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
 
-@model Sitecore.Reference.Storefront.Models.ProductListHeaderViewModel
+@model Sitecore.Reference.Storefront.Models.SiteContentListHeaderViewModel
 @{
     if (Model?.Pagination == null || Model.Pagination.TotalResultCount <= 0)
     {
         return;
     }
+    var item = Html.Sitecore().CurrentRendering.Item;
 }
 
 <div id="C04-ProductListHeader" class="row m-b-1">
     @{
-        var headerText = Model.Rendering.Item["Header"];
+        var headerText = item["Header"];
         if (!string.IsNullOrWhiteSpace(headerText))
         {
             <div class="col-md-12">
@@ -34,7 +35,7 @@
                     @if (Model.Pagination.NumberOfPages > 1)
                     {
                         <div class="showing-amount">
-                            <h6>@Html.Sitecore().Field("Showing", Model.Item) <span id="C04-ProductListHeader-StartItem">@Model.Pagination.StartResultIndex</span> - <span id="C04-ProductListHeader-EndItem">@Model.Pagination.EndResultIndex</span> @Html.Sitecore().Field("Of", Model.Item) <span id="C04-ProductListHeader-TotalCount">@Model.Pagination.TotalResultCount</span></h6>
+                            <h6>@Html.Sitecore().Field("Showing", item) <span id="C04-ProductListHeader-StartItem">@Model.Pagination.StartResultIndex</span> - <span id="C04-ProductListHeader-EndItem">@Model.Pagination.EndResultIndex</span> @Html.Sitecore().Field("Of", item) <span id="C04-ProductListHeader-TotalCount">@Model.Pagination.TotalResultCount</span></h6>
                         </div>
                     }
                 </div>
@@ -42,17 +43,17 @@
                     @if (Model.Pagination.NumberOfPages > 1)
                     {
                         <div class="form-group">
-                            <label for="resultsPerPageDropDown">@Html.Sitecore().Field("Results Per Page", Model.Item)</label>
+                            <label for="resultsPerPageDropDown">@Html.Sitecore().Field("Results Per Page", item)</label>
                             <select id="resultsPerPageDropDown" class="form-control @Model.PageSizeClass">
                                 @{
-                                    var pageSizesString = Model.Rendering.Item["Results Per Page Values"];
+                                    var pageSizesString = item["Results Per Page Values"];
 
                                     if (!string.IsNullOrEmpty(pageSizesString))
                                     {
-                                        int pageSize;
                                         var pageSizes = pageSizesString.Split('|');
                                         foreach (var size in pageSizes)
                                         {
+                                            int pageSize;
                                             if (int.TryParse(size, out pageSize))
                                             {
                                                 <option value="@pageSize" @if (Model.Pagination.PageResultCount == pageSize)
@@ -66,34 +67,6 @@
                             </select>
                         </div>
                     }
-                    <div class="form-group p-l-1">
-                        @if (Model.SortFields != null && Model.SortFields.Any())
-                        {
-                            <label for="sortDropDown">@Html.Sitecore().Field("Sort By", Model.Item)</label>
-                            <select class="form-control sortDropdown" id="sortDropDown">
-                                @foreach (var sortField in Model.SortFields)
-                                {
-                                    var ascSelected = string.Empty;
-                                    var descSelected = string.Empty;
-
-                                    if (!string.IsNullOrEmpty(ViewBag.SortField) && ViewBag.SortField == sortField.Name)
-                                    {
-                                        if (ViewBag.SortDirection == Sitecore.Commerce.Connect.CommerceServer.CommerceConstants.SortDirection.Asc)
-                                        {
-                                            ascSelected = "selected";
-                                        }
-                                        else
-                                        {
-                                            descSelected = "selected";
-                                        }
-                                    }
-
-                                    <option value="@sortField.Name+" @ascSelected>@sortField.DisplayName @Model.Rendering.Item["Ascending"]</option>
-                                    <option value="@sortField.Name-" @descSelected>@sortField.DisplayName @Model.Rendering.Item["Descending"]</option>
-                                }
-                            </select>
-                        }
-                    </div>
                 </div>
             </div>
         </div>

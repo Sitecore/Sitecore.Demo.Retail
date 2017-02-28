@@ -101,7 +101,7 @@ SharedFields:
           ph="/page-layout/section"
           uid="{897C99D8-9A09-4A4B-8336-B7D0E95FA84F}" />
         <r
-          id="{6B1D4310-5FE1-4523-943F-B7F44CCA0179}"
+          id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}"
           ph="/page-layout/section/col-narrow-1"
           uid="{73D00F74-0956-495D-B055-DDCF76AE26A3}" />
         <r
@@ -173,7 +173,7 @@ SharedFields:
         id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
         l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
         <r
-          id="{6B1D4310-5FE1-4523-943F-B7F44CCA0179}"
+          id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}"
           ph="left"
           uid="{5A82789B-26EB-4727-87A7-FB19E5C08986}" />
         <r
@@ -205,15 +205,17 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{73D00F74-0956-495D-B055-DDCF76AE26A3}"
+              s:id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}" />
+            <r
               uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}"
               s:ph="center" />
           </d>
           <d
             id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
-              uid="{E30D9461-67E1-4C44-8CE7-34077CAB298C}">
-              <p:d />
-            </r>
+              uid="{5A82789B-26EB-4727-87A7-FB19E5C08986}"
+              s:id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}" />
           </d>
         </r>
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
@@ -236,15 +238,17 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{73D00F74-0956-495D-B055-DDCF76AE26A3}"
+              s:id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}" />
+            <r
               uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}"
               s:ph="center" />
           </d>
           <d
             id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
-              uid="{E30D9461-67E1-4C44-8CE7-34077CAB298C}">
-              <p:d />
-            </r>
+              uid="{5A82789B-26EB-4727-87A7-FB19E5C08986}"
+              s:id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}" />
           </d>
         </r>
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
@@ -267,15 +271,17 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{73D00F74-0956-495D-B055-DDCF76AE26A3}"
+              s:id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}" />
+            <r
               uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}"
               s:ph="center" />
           </d>
           <d
             id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
-              uid="{E30D9461-67E1-4C44-8CE7-34077CAB298C}">
-              <p:d />
-            </r>
+              uid="{5A82789B-26EB-4727-87A7-FB19E5C08986}"
+              s:id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}" />
           </d>
         </r>
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
@@ -298,15 +304,17 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{73D00F74-0956-495D-B055-DDCF76AE26A3}"
+              s:id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}" />
+            <r
               uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}"
               s:ph="center" />
           </d>
           <d
             id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
             <r
-              uid="{E30D9461-67E1-4C44-8CE7-34077CAB298C}">
-              <p:d />
-            </r>
+              uid="{5A82789B-26EB-4727-87A7-FB19E5C08986}"
+              s:id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}" />
           </d>
         </r>
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"

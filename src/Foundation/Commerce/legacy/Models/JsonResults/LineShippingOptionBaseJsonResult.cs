@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Entities.Shipping;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -42,7 +43,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             {
                 foreach (var shippingOption in lineShippingOption.ShippingOptions)
                 {
-                    var jsonResult = CommerceTypeLoader.CreateInstance<ShippingOptionBaseJsonResult>();
+                    var jsonResult = new ShippingOptionBaseJsonResult();
 
                     jsonResult.Initialize(shippingOption);
                     shippingOptionList.Add(jsonResult);

@@ -23,11 +23,5 @@ namespace Sitecore.Foundation.Commerce.Managers
 {
     public class BaseManager
     {
-        private ICommerceSearchManager _currentSearchManager;
-        private ISiteContext _siteContext;
-
-        public ICommerceSearchManager CurrentSearchManager => this._currentSearchManager ?? (this._currentSearchManager = CommerceTypeLoader.CreateInstance<ICommerceSearchManager>());
-
-        public ISiteContext CurrentSiteContext => this._siteContext ?? (this._siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>());
     }
 }

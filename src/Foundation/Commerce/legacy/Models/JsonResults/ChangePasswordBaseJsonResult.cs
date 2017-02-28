@@ -17,6 +17,7 @@
 
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
@@ -32,7 +33,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public string UserName { get; set; }
 
-        public virtual void Initialize(string userName)
+        public void Initialize(string userName)
         {
             Assert.ArgumentNotNullOrEmpty(userName, nameof(userName));
 

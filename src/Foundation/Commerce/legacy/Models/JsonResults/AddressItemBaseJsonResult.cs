@@ -19,6 +19,7 @@ using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {

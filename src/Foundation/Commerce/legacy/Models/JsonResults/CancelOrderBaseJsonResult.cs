@@ -17,6 +17,7 @@
 
 using Sitecore.Commerce.Services.Orders;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {

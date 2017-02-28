@@ -36,7 +36,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public IEnumerable<ShippingMethodPerItemBaseJsonResult> LineShippingMethods { get; set; }
 
-        public virtual void Initialize(IEnumerable<ShippingMethod> shippingMethods, IEnumerable<ShippingMethodPerItem> shippingMethodsPerItem)
+        public void Initialize(IEnumerable<ShippingMethod> shippingMethods, IEnumerable<ShippingMethodPerItem> shippingMethodsPerItem)
         {
             base.Initialize(shippingMethods);
 
@@ -53,7 +53,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
             foreach (var shippingMethodPerItem in shippingMethodPerItemArray)
             {
-                var jsonResult = CommerceTypeLoader.CreateInstance<ShippingMethodPerItemBaseJsonResult>();
+                var jsonResult = new ShippingMethodPerItemBaseJsonResult();
 
                 jsonResult.Initialize(shippingMethodPerItem);
 

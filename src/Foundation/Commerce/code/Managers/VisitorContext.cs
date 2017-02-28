@@ -66,13 +66,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
         }
 
-        public string ShoppingCartId
-        {
-            get
-            {
-                return Context.User.IsAuthenticated ? Guid.NewGuid().ToString() : CartCookieHelper.GetAnonymousCartIdFromCookie();
-            }
-        }
+        public string ShoppingCartId => Context.User.IsAuthenticated ? Guid.NewGuid().ToString() : CartCookieHelper.GetAnonymousCartIdFromCookie();
 
         public string GetCustomerId()
         {
@@ -81,18 +75,14 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public void SetCommerceUser(CommerceUser user)
         {
-            if (Tracker.Current == null || Tracker.Current.Contact == null ||
-                Tracker.Current.Contact.ContactId == Guid.Empty)
+            if (Tracker.Current == null || Tracker.Current.Contact == null || Tracker.Current.Contact.ContactId == Guid.Empty)
             {
                 return;
             }
 
             Assert.IsNotNull(ContactFactory, "this.ContactFactory should not be null.");
-
             CommerceUser = user;
-
             Assert.IsNotNull(CommerceUser.Customers, "The user '{0}' does not contain a Customers collection.", user.UserName);
-
             _userId = CommerceUser.Customers.FirstOrDefault();
         }
 

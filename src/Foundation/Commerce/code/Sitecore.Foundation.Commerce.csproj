@@ -48,14 +48,6 @@
       <HintPath>..\..\..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="CommerceServer.Core.Catalog, Version=10.0.0.0, Culture=neutral, PublicKeyToken=f5c79cb11734af7a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\CommerceServer\CommerceServer.Core.Catalog.dll</HintPath>
@@ -71,6 +63,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.1.0.0\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -187,9 +187,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\WindsorConfig.cs" />
     <Compile Include="CommerceServerStorefrontConstants.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Extensions\ItemExtensions.cs" />
     <Compile Include="Infrastructure\ComputedFields\VariantInfoComputedField.cs" />
     <Compile Include="Infrastructure\Connect\Arguments\GetProductBulkPricesRequest.cs" />
     <Compile Include="Infrastructure\Connect\Arguments\GetSupportedCurrenciesRequest.cs" />
@@ -214,11 +214,9 @@
     <Compile Include="Extensions\SimpleTypesExtensions.cs" />
     <Compile Include="Extensions\UrlExtensionMethods.cs" />
     <Compile Include="Extensions\ValidateJsonAntiForgeryTokenAttribute.cs" />
+    <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\ApplyVaryByUrlPath.cs" />
-    <Compile Include="Infrastructure\SitecorePipelines\CatalogLinkProvider.cs" />
-    <Compile Include="Infrastructure\DependenciesInstaller.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\ExcludeUrlTracking.cs" />
-    <Compile Include="Infrastructure\SitecorePipelines\ProductItemResolver.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\ResetContact.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\VaryByCurrency.cs" />
     <Compile Include="Managers\AccountManager.cs" />
@@ -226,7 +224,10 @@
     <Compile Include="Managers\CartManager.cs" />
     <Compile Include="Managers\CatalogManager.cs" />
     <Compile Include="Managers\GiftCardManager.cs" />
-    <Compile Include="Models\CatalogRouteData.cs" />
+    <Compile Include="Models\ApiControllerMapping.cs" />
+    <Compile Include="Models\CatalogItemType.cs" />
+    <Compile Include="Models\ICatalogContext.cs" />
+    <Compile Include="Models\BaseJsonResult.cs" />
     <Compile Include="Models\ICatalogCategory.cs" />
     <Compile Include="Managers\InventoryManager.cs" />
     <Compile Include="Models\ICatalogProduct.cs" />
@@ -278,6 +279,7 @@
     <Compile Include="Models\InputModels\WishListInputModel.cs" />
     <Compile Include="Models\InputModels\WishListLineInputModel.cs" />
     <Compile Include="Models\MailTemplate.cs" />
+    <Compile Include="Models\PaginationModel.cs" />
     <Compile Include="Models\PriceTypes.cs" />
     <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Models\SearchResults.cs" />
@@ -294,13 +296,14 @@
     <Compile Include="Models\Catalog.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CommerceStorefront.cs" />
-    <Compile Include="Models\ISiteContext.cs" />
     <Compile Include="Models\SitecoreItemBase.cs" />
+    <Compile Include="Repositories\SiteContextRepository.cs" />
+    <Compile Include="Repositories\VisitorContextRepository.cs" />
+    <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="StorefrontConstants.cs" />
     <Compile Include="Templates.cs" />
     <Compile Include="Util\CartCacheHelper.cs" />
     <Compile Include="Util\CartCookieHelper.cs" />
-    <Compile Include="Util\CatalogUrlManager.cs" />
     <Compile Include="Util\CategoryCookieHelper.cs" />
     <Compile Include="Util\EaPlanInfo.cs" />
     <Compile Include="Util\InstallPostStep.cs" />
@@ -322,6 +325,12 @@
     </None>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\DependencyInjection\code\Sitecore.Foundation.DependencyInjection.csproj">
+      <Project>{366148b7-2392-4f42-80d6-786b7a3682ae}</Project>
+      <Name>Sitecore.Foundation.DependencyInjection</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

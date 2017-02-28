@@ -15,11 +15,12 @@
 @using Sitecore.Reference.Storefront;
 @using Sitecore.Foundation.Commerce.Managers;
 @using Sitecore.Foundation.Commerce.Models
+@using Sitecore.Foundation.Commerce.Repositories
 @using Sitecore.WordOCX.HtmlDocument
 @using Sitecore.Mvc.Analytics.Extensions
 
 @{
-    var siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>();
+    var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().Current; ;
     bool isCategory = siteContext.IsCategory;
     var catalogItem = siteContext.CurrentCatalogItem;
 }

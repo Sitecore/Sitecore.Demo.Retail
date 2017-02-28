@@ -18,8 +18,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
+using System.Web.Mvc;
 using CommerceServer.Core.Catalog;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Catalog;
@@ -52,29 +52,9 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.ComputedFields
             return category.ChildCategories.Select(childCategory => childCategory.ExternalId.ToString()).ToList();
         }
 
-        protected virtual T GetVariantFieldValue<T>(Variant variant, string fieldName)
-        {
-            if (!variant.DataRow.Table.Columns.Contains(fieldName))
-            {
-                return default(T);
-            }
-            var variantValue = variant[fieldName];
-            if (variantValue == null)
-            {
-                return default(T);
-            }
-
-            if (variantValue is T)
-            {
-                return (T) variantValue;
-            }
-
-            return (T) System.Convert.ChangeType(variantValue, typeof(T), CultureInfo.InvariantCulture);
-        }
-
         private Category GetCategoryReadOnly(ID itemId, string language)
         {
-            var catalogRepository = CommerceTypeLoader.CreateInstance<ICatalogRepository>();
+            var catalogRepository = DependencyResolver.Current.GetService<ICatalogRepository>();
             var externalInfo = catalogRepository.GetExternalIdInformation(itemId.Guid);
 
             if (externalInfo == null || externalInfo.CommerceItemType != CommerceItemType.Category)

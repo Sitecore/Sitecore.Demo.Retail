@@ -23,11 +23,13 @@ namespace Sitecore.Foundation.Commerce
     [Obsolete("Move to Templates.cs or similar")]
     public static class StorefrontConstants
     {
+        [Obsolete("Move to Templates.cs or similar")]
         public static class Settings
         {
             public static readonly string DefaultCurrencyCode = "USD";
         }
 
+        [Obsolete("Move to Templates.cs or similar")]
         public static class KnownFieldNames
         {
             public static readonly string Cancel = "Cancel";
@@ -128,8 +130,6 @@ namespace Sitecore.Foundation.Commerce
 
             public static readonly string Title = "Title";
 
-            public static readonly string ProductList = "Product List";
-
             public static readonly string EmailAddressOfExistingCustomer = "Email Address Of Existing Customer";
 
             public static readonly string EmailOfExistingCustomer = "Email Of Existing Customer";
@@ -143,13 +143,7 @@ namespace Sitecore.Foundation.Commerce
             public static readonly string DisclaimerText = "Disclaimer Text";
         }
 
-        public static class KnownTemplateItemIds
-        {
-            public static readonly ID Home = new ID("{FB9DBD60-CBA2-490D-9C72-997271D576A3}");
-
-            public static readonly ID SelectedProducts = new ID("{A45D0030-79F2-4DBF-9A74-226A33C58249}");
-        }
-
+        [Obsolete("Move to Templates.cs or similar")]
         public static class KnowItemNames
         {
             public static readonly string Mails = "Mails";
@@ -173,33 +167,19 @@ namespace Sitecore.Foundation.Commerce
             public static readonly string Shipping = "Shipping";
         }
 
+        [Obsolete("Move to Templates.cs or similar")]
         public static class QueryStrings
         {
             public const string ConfirmationId = "confirmationId";
 
-            public const string Paging = "pg";
-
             public const string SiteContentPaging = "scpg";
-
-            public const string Sort = "s";
-
-            public const string SortDirection = "sd";
-
-            public const string Facets = "f";
-
-            public const char FacetsSeparator = '|';
-
-            public const string SearchKeyword = "q";
-
-            public const string PageSize = "ps";
 
             public const string SiteContentPageSize = "scps";
         }
 
+        [Obsolete("Move to Templates.cs or similar")]
         public static class ItemFields
         {
-            public static readonly string DisplayInSearchResults = "DisplayInSearchResults";
-
             public static readonly string Title = "Title";
 
             public static readonly string SummaryText = "SummaryText";

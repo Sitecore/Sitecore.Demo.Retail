@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Carts;
@@ -33,8 +34,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         {
         }
 
-        public CartBaseJsonResult(ServiceProviderResult result)
-            : base(result)
+        public CartBaseJsonResult(ServiceProviderResult result) : base(result)
         {
         }
 
@@ -89,9 +89,13 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
                 return;
             }
 
+            var catalogManager = DependencyResolver.Current.GetService<CatalogManager>();
             foreach (var line in cart.Lines ?? Enumerable.Empty<CartLine>())
             {
-                var cartLine = CommerceTypeLoader.CreateInstance<CartLineBaseJsonResult>(line);
+                var product = (CommerceCartProduct) line.Product;
+                var productItem = catalogManager.GetProduct(product.ProductId, product.ProductCatalog);
+
+                var cartLine = new CartLineBaseJsonResult(line, productItem);
                 Lines.Add(cartLine);
             }
 
