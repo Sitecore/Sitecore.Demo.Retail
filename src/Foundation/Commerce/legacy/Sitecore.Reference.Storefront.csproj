@@ -268,7 +268,6 @@
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\CartRenderingModel.cs" />
     <Compile Include="Models\CommerceCartLineWithImages.cs" />
-    <Compile Include="Models\LandingPageViewModel.cs" />
     <Compile Include="Models\NoDataSourceViewModel.cs" />
     <Compile Include="Models\PaginationViewModel.cs" />
     <Compile Include="Models\SearchBarViewModel.cs" />

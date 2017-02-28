@@ -31,52 +31,59 @@ using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class CategoryViewModel : RenderingModel
+    public class CategoryViewModel
     {
-        private readonly Item _item;
         private List<MediaItem> _images;
-
-        public CategoryViewModel()
-        {
-            ChildProducts = new List<ProductViewModel>();
-        }
 
         public CategoryViewModel(Item item)
         {
             ChildProducts = new List<ProductViewModel>();
-            _item = item;
+            Item = item;
         }
 
-        public override Item Item
+        public CategoryViewModel(Item categoryItem, SearchResults products, IEnumerable<CommerceQuerySort> sortFields, CommerceSearchOptions searchOptions) : this(categoryItem)
         {
-            get
-            {
-                if (_item == null)
-                    return base.Item;
+            var itemsPerPage = searchOptions?.NumberOfItemsToReturn ?? 0;
 
-                return _item;
+            if (products != null)
+            {
+                ChildProducts = new List<ProductViewModel>();
+                foreach (var child in products.SearchResultItems)
+                {
+                    var productModel = new ProductViewModel(child);
+                    ChildProducts.Add(productModel);
+                }
+
+                ChildProductFacets = products.Facets;
+                if (itemsPerPage > products.SearchResultItems.Count)
+                    itemsPerPage = products.SearchResultItems.Count;
+
+                var alreadyShown = products.CurrentPageNumber * itemsPerPage;
+                Pagination = new PaginationModel
+                {
+                    PageNumber = products.CurrentPageNumber,
+                    TotalResultCount = products.TotalItemCount,
+                    NumberOfPages = products.TotalPageCount,
+                    PageResultCount = itemsPerPage,
+                    StartResultIndex = alreadyShown + 1,
+                    EndResultIndex = Math.Min(products.TotalItemCount, alreadyShown + itemsPerPage)
+                };
             }
+
+            SortFields = sortFields;
         }
 
-        public string RelationshipName { get; set; }
-
-        public string RelationshipDescription { get; set; }
-
-        public HtmlString RelationshipDescriptionRenderer => PageContext.Current.HtmlHelper.Sitecore().Field("Value", LookupRelationshipItem);
-
-        public Item LookupRelationshipItem { get; set; }
+        public Item Item { get; set; }
 
         public string DisplayName => Item.DisplayName;
 
         public HtmlString DisplayNameRender => PageContext.Current.HtmlHelper.Sitecore().Field(FieldIDs.DisplayName.ToString(), Item);
 
-        public string Description => Item["Description"];
-
-        public string ExternalId => Item["ExternalId"];
+        public string Description => Item[Templates.Generated.Category.Fields.Description];
 
         public string Name => Item.Name;
 
-        public HtmlString DescriptionRender => PageContext.Current.HtmlHelper.Sitecore().Field("Description", Item);
+        public HtmlString DescriptionRender => PageContext.Current.HtmlHelper.Sitecore().Field(Templates.Generated.Category.Fields.Description, Item);
 
         public List<MediaItem> Images
         {
@@ -87,7 +94,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
                 _images = new List<MediaItem>();
 
-                MultilistField field = Item.Fields["Images"];
+                MultilistField field = Item.Fields[Templates.Generated.Category.Fields.Images];
 
                 if (field == null)
                     return _images;
@@ -111,41 +118,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         [XmlIgnore]
         protected ViewContext CurrentViewContext => ContextService.Get().GetCurrentOrDefault<ViewContext>();
-
-        public void Initialize(Rendering rendering, SearchResults products, IEnumerable<CommerceQuerySort> sortFields, CommerceSearchOptions searchOptions)
-        {
-            base.Initialize(rendering);
-
-            var itemsPerPage = searchOptions?.NumberOfItemsToReturn ?? 0;
-
-            if (products != null)
-            {
-                ChildProducts = new List<ProductViewModel>();
-                foreach (var child in products.SearchResultItems)
-                {
-                    var productModel = new ProductViewModel(child);
-                    productModel.Initialize(Rendering);
-                    ChildProducts.Add(productModel);
-                }
-
-                ChildProductFacets = products.Facets;
-                if (itemsPerPage > products.SearchResultItems.Count)
-                    itemsPerPage = products.SearchResultItems.Count;
-
-                var alreadyShown = products.CurrentPageNumber * itemsPerPage;
-                Pagination = new PaginationModel
-                {
-                    PageNumber = products.CurrentPageNumber,
-                    TotalResultCount = products.TotalItemCount,
-                    NumberOfPages = products.TotalPageCount,
-                    PageResultCount = itemsPerPage,
-                    StartResultIndex = alreadyShown + 1,
-                    EndResultIndex = Math.Min(products.TotalItemCount, alreadyShown + itemsPerPage)
-                };
-            }
-
-            SortFields = sortFields;
-        }
 
         public string GetLink()
         {

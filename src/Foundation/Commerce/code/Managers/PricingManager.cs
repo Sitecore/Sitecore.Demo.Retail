@@ -43,10 +43,8 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public PricingServiceProvider PricingServiceProvider { get; protected set; }
 
-        public ManagerResponse<GetProductPricesResult, IDictionary<string, Price>> GetProductPrices([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string catalogName, string productId, bool includeVariants, params string[] priceTypeIds)
+        public ManagerResponse<GetProductPricesResult, IDictionary<string, Price>> GetProductPrices([NotNull] VisitorContext visitorContext, string catalogName, string productId, bool includeVariants, params string[] priceTypeIds)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-
             if (priceTypeIds == null)
             {
                 priceTypeIds = _defaultPriceTypeIds;
@@ -70,9 +68,8 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetProductPricesResult, IDictionary<string, Price>>(result, result.Prices ?? new Dictionary<string, Price>());
         }
 
-        public ManagerResponse<GetProductBulkPricesResult, IDictionary<string, Price>> GetProductBulkPrices([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string catalogName, [NotNull] IEnumerable<string> productIds, params string[] priceTypeIds)
+        public ManagerResponse<GetProductBulkPricesResult, IDictionary<string, Price>> GetProductBulkPrices([NotNull] string catalogName, [NotNull] IEnumerable<string> productIds, params string[] priceTypeIds)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(catalogName, nameof(catalogName));
             Assert.ArgumentNotNull(productIds, nameof(productIds));
 

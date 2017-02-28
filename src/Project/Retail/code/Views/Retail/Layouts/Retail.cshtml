@@ -51,7 +51,7 @@
         var currentCategory;
 
         @{
-            var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().GetCurrent();
+            var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().Current;
             bool isCategory = siteContext.IsCategory;
             var catalogItem = siteContext.CurrentCatalogItem;
             if (isCategory && catalogItem != null)

@@ -16,6 +16,7 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
+using System.Web.Mvc;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.WishLists;
 using Sitecore.Data.Items;
@@ -37,7 +38,8 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             Assert.ArgumentNotNullOrEmpty(wishListId, nameof(wishListId));
 
             var product = (CommerceCartProduct) line.Product;
-            var productItem = StorefrontManager.ProductResolver.ResolveProductItem(product.ProductId, product.ProductCatalog);
+            var catalogManager = DependencyResolver.Current.GetService<CatalogManager>();
+            var productItem = catalogManager.GetProduct(product.ProductId, product.ProductCatalog);
 
             var currencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
 

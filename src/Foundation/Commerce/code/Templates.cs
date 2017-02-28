@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Data;
 
 namespace Sitecore.Foundation.Commerce
@@ -30,14 +31,6 @@ namespace Sitecore.Foundation.Commerce
             {
                 public static readonly ID RegionCode = new ID("{A178D0CF-2353-4425-A5D4-466861EBC5BE}");
                 public static readonly ID Name = new ID("{703310C3-2BC2-4781-93E7-331ABEF7EAAD}");
-            }
-        }
-
-        public static class HasRating
-        {
-            public class Fields
-            {
-                public const string Rating = "Rating";
             }
         }
 
@@ -104,6 +97,67 @@ namespace Sitecore.Foundation.Commerce
             public static class DynamicCategory
             {
                 public static readonly ID ID = new ID("{6820281F-3BB3-41B4-8C93-7771EEA496D0}");
+            }
+
+            public static class CatalogItem
+            {
+                public static readonly ID ID = new ID("{E55C2650-E1B7-47F7-A725-0DD761B57CCF}");
+
+                public static class Fields
+                {
+                    public static readonly ID CatalogName = CommerceConstants.KnownFieldIds.CatalogName;
+                    public static readonly ID ListPrice = new ID("{2B935D80-96A1-4D69-A1B1-3B518EA7659E}");
+                    public static readonly ID DefinitionName = new ID("{221635A5-DB7E-44BC-976A-8D31DACC6025}");
+                    public static readonly ID RelationshipList = CommerceConstants.KnownFieldIds.RelationshipList;
+                    public static readonly ID PrimaryParentCategory = CommerceConstants.KnownFieldIds.PrimaryParentCategory;
+                    public static readonly ID ParentCategories = CommerceConstants.KnownFieldIds.CatalogItemParentCategories;
+
+                }
+            }
+
+            public static class Product
+            {
+                public static readonly ID ID = new ID("{225F8638-2611-4841-9B89-19A5440A1DA1}");
+
+                public static class Fields
+                {
+                    public static readonly ID Description = new ID("{42022ABE-A882-4EDE-8084-346B13954DA6}");
+                    public static readonly ID OnSale = new ID("{4B32C41E-6BAA-40B3-8F75-D471AA07B1ED}");
+                    public static readonly ID PriceCardName = new ID("{A4EDC453-9042-41D7-9550-448426A80B2E}");
+                    public static readonly ID Rating = new ID("{3A66887E-98FA-4B80-A32E-FA314A2F6205}");
+
+                }
+            }
+
+            public static class Category
+            {
+                public static readonly ID ID = new ID("{4C4FD207-A9F7-443D-B32A-50AA33523661}");
+
+                public static class Fields
+                {
+                    public static readonly ID ChildProducts = new ID("{95F37041-A3F4-4FA2-8C3C-7A3DB52AAC75}");
+                    public static readonly ID ChildCategories = new ID("{90BC8026-5DA2-4AAC-9330-3286CFD80EC7}");
+                }
+            }
+
+            public static class ProductVariant
+            {
+                public static readonly ID ID = new ID("{C92E6CD7-7F14-46E7-BBF5-29CE31262EF4}");
+                public static class Fields
+                {
+                    public static readonly ID ListPrice = new ID("{9B2ABE41-AB16-463B-8845-A3A5D050A016}");
+                }
+            }
+        }
+
+        public static class CatalogContext
+        {
+            public static readonly ID ID = new ID("{25269B92-CC44-46A9-8C77-DA099BF8992C}");
+
+            public static class Fields
+            {
+                public static readonly ID Catalogs = new ID("{B36DE708-9413-4382-BB53-B944E6D02CFC}");
+                public static readonly ID DefaultProductId = new ID("{872F1C3E-42E7-4F28-9B06-AE6D0C40C3CA}");
             }
         }
     }

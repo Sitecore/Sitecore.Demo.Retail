@@ -26,7 +26,7 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         public static HtmlString GetTags()
         {
-            var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().GetCurrent();
+            var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().Current;
 
             if (siteContext.IsCategory)
             {

@@ -11,28 +11,21 @@
 // -------------------------------------------------------------------------------------------*@
 
 @using Sitecore.Foundation.Commerce.Managers
-@{
-    var storefront = Sitecore.Foundation.Commerce.Managers.StorefrontManager.CurrentStorefront;
-    bool supportsWishlists = storefront.SupportsWishLists;
-}
 
 <div id="C13-ShareAndPrint" class="share-utils pull-right">
     @if (Sitecore.Context.User.IsAuthenticated)
     {
-        if (supportsWishlists)
-        {
-            <a href="#" id="ddWishlistLabel" type="button" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                <button type="button" class="btn btn-default" id="addToWishList"><span class="glyphicon glyphicon-heart"></span></button>
-            </a>
-            <div class="dropdown-menu wishlist-popup" style="padding: 10px;" role="menu" aria-labelledby="ddWishlistLabel" id="wishListsSection">
-                <ul data-bind="foreach: wishLists, visible: isNotEmpty" id="wishLists">
-                    <li><a href="#" data-bind="text: name, attr:{id: externalId}" onclick="addToWishList(this)"></a></li>
-                </ul>
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newWishList" id="openCreateList">@Html.Sitecore().Field("Create Wish List Label", Html.Sitecore().CurrentItem)</button>
-            </div>
-        }
+        <a href="#" id="ddWishlistLabel" type="button" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+            <button type="button" class="btn btn-default" id="addToWishList"><span class="glyphicon glyphicon-heart"></span></button>
+        </a>
+        <div class="dropdown-menu wishlist-popup" style="padding: 10px;" role="menu" aria-labelledby="ddWishlistLabel" id="wishListsSection">
+            <ul data-bind="foreach: wishLists, visible: isNotEmpty" id="wishLists">
+                <li><a href="#" data-bind="text: name, attr:{id: externalId}" onclick="addToWishList(this)"></a></li>
+            </ul>
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newWishList" id="openCreateList">@Html.Sitecore().Field("Create Wish List Label", Html.Sitecore().CurrentItem)</button>
+        </div>
     }
-    else if (supportsWishlists)
+    else
     {
         <a href="@("/login")" type="button">
             <button type="button" class="btn btn-default" id="addToWishList"><span class="glyphicon glyphicon-heart"></span></button>
@@ -42,30 +35,27 @@
     <button type="button" class="btn btn-default" onclick="printPage()"><span class="glyphicon glyphicon-print"></span></button>
 </div>
 
-@if (supportsWishlists && Sitecore.Context.User.IsAuthenticated) 
-{
-    <div class="modal fade" id="newWishList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Html.Sitecore().Field("Close Label", Html.Sitecore().CurrentItem)</span></button>
-                    <h2 class="modal-title" id="myModalLabel">@Html.Sitecore().Field("Create New Wish List Label", Html.Sitecore().CurrentItem)</h2>
+<div class="modal fade" id="newWishList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Html.Sitecore().Field("Close Label", Html.Sitecore().CurrentItem)</span></button>
+                <h2 class="modal-title" id="myModalLabel">@Html.Sitecore().Field("Create New Wish List Label", Html.Sitecore().CurrentItem)</h2>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="wishList-name">@Html.Sitecore().Field("New Wish List Label", Html.Sitecore().CurrentItem)</label>
+                    <input type="text" class="form-control" id="wishList-name" placeholder="@Html.Sitecore().Field("Add New Wish List Label", Html.Sitecore().CurrentItem)">
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="wishList-name">@Html.Sitecore().Field("New Wish List Label", Html.Sitecore().CurrentItem)</label>
-                        <input type="text" class="form-control" id="wishList-name" placeholder="@Html.Sitecore().Field("Add New Wish List Label", Html.Sitecore().CurrentItem)">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="createWishList" onclick="addToWishList('new')" disabled="disabled">@Html.Sitecore().Field("Save Changes Label", Html.Sitecore().CurrentItem)</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="createWishListClose">@Html.Sitecore().Field("Close Label", Html.Sitecore().CurrentItem)</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="createWishList" onclick="addToWishList('new')" disabled="disabled">@Html.Sitecore().Field("Save Changes Label", Html.Sitecore().CurrentItem)</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="createWishListClose">@Html.Sitecore().Field("Close Label", Html.Sitecore().CurrentItem)</button>
             </div>
         </div>
     </div>
+</div>
 
-    <script type="text/javascript">
-        initWishListHeaders("wishListsSection");
-    </script>
-}
+<script type="text/javascript">
+    initWishListHeaders("wishListsSection");
+</script>

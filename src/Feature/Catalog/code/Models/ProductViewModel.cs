@@ -22,30 +22,29 @@ using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Links;
 using Sitecore.Mvc;
 using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class ProductViewModel : RenderingModel, ICatalogProduct, IInventoryProduct
+    public class ProductViewModel : ICatalogProduct, IInventoryProduct
     {
-        private readonly Item _item;
         private List<MediaItem> _images;
 
-        public ProductViewModel()
+        public ProductViewModel(Item item, List<VariantViewModel> variants = null)
         {
+            Assert.IsTrue(item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.ID), "Item must be a Product");
+            Item = item;
+            Variants = variants;
         }
 
-        public ProductViewModel(Item item)
-        {
-            _item = item;
-        }
-
-        public override Item Item => _item ?? base.Item;
+        public Item Item { get; set; }
 
         public string ProductName { get; set; }
 
@@ -55,7 +54,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public string Description { get; set; }
 
-        public HtmlString DescriptionRender => PageContext.Current.HtmlHelper.Sitecore().Field("Description", Item);
+        public HtmlString DescriptionRender => PageContext.Current.HtmlHelper.Sitecore().Field(Foundation.Commerce.Templates.Commerce.Product.Fields.Description, Item);
 
         public List<MediaItem> Images
         {
@@ -66,17 +65,17 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
                     return _images;
                 }
 
-                _images = new List<MediaItem>();
-
                 MultilistField field = Item.Fields["Images"];
-
-                if (field != null)
+                if (field == null)
                 {
-                    foreach (var id in field.TargetIDs)
-                    {
-                        MediaItem mediaItem = Item.Database.GetItem(id);
-                        _images.Add(mediaItem);
-                    }
+                    return new List<MediaItem>();
+                }
+
+                _images = new List<MediaItem>();
+                foreach (var id in field.TargetIDs)
+                {
+                    MediaItem mediaItem = Item.Database.GetItem(id);
+                    _images.Add(mediaItem);
                 }
                 return _images;
             }
@@ -99,41 +98,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public decimal CustomerAverageRating { get; set; }
 
-        public string RatingStarImage
-        {
-            get
-            {
-                var starsImage = "stars_sm_0";
-                var rating = CustomerAverageRating;
-                if (rating > 0 && rating < 1)
-                {
-                    starsImage = "stars_sm_1";
-                }
-                else if (rating > 1 && rating < 2)
-                {
-                    starsImage = "stars_sm_1";
-                }
-                else if (rating > 2 && rating < 3)
-                {
-                    starsImage = "stars_sm_2";
-                }
-                else if (rating > 3 && rating < 4)
-                {
-                    starsImage = "stars_sm_3";
-                }
-                else if (rating > 4 && rating < 5)
-                {
-                    starsImage = "stars_sm_4";
-                }
-                else
-                {
-                    starsImage = "stars_sm_5";
-                }
-
-                return starsImage;
-            }
-        }
-
         public string AdjustedPriceWithCurrency => AdjustedPrice.HasValue ? AdjustedPrice.ToCurrency(StorefrontManager.CurrentStorefront.DefaultCurrency) : string.Empty;
 
         public decimal SavingsPercentage => CalculateSavingsPercentage(AdjustedPrice, ListPrice);
@@ -144,7 +108,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public decimal VariantSavingsPercentage => CalculateSavingsPercentage(LowestPricedVariantAdjustedPrice, LowestPricedVariantListPrice);
 
-        public bool IsOnSale => !Item["OnSale"].Equals("0");
+        public bool IsOnSale => Item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.ID) && Item.Fields[Foundation.Commerce.Templates.Commerce.Product.Fields.OnSale].IsChecked();
 
         public bool IsProduct
         {
@@ -162,7 +126,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public string StockAvailabilityDate { get; set; }
 
-        public IEnumerable<VariantViewModel> Variants { get; protected set; }
+        public IEnumerable<VariantViewModel> Variants { get; }
 
         public List<string> VariantProductColor
         {
@@ -253,12 +217,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
             }
         }
 
-        public void Initialize(Rendering rendering, List<VariantViewModel> variants)
-        {
-            base.Initialize(rendering);
-            Variants = variants;
-        }
-
         public HtmlString RenderField(string fieldName)
         {
             var fieldValue = PageContext.Current.HtmlHelper.Sitecore().Field(fieldName, Item);
@@ -288,6 +246,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
             var percentage = decimal.Floor(100 * (listPrice.Value - adjustedPrice.Value) / listPrice.Value);
             var integerPart = (int) percentage;
             return integerPart == 0 ? 1M : integerPart;
+        }
+
+        public bool IsCategory()
+        {
+            return Item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.ID);
         }
     }
 }

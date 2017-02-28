@@ -16,11 +16,12 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Collections.Specialized;
+using System.Web.Mvc;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines;
-using Sitecore.Feature.Commerce.Catalog.Repositories;
+using Sitecore.Feature.Commerce.Catalog.Services;
 using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Links;
@@ -36,11 +37,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
 
         public const string IncludeFriendlyNameAttribute = "includeFriendlyName";
 
-        public const bool IncludeCatalogsDefault = false;
+        private const bool IncludeCatalogsDefault = false;
 
-        public const bool UseShopLinksDefault = true;
+        private const bool UseShopLinksDefault = true;
 
-        public const bool IncludeFriendlyNameDefault = true;
+        private const bool IncludeFriendlyNameDefault = true;
 
         public bool IncludeCatalog { get; set; }
 
@@ -55,46 +56,20 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
             IncludeCatalog = MainUtil.GetBool(config[IncludeCatalogsAttribute], IncludeCatalogsDefault);
             UseShopLinks = MainUtil.GetBool(config[UseShopLinksAttribute], UseShopLinksDefault);
             IncludeFriendlyName = MainUtil.GetBool(config[IncludeFriendlyNameAttribute], IncludeFriendlyNameDefault);
+            CatalogUrlRepository = DependencyResolver.Current.GetService<CatalogUrlService>();
         }
+
+        public CatalogUrlService CatalogUrlRepository { get; set; }
 
         public override string GetDynamicUrl(Item item, LinkUrlOptions options)
         {
             Assert.ArgumentNotNull(item, nameof(item));
             Assert.ArgumentNotNull(options, nameof(options));
 
-            var url = string.Empty;
+            if (Context.PageMode.IsExperienceEditor)
+                return CatalogUrlRepository.GetProductCatalogUrl(item);
 
-            var productCatalogLinkRequired = CatalogUrlRepository.IsProductCategoryUrl(WebUtil.GetRawUrl());
-            if (productCatalogLinkRequired)
-            {
-                url = CatalogUrlRepository.BuildProductCatalogLink(item);
-            }
-            else if (UseShopLinks)
-            {
-                if (item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductTemplate))
-                {
-                    url = CatalogUrlRepository.BuildProductShopLink(item, IncludeCatalog, IncludeFriendlyName, true);
-                }
-                else if (item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate))
-                {
-                    url = CatalogUrlRepository.BuildCategoryShopLink(item, IncludeCatalog, IncludeFriendlyName);
-                }
-                else if (item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductVariantTemplate))
-                {
-                    url = CatalogUrlRepository.BuildVariantShopLink(item, IncludeCatalog, IncludeFriendlyName, true);
-                }
-            }
-            else
-            {
-                if (item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductTemplate))
-                {
-                    url = CatalogUrlRepository.BuildProductLink(item, IncludeCatalog, IncludeFriendlyName);
-                }
-                else if (item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate))
-                {
-                    url = CatalogUrlRepository.BuildCategoryLink(item, IncludeCatalog, IncludeFriendlyName);
-                }
-            }
+            var url = UseShopLinks ? CatalogUrlRepository.BuildShopUrl(item, IncludeCatalog, IncludeFriendlyName) : CatalogUrlRepository.BuildUrl(item, IncludeCatalog, IncludeFriendlyName);
 
             if (string.IsNullOrEmpty(url))
             {

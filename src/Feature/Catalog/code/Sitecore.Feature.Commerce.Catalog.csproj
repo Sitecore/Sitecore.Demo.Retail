@@ -176,6 +176,10 @@
     <None Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\CatalogContextFactory.cs" />
+    <Compile Include="Models\RelationshipViewModel.cs" />
+    <Compile Include="Models\RouteItemType.cs" />
+    <Compile Include="Models\CatalogRouteData.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\CatalogController.cs" />
@@ -185,23 +189,23 @@
     <Compile Include="Infrastructure\Pipelines\ProductItemResolver.cs" />
     <Compile Include="Infrastructure\Provider\CatalogLinkProvider.cs" />
     <Compile Include="Infrastructure\ServicesConfigurator.cs" />
-    <Compile Include="Repositories\Models\CategoryViewModel.cs" />
-    <Compile Include="Repositories\Models\JsonResults\GiftCardBaseJsonResult.cs" />
-    <Compile Include="Repositories\Models\JsonResults\StockInfoBaseJsonResult.cs" />
-    <Compile Include="Repositories\Models\JsonResults\StockInfoListBaseJsonResult.cs" />
-    <Compile Include="Repositories\Models\MultipleProductSearchResultsViewModel.cs" />
-    <Compile Include="Repositories\Models\NavigationViewModel.cs" />
-    <Compile Include="Repositories\Models\PaginationViewModel.cs" />
-    <Compile Include="Repositories\Models\ProductFacetsViewModel.cs" />
-    <Compile Include="Repositories\Models\ProductListHeaderViewModel.cs" />
-    <Compile Include="Repositories\Models\ProductSearchResultViewModel.cs" />
-    <Compile Include="Repositories\Models\ProductViewModel.cs" />
-    <Compile Include="Repositories\Models\RelatedCatalogItemsViewModel.cs" />
-    <Compile Include="Repositories\Models\VariantPropertiesEqualityComparer.cs" />
-    <Compile Include="Repositories\Models\VariantViewModel.cs" />
+    <Compile Include="Models\CatalogRouteRoot.cs" />
+    <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\JsonResults\GiftCardBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\StockInfoBaseJsonResult.cs" />
+    <Compile Include="Models\JsonResults\StockInfoListBaseJsonResult.cs" />
+    <Compile Include="Models\MultipleProductSearchResultsViewModel.cs" />
+    <Compile Include="Models\NavigationViewModel.cs" />
+    <Compile Include="Models\PaginationViewModel.cs" />
+    <Compile Include="Models\ProductFacetsViewModel.cs" />
+    <Compile Include="Models\ProductListHeaderViewModel.cs" />
+    <Compile Include="Models\ProductSearchResultViewModel.cs" />
+    <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\RelatedCatalogItemsViewModel.cs" />
+    <Compile Include="Models\VariantPropertiesEqualityComparer.cs" />
+    <Compile Include="Models\VariantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\CatalogRepository.cs" />
-    <Compile Include="Repositories\CatalogUrlManager.cs" />
+    <Compile Include="Services\CatalogUrlService.cs" />
     <Compile Include="Templates.cs" />
   </ItemGroup>
   <ItemGroup>

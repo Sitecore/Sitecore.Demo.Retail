@@ -10,14 +10,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-@using Sitecore.Foundation.Commerce.Managers
 @{
-    var storefront = StorefrontManager.CurrentStorefront;
-    var supportsLoyaltyProgram = storefront.SupportsLoyaltyPrograms;
-    if (!supportsLoyaltyProgram)
-    {
-        return;
-    }
     var joiningLabel = @Html.Sitecore().Field("Joining Loyalty Program Button", Html.Sitecore().CurrentItem);
 }
 

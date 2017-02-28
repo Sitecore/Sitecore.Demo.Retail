@@ -40,5 +40,23 @@ namespace Sitecore.Foundation.Commerce.Extensions
 
             return result;
         }
+
+        public static T GetFromCache<T>(this Controller controller, string cacheKey) where T : class
+        {
+            return controller.HttpContext.Items[cacheKey] as T;
+        }
+
+        public static T AddToCache<T>(this Controller controller, string cacheKey, T value)
+        {
+            if (controller.HttpContext.Items.Contains(cacheKey))
+            {
+                controller.HttpContext.Items[cacheKey] = value;
+            }
+            else
+            {
+                controller.HttpContext.Items.Add(cacheKey, value);
+            }
+            return value;
+        }
     }
 }
