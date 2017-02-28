@@ -11,10 +11,12 @@ SharedFields:
 - ID: "12c33f3f-86c5-43a5-aeb4-5598cec45116"
   Hint: __Base template
   Type: tree list
-  Value: "{B0A3F504-6AA6-42B7-99FE-8280D8CC01B1}"
+  Value: |
+    {B0A3F504-6AA6-42B7-99FE-8280D8CC01B1}
+    {25269B92-CC44-46A9-8C77-DA099BF8992C}
 - ID: "f7d48a55-2158-4f02-9356-756654404f73"
   Hint: __Standard values
-  Value: "{418C8422-FC39-4891-AA32-C7CFB38B2D14}"
+  Value: 
 Languages:
 - Language: en
   Versions:
@@ -22,7 +24,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20140911T122423
+      Value: 20140911T022423Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |

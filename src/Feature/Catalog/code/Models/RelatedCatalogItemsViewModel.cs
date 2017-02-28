@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="CatalogRouteData.cs" company="Sitecore Corporation">
+// <copyright file="RelatedCatalogItemsViewModel.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Contains catalog data found in the url.</summary>
+// <summary>Defines the RelatedCatalogItemsViewModel class.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -15,12 +15,22 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-namespace Sitecore.Foundation.Commerce.Models
+using System.Collections.Generic;
+using Sitecore.Feature.Commerce.Catalog.Controllers;
+using Sitecore.Mvc.Presentation;
+
+namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class CatalogRouteData
+    public class RelatedCatalogItemsViewModel : RenderingModel
     {
-        public string Id { get; set; }
-        public string Catalog { get; set; }
-        public bool IsProduct { get; set; }
+        public RelatedCatalogItemsViewModel()
+        {
+            RelatedProducts = new List<RelationshipViewModel>();
+            RelatedCategories = new List<RelationshipViewModel>();
+        }
+
+        public List<RelationshipViewModel> RelatedProducts { get; }
+
+        public List<RelationshipViewModel> RelatedCategories { get; }
     }
 }

@@ -9,18 +9,6 @@
 // either express or implied. See the License for the specific language governing permissions
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
-@using Sitecore.Foundation.Commerce.Managers
-
-@{
-    var storefront = StorefrontManager.CurrentStorefront;
-    var supportsWishlists = storefront.SupportsWishLists;
-    if (!supportsWishlists)
-    {
-        return;
-    }
-}
-
-
 <div class="panel panel-default" id="wishListsSection">
     <div class="panel-heading">
         <h2 class="panel-title">

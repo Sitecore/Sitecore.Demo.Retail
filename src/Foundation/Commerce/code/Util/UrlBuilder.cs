@@ -63,8 +63,8 @@ namespace Sitecore.Foundation.Commerce.Util
         {
             get
             {
-                var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().GetCurrent();
-                return new UrlBuilder(siteContext.CurrentContext.Request.Url);
+                var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().Current;
+                return new UrlBuilder(HttpContext.Current.Request.Url);
             }
         }
 

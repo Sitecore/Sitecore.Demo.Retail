@@ -26,7 +26,7 @@ namespace Sitecore.Foundation.Commerce.Repositories
         public VisitorContext GetCurrent()
         {
             // Setup the visitor context only once per HttpRequest.
-            var visitorContext = SiteContextRepository.GetCurrent().Items["__visitorContext"] as VisitorContext;
+            var visitorContext = HttpContext.Current.Items["__visitorContext"] as VisitorContext;
             if (visitorContext != null)
             {
                 return visitorContext;
@@ -38,7 +38,7 @@ namespace Sitecore.Foundation.Commerce.Repositories
                 visitorContext.SetCommerceUser(AccountManager.ResolveCommerceUser().Result);
             }
 
-            SiteContextRepository.GetCurrent().Items["__visitorContext"] = visitorContext;
+            HttpContext.Current.Items["__visitorContext"] = visitorContext;
 
             return visitorContext;
         }

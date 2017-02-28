@@ -46,6 +46,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DependencyInjection", "Depe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Foundation.DependencyInjection", "src\Foundation\DependencyInjection\code\Sitecore.Foundation.DependencyInjection.csproj", "{366148B7-2392-4F42-80D6-786B7A3682AE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "engine", "engine", "{2B87ACDB-EFC7-4732-9782-D1029030F621}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,5 +96,6 @@ Global
 		{7031F757-2830-44E3-9639-AAD2DBA69A24} = {37CE2FA3-8808-4304-930F-A37695B3A869}
 		{A17F2B02-CD42-43C7-BAF6-823A87E3CA5B} = {A65C1E2B-A56A-4E86-B928-23176FC86DB8}
 		{366148B7-2392-4F42-80D6-786B7A3682AE} = {A17F2B02-CD42-43C7-BAF6-823A87E3CA5B}
+		{2B87ACDB-EFC7-4732-9782-D1029030F621} = {F12F210F-76B3-4142-8AB9-06677BCAED1E}
 	EndGlobalSection
 EndGlobal

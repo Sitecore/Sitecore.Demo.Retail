@@ -1,8 +1,8 @@
 ﻿---
 ID: "f6ad18ae-bc45-44cd-ad69-9036b5b7cb60"
-Parent: "57507da9-3eea-46aa-87e8-e64cde2f73dc"
+Parent: "25269b92-cc44-46a9-8c77-da099bf8992c"
 Template: "e269fbb5-3750-427a-9149-7aa950b49301"
-Path: /sitecore/templates/Storefront/Base Templates/Commerce Storefront/Catalogs
+Path: /sitecore/templates/Foundation/Commerce/_CatalogContext/Catalogs
 DB: master
 Languages:
 - Language: en

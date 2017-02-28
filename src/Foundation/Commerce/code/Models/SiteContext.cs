@@ -30,47 +30,22 @@ namespace Sitecore.Foundation.Commerce.Models
         private const string IsProductKey = "_IsProduct";
         private const string UrlContainsCategoryKey = "_UrlContainsCategory";
 
-        public HttpContext CurrentContext => HttpContext.Current;
+        public Item CurrentCatalogItem => CurrentCatalogContext?.Item;
 
-        public IDictionary Items => HttpContext.Current.Items;
+        public bool IsCategory => CurrentCatalogContext?.ItemType == CatalogItemType.Category;
 
-        public Item CurrentCatalogItem 
-        { 
-            get
-            {
-                return this.Items[CurrentCatalogItemKey] as Item;
-            }
+        public bool IsProduct => CurrentCatalogContext?.ItemType == CatalogItemType.Product;
 
-            set
-            {
-                this.Items[CurrentCatalogItemKey] = value;
-                if (value != null)
-                {
-                    this.Items[IsCategoryKey] = (value.IsDerived(CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate));
-                    this.Items[IsProductKey] = (value.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductTemplate));
-                }
-                else
-                {
-                    this.Items[IsCategoryKey] = false;
-                    this.Items[IsProductKey] = false;
-                }
-            }
-        }
-
-        public bool IsCategory => (bool?) Items[IsCategoryKey] ?? false;
-
-        public bool IsProduct => (bool?) Items[IsProductKey] ?? false;
-
-        public bool UrlContainsCategory
+        public ICatalogContext CurrentCatalogContext
         {
             get
             {
-                return (bool?) Items[UrlContainsCategoryKey] ?? false;
+                return (ICatalogContext)HttpContext.Current.Items[UrlContainsCategoryKey];
             }
 
             set
             {
-                this.Items[UrlContainsCategoryKey] = value;
+                HttpContext.Current.Items[UrlContainsCategoryKey] = value;
             }
         }
     }

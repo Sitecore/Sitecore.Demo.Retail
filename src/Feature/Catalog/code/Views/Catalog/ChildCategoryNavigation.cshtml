@@ -24,7 +24,7 @@
 
     var categoriesLabel = Html.Sitecore().Field("Categories Label", Html.Sitecore().CurrentItem);
 
-    var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().GetCurrent();
+    var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().Current;
     var name = string.Empty;
     var catalogItem = siteContext.CurrentCatalogItem;
     if (catalogItem != null)

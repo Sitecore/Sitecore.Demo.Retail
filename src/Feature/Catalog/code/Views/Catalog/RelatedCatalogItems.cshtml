@@ -9,11 +9,12 @@
     // either express or implied. See the License for the specific language governing permissions
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
+@using Sitecore.Feature.Commerce.Catalog.Controllers
 @using Sitecore.Feature.Commerce.Catalog.Models
 @model RelatedCatalogItemsViewModel
 
 @{
-    var catalogItemList = new List<CategoryViewModel>();
+    var catalogItemList = new List<RelationshipViewModel>();
 
     if (Model == null)
     {
@@ -35,7 +36,7 @@
         return;
     }
 
-    Func<CategoryViewModel, int, string> GetId = (relationship, relationshipIndex) => relationship.DisplayName.Replace(' ', '-').Replace('*', '-').ToLowerInvariant() + "-" + relationshipIndex.ToString();
+    Func<RelationshipViewModel, int, string> GetId = (relationship, relationshipIndex) => relationship.Name.Replace(' ', '-').Replace('*', '-').ToLowerInvariant() + "-" + relationshipIndex.ToString();
 }
 
 
@@ -44,18 +45,9 @@
         var index = 0;
         foreach (var relationship in catalogItemList)
         {
-            relationship.Initialize(Model.Rendering);
-
             <li role="presentation" class="@(index == 0 ? "active" : "")">
                 <a href="#tab-@GetId(relationship, index)" role="tab" data-toggle="tab">
-                    @if (relationship.LookupRelationshipItem != null)
-                    {
-                        @relationship.RelationshipDescriptionRenderer
-                    }
-                    else
-                    {
-                        @relationship.RelationshipDescription
-                    }
+                    @relationship.DescriptionRenderer
                 </a>
             </li>
             index++;

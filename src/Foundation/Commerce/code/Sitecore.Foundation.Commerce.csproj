@@ -189,6 +189,7 @@
   <ItemGroup>
     <Compile Include="CommerceServerStorefrontConstants.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Extensions\ItemExtensions.cs" />
     <Compile Include="Infrastructure\ComputedFields\VariantInfoComputedField.cs" />
     <Compile Include="Infrastructure\Connect\Arguments\GetProductBulkPricesRequest.cs" />
     <Compile Include="Infrastructure\Connect\Arguments\GetSupportedCurrenciesRequest.cs" />
@@ -224,9 +225,9 @@
     <Compile Include="Managers\CatalogManager.cs" />
     <Compile Include="Managers\GiftCardManager.cs" />
     <Compile Include="Models\ApiControllerMapping.cs" />
-    <Compile Include="Models\IProductResolver.cs" />
+    <Compile Include="Models\CatalogItemType.cs" />
+    <Compile Include="Models\ICatalogContext.cs" />
     <Compile Include="Models\BaseJsonResult.cs" />
-    <Compile Include="Models\CatalogRouteData.cs" />
     <Compile Include="Models\ICatalogCategory.cs" />
     <Compile Include="Managers\InventoryManager.cs" />
     <Compile Include="Models\ICatalogProduct.cs" />

@@ -1,8 +1,7 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="RelatedCatalogItemsViewModel.cs" company="Sitecore Corporation">
+// <copyright file="ProductSearchResultViewModel.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Defines the RelatedCatalogItemsViewModel class.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -16,20 +15,38 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class RelatedCatalogItemsViewModel : RenderingModel
+    public class ProductSearchResultViewModel : RenderingModel
     {
-        public RelatedCatalogItemsViewModel()
+        public ProductSearchResultViewModel()
         {
-            RelatedProducts = new List<CategoryViewModel>();
-            RelatedCategories = new List<CategoryViewModel>();
+            Products = new List<ProductViewModel>();
         }
 
-        public List<CategoryViewModel> RelatedProducts { get; private set; }
+        public List<ProductViewModel> Products { get; set; }
 
-        public List<CategoryViewModel> RelatedCategories { get; private set; }
+        public string Title { get; set; }
+
+        public void Initialize(Rendering rendering, SearchResults searchResult)
+        {
+            base.Initialize(rendering);
+
+            if (searchResult == null)
+            {
+                return;
+            }
+
+            Title = searchResult.Title;
+            Products = new List<ProductViewModel>();
+            foreach (var child in searchResult.SearchResultItems)
+            {
+                var productModel = new ProductViewModel(child);
+                Products.Add(productModel);
+            }
+        }
     }
 }

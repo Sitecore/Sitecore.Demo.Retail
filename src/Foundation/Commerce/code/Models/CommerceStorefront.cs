@@ -15,8 +15,11 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using Sitecore.Data;
+using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
@@ -49,15 +52,18 @@ namespace Sitecore.Foundation.Commerce.Models
 
         public string ShopName { get; set; } = "storefront";
 
-        public string DefaultProductId => InnerItem == null ? "22565422120" : InnerItem["DefaultProductId"];
+        public string DefaultProductId
+        {
+            get
+            {
+                var defaultProductId = CatalogContextItem[Templates.CatalogContext.Fields.DefaultProductId];
+                if (string.IsNullOrEmpty(defaultProductId))
+                    throw new ConfigurationErrorsException("No default product has been set on the catalog context");
+                return defaultProductId;
+            }
+        }
 
         public MediaItem OnSaleOverlayImage => string.IsNullOrWhiteSpace(InnerItem["On Sale Overlay Image"])  ? null : Context.Database.GetItem(new ID(InnerItem["On Sale Overlay Image"]));
-
-        public bool SupportsWishLists => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsWishLists], false);
-
-        public bool SupportsLoyaltyPrograms => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsLoyaltyProgram], false);
-
-        public bool SupportsGiftCardPayment => MainUtil.GetBool(HomeItem[CommerceServerStorefrontConstants.KnownFieldNames.SupportsGirstCardPayment], false);
 
         public int MaxNumberOfAddresses => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfAddresses], 10);
 
@@ -79,7 +85,32 @@ namespace Sitecore.Foundation.Commerce.Models
             }
         }
 
-        private Item CurrencyContextItem => InnerItem.GetAncestorOrSelfOfTemplate(Templates.CurrencyContext.ID);
+        private Item CurrencyContextItem
+        {
+            get
+            {
+                var contextItem = InnerItem.GetAncestorOrSelfOfTemplate(Templates.CurrencyContext.ID);
+                if (contextItem == null)
+                    throw new ConfigurationErrorsException("Cannot determine the CurrencyContext for the commerce storefront");
+                return contextItem;
+            }
+        }
+
+        private Item CatalogContextItem
+        {
+            get
+            {
+                var contextItem = InnerItem.GetAncestorOrSelfOfTemplate(Templates.CatalogContext.ID);
+                if (contextItem == null)
+                    throw new ConfigurationErrorsException("Cannot determine the CatalogContext for the commerce storefront");
+                return contextItem;
+            }
+        }
+
+        public Catalog[] GetCatalogs()
+        {
+            return ((MultilistField)CatalogContextItem.Fields[Templates.CatalogContext.Fields.Catalogs]).GetItems().Select(c => new Catalog(c)).ToArray();
+        }
 
         private void SetShopNameBySiteContext()
         {

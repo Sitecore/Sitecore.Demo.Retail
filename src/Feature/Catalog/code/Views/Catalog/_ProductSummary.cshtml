@@ -19,7 +19,7 @@
         return;
     }
 
-    var isCategory = Model.Item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate);
+    var isCategory = Model.IsCategory();
     var brand = Model.RenderField("Brand");
     var brandLength = brand.ToString().Length;
 }
@@ -126,7 +126,7 @@
                 </div>
 
                 <div>
-                    <small class="price-savings" pid="savings">@Html.Sitecore().Field("Save percent lead", Model.Rendering.RenderingItem) @savingsPercentage%</small>
+                    <small class="price-savings" pid="savings">@Html.Sitecore().Field("Save percent lead", Html.Sitecore().CurrentRendering.Item) @savingsPercentage%</small>
                 </div>
             }
             else
@@ -187,7 +187,7 @@
             else
             {
                 <a href="@Model.GetLink()" class="btn btn-default">
-                    <span></span> @Html.Sitecore().Field("Category", Model.Rendering.RenderingItem)
+                    <span></span> @Html.Sitecore().Field("Category", Html.Sitecore().CurrentRendering.Item)
                 </a>
             }
         </div>

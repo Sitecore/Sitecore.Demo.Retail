@@ -34,20 +34,18 @@ namespace Sitecore.Foundation.Commerce.Managers
         {
             get
             {
-                var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().GetCurrent();
+                var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().Current;
                 var path = Context.Site.RootPath + Context.Site.StartItem;
-                if (siteContext.CurrentContext.Items.Contains(path))
+                if (HttpContext.Current.Items.Contains(path))
                 {
-                    return siteContext.CurrentContext.Items[path] as CommerceStorefront;
+                    return HttpContext.Current.Items[path] as CommerceStorefront;
                 }
 
                 var storefront = new CommerceStorefront(Context.Database.GetItem(path));
-                siteContext.CurrentContext.Items[path] = storefront;
-                return (CommerceStorefront) siteContext.CurrentContext.Items[path];
+                HttpContext.Current.Items[path] = storefront;
+                return (CommerceStorefront) HttpContext.Current.Items[path];
             }
         }
-
-        public static IProductResolver ProductResolver => DependencyResolver.Current.GetService<IProductResolver>();
 
         public static Item CommerceItem => Context.Database.GetItem("/sitecore/Commerce");
 

@@ -10,11 +10,11 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-@model CategoryViewModel
+@model RelationshipViewModel
 @using System.Linq;
 @using Sitecore.Feature.Commerce.Catalog.Models
 @{
-    if (Model == null || Model.ChildProducts == null || !Model.ChildProducts.Any())
+    if (Model?.ChildProducts == null || !Model.ChildProducts.Any())
     {
         return;
     }

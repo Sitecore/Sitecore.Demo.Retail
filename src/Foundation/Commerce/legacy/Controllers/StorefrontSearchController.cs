@@ -29,6 +29,7 @@ using Sitecore.ContentSearch.Linq.Utilities;
 using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce;
+using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Repositories;
@@ -95,20 +96,20 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         private SearchResults GetSiteContentSearchResults(CommerceSearchOptions searchOptions, string searchKeyword)
         {
-            if (SiteContextRepository.GetCurrent().Items[CurrentSearchContentResultsKeyName] != null)
+            var searchResults = this.GetFromCache<SearchResults>(CurrentSearchContentResultsKeyName);
+            if (searchResults != null)
             {
-                return (SearchResults) SiteContextRepository.GetCurrent().Items[CurrentSearchContentResultsKeyName];
+                return searchResults;
             }
 
-            var searchResults = new SearchResults();
+            searchResults = new SearchResults();
             var searchResponse = SearchSiteByKeyword(searchKeyword, searchOptions);
             if (searchResponse != null)
             {
                 searchResults = new SearchResults(searchResponse.ResponseItems, searchResponse.TotalItemCount, searchResponse.TotalPageCount, searchOptions.StartPageIndex, searchResponse.Facets);
             }
 
-            SiteContextRepository.GetCurrent().Items[CurrentSearchContentResultsKeyName] = searchResults;
-            return searchResults;
+            return this.AddToCache(CurrentSearchContentResultsKeyName, searchResults);
         }
 
         private SiteContentSearchResultsViewModel GetSiteContentListViewModel(CommerceSearchOptions searchOptions, string searchKeyword, Rendering rendering)
@@ -159,12 +160,13 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         private SearchInfo GetSearchInfo(string searchKeyword, int? pageNumber, int? pageSize)
         {
-            if (SiteContextRepository.GetCurrent().Items["CurrentSearchInfo"] != null)
+            var searchInfo = this.GetFromCache<SearchInfo>("CurrentSearchInfo");
+            if (searchInfo != null)
             {
-                return (SearchInfo) SiteContextRepository.GetCurrent().Items["CurrentSearchInfo"];
+                return searchInfo;
             }
 
-            var searchInfo = new SearchInfo
+            searchInfo = new SearchInfo
             {
                 SearchKeyword = searchKeyword ?? string.Empty,
                 SortFields = CommerceSearchManager.GetSortFieldsForItem(RenderingContext.Current.Rendering.Item),
@@ -179,8 +181,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             var productSearchOptions = new CommerceSearchOptions(searchInfo.ItemsPerPage, pageNumber.GetValueOrDefault(0));
             searchInfo.SearchOptions = productSearchOptions;
 
-            SiteContextRepository.GetCurrent().Items["CurrentSearchInfo"] = searchInfo;
-            return searchInfo;
+            return this.AddToCache("CurrentSearchInfo", searchInfo);
         }
 
         private SearchResponse SearchSiteByKeyword(string keyword, CommerceSearchOptions searchOptions)
