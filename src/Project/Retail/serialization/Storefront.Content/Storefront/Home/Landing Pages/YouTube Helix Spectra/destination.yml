@@ -1,5 +1,5 @@
 ﻿---
-ID: "d534aebd-d25d-46fd-ae13-774161aecf5f"
+ID: "ed355d95-65a5-48a8-9cea-46bc409022d4"
 Parent: "3cfd7503-26bf-443f-af6f-3535baf2df72"
 Template: "3f3cae5e-63d2-4f75-95d9-23eb01827aa9"
 Path: /sitecore/content/Storefront/Home/Landing Pages/YouTube Helix Spectra/destination
@@ -11,11 +11,11 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20170214T124239Z
+      Value: 20170228T160934Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
         sitecore\Admin
     - ID: "7b9f4fe3-6285-4969-9784-b96d49973161"
       Hint: Token Value
-      Value: /shop/Microwaves_microwaves
+      Value: "/shop/Televisions_televisions/Habitat-Spectra-65”-4K-LED-Ultra-HD-Television_6042264/"
