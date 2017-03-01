@@ -16,6 +16,7 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
+using System.IO;
 using System.Text;
 using System.Web.Mvc;
 using Sitecore.Configuration;
@@ -36,6 +37,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Services
         private readonly string _urlTokenDelimiter = Settings.GetSetting("Storefront.UrlTokenDelimiter", "_");
         private readonly string _encodedDelimiter = Settings.GetSetting("Storefront.EncodedDelimiter", "%5f");
 
+        public CatalogUrlService(CatalogManager catalogManager)
+        {
+            CatalogManager = catalogManager;
+        }
+
         private bool IncludeLanguage
         {
             get
@@ -50,27 +56,21 @@ namespace Sitecore.Feature.Commerce.Catalog.Services
 
         public string GetProductCatalogUrl(Item productItem)
         {
-            var productCatalogRootItem = GetProductCatalogRoot();
-            Assert.IsTrue(productCatalogRootItem != null && !productCatalogRootItem.IsDerived(Foundation.Commerce.Templates.Commerce.NavigationItem.ID), "Product Catalog item must be a Commerce Navigation Item");
+            var productCatalogRootItem = CatalogManager.CatalogContext.CatalogRootItem;
+            Assert.IsTrue(productCatalogRootItem != null, "CatalogManager.CatalogContext.CatalogRootItem must be set");
 
             var categoryDatasource = productCatalogRootItem[Foundation.Commerce.Templates.Commerce.NavigationItem.Fields.CategoryDatasource];
-            Assert.IsNotNullOrEmpty(categoryDatasource, "Product Catalog item missing CategoryDatasource.");
+            Assert.IsNotNullOrEmpty(categoryDatasource, "the Catalog root has no CategoryDatasource.");
 
             var parentPath = productItem.Paths.FullPath;
             var path = parentPath.Replace(categoryDatasource, string.Empty);
-            return GetSiteRelativePath(productCatalogRootItem, path);
+            return GetSiteRelativeUrl(productCatalogRootItem, path);
         }
 
-        private string GetSiteRelativePath(Item productCatalogRootItem, string path)
+        private string GetSiteRelativeUrl(Item productCatalogRootItem, string path)
         {
             var catalogRootUrl = LinkManager.GetItemUrl(productCatalogRootItem);
-            Uri rootUri;
-            if (!Uri.TryCreate(catalogRootUrl, UriKind.Absolute, out rootUri))
-                return null;
-            Uri itemUri;
-            if (!Uri.TryCreate(rootUri, path, out itemUri))
-                return null;
-            return itemUri.ToString();
+            return string.Join("/", catalogRootUrl, path);
         }
 
         public string BuildUrl(Item item, bool includeCatalog, bool includeFriendlyName)
@@ -289,10 +289,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Services
             return Uri.UnescapeDataString(urlToken).Replace(_encodedDelimiter, _urlTokenDelimiter);
         }
 
-        private Item GetProductCatalogRoot()
-        {
-            return StorefrontManager.CurrentStorefront.HomeItem.Axes.GetChild("/product catalog");
-        }
+        public CatalogManager CatalogManager { get; }
 
         private class CatalogItemInfo
         {

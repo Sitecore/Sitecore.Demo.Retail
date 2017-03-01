@@ -161,7 +161,8 @@ namespace Sitecore.Foundation.Commerce
 
             public static class Fields
             {
-                public static readonly ID Catalogs = new ID("{B36DE708-9413-4382-BB53-B944E6D02CFC}");
+                public static readonly ID Catalog = new ID("{B36DE708-9413-4382-BB53-B944E6D02CFC}");
+                public static readonly ID CatalogRoot = new ID("{C15A939B-1C97-48E8-B055-37F80DA99C40}");
             }
         }
     }

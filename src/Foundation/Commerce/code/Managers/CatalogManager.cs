@@ -116,6 +116,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return GetCategory(categoryId, CatalogContext.CurrentCatalog.Name);
         }
 
+        [CanBeNull]
         public CatalogContext CatalogContext
         {
             get
@@ -123,7 +124,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 var context = (CatalogContext)HttpContext.Current.Items["_catalogContext"];
                 if (context != null)
                     return context;
-                context = new CatalogContext();
+                context = CatalogContext.CreateFromContext();
                 HttpContext.Current.Items["_catalogContext"] = context;
                 return context;
             }

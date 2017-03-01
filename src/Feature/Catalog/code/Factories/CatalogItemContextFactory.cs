@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
+﻿using System.Web.Routing;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Caching;
 using Sitecore.Data;
@@ -85,6 +80,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
 
         private ICatalogItemContext CreateEmptyCatalogContext()
         {
+            if (CatalogManager.CatalogContext == null)
+                return null;
+
             var data = new CatalogRouteData
             {
                 Catalog = CatalogManager.CatalogContext.CurrentCatalog.Name
@@ -126,7 +124,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
             }
             if (string.IsNullOrEmpty(data.Catalog))
             {
-                data.Catalog = CatalogManager.CatalogContext.CurrentCatalog?.Name;
+                data.Catalog = CatalogManager.CatalogContext?.CurrentCatalog?.Name;
             }
             if (string.IsNullOrEmpty(data.Catalog))
             {
@@ -135,7 +133,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
 
             var item = GetCatalogItem(data, database);
             if (item == null)
+            {
                 return null;
+            }
             data.Item = item;
 
             if (routeData.Values.ContainsKey("category"))
@@ -169,19 +169,21 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
                     break;
             }
             if (item != null)
+            {
                 AddCatalogItemToCache(data.Id, data.Catalog, item);
+            }
             return item;
         }
 
         private ICatalogItemContext CreateCatalogContextFromCatalogRoute(RouteData routeData)
         {
-            var currentStorefront = StorefrontManager.CurrentStorefront;
-            var productCatalogItem = currentStorefront.HomeItem.Axes.GetDescendant("product catalog/" + routeData.Values["catalogPath"]);
-            if (productCatalogItem == null)
+            var catalogPath = routeData.Values["catalogPath"].ToString();
+            if (string.IsNullOrEmpty(catalogPath))
             {
                 return null;
             }
-            return Create(productCatalogItem);
+            var productCatalogItem = CatalogManager.CatalogContext?.CatalogRootItem.Axes.GetItem(catalogPath);
+            return productCatalogItem == null ? null : Create(productCatalogItem);
         }
 
         private string GetCategoryIdFromItem(Item item)

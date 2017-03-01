@@ -6,6 +6,7 @@ using System.Web;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Jobs.AsyncUI;
 
@@ -15,50 +16,36 @@ namespace Sitecore.Foundation.Commerce.Models
     {
         private Catalog _currentCatalog;
 
-        public CatalogContext(Item item)
+        private CatalogContext(Item item)
         {
             Assert.ArgumentNotNull(item, nameof(item));
-            AssignItemFromContext(item);
+            Item = item;
         }
 
-        public CatalogContext()
+        public static CatalogContext CreateFromContext()
         {
-            AssignItemFromContext();
-        }
-
-        private void AssignItemFromContext(Item item = null)
-        {
-            var contextItem = item?.GetAncestorOrSelfOfTemplate(Templates.CatalogContext.ID);
+            var contextItem = Sitecore.Context.Item?.GetAncestorOrSelfOfTemplate(Templates.CatalogContext.ID);
             if (contextItem == null)
             {
-                contextItem = Sitecore.Context.Item?.GetAncestorOrSelfOfTemplate(Templates.CatalogContext.ID);
-                if (contextItem == null)
-                {
-                    contextItem = Sitecore.Context.Site?.GetStartItem()?.GetAncestorOrSelfOfTemplate(Templates.CatalogContext.ID);
-                }
+                contextItem = Sitecore.Context.Site?.GetStartItem()?.GetAncestorOrSelfOfTemplate(Templates.CatalogContext.ID);
             }
 
             if (contextItem == null)
-                throw new InvalidContextException($"Could not determing the catalog context from the item '{Sitecore.Context.Item}' or site '{Sitecore.Context.Site?.Name}'");
+                return null;
 
-            Item = contextItem;
+            return new CatalogContext(contextItem);
         }
 
         public Item Item { get; private set; }
 
-        public Catalog[] GetCatalogs()
-        {
-            return ((MultilistField)Item.Fields[Templates.CatalogContext.Fields.Catalogs]).GetItems().Select(c => new Catalog(c)).ToArray();
-        }
-
         private Catalog GetCurrentCatalog()
         {
-            var catalogs = GetCatalogs();
-            if (catalogs.Any())
+            var catalogItem = ((ReferenceField) Item.Fields[Templates.CatalogContext.Fields.Catalog]).TargetItem;
+            if (catalogItem == null || !catalogItem.IsDerived(Templates.Commerce.Catalog.ID))
             {
-                return catalogs.First();
+                throw new ConfigurationErrorsException($"No catalog is assigned or the assigned item is not a catalog on '{Item.Paths.FullPath}'");
             }
-            throw new ConfigurationErrorsException($"No catalogs is assigned to {Item.Paths.FullPath}");
+            return new Catalog(catalogItem);
         }
 
         public Catalog CurrentCatalog
@@ -71,6 +58,19 @@ namespace Sitecore.Foundation.Commerce.Models
                 }
 
                 return _currentCatalog = GetCurrentCatalog();
+            }
+        }
+
+        public Item CatalogRootItem
+        {
+            get
+            {
+                var catalogRootItem = ((ReferenceField)Item.Fields[Templates.CatalogContext.Fields.CatalogRoot]).TargetItem;
+                if (catalogRootItem == null || !catalogRootItem.IsDerived(Templates.Commerce.NavigationItem.ID))
+                {
+                    throw new ConfigurationErrorsException($"No catalog root is assigned or the assigned root is not a valid type '{Item.Paths.FullPath}'");
+                }
+                return catalogRootItem;
             }
         }
     }

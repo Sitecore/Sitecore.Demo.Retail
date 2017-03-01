@@ -35,9 +35,11 @@ SharedFields:
   Hint: Product Images
   Value: 
 - ID: "b36de708-9413-4382-bb53-b944e6d02cfc"
-  Hint: Catalogs
-  Type: Treelist
+  Hint: Catalog
   Value: "{A890E85A-FE79-4574-9B99-E180A877993A}"
+- ID: "c15a939b-1c97-48e8-b055-37f80da99c40"
+  Hint: Catalog Root
+  Value: "{889A6934-BCDC-4294-94B7-6D141E7312B4}"
 - ID: "c3c1de9d-8881-47d1-b10f-d4ab17306cd5"
   Hint: Supports Wishlists
   Type: Checkbox

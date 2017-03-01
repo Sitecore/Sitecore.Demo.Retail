@@ -72,6 +72,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         public ActionResult CategoryList()
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             var datasource = RenderingContext.Current.Rendering.DataSource;
 
             if (string.IsNullOrEmpty(datasource) || !RenderingContext.Current.Rendering.Item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.ID))
@@ -86,6 +91,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         public ActionResult RelatedProducts([Bind(Prefix = Constants.QueryString.Sort)] string sortField)
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             var viewModel = GetProductSearchViewModel(RenderingContext.Current.Rendering.Item, sortField);
             if (viewModel == null)
             {
@@ -172,6 +182,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         public ActionResult ProductRecommendation([Bind(Prefix = Constants.QueryString.Sort)] string sortField)
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             var viewModel = GetProductSearchViewModel(RenderingContext.Current.Rendering.Item, sortField);
             if (viewModel == null)
             {
@@ -187,6 +202,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                                         [Bind(Prefix = Constants.QueryString.PageSize)] int? pageSize, 
                                         [Bind(Prefix = Constants.QueryString.SortDirection)] CommerceConstants.SortDirection? sortDirection)
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             Category currentCategory;
 
             if (RenderingContext.Current.Rendering.Item.IsWildcardItem())
@@ -225,6 +245,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         public ActionResult Navigation()
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             var item = RenderingContext.Current.Rendering.Item;
             var dataSource = item.IsDerived(Foundation.Commerce.Templates.Commerce.NavigationItem.ID) ? item?.TargetItem(Foundation.Commerce.Templates.Commerce.NavigationItem.Fields.CategoryDatasource) : null;
             if (dataSource == null)
@@ -245,6 +270,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         public ActionResult ChildCategoryNavigation()
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             Assert.IsNotNull(CatalogItemContext.Current, "The Current Catalog Item must be set");
             Assert.IsTrue(CatalogItemContext.IsCategory, "Current item must be a Category.");
 
@@ -266,6 +296,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             [Bind(Prefix = Constants.QueryString.PageSize)] int? pageSize,
             [Bind(Prefix = Constants.QueryString.SortDirection)] CommerceConstants.SortDirection? sortDirection)
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             var currentCategory = GetCurrentCategory();
             var productSearchOptions = GetCategorySearchOptions(currentCategory, pageNumber, facetValues, pageSize, sortField, sortDirection);
 
@@ -279,6 +314,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             [Bind(Prefix = Constants.QueryString.PageSize)] int? pageSize,
             [Bind(Prefix = Constants.QueryString.Facets)] string facetValues)
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             var currentCategory = GetCurrentCategory();
             var productSearchOptions = GetCategorySearchOptions(currentCategory, pageNumber, facetValues, pageSize);
             var viewModel = GetPaginationViewModel(productSearchOptions, currentCategory.InnerItem, RenderingContext.Current.Rendering);
@@ -293,6 +333,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             [Bind(Prefix = Constants.QueryString.Sort)] string sortField,
             [Bind(Prefix = Constants.QueryString.SortDirection)] CommerceConstants.SortDirection? sortDirection)
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             var currentCategory = GetCurrentCategory();
 
             var searchOptions = GetCategorySearchOptions(currentCategory, pageNumber, facetValues, pageSize, sortField, sortDirection);
@@ -304,6 +349,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         public ActionResult CategoryPageHeader()
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             var currentCategory = RenderingContext.Current.Rendering.Item.IsWildcardItem() ? GetCurrentCategory() : CatalogManager.GetCategory(Context.Item);
             if (currentCategory == null)
             {
@@ -340,30 +390,55 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         public ActionResult AddToCart()
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             var model = GetProductViewModel();
             return View(model);
         }
 
         public ActionResult ProductImages()
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             var model = GetProductViewModel();
             return View(model);
         }
 
         public ActionResult ProductInformation()
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             var model = GetProductViewModel();
             return View(model);
         }
 
         public ActionResult ProductRating()
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             var model = GetProductViewModel();
             return View(model);
         }
 
         public ActionResult VisitedProductDetailsPage()
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             var model = GetProductViewModel();
 
             if (model != null)
@@ -376,6 +451,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         public ActionResult VisitedCategoryPage()
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             var lastCategoryId = CategoryCookieHelper.GetLastVisitedCategory(VisitorContextRepository.GetCurrent().GetCustomerId());
 
             var currentCategory = RenderingContext.Current.Rendering.Item.IsWildcardItem() ? GetCurrentCategory() : CatalogManager.GetCategory(Context.Item);
@@ -398,6 +478,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         public ActionResult RelatedCatalogItems()
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             if (RenderingContext.Current.Rendering.Item.IsWildcardItem())
             {
                 // This is a Wild Card
@@ -415,6 +500,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         [HttpGet]
         public ActionResult CheckGiftCardBalance()
         {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+            }
+
             return View();
         }
 
