@@ -31,14 +31,11 @@ using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class CategoryViewModel
+    public class CategoryViewModel : CatalogItemViewModel
     {
-        private List<MediaItem> _images;
-
-        public CategoryViewModel(Item item)
+        public CategoryViewModel(Item item) : base(item)
         {
             ChildProducts = new List<ProductViewModel>();
-            Item = item;
         }
 
         public CategoryViewModel(Item categoryItem, SearchResults products, IEnumerable<CommerceQuerySort> sortFields, CommerceSearchOptions searchOptions) : this(categoryItem)
@@ -73,41 +70,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
             SortFields = sortFields;
         }
 
-        public Item Item { get; set; }
-
-        public string DisplayName => Item.DisplayName;
-
-        public HtmlString DisplayNameRender => PageContext.Current.HtmlHelper.Sitecore().Field(FieldIDs.DisplayName.ToString(), Item);
-
-        public string Description => Item[Templates.Generated.Category.Fields.Description];
-
-        public string Name => Item.Name;
-
-        public HtmlString DescriptionRender => PageContext.Current.HtmlHelper.Sitecore().Field(Templates.Generated.Category.Fields.Description, Item);
-
-        public List<MediaItem> Images
-        {
-            get
-            {
-                if (_images != null)
-                    return _images;
-
-                _images = new List<MediaItem>();
-
-                MultilistField field = Item.Fields[Templates.Generated.Category.Fields.Images];
-
-                if (field == null)
-                    return _images;
-                foreach (var id in field.TargetIDs)
-                {
-                    MediaItem mediaItem = Item.Database.GetItem(id);
-                    _images.Add(mediaItem);
-                }
-
-                return _images;
-            }
-        }
-
         public IEnumerable<CommerceQueryFacet> ChildProductFacets { get; protected set; }
 
         public IEnumerable<CommerceQuerySort> SortFields { get; protected set; }
@@ -119,9 +81,8 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
         [XmlIgnore]
         protected ViewContext CurrentViewContext => ContextService.Get().GetCurrentOrDefault<ViewContext>();
 
-        public string GetLink()
-        {
-            return LinkManager.GetDynamicUrl(Item).TrimEnd('/');
-        }
+        public override string ImagesFieldName => Templates.Generated.Category.Fields.Images;
+        public override string DescriptionFieldName => Templates.Generated.Category.Fields.Description;
+        public override string TitleFieldName => FieldIDs.DisplayName.ToString();
     }
 }

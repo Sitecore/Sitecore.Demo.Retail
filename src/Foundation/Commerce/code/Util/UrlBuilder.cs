@@ -59,14 +59,7 @@ namespace Sitecore.Foundation.Commerce.Util
             PopulateQueryString(request);
         }
 
-        public static UrlBuilder CurrentUrl
-        {
-            get
-            {
-                var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().Current;
-                return new UrlBuilder(HttpContext.Current.Request.Url);
-            }
-        }
+        public static UrlBuilder CurrentUrl => new UrlBuilder(HttpContext.Current.Request.Url);
 
         public QueryStringCollection QueryList { get; private set; } = new QueryStringCollection();
 

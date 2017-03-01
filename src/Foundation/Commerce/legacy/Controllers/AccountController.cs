@@ -29,6 +29,7 @@ using Sitecore.Commerce.Contacts;
 using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Entities.Customers;
 using Sitecore.Commerce.Entities.Orders;
+using Sitecore.Configuration;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce;
 using Sitecore.Foundation.Commerce.Extensions;
@@ -513,7 +514,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                     {
                         // Verify we have not reached the maximum number of addresses supported.
                         var numberOfAddresses = AllAddresses(result).Count;
-                        if (numberOfAddresses >= StorefrontManager.CurrentStorefront.MaxNumberOfAddresses)
+                        if (numberOfAddresses >= MaxNumberOfAddresses)
                         {
                             var message = DictionaryPhraseRepository.Current.Get("/Accounts/Max Address Limit Reached", "The maximum number of addresses ({0}) has been reached.");
                             result.Errors.Add(string.Format(message, numberOfAddresses));
@@ -706,5 +707,6 @@ namespace Sitecore.Reference.Storefront.Controllers
             result.SetErrors(response.ServiceProviderResult);
             return addresses;
         }
+        public int MaxNumberOfAddresses => Settings.GetIntSetting("Storefront.MaxNumberOfAddresses", 10);
     }
 }

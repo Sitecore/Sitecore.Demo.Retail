@@ -57,16 +57,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Models.JsonResults
         {
             Assert.ArgumentNotNull(giftCard, nameof(giftCard));
 
-            var currencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
-
             ExternalId = giftCard.ExternalId;
             Name = giftCard.Name;
             CustomerId = giftCard.CustomerId;
             ShopName = giftCard.ShopName;
             CurrencyCode = giftCard.CurrencyCode;
             Balance = giftCard.Balance;
-            FormattedBalance = giftCard.Balance.ToCurrency(currencyCode);
-            OriginalAmount = giftCard.OriginalAmount.ToCurrency(currencyCode);
+            FormattedBalance = giftCard.Balance.ToCurrency();
+            OriginalAmount = giftCard.OriginalAmount.ToCurrency();
             Description = giftCard.Description;
         }
     }

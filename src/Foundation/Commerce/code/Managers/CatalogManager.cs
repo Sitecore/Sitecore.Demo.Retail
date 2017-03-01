@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Web;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Search;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
@@ -44,9 +45,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 {
     public class CatalogManager : BaseManager
     {
-        private Catalog _currentCatalog;
-
-        public CatalogManager([NotNull] CatalogServiceProvider catalogServiceProvider, [NotNull] GlobalizationServiceProvider globalizationServiceProvider, [NotNull] PricingManager pricingManager, [NotNull] InventoryManager inventoryManager, SiteContextRepository siteContextRepository, ICommerceSearchManager commerceSearchManager)
+        public CatalogManager([NotNull] CatalogServiceProvider catalogServiceProvider, [NotNull] GlobalizationServiceProvider globalizationServiceProvider, [NotNull] PricingManager pricingManager, [NotNull] InventoryManager inventoryManager, CatalogItemContext catalogItemContext, ICommerceSearchManager commerceSearchManager)
         {
             Assert.ArgumentNotNull(catalogServiceProvider, nameof(catalogServiceProvider));
             Assert.ArgumentNotNull(pricingManager, nameof(pricingManager));
@@ -56,7 +55,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             GlobalizationServiceProvider = globalizationServiceProvider;
             PricingManager = pricingManager;
             InventoryManager = inventoryManager;
-            SiteContextRepository = siteContextRepository;
+            CatalogItemContext = catalogItemContext;
             CommerceSearchManager = commerceSearchManager;
         }
 
@@ -64,45 +63,8 @@ namespace Sitecore.Foundation.Commerce.Managers
         public CatalogServiceProvider CatalogServiceProvider { get; protected set; }
         public GlobalizationServiceProvider GlobalizationServiceProvider { get; protected set; }
         public InventoryManager InventoryManager { get; protected set; }
-        public SiteContextRepository SiteContextRepository { get; }
+        public CatalogItemContext CatalogItemContext { get; }
         public PricingManager PricingManager { get; protected set; }
-
-        public Catalog CurrentCatalog
-        {
-            get
-            {
-                if (_currentCatalog != null)
-                {
-                    return _currentCatalog;
-                }
-
-                _currentCatalog = GetCurrentCatalog();
-
-                return _currentCatalog;
-            }
-        }
-
-        public Catalog GetCurrentCatalog()
-        {
-            if (StorefrontManager.CurrentStorefront?.HomeItem != null)
-            {
-                var catalogs = StorefrontManager.CurrentStorefront.GetCatalogs();
-                if (catalogs.Any())
-                {
-                    return catalogs.First();
-                }
-            }
-
-            //If this is not in a storefront then return the default catalog
-            var catalogsListItem = Context.Database.GetItem(CommerceConstants.KnownItemIds.CatalogsItem);
-            var defaultCatalog = catalogsListItem?.Children[CommerceSearchManager.GetDefaultCatalog()];
-            if (defaultCatalog == null)
-            {
-                throw new ConfigurationErrorsException("Default catalog is not set on '/sitecore/Commerce/Settings/Catalog/Default Catalog'");
-            }
-            return new Catalog(defaultCatalog);
-        }
-
 
         public CatalogResult VisitedCategoryPage([NotNull] CommerceStorefront storefront, [NotNull] string categoryId, string categoryName)
         {
@@ -151,7 +113,20 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public Category GetCategory(string categoryId)
         {
-            return GetCategory(categoryId, CurrentCatalog.Name);
+            return GetCategory(categoryId, CatalogContext.CurrentCatalog.Name);
+        }
+
+        public CatalogContext CatalogContext
+        {
+            get
+            {
+                var context = (CatalogContext)HttpContext.Current.Items["_catalogContext"];
+                if (context != null)
+                    return context;
+                context = new CatalogContext();
+                HttpContext.Current.Items["_catalogContext"] = context;
+                return context;
+            }
         }
 
         public Category GetCategory(string categoryId, string catalog)
@@ -475,6 +450,11 @@ namespace Sitecore.Foundation.Commerce.Managers
             return result;
         }
 
+        public Item GetProduct(string productId)
+        {
+            return GetProduct(productId, CatalogContext.CurrentCatalog.Name);
+        }
+
         public Item GetProduct(string productId, string catalogName)
         {
             Assert.ArgumentNotNullOrEmpty(catalogName, nameof(catalogName));
@@ -506,8 +486,13 @@ namespace Sitecore.Foundation.Commerce.Managers
             return result;
         }
 
-        public CategorySearchResults GetCategoryChildCategories(ID categoryId, CommerceSearchOptions searchOptions)
+        public CategorySearchResults GetCategoryChildCategories(Item category)
         {
+            if (category == null)
+            {
+                throw new ArgumentNullException(nameof(category));
+            }
+
             var childCategoryList = new List<Item>();
 
             var searchIndex = CommerceSearchManager.GetIndex();
@@ -517,7 +502,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 var searchResults = context.GetQueryable<CommerceBaseCatalogSearchResultItem>()
                     .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Category)
                     .Where(item => item.Language == Context.Language.Name)
-                    .Where(item => item.ItemId == categoryId)
+                    .Where(item => item.ItemId == category.ID)
                     .Select(p => p);
 
                 var list = searchResults.ToList();

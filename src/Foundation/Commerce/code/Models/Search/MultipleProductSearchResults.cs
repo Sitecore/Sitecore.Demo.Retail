@@ -25,7 +25,7 @@ namespace Sitecore.Foundation.Commerce.Models.Search
             SearchResults = productSearchResults;
         }
 
-        public string DisplayName { get; set; }
+        public string Title { get; set; }
 
         public List<SearchResults> SearchResults { get; private set; }
     }

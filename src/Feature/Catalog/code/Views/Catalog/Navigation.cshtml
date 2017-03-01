@@ -13,13 +13,13 @@
 @model NavigationViewModel
 
 @{
-    if (Model == null || Model.ChildCategories == null || !Model.ChildCategories.Any())
+    if (Model?.ChildCategories == null || !Model.ChildCategories.Any())
     {
         return;
     }
 
-    var mainCategories = Model.ChildCategories.Take(4);
-    var secondaryCategories = Model.ChildCategories.Skip(4);
+    var mainCategories = Model.ChildCategories.Take(4).ToArray();
+    var secondaryCategories = Model.ChildCategories.Skip(4).ToArray();
 }
 
 <div class="navbar-collapse collapse" id="siteNavbar">
@@ -27,9 +27,8 @@
         @{
             foreach (var category in mainCategories)
             {
-                var cModel = new CategoryViewModel(category);
                 <li>
-                    <a class="text-uppercase" href="@cModel.GetLink()" itemid="@cModel.Item.ID.ToString()">@cModel.DisplayNameRender</a>
+                    <a class="text-uppercase" href="@category.GetLink()" itemid="@category.Item.ID.ToString()">@Html.Sitecore().Field(category.TitleFieldName, category.Item)</a>
                 </li>
             }
             if (secondaryCategories.Any())
@@ -42,8 +41,7 @@
                         @{
                             foreach (var category in secondaryCategories)
                             {
-                                var cModel = new CategoryViewModel(category);
-                                <li><a href="@cModel.GetLink()" itemid="@cModel.Item.ID.ToString()">@cModel.DisplayNameRender</a></li>
+                                <li><a href="@category.GetLink()" itemid="@category.Item.ID.ToString()">@Html.Sitecore().Field(category.TitleFieldName, category.Item)</a></li>
                             }
                         }
                     </ul>

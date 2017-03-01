@@ -25,7 +25,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure
         {
             serviceCollection.AddTypesImplementingInCurrentAssembly<BaseManager>(Lifetime.Transient);
             serviceCollection.AddTransient<CountryRepository>();
-            serviceCollection.AddTransient<SiteContextRepository>();
+            serviceCollection.AddSingleton<CatalogItemContext>();
             serviceCollection.AddTransient<VisitorContextRepository>();
             serviceCollection.AddSingleton<CartCacheHelper>();
             serviceCollection.AddTypesImplementing<object>(Lifetime.Transient, "Sitecore.Commerce.Connect.CommerceServer");

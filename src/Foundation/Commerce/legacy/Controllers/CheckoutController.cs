@@ -40,25 +40,22 @@ namespace Sitecore.Reference.Storefront.Controllers
 {
     public class CheckoutController : SitecoreController
     {
-        public CheckoutController([NotNull] CartManager cartManager, [NotNull] OrderManager orderManager, [NotNull] AccountManager accountManager, [NotNull] PaymentManager paymentManager, [NotNull] ShippingManager shippingManager, [NotNull] ContactFactory contactFactory, VisitorContextRepository visitorContextRepository)
+        public CheckoutController(CartManager cartManager, OrderManager orderManager, AccountManager accountManager, PaymentManager paymentManager, ShippingManager shippingManager, ContactFactory contactFactory, VisitorContextRepository visitorContextRepository, CurrencyManager currencyManager)
         {
-            Assert.ArgumentNotNull(cartManager, nameof(cartManager));
-            Assert.ArgumentNotNull(orderManager, nameof(orderManager));
-            Assert.ArgumentNotNull(paymentManager, nameof(paymentManager));
-            Assert.ArgumentNotNull(shippingManager, nameof(shippingManager));
-
             CartManager = cartManager;
             OrderManager = orderManager;
             AccountManager = accountManager;
             PaymentManager = paymentManager;
             ShippingManager = shippingManager;
             VisitorContextRepository = visitorContextRepository;
+            CurrencyManager = currencyManager;
         }
 
         private CartManager CartManager { get; }
         private PaymentManager PaymentManager { get; }
         private ShippingManager ShippingManager { get; }
         private VisitorContextRepository VisitorContextRepository { get; }
+        private CurrencyManager CurrencyManager { get; }
         private OrderManager OrderManager { get; }
         private AccountManager AccountManager { get; }
 
@@ -119,7 +116,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                         result.ShippingMethods = new List<ShippingMethod>();
                         result.CartLoyaltyCardNumber = cart.LoyaltyCardID;
 
-                        result.CurrencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
+                        result.CurrencyCode = CurrencyManager.CurrencyContext.CurrencyCode;
 
                         AddShippingOptionsToResult(result, cart);
                         if (result.Success)
@@ -375,7 +372,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             if (response.ServiceProviderResult.Success && response.Result != null)
             {
                 paymentOptions = response.Result.ToList();
-                paymentOptions.ForEach(x => x.Name = StorefrontManager.GetPaymentName(x.Name));
+                paymentOptions.ForEach(x => x.Name = LookupManager.GetPaymentName(x.Name));
             }
 
             result.PaymentOptions = paymentOptions;
@@ -390,7 +387,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             if (response.ServiceProviderResult.Success)
             {
                 paymentMethodList.AddRange(response.Result);
-                paymentMethodList.ForEach(x => x.Description = StorefrontManager.GetPaymentName(x.Description));
+                paymentMethodList.ForEach(x => x.Description = LookupManager.GetPaymentName(x.Description));
             }
 
             result.SetErrors(response.ServiceProviderResult);

@@ -148,6 +148,11 @@ namespace Sitecore.Foundation.Commerce
                     public static readonly ID ListPrice = new ID("{9B2ABE41-AB16-463B-8845-A3A5D050A016}");
                 }
             }
+
+            public static class Catalog
+            {
+                public static readonly ID ID = CommerceConstants.KnownTemplateIds.CommerceCatalogTemplate;
+            }
         }
 
         public static class CatalogContext
@@ -157,7 +162,6 @@ namespace Sitecore.Foundation.Commerce
             public static class Fields
             {
                 public static readonly ID Catalogs = new ID("{B36DE708-9413-4382-BB53-B944E6D02CFC}");
-                public static readonly ID DefaultProductId = new ID("{872F1C3E-42E7-4F28-9B06-AE6D0C40C3CA}");
             }
         }
     }

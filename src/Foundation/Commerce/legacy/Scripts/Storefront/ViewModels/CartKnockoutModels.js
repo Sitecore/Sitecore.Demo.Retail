@@ -15,7 +15,7 @@ function LineItemData(line) {
 
     // lines //
     self.image = line.Image;
-    self.displayName = line.DisplayName;
+    self.title = line.Title;
     self.color = line.Color;
     self.lineItemDiscount = line.LineDiscount;
     self.quantity = line.Quantity;

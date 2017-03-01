@@ -34,7 +34,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public string Id => _item?.Name;
 
-        public string DisplayName => _item != null ? _item.DisplayName : string.Empty;
+        public string Title => _item != null ? _item.DisplayName : string.Empty;
 
         public string ProductId { get; set; }
 

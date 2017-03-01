@@ -34,14 +34,16 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         private static readonly string[] _defaultPriceTypeIds = {PriceTypes.List, PriceTypes.Adjusted, PriceTypes.LowestPricedVariant, PriceTypes.LowestPricedVariantListPrice, PriceTypes.HighestPricedVariant};
 
-        public PricingManager([NotNull] PricingServiceProvider pricingServiceProvider)
+        public PricingManager(PricingServiceProvider pricingServiceProvider, CurrencyManager currencyManager)
         {
             Assert.ArgumentNotNull(pricingServiceProvider, nameof(pricingServiceProvider));
 
             PricingServiceProvider = pricingServiceProvider;
+            CurrencyManager = currencyManager;
         }
 
         public PricingServiceProvider PricingServiceProvider { get; protected set; }
+        public CurrencyManager CurrencyManager { get; }
 
         public ManagerResponse<GetProductPricesResult, IDictionary<string, Price>> GetProductPrices([NotNull] VisitorContext visitorContext, string catalogName, string productId, bool includeVariants, params string[] priceTypeIds)
         {
@@ -61,7 +63,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
 
             request.IncludeVariantPrices = includeVariants;
-            request.CurrencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
+            request.CurrencyCode = CurrencyManager.CurrencyContext.CurrencyCode;
             var result = PricingServiceProvider.GetProductPrices(request);
 
             result.WriteToSitecoreLog();
@@ -80,7 +82,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             var request = new GetProductBulkPricesRequest(catalogName, productIds, priceTypeIds)
             {
-                CurrencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency,
+                CurrencyCode = CurrencyManager.CurrencyContext.CurrencyCode,
                 DateTime = GetCurrentDate()
             };
 

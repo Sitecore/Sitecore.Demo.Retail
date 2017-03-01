@@ -13,7 +13,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure
         public void Configure(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<CatalogUrlService>();
-            serviceCollection.AddSingleton<CatalogContextFactory>();
+            serviceCollection.AddSingleton<CatalogItemContextFactory>();
             serviceCollection.AddByWildcard(Lifetime.Transient, "*Pipelines.*");
         }
     }

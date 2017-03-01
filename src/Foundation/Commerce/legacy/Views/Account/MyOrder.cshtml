@@ -67,7 +67,7 @@
                 @Html.Sitecore().Field("Order Status Label", Html.Sitecore().CurrentItem):
             </dt>
             <dd>
-                @StorefrontManager.GetOrderStatusName(Model.Status)
+                @LookupManager.GetOrderStatusName(Model.Status)
             </dd>
         </dl>
     </div>
@@ -143,7 +143,7 @@
                 </td>
                 <td class="cart-info">
                     <a pid="link " href="@productUrl">
-                        <h5 pid="displayName">@product.DisplayName</h5>
+                        <h5 pid="title">@product.DisplayName</h5>
                     </a>
                     @if (!string.IsNullOrEmpty(product.Properties["Color"] as string))
                     {

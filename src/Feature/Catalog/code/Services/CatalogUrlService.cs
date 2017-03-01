@@ -210,11 +210,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Services
             return DecodeUrlToken(itemName);
         }
 
-        private ICatalogContext GetCatalogContext()
-        {
-            return DependencyResolver.Current.GetService<SiteContextRepository>().Current.CurrentCatalogContext;
-        }
-
         private string GetCatalogName(Item item)
         {
             Assert.ArgumentNotNull(item, nameof(item));

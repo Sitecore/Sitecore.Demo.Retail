@@ -5,13 +5,6 @@ Template: "fb9dbd60-cba2-490d-9c72-997271d576a3"
 Path: /sitecore/content/Storefront/Home
 DB: master
 SharedFields:
-- ID: "01c98ae9-82bb-4237-acdd-ba5b0a518f2f"
-  Hint: Use Index File For Product Status In Lists
-  Type: Checkbox
-  Value: 0
-- ID: "0ccf5ac9-fa08-4421-9651-707b33193f8e"
-  Hint: CookieExpiryInDays
-  Value: 2
 - ID: "5585a30d-b115-4753-93ce-422c3455deb2"
   Hint: ShowInNavigation
   Type: Checkbox
@@ -53,15 +46,9 @@ SharedFields:
   Hint: Supports Loyalty Program
   Type: Checkbox
   Value: 0
-- ID: "cc553205-a4d2-4feb-b722-9b41e9fa5271"
-  Hint: TrackingCookieName
-  Value: _visitor
 - ID: "cd92dff9-ae15-443c-8de5-661d23b5ac6c"
   Hint: On Sale Overlay Image
   Value: "{CDD9F63A-2FF1-442C-87E1-286C98D506E1}"
-- ID: "e00b561c-503b-47af-979f-d6c0c911721d"
-  Hint: IdKeyName
-  Value: visitorId
 - ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
   Hint: __Renderings
   Type: layout
