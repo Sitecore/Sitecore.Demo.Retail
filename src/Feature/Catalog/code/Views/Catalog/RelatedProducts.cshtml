@@ -12,7 +12,7 @@
 @using Sitecore.Feature.Commerce.Catalog
 @using Sitecore.Feature.Commerce.Catalog.Models
 @using Sitecore.Foundation.SitecoreExtensions.Extensions
-@model MultipleProductSearchResultsViewModel
+@model MultipleSearchResultsViewModel
 @{
     if (Model?.ProductSearchResults == null || !Model.ProductSearchResults.Any())
     {
@@ -44,8 +44,24 @@
         var productSearchResult = Model.ProductSearchResults[index];
         var active = Model.ProductSearchResults.IndexOf(productSearchResult) == 0;
         <div role="tabpanel" class="tab-pane @(active ? "active" : "")" id="tab-@idList[index]">
-            @Html.Partial("_FourProductSlide", productSearchResult)
+            @{
+                var slides = productSearchResult.Items.Count < 4 && productSearchResult.Items.Count > 1 ? productSearchResult.Items.Count : 4;
+            }
+            <div class="owl-carousel" data-options='{"items": @slides, "navigation": true, "navigationText": ["<", ">"], "autoPlay": false}'>
+                @{
+                    foreach (var item in productSearchResult.Items)
+                    {
+                        if (item is ProductViewModel)
+                        {
+                            @Html.Partial("_ProductSummary", (ProductViewModel) item)
+                        }
+                        else if (item is CategoryViewModel)
+                        {
+                            @Html.Partial("_CategorySummary", (CategoryViewModel) item)
+                        }
+                    }
+                }
+            </div>
         </div>
     }
-
 </div>

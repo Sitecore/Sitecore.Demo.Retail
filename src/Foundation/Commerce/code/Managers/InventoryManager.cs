@@ -61,7 +61,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public void GetProductsStockStatusForList([NotNull] CommerceStorefront storefront, IEnumerable<IInventoryProduct> productViewModels)
         {
-            if (!StorefrontManager.CurrentStorefront.UseIndexFileForProductStatusInLists)
+            if (!UseIndexFileForProductStatusInLists)
             {
                 GetProductsStockStatus(storefront, productViewModels);
             }
@@ -70,6 +70,8 @@ namespace Sitecore.Foundation.Commerce.Managers
                 GetProductStockStatusFromIndex(productViewModels);
             }
         }
+
+        private bool UseIndexFileForProductStatusInLists => Settings.GetBoolSetting("Storefront.UseIndexFileForProductStatusInLists", false);
 
         private void GetProductStockStatusFromIndex(IEnumerable<IInventoryProduct> viewModelList)
         {
@@ -151,7 +153,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                     }
 
                     foundModel.StockStatus = status;
-                    foundModel.StockStatusName = StorefrontManager.GetProductStockStatusName(foundModel.StockStatus);
+                    foundModel.StockStatusName = LookupManager.GetProductStockStatusName(foundModel.StockStatus);
                 }
             }
         }
@@ -232,7 +234,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                         if (foundItem != null)
                         {
                             viewModel.StockStatus = foundItem.Status;
-                            viewModel.StockStatusName = StorefrontManager.GetProductStockStatusName(foundItem.Status);
+                            viewModel.StockStatusName = LookupManager.GetProductStockStatusName(foundItem.Status);
                         }
                     }
                 }

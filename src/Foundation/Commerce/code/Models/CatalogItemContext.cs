@@ -23,29 +23,22 @@ using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Foundation.Commerce.Models
 {
-    public class SiteContext
+    public class CatalogItemContext
     {
-        private const string CurrentCatalogItemKey = "_CurrentCatallogItem";
-        private const string IsCategoryKey = "_IsCategory";
-        private const string IsProductKey = "_IsProduct";
-        private const string UrlContainsCategoryKey = "_UrlContainsCategory";
+        public bool IsCategory => Current?.ItemType == CatalogItemType.Category;
 
-        public Item CurrentCatalogItem => CurrentCatalogContext?.Item;
+        public bool IsProduct => Current?.ItemType == CatalogItemType.Product;
 
-        public bool IsCategory => CurrentCatalogContext?.ItemType == CatalogItemType.Category;
-
-        public bool IsProduct => CurrentCatalogContext?.ItemType == CatalogItemType.Product;
-
-        public ICatalogContext CurrentCatalogContext
+        public ICatalogItemContext Current
         {
             get
             {
-                return (ICatalogContext)HttpContext.Current.Items[UrlContainsCategoryKey];
+                return (ICatalogItemContext)HttpContext.Current.Items["_catalogItemContext"];
             }
 
             set
             {
-                HttpContext.Current.Items[UrlContainsCategoryKey] = value;
+                HttpContext.Current.Items["_catalogItemContext"] = value;
             }
         }
     }

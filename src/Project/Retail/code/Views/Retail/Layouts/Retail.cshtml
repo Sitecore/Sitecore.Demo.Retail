@@ -58,13 +58,14 @@
         var currentCategory;
 
         @{
+            var context = DependencyResolver.Current.GetService<CatalogItemContext>();
+            bool isCategory = context.IsCategory;
+            var catalogItem = context.Current?.Item;
             var siteContext = CommerceTypeLoader.CreateInstance<ISiteContext>();
-            bool isCategory = siteContext.IsCategory;
-            var catalogItem = siteContext.CurrentCatalogItem;
-            if (isCategory && catalogItem != null)
+           if (isCategory && catalogItem != null)
             {
                 @:currentCategory = "@catalogItem.ID.ToString()";
-                    }
+            }
         }
     </script>
 

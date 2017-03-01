@@ -12,13 +12,13 @@ namespace Sitecore.Foundation.Commerce.Repositories
 {
     public class VisitorContextRepository
     {
-        public VisitorContextRepository(SiteContextRepository siteContextRepository, AccountManager accountManager, ContactFactory contactFactory)
+        public VisitorContextRepository(CatalogItemContext catalogItemContext, AccountManager accountManager, ContactFactory contactFactory)
         {
-            Assert.ArgumentNotNull(siteContextRepository, nameof(siteContextRepository));
+            Assert.ArgumentNotNull(catalogItemContext, nameof(catalogItemContext));
             Assert.ArgumentNotNull(accountManager, nameof(accountManager));
             Assert.ArgumentNotNull(contactFactory, nameof(contactFactory));
 
-            SiteContextRepository = siteContextRepository;
+            CatalogItemContext = catalogItemContext;
             AccountManager = accountManager;
             ContactFactory = contactFactory;
         }
@@ -47,6 +47,6 @@ namespace Sitecore.Foundation.Commerce.Repositories
 
         public AccountManager AccountManager { get; }
 
-        public SiteContextRepository SiteContextRepository { get; }
+        public CatalogItemContext CatalogItemContext { get; }
     }
 }

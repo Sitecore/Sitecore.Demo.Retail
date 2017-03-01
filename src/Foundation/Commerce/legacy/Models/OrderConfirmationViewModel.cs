@@ -31,7 +31,7 @@ namespace Sitecore.Reference.Storefront.Models
             base.Initialize(renderings);
 
             ConfirmationId = confirmationId;
-            OrderStatus = StorefrontManager.GetOrderStatusName(order.Status);
+            OrderStatus = LookupManager.GetOrderStatusName(order.Status);
         }
     }
 }

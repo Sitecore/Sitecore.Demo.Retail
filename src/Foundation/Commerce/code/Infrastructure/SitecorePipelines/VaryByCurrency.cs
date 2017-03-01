@@ -24,6 +24,13 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
 {
     public class VaryByCurrency : RenderRenderingProcessor
     {
+        public VaryByCurrency(CurrencyManager currencyManager)
+        {
+            CurrencyManager = currencyManager;
+        }
+
+        public CurrencyManager CurrencyManager { get; }
+
         public override void Process(RenderRenderingArgs args)
         {
             if (args.Rendered || HttpContext.Current == null || !args.Cacheable || args.Rendering.RenderingItem == null)
@@ -41,11 +48,11 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
             // When no cache key is present, we generate a full cache key; Otherwise we append to the existing ones.
             if (string.IsNullOrWhiteSpace(args.CacheKey))
             {
-                args.CacheKey = $"_#varyByCurrency_{Context.Site.Name}_{Context.Language.Name}_{HttpContext.Current.Request.Url.AbsoluteUri}_{args.Rendering.RenderingItem.ID}_{StorefrontManager.CurrentStorefront.DefaultCurrency}";
+                args.CacheKey = $"_#varyByCurrency_{Context.Site.Name}_{Context.Language.Name}_{HttpContext.Current.Request.Url.AbsoluteUri}_{args.Rendering.RenderingItem.ID}_{CurrencyManager.CurrencyContext.CurrencyCode}";
             }
             else
             {
-                args.CacheKey = $"_#varybyCurrency_{args.CacheKey}_{args.Rendering.RenderingItem.ID}_{StorefrontManager.CurrentStorefront.DefaultCurrency}";
+                args.CacheKey = $"_#varybyCurrency_{args.CacheKey}_{args.Rendering.RenderingItem.ID}_{CurrencyManager.CurrencyContext.CurrencyCode}";
             }
         }
     }

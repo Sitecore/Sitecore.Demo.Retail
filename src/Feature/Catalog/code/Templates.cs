@@ -54,6 +54,7 @@ namespace Sitecore.Feature.Commerce.Catalog
                 public static class Fields
                 {
                     public static readonly string Images = "Images";
+                    public static readonly string Description = "Description";
                 }
             }
         }

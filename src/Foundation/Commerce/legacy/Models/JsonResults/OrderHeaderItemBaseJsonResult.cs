@@ -27,7 +27,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         public OrderHeaderItemBaseJsonResult(OrderHeader header)
         {
             ExternalId = header.ExternalId;
-            Status = StorefrontManager.GetOrderStatusName(header.Status);
+            Status = LookupManager.GetOrderStatusName(header.Status);
             LastModified = ((CommerceOrderHeader) header).LastModified.ToDisplayedDate();
             DetailsUrl = string.Concat("/accountmanagement/myorder", "?id=", header.ExternalId);
             OrderId = header.OrderID;

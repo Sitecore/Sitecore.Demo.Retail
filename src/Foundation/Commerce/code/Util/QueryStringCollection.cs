@@ -131,7 +131,7 @@ namespace Sitecore.Foundation.Commerce.Util
 
         public QueryStringCollection FromCurrent()
         {
-            var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().Current;
+            var siteContext = DependencyResolver.Current.GetService<CatalogItemContext>().Current;
             return new QueryStringCollection(HttpContext.Current.Request.Url.ToString());
         }
 

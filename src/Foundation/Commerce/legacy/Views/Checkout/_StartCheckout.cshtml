@@ -10,6 +10,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 @using Sitecore.Foundation.Commerce.Managers;
+@using Sitecore.Foundation.Dictionary.Repositories
 @model Sitecore.Reference.Storefront.Models.CartViewModel
 @{
     if (Model == null)
@@ -17,11 +18,11 @@
         return;
     }
 
-    var requiredFieldMessage = @StorefrontManager.GetHtmlSystemMessage("RequiredFieldMessage");
-    var requiredEmailMessage = @StorefrontManager.GetHtmlSystemMessage("RequiredEmailMessage");
-    var requiredNumberMessage = @StorefrontManager.GetHtmlSystemMessage("RequiredNumberMessage");
-    var emailsMustMatchMessage = @StorefrontManager.GetHtmlSystemMessage("EmailsMustMatchMessage");
-    var selectDeliveryFirstMessage = @StorefrontManager.GetHtmlSystemMessage("SelectDeliveryFirstMessage");
+    var requiredFieldMessage = DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Required Field", "This field is required."); ;
+    var requiredEmailMessage = DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Requires Email Address", "Please enter a valid email address."); ;
+    var requiredNumberMessage = DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Requires Number", "Please enter a number.");
+    var emailsMustMatchMessage = DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Emails Must Match", "The entered emails does not match.");
+    var selectDeliveryFirstMessage = DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Select Delivery First", "Please select delivery before proceeding.");
 }
 
 <div id="checkoutContainer">
@@ -31,15 +32,15 @@
         @Html.Sitecore().FormHandler()
         
         <div id="shippingStep">
-            @Html.Partial("_Delivery")
+            @Html.Partial("_Delivery", Model)
         </div>
 
         <div id="billingStep" style="display:none;">
-            @Html.Partial("_Billing")
+            @Html.Partial("_Billing", Model)
         </div>
 
         <div id="reviewStep" style="display:none;">
-            @Html.Partial("_Confirm")
+            @Html.Partial("_Confirm", Model)
         </div>
     }
 
@@ -51,6 +52,6 @@
         AddMessage('SelectDeliveryFirstMessage', '@selectDeliveryFirstMessage');
         AddMessage('EmailsMustMatchMessage', '@emailsMustMatchMessage');
 
-        initCheckoutData("@StorefrontManager.CurrentStorefront.GetMapKey()");
+        initCheckoutData("@CartManager.GetMapKey()");
     </script>
 </div>

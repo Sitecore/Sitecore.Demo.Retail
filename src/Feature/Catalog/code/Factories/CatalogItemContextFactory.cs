@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
+﻿using System.Web.Routing;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Caching;
 using Sitecore.Data;
@@ -17,9 +12,9 @@ using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Feature.Commerce.Catalog.Factories
 {
-    public class CatalogContextFactory
+    public class CatalogItemContextFactory
     {
-        public CatalogContextFactory(CatalogManager catalogManager, CatalogUrlService catalogUrlRepository)
+        public CatalogItemContextFactory(CatalogManager catalogManager, CatalogUrlService catalogUrlRepository)
         {
             CacheProvider = CommerceTypeLoader.GetCacheProvider(CommerceConstants.KnownCacheNames.FriendlyUrlsCache);
             CatalogManager = catalogManager;
@@ -47,7 +42,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
         }
 
 
-        public ICatalogContext Create(RouteData routeData, Database database)
+        public ICatalogItemContext Create(RouteData routeData, Database database)
         {
             Assert.IsNotNull(database, nameof(database));
             Assert.IsNotNull(routeData, nameof(routeData));
@@ -66,7 +61,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
             }
         }
 
-        private ICatalogContext Create(Item productCatalogItem)
+        private ICatalogItemContext Create(Item productCatalogItem)
         {
             Assert.IsNotNull(productCatalogItem, nameof(productCatalogItem));
             Assert.ArgumentCondition(productCatalogItem.IsDerived(Foundation.Commerce.Templates.Commerce.CatalogItem.ID), nameof(productCatalogItem), "Item must be of type Commerce Catalog Item");
@@ -83,27 +78,30 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
             return data;
         }
 
-        private ICatalogContext CreateEmptyCatalogContext()
+        private ICatalogItemContext CreateEmptyCatalogContext()
         {
+            if (CatalogManager.CatalogContext == null)
+                return null;
+
             var data = new CatalogRouteData
             {
-                Catalog = CatalogManager.CurrentCatalog?.Name
+                Catalog = CatalogManager.CatalogContext.CurrentCatalog.Name
             };
 
             return data;
         }
 
-        private ICatalogContext CreateCatalogContextFromProductRoute(RouteData routeData, Database database)
+        private ICatalogItemContext CreateCatalogContextFromProductRoute(RouteData routeData, Database database)
         {
             return CreateCatalogContextFromCatalogItemRoute(routeData, CatalogItemType.Product, database);
         }
 
-        private ICatalogContext CreateCatalogContextFromCategoryRoute(RouteData routeData, Database database)
+        private ICatalogItemContext CreateCatalogContextFromCategoryRoute(RouteData routeData, Database database)
         {
             return CreateCatalogContextFromCatalogItemRoute(routeData, CatalogItemType.Category, database);
         }
 
-        private ICatalogContext CreateCatalogContextFromCatalogItemRoute(RouteData routeData, CatalogItemType itemType, Database database)
+        private ICatalogItemContext CreateCatalogContextFromCatalogItemRoute(RouteData routeData, CatalogItemType itemType, Database database)
         {
             var data = new CatalogRouteData
             {
@@ -126,7 +124,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
             }
             if (string.IsNullOrEmpty(data.Catalog))
             {
-                data.Catalog = CatalogManager.CurrentCatalog?.Name;
+                data.Catalog = CatalogManager.CatalogContext?.CurrentCatalog?.Name;
             }
             if (string.IsNullOrEmpty(data.Catalog))
             {
@@ -135,7 +133,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
 
             var item = GetCatalogItem(data, database);
             if (item == null)
+            {
                 return null;
+            }
             data.Item = item;
 
             if (routeData.Values.ContainsKey("category"))
@@ -150,7 +150,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
             return data;
         }
 
-        private Item GetCatalogItem(ICatalogContext data, Database database)
+        private Item GetCatalogItem(ICatalogItemContext data, Database database)
         {
             var id = GetCatalogItemFromCache(data.Id, data.Catalog);
             if (!ID.IsNullOrEmpty(id))
@@ -169,19 +169,21 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
                     break;
             }
             if (item != null)
+            {
                 AddCatalogItemToCache(data.Id, data.Catalog, item);
+            }
             return item;
         }
 
-        private ICatalogContext CreateCatalogContextFromCatalogRoute(RouteData routeData)
+        private ICatalogItemContext CreateCatalogContextFromCatalogRoute(RouteData routeData)
         {
-            var currentStorefront = StorefrontManager.CurrentStorefront;
-            var productCatalogItem = currentStorefront.HomeItem.Axes.GetDescendant("product catalog/" + routeData.Values["catalogPath"]);
-            if (productCatalogItem == null)
+            var catalogPath = routeData.Values["catalogPath"].ToString();
+            if (string.IsNullOrEmpty(catalogPath))
             {
                 return null;
             }
-            return Create(productCatalogItem);
+            var productCatalogItem = CatalogManager.CatalogContext?.CatalogRootItem.Axes.GetItem(catalogPath);
+            return productCatalogItem == null ? null : Create(productCatalogItem);
         }
 
         private string GetCategoryIdFromItem(Item item)

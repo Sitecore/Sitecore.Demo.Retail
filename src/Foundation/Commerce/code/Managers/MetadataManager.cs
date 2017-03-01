@@ -18,6 +18,7 @@
 using System.Web;
 using System.Web.Mvc;
 using Sitecore.Data.Items;
+using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Repositories;
 
 namespace Sitecore.Foundation.Commerce.Managers
@@ -26,15 +27,15 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         public static HtmlString GetTags()
         {
-            var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().Current;
+            var context = DependencyResolver.Current.GetService<CatalogItemContext>();
 
-            if (siteContext.IsCategory)
+            if (context.IsCategory)
             {
-                return new HtmlString(GetCategoryTags(siteContext.CurrentCatalogItem));
+                return new HtmlString(GetCategoryTags(context.Current?.Item));
             }
-            if (siteContext.IsProduct)
+            if (context.IsProduct)
             {
-                return new HtmlString(GetProductTags(siteContext.CurrentCatalogItem));
+                return new HtmlString(GetProductTags(context.Current?.Item));
             }
 
             return new HtmlString(string.Empty);

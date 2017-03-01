@@ -224,9 +224,13 @@
     <Compile Include="Managers\CartManager.cs" />
     <Compile Include="Managers\CatalogManager.cs" />
     <Compile Include="Managers\GiftCardManager.cs" />
+    <Compile Include="Managers\LookupManager.cs" />
+    <Compile Include="Managers\CurrencyManager.cs" />
     <Compile Include="Models\ApiControllerMapping.cs" />
+    <Compile Include="Models\CatalogContext.cs" />
     <Compile Include="Models\CatalogItemType.cs" />
-    <Compile Include="Models\ICatalogContext.cs" />
+    <Compile Include="Models\CurrencyContext.cs" />
+    <Compile Include="Models\ICatalogItemContext.cs" />
     <Compile Include="Models\BaseJsonResult.cs" />
     <Compile Include="Models\ICatalogCategory.cs" />
     <Compile Include="Managers\InventoryManager.cs" />
@@ -241,7 +245,7 @@
     <Compile Include="Managers\PricingManager.cs" />
     <Compile Include="Managers\ShippingManager.cs" />
     <Compile Include="Managers\StorefrontManager.cs" />
-    <Compile Include="Managers\VisitorContext.cs" />
+    <Compile Include="Models\VisitorContext.cs" />
     <Compile Include="Managers\WishListManager.cs" />
     <Compile Include="Models\CurrencyInformationModel.cs" />
     <Compile Include="Models\InputModels\AddCartLineInputModel.cs" />
@@ -297,7 +301,6 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CommerceStorefront.cs" />
     <Compile Include="Models\SitecoreItemBase.cs" />
-    <Compile Include="Repositories\SiteContextRepository.cs" />
     <Compile Include="Repositories\VisitorContextRepository.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="StorefrontConstants.cs" />
@@ -309,7 +312,7 @@
     <Compile Include="Util\InstallPostStep.cs" />
     <Compile Include="Util\MailUtil.cs" />
     <Compile Include="Util\QueryStringCollection.cs" />
-    <Compile Include="Models\SiteContext.cs" />
+    <Compile Include="Models\CatalogItemContext.cs" />
     <Compile Include="Util\StringUtility.cs" />
     <Compile Include="Util\UrlBuilder.cs" />
   </ItemGroup>
