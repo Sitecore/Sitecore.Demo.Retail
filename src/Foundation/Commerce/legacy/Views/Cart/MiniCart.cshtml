@@ -13,12 +13,11 @@
 @using Sitecore.Foundation.Commerce.Managers
 
 <li class="dropdown" id="B02-Basket">
-    <a href="#" class="dropdown-toggle toggle-cart" data-toggle="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <span class="glyphicon glyphicon-shopping-cart"></span><span class="badge bg-primary" id="miniCartItemCount" data-bind="text: lineitemcount"></span> 
     </a>
     <div class="dropdown-menu">
-        @*TODO: Move the following hard-coded styling to the appropriate .css.*@
-        <ul class="media-list" style="overflow: auto;max-height: 500px;" data-bind="foreach: miniCartItems, visible:miniCartItems().length">
+        <ul class="media-list" data-bind="foreach: miniCartItems, visible:miniCartItems().length">
             <li class="media" data-bind="attr: {'data-ajax-lineitemid': externalCartlineId}">
                 <div class="media-left">
                     <a data-bind="attr:{ href:productUrl}">
@@ -36,7 +35,7 @@
                     </p>
                 </div>
                 <div class="media-right">
-                    <a href="javascript:;" class="text-primary minicart-delete">
+                    <a href="#" class="text-primary">
                         <span class="glyphicon glyphicon-remove"></span>
                     </a>
                 </div>
