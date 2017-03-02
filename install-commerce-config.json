@@ -7,10 +7,17 @@
                 ]   
             }   
         ],
-        [   {   "id": "dacpac",
+        [   {   "id": "projectDatabaseScripts",
                 "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Project\\Retail\\Database",
                 "files": [
-                    [   {   "id": "dacpac", "fileName": "Commerce.Storefront.ProfileDatabase.dacpac", "databaseId": "CommerceProfilesDB"  }   ]
+                    [   {   "id": "profileDacpac", "fileName": "Commerce.Storefront.ProfileDatabase.dacpac", "databaseId": "CommerceProfilesDB"  }   ]
+                ]   
+            }   
+        ],
+        [   {   "id": "foundationDatabaseScripts",
+                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Foundation\\Commerce\\Database",
+                "files": [
+                    [   {   "id": "commerceEngineScript", "fileName": "CommerceServicesDbScript.sql", "databaseId": "commerceEngineGlobalDB", "useDatabaseName": false  }   ]
                 ]   
             }   
         ],
@@ -22,10 +29,27 @@
 				    [	{   "id": "profiles",     "fileName": "Profiles.xml"  }   ]
                 ]   
             }   
-        ]
+        ],
+        [   {   "id": "dotnet",
+                "path": "c:\\Program Files\\dotnet",
+                "files": [
+                    [   {   "id": "exe",      "fileName": "dotnet.exe"   }   ]
+                ]   
+            }   
+        ],
+        [   {   "id": "commerceEngineProject",
+                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Foundation\\Commerce\\Engine\\code",
+                "files": []   
+            }   
+        ],  
+        [   {   "id": "solutionRoot",
+                "path": "C:\\Projects\\Sitecore.Demo.Retail",
+                "files": []   
+            }   
+        ] 
     ],
     "accounts": [
-        [   {   "id": "runTime", "Domain":  ".", "username": "svcRunTimeUser", "password": "pass@word1", "fullname": "svcRunTimeUser", "description": "Commerce Server Run Time Service Account", "defaultGroupMembership":  "Administrators"  }   ]
+        [   {   "id": "runTime", "Domain":  ".", "username": "svcRunTimeUser", "password": "pass@word1", "fullname": "svcRunTimeUser", "description": "Commerce Server Run Time Service Account", "defaultGroupMembership":  "Administrators", "defaultSqlServerRole": "sysadmin"  }   ]
     ],
     "iis": {
         "appPools": [
@@ -54,13 +78,19 @@
             ]
         ],
         "hostEntries": [
-            [   {   "ipAddress": "127.0.0.1", "hostName": "CSServices", "description": "Commerce server services site"   }   ]
-        ]
+            [   {   "ipAddress": "127.0.0.1", "hostName": "CSServices", "description": "Commerce server services site"   }   ],
+            [   {   "ipAddress": "127.0.0.1", "hostName": "CommerceEngine", "description": "Sitecore Commerce Engine site"   }   ]
+        ],
+        "certificates": [
+            [   {   "DnsName": "retail.dev.local", "certStoreLocation": "cert:\\LocalMachine\\My", "name": "habitat.dev.local", "ip": "*", "port": "443", "protocol": "https"   }   ]
+        ]    
     },
     "databases": [
         [   {   "id": "commerceAdminDB", "server": ".", "name": "MSCS_Admin"    }   ],
         [   {   "id": "commerceCatalogDB", "server": ".", "name": "demo.local_CommerceServer.ProductCatalog"    }   ],
-        [   {   "id": "commerceProfilesDB", "server": ".", "name": "demo.local_CommerceServer.Profiles"    }   ]
+        [   {   "id": "commerceProfilesDB", "server": ".", "name": "demo.local_CommerceServer.Profiles"    }   ],
+        [   {   "id": "commerceEngineGlobalDB", "server": ".", "name": "SitecoreCommerce_Global"    }   ],
+        [   {   "id": "commerceEngineSharedEnvironmentDB", "server": ".", "name": "SitecoreCommerce_SharedEnvironments"    }   ]     
     ],
     "sitecoreCommerce": {
         "csInstallerConfig":  {   "adminDatabaseId": "commerceAdminDB", "windowsSecurity": "yes", "username": "", "password": "", "stagingServiceAccountId": "runTime" },

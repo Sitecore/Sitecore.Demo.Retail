@@ -1,31 +1,48 @@
 import-module sqlps -DisableNameChecking 3>$Nul
 
-function Publish-DatabaseChanges
+function Import-DatabaseChanges
 {
     param 
     (
-        [Parameter(Mandatory=$True)][PSCustomObject]$dacpacFolderSetting,
-        [Parameter(Mandatory=$True)][PSCustomObject]$databaseSettingList
+        [Parameter(Mandatory=$True)][PSCustomObject]$databaseSettingList,
+        [Parameter(Mandatory=$True)][PSCustomObject]$resourcesSettingList,
+        [Parameter(Mandatory=$True)][PSCustomObject]$resourceFolderId
     )
 
     begin 
     {
-        Write-Verbose "Publishing Database Changes"
+        Write-Verbose "Importing database files from resourceFolderId: $resourceFolderId"
     }
     process
     {
-        Foreach ($dacpacFileSetting in $dacpacFolderSetting.files)
+        $folderSetting = ($resourcesSettingList | Where { $_.id -eq $resourceFolderId } | Select)
+        If ($folderSetting -eq $null) { Write-Host "Expected $resourceFolderId resources" -ForegroundColor red; return 1; }   
+
+        Foreach ($fileSetting in $folderSetting.files)
         {
-            $databaseSetting = ($databaseSettingList | Where { $_.id -eq $dacpacFileSetting.databaseId })
+            $databaseSetting = ($databaseSettingList | Where { $_.id -eq $fileSetting.databaseId })
             If ($databaseSetting -eq $null) 
             { 
-                Write-Host "Can't derive database from DatabaseId '$($dacpacFileSetting.databaseId)' when processing dacpac file '$($dacpacFileSetting.name)'." -ForegroundColor red; 
+                Write-Host "Can't derive database from DatabaseId '$($fileSetting.databaseId)' when processing file '$($fileSetting.name)'." -ForegroundColor red; 
                 return 1; 
             }         
 
-            $filename = $dacpacFolderSetting.path + "\" + $dacpacFileSetting.fileName
+            $databaseName = If ($databaseSetting.useDatabaseName) { $databaseSetting.name } else { $null }
+            $filename = $folderSetting.path + "\" + $fileSetting.fileName
             
-            return (Publish-Dacpac -dacpacFile $filename -destinationDatabase $databaseSetting.name -server $databaseSetting.server -Verbose)
+            If($filename -like '*.dacpac') 
+            {
+                If((Import-Dacpac -filePath $filename -destinationDatabase $databaseName -server $databaseSetting.server -Verbose) -ne 0 ) { return 1 }
+            }
+            ElseIf ($filename -like '*.sql')
+            {
+                If((Import-SQL -filePath $filename -destinationDatabase $databaseName -serverinstance $databaseSetting.server -Verbose) -ne 0 ) { return 1 }
+            }
+            Else
+            {
+                Write-Host "Unsupported file type '$($fileSetting.name)'." -ForegroundColor red; 
+                return 1; 
+            }
         }
 
         return 0
@@ -33,18 +50,45 @@ function Publish-DatabaseChanges
     end{}
 }
 
-function Publish-Dacpac
+function Import-SQL
+{
+
+    param (
+        [Parameter(Mandatory=$True)][string]$filePath,
+                                    [string]$destinationDatabase,
+        [Parameter(Mandatory=$True)][string]$serverinstance="."
+    )
+
+    begin 
+    {
+        Write-Verbose "Importing '$filePath' to database '$destinationDatabase'"
+    }
+    process
+    {
+        If ([string]::IsNullOrEmpty($destinationDatabase))
+        {
+            Invoke-Sqlcmd -inputfile $filePath -serverinstance $serverinstance -Verbose 
+        }
+        Else
+        {
+            Invoke-Sqlcmd -inputfile $filePath -serverinstance $serverinstance -database $destinationDatabase -Verbose 
+        }
+    }
+    end{}
+}
+
+function Import-Dacpac
 {
     param 
     (
-        [Parameter(Mandatory=$True)][string]$dacpacFile,
+        [Parameter(Mandatory=$True)][string]$filePath,
         [Parameter(Mandatory=$True)][string]$destinationDatabase,
         [Parameter(Mandatory=$True)][string]$server
     )
 
     begin 
     {
-        Write-Verbose "Publishing Dacpac '$dacpacFile' to database '$destinationDatabase' on server '$server'."
+        Write-Verbose "Importing Dacpac '$filePath' to database '$destinationDatabase' on server '$server'."
     }
     process
     {
@@ -66,7 +110,7 @@ function Publish-Dacpac
 
         Add-Type -path $sqlDACFolder
         $dacService = new-object Microsoft.SqlServer.Dac.DacServices "server=$server"
-        $dp = [Microsoft.SqlServer.Dac.DacPackage]::Load($dacpacFile)
+        $dp = [Microsoft.SqlServer.Dac.DacPackage]::Load($filePath)
         $dacService.deploy($dp, $destinationDatabase, "True") 
 
         return 0
@@ -107,7 +151,8 @@ function Delete-Database
     end {}
 }
 
-function Get-SqlLogin { 
+function Get-SqlLogin 
+{ 
     param 
     ( 
         [Parameter(Mandatory=$True)][string]$serverName, 
@@ -177,9 +222,9 @@ function New-SqlLogin
 
         if (-not (Get-SqlLogin -serverName $databaseSetting.server -username $loginname))
         {
-            $query = "CREATE LOGIN [$loginname] FROM WINDOWS WITH DEFAULT_DATABASE=[master]; "; #"ALTER SERVER ROLE [$role] ADD MEMBER [$loginname];"
+            $query = "CREATE LOGIN [$loginname] FROM WINDOWS WITH DEFAULT_DATABASE=[master]; ALTER SERVER ROLE [$($accountSetting.defaultSqlServerRole)] ADD MEMBER [$loginname];"
             Invoke-Sqlcmd -ServerInstance $databaseSetting.server -Database "master" -Query $query
-            Write-Verbose "SQL login created '$loginname'" # with role: $role"
+            Write-Verbose "SQL login created '$loginname' with role: $role"
         }
         else
         {
@@ -226,4 +271,4 @@ function Delete-SqlLogin
     end {}
 }
 
-Export-ModuleMember Publish-DatabaseChanges, Publish-Dacpac, Delete-Database, New-SqlLogin, Delete-SqlLogin
+Export-ModuleMember Import-DatabaseChanges, Import-Dacpac, Delete-Database, New-SqlLogin, Delete-SqlLogin

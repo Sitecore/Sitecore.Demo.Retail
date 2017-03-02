@@ -2,12 +2,14 @@ Set-ExecutionPolicy Unrestricted –scope CurrentUser
 if (-Not ($PSVersionTable.PSVersion.Major -ge 4)) { Write-Host "Update version of powershell"; exit }
 
 #If Install-Module is not available - install https://www.microsoft.com/en-us/download/details.aspx?id=51451
-if((Get-Module Carbon) -eq 0 ) { Install-Module -Name 'Carbon'; Import-Module 'Carbon' }
+if((Get-Module Carbon) -eq $null) { Install-Module -Name 'Carbon'; Import-Module 'Carbon' }
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageUser.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageFile.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageCommerceServer.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageIIS.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageRegistry.psm1 -Force
+Import-Module $PSScriptRoot\Scripts\Commerce\ManageDotNet.psm1 -Force
+Import-Module $PSScriptRoot\Scripts\Commerce\ManageWeb.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageSqlServer.psm1 -Force
 cd $PSScriptRoot
 
@@ -20,21 +22,18 @@ $runTimeUserSetting = ($settings.accounts | Where { $_.id -eq "runTime" } | Sele
 $installFolderSetting = ($settings.resources | Where { $_.id -eq "install" } | Select)
 If ($installFolderSetting -eq $null) { Write-Host "Expected install resources" -ForegroundColor red; exit; }
   
-$dacpacFolderSetting = ($settings.resources | Where { $_.id -eq "dacpac" } | Select)
-If ($dacpacFolderSetting -eq $null) { Write-Host "Expected dacpac resources" -ForegroundColor red; exit; }   
-
 $csResourceFolderSetting = ($settings.resources | Where { $_.id -eq "commerceServerResources" } | Select)
 If ($csResourceFolderSetting -eq $null) { Write-Host "Expected dacpac resources" -ForegroundColor red; exit; }         
 
 # Step 0: check if all files exist that are needed
 Write-Host "`nStep 0: Checking if all needed files exist" -foregroundcolor Yellow
 if ((ManageFile\Confirm-Resources $settings.resources -verbose) -ne 0) { Exit }
-
+<#
 # Step 1: Create Required Users
 Write-Host "`nStep 1: Create Required Users" -foregroundcolor Yellow
 If((ManageUser\Add-User -user $runTimeUserSetting -Verbose) -ne 0) { Exit }
 
-#step 2: Create Database Logins
+# Step 2: Create Database Logins
 Write-Host "`nStep 2: Create Databse Logins" -foregroundcolor Yellow
 If((ManageSqlServer\New-SqlLogin -accountId "runTime" -databaseId "commerceAdminDB" -accountSettingList $settings.accounts -databaseSettingList $settings.databases -Verbose) -ne 0) { Exit }
 
@@ -62,24 +61,44 @@ If((ManageIIS\Set-HostFile -hostEntryList $settings.iis.hostEntries -Verbose) -n
 
 # Step 8: Create Commerce Server Site
 Write-Host "`nStep 8: Create Commerce Server Site" -foregroundcolor Yellow
-$result = (ManageCommerceServer\New-CSWebsite -csSiteSetting $settings.sitecoreCommerce.csSite -accountSettingList $settings.accounts -appPoolSettingList $settings.iis.appPools -websiteSettingList $settings.iis.websites -installFolderSetting $installFolderSetting -databaseSettingList $settings.databases -Verbose)
-If($result -ne 0) { Exit }
+If((ManageCommerceServer\New-CSWebsite -csSiteSetting $settings.sitecoreCommerce.csSite -accountSettingList $settings.accounts -appPoolSettingList $settings.iis.appPools -websiteSettingList $settings.iis.websites -installFolderSetting $installFolderSetting -databaseSettingList $settings.databases -Verbose) -ne 0) { Exit }
 
-# Step 9: Publish Database Changes
-Write-Host "`nStep 9: Publish Database Changes" -foregroundcolor Yellow
-If((ManageSqlServer\Publish-DatabaseChanges -dacpacFolderSetting $dacpacFolderSetting -databaseSettingList $settings.databases -Verbose) -ne 0) { Exit }
+# Step 9: Import Database Changes
+Write-Host "`nStep 9: Import Database Changes" -foregroundcolor Yellow
+If((ManageSqlServer\Import-DatabaseChanges -databaseSettingList $settings.databases -resourcesSettingList $settings.resources -resourceFolderId "projectDatabaseScripts"  -Verbose) -ne 0) { Exit }
+If((ManageSqlServer\Import-DatabaseChanges -databaseSettingList $settings.databases -resourcesSettingList $settings.resources -resourceFolderId "foundationDatabaseScripts"  -Verbose) -ne 0) { Exit }
 
-# Step 10: Publish Commerce Server Resources
-Write-Host "`nStep 10: Publish Commerce Server Resources" -foregroundcolor Yellow
+# Step 10: Import Commerce Server Resources
+Write-Host "`nStep 10: Import Commerce Server Resources" -foregroundcolor Yellow
 If((ManageCommerceServer\Import-CSSiteData -csSiteSetting $settings.sitecoreCommerce.csSite -csResourceFolderSetting $csResourceFolderSetting -Verbose) -ne 0) { Exit }
 
 # Step 11: Disable-LoopbackCheck (for development machines)
 Write-Host "`nStep 11: Disable-LoopbackCheck (for development machines)" -foregroundcolor Yellow
 ManageRegistry\Disable-LoopbackCheck
 
-# Step 11: Test Commerce Server WebServices
-#Write-Host "`nStep 11: Test Commerce Server WebServices" -foregroundcolor Yellow
-#TODO
-#testWebServices -services $settings.CS.webservices -username $settings.CS.user.csusername -pwd $settings.CS.user.password -domain "http://localhost" -port $settings.CS.site.port -sitename $settings.CS.site.sitename -Verbose
+# Step 12: Test Commerce Server WebServices
+Write-Host "`nStep 12: Test Commerce Server WebServices" -foregroundcolor Yellow
+If((ManageCommerceServer\Test-CSWebservices -csSiteSetting $settings.sitecoreCommerce.csSite -accountSettingList $settings.accounts -appPoolSettingList $settings.iis.appPools -websiteSettingList $settings.iis.websites -Verbose) -ne 0) { Exit }
 
+
+# Step 13: Restore Solution Packages 
+Write-Host "`nStep 13: Restore Solution Packages" -foregroundcolor Yellow
+If((ManageDotNet\Restore-SolutionPackages -resourcesSettingList $settings.resources -resourceId "solutionRoot" -Verbose) -ne 0) { Exit }
+cd $PSScriptRoot
+
+# Step 14: Deploy Commerce Engine
+Write-Host "`nStep 14: Deploy Commerce Engine" -foregroundcolor Yellow
+If((ManageDotNet\Publish-Project -resourcesSettingList $settings.resources -websiteSettingList $settings.iis.websites -sourceResourceId "commerceEngineProject" -targetWebsiteId "commerceEngine" -Verbose) -ne 0) { Exit }
+
+# Step 15: Test Commerce Engine
+Write-Host "`nStep 15: Test Commerce Engine" -foregroundcolor Yellow
+If((ManageWeb\Invoke-WebRequest -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "api/`$metadata" -Verbose) -ne 0) { Exit }
+
+# Step 16: Bootstrap Commerce Engine and Initialise Environments
+Write-Host "`nStep 16: Test Commerce Engine" -foregroundcolor Yellow
+If((ManageWeb\Invoke-WebRequest -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/Bootstrap()" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
+If((ManageWeb\Invoke-WebRequest -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/InitializeEnvironment(environment='HabitatShops')" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
+If((ManageWeb\Invoke-WebRequest -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "InitializeEnvironment(environment='HabitatAuthoring')" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
+#>
 # Step 12: Creat self signed certificate
+If((ManageIIS\New-Certificate -certificateSettingList $settings.iis.certificates -Verbose) -ne 0) { Exit }
