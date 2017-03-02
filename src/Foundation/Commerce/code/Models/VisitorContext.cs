@@ -25,7 +25,7 @@ using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Foundation.Dictionary.Repositories;
 
-namespace Sitecore.Foundation.Commerce.Managers
+namespace Sitecore.Foundation.Commerce.Models
 {
     public class VisitorContext
     {

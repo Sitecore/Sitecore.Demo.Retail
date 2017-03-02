@@ -46,14 +46,13 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             }
 
 
-            var userCurrency = StorefrontManager.CurrentStorefront.DefaultCurrency;
-
-            DisplayName = product.DisplayName;
+            Title = product.DisplayName;
             Color = product.Properties["Color"] as string;
-            LineDiscount = ((CommerceTotal) line.Total).LineItemDiscountAmount.ToCurrency(GetCurrencyCode(userCurrency, ((CommerceTotal) line.Total).CurrencyCode));
+            var total = (CommerceTotal) line.Total;
+            LineDiscount = total.LineItemDiscountAmount.ToCurrency(total.CurrencyCode);
             Quantity = line.Quantity.ToString(Context.Language.CultureInfo);
-            LinePrice = product.Price.Amount.ToCurrency(GetCurrencyCode(userCurrency, product.Price.CurrencyCode));
-            LineTotal = line.Total.Amount.ToCurrency(GetCurrencyCode(userCurrency, line.Total.CurrencyCode));
+            LinePrice = product.Price.Amount.ToCurrency(product.Price.CurrencyCode);
+            LineTotal = line.Total.Amount.ToCurrency(line.Total.CurrencyCode);
             ExternalCartLineId = StringUtility.RemoveCurlyBrackets(line.ExternalCartLineId);
             ProductUrl = LinkManager.GetDynamicUrl(productItem);
 
@@ -61,7 +60,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         }
 
         public string Image { get; set; }
-        public string DisplayName { get; set; }
+        public string Title { get; set; }
         public string Color { get; set; }
         public string LineDiscount { get; set; }
         public List<string> DiscountOfferNames { get; set; }

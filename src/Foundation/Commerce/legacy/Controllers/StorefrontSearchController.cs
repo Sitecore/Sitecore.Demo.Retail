@@ -44,18 +44,13 @@ namespace Sitecore.Reference.Storefront.Controllers
         private const string ChangeSiteContentPageSizeClass = "changeSiteContentPageSize";
         private const string CurrentSearchContentResultsKeyName = "CurrentSearchContentResults";
 
-        public StorefrontSearchController([NotNull] CatalogManager catalogManager, [NotNull] SiteContextRepository siteContextRepository, ICommerceSearchManager commerceSearchManager)
+        public StorefrontSearchController(CatalogManager catalogManager, ICommerceSearchManager commerceSearchManager)
         {
-            Assert.ArgumentNotNull(catalogManager, nameof(catalogManager));
-            Assert.ArgumentNotNull(siteContextRepository, nameof(siteContextRepository));
-
             CatalogManager = catalogManager;
-            SiteContextRepository = siteContextRepository;
             CommerceSearchManager = commerceSearchManager;
         }
 
         private CatalogManager CatalogManager { get; }
-        private SiteContextRepository SiteContextRepository { get; }
         public ICommerceSearchManager CommerceSearchManager { get; }
 
         public ActionResult SearchBar([Bind(Prefix = Foundation.Commerce.Constants.QueryString.SearchKeyword)] string searchKeyword)
@@ -170,7 +165,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             {
                 SearchKeyword = searchKeyword ?? string.Empty,
                 SortFields = CommerceSearchManager.GetSortFieldsForItem(RenderingContext.Current.Rendering.Item),
-                Catalog = CatalogManager.CurrentCatalog,
+                Catalog = CatalogManager.CatalogContext.CurrentCatalog,
                 ItemsPerPage = pageSize ?? CommerceSearchManager.GetItemsPerPageForItem(RenderingContext.Current.Rendering.Item)
             };
             if (searchInfo.ItemsPerPage <= 0)
@@ -235,7 +230,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             using (var context = searchIndex.CreateSearchContext())
             {
                 var searchResults = context.GetQueryable<CommerceProductSearchResultItem>()
-                    .Where(item => item.Name.Equals(keyword) || item["_displayname"].Equals(keyword) || item.Content.Contains(keyword))
+                    .Where(item => item.Name.Equals(keyword) || item[Sitecore.ContentSearch.BuiltinFields.DisplayName].Equals(keyword) || item.Content.Contains(keyword))
                     .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product || item.CommerceSearchItemType == CommerceSearchResultItemType.Category)
                     .Where(item => item.CatalogName == catalogName)
                     .Where(item => item.Language == Context.Language.Name)

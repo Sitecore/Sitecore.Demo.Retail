@@ -7,7 +7,7 @@ DB: master
 SharedFields:
 - ID: "083db23d-64d5-48f7-9f2a-710c5612a4a4"
   Hint: Currency Symbol
-  Value: USD
+  Value: US$
 - ID: "1b863c74-d174-4691-b89a-bf30884b3932"
   Hint: Currency Number Format Culture
   Value: en

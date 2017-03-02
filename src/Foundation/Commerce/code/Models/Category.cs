@@ -24,31 +24,22 @@ namespace Sitecore.Foundation.Commerce.Models
     public class Category : SitecoreItemBase
     {
         private int _itemsPerPage;
+
         public Category(Item item)
         {
-            this.InnerItem = item;
+            InnerItem = item;
         }
-        public string Name => this.InnerItem.Name;
-        public string DisplayName => this.InnerItem.DisplayName;
+
+        public string Name => InnerItem.Name;
+        public string Title => InnerItem.DisplayName;
         public List<CommerceQueryFacet> RequiredFacets { get; set; }
         public List<CommerceQuerySort> SortFields { get; set; }
 
         public int ItemsPerPage
         {
-            get
-            {
-                return (_itemsPerPage <= 0) ? 12 : _itemsPerPage;
-            }
+            get { return _itemsPerPage <= 0 ? 12 : _itemsPerPage; }
 
-            set 
-            { 
-                _itemsPerPage = value; 
-            }
-        }
-
-        public string Title()
-        {
-            return this.InnerItem[StorefrontConstants.ItemFields.Title];
+            set { _itemsPerPage = value; }
         }
     }
 }

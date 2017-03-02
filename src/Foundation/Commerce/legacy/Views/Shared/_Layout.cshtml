@@ -20,9 +20,9 @@
 @using Sitecore.Mvc.Analytics.Extensions
 
 @{
-    var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().Current; ;
-    bool isCategory = siteContext.IsCategory;
-    var catalogItem = siteContext.CurrentCatalogItem;
+    var siteContext = DependencyResolver.Current.GetService<CatalogItemContext>();
+    var isCategory = siteContext.IsCategory;
+    var catalogItem = siteContext.Current?.Item;
 }
 
 <!DOCTYPE html>

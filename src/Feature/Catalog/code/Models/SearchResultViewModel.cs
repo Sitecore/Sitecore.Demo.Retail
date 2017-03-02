@@ -15,38 +15,37 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Linq;
+using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class ProductSearchResultViewModel : RenderingModel
+    public class SearchResultViewModel
     {
-        public ProductSearchResultViewModel()
+        public SearchResultViewModel(SearchResults searchResult)
         {
-            Products = new List<ProductViewModel>();
+            Assert.ArgumentNotNull(searchResult, nameof(searchResult));
+
+            Title = searchResult.Title;
+            Items = new List<CatalogItemViewModel>();
+            foreach (var child in searchResult.SearchResultItems)
+            {
+                CatalogItemViewModel productModel = null;
+                if (child.IsDerived(Foundation.Commerce.Templates.Commerce.Product.ID))
+                    productModel = new ProductViewModel(child);
+                if (child.IsDerived(Foundation.Commerce.Templates.Commerce.Category.ID))
+                    productModel = new CategoryViewModel(child);
+                if (productModel != null)
+                    Items.Add(productModel);
+            }
         }
 
-        public List<ProductViewModel> Products { get; set; }
+        public List<CatalogItemViewModel> Items { get; set; }
 
         public string Title { get; set; }
 
-        public void Initialize(Rendering rendering, SearchResults searchResult)
-        {
-            base.Initialize(rendering);
-
-            if (searchResult == null)
-            {
-                return;
-            }
-
-            Title = searchResult.Title;
-            Products = new List<ProductViewModel>();
-            foreach (var child in searchResult.SearchResultItems)
-            {
-                var productModel = new ProductViewModel(child);
-                Products.Add(productModel);
-            }
-        }
     }
 }

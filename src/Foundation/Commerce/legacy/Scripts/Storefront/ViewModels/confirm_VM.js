@@ -28,10 +28,10 @@ function ConfirmViewModel(data) {
    
 }
 
-function composedItem(image, displayName, color, delivery, lineprice, quantity, linetotal, externalCartlineId) {
+function composedItem(image, title, color, delivery, lineprice, quantity, linetotal, externalCartlineId) {
 
     this.image = image;
-    this.displayName = displayName;
+    this.title = title;
     this.color = color;
     this.delivery = delivery;
     this.price = lineprice;

@@ -24,14 +24,14 @@
 
     var categoriesLabel = Html.Sitecore().Field("Categories Label", Html.Sitecore().CurrentItem);
 
-    var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().Current;
+    var siteContext = DependencyResolver.Current.GetService<CatalogItemContext>().Current;
     var name = string.Empty;
-    var catalogItem = siteContext.CurrentCatalogItem;
+    var catalogItem = siteContext.Item;
     if (catalogItem != null)
     {
         name = catalogItem.Name;
     }
-    var catalogId = siteContext.CurrentCatalogItem.DisplayName.Replace(" ", "").ToLower();
+    var catalogId = "catalog-" + Guid.NewGuid().ToString("N").ToLower();
 }
 
 <div class="sidebar sidebar-static">
@@ -48,9 +48,7 @@
                 <ul class="nav nav-pills nav-stacked @catalogId">
                     @foreach (var category in Model.ChildCategories)
                     {
-                        var cModel = new CategoryViewModel(category);
-
-                        <li class="@(string.Equals(name, cModel.Name, StringComparison.OrdinalIgnoreCase) ? "active" : "")"><a href="@cModel.GetLink()">@cModel.DisplayNameRender</a></li>
+                        <li class="@(string.Equals(name, category.Name, StringComparison.OrdinalIgnoreCase) ? "active" : "")"><a href="@category.GetLink()">@Html.Sitecore().Field(category.TitleFieldName, category.Item)</a></li>
                     }
                 </ul>
             </div>

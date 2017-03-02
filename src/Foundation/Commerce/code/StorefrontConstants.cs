@@ -114,14 +114,6 @@ namespace Sitecore.Foundation.Commerce
 
             public static readonly string SenderEmailAddress = "Sender Email Address";
 
-            public static readonly string MaxNumberOfAddresses = "Max Number of Addresses";
-
-            public static readonly string MaxNumberOfWishLists = "Max Number of WishLists";
-
-            public static readonly string MaxNumberOfWishListItems = "Max Number of WishList Items";
-
-            public static readonly string UseIndexFileForProductStatusInLists = "Use Index File For Product Status In Lists";
-
             public static readonly string OperatingUnitNumber = "OperatingUnitNumber";
 
             public static readonly string MapKey = "Map Key";
@@ -150,17 +142,11 @@ namespace Sitecore.Foundation.Commerce
 
             public static readonly string Lookups = "Lookups";
 
-            public static readonly string SystemMessages = "System Messages";
-
             public static readonly string InventoryStatuses = "Inventory Statuses";
 
             public static readonly string Relationships = "Relationships";
 
             public static readonly string OrderStatuses = "Order Statuses";
-
-            public static readonly string Currencies = "Currencies";
-
-            public static readonly string CurrencyDisplay = "Currency Display";
 
             public static readonly string Payments = "Payments";
 
