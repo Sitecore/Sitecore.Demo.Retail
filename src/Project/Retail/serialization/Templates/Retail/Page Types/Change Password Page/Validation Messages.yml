@@ -1,0 +1,18 @@
+﻿---
+ID: "d8fadb01-86de-45df-8e7c-92b13e94323a"
+Parent: "ed33ad84-9678-435d-831e-edbf938bfeeb"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Project/Retail/Page Types/Change Password Page/Validation Messages
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150203T172844Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

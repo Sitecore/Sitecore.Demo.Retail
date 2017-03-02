@@ -40,6 +40,8 @@ namespace Sitecore.Reference.Storefront.Controllers
 {
     public class CheckoutController : SitecoreController
     {
+        private const string ConfirmationIdQueryString = "confirmationId";
+
         public CheckoutController(CartManager cartManager, OrderManager orderManager, AccountManager accountManager, PaymentManager paymentManager, ShippingManager shippingManager, ContactFactory contactFactory, VisitorContextRepository visitorContextRepository, CurrencyManager currencyManager)
         {
             CartManager = cartManager;
@@ -67,6 +69,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             var cart = (CommerceCart) response.ServiceProviderResult.Cart;
             if (cart.Lines == null || !cart.Lines.Any())
             {
+#warning Remove hardcoded URL
                 var cartPageUrl = "/shoppingcart";
                 return Redirect(cartPageUrl);
             }
@@ -76,7 +79,7 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult OrderConfirmation([Bind(Prefix = StorefrontConstants.QueryStrings.ConfirmationId)] string confirmationId)
+        public ActionResult OrderConfirmation([Bind(Prefix = ConfirmationIdQueryString)] string confirmationId)
         {
             var viewModel = new OrderConfirmationViewModel();
             CommerceOrder order = null;
@@ -179,7 +182,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
 
-                result.Initialize($"checkout/OrderConfirmation?{StorefrontConstants.QueryStrings.ConfirmationId}={response.Result.OrderID}");
+                result.Initialize($"checkout/OrderConfirmation?{ConfirmationIdQueryString}={response.Result.OrderID}");
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)

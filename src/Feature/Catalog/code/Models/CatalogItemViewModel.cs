@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Links;
 
@@ -15,8 +17,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         protected CatalogItemViewModel(Item item)
         {
+            Assert.ArgumentNotNull(item, nameof(item));
             Item = item;
         }
+
+        public MediaItem DefaultImage => Images?.FirstOrDefault();
 
         public List<MediaItem> Images
         {

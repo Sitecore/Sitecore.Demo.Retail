@@ -134,6 +134,9 @@
     <Reference Include="Sitecore.Foundation.Dictionary">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Foundation.Indexing">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Indexing.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.SitecoreExtensions">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.SitecoreExtensions.dll</HintPath>
     </Reference>
@@ -220,8 +223,6 @@
     <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\RegisterDataModelExtensionsBase.cs" />
     <Compile Include="Infrastructure\StorefrontSessionStateAttribute.cs" />
-    <Compile Include="Models\CustomerLinkupPendingViewModel.cs" />
-    <Compile Include="Models\IdentityProviderModel.cs" />
     <Compile Include="Models\JsonResults\AddressItemJsonResult.cs" />
     <Compile Include="Models\JsonResults\AddressListItemJsonResult.cs" />
     <Compile Include="Models\JsonResults\CancelOrderBaseJsonResult.cs" />
@@ -232,7 +233,6 @@
     <Compile Include="Models\JsonResults\ShippingMethodPerItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\ShippingMethodsJsonResult.cs" />
     <Compile Include="Models\JsonResults\ShippingOptionBaseJsonResult.cs" />
-    <Compile Include="Models\FederatedSignOutViewModel.cs" />
     <Compile Include="Models\OrderConfirmationViewModel.cs" />
     <Compile Include="Models\JsonResults\AddressItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\AddressListItemBaseJsonResult.cs" />
@@ -268,11 +268,8 @@
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\CartRenderingModel.cs" />
     <Compile Include="Models\CommerceCartLineWithImages.cs" />
-    <Compile Include="Models\NoDataSourceViewModel.cs" />
     <Compile Include="Models\PaginationViewModel.cs" />
     <Compile Include="Models\SearchBarViewModel.cs" />
-    <Compile Include="Models\SiteContentSearchResultsViewModel.cs" />
-    <Compile Include="Models\SiteContentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\InitializeBundles.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\InitializeRoutes.cs" />
@@ -309,7 +306,6 @@
     <Content Include="Views\Account\Addresses.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\EditProfile.cshtml" />
-    <Content Include="Views\Account\FederatedSignout.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
@@ -318,7 +314,6 @@
     <Content Include="Views\Account\MyWishList.cshtml" />
     <Content Include="Views\Account\MyWishLists.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\UserPendingActivation.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsList.cshtml" />
     <Content Include="Views\Checkout\_Billing.cshtml" />
     <Content Include="Views\Checkout\_ByItem_SendByEmail.cshtml" />
@@ -337,21 +332,15 @@
     <Content Include="Views\Checkout\StartCheckout.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_PrintLayout.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\ErrorImage.cshtml" />
     <Content Include="Views\Shared\ErrorsSummary.cshtml" />
     <Content Include="Views\Shared\LanguageSelector.cshtml" />
     <Content Include="Views\Cart\MiniCart.cshtml" />
     <Content Include="Views\Shared\NavigationButtons.cshtml" />
-    <Content Include="Views\Shared\NoDatasource.cshtml" />
     <Content Include="Views\Shared\PrintOnly.cshtml" />
     <Content Include="Views\Shared\SearchBar.cshtml" />
     <Content Include="Views\Shared\SearchEvent.cshtml" />
     <Content Include="Views\Shared\ShareAndPrint.cshtml" />
     <Content Include="Views\Shared\SocialConnector.cshtml" />
-    <Content Include="Views\Shared\TitleText.cshtml" />
-    <Content Include="Views\Shared\TitleTextHeader.cshtml" />
-    <Content Include="Views\Shared\TopBarLinks.cshtml" />
     <Content Include="Views\Cart\_CartSummary.cshtml" />
     <Content Include="Views\Cart\_LineItem.cshtml" />
     <Content Include="Views\Cart\CheckoutButtons.cshtml" />
@@ -420,7 +409,6 @@
     <Content Include="Scripts\Storefront\register.js" />
     <Content Include="Scripts\Storefront\search.js" />
     <Content Include="Scripts\Storefront\Sitecore.js" />
-    <Content Include="Scripts\Storefront\userpendingactivation.js" />
     <Content Include="Scripts\Storefront\ViewModels\addresses_VM.js" />
     <Content Include="Scripts\Storefront\ViewModels\billing_VM.js" />
     <Content Include="Scripts\Storefront\ViewModels\CartKnockoutModels.js" />

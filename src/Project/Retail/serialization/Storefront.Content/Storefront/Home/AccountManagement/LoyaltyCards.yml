@@ -12,6 +12,9 @@ Languages:
     - ID: "06581d7e-762c-4f8f-8121-fa3ce293ee54"
       Hint: Loyalty Points Label
       Value: Loyalty points
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: Loyalty Cards
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150111T190957Z
@@ -66,6 +69,12 @@ Languages:
     - ID: "c19f5f91-f89b-43d8-b057-52a79a06fa49"
       Hint: Loyalty Cards Empty Text
       Value: <p>You have no loyalty cards</p>
+    - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
+      Hint: Title
+      Value: Loyalty Cards
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: Loyalty Cards
     - ID: "cba04a95-279a-4fc8-83b7-989df3366b29"
       Hint: Expired Points Label
       Value: Expired points

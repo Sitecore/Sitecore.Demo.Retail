@@ -31,6 +31,10 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
 {
     public class CatalogLinkProvider : LinkProvider
     {
+        public CatalogLinkProvider()
+        {
+        }
+
         public const string IncludeCatalogsAttribute = "includeCatalog";
 
         public const string UseShopLinksAttribute = "useShopLinks";
@@ -56,21 +60,20 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
             IncludeCatalog = MainUtil.GetBool(config[IncludeCatalogsAttribute], IncludeCatalogsDefault);
             UseShopLinks = MainUtil.GetBool(config[UseShopLinksAttribute], UseShopLinksDefault);
             IncludeFriendlyName = MainUtil.GetBool(config[IncludeFriendlyNameAttribute], IncludeFriendlyNameDefault);
-            CatalogUrlRepository = DependencyResolver.Current.GetService<CatalogUrlService>();
         }
-
-        public CatalogUrlService CatalogUrlRepository { get; set; }
 
         public override string GetDynamicUrl(Item item, LinkUrlOptions options)
         {
             Assert.ArgumentNotNull(item, nameof(item));
             Assert.ArgumentNotNull(options, nameof(options));
 
+            var urlService = DependencyResolver.Current.GetService<CatalogUrlService>();
+
             //TODO: Incorporate the url options in the catalog URL building
             if (Context.PageMode.IsExperienceEditor)
-                return CatalogUrlRepository.GetProductCatalogUrl(item);
+                return urlService.GetProductCatalogUrl(item);
 
-            var url = UseShopLinks ? CatalogUrlRepository.BuildShopUrl(item, IncludeCatalog, IncludeFriendlyName) : CatalogUrlRepository.BuildUrl(item, IncludeCatalog, IncludeFriendlyName);
+            var url = UseShopLinks ? urlService.BuildShopUrl(item, IncludeCatalog, IncludeFriendlyName) : urlService.BuildUrl(item, IncludeCatalog, IncludeFriendlyName);
 
             if (string.IsNullOrEmpty(url))
             {

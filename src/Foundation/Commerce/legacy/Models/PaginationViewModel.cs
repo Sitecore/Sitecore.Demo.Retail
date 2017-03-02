@@ -20,6 +20,7 @@ using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.Foundation.Commerce;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Mvc.Presentation;
+using Sitecore.Reference.Storefront.Controllers;
 
 namespace Sitecore.Reference.Storefront.Models
 {
@@ -31,7 +32,7 @@ namespace Sitecore.Reference.Storefront.Models
 
         public void Initialize(SearchResults products, CommerceSearchOptions searchOptions)
         {
-            QueryStringToken = StorefrontConstants.QueryStrings.SiteContentPaging;
+            QueryStringToken = StorefrontSearchController.SiteContentPaging;
 
             var itemsPerPage = searchOptions?.NumberOfItemsToReturn ?? 20;
 

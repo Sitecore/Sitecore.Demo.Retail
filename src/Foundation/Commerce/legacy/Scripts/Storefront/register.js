@@ -27,16 +27,7 @@ $(document).ready(function () {
 
 function RegisterSuccess(data) {
     if (data && data.Success) {
-        if (data.IsSignupFlow) {
-             var url = new Uri(StorefrontUri("UserPendingActivation"))
-                .addQueryParam("isSignupFlow", data.IsSignupFlow)
-                .addQueryParam("email", data.UserName)
-                .toString();
-             window.location.href = url;
-        }
-        else {
-            window.location.href = StorefrontUri("AccountManagement");
-        }        
+        window.location.href = StorefrontUri("AccountManagement");
     }
 
     ClearGlobalMessages();

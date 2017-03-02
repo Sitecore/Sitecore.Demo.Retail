@@ -25,6 +25,9 @@ Languages:
     - ID: "0754ef47-267d-4390-a004-a28badef4d0b"
       Hint: First Name
       Value: First Name
+    - ID: "0ee2f208-1fee-42fc-8051-6696d49a92bf"
+      Hint: OpenGraphTitle
+      Value: Create an Acccount
     - ID: "0f00bf99-7f90-4fca-b56c-b171f305477c"
       Hint: Facebook Button
       Value: Connect to facebook
@@ -34,6 +37,9 @@ Languages:
     - ID: "17035dd9-9e0f-4459-82f1-6455be08ccad"
       Hint: Email Of Existing Customer
       Value: Email Of Existing Customer
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: Create an Acccount
     - ID: "25654646-90c4-487f-96b2-9ab21bfdbfeb"
       Hint: Registering
       Value: Registering ...
@@ -83,6 +89,9 @@ Languages:
     - ID: "c025ee06-d9f1-45a3-9bbe-b849c24ea25f"
       Hint: Password
       Value: Password
+    - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
+      Hint: Title
+      Value: Create an Acccount
     - ID: "c4a8e07e-4cd4-4b78-8c1a-68d327dcebbd"
       Hint: Passwords Do Not Match Message
       Value: The password and confirmation password do not match.
@@ -90,6 +99,9 @@ Languages:
       Hint: Image
       Value: |
         <image mediaid="{784E8A3C-9C91-40B7-B1B3-7072B6439AB8}" />
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: Create an Acccount
     - ID: "cb93092d-1dd9-4bc7-b30c-bac55e1b6e26"
       Hint: Facebook Text
       Value: |

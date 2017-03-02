@@ -14,8 +14,11 @@
 @model Sitecore.Feature.Commerce.Catalog.Models.PaginationViewModel
 
 @{
-    int desiredPages = 5;
-    int.TryParse(Model.Rendering.Item["Pages on each side of current"], out desiredPages);
+    int desiredPages;
+    if (!int.TryParse(Html.Sitecore().CurrentRendering.Parameters["PagesOnEachSideOfCurrent"], out desiredPages))
+    {
+        desiredPages = 5;
+    }
 }
 
 <div id="C06-Pagination" class="row">

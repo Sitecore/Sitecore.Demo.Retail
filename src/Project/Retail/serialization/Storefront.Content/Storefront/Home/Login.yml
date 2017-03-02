@@ -22,6 +22,9 @@ Languages:
     - ID: "147cfb98-67fd-459e-8a8e-4a8092075350"
       Hint: Email
       Value: Email Address
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: Sign in
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141119T095223Z
@@ -62,12 +65,18 @@ Languages:
     - ID: "bdbdc686-d372-484a-b650-b6fd48baf3a3"
       Hint: Sign In Button
       Value: Sign in
+    - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
+      Hint: Title
+      Value: Sign in
     - ID: "c38aa797-891e-40de-8b95-d1d502cd3261"
       Hint: Customer Message 1
       Value: Returning customers
     - ID: "c3a24e20-8391-4568-affe-ab48df628fe5"
       Hint: Password Placeholder
       Value: Password
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: Sign in
     - ID: "cc1189e1-1fdc-4396-be4d-c5a5b107b7eb"
       Hint: Email Missing Message
       Value: The email is required.

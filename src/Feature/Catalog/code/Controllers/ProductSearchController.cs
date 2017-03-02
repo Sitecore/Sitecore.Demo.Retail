@@ -367,26 +367,19 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
                 searchResults = CommerceSearchManager.AddSearchOptionsToQuery(searchResults, searchOptions);
 
-                var results = searchResults.GetResults();
-                var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);
-
-                return response;
+                try
+                {
+                    var results = searchResults.GetResults();
+                    var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);
+                    return response;
+                }
+                catch (ContentSearch.Linq.Lucene.Exceptions.TooManyClausesException e)
+                {
+                    //In some cases a very broad keyword may cause the query to be too big.
+                    Log.Warn($"Could not search for '{keyword}'. Results in too many clauses.", e, this);
+                    return null;
+                }
             }
-        }
-
-        private class SearchInfo
-        {
-            public string SearchKeyword { get; set; }
-
-            public IEnumerable<CommerceQueryFacet> RequiredFacets { get; set; }
-
-            public IEnumerable<CommerceQuerySort> SortFields { get; set; }
-
-            public int ItemsPerPage { get; set; }
-
-            public Foundation.Commerce.Models.Catalog Catalog { get; set; }
-
-            public CommerceSearchOptions SearchOptions { get; set; }
         }
     }
 }

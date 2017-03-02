@@ -21,6 +21,9 @@ SharedFields:
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
         <r
+          uid="{4598C39D-D2C0-48E7-B039-7D163CD47F93}"
+          s:ds="" />
+        <r
           uid="{565F9960-4E47-4DA4-9406-0A29DD09911F}"
           s:ds=""
           s:par="" />
@@ -29,7 +32,7 @@ SharedFields:
           p:after="r[@uid='{81F6D61C-DF96-46C2-80D2-32EF31E2A6F9}']"
           s:ds=""
           s:id="{7DFD9396-CB94-4174-9721-9419A2AA68E3}"
-          s:par="MapType=roadmap&amp;CenterLocation=-5.055576%2C3.803790&amp;ZoomLevel=0&amp;EnableCenterMapControl&amp;EnableZoomControl=1&amp;EnableMapTypeControl=1&amp;EnableScaleControl&amp;EnableStreetViewControl&amp;EnableRotateControl"
+          s:par="EnableMapTypeControl=1&amp;ZoomLevel=0&amp;EnableZoomControl=1&amp;CenterLocation=-5.055576%2c3.803790&amp;Caching=0%7c0%7c0%7c0%7c0%7c0%7c0%7c0"
           s:ph="/page-layout/section/col-wide-1" />
       </d>
     </r>

@@ -20,6 +20,7 @@
 @using Sitecore.Foundation.SitecoreExtensions.Extensions
 @using Sitecore.Foundation.Commerce.Managers
 @using Sitecore.Commerce.Connect.CommerceServer.Orders.Models
+@using Sitecore.Links
 @model CommerceOrder
 @{
     var productDetailsLabel = Html.Sitecore().Field("Product Details Label", Html.Sitecore().CurrentItem);
@@ -113,8 +114,7 @@
                 image = imageItem?.ImageUrl(110, 110);
             }
 
-            var isGiftCard = product.ProductId.Equals(StorefrontManager.CurrentStorefront.GiftCardProductId, StringComparison.OrdinalIgnoreCase);
-            var productUrl = isGiftCard ? "/buygiftcard" : "/product/" + product.ProductId;
+            var productUrl = ""; //TODO Fix using CatalogManager and LinkManager
             var lineShippingMethod = shipments.FirstOrDefault(s => s.LineIDs.Contains(cartLine.ExternalCartLineId)) as CommerceShippingInfo;
 
             var offers = string.Empty;

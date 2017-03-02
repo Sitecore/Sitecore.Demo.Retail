@@ -21,9 +21,8 @@ SharedFields:
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
         <r
-          uid="{96CC7D47-0E17-493A-A8BD-B596996BD2CB}">
-          <p:d />
-        </r>
+          uid="{9E3164C5-B71B-4684-95F9-6C23010F3CD4}"
+          s:ds="" />
         <r
           uid="{37C79DCA-DADD-43D9-8785-CCACED2584DC}"
           p:after="*[1=2]"
@@ -52,6 +51,9 @@ Languages:
         <p>Orders placed within the last 30 days are shown below.</p>
         <p>For a full list click "View all orders"</p>
         
+    - ID: "0ee2f208-1fee-42fc-8051-6696d49a92bf"
+      Hint: OpenGraphTitle
+      Value: My Account
     - ID: "19666030-1d0e-4423-a7f6-8452c8c244f1"
       Hint: Address Book Title
       Value: Address book
@@ -60,6 +62,9 @@ Languages:
       Value: |
                 <p>Small message here</p>
         
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: My Account
     - ID: "1cdcba80-cda3-4996-88ae-20f49807b25c"
       Hint: Orders Title
       Value: Recent orders
@@ -129,6 +134,12 @@ Languages:
     - ID: "bcb8bfee-f776-449b-907d-edb7cfc29108"
       Hint: Change Password Label
       Value: Change your password
+    - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
+      Hint: Title
+      Value: My Account
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: My Account
     - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
       Hint: Title
       Value: My Account

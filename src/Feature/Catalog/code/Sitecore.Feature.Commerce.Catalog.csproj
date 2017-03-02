@@ -83,6 +83,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.ContentSearch.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.ContentSearch.Linq.Lucene">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.ContentSearch.Linq.Lucene.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.Alerts">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Alerts.dll</HintPath>
     </Reference>
@@ -176,6 +179,7 @@
     <None Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\SearchInfo.cs" />
     <Compile Include="Factories\CatalogItemContextFactory.cs" />
     <Compile Include="Models\RelationshipViewModel.cs" />
     <Compile Include="Models\RouteItemType.cs" />

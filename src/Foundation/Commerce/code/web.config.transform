@@ -82,8 +82,6 @@
       <cache disableMemoryCollection="false" disableExpiration="false"  percentagePhysicalMemoryUsedLimit="50" xdt:Transform="InsertIfMissing"/>
     </caching>
 
-    <customErrors defaultRedirect="/error" />
-
     <sessionState timeout="1"/>
   </system.web>
 

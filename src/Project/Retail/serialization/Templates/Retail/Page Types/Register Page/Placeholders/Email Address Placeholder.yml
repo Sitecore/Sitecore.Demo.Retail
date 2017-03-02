@@ -1,0 +1,21 @@
+﻿---
+ID: "6f1b8496-8581-43bf-93b2-983cc992bbe7"
+Parent: "b9606719-2259-4e3f-9ccb-adc8c375a7e8"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Project/Retail/Page Types/Register Page/Placeholders/Email Address Placeholder
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 100
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141217T105731Z

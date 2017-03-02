@@ -49,7 +49,7 @@ SharedFields:
           ph="topright"
           uid="{1B0865BA-8725-40D7-B472-5466055F1834}" />
         <r
-          ds="{9988B682-59C7-4319-8BF9-7071F132A5AD}"
+          ds=""
           id="{9AA8E388-A6BD-46E1-A73B-DDEF601DE6F8}"
           par=""
           ph="topcenter"
@@ -66,18 +66,6 @@ SharedFields:
           id="{0FA59DDC-5AEB-4ADB-B64B-D8D03B351680}"
           ph="navigationextra"
           uid="{D0FFD21B-BDDF-4C59-A150-C43C76CABF37}" />
-        <r
-          ds="{98CE979E-638E-4EE0-AD7F-05164173F1C1}"
-          id="{DC1B9040-8694-456A-A5E6-81996BD1B2AA}"
-          par=""
-          ph="navigationextraleft"
-          uid="{5D2C83EE-F8CA-41B9-BBF2-03CBC74D3F52}" />
-        <r
-          ds=""
-          id="{582FEA78-404C-44D8-B6B4-356B080F5A7C}"
-          par=""
-          ph="navigationextraright"
-          uid="{0D3D37F8-ED81-4F72-B7C2-8D5AF8EB0094}" />
         <r
           ds="{889A6934-BCDC-4294-94B7-6D141E7312B4}"
           id="{CFD437A6-404A-4C8C-8A41-EED2FB86D5DE}"
@@ -111,13 +99,13 @@ SharedFields:
           ph="socialconnector"
           uid="{8C2C1F8D-59F1-4B59-8B17-FC5BE9CF1765}" />
         <r
-          ds="{2CD89BFE-2CCB-420F-8913-68A063BA4AE8}"
+          ds=""
           id="{83DA4C94-D96C-4957-B026-6C9AC77DB964}"
           par=""
           ph="productinformation"
           uid="{D671C715-DAE0-4EFD-8336-7ACB73E3DE47}" />
         <r
-          ds="{27B8B175-F0C5-4CB9-A91D-40A8C8516DC9}"
+          ds=""
           id="{5DB98A10-52BD-4AB0-9E2B-C40C45FD2FAE}"
           par=""
           ph="addtocart"
@@ -133,7 +121,7 @@ SharedFields:
           ph="center"
           uid="{8B8DFD0C-2842-4B5D-BA29-4753FB35DCEA}" />
         <r
-          ds="{F6504124-F766-43D0-824B-EB339CAE8E5F}"
+          ds=""
           id="{2658217E-196A-4041-8F81-B8AFA7E377EE}"
           par=""
           ph="bottom"
@@ -186,7 +174,7 @@ SharedFields:
           ph="navbar-activity"
           uid="{4F463767-4D70-4EC9-8732-068E6CC5F1F8}" />
         <r
-          ds="{9988B682-59C7-4319-8BF9-7071F132A5AD}"
+          ds=""
           id="{9AA8E388-A6BD-46E1-A73B-DDEF601DE6F8}"
           ph="navbar-activity"
           uid="{892BBFF6-55FF-4292-9F06-9E944E59A593}" />
@@ -222,7 +210,7 @@ SharedFields:
           ph="col-wide-2"
           uid="{3B217F90-4061-48A6-BDCF-23A624D69491}" />
         <r
-          ds="{2CD89BFE-2CCB-420F-8913-68A063BA4AE8}"
+          ds=""
           id="{83DA4C94-D96C-4957-B026-6C9AC77DB964}"
           ph="col-wide-2"
           uid="{D671C715-DAE0-4EFD-8336-7ACB73E3DE47}" />
@@ -231,7 +219,7 @@ SharedFields:
           ph="col-wide-2"
           uid="{329A65A6-5100-42CD-BD5A-74C3356BB8F7}" />
         <r
-          ds="{27B8B175-F0C5-4CB9-A91D-40A8C8516DC9}"
+          ds=""
           id="{5DB98A10-52BD-4AB0-9E2B-C40C45FD2FAE}"
           ph="col-wide-2"
           uid="{59246F17-EC96-46F0-A632-BE4671929091}" />

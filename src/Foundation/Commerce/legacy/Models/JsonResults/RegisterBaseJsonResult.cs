@@ -34,8 +34,6 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public string UserName { get; set; }
 
-        public bool IsSignupFlow { get; set; }
-
         public void Initialize(CommerceUser user)
         {
             UserName = user.UserName;

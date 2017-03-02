@@ -31,8 +31,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         {
         }
 
-        public MiniCartBaseJsonResult(ServiceProviderResult result)
-            : base(result)
+        public MiniCartBaseJsonResult(ServiceProviderResult result) : base(result)
         {
         }
 

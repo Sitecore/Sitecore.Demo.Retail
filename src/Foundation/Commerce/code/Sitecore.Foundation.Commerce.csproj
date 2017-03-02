@@ -189,6 +189,7 @@
   <ItemGroup>
     <Compile Include="CommerceServerStorefrontConstants.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Extensions\ItemExtensions.cs" />
     <Compile Include="Infrastructure\ComputedFields\VariantInfoComputedField.cs" />
     <Compile Include="Infrastructure\Connect\Arguments\GetProductBulkPricesRequest.cs" />
@@ -255,7 +256,6 @@
     <Compile Include="Models\InputModels\ChangePasswordInputModel.cs" />
     <Compile Include="Models\InputModels\CreateWishListInputModel.cs" />
     <Compile Include="Models\InputModels\CreditCardPaymentInputModelItem.cs" />
-    <Compile Include="Models\InputModels\CustomerLinkupPendingInputModel.cs" />
     <Compile Include="Models\InputModels\DeleteCartLineInputModel.cs" />
     <Compile Include="Models\InputModels\DeletePartyInputModelItem.cs" />
     <Compile Include="Models\InputModels\DiscountInputModel.cs" />

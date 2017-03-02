@@ -34,10 +34,6 @@ namespace Sitecore.Reference.Storefront.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
 
-        public List<IdentityProviderModel> Providers { get; } = new List<IdentityProviderModel>();
-
         public string Message { get; set; }
-
-        public bool IsActivationFlow { get; set; }
     }
 }

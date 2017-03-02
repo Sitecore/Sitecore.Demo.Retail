@@ -16,7 +16,7 @@ SharedFields:
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
         <r
           uid="{10C1BE30-D1C5-46F2-A04E-F804CB3E5C66}"
-          s:ds="{F6504124-F766-43D0-824B-EB339CAE8E5F}"
+          s:ds=""
           s:par="" />
       </d>
     </r>
@@ -38,6 +38,9 @@ Languages:
               p:before="*"
               s:id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
               s:ph="/footer/section" />
+            <r
+              uid="{C4014A56-FA2D-46CC-B696-483D5543BCED}"
+              s:ds="" />
           </d>
         </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"

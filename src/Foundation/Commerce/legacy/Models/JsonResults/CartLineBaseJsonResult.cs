@@ -39,13 +39,6 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         {
             var product = (CommerceCartProduct) line.Product;
 
-            var lineWithImages = line as CommerceCartLineWithImages;
-            if (lineWithImages?.Images.Count > 0)
-            {
-                Image = lineWithImages.Images[0] != null ? lineWithImages.Images[0].ImageUrl(100, 100) : string.Empty;
-            }
-
-
             Title = product.DisplayName;
             Color = product.Properties["Color"] as string;
             var total = (CommerceTotal) line.Total;
@@ -55,6 +48,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             LineTotal = line.Total.Amount.ToCurrency(line.Total.CurrencyCode);
             ExternalCartLineId = StringUtility.RemoveCurlyBrackets(line.ExternalCartLineId);
             ProductUrl = LinkManager.GetDynamicUrl(productItem);
+            Image = (line as CommerceCartLineWithImages)?.DefaultImage?.ImageUrl(100, 100) ?? string.Empty;
 
             DiscountOfferNames = line.Adjustments.Select(a => a.Description).ToList();
         }

@@ -101,8 +101,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\Feature\Sitecore.Feature.Customers.config" />
-    <Content Include="App_Config\Include\Feature\Sitecore.Feature.Customers.Serialization.config" />
+    <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Customers.config" />
+    <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Customers.Serialization.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Web.config" />
   </ItemGroup>

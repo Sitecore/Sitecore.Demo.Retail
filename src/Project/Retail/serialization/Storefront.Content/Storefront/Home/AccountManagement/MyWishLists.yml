@@ -18,6 +18,9 @@ Languages:
     - ID: "15508705-e5bc-4054-b0a3-297daf74929a"
       Hint: Rename Button Loading
       Value: Renaming list ...
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: Your Wish Lists
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150106T212713Z
@@ -45,6 +48,12 @@ Languages:
     - ID: "b7fcb6ab-a6ec-49d4-bbe5-bea206ea5feb"
       Hint: Back to My Account Label
       Value: Back to My Account
+    - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
+      Hint: Title
+      Value: Your Wish Lists
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: Your Wish Lists
     - ID: "dc019f89-2cda-4832-9353-e906be2dbd0e"
       Hint: Last Item Added Label
       Value: Last item added

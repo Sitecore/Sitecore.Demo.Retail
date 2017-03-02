@@ -349,15 +349,13 @@ namespace Sitecore.Foundation.Commerce.Managers
             {
                 try
                 {
-                    var userIpAddress = HttpContext.Current != null
-                        ? HttpContext.Current.Request.UserHostAddress
-                        : string.Empty;
+                    var userIpAddress = HttpContext.Current != null ? HttpContext.Current.Request.UserHostAddress : string.Empty;
                     var provisionalPassword = Membership.Provider.ResetPassword(getUserResponse.Result.UserName,
                         string.Empty);
 
                     var mailUtil = new MailUtil();
-                    var wasEmailSent = mailUtil.SendMail("ForgotPassword", inputModel.Email,
-                        storefront.SenderEmailAddress, new object(), new object[] {userIpAddress, provisionalPassword});
+                    var wasEmailSent = mailUtil.SendMail("ForgotPassword", inputModel.Email, storefront.SenderEmailAddress, new object(), new object[] {userIpAddress, provisionalPassword});
+
                     if (!wasEmailSent)
                     {
                         var message = DictionaryPhraseRepository.Current.Get("/System Messages/Accounts/Could Not Send Email Error", "Sorry, the email could not be sent");
