@@ -19,15 +19,25 @@ var miniCartUpdateViewModel = null;
 //
 function manageMiniCartActions() {
     $(document).ready(function () {
+        $('.toggle-cart').hover(function () {
+            $('.minicart').slideDown(500);
+            return false;
+        });
+        
+        $('.minicart').mouseleave(function () {
+            $(this).slideUp(500);
+            return false;
+        });
+
         $('.minicart-content').on('click', ".minicart-delete", function (event) {
             $(event.currentTarget).find(".glyphicon").removeClass("glyphicon-remove-circle");
             $(event.currentTarget).find(".glyphicon").addClass("glyphicon-refresh");
             $(event.currentTarget).find(".glyphicon").addClass("glyphicon-refresh-animate");
-            var lineItem = $(event.currentTarget).parents("[data-ajax-lineitemid]");
+            var lineItem = $(event.currentTarget).parent();
             var lineItemId = lineItem.attr("data-ajax-lineitemid");
 
             ClearGlobalMessages();
-            AJAXPost("/api/storefront/cart/DeleteLineItem", "{'ExternalCartLineId':'" + lineItemId + "'}", removeItemResponse, lineItem);
+            AJAXPost("api/storefront/cart/DeleteLineItem", "{'ExternalCartLineId':'" + lineItemId + "'}", removeItemResponse, lineItem);
             return false;
         });
     });
