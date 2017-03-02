@@ -40,6 +40,10 @@ namespace Sitecore.Reference.Storefront.Models
 
         [JsonIgnore]
         [XmlIgnore]
+        public MediaItem DefaultImage => Images?.FirstOrDefault();
+
+        [JsonIgnore]
+        [XmlIgnore]
         public List<MediaItem> Images
         {
             get

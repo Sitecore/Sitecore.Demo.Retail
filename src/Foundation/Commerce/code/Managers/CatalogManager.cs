@@ -16,10 +16,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Web;
 using Sitecore.Commerce.Connect.CommerceServer;
-using Sitecore.Commerce.Connect.CommerceServer.Catalog;
 using Sitecore.Commerce.Connect.CommerceServer.Search;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.Commerce.Engine.Connect.Entities.Prices;
@@ -32,24 +33,19 @@ using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.ContentSearch.Security;
 using Sitecore.ContentSearch.Utilities;
 using Sitecore.Data;
-using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.Search;
 using Sitecore.Foundation.Commerce.Repositories;
-using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
-using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
     public class CatalogManager : BaseManager
     {
-        private Catalog _currentCatalog;
-
-        public CatalogManager([NotNull] CatalogServiceProvider catalogServiceProvider, [NotNull] GlobalizationServiceProvider globalizationServiceProvider, [NotNull] PricingManager pricingManager, [NotNull] InventoryManager inventoryManager, SiteContextRepository siteContextRepository, ICommerceSearchManager commerceSearchManager)
+        public CatalogManager([NotNull] CatalogServiceProvider catalogServiceProvider, [NotNull] GlobalizationServiceProvider globalizationServiceProvider, [NotNull] PricingManager pricingManager, [NotNull] InventoryManager inventoryManager, CatalogItemContext catalogItemContext, ICommerceSearchManager commerceSearchManager)
         {
             Assert.ArgumentNotNull(catalogServiceProvider, nameof(catalogServiceProvider));
             Assert.ArgumentNotNull(pricingManager, nameof(pricingManager));
@@ -59,7 +55,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             GlobalizationServiceProvider = globalizationServiceProvider;
             PricingManager = pricingManager;
             InventoryManager = inventoryManager;
-            SiteContextRepository = siteContextRepository;
+            CatalogItemContext = catalogItemContext;
             CommerceSearchManager = commerceSearchManager;
         }
 
@@ -67,42 +63,8 @@ namespace Sitecore.Foundation.Commerce.Managers
         public CatalogServiceProvider CatalogServiceProvider { get; protected set; }
         public GlobalizationServiceProvider GlobalizationServiceProvider { get; protected set; }
         public InventoryManager InventoryManager { get; protected set; }
-        public SiteContextRepository SiteContextRepository { get; }
+        public CatalogItemContext CatalogItemContext { get; }
         public PricingManager PricingManager { get; protected set; }
-
-        public Catalog CurrentCatalog
-        {
-            get
-            {
-                if (_currentCatalog != null)
-                {
-                    return _currentCatalog;
-                }
-
-                _currentCatalog = GetCurrentCatalog();
-
-                return _currentCatalog;
-            }
-        }
-
-        public Catalog GetCurrentCatalog()
-        {
-            //If this is not in a storefront then return the default catalog
-            if (StorefrontManager.CurrentStorefront?.HomeItem != null)
-            {
-                var catalogs = ((MultilistField) StorefrontManager.CurrentStorefront?.HomeItem.Fields["Catalogs"]).GetItems();
-                if (catalogs.Any())
-                {
-                    return new Catalog(catalogs.First());
-                }
-            }
-
-            var defaultCatalogContainer = Context.Database.GetItem(CommerceConstants.KnownItemIds.DefaultCatalog);
-            var catalogPath = defaultCatalogContainer.Fields["Catalog"].Source + "/" + defaultCatalogContainer.Fields["Catalog"].Value;
-            var defaultCatalog = Context.Database.GetItem(catalogPath);
-            return new Catalog(defaultCatalog);
-        }
-
 
         public CatalogResult VisitedCategoryPage([NotNull] CommerceStorefront storefront, [NotNull] string categoryId, string categoryName)
         {
@@ -151,7 +113,26 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public Category GetCategory(string categoryId)
         {
-            var categoryItem = GetCategory(categoryId, CurrentCatalog.Name);
+            return GetCategory(categoryId, CatalogContext.CurrentCatalog.Name);
+        }
+
+        [CanBeNull]
+        public CatalogContext CatalogContext
+        {
+            get
+            {
+                var context = (CatalogContext)HttpContext.Current.Items["_catalogContext"];
+                if (context != null)
+                    return context;
+                context = CatalogContext.CreateFromContext();
+                HttpContext.Current.Items["_catalogContext"] = context;
+                return context;
+            }
+        }
+
+        public Category GetCategory(string categoryId, string catalog)
+        {
+            var categoryItem = GetCategoryItem(categoryId, catalog);
             return GetCategory(categoryItem);
         }
 
@@ -175,7 +156,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
 
             var includeVariants = productViewModel.Variants != null && productViewModel.Variants.Any();
-            var pricesResponse = PricingManager.GetProductPrices(StorefrontManager.CurrentStorefront, visitorContext, productViewModel.CatalogName, productViewModel.ProductId, includeVariants, null);
+            var pricesResponse = PricingManager.GetProductPrices(visitorContext, productViewModel.CatalogName, productViewModel.ProductId, includeVariants, null);
             if (pricesResponse == null || !pricesResponse.ServiceProviderResult.Success || pricesResponse.Result == null)
             {
                 return;
@@ -218,7 +199,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             var catalogName = catalogProductsArray.Select(p => p.CatalogName).First();
             var productIds = catalogProductsArray.Select(p => p.ProductId).ToList();
 
-            var pricesResponse = PricingManager.GetProductBulkPrices(StorefrontManager.CurrentStorefront, visitorContext, catalogName, productIds, null);
+            var pricesResponse = PricingManager.GetProductBulkPrices(catalogName, productIds, null);
             var prices = pricesResponse?.Result ?? new Dictionary<string, Price>();
 
             foreach (var product in catalogProductsArray)
@@ -242,7 +223,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public decimal GetProductRating(Item productItem)
         {
-            var ratingString = productItem[Templates.HasRating.Fields.Rating];
+            var ratingString = productItem[Templates.Commerce.Product.Fields.Rating];
             decimal rating;
             return decimal.TryParse(ratingString, out rating) ? rating : 0;
         }
@@ -439,9 +420,10 @@ namespace Sitecore.Foundation.Commerce.Managers
             return newFilter.ToString();
         }
 
-        public Item GetCategory(string categoryName, string catalogName)
+        public Item GetCategoryItem(string categoryName, string catalogName)
         {
             Assert.ArgumentNotNullOrEmpty(catalogName, nameof(catalogName));
+            Assert.ArgumentNotNullOrEmpty(categoryName, nameof(categoryName));
 
             Item result = null;
             var searchIndex = CommerceSearchManager.GetIndex(catalogName);
@@ -467,6 +449,11 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
 
             return result;
+        }
+
+        public Item GetProduct(string productId)
+        {
+            return GetProduct(productId, CatalogContext.CurrentCatalog.Name);
         }
 
         public Item GetProduct(string productId, string catalogName)
@@ -500,8 +487,13 @@ namespace Sitecore.Foundation.Commerce.Managers
             return result;
         }
 
-        public CategorySearchResults GetCategoryChildCategories(ID categoryId, CommerceSearchOptions searchOptions)
+        public CategorySearchResults GetCategoryChildCategories(Item category)
         {
+            if (category == null)
+            {
+                throw new ArgumentNullException(nameof(category));
+            }
+
             var childCategoryList = new List<Item>();
 
             var searchIndex = CommerceSearchManager.GetIndex();
@@ -511,7 +503,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 var searchResults = context.GetQueryable<CommerceBaseCatalogSearchResultItem>()
                     .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Category)
                     .Where(item => item.Language == Context.Language.Name)
-                    .Where(item => item.ItemId == categoryId)
+                    .Where(item => item.ItemId == category.ID)
                     .Select(p => p);
 
                 var list = searchResults.ToList();

@@ -36,5 +36,27 @@ namespace Sitecore.Feature.Commerce.Catalog
 
             }
         }
+
+        //Contains the fields and template names for generated commerce catalog templates
+        public class Generated
+        {
+            public static class Category
+            {
+                public static class Fields
+                {
+                    public static readonly string Description = "Description";
+                    public static readonly string Images = "Images";
+                }
+            }
+
+            public static class Product
+            {
+                public static class Fields
+                {
+                    public static readonly string Images = "Images";
+                    public static readonly string Description = "Description";
+                }
+            }
+        }
     }
 }

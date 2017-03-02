@@ -9,6 +9,9 @@ Languages:
   Versions:
   - Version: 1
     Fields:
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: Your Orders
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141229T175709Z
@@ -21,6 +24,12 @@ Languages:
     - ID: "b5cb89f5-ad33-4d61-9c99-be47b0750d56"
       Hint: Order Number Label
       Value: Order number
+    - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
+      Hint: Title
+      Value: Your Orders
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: Your Orders
     - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
       Hint: Title
       Value: Your Orders

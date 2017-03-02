@@ -1,0 +1,21 @@
+﻿---
+ID: "b7bc66a7-2fbd-4a75-bae1-b4255c4896bf"
+Parent: "f19260ac-7cab-4db4-82b0-261bf2485576"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Project/Retail/Page Types/My Order Page/Labels/Order Status Label
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 300
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150105T204241Z

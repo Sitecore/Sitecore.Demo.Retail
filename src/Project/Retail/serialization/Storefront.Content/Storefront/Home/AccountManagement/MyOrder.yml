@@ -15,6 +15,9 @@ Languages:
     - ID: "0dd06ffb-7b7a-4b83-92bc-c92664cd10b0"
       Hint: Shipping Address Label
       Value: Shipping Address
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: Your Order
     - ID: "1faf7afc-168a-4793-97ea-42c28af2aaf9"
       Hint: Promotion Codes Label
       Value: Promotion Codes
@@ -60,9 +63,15 @@ Languages:
     - ID: "bd92cee4-b867-4d67-9708-3f0b6d33bf6d"
       Hint: Order Total Label
       Value: Order Total
+    - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
+      Hint: Title
+      Value: Your Order
     - ID: "c97afcfe-8170-4e47-a7a6-0775b7e94e14"
       Hint: Shipping Method Label
       Value: Shipping Method
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: Your Order
     - ID: "db9c6c0c-9a3e-45a3-a14b-5921f37bfd69"
       Hint: Delivery Label
       Value: Delivery

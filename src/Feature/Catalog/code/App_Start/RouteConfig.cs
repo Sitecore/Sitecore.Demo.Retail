@@ -15,11 +15,15 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines;
+using Sitecore.Feature.Commerce.Catalog.Models;
+using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Feature.Commerce.Catalog
 {
@@ -47,53 +51,86 @@ namespace Sitecore.Feature.Commerce.Catalog
 
             routes.MapRoute(
                 "shop-category",
-                ProductItemResolver.ShopUrlRoute + "/{id}",
-                new {id = UrlParameter.Optional, itemType = "category"});
+                GetRootName(CatalogRouteRoot.Shop) + "/{id}",
+                new {id = UrlParameter.Optional, itemType = TranslateItemType(RouteItemType.Category) });
 
             routes.MapRoute(
                 "shop-product",
-                ProductItemResolver.ShopUrlRoute + "/{category}/{id}",
-                new {id = UrlParameter.Optional, itemType = "product"});
+                GetRootName(CatalogRouteRoot.Shop) + "/{category}/{id}",
+                new {id = UrlParameter.Optional, itemType = TranslateItemType(RouteItemType.Product) });
 
             routes.MapRoute(
                 "shop-category-catalog",
-                "{catalog}/" + ProductItemResolver.ShopUrlRoute + "/{id}",
-                new {id = UrlParameter.Optional, itemType = "category"});
+                "{catalog}/" + GetRootName(CatalogRouteRoot.Shop) + "/{id}",
+                new {id = UrlParameter.Optional, itemType = TranslateItemType(RouteItemType.Category) });
 
             routes.MapRoute(
                 "shop-product-catalog",
-                "{catalog}/" + ProductItemResolver.ShopUrlRoute + "/{category}/{id}",
-                new {id = UrlParameter.Optional, itemType = "product"});
+                "{catalog}/" + GetRootName(CatalogRouteRoot.Shop) + "/{category}/{id}",
+                new {id = UrlParameter.Optional, itemType = TranslateItemType(RouteItemType.Product) });
 
             routes.MapRoute(
                 "category",
-                ProductItemResolver.CategoryUrlRoute + "/{id}",
-                new {id = UrlParameter.Optional, itemType = "category"});
+                GetRootName(CatalogRouteRoot.Category) + "/{id}",
+                new {id = UrlParameter.Optional, itemType = TranslateItemType(RouteItemType.Category) });
 
             routes.MapRoute(
                 "product",
-                ProductItemResolver.ProductUrlRoute + "/{id}",
-                new {id = UrlParameter.Optional, itemType = "product"});
+                GetRootName(CatalogRouteRoot.Product) + "/{id}",
+                new {id = UrlParameter.Optional, itemType = TranslateItemType(RouteItemType.Product) });
 
             routes.MapRoute(
                 "ProductAction",
-                ProductItemResolver.ProductUrlRoute + "/{action}/{id}",
-                new {controller = "Catalog", id = UrlParameter.Optional, itemType = "product"});
+                GetRootName(CatalogRouteRoot.Product) + "/{action}/{id}",
+                new {controller = "Catalog", id = UrlParameter.Optional, itemType = TranslateItemType(RouteItemType.Product) });
 
             routes.MapRoute(
                 "category-catalog",
-                "{catalog}/" + ProductItemResolver.CategoryUrlRoute + "/{id}",
-                new {id = UrlParameter.Optional, itemType = "category"});
+                "{catalog}/" + GetRootName(CatalogRouteRoot.Category) + "/{id}",
+                new {id = UrlParameter.Optional, itemType = TranslateItemType(RouteItemType.Category) });
 
             routes.MapRoute(
                 "product-catalog",
-                "{catalog}/" + ProductItemResolver.ProductUrlRoute + "/{id}",
-                new {id = UrlParameter.Optional, itemType = "product"});
+                "{catalog}/" + GetRootName(CatalogRouteRoot.Product) + "/{id}",
+                new {id = UrlParameter.Optional, itemType = TranslateItemType(RouteItemType.Product) });
 
             routes.MapRoute(
                 "catalogitem-all",
-                ProductItemResolver.NavigationItemName + "/{*pathElements}",
-                new {itemType = "catalogitem"});
+                GetRootName(CatalogRouteRoot.Catalog) + "/{*catalogPath}",
+                new {itemType = TranslateItemType(RouteItemType.CatalogItem)});
+        }
+
+        public static string GetRootName(CatalogRouteRoot root)
+        {
+            switch (root)
+            {
+                case CatalogRouteRoot.Catalog:
+                    return "product catalog";
+                case CatalogRouteRoot.Shop:
+                    return "shop";
+                case CatalogRouteRoot.Category:
+                    return "category";
+                case CatalogRouteRoot.Product:
+                    return "product";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(root), root, null);
+            }
+        }
+
+        public static string TranslateItemType(RouteItemType itemType)
+        {
+            return itemType.ToString("G").ToLower();
+        }
+
+        public static RouteItemType? GetItemType(RouteData route)
+        {
+            if (!route.Values.ContainsKey("itemType"))
+                return null;
+            var itemType = route.Values["itemType"].ToString();
+            RouteItemType value;
+            if (!Enum.TryParse(itemType, true, out value))
+                return null;
+            return value;
         }
     }
 }

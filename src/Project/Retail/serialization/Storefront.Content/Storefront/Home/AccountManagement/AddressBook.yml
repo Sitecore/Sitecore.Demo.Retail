@@ -9,6 +9,9 @@ Languages:
   Versions:
   - Version: 1
     Fields:
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: Address Book
     - ID: "1bd50106-1aa3-4393-bc2d-d2170f8ead36"
       Hint: Cancel Button
       Value: Cancel
@@ -48,6 +51,12 @@ Languages:
     - ID: "b6d5ea80-1003-4a93-8437-3d334dde9ae3"
       Hint: Deleting Label
       Value: Deleting ...
+    - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
+      Hint: Title
+      Value: Address Book
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: Address Book
     - ID: "caa5dc96-a392-4e4a-878a-58f0414e533f"
       Hint: Select Label
       Value: Select ...

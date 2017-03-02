@@ -10,21 +10,18 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-@model Sitecore.Feature.Commerce.Catalog.Models.ProductViewModel
+@using Sitecore.Foundation.Commerce.Extensions
 @using Sitecore.Foundation.SitecoreExtensions.Extensions
+@model Sitecore.Feature.Commerce.Catalog.Models.ProductViewModel
 @{
     if (Model == null)
     {
         return;
     }
-
-    var quantityLabel = Html.Sitecore().Field("Quantity Label", Html.Sitecore().CurrentItem);
-    var addToCartLabel = Html.Sitecore().Field("AddToCart Label", Html.Sitecore().CurrentItem);
-    var addingToCartLabel = Html.Sitecore().CurrentItem["AddingToCart Label"];
 }
 
 <div id="C12-AddToCart" class="add-to-basket">
-    @using (Ajax.BeginForm("AddCartLine", "Cart", null, new AjaxOptions { OnBegin = "SetAddButton", OnSuccess = "AddToCartSuccess", OnFailure = "AddToCartFailure", HttpMethod = "Post"}, new { @id = "AddToCartForm" }))
+    @using (Ajax.BeginForm("AddCartLine", "Cart", null, new AjaxOptions {OnBegin = "SetAddButton", OnSuccess = "AddToCartSuccess", OnFailure = "AddToCartFailure", HttpMethod = "Post"}, new {id = "AddToCartForm"}))
     {
         @Html.ValidationSummary(true)
         @Html.HiddenFor(m => m.ProductId)
@@ -32,22 +29,18 @@
         @Html.HiddenFor(m => m.CatalogName)
         @Html.HiddenFor(m => m.ProductUrl)
         @Html.AntiForgeryToken()
-
-        if (Model.Images != null && Model.Images.Any())
-        {
-            @Html.Hidden("ImageUrl", Model.Images[0]?.ImageUrl(50, 50))
-        }
+        @Html.Hidden("ImageUrl", Model.DefaultImage?.ImageUrl(50, 50))
 
         <div class="form-group">
-            <label class="control-label" for="Quantity">@quantityLabel</label>
+            <label class="control-label" for="Quantity">@Html.Sitecore().Text("Orders/Add To Cart/Quantity", "Quantity:")</label>
             <div class="controls" id="quantity">
-                @Html.TextBoxFor(model => model.Quantity, new { @type = "number", @class = "form-control", @min = "1", @max = "100", @required = "required", @Value = "1" })
+                @Html.TextBoxFor(model => model.Quantity, new {type = "number", @class = "form-control", min = "1", max = "100", required = "required", Value = "1"})
                 @Html.ValidationMessageFor(model => model.Quantity)
             </div>
         </div>
 
-        <button id="AddToCartButton" type="submit" class="btn btn-success" data-loading-text="@addingToCartLabel">
-            @addToCartLabel
+        <button id="AddToCartButton" type="submit" class="btn btn-success" data-loading-text="@Html.Sitecore().Text("Orders/Add To Cart/Add To Cart", "Add To Cart:")">
+            @Html.Sitecore().Text("Orders/Add To Cart/Adding To Cart", "Adding To Cart:")
         </button>
     }
 </div>

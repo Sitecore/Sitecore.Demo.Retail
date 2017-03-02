@@ -1,0 +1,375 @@
+﻿---
+ID: "e853f2f4-2fcc-474c-9fe8-a6070914e423"
+Parent: "ed33ad84-9678-435d-831e-edbf938bfeeb"
+Template: "ed33ad84-9678-435d-831e-edbf938bfeeb"
+Path: /sitecore/templates/Project/Retail/Page Types/Change Password Page/__Standard Values
+DB: master
+SharedFields:
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Type: layout
+  Value: |
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
+        <r
+          id="{E7AE3F87-CF66-40F2-A9F5-33ECF08BC777}"
+          ph="head"
+          uid="{6B5A8C65-EA9B-4BE3-9BF4-76848FEB4CFE}" />
+        <r
+          id="{3389CAFC-000C-41E5-921C-92821B3DB7B5}"
+          ph="head"
+          uid="{033A6596-E6AF-415B-A73B-E674F6BAD97F}" />
+        <r
+          id="{C28B9C5F-8E01-42EC-ADF6-3324FAF92C7D}"
+          ph="header-top"
+          uid="{055651DE-D1DB-42FC-AFA3-475796C5F642}" />
+        <r
+          ds="{C5BCE776-8E95-44F9-AB65-52631BE0DB3C}"
+          id="{69B9C355-004B-4268-BB1E-2F725B8752B7}"
+          ph="right-header-top"
+          uid="{67391CDE-116B-4789-922A-0B045371774E}" />
+        <r
+          id="{E26A158B-FA1E-4E9B-8622-E4458243FF46}"
+          ph="navbar"
+          uid="{8259DB9E-3A6A-4C99-BC53-9777F335C065}" />
+        <r
+          id="{A47C8288-7D4C-45FF-B75F-4AEDBF58A02D}"
+          ph="navbar-left"
+          uid="{E1F3F72D-562A-41E7-83BE-A098C4D7B6B7}" />
+        <r
+          ds="{889A6934-BCDC-4294-94B7-6D141E7312B4}"
+          id="{CFD437A6-404A-4C8C-8A41-EED2FB86D5DE}"
+          ph="navbar-center"
+          uid="{3029602A-F527-4B6A-982B-F10070279E48}" />
+        <r
+          id="{8832BA30-99C3-4D20-9B1C-237D910A153F}"
+          ph="navbar-right"
+          uid="{E0A30076-BE6D-44D1-B359-957E7D2D1377}" />
+        <r
+          ds="{B5F108D3-651F-4344-BF9B-8F10675DDBA0}"
+          id="{FAA386D8-192F-4762-839D-D637BD11549F}"
+          ph="navbar-activity"
+          uid="{4F6D5AFF-6956-46CD-A004-8532B91F08EA}" />
+        <r
+          id="{B6C0593E-1C35-4C61-8DB5-E7C7AA19D955}"
+          ph="navbar-activity"
+          uid="{025086D9-8674-4E6C-A6A3-BDB412F03D84}" />
+        <r
+          ds=""
+          id="{9AA8E388-A6BD-46E1-A73B-DDEF601DE6F8}"
+          ph="navbar-activity"
+          uid="{C4F3B128-7046-4CD3-B15C-EDBAF6C3E963}" />
+        <r
+          id="{A2216CA7-B205-4042-A345-72117D0086C3}"
+          par="UseStaticPlaceholderNames=1"
+          ph="page-layout"
+          uid="{C8750E2F-CDD6-4EF7-9BDF-F6BC85697FE4}" />
+        <r
+          id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
+          ph="/page-layout/page-header"
+          uid="{85ED049F-4D04-4C8D-BB82-02FF904E0C87}" />
+        <r
+          id="{D201A487-5099-48A1-8189-55944F70C6CB}"
+          par="UseStaticPlaceholderNames=1"
+          ph="page-layout"
+          uid="{0A579924-BB6A-4000-890A-A03416D75797}" />
+        <r
+          id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
+          par="UseStaticPlaceholderNames=1"
+          ph="/page-layout/section"
+          uid="{D04E5CC3-7176-4035-8A6A-34B430397462}" />
+        <r
+          id="{BB67A786-B97E-4412-AC35-3BB650CBBB5C}"
+          ph="/page-layout/section/col-huge"
+          uid="{B2A09B46-ACFE-4D73-BC9C-32D0C7A23639}" />
+        <r
+          id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"
+          ph="footer"
+          uid="{A6AA6BBA-3B67-49B5-A1D8-6290BCC8AC87}" />
+        <r
+          id="{DB4DA660-2D4A-4214-8896-9724E165DA44}"
+          par="UseStaticPlaceholderNames=1"
+          ph="/footer/section"
+          uid="{7578BA7F-A3B1-4E00-A28F-B18AD6FD93EC}" />
+        <r
+          ds="{4279B055-6B9C-4F96-9179-81EC406EFDDD}"
+          id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
+          ph="/footer/section/col-narrow-1"
+          uid="{578B0F0D-FB3A-48E2-B903-54FE75EB4010}" />
+        <r
+          ds="{63E42451-AD63-4CDE-934E-9E039B9422C5}"
+          id="{F366FBA9-EF26-4007-988A-63CB64649C46}"
+          ph="/footer/section/col-narrow-2"
+          uid="{1B5C2E37-0F81-4512-BB35-BFAC66265CAA}" />
+        <r
+          ds="{D010EC68-8E7B-430C-99A6-713FED4D0745}"
+          id="{A25C9850-AAB7-46A6-84B7-0DFAB32FC357}"
+          ph="/footer/section/col-wide-1"
+          uid="{54B58656-49B8-48B3-8FBC-C8FDC60F99F9}" />
+        <r
+          id="{7DAE9F23-890F-4E06-99A7-CCEDB74D3D8E}"
+          ph="postfooter"
+          uid="{34E6AFDF-67B8-4C07-9563-C299DE9EE3C9}" />
+        <r
+          id="{CED18F24-62C2-445E-B0D9-045E3325297B}"
+          ph="page-sidebar"
+          uid="{1E99F716-F281-4142-9154-27D0B2DE308D}" />
+      </d>
+      <d
+        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
+        l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
+        <r
+          id="{BB67A786-B97E-4412-AC35-3BB650CBBB5C}"
+          ph="center"
+          uid="{4EF13732-1044-46C9-B49A-16BCEB1821C7}" />
+      </d>
+    </r>
+- ID: "fd4e2050-186c-4375-8b99-e8a85dd7436e"
+  Hint: __Enable item fallback
+  Type: Checkbox
+  Value: 1
+Languages:
+- Language: "de-DE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{C4F3B128-7046-4CD3-B15C-EDBAF6C3E963}"
+              s:ds="" />
+          </d>
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+            <r
+              uid="{4EF13732-1044-46C9-B49A-16BCEB1821C7}"
+              s:ds=""
+              s:par="" />
+          </d>
+        </r>
+    - ID: "18757981-e7f6-4ab1-95e6-4ca68b65d788"
+      Hint: Repeat Password
+      Value: Repeat Password
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150203T174814Z
+    - ID: "2998cb6a-5fd0-4d1e-96ef-5f3e148f8c40"
+      Hint: Current Password Required Message
+      Value: Current Password is required.
+    - ID: "2ce72b31-f944-4a0b-9ea8-23aadead0c31"
+      Hint: Current Password
+      Value: Current Password
+    - ID: "2fa419b5-da10-4b79-affc-f552628c893b"
+      Hint: Back To My Account
+      Value: Back to My Account
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "727ffca2-41bc-4cb2-bd07-328a2516fa67"
+      Hint: New Password
+      Value: New Password
+    - ID: "8443ff6d-0783-45fd-8657-07beffa9a0b0"
+      Hint: Saving Changes Button
+      Value: Saving Changes
+    - ID: "c8e323d4-3ac3-49e1-8322-619f0168d4fe"
+      Hint: Save Changes Button
+      Value: Save Changes
+    - ID: "cd38a0ff-d6fa-4f14-810f-b50778663e10"
+      Hint: Cancel Button
+      Value: Cancel
+    - ID: "efd2b75f-7354-4eb4-86cd-6d13d911b06c"
+      Hint: The Password Length Message
+      Value: The Password must be at least 6 characters long.
+    - ID: "fd1ad1eb-ca9c-4808-93ef-09a2a28ff8c6"
+      Hint: Password and Confirmation Must Match Message
+      Value: The password and confirmation password do not match.
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{C4F3B128-7046-4CD3-B15C-EDBAF6C3E963}"
+              s:ds="" />
+          </d>
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+            <r
+              uid="{4EF13732-1044-46C9-B49A-16BCEB1821C7}"
+              s:ds=""
+              s:par="" />
+          </d>
+        </r>
+    - ID: "18757981-e7f6-4ab1-95e6-4ca68b65d788"
+      Hint: Repeat Password
+      Value: Repeat Password
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150203T174814Z
+    - ID: "2998cb6a-5fd0-4d1e-96ef-5f3e148f8c40"
+      Hint: Current Password Required Message
+      Value: Current Password is required.
+    - ID: "2ce72b31-f944-4a0b-9ea8-23aadead0c31"
+      Hint: Current Password
+      Value: Current Password
+    - ID: "2fa419b5-da10-4b79-affc-f552628c893b"
+      Hint: Back To My Account
+      Value: Back to My Account
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "727ffca2-41bc-4cb2-bd07-328a2516fa67"
+      Hint: New Password
+      Value: New Password
+    - ID: "8443ff6d-0783-45fd-8657-07beffa9a0b0"
+      Hint: Saving Changes Button
+      Value: Saving Changes
+    - ID: "c8e323d4-3ac3-49e1-8322-619f0168d4fe"
+      Hint: Save Changes Button
+      Value: Save Changes
+    - ID: "cd38a0ff-d6fa-4f14-810f-b50778663e10"
+      Hint: Cancel Button
+      Value: Cancel
+    - ID: "efd2b75f-7354-4eb4-86cd-6d13d911b06c"
+      Hint: The Password Length Message
+      Value: The Password must be at least 6 characters long.
+    - ID: "fd1ad1eb-ca9c-4808-93ef-09a2a28ff8c6"
+      Hint: Password and Confirmation Must Match Message
+      Value: The password and confirmation password do not match.
+- Language: "fr-FR"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+            <r
+              uid="{4EF13732-1044-46C9-B49A-16BCEB1821C7}"
+              s:ds=""
+              s:par="" />
+          </d>
+        </r>
+    - ID: "18757981-e7f6-4ab1-95e6-4ca68b65d788"
+      Hint: Repeat Password
+      Value: Repeat Password
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150203T174814Z
+    - ID: "2998cb6a-5fd0-4d1e-96ef-5f3e148f8c40"
+      Hint: Current Password Required Message
+      Value: Current Password is required.
+    - ID: "2ce72b31-f944-4a0b-9ea8-23aadead0c31"
+      Hint: Current Password
+      Value: Current Password
+    - ID: "2fa419b5-da10-4b79-affc-f552628c893b"
+      Hint: Back To My Account
+      Value: Back to My Account
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "727ffca2-41bc-4cb2-bd07-328a2516fa67"
+      Hint: New Password
+      Value: New Password
+    - ID: "8443ff6d-0783-45fd-8657-07beffa9a0b0"
+      Hint: Saving Changes Button
+      Value: Saving Changes
+    - ID: "c8e323d4-3ac3-49e1-8322-619f0168d4fe"
+      Hint: Save Changes Button
+      Value: Save Changes
+    - ID: "cd38a0ff-d6fa-4f14-810f-b50778663e10"
+      Hint: Cancel Button
+      Value: Cancel
+    - ID: "efd2b75f-7354-4eb4-86cd-6d13d911b06c"
+      Hint: The Password Length Message
+      Value: The Password must be at least 6 characters long.
+    - ID: "fd1ad1eb-ca9c-4808-93ef-09a2a28ff8c6"
+      Hint: Password and Confirmation Must Match Message
+      Value: The password and confirmation password do not match.
+- Language: "ja-JP"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{C4F3B128-7046-4CD3-B15C-EDBAF6C3E963}"
+              s:ds="" />
+          </d>
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+            <r
+              uid="{4EF13732-1044-46C9-B49A-16BCEB1821C7}"
+              s:ds=""
+              s:par="" />
+          </d>
+        </r>
+    - ID: "18757981-e7f6-4ab1-95e6-4ca68b65d788"
+      Hint: Repeat Password
+      Value: Repeat Password
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150203T174814Z
+    - ID: "2998cb6a-5fd0-4d1e-96ef-5f3e148f8c40"
+      Hint: Current Password Required Message
+      Value: Current Password is required.
+    - ID: "2ce72b31-f944-4a0b-9ea8-23aadead0c31"
+      Hint: Current Password
+      Value: Current Password
+    - ID: "2fa419b5-da10-4b79-affc-f552628c893b"
+      Hint: Back To My Account
+      Value: Back to My Account
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "727ffca2-41bc-4cb2-bd07-328a2516fa67"
+      Hint: New Password
+      Value: New Password
+    - ID: "8443ff6d-0783-45fd-8657-07beffa9a0b0"
+      Hint: Saving Changes Button
+      Value: Saving Changes
+    - ID: "c8e323d4-3ac3-49e1-8322-619f0168d4fe"
+      Hint: Save Changes Button
+      Value: Save Changes
+    - ID: "cd38a0ff-d6fa-4f14-810f-b50778663e10"
+      Hint: Cancel Button
+      Value: Cancel
+    - ID: "efd2b75f-7354-4eb4-86cd-6d13d911b06c"
+      Hint: The Password Length Message
+      Value: The Password must be at least 6 characters long.
+    - ID: "fd1ad1eb-ca9c-4808-93ef-09a2a28ff8c6"
+      Hint: Password and Confirmation Must Match Message
+      Value: The password and confirmation password do not match.

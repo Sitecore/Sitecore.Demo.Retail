@@ -28,31 +28,20 @@
     var discountsLabel = Html.Sitecore().Field("Credits Header Label", confirmPage);
     var applyLoyaltyLabel = Html.Sitecore().Field("Apply Loyalty Credit Label", confirmPage);
     var subtitleLoyaltyLabel = Html.Sitecore().Field("Subtitle Loyalty Credit Label", confirmPage);
-    var getBalanceButtonLabel = Html.Sitecore().Field("Get Balance Button Label", billingPage);
     var cardNumberLabel = Html.Sitecore().Field("Card Number Label", billingPage);
     var cardNumberLabelPlaceholder = billingPage["Card Number Label"];
-    var removeLabel = Html.Sitecore().Field("Remove Label", billingPage);
     var addLoyaltyCardButtonLabel = Html.Sitecore().Field("Add Loyalty Card Button", billingPage);
 
     // Payment Information Labels
-    var paymentTotalLabel = Html.Sitecore().Field("Payment Total Label", billingPage);
     var taxesLabel = Html.Sitecore().Field("Taxes Label", billingPage);
     var savingsLabel = Html.Sitecore().Field("Savings Label", billingPage);
-    var orderTotalLabel = Html.Sitecore().Field("Total Label", billingPage);
-    var giftCardLabel = Html.Sitecore().Field("Gift Card Label", billingPage);
-    var loyaltytCardLabel = Html.Sitecore().Field("Loyalty Card Label", billingPage);
 
     //Footer Summart
     var ShippingAddress = Html.Sitecore().Field("Shipping Address Label", confirmPage);
     var EditShippingAddress = Html.Sitecore().Field("Edit Shipping Address Label", confirmPage);
     var BillingAddress = Html.Sitecore().Field("Billing Address Label", confirmPage);
     var EditBillingAddress = Html.Sitecore().Field("Edit Billing Address Label", confirmPage);
-    var ShippingMethod = Html.Sitecore().Field("Shipping Method Label", confirmPage);
-    var EditShippingMethod = Html.Sitecore().Field("Edit Shipping Method Label", confirmPage);
-    var DiscountCode = Html.Sitecore().Field("Discount Code Label", confirmPage);
-    var EditDiscountCode = Html.Sitecore().Field("Edit Discount Code Label", confirmPage);
     var GiftCards = Html.Sitecore().Field("Gift Cards Label", confirmPage);
-    var EditGiftCards = Html.Sitecore().Field("Edit Gift Cards Label", confirmPage);
     var PaymentMethods = Html.Sitecore().Field("Payment Methods Label", confirmPage);
     var EditPaymentMethods = Html.Sitecore().Field("Edit Payment Methods Label", confirmPage);
     var creditCardLabel = Html.Sitecore().Field("Credit Card Label", confirmPage);
@@ -66,9 +55,6 @@
     var discountLabel = Html.Sitecore().Field("Discount Label", confirmPage);
     var colorLabel = Html.Sitecore().Field("Color Label", confirmPage);
     var deliveryLabel = Html.Sitecore().Field("Delivery Label", confirmPage);
-
-    var storefront = StorefrontManager.CurrentStorefront;
-    var supportsLoyaltyProgram = storefront.SupportsLoyaltyPrograms;
 }
 
 <table class="table table-striped table-responsive">
@@ -88,7 +74,7 @@
             </td>
             <td class="cart-info">
                 <a pid="link" data-bind="attr: {href: productUrl}">
-                    <h5 data-bind="text:displayName" pid="displayName"></h5>
+                    <h5 data-bind="text:title" pid="title"></h5>
                 </a>
                 <p class="cart-variable" data-bind="if: color != null">
                     @colorLabel <span data-bind="text:color" pid="color"></span>
@@ -169,32 +155,29 @@
         </tr>
     </tbody>
 </table>
-@if (supportsLoyaltyProgram)
-{
-    <div class="headline text-center">
-        <h3>@discountsLabel</h3>
-    </div>
-    <div class="accordion-container">
-        <a href="#" class="accordion-toggle">
-            <span class="toggle-icon"><span class='glyphicon glyphicon-plus-sign'></span></span>@applyLoyaltyLabel
-        </a>
-        <div class="accordion-content">
-            <div class="col-md-12">
-                <h4>@subtitleLoyaltyLabel</h4>
+<div class="headline text-center">
+    <h3>@discountsLabel</h3>
+</div>
+<div class="accordion-container">
+    <a href="#" class="accordion-toggle">
+        <span class="toggle-icon"><span class='glyphicon glyphicon-plus-sign'></span></span>@applyLoyaltyLabel
+    </a>
+    <div class="accordion-content">
+        <div class="col-md-12">
+            <h4>@subtitleLoyaltyLabel</h4>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="LoyalityCardNumber_Confirm">@cardNumberLabel</label>
+                <input type="text" class="form-control" id="LoyalityCardNumber_Confirm" placeholder="@cardNumberLabelPlaceholder" data-bind="value: cartLoyaltyCardNumber">
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="LoyalityCardNumber_Confirm">@cardNumberLabel</label>
-                    <input type="text" class="form-control" id="LoyalityCardNumber_Confirm" placeholder="@cardNumberLabelPlaceholder" data-bind="value: cartLoyaltyCardNumber">
-                </div>
-                <div class="form-group">
-                    <button type="button" id="addLoyaltyCard_Confirm" class="btn btn-success" data-loading-text="Updating Loyalty Card...">@addLoyaltyCardButtonLabel</button>
-                    <h1 id="loyaltyCard-success" class="glyphicon glyphicon-ok-circle" style="color: green; top: 6px; left: 9px; display: none"></h1>
-                </div>
+            <div class="form-group">
+                <button type="button" id="addLoyaltyCard_Confirm" class="btn btn-success" data-loading-text="Updating Loyalty Card...">@addLoyaltyCardButtonLabel</button>
+                <h1 id="loyaltyCard-success" class="glyphicon glyphicon-ok-circle" style="color: green; top: 6px; left: 9px; display: none"></h1>
             </div>
         </div>
     </div>
-}
+</div>
 <div class="row">
     <div class="col-md-6 col-md-offset-4 col-xs-12">
         <div class="headline text-center">

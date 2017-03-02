@@ -55,7 +55,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
             var totalSavings = cart.Lines.Sum(lineitem => ((CommerceTotal) lineitem.Total).LineItemDiscountAmount);
             totalSavings += ((CommerceTotal) cart.Total).OrderLevelDiscountAmount;
-            Discount = totalSavings.ToCurrency(StorefrontManager.CurrentStorefront.DefaultCurrency);
+            Discount = totalSavings.ToCurrency();
         }
     }
 }

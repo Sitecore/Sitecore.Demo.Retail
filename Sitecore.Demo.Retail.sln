@@ -64,6 +64,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
 	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "engine", "engine", "{2B87ACDB-EFC7-4732-9782-D1029030F621}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Feature.Commerce.Orders", "src\Feature\Orders\code\Sitecore.Feature.Commerce.Orders.csproj", "{9CC4BF07-1259-43FF-B205-AFD1E59E5834}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -116,6 +119,10 @@ Global
 		{72203E4B-DA74-405C-9D33-193B38A0AA33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72203E4B-DA74-405C-9D33-193B38A0AA33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72203E4B-DA74-405C-9D33-193B38A0AA33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC4BF07-1259-43FF-B205-AFD1E59E5834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC4BF07-1259-43FF-B205-AFD1E59E5834}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC4BF07-1259-43FF-B205-AFD1E59E5834}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC4BF07-1259-43FF-B205-AFD1E59E5834}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,5 +148,7 @@ Global
 		{45E1A5F7-861D-4929-A4C4-E3FD9D898F23} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
 		{0296F347-F76D-4A81-9FB1-AE9CA0F0C064} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
 		{72203E4B-DA74-405C-9D33-193B38A0AA33} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
+		{2B87ACDB-EFC7-4732-9782-D1029030F621} = {F12F210F-76B3-4142-8AB9-06677BCAED1E}
+		{9CC4BF07-1259-43FF-B205-AFD1E59E5834} = {A796DED4-AE86-4E8F-BBAF-B57960008D59}
 	EndGlobalSection
 EndGlobal

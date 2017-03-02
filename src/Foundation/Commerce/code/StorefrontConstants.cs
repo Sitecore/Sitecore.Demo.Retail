@@ -52,12 +52,6 @@ namespace Sitecore.Foundation.Commerce
 
             public static readonly string LastNameMissingMessage = "Last Name Missing Message";
 
-            public static readonly string ActivationCodeMissingMessage = "Activation Code Missing Message";
-
-            public static readonly string ResendActivationCodeMessage = "Resend Activation Code Message";
-
-            public static readonly string ActivationCode = "Activation Code";
-
             public static readonly string FacebookButton = "Facebook Button";
 
             public static readonly string FacebookText = "Facebook Text";
@@ -114,21 +108,9 @@ namespace Sitecore.Foundation.Commerce
 
             public static readonly string SenderEmailAddress = "Sender Email Address";
 
-            public static readonly string MaxNumberOfAddresses = "Max Number of Addresses";
-
-            public static readonly string MaxNumberOfWishLists = "Max Number of WishLists";
-
-            public static readonly string MaxNumberOfWishListItems = "Max Number of WishList Items";
-
-            public static readonly string UseIndexFileForProductStatusInLists = "Use Index File For Product Status In Lists";
-
-            public static readonly string OperatingUnitNumber = "OperatingUnitNumber";
-
             public static readonly string MapKey = "Map Key";
 
             public static readonly string NamedSearches = "Named Searches";
-
-            public static readonly string Title = "Title";
 
             public static readonly string EmailAddressOfExistingCustomer = "Email Address Of Existing Customer";
 
@@ -150,39 +132,15 @@ namespace Sitecore.Foundation.Commerce
 
             public static readonly string Lookups = "Lookups";
 
-            public static readonly string SystemMessages = "System Messages";
-
             public static readonly string InventoryStatuses = "Inventory Statuses";
 
             public static readonly string Relationships = "Relationships";
 
             public static readonly string OrderStatuses = "Order Statuses";
 
-            public static readonly string Currencies = "Currencies";
-
-            public static readonly string CurrencyDisplay = "Currency Display";
-
             public static readonly string Payments = "Payments";
 
             public static readonly string Shipping = "Shipping";
-        }
-
-        [Obsolete("Move to Templates.cs or similar")]
-        public static class QueryStrings
-        {
-            public const string ConfirmationId = "confirmationId";
-
-            public const string SiteContentPaging = "scpg";
-
-            public const string SiteContentPageSize = "scps";
-        }
-
-        [Obsolete("Move to Templates.cs or similar")]
-        public static class ItemFields
-        {
-            public static readonly string Title = "Title";
-
-            public static readonly string SummaryText = "SummaryText";
         }
     }
 }

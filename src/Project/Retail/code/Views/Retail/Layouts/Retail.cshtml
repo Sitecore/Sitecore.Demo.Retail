@@ -51,13 +51,13 @@
         var currentCategory;
 
         @{
-            var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().GetCurrent();
-            bool isCategory = siteContext.IsCategory;
-            var catalogItem = siteContext.CurrentCatalogItem;
+            var context = DependencyResolver.Current.GetService<CatalogItemContext>();
+            bool isCategory = context.IsCategory;
+            var catalogItem = context.Current?.Item;
             if (isCategory && catalogItem != null)
             {
                 @:currentCategory = "@catalogItem.ID.ToString()";
-                    }
+            }
         }
     </script>
 

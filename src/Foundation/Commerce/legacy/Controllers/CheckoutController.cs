@@ -40,25 +40,24 @@ namespace Sitecore.Reference.Storefront.Controllers
 {
     public class CheckoutController : SitecoreController
     {
-        public CheckoutController([NotNull] CartManager cartManager, [NotNull] OrderManager orderManager, [NotNull] AccountManager accountManager, [NotNull] PaymentManager paymentManager, [NotNull] ShippingManager shippingManager, [NotNull] ContactFactory contactFactory, VisitorContextRepository visitorContextRepository)
-        {
-            Assert.ArgumentNotNull(cartManager, nameof(cartManager));
-            Assert.ArgumentNotNull(orderManager, nameof(orderManager));
-            Assert.ArgumentNotNull(paymentManager, nameof(paymentManager));
-            Assert.ArgumentNotNull(shippingManager, nameof(shippingManager));
+        private const string ConfirmationIdQueryString = "confirmationId";
 
+        public CheckoutController(CartManager cartManager, OrderManager orderManager, AccountManager accountManager, PaymentManager paymentManager, ShippingManager shippingManager, ContactFactory contactFactory, VisitorContextRepository visitorContextRepository, CurrencyManager currencyManager)
+        {
             CartManager = cartManager;
             OrderManager = orderManager;
             AccountManager = accountManager;
             PaymentManager = paymentManager;
             ShippingManager = shippingManager;
             VisitorContextRepository = visitorContextRepository;
+            CurrencyManager = currencyManager;
         }
 
         private CartManager CartManager { get; }
         private PaymentManager PaymentManager { get; }
         private ShippingManager ShippingManager { get; }
         private VisitorContextRepository VisitorContextRepository { get; }
+        private CurrencyManager CurrencyManager { get; }
         private OrderManager OrderManager { get; }
         private AccountManager AccountManager { get; }
 
@@ -70,6 +69,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             var cart = (CommerceCart) response.ServiceProviderResult.Cart;
             if (cart.Lines == null || !cart.Lines.Any())
             {
+#warning Remove hardcoded URL
                 var cartPageUrl = "/shoppingcart";
                 return Redirect(cartPageUrl);
             }
@@ -79,7 +79,7 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult OrderConfirmation([Bind(Prefix = StorefrontConstants.QueryStrings.ConfirmationId)] string confirmationId)
+        public ActionResult OrderConfirmation([Bind(Prefix = ConfirmationIdQueryString)] string confirmationId)
         {
             var viewModel = new OrderConfirmationViewModel();
             CommerceOrder order = null;
@@ -119,7 +119,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                         result.ShippingMethods = new List<ShippingMethod>();
                         result.CartLoyaltyCardNumber = cart.LoyaltyCardID;
 
-                        result.CurrencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
+                        result.CurrencyCode = CurrencyManager.CurrencyContext.CurrencyCode;
 
                         AddShippingOptionsToResult(result, cart);
                         if (result.Success)
@@ -182,7 +182,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
 
-                result.Initialize($"checkout/OrderConfirmation?{StorefrontConstants.QueryStrings.ConfirmationId}={response.Result.OrderID}");
+                result.Initialize($"checkout/OrderConfirmation?{ConfirmationIdQueryString}={response.Result.OrderID}");
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
@@ -375,7 +375,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             if (response.ServiceProviderResult.Success && response.Result != null)
             {
                 paymentOptions = response.Result.ToList();
-                paymentOptions.ForEach(x => x.Name = StorefrontManager.GetPaymentName(x.Name));
+                paymentOptions.ForEach(x => x.Name = LookupManager.GetPaymentName(x.Name));
             }
 
             result.PaymentOptions = paymentOptions;
@@ -390,7 +390,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             if (response.ServiceProviderResult.Success)
             {
                 paymentMethodList.AddRange(response.Result);
-                paymentMethodList.ForEach(x => x.Description = StorefrontManager.GetPaymentName(x.Description));
+                paymentMethodList.ForEach(x => x.Description = LookupManager.GetPaymentName(x.Description));
             }
 
             result.SetErrors(response.ServiceProviderResult);

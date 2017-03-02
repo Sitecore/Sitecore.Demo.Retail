@@ -1,0 +1,18 @@
+﻿---
+ID: "c69ba5fd-acd1-4ae3-a8f0-3f22f7d34b34"
+Parent: "870f05da-b99c-46d9-90c1-ddd8fa2b3dcf"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Project/Retail/Page Types/Address Book Page/Labels
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150114T013909Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

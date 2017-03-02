@@ -9,12 +9,8 @@
     // either express or implied. See the License for the specific language governing permissions
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
-
-@using Sitecore.Extensions
+@using Sitecore.Foundation.Commerce.Extensions
 @using Sitecore.Foundation.Commerce.Models
-@using Sitecore.Commerce.Connect.CommerceServer
-@using Sitecore.Feature.Commerce.Catalog.Models
-@using Sitecore.Foundation.Commerce.Repositories
 @model Sitecore.Feature.Commerce.Catalog.Models.NavigationViewModel
 @{
     if (Model?.ChildCategories == null || !Model.ChildCategories.Any())
@@ -22,35 +18,33 @@
         return;
     }
 
-    var categoriesLabel = Html.Sitecore().Field("Categories Label", Html.Sitecore().CurrentItem);
-
-    var siteContext = DependencyResolver.Current.GetService<SiteContextRepository>().GetCurrent();
+    var siteContext = DependencyResolver.Current.GetService<CatalogItemContext>().Current;
     var name = string.Empty;
-    var catalogItem = siteContext.CurrentCatalogItem;
+    var catalogItem = siteContext.Item;
     if (catalogItem != null)
     {
         name = catalogItem.Name;
     }
-    var catalogId = siteContext.CurrentCatalogItem.DisplayName.Replace(" ", "").ToLower();
+    var catalogId = "catalog-" + Guid.NewGuid().ToString("N").ToLower();
 }
 
 <div class="sidebar sidebar-static">
     <button type="button" class="sidebar-toggle visible-xs collapsed" data-toggle="collapse" data-target="#@catalogId-sidebar" aria-expanded="false">
-        <span class="text">@categoriesLabel</span>
+        <span class="text">@Html.Sitecore().Text("Catalog/Child Category Navigation/Categories", "Categories")</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
     <div class="sidebar-collapse collapse" id="@catalogId-sidebar">
         <div id="CategoryNavigation" class="category-nav-container">
-            <h5 class="hidden-xs">@categoriesLabel</h5>
+            <h5 class="hidden-xs">@Html.Sitecore().Text("Catalog/Child Category Navigation/Categories", "Categories")</h5>
             <div class="@catalogId-list">
                 <ul class="nav nav-pills nav-stacked @catalogId">
                     @foreach (var category in Model.ChildCategories)
                     {
-                        var cModel = new CategoryViewModel(category);
-
-                        <li class="@(string.Equals(name, cModel.Name, StringComparison.OrdinalIgnoreCase) ? "active" : "")"><a href="@cModel.GetLink()">@cModel.DisplayNameRender</a></li>
+                        <li class="@(string.Equals(name, category.Name, StringComparison.OrdinalIgnoreCase) ? "active" : "")">
+                            <a href="@category.GetLink()">@Html.Sitecore().Field(category.TitleFieldName, category.Item)</a>
+                        </li>
                     }
                 </ul>
             </div>

@@ -69,36 +69,6 @@
             </button>
         </div>
     </div>
-    if (Model != null && Model.Providers != null && Model.Providers.Count > 0)
-    {
-        <div class="row">
-            @Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.FacebookText, Html.Sitecore().CurrentItem)
-            @foreach (var provider in Model.Providers)
-            {
-                <div class="col-lg-4">
-                    <button name="provider" type="submit" onclick='window.location.href="#"' class="btn btn-primary btn-block btn-social-@provider.Name" id="@provider.Name" value="@provider.Name" style='background-image: url("@(provider.Image?.ImageUrl(28, 28))"); background-repeat: no-repeat'>
-                        <div id="provider-name">&emsp;&nbsp;@provider.Name&nbsp;@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.SignInButton, Html.Sitecore().CurrentItem)</div>
-                    </button>
-                </div>
-            }
-
-            @if (!Model.IsActivationFlow)
-            {
-                <div class="col-lg-4">
-                    @Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.LinkAccount, Html.Sitecore().CurrentItem)
-                    <a class="btn btn-default btn-block" href="@("/UserPendingActivation")">
-                        @Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.ActivationText, Html.Sitecore().CurrentItem)
-                    </a>
-                </div>
-            }
-
-            <div class="col-lg-4">
-                <button type="button" class="btn btn-default btn-block" onclick="window.location.href = '@("/Checkout")'">
-                    @Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.GuestCheckoutButton, Html.Sitecore().CurrentItem)
-                </button>
-            </div>
-        </div>
-    }
 }
 
 <script type="text/javascript">

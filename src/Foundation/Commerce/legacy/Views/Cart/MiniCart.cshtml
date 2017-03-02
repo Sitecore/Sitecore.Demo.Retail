@@ -1,4 +1,5 @@
-﻿@*//-----------------------------------------------------------------------
+﻿@using Sitecore.Foundation.Commerce.Extensions
+@*//-----------------------------------------------------------------------
     // Copyright 2016 Sitecore Corporation A/S
     // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
     // except in compliance with the License. You may obtain a copy of the License at
@@ -10,8 +11,6 @@
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
 
-@using Sitecore.Foundation.Commerce.Managers
-
 <li class="dropdown" id="B02-Basket">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <span class="glyphicon glyphicon-shopping-cart"></span><span class="badge bg-primary" id="miniCartItemCount" data-bind="text: lineitemcount"></span> 
@@ -21,17 +20,16 @@
             <li class="media" data-bind="attr: {'data-ajax-lineitemid': externalCartlineId}">
                 <div class="media-left">
                     <a data-bind="attr:{ href:productUrl}">
-                        <img class="media-object" alt="a" data-bind="attr:{src: image, alt: displayName}">
+                        <img class="media-object" alt="a" data-bind="attr:{src: image, alt: title}">
                     </a>
                 </div>
                 <div class="media-body">
                     <a data-bind="attr:{ href:productUrl}">
-                        <strong class="media-heading" data-bind="text: displayName">
-                        </strong>
+                        <strong class="media-heading">@Html.Sitecore().Text("Orders/MiniCart/Items in your cart", "Items in your cart")</strong>
                     </a>
                     <p>
-                        @Html.Sitecore().Field("Quantity", Html.Sitecore().CurrentItem) <strong data-bind="text: quantity"></strong><br/>
-                        @Html.Sitecore().Field("Price", Html.Sitecore().CurrentItem) <strong data-bind="text: linePrice"></strong>
+                        @Html.Sitecore().Text("Orders/MiniCart/Quantity", "Quantity") <strong data-bind="text: quantity"></strong><br/>
+                        @Html.Sitecore().Text("Orders/MiniCart/Price", "Price") <strong data-bind="text: linePrice"></strong>
                     </p>
                 </div>
                 <div class="media-right">
@@ -43,12 +41,12 @@
         </ul>
         <div class="m-b-1">
             <strong>
-                @Html.Sitecore().Field("Total", Html.Sitecore().CurrentItem) <span data-bind="text: total"></span>
+                @Html.Sitecore().Text("Orders/MiniCart/Total", "Total") <span data-bind="text: total"></span>
             </strong>
         </div>
         <div>
-            <button type="button" id="rsf-btn-checkout" onclick="window.location.href = '@("/Checkout")'" class="btn btn-block btn-primary">@Html.Sitecore().Field("CheckoutLabel", Html.Sitecore().CurrentItem)</button>
-            <a class="btn btn-block btn-default" href="@("/ShoppingCart")">@Html.Sitecore().Field("ViewCartLabel", Html.Sitecore().CurrentItem)</a>
+            <button type="button" id="rsf-btn-checkout" onclick="window.location.href = '@("/Checkout")'" class="btn btn-block btn-primary">@Html.Sitecore().Text("Orders/MiniCart/Checkout", "Checkout")</button>
+            <a class="btn btn-block btn-default" href="@("/ShoppingCart")">@Html.Sitecore().Text("Orders/MiniCart/View Cart", "View Cart")</a>
         </div>
     </div>
 </li>

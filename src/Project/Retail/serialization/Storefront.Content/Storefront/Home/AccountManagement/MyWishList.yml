@@ -15,6 +15,9 @@ Languages:
     - ID: "1068af13-b782-4362-ac38-5668fb66a1cc"
       Hint: Unit Price Label
       Value: Unit Price
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: Your Wish List
     - ID: "1f65e5da-12e3-44f8-9532-e08a56ff159b"
       Hint: Change Wish List Label
       Value: Change Wish List
@@ -45,6 +48,12 @@ Languages:
     - ID: "ac731847-a489-4942-99b0-8914d3c0642b"
       Hint: You Save Label
       Value: You save
+    - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
+      Hint: Title
+      Value: Your Wish List
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: Your Wish List
     - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
       Hint: Title
       Value: Your Wish List

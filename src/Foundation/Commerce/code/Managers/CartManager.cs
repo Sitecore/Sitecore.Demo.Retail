@@ -635,5 +635,9 @@ namespace Sitecore.Foundation.Commerce.Managers
                 info.Refresh = refresh;
             }
         }
+        public static string GetMapKey()
+        {
+            return StorefrontManager.CurrentStorefront.HomeItem[StorefrontConstants.KnownFieldNames.MapKey];
+        }
     }
 }

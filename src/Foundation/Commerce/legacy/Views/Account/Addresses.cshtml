@@ -10,6 +10,7 @@
 // either express or implied. See the License for the specific language governing permissions
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
+@using Sitecore.Foundation.Dictionary.Repositories;
 @{
     var savingLabel = Html.Sitecore().CurrentItem["Saving Label"];
     var deletingLabel = Html.Sitecore().CurrentItem["Deleting Label"];
@@ -17,7 +18,7 @@
     var newAddresLabel = Html.Sitecore().CurrentItem["New Address Label"];
     var deleteButtonLabel = Html.Sitecore().Field("Delete Address Button", Html.Sitecore().CurrentItem);
     var deleteButtonLabelText = Html.Sitecore().CurrentItem["Delete Address Button"];
-    var requiredFieldMessage = StorefrontManager.GetHtmlSystemMessage("RequiredFieldMessage");
+    var requiredFieldMessage = DictionaryPhraseRepository.Current.Get("/Customers/Addresses/Required Field", "This field is required.");
 }
 
 <div class="text-right">

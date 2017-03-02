@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Carts;
@@ -70,17 +71,16 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             Lines = new List<CartLineBaseJsonResult>();
             Adjustments = new List<CartAdjustmentBaseJsonResult>();
             PromoCodes = new List<string>();
-            var currencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
 
-            Subtotal = 0.0M.ToCurrency(currencyCode);
+            Subtotal = 0.0M.ToCurrency();
             SubtotalAmount = 0.0M;
-            TaxTotal = 0.0M.ToCurrency(currencyCode);
+            TaxTotal = 0.0M.ToCurrency();
             TaxTotalAmount = 0.0M;
-            Total = 0.0M.ToCurrency(currencyCode);
+            Total = 0.0M.ToCurrency();
             TotalAmount = 0.0M;
-            Discount = 0.0M.ToCurrency(currencyCode);
+            Discount = 0.0M.ToCurrency();
             DiscountAmount = 0.0M;
-            ShippingTotal = 0.0M.ToCurrency(currencyCode);
+            ShippingTotal = 0.0M.ToCurrency();
             ShippingTotalAmount = 0.0M;
 
             if (cart == null)
@@ -88,10 +88,11 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
                 return;
             }
 
+            var catalogManager = DependencyResolver.Current.GetService<CatalogManager>();
             foreach (var line in cart.Lines ?? Enumerable.Empty<CartLine>())
             {
                 var product = (CommerceCartProduct) line.Product;
-                var productItem = StorefrontManager.ProductResolver.ResolveProductItem(product.ProductId, product.ProductCatalog);
+                var productItem = catalogManager.GetProduct(product.ProductId, product.ProductCatalog);
 
                 var cartLine = new CartLineBaseJsonResult(line, productItem);
                 Lines.Add(cartLine);
@@ -103,15 +104,15 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             }
 
             var commerceTotal = (CommerceTotal) cart.Total;
-            Subtotal = commerceTotal.Subtotal.ToCurrency(currencyCode);
+            Subtotal = commerceTotal.Subtotal.ToCurrency();
             SubtotalAmount = commerceTotal.Subtotal;
-            TaxTotal = cart.Total.TaxTotal.Amount.ToCurrency(currencyCode);
+            TaxTotal = cart.Total.TaxTotal.Amount.ToCurrency();
             TaxTotalAmount = cart.Total.TaxTotal.Amount;
-            Total = cart.Total.Amount.ToCurrency(currencyCode);
+            Total = cart.Total.Amount.ToCurrency();
             TotalAmount = cart.Total.Amount;
-            Discount = commerceTotal.OrderLevelDiscountAmount.ToCurrency(currencyCode);
+            Discount = commerceTotal.OrderLevelDiscountAmount.ToCurrency();
             DiscountAmount = commerceTotal.OrderLevelDiscountAmount;
-            ShippingTotal = commerceTotal.ShippingTotal.ToCurrency(currencyCode);
+            ShippingTotal = commerceTotal.ShippingTotal.ToCurrency();
             ShippingTotalAmount = commerceTotal.ShippingTotal;
         }
     }

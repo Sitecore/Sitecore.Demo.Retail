@@ -297,11 +297,11 @@ gulp.task("CE-Install-Commerce", function (callback) {
     var options = { maxBuffer: 4024 * 1024 };
     return exec("powershell -executionpolicy unrestricted -file .\\install-commerce.ps1", options, function (err, stdout, stderr) {
         if (err) {
-            console.error(`exec error: ${err}`);
+            console.error("exec error: " + err);
             throw err;
         }
-        console.log(`stdout: ${stdout}`);
-        console.log(`stderr: ${stderr}`);
+        console.log("stdout: " + stdout);
+        console.log("stderr: " + stderr);
         callback();
     });
 });
@@ -310,11 +310,11 @@ gulp.task("CE-Uninstall-Commerce", function (callback) {
     var options = { maxBuffer: 1024 * 1024 };
     return exec("powershell -executionpolicy unrestricted -file .\\uninstall-commerce.ps1", options, function (err, stdout, stderr) {
         if (err) {
-            console.error(`exec error: ${err}`);
+            console.error("exec error: " + err);
             throw err;
         }
-        console.log(`stdout: ${stdout}`);
-        console.log(`stderr: ${stderr}`);
+        console.log("stdout: " + stdout);
+        console.log("stderr: " + stderr);
         callback();
     });
 });
@@ -351,14 +351,14 @@ gulp.task("CE-Import-CSCatalog", function (callback) {
     var command = "\"& {Import-Module CSPS; Import-CSCatalog -Name " + config.commerceServerSiteName + " -File " + dataPath + " -ImportSchemaChanges $true -Mode Full}\""
     var cmd = "powershell -executionpolicy unrestricted -command " + command
     var options = { maxBuffer: 1024 * 1024 };
-    console.log(`cmd: ${cmd}`);
+    console.log("cmd: " + cmd);
     return exec(cmd, options, function (err, stdout, stderr) {
         if (err) {
-            console.error(`exec error: ${err}`);
+            console.error("exec error: " + err);
             throw err;
         }
-        console.log(`stdout: ${stdout}`);
-        console.log(`stderr: ${stderr}`);
+        console.log("stdout: " + stdout);
+        console.log("stderr: " + stderr);
         callback();
     });
 });
@@ -368,14 +368,14 @@ gulp.task("CE-Export-CSCatalog", function (callback) {
     var command = "\"& {Import-Module CSPS; Export-CSCatalog -Name " + config.commerceServerSiteName + " -File " + dataPath + " -SchemaExportType All -Mode Full}\""
     var cmd = "powershell -executionpolicy unrestricted -command " + command
     var options = { maxBuffer: 1024 * 1024 };
-    console.log(`cmd: ${cmd}`);
+    console.log("cmd: " + cmd);
     return exec(cmd, options, function (err, stdout, stderr) {
         if (err) {
-            console.error(`exec error: ${err}`);
+            console.error("exec error: " + err );
             throw err;
         }
-        console.log(`stdout: ${stdout}`);
-        console.log(`stderr: ${stderr}`);
+        console.log("stdout: " + stdout);
+        console.log("stderr: " + stderr);
         callback();
     });
 });
@@ -386,11 +386,11 @@ gulp.task("CE-Import-CSInventory", function (callback) {
     var options = { maxBuffer: 1024 * 1024 };
     return exec("powershell -executionpolicy unrestricted -command \"" + command + "\"", options, function (err, stdout, stderr) {
         if (err) {
-            console.error(`exec error: ${err}`);
+            console.error("exec error: " + err);
             throw err;
         }
-        console.log(`stdout: ${stdout}`);
-        console.log(`stderr: ${stderr}`);
+        console.log("stdout: " + stdout);
+        console.log("stderr: " + stderr);
         callback();
     });
 });

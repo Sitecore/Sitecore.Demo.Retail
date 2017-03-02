@@ -22,7 +22,7 @@ function WishListHeaderViewModel(wishListHeader) {
 function WishListLineViewModel(wishListLine) {
     var self = this;
     self.image = wishListLine != null ? ko.observable(wishListLine.Image) : ko.observable();
-    self.displayName = wishListLine != null ? ko.observable(wishListLine.DisplayName) : ko.observable();
+    self.title = wishListLine != null ? ko.observable(wishListLine.Title) : ko.observable();
     self.color = wishListLine != null ? ko.observable(wishListLine.Color) : ko.observable();
     self.lineDiscount = wishListLine != null ? ko.observable(wishListLine.LineDiscount) : ko.observable();
     self.quantity = wishListLine != null ? ko.observable(wishListLine.Quantity) : ko.observable();

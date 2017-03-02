@@ -20,17 +20,16 @@
     }
 
     var invalidVariantText = Html.Sitecore().Field("Invalid Variant", Html.Sitecore().CurrentItem);
-    var currencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
 }
 
 <div id="C11-ProductInformation" class="m-b-1">
-    <h1 id="displayName">@Model.DisplayNameRender</h1>
+    <h1 id="title">@Html.Sitecore().Field(Model.TitleFieldName, Model.Item)</h1>
     @{
-        var itemNumber = Model.RenderField("ItemNumber");
+        var itemNumber = Html.Sitecore().Field("ItemNumber", Model.Item);
         if (!string.IsNullOrWhiteSpace(itemNumber.ToString()))
         {
             <p>
-                @Html.Sitecore().Field("Item number", Model.Rendering.RenderingItem)
+                @Html.Sitecore().Field("Item number", Html.Sitecore().CurrentRendering.Item)
                 <span id="itemNumber">@itemNumber</span>
             </p>
         }
@@ -38,7 +37,7 @@
     <p id="description">@Model.DescriptionRender</p>
     <div class="col-md-12 col-xs-12">
         <div class="features" id="features">
-            @Model.RenderField("Features")
+            @Model.RenderFeatures()
         </div>
     </div>
 
@@ -64,17 +63,17 @@
             </span>
             / <span id="stockCount" data-bind="text:selectedStockInfo(). count"></span>
             <!-- ko if: selectedStockInfo().showSingleLabel -->
-            <label id="stockCountLabel">@Html.Sitecore().Field("Item Count", Model.Rendering.RenderingItem)</label>
+            <label id="stockCountLabel">@Html.Sitecore().Field("Item Count", Html.Sitecore().CurrentRendering.Item)</label>
             <!-- /ko -->
             <!-- ko ifnot: selectedStockInfo().showSingleLabel -->
-            <label id="stockCountLabel">@Html.Sitecore().Field("Items Count", Model.Rendering.RenderingItem)</label>
+            <label id="stockCountLabel">@Html.Sitecore().Field("Items Count", Html.Sitecore().CurrentRendering.Item)</label>
             <!-- /ko -->
             <!-- ko if: selectedStockInfo().availabilityDate -->
             / <span id="stockAvailabilityDate" data-bind="text: selectedStockInfo().availabilityDate"></span>
             <!-- /ko -->
         </div>
         <a id="signForStockNotification" data-toggle="modal" data-target="#signForNotificationModal" title="@Html.Sitecore().CurrentItem["Sign Up For Notification Tooltip"]" data-bind="visible: selectedStockInfo().showSignUpForNotification">
-            @Html.Sitecore().Field("Sign Up For Notification Label", Model.Rendering.RenderingItem)
+            @Html.Sitecore().Field("Sign Up For Notification Label", Html.Sitecore().CurrentRendering.Item)
         </a>
     </div>
 
@@ -84,7 +83,7 @@
         if (colors.Any())
         {
             <div class="color">
-                <label for="variantColour">@Html.Sitecore().Field("Color", Model.Rendering.RenderingItem)</label>
+                <label for="variantColour">@Html.Sitecore().Field("Color", Html.Sitecore().CurrentRendering.Item)</label>
                 <select class="form-control" name="Variant_Color" id="variantColor" onchange="VariantSelectionChanged()">
                     @foreach (var color in colors)
                     {
@@ -101,7 +100,7 @@
         if (sizes.Any() && sizes.All(s => !string.IsNullOrEmpty(s.Size)))
         {
             <div class="size">
-                <label for="variantSize">@Html.Sitecore().Field("Size", Model.Rendering.RenderingItem)</label>
+                <label for="variantSize">@Html.Sitecore().Field("Size", Html.Sitecore().CurrentRendering.Item)</label>
                 <select class="form-control" name="Variant_Size" id="variantSize" onchange="VariantSelectionChanged()">
                     @foreach (var size in sizes)
                     {
@@ -181,7 +180,7 @@
             var sizeValue = string.IsNullOrWhiteSpace(variant.Size) ? string.Empty : variant.Size.GetHashCode().ToString();
             var colorValue = string.IsNullOrWhiteSpace(variant.ProductColor) ? string.Empty : variant.ProductColor.GetHashCode().ToString();
 
-            @:AddVariantCombination('@sizeValue','@colorValue','@variant.Id','@variant.ListPrice.ToCurrency(currencyCode)','@variant.AdjustedPrice.ToCurrency(currencyCode)',@variant.IsOnSale.ToString().ToLower(),'@savingsMessage');
+            @:AddVariantCombination('@sizeValue','@colorValue','@variant.Id','@variant.ListPrice.ToCurrency()','@variant.AdjustedPrice.ToCurrency()',@variant.IsOnSale.ToString().ToLower(),'@savingsMessage');
         }
     }
     else

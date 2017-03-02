@@ -11,11 +11,6 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-@{
-    var storefront = StorefrontManager.CurrentStorefront;
-    var supportsWishlists = storefront.SupportsWishLists;
-    var supportsLoyaltyProgram = storefront.SupportsLoyaltyPrograms;
-}
 <div class="text-right">
     <a href="@Url.Action("LogOff", "Account")" class="btn btn-warning btn-lg">
         <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log out @* TODO: Hardcoded *@

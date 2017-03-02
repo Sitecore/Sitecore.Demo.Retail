@@ -17,6 +17,7 @@
 
 using System;
 using System.Globalization;
+using System.Web.Mvc;
 using Sitecore.Foundation.Commerce.Managers;
 
 namespace Sitecore.Foundation.Commerce.Extensions
@@ -30,7 +31,10 @@ namespace Sitecore.Foundation.Commerce.Extensions
 
         public static string ToCurrency(this decimal currency, string currencyCode)
         {
-            var currencyInfo = StorefrontManager.GetCurrencyInformation(currencyCode);
+            if (string.IsNullOrEmpty(currencyCode))
+                return currency.ToCurrency();
+
+            var currencyInfo = CurrencyManager.GetCurrencyInformation(currencyCode);
 
             NumberFormatInfo info;
             if (currencyInfo != null)
@@ -42,7 +46,6 @@ namespace Sitecore.Foundation.Commerce.Extensions
             else
             {
                 info = NumberFormatInfo.CurrentInfo;
-                ;
             }
             return currency.ToString("C", info);
         }
@@ -50,6 +53,16 @@ namespace Sitecore.Foundation.Commerce.Extensions
         public static string ToDisplayedDate(this DateTime date)
         {
             return date.ToString("d", Context.Language.CultureInfo);
+        }
+
+        public static string ToCurrency(this decimal currency)
+        {
+            var currencyManager = DependencyResolver.Current.GetService<CurrencyManager>();
+            return currency.ToCurrency(currencyManager.CurrencyContext.CurrencyCode);
+        }
+        public static string ToCurrency(this decimal? currency)
+        {
+            return currency.HasValue ? currency.Value.ToCurrency() : 0M.ToCurrency();
         }
     }
 }

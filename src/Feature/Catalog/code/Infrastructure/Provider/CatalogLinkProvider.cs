@@ -16,11 +16,12 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Collections.Specialized;
+using System.Web.Mvc;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines;
-using Sitecore.Feature.Commerce.Catalog.Repositories;
+using Sitecore.Feature.Commerce.Catalog.Services;
 using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Links;
@@ -30,17 +31,21 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
 {
     public class CatalogLinkProvider : LinkProvider
     {
+        public CatalogLinkProvider()
+        {
+        }
+
         public const string IncludeCatalogsAttribute = "includeCatalog";
 
         public const string UseShopLinksAttribute = "useShopLinks";
 
         public const string IncludeFriendlyNameAttribute = "includeFriendlyName";
 
-        public const bool IncludeCatalogsDefault = false;
+        private const bool IncludeCatalogsDefault = false;
 
-        public const bool UseShopLinksDefault = true;
+        private const bool UseShopLinksDefault = true;
 
-        public const bool IncludeFriendlyNameDefault = true;
+        private const bool IncludeFriendlyNameDefault = true;
 
         public bool IncludeCatalog { get; set; }
 
@@ -62,39 +67,13 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
             Assert.ArgumentNotNull(item, nameof(item));
             Assert.ArgumentNotNull(options, nameof(options));
 
-            var url = string.Empty;
+            var urlService = DependencyResolver.Current.GetService<CatalogUrlService>();
 
-            var productCatalogLinkRequired = CatalogUrlRepository.IsProductCategoryUrl(WebUtil.GetRawUrl());
-            if (productCatalogLinkRequired)
-            {
-                url = CatalogUrlRepository.BuildProductCatalogLink(item);
-            }
-            else if (UseShopLinks)
-            {
-                if (item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductTemplate))
-                {
-                    url = CatalogUrlRepository.BuildProductShopLink(item, IncludeCatalog, IncludeFriendlyName, true);
-                }
-                else if (item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate))
-                {
-                    url = CatalogUrlRepository.BuildCategoryShopLink(item, IncludeCatalog, IncludeFriendlyName);
-                }
-                else if (item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductVariantTemplate))
-                {
-                    url = CatalogUrlRepository.BuildVariantShopLink(item, IncludeCatalog, IncludeFriendlyName, true);
-                }
-            }
-            else
-            {
-                if (item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceProductTemplate))
-                {
-                    url = CatalogUrlRepository.BuildProductLink(item, IncludeCatalog, IncludeFriendlyName);
-                }
-                else if (item.IsDerived(CommerceConstants.KnownTemplateIds.CommerceCategoryTemplate))
-                {
-                    url = CatalogUrlRepository.BuildCategoryLink(item, IncludeCatalog, IncludeFriendlyName);
-                }
-            }
+            //TODO: Incorporate the url options in the catalog URL building
+            if (Context.PageMode.IsExperienceEditor)
+                return urlService.GetProductCatalogUrl(item);
+
+            var url = UseShopLinks ? urlService.BuildShopUrl(item, IncludeCatalog, IncludeFriendlyName) : urlService.BuildUrl(item, IncludeCatalog, IncludeFriendlyName);
 
             if (string.IsNullOrEmpty(url))
             {

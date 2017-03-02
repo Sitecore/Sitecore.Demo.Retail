@@ -51,16 +51,6 @@ namespace Sitecore.Reference.Storefront.Controllers
             }
         }
 
-        public ActionResult Error()
-        {
-            return View();
-        }
-
-        public ActionResult ErrorImage()
-        {
-            return View(CurrentRenderingModel);
-        }
-
         public ActionResult ErrorsSummary()
         {
             return View();
@@ -76,24 +66,9 @@ namespace Sitecore.Reference.Storefront.Controllers
             return View();
         }
 
-        public ActionResult PrintOnly()
-        {
-            return View();
-        }
-
         public ActionResult SocialConnector()
         {
             return View();
-        }
-
-        public ActionResult TitleText()
-        {
-            return View(CurrentRenderingModel);
-        }
-
-        public ActionResult TopBarLinks()
-        {
-            return View(CurrentRenderingModel);
         }
 
         [HttpPost]

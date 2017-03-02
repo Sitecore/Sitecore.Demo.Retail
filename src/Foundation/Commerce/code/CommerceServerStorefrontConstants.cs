@@ -24,8 +24,6 @@ namespace Sitecore.Foundation.Commerce
     {
         public static class KnownFieldNames
         {
-            public const string CommerceServerPaymentMethods = "CS Payment Methods";
-
             public const string CommerceServerShippingMethods = "CS Shipping Methods";
 
             public const string CountryLocationPath = "Country location path";
@@ -34,19 +32,11 @@ namespace Sitecore.Foundation.Commerce
 
             public const string CountryCode = "Country Code";
 
-            public const string PaymentOptionValue = "Payment Option Value";
-
             public const string RegionName = "Name";
 
             public const string ShippingOptionValue = "Shipping Option Value";
 
             public const string ShippingOptionsLocationPath = "Shipping Options location path";
-
-            public const string SupportsWishLists = "Supports Wishlists";
-
-            public const string SupportsLoyaltyProgram = "Supports Loyalty Program ";
-
-            public const string SupportsGirstCardPayment = "Supports Girft Card Payment";
 
             public const string Value = "Value";
         }

@@ -12,13 +12,13 @@ namespace Sitecore.Foundation.Commerce.Repositories
 {
     public class VisitorContextRepository
     {
-        public VisitorContextRepository(SiteContextRepository siteContextRepository, AccountManager accountManager, ContactFactory contactFactory)
+        public VisitorContextRepository(CatalogItemContext catalogItemContext, AccountManager accountManager, ContactFactory contactFactory)
         {
-            Assert.ArgumentNotNull(siteContextRepository, nameof(siteContextRepository));
+            Assert.ArgumentNotNull(catalogItemContext, nameof(catalogItemContext));
             Assert.ArgumentNotNull(accountManager, nameof(accountManager));
             Assert.ArgumentNotNull(contactFactory, nameof(contactFactory));
 
-            SiteContextRepository = siteContextRepository;
+            CatalogItemContext = catalogItemContext;
             AccountManager = accountManager;
             ContactFactory = contactFactory;
         }
@@ -26,7 +26,7 @@ namespace Sitecore.Foundation.Commerce.Repositories
         public VisitorContext GetCurrent()
         {
             // Setup the visitor context only once per HttpRequest.
-            var visitorContext = SiteContextRepository.GetCurrent().Items["__visitorContext"] as VisitorContext;
+            var visitorContext = HttpContext.Current.Items["__visitorContext"] as VisitorContext;
             if (visitorContext != null)
             {
                 return visitorContext;
@@ -38,7 +38,7 @@ namespace Sitecore.Foundation.Commerce.Repositories
                 visitorContext.SetCommerceUser(AccountManager.ResolveCommerceUser().Result);
             }
 
-            SiteContextRepository.GetCurrent().Items["__visitorContext"] = visitorContext;
+            HttpContext.Current.Items["__visitorContext"] = visitorContext;
 
             return visitorContext;
         }
@@ -47,6 +47,6 @@ namespace Sitecore.Foundation.Commerce.Repositories
 
         public AccountManager AccountManager { get; }
 
-        public SiteContextRepository SiteContextRepository { get; }
+        public CatalogItemContext CatalogItemContext { get; }
     }
 }

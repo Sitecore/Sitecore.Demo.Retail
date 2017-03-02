@@ -13,9 +13,9 @@
 @using Sitecore.Reference.Storefront;
 @using Sitecore.Foundation.Commerce.Managers;
 @using Sitecore.Foundation.Commerce.Models
+@model Sitecore.Reference.Storefront.Models.CartViewModel
 
 @{
-  var currencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
   var currencyDecimalSeparator = Sitecore.Context.Language.CultureInfo.NumberFormat.CurrencyDecimalSeparator;
   var currencyGroupSeparator = Sitecore.Context.Language.CultureInfo.NumberFormat.CurrencyGroupSeparator;
 
@@ -29,16 +29,9 @@
   var confirmEmailAddressLabelPlaceholder = billingPage["Confirm Email Address Label"];
 
   //Credit Card Labels
-  var paymentOptionsHeaderLabel = Html.Sitecore().Field("Payment Options Header", billingPage);
-  var nameOnCardLabel = Html.Sitecore().Field("Name on Card Label", billingPage);
-  var nameOnCardLabelPlaceholder = billingPage["Name on Card Label"];
   var cardNumberLabel = Html.Sitecore().Field("Card Number Label", billingPage);
   var cardNumberLabelPlaceholder = billingPage["Card Number Label"];
-  var expirationDateLabel = Html.Sitecore().Field("Expiration Date Label", billingPage);
-  var expirationYearLabel = Html.Sitecore().Field("Expiration Year Label", billingPage);
-  var ccidLabel = Html.Sitecore().Field("CCID Label", billingPage);
-  var ccidLabelPlaceholder = billingPage["CCID Label"];
-
+  
   //Billing Labels
   var billingAddressHeaderLabel = Html.Sitecore().Field("Billing Address Header", billingPage);
   var billingNameLabel = Html.Sitecore().Field("Billing Name Label", billingPage);
@@ -126,7 +119,7 @@
                                     <div class="show-payment">
                                         <div class="form-group">
                                             <label for="creditCardPayment_Amount">@paymentAmountLabel *</label>
-                                            <input type="text" class="form-control" name="amount" id="creditCardPayment_Amount" data-bind="value: formatCurrency(creditCardAmount, 2, '@currencyDecimalSeparator', '@currencyCode', '@currencyGroupSeparator')" disabled>
+                                            <input type="text" class="form-control" name="amount" id="creditCardPayment_Amount" data-bind="value: formatCurrency(creditCardAmount, 2, '@currencyDecimalSeparator', '@Model.Cart.CurrencyCode', '@currencyGroupSeparator')" disabled>
                                         </div>
                                     </div>
                                 </div>

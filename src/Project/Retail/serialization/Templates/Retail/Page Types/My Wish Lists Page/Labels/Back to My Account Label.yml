@@ -1,0 +1,21 @@
+﻿---
+ID: "b7fcb6ab-a6ec-49d4-bbe5-bea206ea5feb"
+Parent: "ecbcb27f-e002-4b66-adf8-e74963d76d43"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Project/Retail/Page Types/My Wish Lists Page/Labels/Back to My Account Label
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 600
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150106T205213Z
