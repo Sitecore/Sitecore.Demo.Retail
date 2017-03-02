@@ -10,19 +10,27 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-@model Sitecore.Feature.Commerce.Catalog.Models.CategoryViewModel
+@using Sitecore.Feature.Commerce.Catalog.Models
+@model Sitecore.Feature.Commerce.Catalog.Models.SearchResultViewModel
 @{
-    if (Model == null || Model.ChildProducts == null || !Model.ChildProducts.Any())
+    if (Model?.Items == null || !Model.Items.Any())
     {
         return;
     }
 }
 
 <div id="C05-ProductList" class="row">
-    @foreach (var product in Model.ChildProducts)
+    @foreach (var item in Model.Items)
     {
         <div class="col-sm-4 col-xs-12">
-            @Html.Partial("~/views/Catalog/_ProductSummary.cshtml", product)
+            @if (item is ProductViewModel)
+            {
+                @Html.Partial("~/views/Catalog/_ProductSummary.cshtml", (ProductViewModel)item)
+            }
+            else if (item is CategoryViewModel)
+            {
+                @Html.Partial("~/views/Catalog/_CategorySummary.cshtml", (CategoryViewModel)item)
+            }
         </div>
     }
 </div>

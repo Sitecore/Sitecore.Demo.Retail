@@ -66,6 +66,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
             Assert.ArgumentNotNull(item, nameof(item));
             Assert.ArgumentNotNull(options, nameof(options));
 
+            //TODO: Incorporate the url options in the catalog URL building
             if (Context.PageMode.IsExperienceEditor)
                 return CatalogUrlRepository.GetProductCatalogUrl(item);
 

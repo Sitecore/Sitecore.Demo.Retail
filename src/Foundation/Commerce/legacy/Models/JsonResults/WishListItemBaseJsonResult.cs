@@ -41,13 +41,11 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             var catalogManager = DependencyResolver.Current.GetService<CatalogManager>();
             var productItem = catalogManager.GetProduct(product.ProductId, product.ProductCatalog);
 
-            var currencyCode = StorefrontManager.CurrentStorefront.DefaultCurrency;
-
-            DisplayName = product.DisplayName;
+            Title = product.DisplayName;
             Color = product.Properties["Color"] as string;
             LineDiscount = ((CommerceTotal) line.Total).LineItemDiscountAmount.ToString(Context.Language.CultureInfo);
             Quantity = line.Quantity.ToString(Context.Language.CultureInfo);
-            LineTotal = line.Total.Amount.ToCurrency(currencyCode);
+            LineTotal = line.Total.Amount.ToCurrency();
             ExternalLineId = line.ExternalId;
             ProductId = product.ProductId;
             VariantId = product.ProductVariantId;
@@ -56,7 +54,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             ProductUrl = LinkManager.GetDynamicUrl(productItem);
 
             if (product.Price.Amount != 0M)
-                LinePrice = product.Price.Amount.ToCurrency(currencyCode);
+                LinePrice = product.Price.Amount.ToCurrency();
 
             var imageInfo = product.Properties["_product_Images"] as string;
             if (imageInfo == null)
@@ -69,7 +67,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
         }
 
         public string Image { get; set; }
-        public string DisplayName { get; set; }
+        public string Title { get; set; }
         public string Color { get; set; }
         public string LineDiscount { get; set; }
         public string Quantity { get; set; }

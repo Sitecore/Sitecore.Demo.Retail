@@ -39,18 +39,22 @@ namespace Sitecore.Reference.Storefront.Controllers
 {
     public class CartController : SitecoreController
     {
-        public CartController([NotNull] CartManager cartManager, [NotNull] AccountManager accountManager, [NotNull] ContactFactory contactFactory, VisitorContextRepository visitorContextRepository, CartCacheHelper cartCacheHelper)
+        public CartController(CartManager cartManager, VisitorContextRepository visitorContextRepository, CartCacheHelper cartCacheHelper, PricingManager pricingManager, CurrencyManager currencyManager)
         {
             Assert.ArgumentNotNull(cartManager, nameof(cartManager));
 
             CartManager = cartManager;
             VisitorContextRepository = visitorContextRepository;
             CartCacheHelper = cartCacheHelper;
+            PricingManager = pricingManager;
+            CurrencyManager = currencyManager;
         }
 
-        public CartManager CartManager { get; protected set; }
-        public VisitorContextRepository VisitorContextRepository { get; }
-        public CartCacheHelper CartCacheHelper { get; }
+        private CartManager CartManager { get; }
+        private VisitorContextRepository VisitorContextRepository { get; }
+        private CartCacheHelper CartCacheHelper { get; }
+        private PricingManager PricingManager { get; }
+        private CurrencyManager CurrencyManager { get; }
 
         [HttpGet]
         public override ActionResult Index()
@@ -61,6 +65,25 @@ namespace Sitecore.Reference.Storefront.Controllers
         public ActionResult MiniCart(bool updateCart = false)
         {
             return PartialView();
+        }
+
+        [HttpPost]
+        public JsonResult SwitchCurrency(string currency)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(currency))
+                {
+                    PricingManager.CurrencyChosenPageEvent(StorefrontManager.CurrentStorefront, CurrencyManager.CurrencyContext.CurrencyCode);
+                    CartManager.UpdateCartCurrency(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), CurrencyManager.CurrencyContext.CurrencyCode);
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(new BaseJsonResult("SwitchCurrency", e), JsonRequestBehavior.AllowGet);
+            }
+
+            return new JsonResult();
         }
 
         [HttpGet]

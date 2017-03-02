@@ -16,34 +16,32 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Web;
-using System.Web.Mvc;
-using Sitecore.Commerce.Entities.Inventory;
-using Sitecore.Data.Items;
-using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Models;
-using Sitecore.Foundation.Commerce.Repositories;
-using Sitecore.Links;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
-    public static class StorefrontManager
+    public class CurrencyManager : BaseManager
     {
-        public static CommerceStorefront CurrentStorefront
+        public CurrencyContext CurrencyContext
         {
             get
             {
-                var path = Context.Site.RootPath + Context.Site.StartItem;
-                if (HttpContext.Current.Items.Contains(path))
+                var context = (CurrencyContext) HttpContext.Current.Items["_currencyContext"];
+                if (context != null)
                 {
-                    return HttpContext.Current.Items[path] as CommerceStorefront;
+                    return context;
                 }
-
-                var storefront = new CommerceStorefront(Context.Database.GetItem(path));
-                HttpContext.Current.Items[path] = storefront;
-                return (CommerceStorefront) HttpContext.Current.Items[path];
+                context = new CurrencyContext();
+                HttpContext.Current.Items["_currencyContext"] = context;
+                return context;
             }
         }
 
-        public static string StorefrontHome => LinkManager.GetItemUrl(CurrentStorefront.HomeItem);
+        public static CurrencyInformationModel GetCurrencyInformation(string currency)
+        {
+            var displayKey = $"{currency}_{Context.Language.Name}";
+            var item = Context.Database.GetItem($"/sitecore/Commerce/Storefront Configuration/Currency Display/{displayKey}") ?? Context.Database.GetItem($"/sitecore/Commerce/Storefront Configuration/Currencies/{currency}");
+            return item != null ? new CurrencyInformationModel(item) : null;
+        }
     }
 }

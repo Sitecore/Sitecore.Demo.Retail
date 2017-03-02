@@ -34,15 +34,15 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines
 {
     public class ProductItemResolver : HttpRequestProcessor
     {
-        public ProductItemResolver(SiteContextRepository siteContextRepository, CatalogManager catalogManager, CatalogContextFactory catalogContextFactory)
+        public ProductItemResolver(CatalogItemContext catalogItemContext, CatalogManager catalogManager, CatalogItemContextFactory catalogContextFactory)
         {
-            SiteContextRepository = siteContextRepository;
+            CatalogItemContext = catalogItemContext;
             CatalogContextFactory = catalogContextFactory;
         }
 
-        private SiteContextRepository SiteContextRepository { get; }
+        private CatalogItemContext CatalogItemContext { get; }
 
-        private ICatalogContext GetCatalogContextFromIncomingRequest()
+        private ICatalogItemContext GetCatalogContextFromIncomingRequest()
         {
             var httpContext = new HttpContextWrapper(HttpContext.Current);
             var routeData = RouteTable.Routes.GetRouteData(httpContext);
@@ -50,7 +50,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines
             return routeData == null ? null : CatalogContextFactory.Create(routeData, Context.Database);
         }
 
-        private CatalogContextFactory CatalogContextFactory { get; }
+        private CatalogItemContextFactory CatalogContextFactory { get; }
 
         public override void Process(HttpRequestArgs args)
         {
@@ -65,7 +65,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines
                 return;
             }
 
-            SiteContextRepository.Current.CurrentCatalogContext = catalogContext;
+            CatalogItemContext.Current = catalogContext;
             Context.Item = catalogContext.Item;
         }
     }

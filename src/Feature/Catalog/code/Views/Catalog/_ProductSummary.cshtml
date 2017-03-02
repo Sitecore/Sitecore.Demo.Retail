@@ -19,8 +19,7 @@
         return;
     }
 
-    var isCategory = Model.IsCategory();
-    var brand = Model.RenderField("Brand");
+    var brand = Html.Sitecore().Field("Brand", Model.Item);
     var brandLength = brand.ToString().Length;
 }
 
@@ -28,7 +27,7 @@
     @if (Model.IsOnSale && Model.OnSaleOverlayImage != null)
     {
         // TODO: Move the following hard-coded style settings to .css.
-        <div style="position: absolute; top: 25; left: 25;">
+        <div style="position: absolute; top:25px; left:25px;">
             <img src="@(Model.OnSaleOverlayImage.ImageUrl(50,50))" alt="On sale!"/>
         </div>
     }    
@@ -38,7 +37,7 @@
         if (Model.Images != null && Model.Images.Count > 0)
         {
             <a href="@Model.GetLink()">
-                <img src="@(Model.Images[0]?.ImageUrl(300, 300))" class="img-responsive" alt="product image" title="@Model.DisplayName"/>
+                <img src="@(Model.Images[0]?.ImageUrl(300, 300))" class="img-responsive" alt="product image" title="@Model.Title"/>
             </a>
         }
         else
@@ -49,7 +48,7 @@
                     Parameters = new SafeDictionary<string>
                     {
                         {"class", "img-responsive"},
-                        {"title", Model.DisplayName}
+                        {"title", Model.Title}
                     }
                 })
             </a>
@@ -59,7 +58,7 @@
 
     <div class="caption">
         <a href="@Model.GetLink()">
-            <h3 class="twolines">@Model.DisplayName</h3>
+            <h3 class="twolines">@Model.Title</h3>
         </a>
         @if (brand != null && brandLength > 0)
         {
@@ -69,8 +68,7 @@
         {
             <p class="nobrand">&nbsp;</p>
         }
-        @if (!isCategory)
-        {
+        @{
             var isVariant = Model.LowestPricedVariantAdjustedPrice.HasValue;
             var adjustedPriceWithCurrency = string.Empty;
             var listPriceWithCurrency = string.Empty;
@@ -167,29 +165,17 @@
             }
         }
 
-        @if (!isCategory)
-        {
-            <div class="rating hidden-sm hidden-xs">
-                <span @(Model.CustomerAverageRating >= 1 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
-                <span @(Model.CustomerAverageRating >= 2 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
-                <span @(Model.CustomerAverageRating >= 3 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
-                <span @(Model.CustomerAverageRating >= 4 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
-                <span @(Model.CustomerAverageRating >= 5 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
-            </div>
-        }
+        <div class="rating hidden-sm hidden-xs">
+            <span @(Model.CustomerAverageRating >= 1 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
+            <span @(Model.CustomerAverageRating >= 2 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
+            <span @(Model.CustomerAverageRating >= 3 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
+            <span @(Model.CustomerAverageRating >= 4 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
+            <span @(Model.CustomerAverageRating >= 5 ? "class=text-primary" : "")><span class="glyphicon glyphicon-star"></span></span>
+        </div>
         <div class="p-t-1">
-            @if (!isCategory)
-            {
-                <a href="@Model.GetLink()" class="btn btn-default">
-                    <span class="glyphicon glyphicon-th-list"></span> @Model.ProductDetailsLinkText
-                </a>
-            }
-            else
-            {
-                <a href="@Model.GetLink()" class="btn btn-default">
-                    <span></span> @Html.Sitecore().Field("Category", Html.Sitecore().CurrentRendering.Item)
-                </a>
-            }
+            <a href="@Model.GetLink()" class="btn btn-default">
+                <span class="glyphicon glyphicon-th-list"></span> @Model.ProductDetailsLinkText
+            </a>
         </div>
     </div>
 </div>

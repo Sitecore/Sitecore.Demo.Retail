@@ -31,7 +31,7 @@
         <!-- Toggle facets for mobile -->
         @foreach (var facet in Model.ActiveFacets)
         {
-            var facetId = facet.DisplayName.ToLower().Replace(" ", "");
+            var facetId = "facet" + Guid.NewGuid().ToString("N");
             if (facet.IsValid())
             {
                 <div class="facets-container">

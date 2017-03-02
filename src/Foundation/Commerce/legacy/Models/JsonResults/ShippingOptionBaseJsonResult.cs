@@ -42,7 +42,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
             ExternalId = shippingOption.ExternalId;
             Description = shippingOption.Description;
-            Name = StorefrontManager.GetShippingName(shippingOption.Name);
+            Name = LookupManager.GetShippingName(shippingOption.Name);
             Description = shippingOption.Description;
             ShippingOptionType = shippingOption.ShippingOptionType;
             ShopName = shippingOption.ShopName;

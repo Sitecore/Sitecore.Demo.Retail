@@ -24,18 +24,13 @@ using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class NavigationViewModel : RenderingModel
+    public class NavigationViewModel
     {
-        public List<Item> ChildCategories { get; private set; }
+        public List<CategoryViewModel> ChildCategories { get; }
 
-        public void Initialize(Rendering rendering, CategorySearchResults childCategories)
+        public NavigationViewModel()
         {
-            base.Initialize(rendering);
-
-            if (childCategories != null)
-            {
-                ChildCategories = childCategories.CategoryItems;
-            }
+            ChildCategories = new List<CategoryViewModel>();
         }
     }
 }

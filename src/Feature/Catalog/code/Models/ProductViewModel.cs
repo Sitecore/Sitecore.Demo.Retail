@@ -33,18 +33,13 @@ using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class ProductViewModel : ICatalogProduct, IInventoryProduct
+    public class ProductViewModel : CatalogItemViewModel, ICatalogProduct, IInventoryProduct
     {
-        private List<MediaItem> _images;
-
-        public ProductViewModel(Item item, List<VariantViewModel> variants = null)
+        public ProductViewModel(Item item, List<VariantViewModel> variants = null) : base(item)
         {
             Assert.IsTrue(item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.ID), "Item must be a Product");
-            Item = item;
             Variants = variants;
         }
-
-        public Item Item { get; set; }
 
         public string ProductName { get; set; }
 
@@ -52,59 +47,21 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public string ParentCategoryName { get; set; }
 
-        public string Description { get; set; }
-
         public HtmlString DescriptionRender => PageContext.Current.HtmlHelper.Sitecore().Field(Foundation.Commerce.Templates.Commerce.Product.Fields.Description, Item);
-
-        public List<MediaItem> Images
-        {
-            get
-            {
-                if (_images != null)
-                {
-                    return _images;
-                }
-
-                MultilistField field = Item.Fields["Images"];
-                if (field == null)
-                {
-                    return new List<MediaItem>();
-                }
-
-                _images = new List<MediaItem>();
-                foreach (var id in field.TargetIDs)
-                {
-                    MediaItem mediaItem = Item.Database.GetItem(id);
-                    _images.Add(mediaItem);
-                }
-                return _images;
-            }
-        }
 
         public MediaItem OnSaleOverlayImage => StorefrontManager.CurrentStorefront.OnSaleOverlayImage;
 
-        public string DisplayName
-        {
-            get
-            {
-                var displayName = Item[FieldIDs.DisplayName.ToString()];
-                return string.IsNullOrEmpty(displayName) ? string.Empty : displayName;
-            }
-        }
-
-        public HtmlString DisplayNameRender => PageContext.Current.HtmlHelper.Sitecore().Field(FieldIDs.DisplayName.ToString(), Item);
-
-        public string ListPriceWithCurrency => ListPrice.HasValue ? ListPrice.ToCurrency(StorefrontManager.CurrentStorefront.DefaultCurrency) : string.Empty;
+        public string ListPriceWithCurrency => ListPrice.HasValue ? ListPrice.ToCurrency() : string.Empty;
 
         public decimal CustomerAverageRating { get; set; }
 
-        public string AdjustedPriceWithCurrency => AdjustedPrice.HasValue ? AdjustedPrice.ToCurrency(StorefrontManager.CurrentStorefront.DefaultCurrency) : string.Empty;
+        public string AdjustedPriceWithCurrency => AdjustedPrice.HasValue ? AdjustedPrice.ToCurrency() : string.Empty;
 
         public decimal SavingsPercentage => CalculateSavingsPercentage(AdjustedPrice, ListPrice);
 
-        public string LowestPricedVariantAdjustedPriceWithCurrency => LowestPricedVariantAdjustedPrice.HasValue ? LowestPricedVariantAdjustedPrice.ToCurrency(StorefrontManager.CurrentStorefront.DefaultCurrency) : string.Empty;
+        public string LowestPricedVariantAdjustedPriceWithCurrency => LowestPricedVariantAdjustedPrice.HasValue ? LowestPricedVariantAdjustedPrice.ToCurrency() : string.Empty;
 
-        public string LowestPricedVariantListPriceWithCurrency => LowestPricedVariantListPrice.HasValue ? LowestPricedVariantListPrice.ToCurrency(StorefrontManager.CurrentStorefront.DefaultCurrency) : string.Empty;
+        public string LowestPricedVariantListPriceWithCurrency => LowestPricedVariantListPrice.HasValue ? LowestPricedVariantListPrice.ToCurrency() : string.Empty;
 
         public decimal VariantSavingsPercentage => CalculateSavingsPercentage(LowestPricedVariantAdjustedPrice, LowestPricedVariantListPrice);
 
@@ -217,11 +174,10 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
             }
         }
 
-        public HtmlString RenderField(string fieldName)
+        public HtmlString RenderFeatures()
         {
-            var fieldValue = PageContext.Current.HtmlHelper.Sitecore().Field(fieldName, Item);
-            if (fieldName.Equals("Features", StringComparison.OrdinalIgnoreCase)
-                && (fieldValue.ToString().Equals("Default", StringComparison.OrdinalIgnoreCase) || fieldValue.ToString().Equals(string.Empty, StringComparison.OrdinalIgnoreCase))
+            var fieldValue = PageContext.Current.HtmlHelper.Sitecore().Field("Features", Item);
+            if (fieldValue.ToString().Equals("Default", StringComparison.OrdinalIgnoreCase) || fieldValue.ToString().Equals(string.Empty, StringComparison.OrdinalIgnoreCase)
                 && Item.HasChildren
                 && Item.Children[0] != null)
             {
@@ -229,11 +185,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
             }
 
             return fieldValue;
-        }
-
-        public string GetLink()
-        {
-            return LinkManager.GetDynamicUrl(Item);
         }
 
         public decimal CalculateSavingsPercentage(decimal? adjustedPrice, decimal? listPrice)
@@ -252,5 +203,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
         {
             return Item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.ID);
         }
+
+        public override string ImagesFieldName => Templates.Generated.Product.Fields.Images;
+        public override string DescriptionFieldName => Templates.Generated.Product.Fields.Description;
+        public override string TitleFieldName => FieldIDs.DisplayName.ToString();
     }
 }

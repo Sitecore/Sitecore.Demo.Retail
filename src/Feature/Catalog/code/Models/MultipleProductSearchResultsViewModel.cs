@@ -17,39 +17,27 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Models.Search;
 using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class MultipleProductSearchResultsViewModel : RenderingModel
+    public class MultipleSearchResultsViewModel
     {
-        public MultipleProductSearchResultsViewModel(MultipleProductSearchResults searchResults)
+        public MultipleSearchResultsViewModel(MultipleProductSearchResults searchResults)
         {
-            SearchResults = searchResults;
-        }
-
-        public MultipleProductSearchResults SearchResults { get; }
-
-        public List<ProductSearchResultViewModel> ProductSearchResults { get; set; }
-        public string DisplayName { get; set; }
-
-        public override void Initialize(Rendering rendering)
-        {
-            base.Initialize(rendering);
-
-            ProductSearchResults = new List<ProductSearchResultViewModel>();
-            if (SearchResults.SearchResults == null || !SearchResults.SearchResults.Any())
+            Assert.ArgumentNotNull(searchResults, nameof(searchResults));
+            if (searchResults.SearchResults == null)
             {
+                ProductSearchResults = new List<SearchResultViewModel>();
                 return;
             }
 
-            foreach (var results in SearchResults.SearchResults)
-            {
-                var productSearchResultModel = new ProductSearchResultViewModel();
-                productSearchResultModel.Initialize(Rendering, results);
-                ProductSearchResults.Add(productSearchResultModel);
-            }
+            ProductSearchResults = searchResults.SearchResults.Select(r => new SearchResultViewModel(r)).ToList();
         }
+
+        public List<SearchResultViewModel> ProductSearchResults { get; set; }
+        public string Title { get; set; }
     }
 }

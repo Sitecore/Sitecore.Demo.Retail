@@ -92,7 +92,7 @@ function initCartAmount(updateAmount) {
 function basketitem() {
     var self = this;
     self.image = "http://placehold.it/80x80";
-    self.displayName = "Empty Element";
+    self.title = "Empty Element";
     self.quantity = 100;
     self.linePrice = 999.00;
     self.productUrl = "#";
@@ -104,11 +104,11 @@ function MiniCartViewModel(count, total) {
 }
 
 
-function MiniCartItemViewModel(image, displayName, quantity, linePrice, productUrl, externalCartlineId) {
+function MiniCartItemViewModel(image, title, quantity, linePrice, productUrl, externalCartlineId) {
     var self = this;
 
     self.image = image;
-    self.displayName = displayName;
+    self.title = title;
     self.quantity = quantity;
     self.linePrice = linePrice;
     self.productUrl = productUrl;
@@ -122,7 +122,7 @@ function MiniCartItemListViewModel(data) {
         self.miniCartItems = ko.observableArray();
 
         $(data.Lines).each(function () {
-            self.miniCartItems.push(new MiniCartItemViewModel(this.Image, this.DisplayName, this.Quantity, this.LinePrice, this.ProductUrl, this.ExternalCartLineId));
+            self.miniCartItems.push(new MiniCartItemViewModel(this.Image, this.title, this.Quantity, this.LinePrice, this.ProductUrl, this.ExternalCartLineId));
         });
 
         self.lineitemcount = ko.observable(data.Lines.length);
@@ -132,7 +132,7 @@ function MiniCartItemListViewModel(data) {
             self.miniCartItems.removeAll();
 
             $(data.Lines).each(function () {
-                self.miniCartItems.push(new MiniCartItemViewModel(this.Image, this.DisplayName, this.Quantity, this.LinePrice, this.ProductUrl, this.ExternalCartLineId));
+                self.miniCartItems.push(new MiniCartItemViewModel(this.Image, this.Title, this.Quantity, this.LinePrice, this.ProductUrl, this.ExternalCartLineId));
             });
             self.lineitemcount(data.Lines.length);
             self.total(data.Subtotal);

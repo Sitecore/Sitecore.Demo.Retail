@@ -45,7 +45,7 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
             Assert.ArgumentNotNull(cart, nameof(cart));
 
             LineItemCount = ((CommerceCart) cart).LineItemCount;
-            Total = ((CommerceTotal) cart.Total).Subtotal.ToCurrency(StorefrontManager.CurrentStorefront.DefaultCurrency);
+            Total = ((CommerceTotal) cart.Total).Subtotal.ToCurrency();
         }
     }
 }

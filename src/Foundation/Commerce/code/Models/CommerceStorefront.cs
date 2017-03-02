@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using Sitecore.Configuration;
 using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
@@ -48,69 +49,9 @@ namespace Sitecore.Foundation.Commerce.Models
             }
         }
 
-        public bool UseIndexFileForProductStatusInLists => MainUtil.GetBool(HomeItem[StorefrontConstants.KnownFieldNames.UseIndexFileForProductStatusInLists], false);
-
         public string ShopName { get; set; } = "storefront";
 
-        public string DefaultProductId
-        {
-            get
-            {
-                var defaultProductId = CatalogContextItem[Templates.CatalogContext.Fields.DefaultProductId];
-                if (string.IsNullOrEmpty(defaultProductId))
-                    throw new ConfigurationErrorsException("No default product has been set on the catalog context");
-                return defaultProductId;
-            }
-        }
-
         public MediaItem OnSaleOverlayImage => string.IsNullOrWhiteSpace(InnerItem["On Sale Overlay Image"])  ? null : Context.Database.GetItem(new ID(InnerItem["On Sale Overlay Image"]));
-
-        public int MaxNumberOfAddresses => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfAddresses], 10);
-
-        public int MaxNumberOfWishLists => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfWishLists], 10);
-
-        public int MaxNumberOfWishListItems => MainUtil.GetInt(HomeItem[StorefrontConstants.KnownFieldNames.MaxNumberOfWishListItems], 10);
-
-        public string DefaultCurrency
-        {
-            get
-            {
-                var currencyItem = CurrencyContextItem?.TargetItem(Templates.CurrencyContext.Fields.DefaultCurrency);
-                if (currencyItem == null)
-                {
-                    throw new ConfigurationErrorsException("Default currency not set on the store");
-                }
-
-                return currencyItem.Name;
-            }
-        }
-
-        private Item CurrencyContextItem
-        {
-            get
-            {
-                var contextItem = InnerItem.GetAncestorOrSelfOfTemplate(Templates.CurrencyContext.ID);
-                if (contextItem == null)
-                    throw new ConfigurationErrorsException("Cannot determine the CurrencyContext for the commerce storefront");
-                return contextItem;
-            }
-        }
-
-        private Item CatalogContextItem
-        {
-            get
-            {
-                var contextItem = InnerItem.GetAncestorOrSelfOfTemplate(Templates.CatalogContext.ID);
-                if (contextItem == null)
-                    throw new ConfigurationErrorsException("Cannot determine the CatalogContext for the commerce storefront");
-                return contextItem;
-            }
-        }
-
-        public Catalog[] GetCatalogs()
-        {
-            return ((MultilistField)CatalogContextItem.Fields[Templates.CatalogContext.Fields.Catalogs]).GetItems().Select(c => new Catalog(c)).ToArray();
-        }
 
         private void SetShopNameBySiteContext()
         {
@@ -127,16 +68,6 @@ namespace Sitecore.Foundation.Commerce.Models
                 return;
             }
             ShopName = shopName;
-        }
-
-        public string Title()
-        {
-            return InnerItem == null ? "default" : InnerItem[StorefrontConstants.ItemFields.Title];
-        }
-
-        public string GetMapKey()
-        {
-            return HomeItem[StorefrontConstants.KnownFieldNames.MapKey];
         }
     }
 }
