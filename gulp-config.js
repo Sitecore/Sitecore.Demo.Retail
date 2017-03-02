@@ -7,7 +7,7 @@ module.exports = function() {
     solutionName: "Sitecore.Demo.Retail",
     buildConfiguration: "Debug",
     runCleanBuilds: false,
-    commerceServerSiteName: "Habitat",
+    commerceServerSiteName: "CFSolutionStorefrontSite",
     commerceDatabasePath: ".\\src\\Project\\Retail\\Database"
   };
   return config;
