@@ -208,7 +208,8 @@ function New-Certificate
 {
     param 
     (
-        [Parameter(Mandatory=$True)][PSCustomObject]$certificateSettingList
+        [Parameter(Mandatory=$True)][PSCustomObject]$certificateSettingList,
+        [Parameter(Mandatory=$True)][PSCustomObject]$installFolderSetting
     )
     begin 
     {
@@ -216,100 +217,105 @@ function New-Certificate
     }
     process
     {
+        $myCertStoreLocation = "cert:\LocalMachine\My"
+        $rootCertStoreLocation = "cert:\LocalMachine\Root"
+        $protocol = "https"
+        $port = "443"
+
         Foreach ($certificateSetting in $certificateSettingList)
         {
-            Write-Verbose "Setting up Certificate for: $($certificateSetting.DnsName)"
-
-            $certificate = Get-ChildItem $certificateSetting.certStoreLocation | where-object { $_.DnsNameList -like $certificateSetting.dnsName }  | Select-Object -First 1
-
+            Write-Verbose "Setting up certificate $($certificateSetting.dnsName)"
+            
+            $certificate = Get-ChildItem $myCertStoreLocation | where-object { $_.DnsNameList -like $certificateSetting.dnsName }  | Select-Object -First 1
             If(-not $certificate)
             {
-                PKI\New-SelfSignedCertificate -DnsName $certificateSetting.dnsName -CertStoreLocation $certificateSetting.certStosreLocation -verbose | Write-Verbose
-                $certificate = Get-ChildItem $certificateSetting.certStoreLocation | where-object { $_.Subject -like $certificateSetting.dnsName }  | Select-Object -First 1
+                Write-Verbose "Creating certificate $($certificateSetting.dnsName) in store '$myCertStoreLocation'"
+                
+                # The self signed certificate command only supports 'Cert:\CurrentUser\My' or 'Cert:\LocalMachine\My'                    
+                PKI\New-SelfSignedCertificate -DnsName $certificateSetting.dnsName -CertStoreLocation $myCertStoreLocation -verbose | Write-Verbose
+                $certificate = Get-ChildItem $myCertStoreLocation | where-object { $_.DnsNameList -like $certificateSetting.dnsName }  | Select-Object -First 1
       
                 If(-not $certificate)
                 {
-                    Write-Host "Error, unable to create certificate for $($certificateSetting.name)" -ForegroundColor red
+                    Write-Host "Error, unable to create certificate $($certificateSetting.dnsName) in '$myCertStoreLocation'" -ForegroundColor red
+                    return 1; 
+                }
+
+            }
+            Else
+            {
+                Write-Verbose "Certificate $($certificateSetting.dnsName) already exists in store '$myCertStoreLocation'"
+            }
+
+            $rootCertificate = Get-ChildItem $rootCertStoreLocation | where-object { $_.DnsNameList -like $certificateSetting.dnsName }  | Select-Object -First 1
+            If(-not $rootCertificate)
+            {
+                Write-Verbose "Creating certificate $($certificateSetting.dnsName) in store '$rootCertStoreLocation'"
+                
+                $mypwd = ConvertTo-SecureString -String "sitecore" -Force -AsPlainText
+                $filePath = $installFolderSetting.path + "\" + $certificateSetting.DnsName + ".pfx"
+
+                Write-Verbose "Exporting certificate to $($installFolderSetting.path)"
+                $certificate | Export-PfxCertificate -FilePath $filePath -Password $mypwd -Verbose | Write-Verbose
+
+                Write-Verbose "Importing certificate $($installFolderSetting.path) to store '$rootCertStoreLocation'"
+                Import-PfxCertificate -FilePath $filePath -CertStoreLocation $rootCertStoreLocation -Password $mypwd -Verbose | Write-Verbose
+
+                $rootCertificate = Get-ChildItem $rootCertStoreLocation | where-object { $_.DnsNameList -like $certificateSetting.dnsName }  | Select-Object -First 1
+                If(-not $rootCertificate)
+                {
+                    Write-Host "Error, unable to create certificate $($certificateSetting.dnsName) in '$rootCertStoreLocation'" -ForegroundColor red
                     return 1; 
                 }
             }
-New-WebBinding -Name TestWebsite -Protocol https -Port 443 -HostHeader TestsslBinding -IPAddress 192.168.1.108 -SslFlags 1
-$session = New-PsSession –ComputerName '.'
-Invoke-Command -Session $session {get-item -Path "cert:\LocalMachine\My\$($certificateSetting.name)" | new-item -path "IIS:\SslBindings\0.0.0.0!443"}
-<#
-calhost -Query "Select * from SSLBinding"
-
-foreach ($obj in $objWmi)
-{
-	write-host "BindingOwnerID:" $obj.BindingOwnerID
-	write-host "CertificateCheckMode:" $obj.CertificateCheckMode
-	write-host "CertificateHash:" $obj.CertificateHash
-	write-host "CertificateStoreName:" $obj.CertificateStoreName
-	write-host "CTLIdentifier:" $obj.CTLIdentifier
-	write-host "CTLStoreName:" $obj.CTLStoreName
-	write-host "IPAddress:" $obj.IPAddress
-	write-host "Port:" $obj.Port
-	write-host "RevocationFreshnessTime:" $obj.RevocationFreshnessTime
-	write-host "RevocationURLRetrievalTimeout:" $obj.RevocationURLRetrievalTimeout
-	write-host "SslAlwaysNegoClientCert:" $obj.SslAlwaysNegoClientCert
-	write-host "SslUseDsMapper:" $obj.SslUseDsMapper
-	write-host
-	write-host "########"
-	write-host
-}
-
-
-$site1 = Get-Website | Where {$_.Name -eq $certificateSetting.name}
-$site1Bindings = $site1 | Get-WebBinding
-
-
-
-
-            Get-ChildItem IIS:\SslBindings | ? write-host
-
-            if (-not (Get-ChildItem IIS:\SslBindings | ?{ $_.host -eq "*.example.com" -and $_.port -eq 443 }))
+            Else
             {
+                Write-Verbose "Certificate $($certificateSetting.dnsName) already exists in store '$rootCertStoreLocation'"
             }
 
-            Write-Host "tesT"
-            #Push-Location IIS:\SslBindings
-            #Get-Item cert:\LocalMachine\My\$certificate.Thumbprint | New-Item 0.0.0.0!443;
-            #Pop-Location
-            #>
-<#
-# test binding, create if missing
-# fails on wildcard test when the binding exists
-if (-not (Test-Path -LiteralPath IIS:\SslBindings\*!443!*.example.com))
-{ 
-    Push-Location Cert:\LocalMachine\My
+            # AppId is used as a reference to which application created the binding for audit purposes.
+            $applicationId = ([guid]::newguid()).ToString('B')
+            
+            # From IIS 7, the OS is responsible for SSL to port mappings. The OS doesn't care about what IIS site made the configuration - thats just a visualisation 
+            # in IIS Manager (i.e. the link in IIS to the SSL\Port mapping is maintained in IIS metadata). 
+            # NOTE: there is potentialy you can have a certificate mapped correctly and not see it in IIS Manager.
+            $cmd = netsh http add sslcert hostnameport=$($certificateSetting.dnsName):$port certhash=$($certificate.Thumbprint) appid=$applicationId certstore=My
 
-    # find or create a certificate
-    $targetCert = Get-ChildItem -Recurse | ? { ($_.NotAfter -gt (Get-Date)) -and ($_.DnsNameList -contains "*.example.com") } | Sort NotAfter -Descending | select -First 1
-    if ($targetCert -eq $null)
-    {
-        $targetCert = New-SelfSignedCertificate -DnsName "*.example.com" -CertStoreLocation Cert:\LocalMachine\My
-    }
+            if($cmd -Match 'SSL Certificate successfully added')
+            {
+                Write-Verbose "Certificate successfully bound to host '$($certificateSetting.dnsName)' and port '$port'."
+            }
+            ElseIf($cmd -Match 'Cannot create a file when that file already exists')
+            {
+                Write-Verbose "Certificate already bound. Response from command is: '$cmd'"
+            }
+            Else
+            {
+                Write-Host "Error, unable to bind certificate to hostname '$($certificateSetting.dnsName)'. Response from command '$cmd'." -ForegroundColor red
+                return 1; 
+            }
 
-    # bind to host header *
-    $targetCert | New-Item -Path IIS:\SslBindings\*!443!*.example.com -SSLFlags 1
-
-    Pop-Location
-}
-
-            # Go to the PowerShell Drive for IIS 
-            Push-Location IIS:\SslBindings
- 
-            # Bind the HTTPS protocol to the Default Website (listening on all IP addresses)
-            New-WebBinding -Name $certificateSetting.name -IP $certificateSetting.ip -Port $certificateSetting.port -Protocol $certificateSetting.protocol
- 
-            # Look at the binding collection using the following command: 
-            Get-WebBinding $certificateSetting.name 
- 
-            # Bind the Self-Signed certificate to the WebBinding
-            $strThumb = $SelfSignedCert.Thumbprint
-            Get-Item Cert:\LocalMachine\MY\$strThumb | New-Item "$certificateSetting.ip!$certificateSetting.port"
-            Pop-Location
-        #>
+            # Change the IIS metadata so we can see the SSL\Port configuration in IIS Manager
+            $bindingInformation = "*:$($port):$($certificateSetting.dnsName)"
+            $escaped = [Regex]::Escape($bindingInformation)
+            $cmd = invoke-expression "$($env:WINDIR)\system32\inetsrv\Appcmd list site `"$($certificateSetting.siteName)`" /Config"
+            If($cmd -Match $escaped)
+            {
+                Write-Verbose "IIS configuration allready applied."
+            }
+            Else
+            {
+                $cmd = invoke-expression "$($env:WINDIR)\system32\inetsrv\Appcmd set site /site.name: `"$($certificateSetting.siteName)`" /+`"bindings.[protocol='https',bindingInformation='$bindingInformation',sslFlags='0']`" /commit:apphost"
+                if($cmd -Like "SITE object * changed")
+                {
+                    Write-Verbose "IIS  successfully bound to host '$($certificateSetting.dnsName)' and port '$port'."
+                }
+                Else
+                {
+                    Write-Host "Error, unable to create IIS metadata for binding of certificate '$($certificateSetting.dnsName)'. Response from command '$cmd'." -ForegroundColor red
+                    return 1; 
+                }
+            }
         }
 
         return 0;

@@ -28,7 +28,7 @@ If ($csResourceFolderSetting -eq $null) { Write-Host "Expected dacpac resources"
 # Step 0: check if all files exist that are needed
 Write-Host "`nStep 0: Checking if all needed files exist" -foregroundcolor Yellow
 if ((ManageFile\Confirm-Resources $settings.resources -verbose) -ne 0) { Exit }
-<#
+
 # Step 1: Create Required Users
 Write-Host "`nStep 1: Create Required Users" -foregroundcolor Yellow
 If((ManageUser\Add-User -user $runTimeUserSetting -Verbose) -ne 0) { Exit }
@@ -80,7 +80,6 @@ ManageRegistry\Disable-LoopbackCheck
 Write-Host "`nStep 12: Test Commerce Server WebServices" -foregroundcolor Yellow
 If((ManageCommerceServer\Test-CSWebservices -csSiteSetting $settings.sitecoreCommerce.csSite -accountSettingList $settings.accounts -appPoolSettingList $settings.iis.appPools -websiteSettingList $settings.iis.websites -Verbose) -ne 0) { Exit }
 
-
 # Step 13: Restore Solution Packages 
 Write-Host "`nStep 13: Restore Solution Packages" -foregroundcolor Yellow
 If((ManageDotNet\Restore-SolutionPackages -resourcesSettingList $settings.resources -resourceId "solutionRoot" -Verbose) -ne 0) { Exit }
@@ -94,11 +93,13 @@ If((ManageDotNet\Publish-Project -resourcesSettingList $settings.resources -webs
 Write-Host "`nStep 15: Test Commerce Engine" -foregroundcolor Yellow
 If((ManageWeb\Invoke-WebRequest -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "api/`$metadata" -Verbose) -ne 0) { Exit }
 
-# Step 16: Bootstrap Commerce Engine and Initialise Environments
-Write-Host "`nStep 16: Test Commerce Engine" -foregroundcolor Yellow
+# Step 16: Create self signed certificate
+Write-Host "`nStep 16: Create self signed certificates" -foregroundcolor Yellow
+If((ManageIIS\New-Certificate -certificateSettingList $settings.iis.certificates -installFolderSetting $installFolderSetting -Verbose) -ne 0) { Exit }
+
+# Step 17: Bootstrap Commerce Engine and Initialise Environments
+Write-Host "`nStep 17: Test Commerce Engine" -foregroundcolor Yellow
 If((ManageWeb\Invoke-WebRequest -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/Bootstrap()" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
 If((ManageWeb\Invoke-WebRequest -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/InitializeEnvironment(environment='HabitatShops')" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
-If((ManageWeb\Invoke-WebRequest -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "InitializeEnvironment(environment='HabitatAuthoring')" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
-#>
-# Step 12: Creat self signed certificate
-If((ManageIIS\New-Certificate -certificateSettingList $settings.iis.certificates -Verbose) -ne 0) { Exit }
+If((ManageWeb\Invoke-WebRequest -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/InitializeEnvironment(environment='HabitatAuthoring')" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
+

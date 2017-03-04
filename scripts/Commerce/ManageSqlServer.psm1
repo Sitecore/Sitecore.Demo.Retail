@@ -118,7 +118,7 @@ function Import-Dacpac
     end{}
 }
 
-function Delete-Database
+function Remove-Database
 {
     param 
     (
@@ -236,7 +236,7 @@ function New-SqlLogin
     end {}
 }
 
-function Delete-SqlLogin
+function Remove-SqlLogin
 {
     param 
     (
@@ -271,4 +271,4 @@ function Delete-SqlLogin
     end {}
 }
 
-Export-ModuleMember Import-DatabaseChanges, Import-Dacpac, Delete-Database, New-SqlLogin, Delete-SqlLogin
+Export-ModuleMember Import-DatabaseChanges, Import-Dacpac, Remove-Database, New-SqlLogin, Remove-SqlLogin
