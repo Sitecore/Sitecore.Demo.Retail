@@ -132,7 +132,7 @@ var publishProjects = function (location, dest) {
         .pipe(msbuild({
           targets: targets,
           configuration: config.buildConfiguration,
-          logCommand: true,
+          logCommand: false,
           verbosity: "minimal",
           stdout: true,
           errorOnFail: true,
@@ -334,14 +334,14 @@ gulp.task("CE-01-Nuget-Restore", function (callback) {
 gulp.task("CE-02-Publish-CommerceEngine-Projects", function (callback) {
     var cmd = "dotnet publish ./src/Foundation/Commerce/Engine/code -o " + config.commerceEngineRoot
     var options = { maxBuffer: 1024 * 1024 };
-    console.log(`cmd: ${cmd}`);
+    console.log("cmd: " + cmd);
     return exec(cmd, options, function (err, stdout, stderr) {
         if (err) {
-            console.error(`exec error: ${err}`);
+            console.error("exec error: " + err);
             throw err;
         }
-        console.log(`stdout: ${stdout}`);
-        console.log(`stderr: ${stderr}`);
+        console.log("stdout: " + stdout);
+        console.log("stderr: " + stderr);
         callback();
     });
 });

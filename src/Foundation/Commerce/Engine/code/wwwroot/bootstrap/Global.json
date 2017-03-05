@@ -1,69 +1,69 @@
 ﻿{
-  "$type": "Sitecore.Commerce.Core.CommerceEnvironment, Sitecore.Commerce.Core",
-  "Components": {
-    "$type": "System.Collections.ObjectModel.ReadOnlyCollection`1[[Sitecore.Commerce.Core.Component, Sitecore.Commerce.Core]], mscorlib",
-    "$values": [ ]
-  },
-  "DateCreated": "2015-04-20T23:14:12.4908676Z",
-  "DateDeleted": "0001-01-01T00:00:00",
-  "DateUpdated": "2015-04-20T23:14:12.4908676Z",
-  "EntityProviderName": "EntityProvider_SQL",
-  "Id": "GlobalEnvironment",
-  "EnvironmentId": "{6be385f1-93dc-4299-9dd4-934f6ba42eaa}",
-  "IndexProviderName": "IndexProvider_SQL",
-  "IsDeleted": false,
-  "IsPersisted": false,
-  "ListMemberships": {
-    "$type": "System.Collections.ObjectModel.ReadOnlyCollection`1[[System.String, mscorlib]], mscorlib",
-    "$values": [
-      "Environments",
-      "AllEntities"
-    ]
-  },
-  "Name": "GlobalEnvironment",
-  "NameSpace": "Sitecore.Commerce",
-  "Policies": {
-    "$type": "System.Collections.ObjectModel.ReadOnlyCollection`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
-    "$values": [
-      {
-        "$type": "Sitecore.Commerce.Plugin.SQL.EntityStoreSqlPolicy, Sitecore.Commerce.Plugin.SQL",
-        "PolicyId": "Global",
-        "AllowAdmin": true,
-        "Database": "SitecoreCommerce_Global",
-        "EffectiveDate": "0001-01-01T00:00:00",
-        "IsVisible": false,
-        "Password": "",
-        "Server": ".",
-        "TrustedConnection": true,
-        "UserName": "",
-        "View": "EntityStoreSqlPolicy"
-      },
-      {
-        "$type": "Sitecore.Commerce.Plugin.CsAgent.CsCatalogPolicy, Sitecore.Commerce.Plugin.CsAgent",
-        "CacheEnable": true,
-        "EnableInventorySystem": true,
-        "SchemaTimeout": "10",
-        "ItemInformationCacheTimeout": "10",
-        "ItemHierarchyCacheTimeout": "10",
-        "ItemRelationshipsCacheTimeout": "10",
-        "ItemAssociationsCacheTimeout": "10",
-        "CatalogCollectionCacheTimeout": "10",
-        "ServiceUrl": "http://localhost:1004/CFSolutionStorefrontSite_CatalogWebService/CatalogWebService.asmx",
-        "SiteName": "CFSolutionStorefrontSite",
-        "DebugLevel": "Production",
-        "PolicyId": "04698b7d04e249d4a3e1324b1f13989b",
-        "Models": {
-          "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
-          "$values": []
-        }
-      },
-      {
-        "$type": "Sitecore.Commerce.Core.DeploymentPolicy, Sitecore.Commerce.Core",
-        "DeploymentId": "Deployment01",
-        "DeploymentVersion": "1.0.0",
-        "ParentNodeId": "Hub01"
-      }
-    ]
-  },
-  "SortOrder": 0
+    "$type": "Sitecore.Commerce.Core.CommerceEnvironment, Sitecore.Commerce.Core",
+    "Components": {
+        "$type": "System.Collections.ObjectModel.ReadOnlyCollection`1[[Sitecore.Commerce.Core.Component, Sitecore.Commerce.Core]], mscorlib",
+        "$values": []
+    },
+    "DateCreated": "2015-04-20T23:14:12.4908676Z",
+    "DateDeleted": "0001-01-01T00:00:00",
+    "DateUpdated": "2015-04-20T23:14:12.4908676Z",
+    "EntityProviderName": "EntityProvider_SQL",
+    "Id": "GlobalEnvironment",
+    "EnvironmentId": "{6be385f1-93dc-4299-9dd4-934f6ba42eaa}",
+    "IndexProviderName": "IndexProvider_SQL",
+    "IsDeleted": false,
+    "IsPersisted": false,
+    "ListMemberships": {
+        "$type": "System.Collections.ObjectModel.ReadOnlyCollection`1[[System.String, mscorlib]], mscorlib",
+        "$values": [
+            "Environments",
+            "AllEntities"
+        ]
+    },
+    "Name": "GlobalEnvironment",
+    "NameSpace": "Sitecore.Commerce",
+    "Policies": {
+        "$type": "System.Collections.ObjectModel.ReadOnlyCollection`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+        "$values": [
+            {
+                "$type": "Sitecore.Commerce.Plugin.SQL.EntityStoreSqlPolicy, Sitecore.Commerce.Plugin.SQL",
+                "PolicyId": "Global",
+                "AllowAdmin": true,
+                "Database": "SitecoreCommerce_Global",
+                "EffectiveDate": "0001-01-01T00:00:00",
+                "IsVisible": false,
+                "Password": "",
+                "Server": ".",
+                "TrustedConnection": true,
+                "UserName": "",
+                "View": "EntityStoreSqlPolicy"
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.CsAgent.CsCatalogPolicy, Sitecore.Commerce.Plugin.CsAgent",
+                "CacheEnable": true,
+                "EnableInventorySystem": true,
+                "SchemaTimeout": "10",
+                "ItemInformationCacheTimeout": "10",
+                "ItemHierarchyCacheTimeout": "10",
+                "ItemRelationshipsCacheTimeout": "10",
+                "ItemAssociationsCacheTimeout": "10",
+                "CatalogCollectionCacheTimeout": "10",
+                "ServiceUrl": "http://habitat.csservices.dev.local:1004/Habitat_CatalogWebService/CatalogWebService.asmx",
+                "SiteName": "Habitat",
+                "DebugLevel": "Production",
+                "PolicyId": "04698b7d04e249d4a3e1324b1f13989b",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": []
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.DeploymentPolicy, Sitecore.Commerce.Core",
+                "DeploymentId": "Deployment01",
+                "DeploymentVersion": "1.0.0",
+                "ParentNodeId": "Hub01"
+            }
+        ]
+    },
+    "SortOrder": 0
 }

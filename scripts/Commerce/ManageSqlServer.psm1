@@ -27,7 +27,7 @@ function Import-DatabaseChanges
                 return 1; 
             }         
 
-            $databaseName = If ($databaseSetting.useDatabaseName) { $databaseSetting.name } else { $null }
+            $databaseName = If ([string]::IsNullOrEmpty($fileSetting.useDatabaseName) -or ($fileSetting.useDatabaseName -ne $false)) { $databaseSetting.name }
             $filename = $folderSetting.path + "\" + $fileSetting.fileName
             
             If($filename -like '*.dacpac') 
@@ -67,12 +67,15 @@ function Import-SQL
     {
         If ([string]::IsNullOrEmpty($destinationDatabase))
         {
-            Invoke-Sqlcmd -inputfile $filePath -serverinstance $serverinstance -Verbose 
+            $test = Invoke-Sqlcmd -inputfile $filePath -serverinstance $serverinstance -Verbose
+            Invoke-Sqlcmd -inputfile $filePath -serverinstance $serverinstance -Verbose
         }
         Else
         {
-            Invoke-Sqlcmd -inputfile $filePath -serverinstance $serverinstance -database $destinationDatabase -Verbose 
+            Invoke-Sqlcmd -inputfile $filePath -serverinstance $serverinstance -database $destinationDatabase -Verbose
         }
+
+        return 0;
     }
     end{}
 }
@@ -113,12 +116,12 @@ function Import-Dacpac
         $dp = [Microsoft.SqlServer.Dac.DacPackage]::Load($filePath)
         $dacService.deploy($dp, $destinationDatabase, "True") 
 
-        return 0
+        return 0;
     }
     end{}
 }
 
-function Delete-Database
+function Remove-Database
 {
     param 
     (
@@ -236,7 +239,7 @@ function New-SqlLogin
     end {}
 }
 
-function Delete-SqlLogin
+function Remove-SqlLogin
 {
     param 
     (
@@ -271,4 +274,4 @@ function Delete-SqlLogin
     end {}
 }
 
-Export-ModuleMember Import-DatabaseChanges, Import-Dacpac, Delete-Database, New-SqlLogin, Delete-SqlLogin
+Export-ModuleMember Import-DatabaseChanges, Import-Dacpac, Remove-Database, New-SqlLogin, Remove-SqlLogin

@@ -173,6 +173,8 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="App_Config\Include\Foundation\Sitecore.Foundation.Commerce.Customer.config" />
+    <Content Include="App_Config\CommerceServer.Core.config" />
+    <Content Include="App_Config\Include\Y.Commerce.Engine\Sitecore.Commerce.Engine.config" />
     <None Include="web.config.transform">
       <SubType>Designer</SubType>
     </None>

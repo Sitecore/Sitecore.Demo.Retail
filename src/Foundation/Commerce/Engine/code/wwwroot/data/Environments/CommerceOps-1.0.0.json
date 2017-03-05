@@ -124,7 +124,7 @@
                 "ItemRelationshipsCacheTimeout": "10",
                 "ItemAssociationsCacheTimeout": "10",
                 "CatalogCollectionCacheTimeout": "10",
-                "ServiceUrl": "http://csservices:1004/Habitat_CatalogWebService/CatalogWebService.asmx",
+                "ServiceUrl": "http://habitat.csservices.dev.local:1004/Habitat_CatalogWebService/CatalogWebService.asmx",
                 "SiteName": "Habitat",
                 "DebugLevel": "Production",
                 "PolicyId": "04698b7d04e249d4a3e1324b1f13989b",

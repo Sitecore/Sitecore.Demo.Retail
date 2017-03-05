@@ -75,6 +75,11 @@ namespace Plugin.Sample.Habitat
         /// </returns>
         public override async Task<string> Run(string arg, CommercePipelineExecutionContext context)
         {
+            if (arg != "Habitat" && arg != "HabitatShops")
+            {
+                return arg;
+            }
+
             var artifactSet = "Environment.Habitat.Pricing-1.0";
 
             // Check if this environment has subscribed to this Artifact Set
@@ -87,6 +92,7 @@ namespace Plugin.Sample.Habitat
 
             try
             {
+
                 // BOOK
                 var book = await this._addPriceBookPipeline.Run(
                     new AddPriceBookArgument("Habitat_PriceBook")
