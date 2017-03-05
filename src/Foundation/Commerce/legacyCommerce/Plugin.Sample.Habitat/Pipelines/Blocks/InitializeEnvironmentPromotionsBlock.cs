@@ -87,6 +87,11 @@ namespace Plugin.Sample.Habitat
         /// </returns>
         public override async Task<string> Run(string arg, CommercePipelineExecutionContext context)
         {
+            if (arg != "Habitat" && arg != "HabitatShops")
+            {
+                return arg;
+            }
+
             var artifactSet = "Environment.Habitat.Promotions-1.0";
 
             // Check if this environment has subscribed to this Artifact Set

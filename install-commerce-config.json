@@ -49,17 +49,17 @@
         ] 
     ],
     "accounts": [
-        [   {   "id": "runTime", "Domain":  ".", "username": "svcRunTimeUser", "password": "pass@word1", "fullname": "svcRunTimeUser", "description": "Commerce Server Run Time Service Account", "defaultGroupMembership":  "Administrators", "defaultSqlServerRole": "sysadmin"  }   ]
+        [   {   "id": "runTime", "Domain":  ".", "username": "HabitatRunTimeUser", "password": "pass@word1", "fullname": "HabitatRunTimeUser", "description": "Commerce Server Run Time Service Account", "defaultGroupMembership":  "Administrators", "defaultSqlServerRole": "sysadmin"  }   ]
     ],
     "iis": {
         "appPools": [
-            [   {   "id": "commerceServerServices", "name": "HabitatCSServices", "managedRuntimeVersion": "v4.0", "accountId": "runTime" }   ],
-            [   {   "id": "commerceEngine", "name": "HabitatCommerceEngine", "managedRuntimeVersion": "", "accountId": "runTime" }   ]
+            [   {   "id": "commerceServerServices", "name": "habitat.csservices.dev.local", "managedRuntimeVersion": "v4.0", "accountId": "runTime" }   ],
+            [   {   "id": "commerceEngine", "name": "habitat.commerceengine.dev.local", "managedRuntimeVersion": "", "accountId": "runTime" }   ]
 
         ],
         "websites": [
             [   {   "id": "commerceServerServices", 
-                    "siteName": "HabitatCSServices", 
+                    "siteName": "habitat.csservices.dev.local", 
                     "physicalPath": "C:\\Websites\\habitat.dev.local\\CSServices" ,
                     "appPoolId":  "commerceServerServices",
                     "bindings": [
@@ -68,7 +68,7 @@
                 }
             ],
             [   {   "id": "commerceEngine", 
-                    "siteName": "HabitatCommerceEngine", 
+                    "siteName": "habitat.commerceengine.dev.local", 
                     "physicalPath": "C:\\Websites\\habitat.dev.local\\CommerceEngine" ,
                     "appPoolId":  "commerceEngine",
                     "bindings": [
@@ -79,8 +79,7 @@
         ],
         "hostEntries": [
             [   {   "ipAddress": "127.0.0.1", "hostName": "habitat.csservices.dev.local", "description": "Commerce server services site"   }   ],
-            [   {   "ipAddress": "127.0.0.1", "hostName": "habitat.commerceengine.dev.local", "description": "Sitecore Commerce Engine site"   }   ],
-            [   {   "ipAddress": "127.0.0.1", "hostName": "localhost", "description": "Sitecore Commerce Engine site"   }   ],
+            [   {   "ipAddress": "127.0.0.1", "hostName": "habitat.commerceengine.dev.local", "description": "Sitecore Commerce Engine site"   }   ]
         ],
         "certificates": [
             [   {   "DnsName": "retail.dev.local", "siteName": "habitat.dev.local"  }   ]

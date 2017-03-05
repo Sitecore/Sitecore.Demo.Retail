@@ -2,7 +2,7 @@ Set-ExecutionPolicy Unrestricted –scope CurrentUser
 if (-Not ($PSVersionTable.PSVersion.Major -ge 4)) { Write-Host "Update version of powershell"; exit }
 
 #If Install-Module is not available - install https://www.microsoft.com/en-us/download/details.aspx?id=51451
-if((Get-Module Carbon) -eq $null) { Install-Module -Name 'Carbon'; Import-Module 'Carbon' }
+if(-Not (Get-Module -ListAvailable -Name Carbon)) { Install-Module -Name Carbon; Import-Module Carbon}
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageUser.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageFile.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageCommerceServer.psm1 -Force
@@ -14,7 +14,7 @@ Import-Module $PSScriptRoot\Scripts\Commerce\ManageSqlServer.psm1 -Force
 cd $PSScriptRoot
 
 If ((ManageUser\Confirm-Admin) -ne $true) { Write-Host "Please run script as administrator"; exit }
-If ((ManageRegistry\Get-InternetExplorerEnhancedSecurityEnabled) -eq $true) { Write-Host "Please disable Internet Explorer Enhanced Security"; exit }
+If ((ManageRegistry\Get-InternetExplorerEnhancedSecurityEnabled -Verbose) -eq $true) { Write-Host "Please disable Internet Explorer Enhanced Security"; exit }
 
 $settings = ((Get-Content $PSScriptRoot\install-commerce-config.json -Raw) | ConvertFrom-Json)
 $runTimeUserSetting = ($settings.accounts | Where { $_.id -eq "runTime" } | Select)
@@ -102,4 +102,3 @@ Write-Host "`nStep 17: Test Commerce Engine" -foregroundcolor Yellow
 If((ManageWeb\Invoke-WebRequest -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/Bootstrap()" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
 If((ManageWeb\Invoke-WebRequest -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/InitializeEnvironment(environment='HabitatShops')" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
 If((ManageWeb\Invoke-WebRequest -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/InitializeEnvironment(environment='HabitatAuthoring')" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
-

@@ -14,10 +14,9 @@ $settings = ((Get-Content $PSScriptRoot\install-commerce-config.json -Raw) | Con
 $installFolderSetting = ($settings.resources | Where { $_.id -eq "install" } | Select)
 If ($installFolderSetting -eq $null) { Write-Host "Expected install resources" -ForegroundColor red; exit; }
   
-
 # Step 1: Remove Commerce Server SIte
 Write-Host "`nStep 1: Remove Commerce Server Site" -foregroundcolor Yellow
-if((Get-Module CSPS) -eq 0 ) 
+if(Get-Module -ListAvailable -Name CSPS) 
 {
     Import-Module CSPS -Force
     ManageCommerceServer\Remove-CSWebsite -csSiteSetting $settings.sitecoreCommerce.csSite -Verbose

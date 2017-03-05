@@ -122,6 +122,8 @@ function Enable-CS
         $logfile = "$path\csconfig.log"
         $options = "/l $logfile /s $configfile" # /u - to remove, /f - to reapply 
 
+        Write-Verbose "Initiating Commerce Server Configuration"
+
         # Won't do anything if the site is already configured, unless option /f is specified 
         $process = Start-Process -FilePath $cmd -ArgumentList $options -NoNewWindow -PassThru -Wait -Verbose
         
@@ -129,6 +131,10 @@ function Enable-CS
         {
             Write-Host "Error configuring Commerce Server exited with status code $($process.ExitCode). Please check the log file for details: $logfile" -ForegroundColor red
             return $process.ExitCode
+        }
+        Else
+        {
+            Write-Verbose "Commerce Server Configuration Successful"
         }
 
         return 0
