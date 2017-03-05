@@ -57,9 +57,6 @@ Languages:
     - ID: "dc019f89-2cda-4832-9353-e906be2dbd0e"
       Hint: Last Item Added Label
       Value: Last item added
-    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
-      Hint: Title
-      Value: Your Wish Lists
     - ID: "f5bb14ce-d2a7-4f5d-837f-3b786b39cce7"
       Hint: Create New Wish List Label
       Value: Create new wish list

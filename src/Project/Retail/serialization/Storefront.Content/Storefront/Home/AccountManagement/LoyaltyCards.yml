@@ -81,9 +81,6 @@ Languages:
     - ID: "dcf86f3e-d266-46c9-ab44-229442459c41"
       Hint: Date Label
       Value: Date
-    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
-      Hint: Title
-      Value: Loyalty Cards
     - ID: "f2bccec0-4dac-47a5-a126-ad4c7cb1b513"
       Hint: Tier Progress Header
       Value: Tier progress

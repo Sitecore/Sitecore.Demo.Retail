@@ -66,9 +66,6 @@ Languages:
     - ID: "e16e9b13-d388-419e-b8bd-48c71ef0d3bb"
       Hint: Name Label
       Value: Name
-    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
-      Hint: Title
-      Value: Address Book
     - ID: "f085c466-000a-40e4-a119-88c3534d9ce3"
       Hint: Addresses Empty Text
       Value: <p>You have not added any address yet</p>
