@@ -1,7 +1,7 @@
 {
     "resources": [ 
         [   {   "id": "install",
-                "path": "C:\\Websites\\habitat.dev.local\\Install",
+                "path": "C:\\Projects\\Sitecore.Demo.Retail\\Install",
                 "files": [
                     [   {   "id": "commerceInstaller", "fileName": "CommerceServer-11.4.148.exe"}   ]
                 ]   

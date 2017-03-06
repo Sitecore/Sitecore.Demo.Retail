@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <CommerceServer>
+    <application siteName="Habitat" xdt:Transform="SetAttributes"/>
+    <profiles>
+      <encryption>
+        <keys>
+          <add type="publicKey" value="registry:HKEY_LOCAL_MACHINE\SOFTWARE\CommerceServer\Encryption\Keys\Habitat,PublicKey" xdt:Locator="Match(type)" xdt:Transform="SetAttributes"/>
+          <add type="privateKey1" value="registry:HKEY_LOCAL_MACHINE\SOFTWARE\CommerceServer\Encryption\Keys\Habitat,PrivateKey" xdt:Locator="Match(type)" xdt:Transform="SetAttributes"/>
+        </keys>
+      </encryption>
+    </profiles>
+  </CommerceServer>
+</configuration>

@@ -2,7 +2,7 @@ Set-ExecutionPolicy Unrestricted –scope CurrentUser
 if (-Not ($PSVersionTable.PSVersion.Major -ge 4)) { Write-Host "Update version of powershell"; exit }
 
 #If Install-Module is not available - install https://www.microsoft.com/en-us/download/details.aspx?id=51451
-if(-Not (Get-Module -ListAvailable -Name Carbon)) { Install-Module -Name Carbon; -AllowClobber; Import-Module Carbon}
+if(-Not (Get-Module -ListAvailable -Name Carbon)) { Install-Module -Name Carbon -AllowClobber; Import-Module Carbon}
 
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageUser.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageFile.psm1 -Force
@@ -29,23 +29,7 @@ If ($csResourceFolderSetting -eq $null) { Write-Host "Expected dacpac resources"
 Write-Host "`nStep 0: Checking if all needed files exist" -foregroundcolor Yellow
 if ((ManageFile\Confirm-Resources $settings.resources -verbose) -ne 0) { Exit }
 
-# Step 1: Create Required Users
-Write-Host "`nStep 1: Create Required Users" -foregroundcolor Yellow
-If((ManageUser\Add-User -user $runTimeUserSetting -Verbose) -ne 0) { Exit }
-
-# Step 2: Create Database Logins
-Write-Host "`nStep 2: Create Database Logins" -foregroundcolor Yellow
-If((ManageSqlServer\New-SqlLogin -accountId "runTime" -databaseId "commerceAdminDB" -accountSettingList $settings.accounts -databaseSettingList $settings.databases -Verbose) -ne 0) { Exit }
-
-# Step 3: Run Commerce Server Installer
-Write-Host "`nStep 3: Run Commerce Server Installer" -foregroundcolor Yellow
-If((ManageCommerceServer\Install-CS -installFolderSetting $installFolderSetting -Verbose) -ne 0) { Exit }
-
 Import-Module CSPS -Force
-
-# Step 4: Run Commerce Server Configuration
-Write-Host "`nStep 4: Run Commerce Server Configuration" -foregroundcolor Yellow
-If((ManageCommerceServer\Enable-CS -path $installFolderSetting.path -csConfigSetting $settings.sitecoreCommerce.csInstallerConfig -databaseSettingList $settings.databases -accountSettingList $settings.accounts -Verbose) -ne 0) { Exit }
 
 # Step 5: Create IIS App Pools
 Write-Host "`nStep 5: Create IIS App Pools" -foregroundcolor Yellow

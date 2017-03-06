@@ -293,9 +293,22 @@ gulp.task("Auto-Publish-Assemblies", function () {
 /*****************************
  Commerce
 *****************************/
-gulp.task("CE-Install-Commerce", function (callback) {
+gulp.task("CE-Install-Commerce-Server", function (callback) {
     var options = { maxBuffer: 4024 * 1024 };
-    return exec("powershell -executionpolicy unrestricted -file .\\install-commerce.ps1", options, function (err, stdout, stderr) {
+    return exec("powershell -executionpolicy unrestricted -file .\\install-commerce-server.ps1", options, function (err, stdout, stderr) {
+        if (err) {
+            console.error("exec error: " + err);
+            throw err;
+        }
+        console.log("stdout: " + stdout);
+        console.log("stderr: " + stderr);
+        callback();
+    });
+});
+
+gulp.task("CE-Install-Commerce-Sites", function (callback) {
+    var options = { maxBuffer: 4024 * 1024 };
+    return exec("powershell -executionpolicy unrestricted -file .\\install-commerce-sites.ps1", options, function (err, stdout, stderr) {
         if (err) {
             console.error("exec error: " + err);
             throw err;
