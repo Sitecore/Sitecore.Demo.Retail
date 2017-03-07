@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Sitecore.Commerce.Core;
+using Sitecore.Foundation.Commerce.Engine.App_Start;
 using Sitecore.Framework.Diagnostics;
 
 namespace Sitecore.Foundation.Commerce.Engine
