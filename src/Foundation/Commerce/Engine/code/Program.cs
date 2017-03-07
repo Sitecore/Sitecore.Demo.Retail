@@ -11,7 +11,7 @@ namespace Sitecore.Foundation.Commerce.Engine
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
-                .UseStartup<App_Start.Startup>()
+                .UseStartup<Startup>()
                 .Build();
 
             host.Run();

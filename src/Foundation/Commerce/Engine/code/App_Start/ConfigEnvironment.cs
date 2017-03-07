@@ -3,12 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Provider.FileSystem;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Sitecore.Foundation.Commerce.Engine.App_Start
+namespace Sitecore.Foundation.Commerce.Engine
 {
     public static class ConfigEnvironment
     {

@@ -1,13 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Sitecore.Foundation.Commerce.Engine.App_Start
+namespace Sitecore.Foundation.Commerce.Engine
 {
     public static class ConfigSettings
     {

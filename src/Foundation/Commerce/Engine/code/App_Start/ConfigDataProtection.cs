@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.DataProtection;
+﻿using System.IO;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.DataProtection.XmlEncryption;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Sitecore.Foundation.Commerce.Engine.App_Start
+namespace Sitecore.Foundation.Commerce.Engine
 {
     public static class ConfigDataProtection
     {

@@ -1,25 +1,14 @@
 ﻿using System;
-using System.IO;
-
-using Microsoft.ApplicationInsights;
-using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.DataProtection.XmlEncryption;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.OData.Builder;
 using Microsoft.AspNetCore.OData.Extensions;
-using Microsoft.AspNetCore.OData.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
 using Sitecore.Commerce.Core;
-using Sitecore.Commerce.Provider.FileSystem;
 using Sitecore.Framework.Diagnostics;
-using Sitecore.Framework.Rules;
 
-namespace Sitecore.Foundation.Commerce.Engine.App_Start
+namespace Sitecore.Foundation.Commerce.Engine
 {
     public class Startup
     {

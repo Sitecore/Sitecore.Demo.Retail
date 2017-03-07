@@ -1,12 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Sitecore.Framework.Rules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Sitecore.Foundation.Commerce.Engine.App_Start
+namespace Sitecore.Foundation.Commerce.Engine
 {
     public static class ConfigSitecore
     {

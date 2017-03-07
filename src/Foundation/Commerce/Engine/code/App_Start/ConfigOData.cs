@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.OData.Builder;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Sitecore.Commerce.Core;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.OData.Builder;
 using Microsoft.AspNetCore.OData.Extensions;
 using Microsoft.AspNetCore.OData.Routing;
+using Sitecore.Commerce.Core;
 
-namespace Sitecore.Foundation.Commerce.Engine.App_Start
+namespace Sitecore.Foundation.Commerce.Engine
 {
     public static class ConfigOData
     {

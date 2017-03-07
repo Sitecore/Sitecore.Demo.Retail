@@ -3,7 +3,7 @@
         "windowsAuthentication": false,
         "anonymousAuthentication": true,
         "iisExpress": {
-            "applicationUrl": "http://habitat.commerceengine.dev.local:5000/",
+            "applicationUrl": "http://habitat.commerceengine.dev.local:5000/commerceops/Bootstrap()",
             "sslPort": 0
         }
     },
@@ -18,7 +18,7 @@
         "Sitecore.Foundation.Commerce.Engine": {
             "commandName": "Project",
             "launchBrowser": true,
-            "launchUrl": "http://habitat.commerceengine.dev.local:5000",
+            "launchUrl": "http://habitat.commerceengine.dev.local:5000/commerceops/Bootstrap()",
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             }

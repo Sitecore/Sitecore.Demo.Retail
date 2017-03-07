@@ -56,9 +56,9 @@
             {
                 "$type": "Plugin.Sample.Payments.Braintree.BraintreeClientPolicy, Plugin.Sample.Payments.Braintree",
                 "Environment": "sandbox",
-                "MerchantId": 0,
-                "PublicKey": 0,
-                "PrivateKey": 0,
+                "MerchantId": "rwd84b5k2rck8c7f",
+                "PublicKey": "747f5tsgkbk9xrk3",
+                "PrivateKey": "25d3cfa5a9674a8b12e167af80b8607f",
                 "ConnectTimeout": 120000,
                 "PolicyId": "0af6253f42184fd8ae0a61085980c03c",
                 "Models": {
