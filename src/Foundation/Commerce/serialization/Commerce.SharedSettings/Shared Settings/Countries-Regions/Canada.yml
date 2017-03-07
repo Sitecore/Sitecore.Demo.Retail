@@ -7,11 +7,19 @@ DB: master
 SharedFields:
 - ID: "6364fd2c-7b9e-482d-b96b-7c324d49011e"
   Hint: Country Code
-  Value: CA
+  Value: CAD
 Languages:
 - Language: en
   Versions:
   - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161205T100743Z
+    - ID: "9f6720cc-654f-4fdd-9848-7039da6a0e7b"
+      Hint: Name
+      Value: Canada
+  - Version: 2
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created

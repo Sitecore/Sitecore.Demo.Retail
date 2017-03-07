@@ -1,0 +1,25 @@
+﻿---
+ID: "5e08fbdd-3826-438d-8cf1-882b79793d86"
+Parent: "9e9e8cb4-b03d-4650-9388-2f73cd0ad28f"
+Template: "cc933745-4840-4bd7-962a-24b27c7eca6d"
+Path: "/sitecore/Commerce/Commerce Control Panel/Shared Settings/Countries-Regions/Canada/Nova Scotia"
+DB: master
+SharedFields:
+- ID: "3860ab02-9645-47bf-9224-3e3d4c3c6bd3"
+  Hint: Code
+  Value: NS
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170202T184024Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "725bc3bc-0dcb-40a7-b6d8-64a254e10b1a"
+      Hint: Name
+      Value: Nova Scotia
