@@ -82,24 +82,9 @@ namespace Sitecore.Foundation.Commerce.Engine
             app.UseDiagnostics();
             app.UseStaticFiles();
 
-            // Set the error page
-            if (this._hostEnv.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseStatusCodePages();
-            }
+            ConfigErrorPage.Register(_hostEnv, app);
 
             startNodePipeline.Run(this._node, this._node.GetPipelineContextOptions()).Wait();
-
-            // Starting the environment to register Minion policies and run Minions
-            //var environmentName = this._configuration.GetSection("AppSettings:EnvironmentName").Value;
-
-            ////this.NodeContext.AddDataMessage("EnvironmentStartup", $"StartEnvironment={environmentName}");
-
-            ////startEnvironmentPipeline.Run(environmentName, this.NodeContext.GetPipelineContextOptions()).Wait();
 
             ConfigOData.Register(app, contextPipeline, contextOpsServiceApiPipeline, _node);
         }

@@ -7,10 +7,7 @@ if(-Not (Get-Module -ListAvailable -Name Carbon)) { Install-Module -Name Carbon 
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageUser.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageFile.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageCommerceServer.psm1 -Force
-Import-Module $PSScriptRoot\Scripts\Commerce\ManageIIS.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageRegistry.psm1 -Force
-Import-Module $PSScriptRoot\Scripts\Commerce\ManageDotNet.psm1 -Force
-Import-Module $PSScriptRoot\Scripts\Commerce\ManageWeb.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageSqlServer.psm1 -Force
 cd $PSScriptRoot
 
