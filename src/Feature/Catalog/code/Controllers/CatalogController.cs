@@ -53,17 +53,15 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 {
     public class CatalogController : SitecoreController
     {
-        public CatalogController(InventoryManager inventoryManager, ContactFactory contactFactory, AccountManager accountManager, CatalogManager catalogManager, GiftCardManager giftCardManager, PricingManager pricingManager, [NotNull] CartManager cartManager, VisitorContextRepository visitorContextRepository, CatalogItemContext catalogItemContext, CatalogUrlService catalogUrlRepository, CurrencyManager currencyManager)
+        public CatalogController(InventoryManager inventoryManager, ContactFactory contactFactory, AccountManager accountManager, CatalogManager catalogManager, GiftCardManager giftCardManager, PricingManager pricingManager, [NotNull] CartManager cartManager, VisitorContextRepository visitorContextRepository, CatalogItemContext catalogItemContext, CatalogUrlService catalogUrlRepository)
         {
             InventoryManager = inventoryManager;
             CatalogManager = catalogManager;
             GiftCardManager = giftCardManager;
             VisitorContextRepository = visitorContextRepository;
             CatalogItemContext = catalogItemContext;
-            CurrencyManager = currencyManager;
         }
 
-        private CurrencyManager CurrencyManager { get; }
         private VisitorContextRepository VisitorContextRepository { get; }
         public CatalogItemContext CatalogItemContext { get; }
         private InventoryManager InventoryManager { get; }

@@ -279,9 +279,6 @@
     <Content Include="App_Config\Include\Reference.Storefront\Reference.Storefront.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Config\Include\Reference.Storefront\Reference.Storefront.Index.Lucene.config">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

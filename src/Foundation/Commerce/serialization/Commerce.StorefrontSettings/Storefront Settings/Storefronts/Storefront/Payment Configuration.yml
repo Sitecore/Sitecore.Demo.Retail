@@ -9,8 +9,8 @@ SharedFields:
   Hint: Payment Options
   Type: Multilist
   Value: |
-    {3C86B4A2-7D72-4110-A697-82D6CD0B6619}
     {C6E45321-A7CD-4992-AAE7-95A5F04F8BC0}
+    {3C86B4A2-7D72-4110-A697-82D6CD0B6619}
 Languages:
 - Language: en
   Versions:

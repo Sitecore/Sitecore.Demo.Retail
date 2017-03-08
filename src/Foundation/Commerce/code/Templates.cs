@@ -58,16 +58,6 @@ namespace Sitecore.Foundation.Commerce
 
         }
 
-        public static class IncludeInCommerceSearchResults
-        {
-            public static readonly ID ID = new ID("{D40A2D89-5AA5-4C9F-BA46-1216E95A13F7}");
-
-            public static class Fields
-            {
-                public static readonly ID DisplayInSearchResults = new ID("{32B3C63B-B71B-4845-A83F-D91E57AEA220}");
-            }
-        }
-
         /// <summary>
         /// Default Sitecore Commerce Templates
         /// </summary>

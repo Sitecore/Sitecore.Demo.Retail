@@ -291,7 +291,6 @@
     <Compile Include="Models\SearchResults.cs" />
     <Compile Include="Infrastructure\ComputedFields\ChildCategoriesComputedField.cs" />
     <Compile Include="Infrastructure\ComputedFields\ProductIdComputedField.cs" />
-    <Compile Include="Infrastructure\ComputedFields\IsSiteContentItem.cs" />
     <Compile Include="Models\Search\CategorySearchResults.cs" />
     <Compile Include="Models\Search\InventorySearchResultItem.cs" />
     <Compile Include="Models\Search\MultipleProductSearchResults.cs" />
