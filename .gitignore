@@ -21,9 +21,12 @@ vars.user.cmd
 /.vs
 /target
 /node_modules
+/install
 temp/
 *.ncrunchproject
 *.ncrunchsolution
 .vscode
 nCrunchTemp*.*
 /src/Foundation/Commerce/serialization/Commerce.Templates.CommerceProduct/Commerce Product/Commerce/PriceCardName.yml
+project.lock.json
+**/wwwroot/logs/*

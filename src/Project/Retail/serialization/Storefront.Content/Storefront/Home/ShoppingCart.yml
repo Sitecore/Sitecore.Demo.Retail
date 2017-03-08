@@ -73,9 +73,6 @@ Languages:
     - ID: "d8221196-ca94-4d7c-a67d-a9c5e0ed496c"
       Hint: Checkout Button
       Value: Checkout
-    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
-      Hint: Title
-      Value: Your Cart
     - ID: "ed153781-e66a-49fa-8149-1ee7c6fc5452"
       Hint: Back To Shopping Button
       Value: Back to shopping

@@ -78,9 +78,6 @@ Languages:
     - ID: "e4d24ddf-4336-4a36-8252-6db88ef93fe9"
       Hint: Order Date Label
       Value: Order date
-    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
-      Hint: Title
-      Value: Your Order
     - ID: "f53a75b0-cb77-42de-9976-94cab83ed6f0"
       Hint: Loyalty Rewards Header
       Value: Loyalty Rewards

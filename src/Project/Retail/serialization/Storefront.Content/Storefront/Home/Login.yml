@@ -80,9 +80,6 @@ Languages:
     - ID: "cc1189e1-1fdc-4396-be4d-c5a5b107b7eb"
       Hint: Email Missing Message
       Value: The email is required.
-    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
-      Hint: Title
-      Value: Sign Up
     - ID: "f5ed105b-6576-4a4c-b5bd-61d69c4b4c51"
       Hint: Customer Message 2
       Value: Enter you email address and password

@@ -140,9 +140,6 @@ Languages:
     - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
       Hint: BrowserTitle
       Value: My Account
-    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
-      Hint: Title
-      Value: My Account
     - ID: "ee964941-5302-4603-b24f-0437ceb488fa"
       Hint: Order Number Label
       Value: "Order number:"

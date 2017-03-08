@@ -23,6 +23,7 @@ function Confirm-Resources
             else
             {
                 Write-Host "Path does not exist: $path" -ForegroundColor red
+                return 1;
             }
         }
 

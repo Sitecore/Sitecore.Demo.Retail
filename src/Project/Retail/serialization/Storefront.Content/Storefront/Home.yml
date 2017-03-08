@@ -15,16 +15,6 @@ SharedFields:
 - ID: "7315350f-f3b5-4740-a227-186f7a2ba9f7"
   Hint: Default Currency
   Value: "{80F76147-FD9C-440D-A457-D2B3A4AA9F7A}"
-- ID: "7fd4ca02-383c-45e1-902d-c3ed9e4a112f"
-  Hint: Max Number of Addresses
-  Value: 6
-- ID: "872f1c3e-42e7-4f28-9b06-ae6d0c40c3ca"
-  Hint: DefaultProductId
-  Value: 22565422120
-- ID: "9e712a53-d222-46ea-a6ef-82f29af0e0fd"
-  Hint: Supports Gift Card Payment
-  Type: Checkbox
-  Value: 0
 - ID: "a204f8d6-b81a-4c1b-88ef-2dbc9471c18a"
   Hint: Category Images
   Value: 
@@ -40,14 +30,6 @@ SharedFields:
 - ID: "c15a939b-1c97-48e8-b055-37f80da99c40"
   Hint: Catalog Root
   Value: "{889A6934-BCDC-4294-94B7-6D141E7312B4}"
-- ID: "c3c1de9d-8881-47d1-b10f-d4ab17306cd5"
-  Hint: Supports Wishlists
-  Type: Checkbox
-  Value: 0
-- ID: "caf0c107-bbb2-4eed-ba3e-692b1d975854"
-  Hint: Supports Loyalty Program
-  Type: Checkbox
-  Value: 0
 - ID: "cd92dff9-ae15-443c-8de5-661d23b5ac6c"
   Hint: On Sale Overlay Image
   Value: "{CDD9F63A-2FF1-442C-87E1-286C98D506E1}"
@@ -64,9 +46,6 @@ SharedFields:
           s:ds="" />
       </d>
     </r>
-- ID: "f605d200-01a0-4235-8886-391c4c906092"
-  Hint: OperatingUnitNumber
-  Value: 
 - ID: "fbf2bba1-47bc-4b2e-bf76-133c8faea0fb"
   Hint: General Images
   Value: "{D2BE1B43-9784-47F1-B00E-F324BC0D474A}"
@@ -82,9 +61,6 @@ Languages:
       Hint: __Created by
       Value: |
         sitecore\admin
-    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
-      Hint: Title
-      Value: Reference Storefront
 - Language: en
   Versions:
   - Version: 1
@@ -306,9 +282,6 @@ Languages:
     - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
       Hint: BrowserTitle
       Value: Experience True Technology Wonders
-    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
-      Hint: Title
-      Value: Reference Storefront
 - Language: "fr-FR"
   Versions:
   - Version: 1
@@ -320,9 +293,6 @@ Languages:
       Hint: __Created by
       Value: |
         sitecore\admin
-    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
-      Hint: Title
-      Value: Reference Storefront
 - Language: "ja-JP"
   Versions:
   - Version: 1
@@ -330,6 +300,3 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: "20161220T232036:636178728360828997Z"
-    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
-      Hint: Title
-      Value: Habitat Retail

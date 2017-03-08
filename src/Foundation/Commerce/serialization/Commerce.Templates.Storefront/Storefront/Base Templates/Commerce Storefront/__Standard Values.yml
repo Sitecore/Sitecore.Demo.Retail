@@ -4,7 +4,3 @@ Parent: "57507da9-3eea-46aa-87e8-e64cde2f73dc"
 Template: "57507da9-3eea-46aa-87e8-e64cde2f73dc"
 Path: /sitecore/templates/Storefront/Base Templates/Commerce Storefront/__Standard Values
 DB: master
-SharedFields:
-- ID: "7fd4ca02-383c-45e1-902d-c3ed9e4a112f"
-  Hint: Max Number of Addresses
-  Value: 10

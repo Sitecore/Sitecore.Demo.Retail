@@ -14,10 +14,9 @@ $settings = ((Get-Content $PSScriptRoot\install-commerce-config.json -Raw) | Con
 $installFolderSetting = ($settings.resources | Where { $_.id -eq "install" } | Select)
 If ($installFolderSetting -eq $null) { Write-Host "Expected install resources" -ForegroundColor red; exit; }
   
-
 # Step 1: Remove Commerce Server SIte
 Write-Host "`nStep 1: Remove Commerce Server Site" -foregroundcolor Yellow
-if((Get-Module CSPS) -eq 0 ) 
+if(Get-Module -ListAvailable -Name CSPS) 
 {
     Import-Module CSPS -Force
     ManageCommerceServer\Remove-CSWebsite -csSiteSetting $settings.sitecoreCommerce.csSite -Verbose
@@ -31,12 +30,12 @@ Else
 Write-Host "`nStep 2: Uninstall Commerce Server" -foregroundcolor Yellow
 ManageCommerceServer\Uninstall-CS -installFolderSetting $installFolderSetting -Verbose
 
-# Step 3: Delete databases from SQL
-Write-Host "`nStep 3: Delete databases from SQL" -foregroundcolor Yellow
+# Step 3: Remove databases from SQL
+Write-Host "`nStep 3: Remove databases from SQL" -foregroundcolor Yellow
 cd SQLSERVER:\SQL
 ForEach ($database in $settings.databases)
 {
-    ManageSqlServer\Delete-Database -dbname $database.name -Verbose
+    ManageSqlServer\Remove-Database -dbname $database.name -Verbose
 }
 cd $PSScriptRoot
 
@@ -54,13 +53,13 @@ Foreach ($appPool in $settings.iis.appPools)
     ManageIIS\Remove-AppPool -name $appPool.name -Verbose
 }
 
-# Step 6: Delete User
-Write-Host "`nStep 6: Delete Users" -foregroundcolor Yellow
+# Step 6: Remove User
+Write-Host "`nStep 6: Remove Users" -foregroundcolor Yellow
 #$runTimeUserSetting = ($settings.accounts | Where { $_.id -eq "runTime" } | Select)
 #ManageUser\Remove-User -username $runTimeUserSetting.username -Verbose
 
-# Step 4 delete sql login
-Write-Host "`nStep 7: Delete Sql Login" -foregroundcolor Yellow
-ManageSqlServer\Delete-SqlLogin -accountId "runTime" -databaseId "commerceAdminDB" -accountSettingList $settings.accounts -databaseSettingList $settings.databases -Verbose
+# Step 4 Remove sql login
+Write-Host "`nStep 7: Remove Sql Login" -foregroundcolor Yellow
+ManageSqlServer\Remove-SqlLogin -accountId "runTime" -databaseId "commerceAdminDB" -accountSettingList $settings.accounts -databaseSettingList $settings.databases -Verbose
 
 
