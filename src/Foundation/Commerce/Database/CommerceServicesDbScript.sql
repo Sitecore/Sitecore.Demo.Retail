@@ -513,7 +513,7 @@ USE [master]
 	DECLARE @dynamicSQL VARCHAR(MAX)
 
 	SET @databaseName = 'SitecoreCommerce_SharedEnvironments'
-	SET @userName = HOST_NAME() + '\svcRunTimeUser'
+	SET @userName = HOST_NAME() + '\HabitatRuntimeUser'
 	SET @roleName = 'db_owner'
 
 	/* If the user does not exist as a login, add it to the system security */	
@@ -1039,7 +1039,7 @@ USE [master]
 	DECLARE @dynamicSQL VARCHAR(MAX)
 
 	SET @databaseName = 'SitecoreCommerce_Global'
-	SET @userName = HOST_NAME() + '\svcRunTimeUser'
+	SET @userName = HOST_NAME() + '\HabitatRuntimeUser'
 	SET @roleName = 'db_owner'
 
 	/* If the user does not exist as a login, add it to the system security */	
