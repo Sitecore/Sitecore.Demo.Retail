@@ -1,0 +1,25 @@
+﻿---
+ID: "334ee38c-9fcb-4dc9-9089-43f0f7996593"
+Parent: "90985a63-478b-4659-8cbd-26cfb2ae31f6"
+Template: "bfafe295-9df8-4a3e-9ca1-7d161da74538"
+Path: /sitecore/client/Commerce/DynamicRendering/CommerceFormPage/PageSettings/Commerce Data Service Settings
+DB: core
+SharedFields:
+- ID: "6f1ec156-0abc-4aab-9184-42e90eed5904"
+  Hint: ShopName
+  Value: Storefront
+- ID: "93d751cc-3739-457b-b44d-2aed8b8da038"
+  Hint: DataServiceUrl
+  Value: "http://habitat.commerceengine.dev.local:5000/api/"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160428T141328Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

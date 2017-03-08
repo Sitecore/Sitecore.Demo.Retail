@@ -122,6 +122,8 @@ function Enable-CS
         $logfile = "$path\csconfig.log"
         $options = "/l $logfile /s $configfile" # /u - to remove, /f - to reapply 
 
+        Write-Verbose "Initiating Commerce Server Configuration"
+
         # Won't do anything if the site is already configured, unless option /f is specified 
         $process = Start-Process -FilePath $cmd -ArgumentList $options -NoNewWindow -PassThru -Wait -Verbose
         
@@ -129,6 +131,10 @@ function Enable-CS
         {
             Write-Host "Error configuring Commerce Server exited with status code $($process.ExitCode). Please check the log file for details: $logfile" -ForegroundColor red
             return $process.ExitCode
+        }
+        Else
+        {
+            Write-Verbose "Commerce Server Configuration Successful"
         }
 
         return 0
@@ -250,32 +256,32 @@ function New-CSWebsite
         $catalogDatabaseSetting = ($databaseSettingList | Where { $_.id -eq $csSiteSetting.catalogDatabaseId })
         $profilesDatabaseSetting = ($databaseSettingList | Where { $_.id -eq $csSiteSetting.profileDatabaseId })
         
-        $null = New-CSSite -Name $csSiteSetting.name;
+        New-CSSite -Name $csSiteSetting.name | Write-Verbose;
 
         Write-Verbose "Creating site resources.";
-        $null = Add-CSCatalogResource  -Name $csSiteSetting.name -DatabaseName $catalogDatabaseSetting.name;
-        $null = Add-CSInventoryResource -Name $csSiteSetting.name -DatabaseName $catalogDatabaseSetting.name;
-        $null = Add-CSProfilesResource -Name $csSiteSetting.name -DatabaseName $profilesDatabaseSetting.name;
+        Add-CSCatalogResource  -Name $csSiteSetting.name -DatabaseName $catalogDatabaseSetting.name | Write-Verbose;
+        Add-CSInventoryResource -Name $csSiteSetting.name -DatabaseName $catalogDatabaseSetting.name | Write-Verbose;
+        Add-CSProfilesResource -Name $csSiteSetting.name -DatabaseName $profilesDatabaseSetting.name | Write-Verbose;
 
         # Setting the Commerce Server to Display Out-of-Stock items and also enable pre and back order capability
         Write-Verbose "Setting resource properties";
-        $null = Set-CSSiteResourceProperty -Name $csSiteSetting.name -Resource "Inventory" -PropertyName "f_display_oos_skus" -PropertyValue $true;
-        $null = Set-CSSiteResourceProperty -Name $csSiteSetting.name -Resource "Inventory" -PropertyName "i_stock_handling" -PropertyValue 1;
+        Set-CSSiteResourceProperty -Name $csSiteSetting.name -Resource "Inventory" -PropertyName "f_display_oos_skus" -PropertyValue $true | Write-Verbose;
+        Set-CSSiteResourceProperty -Name $csSiteSetting.name -Resource "Inventory" -PropertyName "i_stock_handling" -PropertyValue 1 | Write-Verbose;
 
         Write-Verbose "Creating Web Services";
-        $null = New-CSWebService -Name $csSiteSetting.name -Resource Catalog -IISSite $csServicesWebsiteSetting.siteName -AppPool $catalogAppPoolSetting.name -Identity $catalogAccountSetting.username -Password $catalogAccountSetting.password
-        $null = New-CSWebService -Name $csSiteSetting.name -Resource Profiles -IISSite $csServicesWebsiteSetting.siteName -AppPool $profilesAppPoolSetting.name -Identity $profilesAccountSetting.username -Password $profilesAccountSetting.password
+        New-CSWebService -Name $csSiteSetting.name -Resource Catalog -IISSite $csServicesWebsiteSetting.siteName -AppPool $catalogAppPoolSetting.name -Identity $catalogAccountSetting.username -Password $catalogAccountSetting.password | Write-Verbose;
+        New-CSWebService -Name $csSiteSetting.name -Resource Profiles -IISSite $csServicesWebsiteSetting.siteName -AppPool $profilesAppPoolSetting.name -Identity $profilesAccountSetting.username -Password $profilesAccountSetting.password | Write-Verbose;
 
         Write-Verbose "Setting Web Service Permissions";
         $catalogAzmanFile = $csServicesWebsiteSetting.physicalPath + "\" + $csSiteSetting.name + "_CatalogWebService\CatalogAuthorizationStore.xml"        
         $profilesAzmanFile = $csServicesWebsiteSetting.physicalPath + "\" + $csSiteSetting.name + "_ProfilesWebService\ProfilesAuthorizationStore.xml"        
-        $null = Grant-CSCatalogWebServicePermissions -File $catalogAzmanFile -Identity $catalogAccountSetting.username -Role "Administrator"
-        $null = Grant-CSProfilesWebServicePermissions –File $profilesAzmanFile -Identity $profilesAccountSetting.username -Role "ProfileAdministrator"
+        Grant-CSCatalogWebServicePermissions -File $catalogAzmanFile -Identity $catalogAccountSetting.username -Role "Administrator" | Write-Verbose;
+        Grant-CSProfilesWebServicePermissions –File $profilesAzmanFile -Identity $profilesAccountSetting.username -Role "ProfileAdministrator" | Write-Verbose;
 
         Write-Verbose "Setting Database Permissions"
-        $null = Grant-CSManagementPermissions -Name $csSiteSetting.name -Identity $runtimeFQDN;
-        $null = Grant-CSCatalogManagementPermissions -Name $csSiteSetting.name -Identity $catalogFQDN;
-        $null = Grant-CSProfilesManagementPermissions -Name $csSiteSetting.name -Identity $profilesFQDN;
+        Grant-CSManagementPermissions -Name $csSiteSetting.name -Identity $runtimeFQDN | Write-Verbose;
+        Grant-CSCatalogManagementPermissions -Name $csSiteSetting.name -Identity $catalogFQDN | Write-Verbose;
+        Grant-CSProfilesManagementPermissions -Name $csSiteSetting.name -Identity $profilesFQDN | Write-Verbose;
 
         If ((New-CSProfileKey -pathToStoreKeyFile $installFolderSetting.path -siteName $csSiteSetting.name -Verbose) -ne 0) { Return 1 }
         
@@ -303,7 +309,7 @@ function Remove-CSWebsite
     }
     process
     {
-        Remove-CSSite -Name $csSiteSetting.name  -DeleteDatabases $true -DeleteGlobalResources $true;
+        Remove-CSSite -Name $csSiteSetting.name  -DeleteDatabases $true -DeleteGlobalResources $true | Write-Verbose;
     }
     end{}
 }
@@ -425,4 +431,54 @@ function Import-CSSiteData
     end{}
 }
 
-Export-ModuleMember Install-CS, Uninstall-CS, Enable-CS, New-CSWebsite, Remove-CSWebsite, New-CSProfileKey, Import-CSSiteData
+function Test-CSWebservices
+{
+    [CmdletBinding()]
+    param 
+    (
+        [Parameter(Mandatory=$True)][PSCustomObject]$csSiteSetting,
+        [Parameter(Mandatory=$True)][PSCustomObject]$websiteSettingList,
+        [Parameter(Mandatory=$True)][PSCustomObject]$appPoolSettingList,
+        [Parameter(Mandatory=$True)][PSCustomObject]$accountSettingList
+    )
+    begin {}
+    process
+    {
+        $services =	"CatalogWebService", "ProfilesWebService"
+
+        $csServicesWebsiteSetting = ($websiteSettingList | Where { $_.id -eq $csSiteSetting.csServicesWebsiteId} | Select)
+        If ($csServicesWebsiteSetting -eq $null) { Write-Host "Can't derive website from WebsiteId '$($csSiteSetting.csServicesWebsiteId)' when processing CS Site '$($csSiteSetting.name)'." -ForegroundColor red; return 1; }
+
+        $csServicesBindingSetting = $csServicesWebsiteSetting.bindings | Select -First 1
+        If ($csServicesBindingSetting -eq $null) { Write-Host "Website '$($csServicesWebsiteSetting.id)' has no specified binding." -ForegroundColor red; return 1; }
+        
+        $csServicesAppPoolSetting = ($appPoolSettingList | Where { $_.id -eq $csServicesWebsiteSetting.appPoolId } | Select)
+        If ($csServicesAppPoolSetting -eq $null) { Write-Host "Can't derive application pool from AppPoolId '$($csSiteSetting.runTimeAppPoolId)' when processing CS Site '$($csSiteSetting.name)'." -ForegroundColor red; return 1; }
+        
+        $csServicesAccountSetting = ($accountSettingList | Where { $_.id -eq $csServicesAppPoolSetting.accountId } | Select)
+        If ($csServicesAccountSetting -eq $null) { Write-Host "Can't derive account from AppPoolId '$($csSiteSetting.runTimeAppPoolId)' when processing CS Site '$($csSiteSetting.name)'." -ForegroundColor red; return 1; }
+
+        ForEach ($service in $services)
+        {
+            $name = $csServicesBindingSetting.protocol + "://" + $csServicesBindingSetting.hostName + ":" + $csServicesBindingSetting.port + "/" + $csSiteSetting.name + "_" + $service + "/" + $service + ".asmx?WSDL"
+            $result = ManageIIS\Test-WebService -uri $name -username $csServicesAccountSetting.username -pwd $csServicesAccountSetting.password 
+            
+            if ($result)
+            {
+                $version = "" + $result.MajorVersion + "." + $result.MinorVersion
+                Write-Host "testing $service --> version: $version" -foregroundcolor green
+            }
+            else 
+            {
+                Write-Host $result.code
+                Write-Host "testing $service, result: $status" -foregroundcolor red
+                return 1;
+            }
+        }
+
+        return 0;
+    }
+    end { }
+}
+
+Export-ModuleMember Install-CS, Uninstall-CS, Enable-CS, New-CSWebsite, Remove-CSWebsite, New-CSProfileKey, Import-CSSiteData, Test-CSWebservices

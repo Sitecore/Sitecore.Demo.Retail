@@ -14,7 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configurat
 		gulp-config.js = gulp-config.js
 		gulpfile.js = gulpfile.js
 		install-commerce-config.json = install-commerce-config.json
-		install-commerce.ps1 = install-commerce.ps1
+		install-commerce-server.ps1 = install-commerce-server.ps1
+		install-commerce-sites.ps1 = install-commerce-sites.ps1
 		package.json = package.json
 		publishsettings.targets = publishsettings.targets
 		uninstall-commerce.ps1 = uninstall-commerce.ps1
@@ -46,9 +47,33 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DependencyInjection", "Depe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Foundation.DependencyInjection", "src\Foundation\DependencyInjection\code\Sitecore.Foundation.DependencyInjection.csproj", "{366148B7-2392-4F42-80D6-786B7A3682AE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "engine", "engine", "{2B87ACDB-EFC7-4732-9782-D1029030F621}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{C01BE502-C648-4368-84FC-3F2B212541BC}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sitecore.Foundation.Commerce.Engine", "src\Foundation\Commerce\Engine\code\Sitecore.Foundation.Commerce.Engine.xproj", "{7F35C803-0290-4BFD-A806-F1EDDF1E24D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugin", "Plugin", "{9633DAAE-84BB-48E3-9F39-BAC6E9133CC1}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sitecore.Foundation.Commerce.Engine.Plugin.Habitat", "src\Foundation\Commerce\Engine\Plugin\Code\Sitecore.Foundation.Commerce.Engine.Plugin.Habitat.xproj", "{16A75548-B717-41D9-A55A-D1E68765E530}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sitecore.Commerce.Plugin.AdventureWorks", "src\Foundation\Commerce\legacyCommerce\Sitecore.Commerce.Plugin.AdventureWorks\Sitecore.Commerce.Plugin.AdventureWorks.xproj", "{45E1A5F7-861D-4929-A4C4-E3FD9D898F23}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Plugin.Sample.Payments.Braintree", "src\Foundation\Commerce\legacyCommerce\Plugin.Sample.Payments.Braintree\Plugin.Sample.Payments.Braintree.xproj", "{0296F347-F76D-4A81-9FB1-AE9CA0F0C064}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Plugin.Sample.Habitat", "src\Foundation\Commerce\legacyCommerce\Plugin.Sample.Habitat\Plugin.Sample.Habitat.xproj", "{72203E4B-DA74-405C-9D33-193B38A0AA33}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0240E3D9-240C-4694-BD42-B60FBBF21EBF}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Feature.Commerce.Orders", "src\Feature\Orders\code\Sitecore.Feature.Commerce.Orders.csproj", "{9CC4BF07-1259-43FF-B205-AFD1E59E5834}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Databases", "Databases", "{8B1B7EE8-17D0-4D90-BABD-249C971EBDFB}"
+	ProjectSection(SolutionItems) = preProject
+		src\Project\Retail\Database\Catalog.xml = src\Project\Retail\Database\Catalog.xml
+		src\Project\Retail\Database\Inventory.xml = src\Project\Retail\Database\Inventory.xml
+		src\Project\Retail\Database\Profiles.xml = src\Project\Retail\Database\Profiles.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +85,7 @@ Global
 		{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655}.Release|Any CPU.Build.0 = Release|Any CPU
+		{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{662345AC-23EE-4125-87A6-0785795C2409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{662345AC-23EE-4125-87A6-0785795C2409}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{662345AC-23EE-4125-87A6-0785795C2409}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -80,6 +106,26 @@ Global
 		{366148B7-2392-4F42-80D6-786B7A3682AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{366148B7-2392-4F42-80D6-786B7A3682AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{366148B7-2392-4F42-80D6-786B7A3682AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F35C803-0290-4BFD-A806-F1EDDF1E24D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F35C803-0290-4BFD-A806-F1EDDF1E24D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F35C803-0290-4BFD-A806-F1EDDF1E24D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F35C803-0290-4BFD-A806-F1EDDF1E24D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16A75548-B717-41D9-A55A-D1E68765E530}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16A75548-B717-41D9-A55A-D1E68765E530}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16A75548-B717-41D9-A55A-D1E68765E530}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16A75548-B717-41D9-A55A-D1E68765E530}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45E1A5F7-861D-4929-A4C4-E3FD9D898F23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45E1A5F7-861D-4929-A4C4-E3FD9D898F23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45E1A5F7-861D-4929-A4C4-E3FD9D898F23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45E1A5F7-861D-4929-A4C4-E3FD9D898F23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0296F347-F76D-4A81-9FB1-AE9CA0F0C064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0296F347-F76D-4A81-9FB1-AE9CA0F0C064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0296F347-F76D-4A81-9FB1-AE9CA0F0C064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0296F347-F76D-4A81-9FB1-AE9CA0F0C064}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72203E4B-DA74-405C-9D33-193B38A0AA33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72203E4B-DA74-405C-9D33-193B38A0AA33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72203E4B-DA74-405C-9D33-193B38A0AA33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72203E4B-DA74-405C-9D33-193B38A0AA33}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9CC4BF07-1259-43FF-B205-AFD1E59E5834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9CC4BF07-1259-43FF-B205-AFD1E59E5834}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CC4BF07-1259-43FF-B205-AFD1E59E5834}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -102,7 +148,14 @@ Global
 		{7031F757-2830-44E3-9639-AAD2DBA69A24} = {37CE2FA3-8808-4304-930F-A37695B3A869}
 		{A17F2B02-CD42-43C7-BAF6-823A87E3CA5B} = {A65C1E2B-A56A-4E86-B928-23176FC86DB8}
 		{366148B7-2392-4F42-80D6-786B7A3682AE} = {A17F2B02-CD42-43C7-BAF6-823A87E3CA5B}
-		{2B87ACDB-EFC7-4732-9782-D1029030F621} = {F12F210F-76B3-4142-8AB9-06677BCAED1E}
+		{C01BE502-C648-4368-84FC-3F2B212541BC} = {F12F210F-76B3-4142-8AB9-06677BCAED1E}
+		{7F35C803-0290-4BFD-A806-F1EDDF1E24D2} = {C01BE502-C648-4368-84FC-3F2B212541BC}
+		{9633DAAE-84BB-48E3-9F39-BAC6E9133CC1} = {C01BE502-C648-4368-84FC-3F2B212541BC}
+		{16A75548-B717-41D9-A55A-D1E68765E530} = {9633DAAE-84BB-48E3-9F39-BAC6E9133CC1}
+		{45E1A5F7-861D-4929-A4C4-E3FD9D898F23} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
+		{0296F347-F76D-4A81-9FB1-AE9CA0F0C064} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
+		{72203E4B-DA74-405C-9D33-193B38A0AA33} = {0639A703-FE73-43C9-8F19-5E62FA008BC3}
 		{9CC4BF07-1259-43FF-B205-AFD1E59E5834} = {A796DED4-AE86-4E8F-BBAF-B57960008D59}
+		{8B1B7EE8-17D0-4D90-BABD-249C971EBDFB} = {B3C10EC2-6B18-480D-8C75-CE4929838289}
 	EndGlobalSection
 EndGlobal

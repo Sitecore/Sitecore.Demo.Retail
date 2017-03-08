@@ -95,10 +95,6 @@ Languages:
     - ID: "c4a8e07e-4cd4-4b78-8c1a-68d327dcebbd"
       Hint: Passwords Do Not Match Message
       Value: The password and confirmation password do not match.
-    - ID: "c75de0e7-17ff-4086-8552-9d68b7667809"
-      Hint: Image
-      Value: |
-        <image mediaid="{784E8A3C-9C91-40B7-B1B3-7072B6439AB8}" />
     - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
       Hint: BrowserTitle
       Value: Create an Acccount
@@ -114,6 +110,3 @@ Languages:
     - ID: "e066eb82-1f62-4e92-a749-2c885a6fbcf4"
       Hint: Fill Form Message
       Value: Please fill out the form below to create your own user.
-    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
-      Hint: Title
-      Value: Create an Acccount

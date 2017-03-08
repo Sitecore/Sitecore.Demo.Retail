@@ -30,9 +30,6 @@ Languages:
     - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
       Hint: BrowserTitle
       Value: Your Orders
-    - ID: "ec1f4944-d675-42f6-b354-a0a1bf04bff8"
-      Hint: Title
-      Value: Your Orders
     - ID: "f4e176dc-4d51-408f-9cb3-6c22381e55b5"
       Hint: Order Date Label
       Value: Order date

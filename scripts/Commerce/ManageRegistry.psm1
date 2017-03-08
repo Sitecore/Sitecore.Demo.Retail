@@ -40,7 +40,7 @@ Function GetValueFromRegistryThruWMI([string]$computername, $regkey, $value, $va
     }
     Else
     {
-        Throw "Error, can't find registry value"
+        throw [System.ArgumentException]("Error, could not find registry key: " + $regkey);
     }
 } 
 
@@ -51,13 +51,20 @@ function Get-InternetExplorerEnhancedSecurityEnabled
     $adminKey = "SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"
     $userKey = "SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"
  
-    # Need to be able to access x64 reg from x32 prompt
-    $adminIeesValue = GetValueFromRegistryThruWMI $domain $adminKey "IsInstalled"
-    $userIeesValue = GetValueFromRegistryThruWMI $domain $userKey "IsInstalled"
-
-    If(($adminIeesValue -eq 1) -or ($userIeesValue -eq 1))
+    Try
     {
-        return $true
+        # Need to be able to access 64 bit reg from 32 bit prompt
+        $adminIeesValue = GetValueFromRegistryThruWMI $domain $adminKey "IsInstalled"
+        $userIeesValue = GetValueFromRegistryThruWMI $domain $userKey "IsInstalled"
+
+        If(($adminIeesValue -eq 1) -or ($userIeesValue -eq 1))
+        {
+            return $true
+        }
+    }
+    Catch [System.ArgumentException]
+    {
+        Write-Verbose "System does not have internet explorer enhanced security. This is usually only valid for servers"
     }
 
     return $false
