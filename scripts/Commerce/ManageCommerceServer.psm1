@@ -15,7 +15,7 @@ function Install-CS
     {
         $installerFileName = ($installFolderSettings.files | Where { $_.id -eq "commerceInstaller" }).fileName
         $installerFilePath = $installFolderSettings.path + "\" + $installerFileName
-        $options = "-silent NOCSCONFIG NOSTAGING"
+        $options = "-silent NOCSCONFIG"
 
         $csInstalled = Get-ChildItem "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall" | ForEach { Get-ItemProperty $_.PSPath } | ? { $_ -match "Commerce Server" } | select
 
