@@ -57,6 +57,7 @@ gulp.task("03-Publish-All-Projects", function (callback) {
     "Publish-Storefront-Projects",
     "Publish-Foundation-Projects",
     "Publish-Feature-Projects",
+    "Publish-Css",
     "Publish-Project-Projects", callback);
 });
 
@@ -228,6 +229,23 @@ gulp.task("Publish-All-Configs", function () {
       return stream;
     })
   );
+});
+
+gulp.task("Publish-Css", function () {
+    var root = "./src";
+    var roots = [root + "/**/styles", "!" + root + "/**/obj/**/styles"];
+    var files = "/**/*.css";
+    var destination = config.websiteRoot + "\\styles";
+    return gulp.src(roots, { base: root }).pipe(
+      foreach(function (stream, file) {
+          console.log("Publishing from " + file.path);
+          gulp.src(file.path + files, { base: file.path })
+            .pipe(newer(destination))
+            .pipe(debug({ title: "Copying " }))
+            .pipe(gulp.dest(destination));
+          return stream;
+      })
+    );
 });
 
 /*****************************
