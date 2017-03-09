@@ -202,6 +202,11 @@ $(document).ready(function () {
 
         $('#prod-large-view').attr('src', $(this).attr('href'));
     });
+
+    // This change stops the shopping chart from closing of a user clicks on it.
+    $(document).on('click', 'div.dropdown-menu', function (e) {
+        e.stopPropagation();
+    });
 });
 
 function changeClass(e) {
