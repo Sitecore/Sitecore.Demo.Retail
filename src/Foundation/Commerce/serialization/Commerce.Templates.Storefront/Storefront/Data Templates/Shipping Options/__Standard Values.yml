@@ -1,0 +1,23 @@
+﻿---
+ID: "15518dfb-8e27-4c2b-9199-82910ee8e764"
+Parent: "b67e45b2-2fa8-481c-ad41-ea1dee59ecb0"
+Template: "b67e45b2-2fa8-481c-ad41-ea1dee59ecb0"
+Path: /sitecore/templates/Storefront/Data Templates/Shipping Options/__Standard Values
+DB: master
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: "{0484480B-FCBD-4949-B6AC-9778B5F7C294}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150211T112057Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
