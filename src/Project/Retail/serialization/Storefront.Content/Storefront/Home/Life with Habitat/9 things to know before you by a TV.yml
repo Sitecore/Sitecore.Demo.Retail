@@ -22,6 +22,22 @@ Languages:
   Versions:
   - Version: 1
     Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{02BB0A3D-1C11-48D0-8B4B-9410D445F9E1}"
+              p:after="r[@uid='{4B68986D-5436-4CEA-AFD9-39FD441AC039}']"
+              s:ds="{6E530F0C-DBC3-4764-9A57-6A662D109798}"
+              s:id="{A1AD34DD-535E-47AF-A911-34C57CCC26F6}"
+              s:ph="/page-layout/section/col-narrow-1" />
+          </d>
+        </r>
     - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
       Hint: NavigationTitle
       Value: 9 things to know before you by a TV
@@ -49,10 +65,10 @@ Languages:
       Value: |
         <p>When considering a new TV for your living room or mancave, most people think about just two factors: How big it is and how much it is. For some people, buying a TV may never come down to anything more than that. But if you truly want to get the most for your money, you&rsquo;ll want to understand what&rsquo;s really going on with the TVs you're considering. The <a href="/shop/Televisions_televisions">Helix Televisions</a> page shows a full range of all our latest TVs.</p>
         <p>As with all electronics, there&rsquo;s a high degree of complexity that can be hard to understand. What really matters when you&rsquo;re TV-shopping is what it all means to you&nbsp;as the user of the product. In this article we'll examine nine things to consider as well as get you acquainted with what they mean in order to help you prepare for buying a new television.</p>
-        <p><strong><a href="/shop/SmartTVs_smart tvs">Smart TVs</a></strong></p>
-        <p>For some, a smart TV might actually be the route to go. Smart TVs connect to the internet and can stream content that way. They often include applications like Netflix, as does our <a href="~/link.aspx?_id=CC05CB6D14994BEA9F734049C19F1415&amp;_z=z">Helix Sage Smart TV</a>, so customers need&nbsp;fewer devices to get started with their movie or TV-watching. Some connect via wifi, while others might only have an ethernet jack. If you don&rsquo;t want to deal with a lot of wires and want an uncluttered space around the TV, a smart TV might be the best option. If space is no problem, maybe you should try the spectacular 88 inch &nbsp;<a href="/shop/SmartTVs_smart%20tvs/HelixSage88%E2%80%9DLEDSmartHDTV_6042291">Helix Sage 88</a> TV.</p>
+        <p><strong><a href="/shop/SmartTVs_smart%20tvs">Smart TVs</a></strong></p>
+        <p>For some, a smart TV might actually be the route to go. Smart TVs connect to the internet and can stream content that way. They often include applications like Netflix, as does our <a href="~/link.aspx?_id=CC05CB6D14994BEA9F734049C19F1415&amp;_z=z">Helix Sage Smart TV</a>, so customers need&nbsp;fewer devices to get started with their movie or TV-watching. Some connect via wifi, while others might only have an ethernet jack. If you don&rsquo;t want to deal with a lot of wires and want an uncluttered space around the TV, a smart TV might be the best option. If space is no problem, maybe you should try the spectacular 88 inch &nbsp;<a href="/shop/SmartTVs_smart%20tvs/HelixSage88âLEDSmartHDTV_6042291">Helix Sage 88</a> TV.</p>
         <p><strong><a href="/shop/4K_4k">4K TVs</a></strong></p>
-        <p>You might be seeing a lot start to pop up about 4K TVs and the <a href="/shop/4K_4k/HelixSpectra65%E2%80%9D4KLEDUltraHDTelevision_6042264">Helix Spectra Ultra HD</a>&nbsp;is an excellent example. Just as 1080 was the buzz number when HD TVs were coming into fashion, 4K is simply the next step. A 1080p screen has 1,080 pixels in each vertical column and 1,920 pixels in each horizontal row. The 4K defies the convention by counting the horizontal pixels instead. If you&rsquo;re really curious, read on, but the main thing to know right now is that there is not a lot of content out there to actually watch on a 4K TV, so those buying them now are buying prematurely and will be paying a hefty premium to do so &mdash; maybe think about waiting another year or two for 4K TVs to really become mainstream and for 4K content to be more readily available.</p>
+        <p>You might be seeing a lot start to pop up about 4K TVs and the&nbsp;<a href="/shop/Televisions_televisions/Habitat-Spectra-48”-4K-LED-Ultra-HD-Television_6042262">Spectra Ultra HD</a>&nbsp;is an excellent example. Just as 1080 was the buzz number when HD TVs were coming into fashion, 4K is simply the next step. A 1080p screen has 1,080 pixels in each vertical column and 1,920 pixels in each horizontal row. The 4K defies the convention by counting the horizontal pixels instead. If you&rsquo;re really curious, read on, but the main thing to know right now is that there is not a lot of content out there to actually watch on a 4K TV, so those buying them now are buying prematurely and will be paying a hefty premium to do so &mdash; maybe think about waiting another year or two for 4K TVs to really become mainstream and for 4K content to be more readily available.</p>
         <p>What&rsquo;s important to note is that the number of pixels on a screen doesn&rsquo;t define the clarity of the image, but rather the density of those pixels does, along with the source resolution. If you have a 24&Prime; 1080p TV and compare it to a 48&Prime; 4K TV, they will have about the same pixel density. So, unless the two TVs are displaying images that are higher than a 1080p resolution, they will have the same level of clarity, but the 4K TV will show it at four times the size, which may still help you see details better. Of course, if a 4K TV and 1080p TV are the same size, the 4K TV will have notably higher image clarity for everything above&nbsp;1080p resolution. Just keep in mind that a TV being 4K doesn&rsquo;t mean you should ignore all the other aspects of the TV.</p>
         <p><strong>Display types</strong></p>
         <p>One of the first things you&rsquo;ll want to do is narrow down what type of&nbsp;TV&nbsp;you want. There are LCD TVs, LED TVs, OLED TVs, and plasma TVs to chose from.</p>

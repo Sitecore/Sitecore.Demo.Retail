@@ -4,6 +4,29 @@ Parent: "97ab80a2-5c02-4696-916b-0256354832e7"
 Template: "49c651ba-4004-40a9-9b0f-e95d0573f3ae"
 Path: /sitecore/content/Storefront/Home/Landing Pages/YouTube Helix Spectra
 DB: master
+SharedFields:
+- ID: "b0a67b2a-8b07-4e0b-8809-69f751709806"
+  Hint: __Tracking
+  Type: Tracking
+  Value: |
+    <tracking>
+      <profile
+        id="{4F7F3405-9606-495E-8D44-55177A382BB3}"
+        name="Retail Persona">
+        <key
+          name="Appliances"
+          value="0" />
+        <key
+          name="Audio"
+          value="0" />
+        <key
+          name="Gaming or Subscription"
+          value="0" />
+        <key
+          name="Televisions"
+          value="0" />
+      </profile>
+    </tracking>
 Languages:
 - Language: en
   Versions:

@@ -10,10 +10,10 @@ SharedFields:
   Value: |
     <tracking>
       <profile id="{4F7F3405-9606-495E-8D44-55177A382BB3}" name="Retail Persona">
-        <key name="Televisions" value="0" />
+        <key name="Televisions" value="1" />
         <key name="Appliances" value="0" />
-        <key name="Gaming or Subscription" value="0" />
-        <key name="Audio" value="0" />
+        <key name="Gaming or Subscription" value="3" />
+        <key name="Audio" value="5" />
       </profile>
     </tracking>
 - ID: "fe732790-2ddb-4657-a882-c2fce1fbf0c9"

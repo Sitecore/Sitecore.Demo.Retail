@@ -74,11 +74,69 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{AB311C8C-CB7F-4D70-99C6-3E5BD409FE3A}"
+              uid="{821101B8-F075-423A-AD6D-136AB29A3191}"
               p:before="*"
+              s:ds="{20564ED2-6836-4E21-9946-26FFB0644CDD}"
+              s:id="{A9B002E1-963F-4F35-B6DB-14A8D4BF171A}"
+              s:ph="/page-layout/page-header">
+              <rls>
+                <ruleset>
+                  <rule
+                    uid="{0E248FCA-2619-42C8-B5DC-847BE229B794}"
+                    s:name="500 Discount">
+                    <conditions>
+                      <and
+                        uid="8AD6F52A79184A87AF2B15AFCD3F5997">
+                        <condition
+                          uid="A433EA35EE4A475E85EB3659FD161F09"
+                          s:id="{F534DDB9-D2C7-44B5-AA28-3E03878F4A58}"
+                          s:operatorid="{B88CD556-082E-4385-BB76-E4D1B565F290}"
+                          s:TotalProductQuantity="0" />
+                        <and
+                          uid="5296B4AA3F3A49E1A5E005A0605A5D57">
+                          <condition
+                            uid="2A66EF3538BA47588FF483141C4E3BA8"
+                            s:id="{A5C43381-DA2F-4C22-AB76-A1A3483590AF}"
+                            s:operatorid="{814EF7D0-1639-44FD-AEEF-735B5AC14425}"
+                            s:CartTotal="350" />
+                          <condition
+                            uid="F7C53E9938874186BF47EE049A96544A"
+                            s:id="{A5C43381-DA2F-4C22-AB76-A1A3483590AF}"
+                            s:operatorid="{E362A3A4-E230-4A40-A7C4-FC42767E908F}"
+                            s:CartTotal="500" />
+                        </and>
+                      </and>
+                    </conditions>
+                    <actions>
+                      <action
+                        uid="D03CBADB32C3421F8CA9791D6CC640E3"
+                        s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
+                        s:DataSource="{20564ED2-6836-4E21-9946-26FFB0644CDD}" />
+                    </actions>
+                  </rule>
+                  <rule
+                    uid="{00000000-0000-0000-0000-000000000000}"
+                    s:name="Default">
+                    <conditions>
+                      <condition
+                        uid="98C7E4EA5ACC4A2EA4DBC85CD8444260"
+                        s:id="{4888ABBB-F17D-4485-B14B-842413F88732}" />
+                    </conditions>
+                    <actions>
+                      <action
+                        uid="AEA0A0EFA7384D2FBDB1471A2E913E6A"
+                        s:id="{25F351A1-712D-45F8-857D-8AD95BB2ACE9}" />
+                    </actions>
+                  </rule>
+                </ruleset>
+              </rls>
+            </r>
+            <r
+              uid="{AB311C8C-CB7F-4D70-99C6-3E5BD409FE3A}"
+              p:after="r[@uid='{821101B8-F075-423A-AD6D-136AB29A3191}']"
               s:ds="{F2DDEBC5-B7C1-4C8E-9DC9-169A60216B69}"
               s:id="{97459D5B-3C92-46C2-A329-138C1E277465}"
-              s:par="Background=%7bEFA6AD59-AE21-4524-90F8-A92440B869AF%7d"
+              s:par="Background={EFA6AD59-AE21-4524-90F8-A92440B869AF}"
               s:ph="/page-layout/section_8a1bbcac-f675-4ec3-acb2-f7d0b8abbed5/col-narrow-1_bca27930-e270-43e1-b347-06fb77ded99a" />
             <r
               uid="{E6EE01BA-DC88-4A94-8356-F4F9115A3C92}"
@@ -145,39 +203,6 @@ Languages:
               <rls>
                 <ruleset>
                   <rule
-                    uid="{EFE1EC62-1E5F-4B6A-9F94-A27C16345C94}"
-                    s:name="Over 500">
-                    <conditions>
-                      <and
-                        uid="C30490283727497985C4C875DD61C07F">
-                        <condition
-                          uid="B41E076E307D464D8FC8773A75B83FAC"
-                          s:id="{F534DDB9-D2C7-44B5-AA28-3E03878F4A58}"
-                          s:operatorid="{B88CD556-082E-4385-BB76-E4D1B565F290}"
-                          s:TotalProductQuantity="0" />
-                        <and
-                          uid="0726300E6841429B876E0EFFDED68D7D">
-                          <condition
-                            uid="281E44DE582D4681B799FC28F0E53DB3"
-                            s:id="{A5C43381-DA2F-4C22-AB76-A1A3483590AF}"
-                            s:operatorid="{E362A3A4-E230-4A40-A7C4-FC42767E908F}"
-                            s:CartTotal="500" />
-                          <condition
-                            uid="7771F15D056E48E986DDFEBEA86AA90E"
-                            s:id="{A5C43381-DA2F-4C22-AB76-A1A3483590AF}"
-                            s:operatorid="{B88CD556-082E-4385-BB76-E4D1B565F290}"
-                            s:CartTotal="300" />
-                        </and>
-                      </and>
-                    </conditions>
-                    <actions>
-                      <action
-                        uid="2518A31A6D634CBFB5E217AEC547F943"
-                        s:id="{0F3C6BEC-E56B-4875-93D7-2846A75881D2}"
-                        s:DataSource="{20564ED2-6836-4E21-9946-26FFB0644CDD}" />
-                    </actions>
-                  </rule>
-                  <rule
                     uid="{CD260325-93E7-4671-9B58-C66D0B482E0D}"
                     s:name="Kerry">
                     <conditions>
@@ -241,9 +266,6 @@ Languages:
               </rls>
             </r>
             <r
-              uid="{8C308774-5362-4996-A416-527ED85204F1}"
-              s:ds="" />
-            <r
               uid="{FAD6585A-A605-4FDE-B461-3ADE0A1D7FA4}">
               <p:d />
             </r>
@@ -260,7 +282,7 @@ Languages:
               p:after="r[@uid='{8BE50F19-C969-4AC1-843F-3BCF8E4FB610}']"
               s:ds=""
               s:id="{1149A3C7-C69A-4E6B-A6C3-32687EC2F8D4}"
-              s:par="Media=%7b656260C8-B8DE-484A-A25B-1FF7CC920752%7d&amp;Parallax=1"
+              s:par="Media={656260C8-B8DE-484A-A25B-1FF7CC920752}&amp;Parallax=1"
               s:ph="page-layout" />
             <r
               uid="{8A1BBCAC-F675-4EC3-ACB2-F7D0B8ABBED5}"
