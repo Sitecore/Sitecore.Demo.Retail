@@ -1,10 +1,13 @@
 ﻿---
 ID: "3ffb409a-0eed-4fe8-a155-e33e55e7e978"
 Parent: "9e9e8cb4-b03d-4650-9388-2f73cd0ad28f"
-Template: "cc933745-4840-4bd7-962a-24b27c7eca6d"
+Template: "f0d5dd44-101a-46f4-81c8-f48a6ff5d17b"
 Path: "/sitecore/Commerce/Commerce Control Panel/Shared Settings/Countries-Regions/Canada/Ontario"
 DB: master
 SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: flags/16x16/flag_canada.png
 - ID: "3860ab02-9645-47bf-9224-3e3d4c3c6bd3"
   Hint: Code
   Value: ON
@@ -20,9 +23,6 @@ Languages:
       Hint: __Created by
       Value: |
         sitecore\Admin
-    - ID: "725bc3bc-0dcb-40a7-b6d8-64a254e10b1a"
-      Hint: Name
-      Value: Ontario
   - Version: 2
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"

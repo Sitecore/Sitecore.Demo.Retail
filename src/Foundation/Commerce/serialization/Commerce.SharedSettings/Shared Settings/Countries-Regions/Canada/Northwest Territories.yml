@@ -1,10 +1,13 @@
 ﻿---
 ID: "35583f56-4901-4091-b43b-88798432c04e"
 Parent: "9e9e8cb4-b03d-4650-9388-2f73cd0ad28f"
-Template: "cc933745-4840-4bd7-962a-24b27c7eca6d"
+Template: "f0d5dd44-101a-46f4-81c8-f48a6ff5d17b"
 Path: "/sitecore/Commerce/Commerce Control Panel/Shared Settings/Countries-Regions/Canada/Northwest Territories"
 DB: master
 SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: flags/16x16/flag_canada.png
 - ID: "3860ab02-9645-47bf-9224-3e3d4c3c6bd3"
   Hint: Code
   Value: NT

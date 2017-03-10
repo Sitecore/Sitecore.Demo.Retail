@@ -74,6 +74,10 @@ namespace Sitecore.Foundation.Commerce
                 }
             }
 
+      public static class SharedSettings
+      {
+        public static readonly ID CountriesRegions = new ID("{41FBC29E-001F-42AC-80B7-835440C852A7}");
+      }
             public static class NavigationItem
             {
                 public static readonly ID ID = new ID("{E55834FB-7C93-44A2-87C0-62BEBA282CED}");

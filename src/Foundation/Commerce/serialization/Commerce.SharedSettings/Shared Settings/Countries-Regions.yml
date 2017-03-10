@@ -1,9 +1,13 @@
 ﻿---
 ID: "41fbc29e-001f-42ac-80b7-835440c852a7"
 Parent: "bec7a22d-95bd-49d9-9715-5a2307110139"
-Template: "d7640afe-63c0-4cdf-876f-c17c5d3fa5c4"
+Template: "45ead99f-6344-4ad5-8fb0-205e8c39bd2a"
 Path: "/sitecore/Commerce/Commerce Control Panel/Shared Settings/Countries-Regions"
 DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Flags/16x16/flag_generic.png
 Languages:
 - Language: da
   Fields:
