@@ -1,13 +1,19 @@
 ﻿---
 ID: "9e9e8cb4-b03d-4650-9388-2f73cd0ad28f"
 Parent: "41fbc29e-001f-42ac-80b7-835440c852a7"
-Template: "1f8158d8-4139-46be-94af-9ff80501f5de"
+Template: "9086e8e0-55ad-443f-99af-cff0f95e7138"
 Path: "/sitecore/Commerce/Commerce Control Panel/Shared Settings/Countries-Regions/Canada"
 DB: master
 SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: flags/16x16/flag_canada.png
 - ID: "6364fd2c-7b9e-482d-b96b-7c324d49011e"
   Hint: Country Code
   Value: CAD
+- ID: "f8487720-7f38-40f3-a689-c5ca1722b809"
+  Hint: Country Code
+  Value: CA
 Languages:
 - Language: en
   Versions:
@@ -16,9 +22,6 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20161205T100743Z
-    - ID: "9f6720cc-654f-4fdd-9848-7039da6a0e7b"
-      Hint: Name
-      Value: Canada
   - Version: 2
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
