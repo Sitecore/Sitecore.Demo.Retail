@@ -12,7 +12,6 @@
 @using System.Text
 @using Sitecore.Commerce.Engine.Connect.Entities.Carts
 @using Sitecore.Commerce.Entities.GiftCards
-@using Sitecore.Commerce.Entities.LoyaltyPrograms
 @using Sitecore.Data
 @using Sitecore.Data.Items
 @using Sitecore.Foundation.Commerce
@@ -361,23 +360,6 @@
                             <li id="confirm-giftCardNumber">@giftCard.PaymentMethodID</li>
                             <li id="confirm-giftCardAmount">
                                 @giftCard.Amount.ToCurrency(StorefrontConstants.Settings.DefaultCurrencyCode)
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            }
-            if (payment is LoyaltyCardPaymentInfo)
-            {
-                var loyaltyCard = payment as LoyaltyCardPaymentInfo;
-                <div class="panel panel-default" data-bind="with: store">
-                    <div class="panel-heading">
-                        <h5>Loyalty Card</h5>
-                    </div>
-                    <div class="panel-body">
-                        <ul class="list list-unstyled">
-                            <li id="confirm-loyaltyCardNumber">@loyaltyCard.PaymentMethodID</li>
-                            <li id="confirm-loyaltyCardAmount">
-                                @loyaltyCard.Amount.ToCurrency(StorefrontConstants.Settings.DefaultCurrencyCode)
                             </li>
                         </ul>
                     </div>

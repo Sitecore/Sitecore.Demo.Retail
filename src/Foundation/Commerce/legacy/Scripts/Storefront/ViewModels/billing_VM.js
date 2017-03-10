@@ -96,90 +96,18 @@ function GiftCardPaymentViewModel(card) {
             return;
         }
 
-        var lcIsAdded = checkoutDataViewModel.loyaltyCardPayment().isAdded();
         var ccIsAdded = checkoutDataViewModel.creditCardPayment().isAdded();
-        if (!lcIsAdded && !ccIsAdded) {
+        if (!ccIsAdded) {
             return;
         }
 
         var ccAmount = parseFloat(checkoutDataViewModel.creditCardPayment().creditCardAmount());
-        var lcAmount = parseFloat(checkoutDataViewModel.loyaltyCardPayment().loyaltyCardAmount());
         var total = parseFloat(checkoutDataViewModel.cart().totalAmount());
-        var aTotal = parseFloat(parseFloat(self.giftCardAmount()) + lcAmount + ccAmount);
+        var aTotal = parseFloat(parseFloat(self.giftCardAmount()) + ccAmount);
 
         if (aTotal > total) {
-            var count = lcIsAdded && ccIsAdded ? 2 : 1;
-            var diff = (aTotal - total) / count;
-            lcAmount = lcIsAdded ? lcAmount - diff : 0;
-            ccAmount = ccIsAdded ? ccAmount - diff : 0;
-            checkoutDataViewModel.loyaltyCardPayment().loyaltyCardAmount((lcAmount).toFixed(2));
-            checkoutDataViewModel.creditCardPayment().creditCardAmount((ccAmount).toFixed(2));
-        }
-    };
-}
-
-function LoyaltyCardPaymentViewModel(card) {
-    var self = this;
-    var populate = card != null;
-
-    self.enableAddCard = ko.observable(false);
-    self.isAdded = ko.observable(false);
-
-    self.loyaltyCardNumber = ko.validatedObservable("").extend({ required: true });
-    if (populate) {
-        if (card.PaymentMethodID) {
-            self.loyaltyCardNumber(card.PaymentMethodID);
-        }
-        else if (card.CartLoyaltyCardNumber) {
-            self.loyaltyCardNumber(card.CartLoyaltyCardNumber);
-        }
-    }
-    self.loyaltyCardNumber.subscribe(function (cn) {
-        self.enableAddCard(cn.length > 0 && self.loyaltyCardAmount().length > 0 && self.isAdded() === false);
-    }.bind(this));
-
-    self.loyaltyCardAmount = populate ? ko.validatedObservable(card.Amount).extend({ required: true, number: true }) : ko.validatedObservable(0.00).extend({ required: true, number: true });
-    self.loyaltyCardAmount.subscribe(function (ca) {
-        self.enableAddCard(ca.length > 0 && self.loyaltyCardNumber().length > 0 && self.isAdded() === false);
-        self.revalueAmounts();
-    }.bind(this));
-
-    self.addCard = function () {
-        ClearGlobalMessages();
-        self.isAdded(true);
-        self.enableAddCard(false);
-        self.revalueAmounts();
-    };
-
-    self.removeCard = function () {
-        ClearGlobalMessages();
-        self.isAdded(false);
-        self.loyaltyCardNumber("");
-        self.loyaltyCardAmount(0.00);
-    };
-
-    self.revalueAmounts = function () {
-        if (!self.isAdded()) {
-            return;
-        }
-
-        var gcIsAdded = checkoutDataViewModel.giftCardPayment().isAdded();
-        var ccIsAdded = checkoutDataViewModel.creditCardPayment().isAdded();
-        if (!gcIsAdded && !ccIsAdded) {
-            return;
-        }
-
-        var ccAmount = parseFloat(checkoutDataViewModel.creditCardPayment().creditCardAmount());
-        var gcAmount = parseFloat(checkoutDataViewModel.giftCardPayment().giftCardAmount());
-        var total = parseFloat(checkoutDataViewModel.cart().totalAmount());
-        var aTotal = parseFloat(parseFloat(self.loyaltyCardAmount()) + gcAmount + ccAmount);
-
-        if (aTotal > total) {
-            var count = gcIsAdded && ccIsAdded ? 2 : 1;
-            var diff = (aTotal - total) / count;
-            gcAmount = gcIsAdded ? gcAmount - diff : 0;
-            ccAmount = ccIsAdded ? ccAmount - diff : 0;
-            checkoutDataViewModel.giftCardPayment().giftCardAmount((gcAmount).toFixed(2));
+            var diff = aTotal - total;
+            ccAmount = ccAmount - diff;
             checkoutDataViewModel.creditCardPayment().creditCardAmount((ccAmount).toFixed(2));
         }
     };
@@ -233,8 +161,7 @@ function CreditCardPaymentViewModel(card) {
 
             var total = checkoutDataViewModel.cart() ? checkoutDataViewModel.cart().totalAmount() : 0;
             var gcAmount = checkoutDataViewModel.giftCardPayment() ? checkoutDataViewModel.giftCardPayment().giftCardAmount() : 0;
-            var lcAmount = checkoutDataViewModel.loyaltyCardPayment() ? checkoutDataViewModel.loyaltyCardPayment().loyaltyCardAmount() : 0;
-            return (parseFloat(total) - parseFloat(gcAmount) - parseFloat(lcAmount)).toFixed(2);
+            return (parseFloat(total) - parseFloat(gcAmount)).toFixed(2);
         },
         write: function () { }
     });

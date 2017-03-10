@@ -61,8 +61,6 @@ namespace Sitecore.Reference.Storefront.Models.JsonResults
 
         public string UserEmail { get; set; }
 
-        public string CartLoyaltyCardNumber { get; set; }
-
         public string CurrencyCode { get; set; }
 
         public CartBaseJsonResult Cart { get; set; }

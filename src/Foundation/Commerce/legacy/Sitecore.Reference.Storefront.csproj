@@ -242,27 +242,16 @@
     <Compile Include="Models\JsonResults\CartLineBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\ForgotPasswordBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\CheckoutDataBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\LoyaltyCardItemBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\LoyaltyCardsBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\LoyaltyRewardPointItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\ProfileBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\RegisterBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\ChangePasswordBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\ShippingMethodsBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\LoyaltyProgramItemBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\LoyaltyTierItemBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\LoyaltyTransactionItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\MiniCartBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\OrderHeaderItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\SubmitOrderBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\UpdateLoyaltyCardBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\UserBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\OrderBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\OrdersBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\WishListHeaderItemBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\WishListItemBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\WishListBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\WishListsBaseJsonResult.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\SiteContentListHeaderViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
@@ -297,9 +286,7 @@
     <Content Include="Sitecore\Copyrights\WebActivatorEx_MSPL.txt" />
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Account\AddressBook.cshtml" />
-    <Content Include="Views\Account\LoyaltyAccount.cshtml" />
     <Content Include="Views\Account\RecentOrders.cshtml" />
-    <Content Include="Views\Account\WishListsSummary.cshtml" />
     <Content Include="Views\Account\Addresses.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\EditProfile.cshtml" />
@@ -307,9 +294,6 @@
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\LoyaltyCards.cshtml" />
-    <Content Include="Views\Account\MyWishList.cshtml" />
-    <Content Include="Views\Account\MyWishLists.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsList.cshtml" />
     <Content Include="Views\Checkout\_Billing.cshtml" />
@@ -398,7 +382,6 @@
     <Content Include="Scripts\Storefront\debug-knockout.js" />
     <Content Include="Scripts\Storefront\editprofile.js" />
     <Content Include="Scripts\Storefront\knockout-3.2.0.debug.js" />
-    <Content Include="Scripts\Storefront\loyaltycards.js" />
     <Content Include="Scripts\Storefront\main.js" />
     <Content Include="Scripts\Storefront\maps.js" />
     <Content Include="Scripts\Storefront\passwordmanagement.js" />
@@ -413,12 +396,9 @@
     <Content Include="Scripts\Storefront\ViewModels\confirm_VM.js" />
     <Content Include="Scripts\Storefront\ViewModels\delivery_VM.js" />
     <Content Include="Scripts\Storefront\ViewModels\errorsummary_VM.js" />
-    <Content Include="Scripts\Storefront\ViewModels\loyaltycards_VM.js" />
     <Content Include="Scripts\Storefront\ViewModels\minicart_VM.js" />
     <Content Include="Scripts\Storefront\ViewModels\orders_VM.js" />
     <Content Include="Scripts\Storefront\ViewModels\StepIndicator.js" />
-    <Content Include="Scripts\Storefront\ViewModels\wishlist_VM.js" />
-    <Content Include="Scripts\Storefront\wishlist.js" />
     <Content Include="Scripts\_references.js" />
   </ItemGroup>
   <ItemGroup>

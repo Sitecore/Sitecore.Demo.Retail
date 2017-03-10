@@ -7,7 +7,7 @@ DB: master
 SharedFields:
 - ID: "6364fd2c-7b9e-482d-b96b-7c324d49011e"
   Hint: Country Code
-  Value: USA
+  Value: US
 Languages:
 - Language: en
   Versions:
