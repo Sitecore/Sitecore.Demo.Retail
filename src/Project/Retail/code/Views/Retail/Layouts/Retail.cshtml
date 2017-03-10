@@ -1,15 +1,22 @@
-﻿@using Sitecore.Commerce.Connect.CommerceServer
+﻿@using Sitecore.Feature.Commerce.Catalog.Services
 @using Sitecore.Foundation.Assets.Models
 @using Sitecore.Foundation.Assets.Services
-@using Sitecore.Mvc.Analytics.Extensions
 @using Sitecore.Foundation.Commerce.Managers
 @using Sitecore.Foundation.Commerce.Models
-@using Sitecore.Commerce.Connect.CommerceServer.Orders.Models
-@using Sitecore.Foundation.Commerce.Repositories
+@using Sitecore.Mvc.Analytics.Extensions
 @inherits WebViewPage
+
 @{
     Layout = null;
+
+    var urlService = DependencyResolver.Current.GetService<CatalogUrlService>();
+    var url = urlService.GetAdjustedProductUrl(Sitecore.Context.Item);
+    if (url != null)
+    {
+        Response.Redirect(url);
+    }
 }
+
 <!DOCTYPE html>
 <!--[if IE 9]><html lang="en" class="ie9 no-js"><![endif]-->
 <!--[if !IE]><!-->
