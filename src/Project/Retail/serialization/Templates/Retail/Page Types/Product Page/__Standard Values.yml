@@ -81,8 +81,10 @@ SharedFields:
           ph="/page-layout/section"
           uid="{80587E8D-67C3-47AF-97AC-4FAA0F81D9D4}" />
         <r
+          ds=""
           id="{A7CEEE33-046A-49DA-8D0B-636BAC05F97F}"
-          ph="col-wide-1"
+          par=""
+          ph="/page-layout/section/col-wide-1"
           uid="{CBF8B050-CFD6-4013-83BF-5EF3AAF64682}" />
         <r
           id="{AAF9B3B2-BE53-4B85-BDBF-E7704C0B28D2}"
@@ -259,6 +261,13 @@ Languages:
               uid="{CBF8B050-CFD6-4013-83BF-5EF3AAF64682}">
               <p:d />
             </r>
+            <r
+              uid="{17CEEB73-56B8-4029-A487-A1AA0ACFC0ED}"
+              p:after="r[@uid='{80587E8D-67C3-47AF-97AC-4FAA0F81D9D4}']"
+              s:ds=""
+              s:id="{A7CEEE33-046A-49DA-8D0B-636BAC05F97F}"
+              s:par=""
+              s:ph="/page-layout/section/col-wide-1" />
             <r
               uid="{59246F17-EC96-46F0-A632-BE4671929091}"
               s:par="" />
