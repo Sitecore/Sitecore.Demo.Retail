@@ -125,6 +125,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\commerce3.pubxml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="styles\commerce.css" />
     <Content Include="Views\Retail\Layouts\Retail.cshtml" />
     <None Include="Web.config">
       <SubType>Designer</SubType>

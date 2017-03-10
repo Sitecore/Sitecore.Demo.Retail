@@ -11,13 +11,14 @@ Languages:
     Fields:
     - ID: "0de53078-0da4-40cc-bbca-63aa96a0a1ef"
       Hint: Quote
-      Value: The Helix Viva 4 Door is a top quality appliance at a very reasonable price
+      Value: |
+        "The Helix Viva 4 Door is a top quality appliance at a very reasonable price"
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20170109T120149Z
     - ID: "26cd59ab-3639-488f-bafd-58d2b217755a"
       Hint: Name
-      Value: Lucy Smith
+      Value: Brenda Barkley
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
@@ -31,4 +32,4 @@ Languages:
     - ID: "c9baf3eb-8cfa-4bf6-9b19-51d38db5fc38"
       Hint: Picture
       Value: |
-        <image mediaid="{DBA76CC5-D35A-4527-9516-65D22ED35441}" ></image>
+        <image mediaid="{37234A35-0461-4E08-A141-E7F1B2BE0878}"></image>

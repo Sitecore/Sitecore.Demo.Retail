@@ -12,11 +12,11 @@
     // -------------------------------------------------------------------------------------------*@
 
 <li class="dropdown" id="B02-Basket">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <a href="#" class="dropdown-toggle toggle-cart" data-toggle="dropdown">
         <span class="glyphicon glyphicon-shopping-cart"></span><span class="badge bg-primary" id="miniCartItemCount" data-bind="text: lineitemcount"></span> 
     </a>
-    <div class="dropdown-menu">
-        <ul class="media-list" data-bind="foreach: miniCartItems, visible:miniCartItems().length">
+    <div class="dropdown-menu minicart">
+        <ul class="media-list minicart-content" data-bind="foreach: miniCartItems, visible:miniCartItems().length">
             <li class="media" data-bind="attr: {'data-ajax-lineitemid': externalCartlineId}">
                 <div class="media-left">
                     <a data-bind="attr:{ href:productUrl}">
@@ -33,7 +33,7 @@
                     </p>
                 </div>
                 <div class="media-right">
-                    <a href="#" class="text-primary">
+                    <a href="javascript:;" class="text-primary minicart-delete">
                         <span class="glyphicon glyphicon-remove"></span>
                     </a>
                 </div>
@@ -49,6 +49,12 @@
             <a class="btn btn-block btn-default" href="@("/ShoppingCart")">@Html.Sitecore().Text("Orders/MiniCart/View Cart", "View Cart")</a>
         </div>
     </div>
+</li>
+
+<li class="dropdown" id="B02-Basket-responsive">
+    <a href="@("/ShoppingCart")">
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+    </a>
 </li>
 
 <script type="text/javascript">

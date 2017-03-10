@@ -11,9 +11,9 @@ SharedFields:
     <tracking>
       <profile id="{4F7F3405-9606-495E-8D44-55177A382BB3}" name="Retail Persona">
         <key name="Televisions" value="5" />
-        <key name="Appliances" value="4" />
+        <key name="Appliances" value="3" />
         <key name="Gaming or Subscription" value="4" />
-        <key name="Audio" value="5" />
+        <key name="Audio" value="3" />
       </profile>
     </tracking>
 Languages:
