@@ -69,6 +69,10 @@ SharedFields:
           ph="navbar-activity"
           uid="{4598C39D-D2C0-48E7-B039-7D163CD47F93}" />
         <r
+          id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"
+          ph="footer"
+          uid="{E2040FB7-4151-456D-9315-5973E4EB4D9D}" />
+        <r
           id="{359A65BB-0A2C-44E5-8C34-DF3ACDBB42A7}"
           ph="page-layout"
           uid="{EB352679-4420-46AE-95B0-7CA976C24194}" />
