@@ -249,14 +249,11 @@
     <Compile Include="Managers\ShippingManager.cs" />
     <Compile Include="Managers\StorefrontManager.cs" />
     <Compile Include="Models\VisitorContext.cs" />
-    <Compile Include="Managers\WishListManager.cs" />
     <Compile Include="Models\CurrencyInformationModel.cs" />
     <Compile Include="Models\InputModels\AddCartLineInputModel.cs" />
-    <Compile Include="Models\InputModels\AddToWishListInputModel.cs" />
     <Compile Include="Models\InputModels\CancelOrderInputModel.cs" />
     <Compile Include="Models\InputModels\CartLineInputModelItem.cs" />
     <Compile Include="Models\InputModels\ChangePasswordInputModel.cs" />
-    <Compile Include="Models\InputModels\CreateWishListInputModel.cs" />
     <Compile Include="Models\InputModels\CreditCardPaymentInputModelItem.cs" />
     <Compile Include="Models\InputModels\DeleteCartLineInputModel.cs" />
     <Compile Include="Models\InputModels\DeletePartyInputModelItem.cs" />
@@ -268,8 +265,6 @@
     <Compile Include="Models\InputModels\GetNearbyStoresInputModel.cs" />
     <Compile Include="Models\InputModels\GetShippingMethodsInputModel.cs" />
     <Compile Include="Models\InputModels\GiftCardPaymentInputModelItem.cs" />
-    <Compile Include="Models\InputModels\LoyaltyCardInputModelItem.cs" />
-    <Compile Include="Models\InputModels\LoyaltyCardPaymentInputModelItem.cs" />
     <Compile Include="Models\InputModels\OrderConfirmationInputModel.cs" />
     <Compile Include="Models\InputModels\PartyInputModelItem.cs" />
     <Compile Include="Models\InputModels\PaymentInputModel.cs" />
@@ -281,9 +276,6 @@
     <Compile Include="Models\InputModels\SignUpForNotificationInputModel.cs" />
     <Compile Include="Models\InputModels\SubmitOrderInputModel.cs" />
     <Compile Include="Models\InputModels\UpdateCartLineInputModel.cs" />
-    <Compile Include="Models\InputModels\UpdateWishListInputModel.cs" />
-    <Compile Include="Models\InputModels\WishListInputModel.cs" />
-    <Compile Include="Models\InputModels\WishListLineInputModel.cs" />
     <Compile Include="Models\MailTemplate.cs" />
     <Compile Include="Models\PaginationModel.cs" />
     <Compile Include="Models\PriceTypes.cs" />
@@ -291,7 +283,6 @@
     <Compile Include="Models\SearchResults.cs" />
     <Compile Include="Infrastructure\ComputedFields\ChildCategoriesComputedField.cs" />
     <Compile Include="Infrastructure\ComputedFields\ProductIdComputedField.cs" />
-    <Compile Include="Infrastructure\ComputedFields\IsSiteContentItem.cs" />
     <Compile Include="Models\Search\CategorySearchResults.cs" />
     <Compile Include="Models\Search\InventorySearchResultItem.cs" />
     <Compile Include="Models\Search\MultipleProductSearchResults.cs" />

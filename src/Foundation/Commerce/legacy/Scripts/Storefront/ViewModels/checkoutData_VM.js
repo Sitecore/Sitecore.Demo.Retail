@@ -132,8 +132,6 @@ function CheckoutDataViewModel(data) {
     self.payCard = false;
     self.payFederatedPayment = false;
     self.payGiftCard = false;
-    self.payLoyaltyCard = false;
-    self.payGiftLoyaltyCard = self.payGiftCard || self.payLoyaltyCard ? true : false;
     self.cardPaymentAcceptPageUrl = ko.observable('');
     self.cardPaymentResultAccessCode = "";
     self.cardPaymentAcceptCardPrefix = "";
@@ -153,9 +151,6 @@ function CheckoutDataViewModel(data) {
             if (value.PaymentOptionType.Name === "PayGiftCard") {
                 self.payGiftCard = true;
             }
-            if (value.PaymentOptionType.Name === "PayLoyaltyCard") {
-                self.payLoyaltyCard = true;
-            }
         });
     }
 
@@ -172,9 +167,7 @@ function CheckoutDataViewModel(data) {
         });
     }
 
-    self.cartLoyaltyCardNumber = data.CartLoyaltyCardNumber;
     self.giftCardPayment = ko.validatedObservable(new GiftCardPaymentViewModel());
-    self.loyaltyCardPayment = ko.validatedObservable(data.CartLoyaltyCardNumber ? new LoyaltyCardPaymentViewModel({ "CartLoyaltyCardNumber": data.CartLoyaltyCardNumber, "Amount": 0.00 }) : new LoyaltyCardPaymentViewModel());
     self.creditCardPayment = ko.validatedObservable(new CreditCardPaymentViewModel());
     self.creditCardEnable = ko.observable(false);
     self.billingAddress = ko.validatedObservable(new AddressViewModel({ "ExternalId": "1" }));
@@ -201,15 +194,13 @@ function CheckoutDataViewModel(data) {
         read: function () {
             var ccIsAdded = self.creditCardPayment().isAdded();
             var gcIsAdded = self.giftCardPayment().isAdded();
-            var lcIsAdded = self.loyaltyCardPayment().isAdded();
-            if (!ccIsAdded && !gcIsAdded && !lcIsAdded) {
+            if (!ccIsAdded && !gcIsAdded) {
                 return 0;
             }
 
             var ccAmount = ccIsAdded ? self.creditCardPayment().creditCardAmount() : 0;
             var gcAmount = gcIsAdded ? self.giftCardPayment().giftCardAmount() : 0;
-            var lcAmount = lcIsAdded ? self.loyaltyCardPayment().loyaltyCardAmount() : 0;
-            return (parseFloat(ccAmount) + parseFloat(gcAmount) + parseFloat(lcAmount)).toFixed(2);
+            return (parseFloat(ccAmount) + parseFloat(gcAmount)).toFixed(2);
         },
         write: function () { }
     });
@@ -223,10 +214,6 @@ function CheckoutDataViewModel(data) {
             var paymentsAreValid = false;
             if (self.giftCardPayment().isAdded()) {
                 paymentsAreValid = self.giftCardPayment.isValid();
-            }
-
-            if (self.loyaltyCardPayment().isAdded()) {
-                paymentsAreValid = self.loyaltyCardPayment.isValid();
             }
 
             if (self.creditCardPayment().isAdded()) {

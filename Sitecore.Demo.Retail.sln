@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Retail", "Retail", "{B3C10E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{1EE871B8-E158-46DE-AD3C-6D0B7DE4A081}"
 	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
 		gulp-config.js = gulp-config.js
 		gulpfile.js = gulpfile.js
 		install-commerce-config.json = install-commerce-config.json
@@ -60,11 +61,6 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Plugin.Sample.Payments.Braintree", "src\Foundation\Commerce\legacyCommerce\Plugin.Sample.Payments.Braintree\Plugin.Sample.Payments.Braintree.xproj", "{0296F347-F76D-4A81-9FB1-AE9CA0F0C064}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Plugin.Sample.Habitat", "src\Foundation\Commerce\legacyCommerce\Plugin.Sample.Habitat\Plugin.Sample.Habitat.xproj", "{72203E4B-DA74-405C-9D33-193B38A0AA33}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0240E3D9-240C-4694-BD42-B60FBBF21EBF}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Feature.Commerce.Orders", "src\Feature\Orders\code\Sitecore.Feature.Commerce.Orders.csproj", "{9CC4BF07-1259-43FF-B205-AFD1E59E5834}"
 EndProject

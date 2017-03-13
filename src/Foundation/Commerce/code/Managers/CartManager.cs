@@ -396,11 +396,6 @@ namespace Sitecore.Foundation.Commerce.Managers
                 payments.Add(inputModel.GiftCardPayment.ToGiftCardPaymentInfo());
             }
 
-            if (inputModel.LoyaltyCardPayment != null && !string.IsNullOrEmpty(inputModel.LoyaltyCardPayment.PaymentMethodID))
-            {
-                payments.Add(inputModel.LoyaltyCardPayment.ToLoyaltyCardPaymentInfo());
-            }
-
             var request = new AddPaymentInfoRequest(cart, payments);
             result = CartServiceProvider.AddPaymentInfo(request);
             result.WriteToSitecoreLog();

@@ -51,9 +51,6 @@ Languages:
     - ID: "9e13e4ad-a169-42ef-bb85-f8257a080b00"
       Hint: Order Number Label
       Value: Order number
-    - ID: "ac13e44d-df37-4619-a140-225553293fe7"
-      Hint: Loyalty Card Label
-      Value: Loyalty Card
     - ID: "ae228cb9-9406-4ed4-939d-ed4a7df09652"
       Hint: View All Orders Label
       Value: View All Orders
@@ -78,6 +75,3 @@ Languages:
     - ID: "e4d24ddf-4336-4a36-8252-6db88ef93fe9"
       Hint: Order Date Label
       Value: Order date
-    - ID: "f53a75b0-cb77-42de-9976-94cab83ed6f0"
-      Hint: Loyalty Rewards Header
-      Value: Loyalty Rewards
