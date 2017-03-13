@@ -48,6 +48,29 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.DataAccess, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Analytics.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.MongoDB, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Analytics.MongoDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Commerce, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Commerce.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Commerce.Connect.CommerceServer">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Commerce.Engine.Connect, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Commerce.Engine.Connect.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.Dictionary">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
     </Reference>
@@ -103,20 +126,64 @@
   <ItemGroup>
     <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Orders.config" />
     <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Orders.Serialization.config" />
+    <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Orders.Processing.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="Views\Cart\_CartSummary.cshtml" />
+    <Content Include="Views\Cart\_LineItem.cshtml" />
+    <Content Include="Views\Cart\CheckoutButtons.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\MiniCart.cshtml" />
+    <Content Include="Views\Checkout\_Billing.cshtml" />
+    <Content Include="Views\Checkout\_ByItem_SendByEmail.cshtml" />
+    <Content Include="Views\Checkout\_ByItem_ShipAll.cshtml" />
+    <Content Include="Views\Checkout\_ByItem_Store.cshtml" />
+    <Content Include="Views\Checkout\_CheckoutFooter.cshtml" />
+    <Content Include="Views\Checkout\_Confirm.cshtml" />
+    <Content Include="Views\Checkout\_Delivery.cshtml" />
+    <Content Include="Views\Checkout\_PickAtStore.cshtml" />
+    <Content Include="Views\Checkout\_PickDeliveryByItem.cshtml" />
+    <Content Include="Views\Checkout\_SendByEmail.cshtml" />
+    <Content Include="Views\Checkout\_ShipAll.cshtml" />
+    <Content Include="Views\Checkout\_StartCheckout.cshtml" />
+    <Content Include="Views\Checkout\_StepIndicator.cshtml" />
+    <Content Include="Views\Checkout\OrderConfirmation.cshtml" />
+    <Content Include="Views\Checkout\StartCheckout.cshtml" />
     <None Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Infrastructure\Pipelines\RegisterDataModelExtensions.cs" />
+    <Compile Include="Models\Api\AddressItemModel.cs" />
+    <Compile Include="Models\Api\AddressListItemModel.cs" />
+    <Compile Include="Models\Api\AddressListModel.cs" />
+    <Compile Include="Models\Api\AvailableStatesModel.cs" />
+    <Compile Include="Models\Api\CartAdjustmentModel.cs" />
+    <Compile Include="Models\Api\CartLineModel.cs" />
+    <Compile Include="Models\Api\CartModel.cs" />
+    <Compile Include="Models\Api\CheckoutModel.cs" />
+    <Compile Include="Models\Api\LineShippingOptionModel.cs" />
+    <Compile Include="Models\Api\MiniCartModel.cs" />
+    <Compile Include="Models\Api\ShippingMethodModel.cs" />
+    <Compile Include="Models\Api\ShippingMethodPerItemModel.cs" />
+    <Compile Include="Models\Api\ShippingMethodsModel.cs" />
+    <Compile Include="Models\Api\ShippingOptionModel.cs" />
+    <Compile Include="Models\Api\SubmitOrderModel.cs" />
+    <Compile Include="Models\CommerceCartLineWithImages.cs" />
+    <Compile Include="Models\View\CartModel.cs" />
+    <Compile Include="Models\View\OrderConfirmationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\web.config" />
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\Commerce\Orders\" />
+    <ProjectReference Include="..\..\..\Foundation\Commerce\code\Sitecore.Foundation.Commerce.csproj">
+      <Project>{662345ac-23ee-4125-87a6-0785795c2409}</Project>
+      <Name>Sitecore.Foundation.Commerce</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
