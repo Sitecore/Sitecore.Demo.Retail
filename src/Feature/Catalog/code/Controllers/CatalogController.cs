@@ -405,6 +405,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             }
 
             var model = GetProductViewModel();
+            if (model.Images == null || !model.Images.Any())
+                return new EmptyResult();
+
             return View(model);
         }
 
@@ -784,7 +787,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 return navigationViewModel;
             }
 
-            navigationViewModel = new NavigationViewModel();
+            navigationViewModel = new NavigationViewModel(GetCategoryViewModel(category));
             var childCategories = GetChildCategories(category);
             navigationViewModel.ChildCategories.AddRange(childCategories.Select(i => GetCategoryViewModel(CatalogManager.GetCategory(i))));
 

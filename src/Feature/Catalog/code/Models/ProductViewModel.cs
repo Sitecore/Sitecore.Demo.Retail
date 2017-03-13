@@ -65,7 +65,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public decimal VariantSavingsPercentage => CalculateSavingsPercentage(LowestPricedVariantAdjustedPrice, LowestPricedVariantListPrice);
 
-        public bool IsOnSale => Item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.ID) && Item.Fields[Foundation.Commerce.Templates.Commerce.Product.Fields.OnSale].IsChecked();
+        public bool IsOnSale => Item.Fields[Foundation.Commerce.Templates.Commerce.Product.Fields.OnSale].IsChecked();
 
         public bool IsProduct
         {
