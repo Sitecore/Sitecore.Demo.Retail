@@ -134,43 +134,6 @@ function CheckGiftCardBalance() {
     }, this);
 }
 
-function addToWishList(id) {
-    var wishListId = "";
-    var wishListName = "";
-
-    if (id === "new") {
-        $('#createWishListClose').trigger('click');
-        wishListName = $("#wishList-name").val();
-        $("#wishList-name").val("");
-    } else {
-        wishListId = id.id;
-    }
-
-    var formData = {};
-    formData.ProductId = $("#ProductId").val();
-    formData.VariantId = $("#VariantId").length > 0 ? $("#VariantId").val() : "";
-    formData.ProductCatalog = $("#CatalogName").val();
-    formData.Quantity = $("#Quantity").val();
-    formData.WishListId = wishListId;
-    formData.WishListName = wishListName;
-
-    ClearGlobalMessages();
-    $("#addToWishList").find(".glyphicon").removeClass("glyphicon-heart");
-    $("#addToWishList").find(".glyphicon").addClass("glyphicon-refresh");
-    $("#addToWishList").find(".glyphicon").addClass("glyphicon-refresh-animate");
-
-    AJAXPost("/api/storefront/WishList/AddToWishList", JSON.stringify(formData), function (data, success, sender) {
-        if (success && data.Success) {            
-            wishListHeadersListViewModel.reload(data);
-        }
-
-        $("#addToWishList").find(".glyphicon").removeClass("glyphicon-refresh");
-        $("#addToWishList").find(".glyphicon").removeClass("glyphicon-refresh-animate");
-        $("#addToWishList").find(".glyphicon").addClass("glyphicon-heart");
-        ShowGlobalMessages(data);
-    }, this);
-}
-
 function SetAddButton() {
     $(document).ready(function () {
         ClearGlobalMessages();

@@ -24,7 +24,6 @@ using Sitecore.Commerce.Engine.Connect.Entities.Carts;
 using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Commerce.Entities.GiftCards;
-using Sitecore.Commerce.Entities.LoyaltyPrograms;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Foundation.Commerce.Models.InputModels;
 
@@ -73,18 +72,6 @@ namespace Sitecore.Foundation.Commerce.Extensions
                 Amount = item.Amount,
                 ExternalId = item.PaymentMethodID,
                 PaymentMethodID = GetPaymentOptionId("Gift Card")
-            };
-
-            return paymentInfo;
-        }
-
-        public static LoyaltyCardPaymentInfo ToLoyaltyCardPaymentInfo(this LoyaltyCardPaymentInputModelItem item)
-        {
-            var paymentInfo = new LoyaltyCardPaymentInfo
-            {
-                Amount = item.Amount,
-                ExternalId = item.PaymentMethodID,
-                PaymentMethodID = GetPaymentOptionId("Loyalty Card")
             };
 
             return paymentInfo;

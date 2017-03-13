@@ -25,7 +25,7 @@ namespace Sitecore.Foundation.Commerce.Models
     {
         public Catalog(Item item)
         {
-            Assert.ArgumentCondition(item.IsDerived(Templates.Commerce.Catalog.ID), nameof(item), "Not a valid item. Must derive from Commerce Catalog Template");
+            Assert.ArgumentCondition(item.IsDerived(Templates.Commerce.Catalog.Id), nameof(item), "Not a valid item. Must derive from Commerce Catalog Template");
 
             InnerItem = item;
         }

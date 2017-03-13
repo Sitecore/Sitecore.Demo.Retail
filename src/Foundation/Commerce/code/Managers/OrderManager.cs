@@ -128,9 +128,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return info;
         }
 
-        public ManagerResponse<GetAvailableRegionsResult, Dictionary<string, string>> GetAvailableRegions(
-            [NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext,
-            [NotNull] string countryCode)
+        public ManagerResponse<GetAvailableRegionsResult, Dictionary<string, string>> GetAvailableRegions([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext,[NotNull] string countryCode)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
@@ -156,6 +154,9 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
 
             result.WriteToSitecoreLog();
+            //no orders found returns false - we treat it as success
+            if (!result.Success && !result.SystemMessages.Any())
+                result.Success = true;
             return new ManagerResponse<GetVisitorOrdersResult, IEnumerable<OrderHeader>>(result, new List<OrderHeader>());
         }
 

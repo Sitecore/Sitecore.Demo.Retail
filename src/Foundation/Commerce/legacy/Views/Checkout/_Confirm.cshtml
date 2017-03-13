@@ -24,14 +24,6 @@
     var quantityLabel = Html.Sitecore().Field("Quantity Label", confirmPage);
     var totalLabel = Html.Sitecore().Field("Total Label", confirmPage);
 
-    //Discounts and loyality credits
-    var discountsLabel = Html.Sitecore().Field("Credits Header Label", confirmPage);
-    var applyLoyaltyLabel = Html.Sitecore().Field("Apply Loyalty Credit Label", confirmPage);
-    var subtitleLoyaltyLabel = Html.Sitecore().Field("Subtitle Loyalty Credit Label", confirmPage);
-    var cardNumberLabel = Html.Sitecore().Field("Card Number Label", billingPage);
-    var cardNumberLabelPlaceholder = billingPage["Card Number Label"];
-    var addLoyaltyCardButtonLabel = Html.Sitecore().Field("Add Loyalty Card Button", billingPage);
-
     // Payment Information Labels
     var taxesLabel = Html.Sitecore().Field("Taxes Label", billingPage);
     var savingsLabel = Html.Sitecore().Field("Savings Label", billingPage);
@@ -45,7 +37,6 @@
     var PaymentMethods = Html.Sitecore().Field("Payment Methods Label", confirmPage);
     var EditPaymentMethods = Html.Sitecore().Field("Edit Payment Methods Label", confirmPage);
     var creditCardLabel = Html.Sitecore().Field("Credit Card Label", confirmPage);
-    var footerLoyaltyCardLabel = Html.Sitecore().Field("Loyalty Card Label", confirmPage);
 
     var orderInformationLabel = Html.Sitecore().Field("Order Information Label", billingPage);
     var subtotalLabel = Html.Sitecore().Field("Subtotal Label", billingPage);
@@ -155,29 +146,6 @@
         </tr>
     </tbody>
 </table>
-<div class="headline text-center">
-    <h3>@discountsLabel</h3>
-</div>
-<div class="accordion-container">
-    <a href="#" class="accordion-toggle">
-        <span class="toggle-icon"><span class='glyphicon glyphicon-plus-sign'></span></span>@applyLoyaltyLabel
-    </a>
-    <div class="accordion-content">
-        <div class="col-md-12">
-            <h4>@subtitleLoyaltyLabel</h4>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="LoyalityCardNumber_Confirm">@cardNumberLabel</label>
-                <input type="text" class="form-control" id="LoyalityCardNumber_Confirm" placeholder="@cardNumberLabelPlaceholder" data-bind="value: cartLoyaltyCardNumber">
-            </div>
-            <div class="form-group">
-                <button type="button" id="addLoyaltyCard_Confirm" class="btn btn-success" data-loading-text="Updating Loyalty Card...">@addLoyaltyCardButtonLabel</button>
-                <h1 id="loyaltyCard-success" class="glyphicon glyphicon-ok-circle" style="color: green; top: 6px; left: 9px; display: none"></h1>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="row">
     <div class="col-md-6 col-md-offset-4 col-xs-12">
         <div class="headline text-center">
@@ -315,18 +283,6 @@
                     <li id="confirm-giftCardAmount">
                         <strong>
                             <span data-bind="text: formatCurrency(giftCardAmount, 2, '@currencyDecimalSeparator', '', '@currencyGroupSeparator')"></span>
-                            <span data-bind="text: $root.currencyCode"></span>
-                        </strong>
-                    </li>
-                </ul>
-                <!-- /ko -->
-                <!-- ko if: $root.loyaltyCardPayment().isAdded -->
-                <h5>@footerLoyaltyCardLabel</h5>
-                <ul class="list list-unstyled" data-bind="with: loyaltyCardPayment" id="confirm-loyaltyCardContainer">
-                    <li id="confirm-loyaltyCardNumber" data-bind="text: loyaltyCardNumber"></li>
-                    <li id="confirm-loyaltyCardAmount">
-                        <strong>
-                            <span data-bind="text: formatCurrency(loyaltyCardAmount, 2, '@currencyDecimalSeparator', '', '@currencyGroupSeparator')"></span>
                             <span data-bind="text: $root.currencyCode"></span>
                         </strong>
                     </li>

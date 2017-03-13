@@ -31,8 +31,6 @@ namespace Sitecore.Foundation.Commerce.Models.InputModels
 
         public GiftCardPaymentInputModelItem GiftCardPayment { get; set; }
 
-        public LoyaltyCardPaymentInputModelItem LoyaltyCardPayment { get; set; }
-
         public PartyInputModelItem BillingAddress { get; set; }
     }
 }

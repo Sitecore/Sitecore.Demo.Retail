@@ -117,7 +117,6 @@ namespace Sitecore.Reference.Storefront.Controllers
                         result.Cart.Initialize(response.ServiceProviderResult.Cart);
 
                         result.ShippingMethods = new List<ShippingMethod>();
-                        result.CartLoyaltyCardNumber = cart.LoyaltyCardID;
 
                         result.CurrencyCode = CurrencyManager.CurrencyContext.CurrencyCode;
 

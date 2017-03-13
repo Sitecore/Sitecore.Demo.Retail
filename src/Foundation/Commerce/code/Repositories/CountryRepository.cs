@@ -12,29 +12,29 @@ namespace Sitecore.Foundation.Commerce.Repositories
   {
     public Dictionary<string, string> GetCountriesAsDictionary()
     {
-      return this.GetCountryItems().ToDictionary(country => country[Templates.Country.Fields.CountryCode], country => country[Templates.Country.Fields.Name]);
+      return this.GetCountryItems().ToDictionary(country => country[Templates.Commerce.SharedSettings.Country.Fields.CountryCode], country => country[Templates.Commerce.SharedSettings.Country.Fields.Name]);
     }
 
     public Dictionary<string, string> GetRegionsAsDictionary(string countryCode)
     {
-      return this.GetRegionItems(countryCode).ToDictionary(region => region[Templates.Region.Fields.RegionCode], region => region[Templates.Region.Fields.Name]);
+      return this.GetRegionItems(countryCode).ToDictionary(region => region[Templates.Commerce.SharedSettings.Subdivision.Fields.Code], region => region[Templates.Commerce.SharedSettings.Subdivision.Fields.Name]);
     }
 
     public IEnumerable<Item> GetCountryItems()
     {
       var root = GetCountriesRoot();
-      return root.Children.Where(i => i.IsDerived(Templates.Country.ID));
+      return root.Children.Where(i => i.IsDerived(Templates.Commerce.SharedSettings.Country.Id));
     }
 
     public Item GetCountryItem(string countryCode)
     {
       var root = GetCountriesRoot();
-      return root.Children.FirstOrDefault(i => i.IsDerived(Templates.Country.ID) && String.Equals(i[Templates.Country.Fields.CountryCode], countryCode, StringComparison.InvariantCultureIgnoreCase));
+      return root.Children.FirstOrDefault(i => i.IsDerived(Templates.Commerce.SharedSettings.Country.Id) && String.Equals(i[Templates.Commerce.SharedSettings.Country.Fields.CountryCode], countryCode, StringComparison.InvariantCultureIgnoreCase));
     }
 
     public IEnumerable<Item> GetRegionItems(string countryCode)
     {
-      return GetCountryItem(countryCode)?.Children.Where(i => i.IsDerived(Templates.Region.ID));
+      return GetCountryItem(countryCode)?.Children.Where(i => i.IsDerived(Templates.Commerce.SharedSettings.Subdivision.Id));
     }
 
     private Item GetCountriesRoot()

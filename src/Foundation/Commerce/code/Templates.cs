@@ -9,30 +9,8 @@ namespace Sitecore.Foundation.Commerce
 {
   public static class Templates
   {
-    public static class CountryFolder
-    {
-      public static readonly ID ID = new ID("{45EAD99F-6344-4AD5-8FB0-205E8C39BD2A}");
-    }
-
-    public static class Country
-    {
-      public static readonly ID ID = new ID("{9086E8E0-55AD-443F-99AF-CFF0F95E7138}");
-      public static class Fields
-      {
-        public static readonly ID CountryCode = new ID("{F8487720-7F38-40F3-A689-C5CA1722B809}");
-        public static readonly ID Name = new ID("{2E19E838-DF61-4CD1-ABB7-106945E60901}");
-      }
-    }
-
-    public static class Region
-    {
-      public static readonly ID ID = new ID("{F0D5DD44-101A-46F4-81C8-F48A6FF5D17B}");
-      public static class Fields
-      {
-        public static readonly ID RegionCode = new ID("{A178D0CF-2353-4425-A5D4-466861EBC5BE}");
-        public static readonly ID Name = new ID("{703310C3-2BC2-4781-93E7-331ABEF7EAAD}");
-      }
-    }
+   
+   
 
     public static class CurrencyContext
     {
@@ -58,16 +36,6 @@ namespace Sitecore.Foundation.Commerce
 
     }
 
-    public static class IncludeInCommerceSearchResults
-    {
-      public static readonly ID ID = new ID("{D40A2D89-5AA5-4C9F-BA46-1216E95A13F7}");
-
-      public static class Fields
-      {
-        public static readonly ID DisplayInSearchResults = new ID("{32B3C63B-B71B-4845-A83F-D91E57AEA220}");
-      }
-    }
-
     /// <summary>
     /// Default Sitecore Commerce Templates
     /// </summary>
@@ -75,7 +43,7 @@ namespace Sitecore.Foundation.Commerce
     {
       public static class SearchSettings
       {
-        public static readonly ID ID = new ID("{CB5F3E43-EAF7-4EDB-8235-674745D95059}");
+        public static readonly ID Id = new ID("{CB5F3E43-EAF7-4EDB-8235-674745D95059}");
 
         public static class Fields
         {
@@ -87,10 +55,29 @@ namespace Sitecore.Foundation.Commerce
       public static class SharedSettings
       {
         public static readonly ID CountriesRegions = new ID("{41FBC29E-001F-42AC-80B7-835440C852A7}");
+        public static class Country
+        {
+          public static readonly ID Id = new ID("{1F8158D8-4139-46BE-94AF-9FF80501F5DE}");
+          public static class Fields
+          {
+            public static readonly ID CountryCode = new ID("{6364FD2C-7B9E-482D-B96B-7C324D49011E}");
+            public static readonly ID Name = new ID("{9F6720CC-654F-4FDD-9848-7039DA6A0E7B}");
+          }
+        }
+
+        public static class Subdivision
+        {
+          public static readonly ID Id = new ID("{CC933745-4840-4BD7-962A-24B27C7ECA6D}");
+          public static class Fields
+          {
+            public static readonly ID Code = new ID("{3860AB02-9645-47BF-9224-3E3D4C3C6BD3}");
+            public static readonly ID Name = new ID("{725BC3BC-0DCB-40A7-B6D8-64A254E10B1A}");
+          }
+        }
       }
       public static class NavigationItem
       {
-        public static readonly ID ID = new ID("{E55834FB-7C93-44A2-87C0-62BEBA282CED}");
+        public static readonly ID Id = new ID("{E55834FB-7C93-44A2-87C0-62BEBA282CED}");
 
         public static class Fields
         {
@@ -100,12 +87,12 @@ namespace Sitecore.Foundation.Commerce
 
       public static class DynamicCategory
       {
-        public static readonly ID ID = new ID("{6820281F-3BB3-41B4-8C93-7771EEA496D0}");
+        public static readonly ID Id = new ID("{6820281F-3BB3-41B4-8C93-7771EEA496D0}");
       }
 
       public static class CatalogItem
       {
-        public static readonly ID ID = new ID("{E55C2650-E1B7-47F7-A725-0DD761B57CCF}");
+        public static readonly ID Id = new ID("{E55C2650-E1B7-47F7-A725-0DD761B57CCF}");
 
         public static class Fields
         {
@@ -121,7 +108,7 @@ namespace Sitecore.Foundation.Commerce
 
       public static class Product
       {
-        public static readonly ID ID = new ID("{225F8638-2611-4841-9B89-19A5440A1DA1}");
+        public static readonly ID Id = new ID("{225F8638-2611-4841-9B89-19A5440A1DA1}");
 
         public static class Fields
         {
@@ -135,7 +122,7 @@ namespace Sitecore.Foundation.Commerce
 
       public static class Category
       {
-        public static readonly ID ID = new ID("{4C4FD207-A9F7-443D-B32A-50AA33523661}");
+        public static readonly ID Id = new ID("{4C4FD207-A9F7-443D-B32A-50AA33523661}");
 
         public static class Fields
         {
@@ -146,7 +133,7 @@ namespace Sitecore.Foundation.Commerce
 
       public static class ProductVariant
       {
-        public static readonly ID ID = new ID("{C92E6CD7-7F14-46E7-BBF5-29CE31262EF4}");
+        public static readonly ID Id = new ID("{C92E6CD7-7F14-46E7-BBF5-29CE31262EF4}");
         public static class Fields
         {
           public static readonly ID ListPrice = new ID("{9B2ABE41-AB16-463B-8845-A3A5D050A016}");
@@ -155,13 +142,13 @@ namespace Sitecore.Foundation.Commerce
 
       public static class Catalog
       {
-        public static readonly ID ID = CommerceConstants.KnownTemplateIds.CommerceCatalogTemplate;
+        public static readonly ID Id = CommerceConstants.KnownTemplateIds.CommerceCatalogTemplate;
       }
     }
 
     public static class CatalogContext
     {
-      public static readonly ID ID = new ID("{25269B92-CC44-46A9-8C77-DA099BF8992C}");
+      public static readonly ID Id = new ID("{25269B92-CC44-46A9-8C77-DA099BF8992C}");
 
       public static class Fields
       {

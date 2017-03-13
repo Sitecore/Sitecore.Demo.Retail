@@ -42,9 +42,8 @@ function initRecentOrders(sectionId) {
         if (success && data.Success) {
             ordersHeaderViewModel = new OrderHeaderViewModel(data);
             ko.applyBindings(ordersHeaderViewModel, document.getElementById(sectionId));
-            ordersHeaderViewModel.showLoader(false);
         }
-        
+        ordersHeaderViewModel.showLoader(false);
         ShowGlobalMessages(data);
     });
 }

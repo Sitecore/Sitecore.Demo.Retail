@@ -12,24 +12,12 @@ Languages:
     - ID: "00249bcb-f270-4edd-8ec1-3dfe65136314"
       Hint: Billing Address Header
       Value: Billing address
-    - ID: "03097782-47ff-4e76-9f48-0566f6b56949"
-      Hint: Cards Header
-      Value: Gift cards and Loyalty cards
     - ID: "04d47388-9794-44c5-b6d5-78af663bcf3b"
       Hint: NextButtonLabel
       Value: Continue to confirmation
     - ID: "0bf8dcbf-08f2-4f50-80a1-a603d5342009"
       Hint: Apply Amount Button
       Value: Apply full amount
-    - ID: "0d330979-115c-4726-85d3-ea00fd4a9cb6"
-      Hint: Add Loyalty Card Button
-      Value: Add loyalty card
-    - ID: "162b5d9f-c092-4ecc-b9c2-56a0ccb123e9"
-      Hint: Gift Card Label
-      Value: Gift card
-    - ID: "191de834-5438-49eb-b4a7-f1c0d2ce7d6c"
-      Hint: Subtitle Loyalty Label
-      Value: Enter the information regarding your loyalty card here
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141121T120805Z
@@ -45,15 +33,9 @@ Languages:
     - ID: "3252f170-4cb2-4aba-8450-77fa42ed6688"
       Hint: Name on Card Label
       Value: Name on card
-    - ID: "34be9733-2fe0-4cb9-b949-8f796574729f"
-      Hint: Remove Label
-      Value: Remove
     - ID: "362a19c3-a7e7-414c-9e52-593fadf5a8c7"
       Hint: Order Information Label
       Value: Order Information
-    - ID: "37e9811a-b949-4d89-8637-26e8547c7bb8"
-      Hint: Apply Gift Card Label
-      Value: Pay with Gift Card
     - ID: "3bb46433-5d5b-4187-b8ca-99a09117f1cb"
       Hint: Billing Name Label
       Value: Billing name
@@ -91,27 +73,15 @@ Languages:
     - ID: "7fc4ecaa-2aed-4ade-b9e4-f1265c1e824c"
       Hint: Expiration Date Label
       Value: Expiration date
-    - ID: "82652dc1-d579-4f9b-828c-bd003eee0c68"
-      Hint: Loyalty Card Label
-      Value: Loyalty card
     - ID: "86690679-3be1-42c0-a5de-96764a815aac"
       Hint: Payment Total Label
       Value: Payment total
     - ID: "8724fb79-17c0-4602-a0fa-4681927ad591"
       Hint: Total Label
       Value: Order total
-    - ID: "8a11421a-f926-4e50-a55d-d23e08ec704a"
-      Hint: Updating Loyalty Card Button
-      Value: Updating Loyalty Card ...
     - ID: "8b0e5e72-80fa-48c0-9f8e-a7a67b915ebb"
       Hint: Credit Card Label
       Value: Credit Card
-    - ID: "93e161e7-a2c5-4304-ac45-fdc22fb577b9"
-      Hint: Payment Amount Label
-      Value: Payment amount
-    - ID: "964a0b0a-6597-4844-a9ea-a03c4b337dfb"
-      Hint: Subtitle Gift Label
-      Value: Enter the information regarding your gift card here
     - ID: "a0531c10-9929-4554-88f9-1199e044142b"
       Hint: Apply Credit Card Label
       Value: Pay with Credit Card
@@ -131,15 +101,9 @@ Languages:
       Hint: Disclaimer Text
       Value: |
         <b>IMPORTANT NOTICE:</b> &nbsp; This form is provided by your designated third-party payment provider. By clicking "Next" you acknowledge your information will be transmitted directly to your payment provider, and will be handled in accordance with the terms and conditions and privacy statement that you agreed to with your payment provider. 'Your Company Name' does not collect, store, or transmit any of your payment card information, or provide rights for third-party products or services.&nbsp;
-    - ID: "b0649d6e-7ae1-4473-bee2-75c31e8b3dda"
-      Hint: Getting Balance Label
-      Value: Getting balance ...
     - ID: "b1a9c292-a7aa-40d8-86ed-b32840dd8db1"
       Hint: PrevButtonLabel
       Value: Back to delivery
-    - ID: "b3759862-12bf-4972-a814-cba16257bfb7"
-      Hint: Apply Loyalty Card Label
-      Value: Apply loyalty card
     - ID: "b38e1871-9f00-4d57-8419-a67301675b31"
       Hint: Expiration Year Label
       Value: Expiration year
