@@ -77,7 +77,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
             var datasource = RenderingContext.Current.Rendering.DataSource;
 
-            if (string.IsNullOrEmpty(datasource) || !RenderingContext.Current.Rendering.Item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.ID))
+            if (string.IsNullOrEmpty(datasource) || !RenderingContext.Current.Rendering.Item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id))
             {
                 return this.InfoMessage(InfoMessage.Error(AlertTexts.InvalidDataSourceTemplateFriendlyMessage));
             }
@@ -161,7 +161,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                     var productList = productListField.GetItems();
                     foreach (var productItem in productList)
                     {
-                        if (!productItem.IsDerived(Foundation.Commerce.Templates.Commerce.Category.ID) && !productItem.IsDerived(Foundation.Commerce.Templates.Commerce.Category.ID))
+                        if (!productItem.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id) && !productItem.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id))
                         {
                             continue;
                         }
@@ -249,7 +249,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             }
 
             var item = RenderingContext.Current.Rendering.Item;
-            var dataSource = item.IsDerived(Foundation.Commerce.Templates.Commerce.NavigationItem.ID) ? item?.TargetItem(Foundation.Commerce.Templates.Commerce.NavigationItem.Fields.CategoryDatasource) : null;
+            var dataSource = item.IsDerived(Foundation.Commerce.Templates.Commerce.NavigationItem.Id) ? item?.TargetItem(Foundation.Commerce.Templates.Commerce.NavigationItem.Fields.CategoryDatasource) : null;
             if (dataSource == null)
             {
                 return this.InfoMessage(InfoMessage.Error(AlertTexts.InvalidDataSourceTemplateFriendlyMessage));
@@ -922,7 +922,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
 
-            if (catalogItem == null || !catalogItem.IsDerived(Foundation.Commerce.Templates.Commerce.CatalogItem.ID) || catalogItem.FieldHasValue(Foundation.Commerce.Templates.Commerce.CatalogItem.Fields.RelationshipList))
+            if (catalogItem == null || !catalogItem.IsDerived(Foundation.Commerce.Templates.Commerce.CatalogItem.Id) || catalogItem.FieldHasValue(Foundation.Commerce.Templates.Commerce.CatalogItem.Fields.RelationshipList))
             {
                 return null;
             }

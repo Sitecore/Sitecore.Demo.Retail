@@ -24,10 +24,10 @@ namespace Sitecore.Foundation.Commerce.Models
 
         public static CatalogContext CreateFromContext()
         {
-            var contextItem = Sitecore.Context.Item?.GetAncestorOrSelfOfTemplate(Templates.CatalogContext.ID);
+            var contextItem = Sitecore.Context.Item?.GetAncestorOrSelfOfTemplate(Templates.CatalogContext.Id);
             if (contextItem == null)
             {
-                contextItem = Sitecore.Context.Site?.GetStartItem()?.GetAncestorOrSelfOfTemplate(Templates.CatalogContext.ID);
+                contextItem = Sitecore.Context.Site?.GetStartItem()?.GetAncestorOrSelfOfTemplate(Templates.CatalogContext.Id);
             }
 
             if (contextItem == null)
@@ -41,7 +41,7 @@ namespace Sitecore.Foundation.Commerce.Models
         private Catalog GetCurrentCatalog()
         {
             var catalogItem = ((ReferenceField) Item.Fields[Templates.CatalogContext.Fields.Catalog]).TargetItem;
-            if (catalogItem == null || !catalogItem.IsDerived(Templates.Commerce.Catalog.ID))
+            if (catalogItem == null || !catalogItem.IsDerived(Templates.Commerce.Catalog.Id))
             {
                 throw new ConfigurationErrorsException($"No catalog is assigned or the assigned item is not a catalog on '{Item.Paths.FullPath}'");
             }
@@ -66,7 +66,7 @@ namespace Sitecore.Foundation.Commerce.Models
             get
             {
                 var catalogRootItem = ((ReferenceField)Item.Fields[Templates.CatalogContext.Fields.CatalogRoot]).TargetItem;
-                if (catalogRootItem == null || !catalogRootItem.IsDerived(Templates.Commerce.NavigationItem.ID))
+                if (catalogRootItem == null || !catalogRootItem.IsDerived(Templates.Commerce.NavigationItem.Id))
                 {
                     throw new ConfigurationErrorsException($"No catalog root is assigned or the assigned root is not a valid type '{Item.Paths.FullPath}'");
                 }

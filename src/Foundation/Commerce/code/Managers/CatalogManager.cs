@@ -85,7 +85,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         public SearchResults GetProductSearchResults(Item dataSource, CommerceSearchOptions productSearchOptions)
         {
             Assert.ArgumentNotNull(productSearchOptions, nameof(productSearchOptions));
-            Assert.ArgumentCondition(dataSource.IsDerived(Templates.Commerce.SearchSettings.ID), nameof(dataSource), "Item must derive from the CommerceSearchSettings template");
+            Assert.ArgumentCondition(dataSource.IsDerived(Templates.Commerce.SearchSettings.Id), nameof(dataSource), "Item must derive from the CommerceSearchSettings template");
 
             if (dataSource == null)
             {
@@ -363,7 +363,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public SearchResponse GetCategoryProducts(Item categoryItem, CommerceSearchOptions searchOptions)
         {
-            if (categoryItem.IsDerived(Templates.Commerce.DynamicCategory.ID))
+            if (categoryItem.IsDerived(Templates.Commerce.DynamicCategory.Id))
             {
                 return FindCatalogItems(categoryItem, searchOptions);
             }
