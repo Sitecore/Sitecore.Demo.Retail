@@ -78,4 +78,4 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines
             Context.Item = catalogContext.Item;
         }
     }
-}
+}   
