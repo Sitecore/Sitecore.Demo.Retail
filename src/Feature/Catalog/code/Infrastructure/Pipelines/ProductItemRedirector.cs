@@ -16,19 +16,7 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
-using System.Web;
-using System.Web.Routing;
-using Sitecore.Commerce.Connect.CommerceServer;
-using Sitecore.Commerce.Connect.CommerceServer.Caching;
-using Sitecore.Data;
-using Sitecore.Data.Items;
-using Sitecore.Feature.Commerce.Catalog.Factories;
-using Sitecore.Feature.Commerce.Catalog.Models;
-using Sitecore.Foundation.Commerce.Managers;
-using Sitecore.Foundation.Commerce.Models;
-using Sitecore.Foundation.Commerce.Repositories;
 using Sitecore.Pipelines.HttpRequest;
-using Sitecore.Web;
 using System.Web.Mvc;
 using Sitecore.Feature.Commerce.Catalog.Services;
 
@@ -36,7 +24,13 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines
 {
     public class ProductItemRedirector : HttpRequestProcessor
     {
-        private const string CommercePath = "/sitecore/Commerce/";
+        public string CommercePath { get; set; } = "/sitecore/Commerce/";
+
+        public bool IncludeCatalog { get; set; } = false;
+
+        public bool IncludeFriendlyName { get; set; } = true;
+
+        public bool UseShopLinks { get; set; } = true;
 
         public override void Process(HttpRequestArgs args)
         {
@@ -47,6 +41,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines
             }
 
             var urlService = DependencyResolver.Current.GetService<CatalogUrlService>();
+            var url = UseShopLinks ?
+                urlService.BuildShopUrl(Context.Item, IncludeCatalog, IncludeFriendlyName) :
+                urlService.BuildUrl(Context.Item, IncludeCatalog, IncludeFriendlyName);
             var goodUrl = urlService.BuildShopUrl(Context.Item, false, true);
             if (goodUrl != null)
             {
