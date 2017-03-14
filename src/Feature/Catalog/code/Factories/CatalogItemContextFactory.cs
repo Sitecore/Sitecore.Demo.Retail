@@ -64,11 +64,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
         private ICatalogItemContext Create(Item productCatalogItem)
         {
             Assert.IsNotNull(productCatalogItem, nameof(productCatalogItem));
-            Assert.ArgumentCondition(productCatalogItem.IsDerived(Foundation.Commerce.Templates.Commerce.CatalogItem.ID), nameof(productCatalogItem), "Item must be of type Commerce Catalog Item");
+            Assert.ArgumentCondition(productCatalogItem.IsDerived(Foundation.Commerce.Templates.Commerce.CatalogItem.Id), nameof(productCatalogItem), "Item must be of type Commerce Catalog Item");
 
             var data = new CatalogRouteData
             {
-                ItemType = productCatalogItem.IsDerived(Foundation.Commerce.Templates.Commerce.Product.ID) ? CatalogItemType.Product : CatalogItemType.Category,
+                ItemType = productCatalogItem.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id) ? CatalogItemType.Product : CatalogItemType.Category,
                 Id = productCatalogItem.Name.ToLowerInvariant(),
                 Item = productCatalogItem,
                 Catalog = productCatalogItem[Foundation.Commerce.Templates.Commerce.CatalogItem.Fields.CatalogName],
@@ -188,15 +188,15 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
 
         private string GetCategoryIdFromItem(Item item)
         {
-            if (item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.ID))
+            if (item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id))
             {
                 return item.Name.ToLowerInvariant();
             }
-            if (item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.ID))
+            if (item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id))
             {
                 return item.Parent.Name.ToLowerInvariant();
             }
-            if (item.IsDerived(Foundation.Commerce.Templates.Commerce.ProductVariant.ID))
+            if (item.IsDerived(Foundation.Commerce.Templates.Commerce.ProductVariant.Id))
             {
                 return item.Parent.Parent.Name.ToLowerInvariant();
             }

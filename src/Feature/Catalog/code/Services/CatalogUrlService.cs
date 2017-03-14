@@ -225,20 +225,20 @@ namespace Sitecore.Feature.Commerce.Catalog.Services
             Item variantItem = null;
             Item productItem = null;
             Item categoryItem;
-            if (item.IsDerived(Foundation.Commerce.Templates.Commerce.ProductVariant.ID))
+            if (item.IsDerived(Foundation.Commerce.Templates.Commerce.ProductVariant.Id))
             {
                 info.ItemType = CatalogItemType.Variant;
                 variantItem = item;
                 productItem = item.Parent;
                 categoryItem = item.Parent.Parent;
             }
-            else if (item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.ID))
+            else if (item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id))
             {
                 info.ItemType = CatalogItemType.Product;
                 productItem = item;
                 categoryItem = item.Parent;
             }
-            else if (item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.ID))
+            else if (item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id))
             {
                 info.ItemType = CatalogItemType.Category;
                 categoryItem = item;

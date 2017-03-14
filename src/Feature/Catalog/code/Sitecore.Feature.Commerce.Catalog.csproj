@@ -151,8 +151,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Catalog.config" />
-    <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Catalog.Serialization.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Commerce.Catalog.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Commerce.Catalog.Serialization.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <Content Include="Views\Catalog\_ProductSummary.cshtml" />
     <Content Include="Views\Catalog\_RelatedCatalogItemsSlide.cshtml" />

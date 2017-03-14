@@ -37,7 +37,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
     {
         public ProductViewModel(Item item, List<VariantViewModel> variants = null) : base(item)
         {
-            Assert.IsTrue(item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.ID), "Item must be a Product");
+            Assert.IsTrue(item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id), "Item must be a Product");
             Variants = variants;
         }
 
@@ -65,7 +65,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public decimal VariantSavingsPercentage => CalculateSavingsPercentage(LowestPricedVariantAdjustedPrice, LowestPricedVariantListPrice);
 
-        public bool IsOnSale => Item.Fields[Foundation.Commerce.Templates.Commerce.Product.Fields.OnSale].IsChecked();
+        public bool IsOnSale => Item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id) && Item.Fields[Foundation.Commerce.Templates.Commerce.Product.Fields.OnSale].IsChecked();
 
         public bool IsProduct
         {
@@ -201,7 +201,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public bool IsCategory()
         {
-            return Item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.ID);
+            return Item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id);
         }
 
         public override string ImagesFieldName => Templates.Generated.Product.Fields.Images;
