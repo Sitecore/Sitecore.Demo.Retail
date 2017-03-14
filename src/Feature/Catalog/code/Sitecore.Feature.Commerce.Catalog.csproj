@@ -68,6 +68,9 @@
       <HintPath>..\..\..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sitecore.Client">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Commerce">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Commerce.dll</HintPath>
       <Private>True</Private>
@@ -154,6 +157,7 @@
     <Content Include="App_Config\Include\Feature\Feature.Commerce.Catalog.config" />
     <Content Include="App_Config\Include\Feature\Feature.Commerce.Catalog.Serialization.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="Sitecore\shell\override\Controls\Rich Text Editor\InsertLink\InsertLink.xml" />
     <Content Include="Views\Catalog\_ProductSummary.cshtml" />
     <Content Include="Views\Catalog\_RelatedCatalogItemsSlide.cshtml" />
     <Content Include="Views\Catalog\AddToCart.cshtml" />
@@ -185,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factories\ProductViewModelFactory.cs" />
+    <Compile Include="Infrastructure\Dialogs\InsertLinkForm.cs" />
     <Compile Include="Models\SearchInfo.cs" />
     <Compile Include="Factories\CatalogItemContextFactory.cs" />
     <Compile Include="Models\RelationshipViewModel.cs" />
