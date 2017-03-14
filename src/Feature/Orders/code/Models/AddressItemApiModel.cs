@@ -22,15 +22,15 @@ using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Models;
 using System;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.Api
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class AddressItemModel : BaseJsonResult
+    public class AddressItemApiModel : BaseJsonResult
     {
-        public AddressItemModel()
+        public AddressItemApiModel()
         {
         }
 
-        public AddressItemModel(ServiceProviderResult result)
+        public AddressItemApiModel(ServiceProviderResult result)
             : base(result)
         {
         }

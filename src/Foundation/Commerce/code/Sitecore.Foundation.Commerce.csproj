@@ -175,9 +175,6 @@
     <Content Include="App_Config\Include\Foundation\Sitecore.Foundation.Commerce.Customer.config" />
     <Content Include="App_Config\Include\Y.Commerce.Engine\Sitecore.Commerce.Engine.config" />
     <None Include="App_Config\CommerceServer.Core.config.example.transform" />
-    <None Include="web.config.transform">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="App_Config\Include\Foundation\Sitecore.Foundation.Commerce.Lucene.config">
       <SubType>Designer</SubType>
     </Content>

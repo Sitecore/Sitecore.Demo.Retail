@@ -19,9 +19,9 @@ using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.Api
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class ShippingMethodModel : BaseJsonResult
+    public class ShippingMethodApiModel : BaseJsonResult
     {
         public string ExternalId { get; set; }
 

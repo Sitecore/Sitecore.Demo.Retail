@@ -18,9 +18,9 @@ using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Mvc.Presentation;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.View
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class OrderConfirmationModel : RenderingModel
+    public class OrderConfirmationViewModel : RenderingModel
     {
         public string ConfirmationId { get; set; }
 

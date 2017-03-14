@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MiniCartModel.cs" company="Sitecore Corporation">
+// <copyright file="AvailableStatesModel.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Emits the Json result of a MiniCart update request.</summary>
+// <summary>Defines the AvailableStatesModel class.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -15,36 +15,31 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
-using Sitecore.Commerce.Entities.Carts;
+using System.Collections.Generic;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
-using Sitecore.Foundation.Commerce.Extensions;
-using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.Api
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class MiniCartModel : BaseJsonResult
+    public class AvailableStatesApiModel : BaseJsonResult
     {
-        public MiniCartModel()
+        public AvailableStatesApiModel()
         {
         }
 
-        public MiniCartModel(ServiceProviderResult result) : base(result)
+        public AvailableStatesApiModel(ServiceProviderResult result)
+            : base(result)
         {
         }
 
-        public int LineItemCount { get; set; }
+        public Dictionary<string, string> States { get; set; }
 
-        public string Total { get; set; }
-
-        public void Initialize(Cart cart)
+        public void Initialize(Dictionary<string, string> states)
         {
-            Assert.ArgumentNotNull(cart, nameof(cart));
+            Assert.ArgumentNotNull(states, nameof(states));
 
-            LineItemCount = ((CommerceCart) cart).LineItemCount;
-            Total = ((CommerceTotal) cart.Total).Subtotal.ToCurrency();
+            States = states;
         }
     }
 }

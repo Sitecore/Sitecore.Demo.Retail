@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="AddressListModel.cs" company="Sitecore Corporation">
+// <copyright file="AddressListItemModel.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Defines the AddressListModel class.</summary>
+// <summary>Defines the AddressListJsonResult class.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -16,37 +16,36 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Linq;
+using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Services;
-using Sitecore.Diagnostics;
-using Sitecore.Foundation.Commerce.Models;
-using Sitecore.Mvc.Extensions;
 using System;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.Api
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
     [Obsolete("Please refactor")]
-    public class AddressListModel : BaseJsonResult
+    public class AddressListItemApiModel : AddressListApiModel
     {
-        public AddressListModel()
+        public AddressListItemApiModel()
         {
         }
 
-        public AddressListModel(ServiceProviderResult result) : base(result)
+        public AddressListItemApiModel(ServiceProviderResult result)
+            : base(result)
         {
         }
 
-        public List<AddressItemModel> Addresses { get; } = new List<AddressItemModel>();
-
-        public Dictionary<string, string> Countries { get; } = new Dictionary<string, string>();
-
-        public virtual void Initialize(IEnumerable<Party> addresses, Dictionary<string, string> countries)
+        public override void Initialize(IEnumerable<Party> addresses, Dictionary<string, string> countries)
         {
-            Assert.ArgumentNotNull(addresses, nameof(addresses));
+            var addressArray = addresses as Party[] ?? addresses.ToArray();
+            base.Initialize(addressArray, countries);
 
-            if (countries != null && countries.Count > 0)
+            foreach (var address in addressArray)
             {
-                Countries.AddRange(countries);
+                var result = new AddressItemApiModel();
+                result.Initialize(address as CommerceParty);
+                Addresses.Add(result);
             }
         }
     }

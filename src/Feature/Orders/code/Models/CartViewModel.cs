@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="AvailableStatesModel.cs" company="Sitecore Corporation">
+// <copyright file="CartModel.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Defines the AvailableStatesModel class.</summary>
+// <summary>Sitecore redering class for the CommerceCart.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -15,31 +15,27 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using Sitecore.Commerce.Services;
-using Sitecore.Diagnostics;
-using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
+using Sitecore.Mvc.Presentation;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.Api
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class AvailableStatesModel : BaseJsonResult
+    public class CartViewModel : RenderingModel
     {
-        public AvailableStatesModel()
+        public CartViewModel(CommerceCart cart)
         {
+            Cart = cart;
         }
 
-        public AvailableStatesModel(ServiceProviderResult result)
-            : base(result)
+        public CommerceCart Cart { get; set; }
+
+        public static CartViewModel Get(CommerceCart cart, Rendering rendering)
         {
-        }
+            var model = new CartViewModel(cart);
 
-        public Dictionary<string, string> States { get; set; }
+            model.Initialize(rendering);
 
-        public void Initialize(Dictionary<string, string> states)
-        {
-            Assert.ArgumentNotNull(states, nameof(states));
-
-            States = states;
+            return model;
         }
     }
 }

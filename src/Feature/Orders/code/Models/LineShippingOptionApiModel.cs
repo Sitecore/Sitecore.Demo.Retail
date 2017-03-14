@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ShippingMethodPerItemModel.cs" company="Sitecore Corporation">
+// <copyright file="LineShippingOptionModel.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Shipping method per item JSON result.</summary>
+// <summary>Line shipping options JSON result.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -16,42 +16,41 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Linq;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Foundation.Commerce.Models;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.Api
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class ShippingMethodPerItemModel : BaseJsonResult
+    public class LineShippingOptionApiModel : BaseJsonResult
     {
         public string LineId { get; set; }
 
-        public IEnumerable<ShippingMethodModel> ShippingMethods { get; set; }
+        public IEnumerable<ShippingOptionApiModel> ShippingOptions { get; set; }
 
-        public void Initialize(ShippingMethodPerItem shippingMethodPerItem)
+        public void Initialize(LineShippingOption lineShippingOption)
         {
-            if (shippingMethodPerItem == null)
+            if (lineShippingOption == null)
             {
                 return;
             }
 
-            LineId = shippingMethodPerItem.LineId;
+            LineId = lineShippingOption.LineId;
 
-            if (shippingMethodPerItem.ShippingMethods != null && shippingMethodPerItem.ShippingMethods.Any())
+            var shippingOptionList = new List<ShippingOptionApiModel>();
+
+            if (lineShippingOption.ShippingOptions != null)
             {
-                var shippingMethodList = new List<ShippingMethodModel>();
-
-                foreach (var shippingMethod in shippingMethodPerItem.ShippingMethods)
+                foreach (var shippingOption in lineShippingOption.ShippingOptions)
                 {
-                    var jsonResult = new ShippingMethodModel();
+                    var jsonResult = new ShippingOptionApiModel();
 
-                    jsonResult.Initialize(shippingMethod);
-                    shippingMethodList.Add(jsonResult);
+                    jsonResult.Initialize(shippingOption);
+                    shippingOptionList.Add(jsonResult);
                 }
-
-                ShippingMethods = shippingMethodList;
             }
+
+            ShippingOptions = shippingOptionList;
         }
     }
 }

@@ -23,21 +23,21 @@ using Sitecore.Commerce.Services.Shipping;
 using System;
 using Sitecore.Foundation.Commerce.Models;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.Api
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class ShippingMethodsModel : BaseJsonResult
+    public class ShippingMethodsApiModel : BaseJsonResult
     {
-        public ShippingMethodsModel()
+        public ShippingMethodsApiModel()
         {
         }
 
-        public ShippingMethodsModel(GetShippingMethodsResult result)
+        public ShippingMethodsApiModel(GetShippingMethodsResult result)
             : base(result)
         {
         }
 
-        public IEnumerable<ShippingMethodPerItemModel> LineShippingMethods { get; set; }
-        public IEnumerable<ShippingMethodModel> ShippingMethods { get; set; }
+        public IEnumerable<ShippingMethodPerItemApiModel> LineShippingMethods { get; set; }
+        public IEnumerable<ShippingMethodApiModel> ShippingMethods { get; set; }
 
 
         private void Initialize(IEnumerable<ShippingMethod> shippingMethods)
@@ -47,11 +47,11 @@ namespace Sitecore.Feature.Commerce.Orders.Models.Api
                 return;
             }
 
-            var shippingMethodList = new List<ShippingMethodModel>();
+            var shippingMethodList = new List<ShippingMethodApiModel>();
 
             foreach (var shippingMethod in shippingMethods)
             {
-                var jsonResult = new ShippingMethodModel();
+                var jsonResult = new ShippingMethodApiModel();
 
                 jsonResult.Initialize(shippingMethod);
                 shippingMethodList.Add(jsonResult);
@@ -73,11 +73,11 @@ namespace Sitecore.Feature.Commerce.Orders.Models.Api
                 return;
             }
 
-            var lineShippingMethodList = new List<ShippingMethodPerItemModel>();
+            var lineShippingMethodList = new List<ShippingMethodPerItemApiModel>();
 
             foreach (var shippingMethodPerItem in shippingMethodPerItemArray)
             {
-                var jsonResult = new ShippingMethodPerItemModel();
+                var jsonResult = new ShippingMethodPerItemApiModel();
 
                 jsonResult.Initialize(shippingMethodPerItem);
 

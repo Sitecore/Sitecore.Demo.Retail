@@ -19,11 +19,11 @@ using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Models;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.Api
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class CartAdjustmentModel : BaseJsonResult
+    public class CartAdjustmentApiModel : BaseJsonResult
     {
-        public CartAdjustmentModel(CartAdjustment adjustment)
+        public CartAdjustmentApiModel(CartAdjustment adjustment)
         {
             Assert.ArgumentNotNull(adjustment, nameof(adjustment));
             Amount = adjustment.Amount.ToString("C", Context.Language.CultureInfo);

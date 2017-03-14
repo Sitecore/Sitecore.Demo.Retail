@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="CartModel.cs" company="Sitecore Corporation">
+// <copyright file="SubmitOrderModel.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Sitecore redering class for the CommerceCart.</summary>
+// <summary>Emits the Json result of a Submit Order request.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -15,27 +15,30 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
-using Sitecore.Mvc.Presentation;
+using Sitecore.Commerce.Services;
+using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Models;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.View
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class CartModel : RenderingModel
+    public class SubmitOrderApiModel : BaseJsonResult
     {
-        public CartModel(CommerceCart cart)
+        public SubmitOrderApiModel()
         {
-            Cart = cart;
         }
 
-        public CommerceCart Cart { get; set; }
-
-        public static CartModel Get(CommerceCart cart, Rendering rendering)
+        public SubmitOrderApiModel(ServiceProviderResult result)
+            : base(result)
         {
-            var model = new CartModel(cart);
+        }
 
-            model.Initialize(rendering);
+        public string ConfirmUrl { get; set; }
 
-            return model;
+        public void Initialize(string confirmUrl)
+        {
+            Assert.ArgumentNotNullOrEmpty(confirmUrl, nameof(confirmUrl));
+
+            ConfirmUrl = confirmUrl;
         }
     }
 }

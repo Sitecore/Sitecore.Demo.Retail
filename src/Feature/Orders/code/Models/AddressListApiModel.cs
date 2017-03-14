@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="SubmitOrderModel.cs" company="Sitecore Corporation">
+// <copyright file="AddressListModel.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Emits the Json result of a Submit Order request.</summary>
+// <summary>Defines the AddressListModel class.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -15,30 +15,39 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Mvc.Extensions;
+using System;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.Api
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class SubmitOrderModel : BaseJsonResult
+    [Obsolete("Please refactor")]
+    public class AddressListApiModel : BaseJsonResult
     {
-        public SubmitOrderModel()
+        public AddressListApiModel()
         {
         }
 
-        public SubmitOrderModel(ServiceProviderResult result)
-            : base(result)
+        public AddressListApiModel(ServiceProviderResult result) : base(result)
         {
         }
 
-        public string ConfirmUrl { get; set; }
+        public List<AddressItemApiModel> Addresses { get; } = new List<AddressItemApiModel>();
 
-        public void Initialize(string confirmUrl)
+        public Dictionary<string, string> Countries { get; } = new Dictionary<string, string>();
+
+        public virtual void Initialize(IEnumerable<Party> addresses, Dictionary<string, string> countries)
         {
-            Assert.ArgumentNotNullOrEmpty(confirmUrl, nameof(confirmUrl));
+            Assert.ArgumentNotNull(addresses, nameof(addresses));
 
-            ConfirmUrl = confirmUrl;
+            if (countries != null && countries.Count > 0)
+            {
+                Countries.AddRange(countries);
+            }
         }
     }
 }

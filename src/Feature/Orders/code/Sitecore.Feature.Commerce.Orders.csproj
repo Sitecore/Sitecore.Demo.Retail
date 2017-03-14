@@ -124,9 +124,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Orders.config" />
-    <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Orders.Serialization.config" />
-    <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Orders.Processing.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Commerce.Orders.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Commerce.Orders.Serialization.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Commerce.Orders.Processing.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <Content Include="Views\Cart\_CartSummary.cshtml" />
     <Content Include="Views\Cart\_LineItem.cshtml" />
@@ -154,24 +154,24 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Infrastructure\Pipelines\RegisterDataModelExtensions.cs" />
-    <Compile Include="Models\Api\AddressItemModel.cs" />
-    <Compile Include="Models\Api\AddressListItemModel.cs" />
-    <Compile Include="Models\Api\AddressListModel.cs" />
-    <Compile Include="Models\Api\AvailableStatesModel.cs" />
-    <Compile Include="Models\Api\CartAdjustmentModel.cs" />
-    <Compile Include="Models\Api\CartLineModel.cs" />
-    <Compile Include="Models\Api\CartModel.cs" />
-    <Compile Include="Models\Api\CheckoutModel.cs" />
-    <Compile Include="Models\Api\LineShippingOptionModel.cs" />
-    <Compile Include="Models\Api\MiniCartModel.cs" />
-    <Compile Include="Models\Api\ShippingMethodModel.cs" />
-    <Compile Include="Models\Api\ShippingMethodPerItemModel.cs" />
-    <Compile Include="Models\Api\ShippingMethodsModel.cs" />
-    <Compile Include="Models\Api\ShippingOptionModel.cs" />
-    <Compile Include="Models\Api\SubmitOrderModel.cs" />
+    <Compile Include="Models\AddressItemApiModel.cs" />
+    <Compile Include="Models\AddressListItemApiModel.cs" />
+    <Compile Include="Models\AddressListApiModel.cs" />
+    <Compile Include="Models\AvailableStatesApiModel.cs" />
+    <Compile Include="Models\CartAdjustmentApiModel.cs" />
+    <Compile Include="Models\CartLineApiModel.cs" />
+    <Compile Include="Models\CartApiModel.cs" />
+    <Compile Include="Models\CheckoutApiModel.cs" />
+    <Compile Include="Models\LineShippingOptionApiModel.cs" />
+    <Compile Include="Models\MiniCartApiModel.cs" />
+    <Compile Include="Models\ShippingMethodApiModel.cs" />
+    <Compile Include="Models\ShippingMethodPerItemApiModel.cs" />
+    <Compile Include="Models\ShippingMethodsApiModel.cs" />
+    <Compile Include="Models\ShippingOptionApiModel.cs" />
+    <Compile Include="Models\SubmitOrderApiModel.cs" />
     <Compile Include="Models\CommerceCartLineWithImages.cs" />
-    <Compile Include="Models\View\CartModel.cs" />
-    <Compile Include="Models\View\OrderConfirmationModel.cs" />
+    <Compile Include="Models\CartViewModel.cs" />
+    <Compile Include="Models\OrderConfirmationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

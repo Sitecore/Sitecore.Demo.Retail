@@ -24,26 +24,26 @@ using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Commerce.Services;
 using Sitecore.Foundation.Commerce.Models;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.Api
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class CheckoutModel : BaseJsonResult
+    public class CheckoutApiModel : BaseJsonResult
     {
-        public CheckoutModel()
+        public CheckoutApiModel()
         {
         }
 
-        public CheckoutModel(ServiceProviderResult result)
+        public CheckoutApiModel(ServiceProviderResult result)
             : base(result)
         {
         }
 
-        public IEnumerable<ShippingOptionModel> OrderShippingOptions { get; set; }
+        public IEnumerable<ShippingOptionApiModel> OrderShippingOptions { get; set; }
 
-        public IEnumerable<LineShippingOptionModel> LineShippingOptions { get; set; }
+        public IEnumerable<LineShippingOptionApiModel> LineShippingOptions { get; set; }
 
-        public ShippingMethodModel EmailDeliveryMethod { get; set; }
+        public ShippingMethodApiModel EmailDeliveryMethod { get; set; }
 
-        public ShippingMethodModel ShipToStoreDeliveryMethod { get; set; }
+        public ShippingMethodApiModel ShipToStoreDeliveryMethod { get; set; }
 
         public IDictionary<string, string> Countries { get; set; }
 
@@ -57,13 +57,13 @@ namespace Sitecore.Feature.Commerce.Orders.Models.Api
 
         public bool IsUserAuthenticated { get; set; }
 
-        public AddressListModel UserAddresses { get; set; }
+        public AddressListApiModel UserAddresses { get; set; }
 
         public string UserEmail { get; set; }
 
         public string CurrencyCode { get; set; }
 
-        public CartModel Cart { get; set; }
+        public CartApiModel Cart { get; set; }
 
         public void InitializeShippingOptions(IEnumerable<ShippingOption> shippingOptions)
         {
@@ -72,11 +72,11 @@ namespace Sitecore.Feature.Commerce.Orders.Models.Api
                 return;
             }
 
-            var shippingOptionList = new List<ShippingOptionModel>();
+            var shippingOptionList = new List<ShippingOptionApiModel>();
 
             foreach (var shippingOption in shippingOptions)
             {
-                var jsonResult = new ShippingOptionModel();
+                var jsonResult = new ShippingOptionApiModel();
 
                 jsonResult.Initialize(shippingOption);
                 shippingOptionList.Add(jsonResult);
@@ -96,11 +96,11 @@ namespace Sitecore.Feature.Commerce.Orders.Models.Api
             {
                 return;
             }
-            var lineShippingOptionList = new List<LineShippingOptionModel>();
+            var lineShippingOptionList = new List<LineShippingOptionApiModel>();
 
             foreach (var lineShippingOption in lineShippingOptions)
             {
-                var jsonResult = new LineShippingOptionModel();
+                var jsonResult = new LineShippingOptionApiModel();
 
                 jsonResult.Initialize(lineShippingOption);
                 lineShippingOptionList.Add(jsonResult);
