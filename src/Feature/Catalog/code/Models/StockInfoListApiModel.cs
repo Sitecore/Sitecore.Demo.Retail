@@ -22,20 +22,20 @@ using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Models;
 
-namespace Sitecore.Feature.Commerce.Catalog.Models.JsonResults
+namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class StockInfoListBaseJsonResult : BaseJsonResult
+    public class StockInfoListApiModel : BaseJsonResult
     {
-        public StockInfoListBaseJsonResult()
+        public StockInfoListApiModel()
         {
         }
 
-        public StockInfoListBaseJsonResult(ServiceProviderResult result)
+        public StockInfoListApiModel(ServiceProviderResult result)
             : base(result)
         {
         }
 
-        public List<StockInfoBaseJsonResult> StockInformations { get; } = new List<StockInfoBaseJsonResult>();
+        public List<StockInfoApiModel> StockInformations { get; } = new List<StockInfoApiModel>();
 
         public void Initialize(IEnumerable<StockInformation> stockInformations)
         {
@@ -49,7 +49,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models.JsonResults
 
             foreach (var info in stockInfos)
             {
-                var stockInfo = new StockInfoBaseJsonResult();
+                var stockInfo = new StockInfoApiModel();
                 stockInfo.Initialize(info);
                 StockInformations.Add(stockInfo);
             }

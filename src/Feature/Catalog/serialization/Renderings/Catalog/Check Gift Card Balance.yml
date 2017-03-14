@@ -2,7 +2,7 @@
 ID: "7b9b4279-22ec-4274-901f-96b1a5cab999"
 Parent: "8817567e-830e-4b71-b072-fe7681ec832f"
 Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
-Path: /sitecore/layout/Renderings/Feature/Commerce/Catalog/CheckGiftCardBalance
+Path: /sitecore/layout/Renderings/Feature/Commerce/Catalog/Check Gift Card Balance
 DB: master
 SharedFields:
 - ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"

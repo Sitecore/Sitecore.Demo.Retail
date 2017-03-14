@@ -1,31 +1,33 @@
 ﻿---
-ID: "8bd15ec8-799b-4aa1-aebb-45ec6678a57f"
+ID: "cfb07d55-452f-40d5-aa86-55d30f3c120d"
 Parent: "8817567e-830e-4b71-b072-fe7681ec832f"
 Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
-Path: /sitecore/layout/Renderings/Feature/Commerce/Catalog/ProductRecommendation
+Path: /sitecore/layout/Renderings/Feature/Commerce/Catalog/Product List
 DB: master
 SharedFields:
-- ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
-  Hint: Datasource Template
-  Value: /sitecore/templates/Storefront/Rendering Datasources/Product Search Lists
+- ID: "11490da4-bbc2-4397-8df2-6db2ef445081"
+  Hint: VaryByUrlPath
+  Type: Checkbox
+  Value: 1
+- ID: "308e88f5-cd6e-4f8f-bafe-95a47dedefdc"
+  Hint: Editable
+  Type: Checkbox
+  Value: 0
 - ID: "3d08db46-2267-41b0-bc52-be69fd618633"
   Hint: Cacheable
   Type: Checkbox
   Value: 1
-- ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
-  Hint: Datasource Location
-  Value: /sitecore/content/Storefront/Global/Product Search Lists
 - ID: "c7c26117-dbb1-42b2-ab5e-f7223845cca3"
   Hint: __Thumbnail
   Value: |
-    <image mediaid="{E6E11ED1-4815-43CE-ACDB-AA766E08A05F}" />
+    <image mediaid="{A813B8CA-B43A-4652-BFB3-C5D38124D000}" />
 - ID: "c81ed375-7c73-4815-8ea5-8ccfc4056929"
   Hint: VaryByCurrency
   Type: Checkbox
   Value: 1
 - ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
   Hint: Controller Action
-  Value: ProductRecommendation
+  Value: ProductList
 - ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
   Hint: Controller
   Value: Catalog
@@ -40,4 +42,4 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20141009T040447
+      Value: 20141023T062536

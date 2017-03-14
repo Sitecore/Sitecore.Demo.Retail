@@ -16,13 +16,13 @@
 
 using System;
 using System.Collections.Generic;
+using Sitecore.Feature.Commerce.Catalog.Models;
 
-namespace Sitecore.Feature.Commerce.Catalog.Models
+namespace Sitecore.Feature.Commerce.Catalog.Extensions
 {
     public enum VariantPropertiesComparisonProperty
     {
         ProductColor,
-
         Size
     }
 

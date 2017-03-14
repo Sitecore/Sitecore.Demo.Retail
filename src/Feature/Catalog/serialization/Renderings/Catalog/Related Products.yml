@@ -2,7 +2,7 @@
 ID: "c8dc8851-0c13-4090-a7cf-9416af349af6"
 Parent: "8817567e-830e-4b71-b072-fe7681ec832f"
 Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
-Path: /sitecore/layout/Renderings/Feature/Commerce/Catalog/RelatedProducts
+Path: /sitecore/layout/Renderings/Feature/Commerce/Catalog/Related Products
 DB: master
 SharedFields:
 - ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"

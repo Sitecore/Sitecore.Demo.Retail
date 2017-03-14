@@ -1,13 +1,17 @@
 ﻿---
-ID: "c3ce5766-a3c7-4354-9711-fce7786fc451"
+ID: "49424190-0efa-4414-8d18-4569cc8ea5fd"
 Parent: "8817567e-830e-4b71-b072-fe7681ec832f"
 Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
-Path: /sitecore/layout/Renderings/Feature/Commerce/Catalog/CategoryPageHeader
+Path: /sitecore/layout/Renderings/Feature/Commerce/Catalog/Product Rating
 DB: master
 SharedFields:
+- ID: "c7c26117-dbb1-42b2-ab5e-f7223845cca3"
+  Hint: __Thumbnail
+  Value: |
+    <image mediaid="{9272BA9C-DBFC-40E0-B2D3-A0074FA6FC97}" />
 - ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
   Hint: Controller Action
-  Value: CategoryPageHeader
+  Value: ProductRating
 - ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
   Hint: Controller
   Value: Catalog
@@ -18,4 +22,4 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150108T211720Z
+      Value: 20141023T062706

@@ -1,16 +1,13 @@
 ﻿---
-ID: "a2556698-78bd-4242-9d5c-d1ad5788984a"
+ID: "c3ce5766-a3c7-4354-9711-fce7786fc451"
 Parent: "8817567e-830e-4b71-b072-fe7681ec832f"
 Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
-Path: /sitecore/layout/Renderings/Feature/Commerce/Catalog/SearchEvent
+Path: /sitecore/layout/Renderings/Feature/Commerce/Catalog/Category Page Header
 DB: master
 SharedFields:
-- ID: "94069f66-609c-48b0-8281-521c30fb269d"
-  Hint: Open Properties after Add
-  Value: "-"
 - ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
   Hint: Controller Action
-  Value: SearchEvent
+  Value: CategoryPageHeader
 - ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
   Hint: Controller
   Value: Catalog
@@ -21,4 +18,4 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150414T100051Z
+      Value: 20150108T211720Z

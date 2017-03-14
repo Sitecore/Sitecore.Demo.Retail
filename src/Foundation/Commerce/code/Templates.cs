@@ -50,13 +50,13 @@ namespace Sitecore.Foundation.Commerce
 
                 public static class Fields
                 {
-                public static readonly ID CategoryDatasource = new ID("{2882072B-E310-406B-8DD9-B22C9EA4A0F3}");
+                    public static readonly ID CategoryDatasource = new ID("{2882072B-E310-406B-8DD9-B22C9EA4A0F3}");
                 }
             }
 
             public static class DynamicCategory
             {
-            public static readonly ID Id = new ID("{6820281F-3BB3-41B4-8C93-7771EEA496D0}");
+                public static readonly ID Id = new ID("{6820281F-3BB3-41B4-8C93-7771EEA496D0}");
             }
 
             public static class CatalogItem
@@ -104,13 +104,13 @@ namespace Sitecore.Foundation.Commerce
 
                 public static class Fields
                 {
-                public static readonly ID ListPrice = new ID("{9B2ABE41-AB16-463B-8845-A3A5D050A016}");
+                    public static readonly ID ListPrice = new ID("{9B2ABE41-AB16-463B-8845-A3A5D050A016}");
                 }
             }
 
             public static class Catalog
             {
-            public static readonly ID Id = CommerceConstants.KnownTemplateIds.CommerceCatalogTemplate;
+                public static readonly ID Id = CommerceConstants.KnownTemplateIds.CommerceCatalogTemplate;
             }
         }
 

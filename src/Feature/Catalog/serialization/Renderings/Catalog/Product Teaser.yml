@@ -1,23 +1,19 @@
 ﻿---
-ID: "8767aff3-f7f2-47ec-92c0-8a24b0f18967"
+ID: "b2bde50b-bc4e-4624-8c45-e3ea443a6c5d"
 Parent: "8817567e-830e-4b71-b072-fe7681ec832f"
 Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
-Path: /sitecore/layout/Renderings/Feature/Commerce/Catalog/ProductListHeader
+Path: /sitecore/layout/Renderings/Feature/Commerce/Catalog/Product Teaser
 DB: master
 SharedFields:
 - ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
   Hint: Datasource Template
-  Value: /sitecore/templates/Storefront/Rendering Datasources/Product List Header
+  Value: 
 - ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
   Hint: Datasource Location
-  Value: /sitecore/content/Storefront/Global/Site Spots
-- ID: "c7c26117-dbb1-42b2-ab5e-f7223845cca3"
-  Hint: __Thumbnail
-  Value: |
-    <image mediaid="{E5D521CF-F138-4A3A-9382-6D6740508C63}" />
+  Value: "site:product"
 - ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
   Hint: Controller Action
-  Value: ProductListHeader
+  Value: ProductTeaser
 - ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
   Hint: Controller
   Value: Catalog
@@ -28,4 +24,8 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20141023T062602
+      Value: 20170314T010544Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

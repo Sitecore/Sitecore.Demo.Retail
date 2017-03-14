@@ -23,15 +23,15 @@ using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 
-namespace Sitecore.Feature.Commerce.Catalog.Models.JsonResults
+namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class StockInfoBaseJsonResult : BaseJsonResult
+    public class StockInfoApiModel : BaseJsonResult
     {
-        public StockInfoBaseJsonResult()
+        public StockInfoApiModel()
         {
         }
 
-        public StockInfoBaseJsonResult(ServiceProviderResult result)
+        public StockInfoApiModel(ServiceProviderResult result)
             : base(result)
         {
         }
