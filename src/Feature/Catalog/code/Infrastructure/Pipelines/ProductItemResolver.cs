@@ -29,8 +29,6 @@ using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Repositories;
 using Sitecore.Pipelines.HttpRequest;
 using Sitecore.Web;
-using System.Web.Mvc;
-using Sitecore.Feature.Commerce.Catalog.Services;
 
 namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines
 {
@@ -58,13 +56,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines
         {
             if (Context.Item != null)
             {
-                var urlService = DependencyResolver.Current.GetService<CatalogUrlService>();
-                var url = urlService.BuildShopUrl(Context.Item, false, true);
-                if (url != null)
-                {
-                    args.Context.Response.Redirect(url);
-                }
-
                 return;
             }
 
@@ -78,4 +69,4 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines
             Context.Item = catalogContext.Item;
         }
     }
-}   
+}
