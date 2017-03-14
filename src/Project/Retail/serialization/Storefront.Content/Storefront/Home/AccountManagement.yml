@@ -21,9 +21,6 @@ SharedFields:
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
         <r
-          uid="{9E3164C5-B71B-4684-95F9-6C23010F3CD4}"
-          s:ds="" />
-        <r
           uid="{37C79DCA-DADD-43D9-8785-CCACED2584DC}"
           p:after="*[1=2]"
           s:ds=""
@@ -74,9 +71,6 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141218T070323Z
-    - ID: "2e90d854-47d3-4485-9c77-13f60cbc8f2c"
-      Hint: Join Loyalty Program Button
-      Value: Join now
     - ID: "30f5a63a-4816-45c0-8491-d962da29cdf5"
       Hint: Profile Label
       Value: "Profile:"
@@ -89,15 +83,6 @@ Languages:
     - ID: "42074d5d-2228-4ea0-b621-5c7f852ee4e6"
       Hint: Primary Address Label
       Value: Primary
-    - ID: "4cbe2bb0-d74c-451d-9444-fd1aef7490c8"
-      Hint: Create New Wishlist Button
-      Value: Create new wish list
-    - ID: "4cd14b92-6943-4378-af90-bcca74ad6f33"
-      Hint: Create New Wishlist Label
-      Value: Create new wish list
-    - ID: "4cffc76a-61cc-420c-9e58-40caff8d0ed3"
-      Hint: Loyalty Empty Text
-      Value: <p>Get started on the path to the Gold level and start saving today</p>
     - ID: "4fded9ac-57f7-493c-9902-2f0ed5e1cd37"
       Hint: View All Orders Label
       Value: View all orders
@@ -107,9 +92,6 @@ Languages:
     - ID: "57ac22d6-7abd-4a4e-95f7-98afb47953ab"
       Hint: Save Changes Button
       Value: Save changes
-    - ID: "5f4f242e-f947-4027-945b-d3da9ca2d7f3"
-      Hint: Joining Loyalty Program Button
-      Value: Joining ...
     - ID: "62788f20-badd-4a38-8edc-3b23c786d2c9"
       Hint: Account Profile Title
       Value: Account profile
@@ -119,18 +101,12 @@ Languages:
     - ID: "67a50dc1-bbc7-4394-a142-8a0add91f050"
       Hint: Saving Button
       Value: Saving ...
-    - ID: "7096038a-667b-4d2f-8829-1e4a715d49bf"
-      Hint: Wishlist Name Label
-      Value: Wish list name
     - ID: "82a3d299-a37d-46fc-9aca-289fca0f4c6b"
       Hint: Add New Address Label
       Value: Add a new address
     - ID: "85ecc994-fe65-4e56-80c4-4d4d59647691"
       Hint: Address Label
       Value: "Address:"
-    - ID: "aef06d94-a267-429f-9ff1-157be7410d13"
-      Hint: WishList Title
-      Value: My wish list
     - ID: "bcb8bfee-f776-449b-907d-edb7cfc29108"
       Hint: Change Password Label
       Value: Change your password
@@ -146,19 +122,9 @@ Languages:
     - ID: "f0ed76e4-62d9-4453-80e3-189fe2772287"
       Hint: Close Button
       Value: Close
-    - ID: "f1f07e2d-e278-44d9-8426-bc4595e297e6"
-      Hint: WishList Empty Text
-      Value: |
-        <p>You have not created any wish lists yet.</p>
-        <p>Make a wish list to keep track of the tings you really want</p>
-        <p>Make it public if you want to share your wishes with family and friends</p>
-        
     - ID: "f6b4ca14-0a00-4a7f-88be-684961d050b8"
       Hint: AddressBook Empty Text
       Value:         <p>Your address book is empty</p>
     - ID: "f82b1dba-709b-4106-9634-65365e9b1749"
       Hint: View Details Label
       Value: View details
-    - ID: "fc33e2ce-b900-4603-b406-1748e5fd07e9"
-      Hint: Loyalty Title
-      Value: Loyalty account

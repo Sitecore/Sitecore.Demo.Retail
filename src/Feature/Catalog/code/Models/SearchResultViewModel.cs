@@ -34,9 +34,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
             foreach (var child in searchResult.SearchResultItems)
             {
                 CatalogItemViewModel productModel = null;
-                if (child.IsDerived(Foundation.Commerce.Templates.Commerce.Product.ID))
+                if (child.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id))
                     productModel = new ProductViewModel(child);
-                if (child.IsDerived(Foundation.Commerce.Templates.Commerce.Category.ID))
+                if (child.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id))
                     productModel = new CategoryViewModel(child);
                 if (productModel != null)
                     Items.Add(productModel);

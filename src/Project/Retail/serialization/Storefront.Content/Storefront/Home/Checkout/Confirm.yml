@@ -71,15 +71,9 @@ Languages:
     - ID: "8c738971-a3e2-4aa2-ba36-5174e2143573"
       Hint: Edit Shipping Address Label
       Value: Edit shipping address
-    - ID: "a00876bc-0935-4e34-b20b-c62a73770af8"
-      Hint: Apply Loyalty Credit Label
-      Value: Your loyalty card
     - ID: "a0135993-71de-4545-aae2-689fe6d74654"
       Hint: Subtitle Loyalty Credit Label
       Value: Enter the information regarding your loyalty card here
-    - ID: "a735e911-e581-438b-817e-0c289ee91335"
-      Hint: Loyalty Card Label
-      Value: Loyalty Card
     - ID: "ad4808a1-feab-4f41-9b6c-9708462ff177"
       Hint: Subtitle Discount Credit Label
       Value: Enter a coupon code to apply to the current order

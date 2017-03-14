@@ -61,8 +61,6 @@ namespace Sitecore.Feature.Commerce.Orders.Models.Api
 
         public string UserEmail { get; set; }
 
-        public string CartLoyaltyCardNumber { get; set; }
-
         public string CurrencyCode { get; set; }
 
         public CartModel Cart { get; set; }

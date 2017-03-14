@@ -113,24 +113,6 @@ function setupCheckoutPage() {
         }
     });
 
-    $("body").on('click', '#addLoyaltyCard_Confirm', function () {
-        ClearGlobalMessages();
-        if ($('#LoyalityCardNumber_Confirm').val().length === 0) {
-            return;
-        }
-
-        $('#loyaltyCardNumber_Confirm_Added').text($('#LoyalityCardNumber_Confirm').val());
-        $(this).button("loading");
-        AJAXPost(StorefrontUri('api/storefront/checkout/updateloyaltycard'), "{'loyaltyCardNumber':'" + $('#LoyalityCardNumber_Confirm').val() + "'}", function (data, success, sender) {
-            if (success && data.Success && data.WasUpdated) {
-                $('#loyaltyCard-success').show();
-            }
-
-            $('#addLoyaltyCard_Confirm').button("reset");
-            ShowGlobalMessages(data);
-        }, this);
-    });
-
     $("#submitOrder").click(function () {
         submitOrder();
     });
@@ -162,9 +144,6 @@ function getCheckoutData() {
             ko.applyBindingsWithValidation(checkoutDataViewModel, document.getElementById("checkoutSection"));
             $('#orderShippingPreference').removeAttr('disabled');
 
-            if (checkoutDataViewModel.cartLoyaltyCardNumber && checkoutDataViewModel.cartLoyaltyCardNumber.length > 0) {
-                $('#loyaltyCard-success').show();
-            }
         }
 
         ShowGlobalMessages(data);
@@ -632,45 +611,37 @@ function getCardPaymentAcceptUrl() {
 function updatePaymentAllAmount() {
     var ccIsAdded = checkoutDataViewModel.creditCardPayment().isAdded();
     var gcIsAdded = checkoutDataViewModel.giftCardPayment().isAdded();
-    var lcIsAdded = checkoutDataViewModel.loyaltyCardPayment().isAdded();
-    if (!ccIsAdded && !gcIsAdded && !lcIsAdded) {
+    if (!ccIsAdded && !gcIsAdded) {
         return;
     }
 
     var total = parseFloat(checkoutDataViewModel.cart().totalAmount());
-    var lcAmount = parseFloat(checkoutDataViewModel.loyaltyCardPayment().loyaltyCardAmount());
     var gcAmount = parseFloat(checkoutDataViewModel.giftCardPayment().giftCardAmount());
     var ccAmount = parseFloat(checkoutDataViewModel.creditCardPayment().creditCardAmount());
-    var aTotal = parseFloat(lcAmount + gcAmount + ccAmount);
+    var aTotal = parseFloat(gcAmount + ccAmount);
 
     if (aTotal === total) {
         return;
     }
 
     var count = 0
-    if (lcIsAdded) {
-        ++count;
-    }
     if (gcIsAdded) {
         ++count;
     }
     if (ccIsAdded) {
-        ++ccount;
+        ++count;
     }
 
     if (aTotal > total) {
         var diff = (aTotal - total) / count;
-        lcAmount = lcIsAdded ? lcAmount - diff : 0;
         gcAmount = gcIsAdded ? gcAmount - diff : 0;
         ccAmount = ccIsAdded ? ccAmount - diff : 0;
     } else if (aTotal < total) {
         var diff = (total - aTotal) / count;
-        lcAmount = lcIsAdded ? lcAmount + diff : 0;
         gcAmount = gcIsAdded ? gcAmount + diff : 0;
         ccAmount = ccIsAdded ? ccAmount + diff : 0;
     }
 
-    checkoutDataViewModel.loyaltyCardPayment().loyaltyCardAmount((lcAmount).toFixed(2));
     checkoutDataViewModel.giftCardPayment().giftCardAmount((gcAmount).toFixed(2));
     checkoutDataViewModel.creditCardPayment().creditCardAmount((ccAmount).toFixed(2));
 }
@@ -824,19 +795,6 @@ function setPaymentMethods() {
         data += '"GiftCardPayment":' + JSON.stringify(giftCard);
     }
 
-    if (checkoutDataViewModel.loyaltyCardPayment().isAdded()) {
-        var loyaltyCard = {
-            "PaymentMethodID": checkoutDataViewModel.loyaltyCardPayment().loyaltyCardNumber(),
-            "Amount": checkoutDataViewModel.loyaltyCardPayment().loyaltyCardAmount()
-        };
-
-        if (data.length > 1) {
-            data += ",";
-        }
-
-        data += '"LoyaltyCardPayment":' + JSON.stringify(loyaltyCard);
-    }
-
     data += "}";
 
     $("#ToConfirmButton").button('loading');
@@ -932,15 +890,6 @@ function submitOrder() {
         };
 
         data += ',"GiftCardPayment":' + JSON.stringify(giftCard);
-    }
-
-    if (checkoutDataViewModel.loyaltyCardPayment().isAdded()) {
-        var loyaltyCard = {
-            "PaymentMethodID": checkoutDataViewModel.loyaltyCardPayment().loyaltyCardNumber(),
-            "Amount": checkoutDataViewModel.loyaltyCardPayment().loyaltyCardAmount()
-        };
-
-        data += ',"LoyaltyCardPayment":' + JSON.stringify(loyaltyCard);
     }
 
     data += "}";
