@@ -19,8 +19,7 @@ SharedFields:
   Value: 1
 - ID: "c7c26117-dbb1-42b2-ab5e-f7223845cca3"
   Hint: __Thumbnail
-  Value: |
-    <image mediaid="{967EBD04-9263-4342-9B6B-EE89D20DDCAF}" />
+  Value: 
 - ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
   Hint: Controller Action
   Value: ProductSearchResultsFacets

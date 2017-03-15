@@ -11,7 +11,7 @@ SharedFields:
   Value: 1
 - ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
   Hint: Datasource Template
-  Value: /sitecore/templates/Storefront/Rendering Datasources/Product Information
+  Value: 
 - ID: "3d08db46-2267-41b0-bc52-be69fd618633"
   Hint: Cacheable
   Type: Checkbox
@@ -25,8 +25,7 @@ SharedFields:
   Value: 
 - ID: "c7c26117-dbb1-42b2-ab5e-f7223845cca3"
   Hint: __Thumbnail
-  Value: |
-    <image mediaid="{EA8AB448-6F4A-4B29-A652-C7A9F078836F}" />
+  Value: 
 - ID: "c81ed375-7c73-4815-8ea5-8ccfc4056929"
   Hint: VaryByCurrency
   Type: Checkbox

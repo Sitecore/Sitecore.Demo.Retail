@@ -7,18 +7,18 @@ DB: master
 SharedFields:
 - ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
   Hint: Datasource Template
-  Value: /sitecore/templates/Storefront/Rendering Datasources/Product Search Lists
+  Value: 
 - ID: "3d08db46-2267-41b0-bc52-be69fd618633"
   Hint: Cacheable
   Type: Checkbox
   Value: 1
 - ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
   Hint: Datasource Location
-  Value: /sitecore/content/Storefront/Global/Product Search Lists
+  Value: "site:productsearch"
 - ID: "c7c26117-dbb1-42b2-ab5e-f7223845cca3"
   Hint: __Thumbnail
   Value: |
-    <image mediaid="{E6E11ED1-4815-43CE-ACDB-AA766E08A05F}" />
+    <image mediaid="{260C668F-79FE-4D6C-B187-E076360EDD8A}" />
 - ID: "c81ed375-7c73-4815-8ea5-8ccfc4056929"
   Hint: VaryByCurrency
   Type: Checkbox
@@ -38,6 +38,10 @@ Languages:
   Versions:
   - Version: 1
     Fields:
+    - ID: "1c307764-806c-42f0-b7ce-fc173ac8372b"
+      Hint: Supports Local Datasource
+      Type: Checkbox
+      Value: 1
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20141009T040447
+      Value: 20141008T170447Z

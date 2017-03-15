@@ -17,10 +17,13 @@ SharedFields:
   Hint: Cacheable
   Type: Checkbox
   Value: 1
+- ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
+  Hint: Datasource Location
+  Value: "site:productcategory"
 - ID: "c7c26117-dbb1-42b2-ab5e-f7223845cca3"
   Hint: __Thumbnail
   Value: |
-    <image mediaid="{A813B8CA-B43A-4652-BFB3-C5D38124D000}" />
+    <image mediaid="{D19EDE02-BC82-476F-B030-7722E253B101}" />
 - ID: "c81ed375-7c73-4815-8ea5-8ccfc4056929"
   Hint: VaryByCurrency
   Type: Checkbox
@@ -42,4 +45,4 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20141023T062536
+      Value: 20141022T192536Z
