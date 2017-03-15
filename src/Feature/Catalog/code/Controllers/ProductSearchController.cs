@@ -248,6 +248,10 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
             var searchInfo = GetSearchInfo(searchKeyword, pageNumber, facetValues, sortField, pageSize, sortDirection);
             var viewModel = GetPaginationViewModel(searchInfo);
+            if (viewModel.Pagination.NumberOfPages <= 1)
+            {
+                return new EmptyResult();
+            }
             return View(viewModel);
         }
 

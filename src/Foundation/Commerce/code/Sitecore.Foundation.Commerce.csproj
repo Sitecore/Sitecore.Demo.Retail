@@ -172,13 +172,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="App_Config\Include\Foundation\Sitecore.Foundation.Commerce.Customer.config" />
+    <Content Include="App_Config\Include\Foundation\Foundation.Commerce.Customer.config" />
     <Content Include="App_Config\Include\Y.Commerce.Engine\Sitecore.Commerce.Engine.config" />
     <None Include="App_Config\CommerceServer.Core.config.example.transform" />
     <None Include="web.config.transform">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="App_Config\Include\Foundation\Sitecore.Foundation.Commerce.Lucene.config">
+    <Content Include="App_Config\Include\Foundation\Foundation.Commerce.Lucene.config">
       <SubType>Designer</SubType>
     </Content>
     <None Include="web.config.transform">
@@ -310,8 +310,8 @@
     <Compile Include="Util\UrlBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\Foundation\Sitecore.Foundation.Commerce.Serialization.config" />
-    <Content Include="App_Config\Include\Foundation\Sitecore.Foundation.Commerce.config" />
+    <Content Include="App_Config\Include\Foundation\Foundation.Commerce.Serialization.config" />
+    <Content Include="App_Config\Include\Foundation\Foundation.Commerce.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

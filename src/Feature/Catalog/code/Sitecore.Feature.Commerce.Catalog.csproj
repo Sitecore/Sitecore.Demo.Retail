@@ -68,6 +68,9 @@
       <HintPath>..\..\..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sitecore.Client">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Commerce">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Commerce.dll</HintPath>
       <Private>True</Private>
@@ -151,16 +154,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Catalog.config" />
-    <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Catalog.Serialization.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Commerce.Catalog.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Commerce.Catalog.Serialization.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="Sitecore\shell\override\Controls\Rich Text Editor\InsertLink\InsertLink.xml" />
     <Content Include="Views\Catalog\_ProductSummary.cshtml" />
     <Content Include="Views\Catalog\_RelatedCatalogItemsSlide.cshtml" />
     <Content Include="Views\Catalog\AddToCart.cshtml" />
     <Content Include="Views\Catalog\CategoryPageHeader.cshtml" />
     <Content Include="Views\Catalog\CheckGiftCardBalance.cshtml" />
     <Content Include="Views\Catalog\ChildCategoryNavigation.cshtml" />
-    <Content Include="Views\Catalog\Pagination.cshtml" />
     <Content Include="Views\Catalog\ProductFacets.cshtml" />
     <Content Include="Views\Catalog\ProductImages.cshtml" />
     <Content Include="Views\Catalog\ProductInformation.cshtml" />
@@ -176,9 +179,17 @@
     <Content Include="Views\ProductSearch\ProductSearchResultsList.cshtml" />
     <Content Include="Views\ProductSearch\ProductSearchResultsListHeader.cshtml" />
     <Content Include="Views\Catalog\_CategorySummary.cshtml" />
+    <Content Include="Views\ProductSearch\_ProductSearchResultDetails.cshtml" />
+    <Content Include="Views\ProductSearch\_CategorySearchResultDetails.cshtml" />
+    <Content Include="Views\Catalog\_ProductPrice.cshtml" />
+    <Content Include="Views\Catalog\_ProductLabels.cshtml" />
+    <Content Include="Views\Catalog\CategoryBreadcrumb.cshtml" />
+    <Content Include="Views\Catalog\ProductTeaser.cshtml" />
     <None Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\ProductViewModelFactory.cs" />
+    <Compile Include="Infrastructure\Dialogs\InsertLinkForm.cs" />
     <Compile Include="Models\SearchInfo.cs" />
     <Compile Include="Factories\CatalogItemContextFactory.cs" />
     <Compile Include="Models\RelationshipViewModel.cs" />
@@ -195,9 +206,9 @@
     <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Models\CatalogRouteRoot.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
-    <Compile Include="Models\JsonResults\GiftCardBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\StockInfoBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\StockInfoListBaseJsonResult.cs" />
+    <Compile Include="Models\GiftCardApiModel.cs" />
+    <Compile Include="Models\StockInfoApiModel.cs" />
+    <Compile Include="Models\StockInfoListApiModel.cs" />
     <Compile Include="Models\MultipleProductSearchResultsViewModel.cs" />
     <Compile Include="Models\NavigationViewModel.cs" />
     <Compile Include="Models\PaginationViewModel.cs" />
@@ -207,7 +218,7 @@
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\RelatedCatalogItemsViewModel.cs" />
     <Compile Include="Models\CatalogItemViewModel.cs" />
-    <Compile Include="Models\VariantPropertiesEqualityComparer.cs" />
+    <Compile Include="Extensions\VariantPropertiesEqualityComparer.cs" />
     <Compile Include="Models\VariantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CatalogUrlService.cs" />
@@ -239,7 +250,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63497</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

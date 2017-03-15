@@ -217,7 +217,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
-    <Compile Include="Controllers\NavigationSearchController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\StorefrontSearchController.cs" />
     <Compile Include="Infrastructure\ServicesConfigurator.cs" />

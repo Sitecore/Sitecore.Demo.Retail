@@ -62,20 +62,22 @@
                                             break;
                                     }
 
-                                    var activeFacetClass = string.Empty;
                                     foreach (var activeFacet in Model.ActiveFacets)
                                     {
                                         if (activeFacet.Values.Contains(value.Name))
                                         {
-                                            activeFacetClass = "class=active";
                                             facetValueSelected = true;
                                         }
                                     }
 
-                                    <li @activeFacetClass>
+                                    <li class="@(facetValueSelected ? "active" : "")">
                                         <a href="#" onclick="FireFacetApplied('@facet.Name', '@value.Name', @(facetValueSelected ? 0 : 1), '@Url.AddToFacets(facet.Name, value.Name)')">
-                                            <span pid="facetName">@name</span> 
-                                            <span pid="facetCount">(@facetCount)</span>
+                                            @if (facetValueSelected)
+                                            {
+                                                <small class="glyphicon glyphicon-ok text-info"></small>
+                                            }
+                                            <span pid="facetName">@name</span>
+                                            <small pid="facetCount">(@facetCount)</small>
                                         </a>
                                     </li>
                                 }

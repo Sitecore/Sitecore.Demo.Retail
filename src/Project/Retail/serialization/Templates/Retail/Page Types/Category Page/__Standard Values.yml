@@ -145,22 +145,6 @@ SharedFields:
           ph="page-sidebar"
           uid="{DE89A140-07A6-437F-9C7C-347C1A696AE3}" />
       </d>
-      <d
-        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-        l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
-        <r
-          id="{1CA6E4C1-B92E-48E4-941B-466057ABC752}"
-          ph="left"
-          uid="{79A552ED-DC24-4BBA-B5F3-1B2013C2E37A}" />
-        <r
-          id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}"
-          ph="left"
-          uid="{22A6B818-B13E-4FD0-A52A-7DD2F96C2030}" />
-        <r
-          id="{CFB07D55-452F-40D5-AA86-55D30F3C120D}"
-          ph="center"
-          uid="{EA8CF19E-4C90-475C-9C6F-F92F50527218}" />
-      </d>
     </r>
 - ID: "fd4e2050-186c-4375-8b99-e8a85dd7436e"
   Hint: __Enable item fallback

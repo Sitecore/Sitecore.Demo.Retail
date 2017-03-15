@@ -26,10 +26,12 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 {
     public class NavigationViewModel
     {
+        public CategoryViewModel TopCategory { get; }
         public List<CategoryViewModel> ChildCategories { get; }
 
-        public NavigationViewModel()
+        public NavigationViewModel(CategoryViewModel topCategory)
         {
+            TopCategory = topCategory;
             ChildCategories = new List<CategoryViewModel>();
         }
     }

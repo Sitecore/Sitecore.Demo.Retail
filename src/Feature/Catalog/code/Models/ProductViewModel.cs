@@ -23,6 +23,7 @@ using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
+using Sitecore.Feature.Commerce.Catalog.Extensions;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
