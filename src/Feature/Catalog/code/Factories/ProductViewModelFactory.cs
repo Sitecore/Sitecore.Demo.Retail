@@ -52,7 +52,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
                 throw new ArgumentNullException(nameof(item));
             }
 
-            if (IsValid(item))
+            if (!IsValid(item))
             {
                 throw new ArgumentException("Invalid item type. Must be a product.", nameof(item));
             }
