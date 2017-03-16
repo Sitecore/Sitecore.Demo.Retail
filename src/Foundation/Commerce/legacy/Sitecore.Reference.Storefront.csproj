@@ -243,9 +243,6 @@
     <Compile Include="Models\JsonResults\ProfileBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\RegisterBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\ChangePasswordBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\LoyaltyProgramItemBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\LoyaltyTierItemBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\LoyaltyTransactionItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\OrderHeaderItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\UpdateLoyaltyCardBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\UserBaseJsonResult.cs" />

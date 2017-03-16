@@ -31,11 +31,11 @@ using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Links;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.Api
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class CartLineModel : BaseJsonResult
+    public class CartLineApiModel : BaseJsonResult
     {
-        public CartLineModel(CartLine line, Item productItem)
+        public CartLineApiModel(CartLine line, Item productItem)
         {
             var product = (CommerceCartProduct) line.Product;
 
@@ -63,7 +63,7 @@ namespace Sitecore.Feature.Commerce.Orders.Models.Api
         public string LineTotal { get; set; }
         public string ExternalCartLineId { get; set; }
         public string ProductUrl { get; set; }
-        public IEnumerable<ShippingOptionModel> ShippingOptions { get; set; }
+        public IEnumerable<ShippingOptionApiModel> ShippingOptions { get; set; }
 
         public void SetShippingOptions(IEnumerable<ShippingOption> shippingOptions)
         {
@@ -72,11 +72,11 @@ namespace Sitecore.Feature.Commerce.Orders.Models.Api
                 return;
             }
 
-            var shippingOptionList = new List<ShippingOptionModel>();
+            var shippingOptionList = new List<ShippingOptionApiModel>();
 
             foreach (var shippingOption in shippingOptions)
             {
-                var jsonResult = new ShippingOptionModel();
+                var jsonResult = new ShippingOptionApiModel();
 
                 jsonResult.Initialize(shippingOption);
                 shippingOptionList.Add(jsonResult);

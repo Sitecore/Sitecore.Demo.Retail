@@ -26,23 +26,23 @@ using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Models;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.Api
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class CartModel : BaseJsonResult
+    public class CartApiModel : BaseJsonResult
     {
-        public CartModel()
+        public CartApiModel()
         {
         }
 
-        public CartModel(ServiceProviderResult result) : base(result)
+        public CartApiModel(ServiceProviderResult result) : base(result)
         {
         }
 
         public bool IsPreview { get; set; }
 
-        public List<CartLineModel> Lines { get; set; }
+        public List<CartLineApiModel> Lines { get; set; }
 
-        public List<CartAdjustmentModel> Adjustments { get; set; }
+        public List<CartAdjustmentApiModel> Adjustments { get; set; }
 
         public string Subtotal { get; set; }
 
@@ -68,8 +68,8 @@ namespace Sitecore.Feature.Commerce.Orders.Models.Api
 
         public virtual void Initialize(Cart cart)
         {
-            Lines = new List<CartLineModel>();
-            Adjustments = new List<CartAdjustmentModel>();
+            Lines = new List<CartLineApiModel>();
+            Adjustments = new List<CartAdjustmentApiModel>();
             PromoCodes = new List<string>();
 
             Subtotal = 0.0M.ToCurrency();
@@ -94,13 +94,13 @@ namespace Sitecore.Feature.Commerce.Orders.Models.Api
                 var product = (CommerceCartProduct) line.Product;
                 var productItem = catalogManager.GetProduct(product.ProductId, product.ProductCatalog);
 
-                var cartLine = new CartLineModel(line, productItem);
+                var cartLine = new CartLineApiModel(line, productItem);
                 Lines.Add(cartLine);
             }
 
             foreach (var adjustment in cart.Adjustments ?? Enumerable.Empty<CartAdjustment>())
             {
-                Adjustments.Add(new CartAdjustmentModel(adjustment));
+                Adjustments.Add(new CartAdjustmentApiModel(adjustment));
             }
 
             var commerceTotal = (CommerceTotal) cart.Total;

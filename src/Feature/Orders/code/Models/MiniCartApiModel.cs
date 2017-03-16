@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="AddressListItemModel.cs" company="Sitecore Corporation">
+// <copyright file="MiniCartModel.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Defines the AddressListJsonResult class.</summary>
+// <summary>Emits the Json result of a MiniCart update request.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -15,38 +15,36 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.Linq;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
-using Sitecore.Commerce.Entities;
+using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Commerce.Services;
-using System;
+using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Extensions;
+using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.Commerce.Models;
 
-namespace Sitecore.Feature.Commerce.Orders.Models.Api
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    [Obsolete("Please refactor")]
-    public class AddressListItemModel : AddressListModel
+    public class MiniCartApiModel : BaseJsonResult
     {
-        public AddressListItemModel()
+        public MiniCartApiModel()
         {
         }
 
-        public AddressListItemModel(ServiceProviderResult result)
-            : base(result)
+        public MiniCartApiModel(ServiceProviderResult result) : base(result)
         {
         }
 
-        public override void Initialize(IEnumerable<Party> addresses, Dictionary<string, string> countries)
-        {
-            var addressArray = addresses as Party[] ?? addresses.ToArray();
-            base.Initialize(addressArray, countries);
+        public int LineItemCount { get; set; }
 
-            foreach (var address in addressArray)
-            {
-                var result = new AddressItemModel();
-                result.Initialize(address as CommerceParty);
-                Addresses.Add(result);
-            }
+        public string Total { get; set; }
+
+        public void Initialize(Cart cart)
+        {
+            Assert.ArgumentNotNull(cart, nameof(cart));
+
+            LineItemCount = ((CommerceCart) cart).LineItemCount;
+            Total = ((CommerceTotal) cart.Total).Subtotal.ToCurrency();
         }
     }
 }

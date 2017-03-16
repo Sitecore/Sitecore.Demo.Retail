@@ -31,7 +31,7 @@ using Sitecore.Foundation.Commerce.Models.InputModels;
 using Sitecore.Foundation.Commerce.Repositories;
 using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Mvc.Controllers;
-using Sitecore.Feature.Commerce.Orders.Models.Api;
+using Sitecore.Feature.Commerce.Orders.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Controllers
 {
@@ -100,7 +100,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             try
             {
                 var response = CartManager.GetCurrentCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), updateCart);
-                var result = new MiniCartModel(response.ServiceProviderResult);
+                var result = new MiniCartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
                     result.Initialize(response.ServiceProviderResult.Cart);
@@ -125,13 +125,13 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             {
                 var id = VisitorContextRepository.GetCurrent().GetCustomerId();
                 var cart = CartCacheHelper.GetCart(id);
-                CartModel cartResult;
+                CartApiModel cartResult;
 
                 // The following condition stops the creation of empty carts on startup.
                 if (cart == null && CartCookieHelper.DoesCookieExistForCustomer(id))
                 {
                     var response = CartManager.GetCurrentCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), true);
-                    cartResult = new CartModel(response.ServiceProviderResult);
+                    cartResult = new CartApiModel(response.ServiceProviderResult);
                     if (response.ServiceProviderResult.Success && response.Result != null)
                     {
                         cartResult.Initialize(response.ServiceProviderResult.Cart);
@@ -143,7 +143,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 }
                 else
                 {
-                    cartResult = new CartModel();
+                    cartResult = new CartApiModel();
                     cartResult.Initialize(cart);
                 }
 
@@ -227,7 +227,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 }
 
                 var response = CartManager.RemoveLineItemFromCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), model.ExternalCartLineId);
-                var result = new CartModel(response.ServiceProviderResult);
+                var result = new CartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
                     result.Initialize(response.Result);
@@ -259,7 +259,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 }
 
                 var response = CartManager.ChangeLineQuantity(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
-                var result = new CartModel(response.ServiceProviderResult);
+                var result = new CartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
                     result.Initialize(response.Result);
@@ -298,7 +298,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 }
 
                 var response = CartManager.AddPromoCodeToCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), model.PromoCode);
-                var result = new CartModel(response.ServiceProviderResult);
+                var result = new CartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
                     result.Initialize(response.Result);
@@ -330,7 +330,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 }
 
                 var response = CartManager.RemovePromoCodeFromCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), model.PromoCode);
-                var result = new CartModel(response.ServiceProviderResult);
+                var result = new CartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
                     result.Initialize(response.Result);
