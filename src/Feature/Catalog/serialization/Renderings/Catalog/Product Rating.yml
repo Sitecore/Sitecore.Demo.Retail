@@ -7,8 +7,7 @@ DB: master
 SharedFields:
 - ID: "c7c26117-dbb1-42b2-ab5e-f7223845cca3"
   Hint: __Thumbnail
-  Value: |
-    <image mediaid="{9272BA9C-DBFC-40E0-B2D3-A0074FA6FC97}" />
+  Value: 
 - ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
   Hint: Controller Action
   Value: ProductRating

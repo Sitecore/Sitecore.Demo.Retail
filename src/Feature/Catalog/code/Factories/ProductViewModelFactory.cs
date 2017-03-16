@@ -52,7 +52,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
                 throw new ArgumentNullException(nameof(item));
             }
 
-            if (IsValid(item))
+            if (!IsValid(item))
             {
                 throw new ArgumentException("Invalid item type. Must be a product.", nameof(item));
             }
@@ -94,7 +94,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
 
         public bool IsValid(Item item)
         {
-            return item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id);
+            if (item == null)
+                return false;
+            if (item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id))
+                return true;
+            return item.IsWildcardItem() && IsValid(CatalogItemContext.Current?.Item);
         }
 
         private void PopulateStockInformation(ProductViewModel model)
