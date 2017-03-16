@@ -41,7 +41,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
     {
         private const string ConfirmationIdQueryString = "confirmationId";
 
-        public CheckoutController(CartManager cartManager, OrderManager orderManager, AccountManager accountManager, PaymentManager paymentManager, ShippingManager shippingManager, ContactFactory contactFactory, VisitorContextRepository visitorContextRepository, CurrencyManager currencyManager)
+        public CheckoutController(CartManager cartManager, OrderManager orderManager, AccountManager accountManager, PaymentManager paymentManager, ShippingManager shippingManager, ContactFactory contactFactory, VisitorContextRepository visitorContextRepository, CurrencyManager currencyManager, CountryManager countryManager)
         {
             CartManager = cartManager;
             OrderManager = orderManager;
@@ -50,6 +50,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             ShippingManager = shippingManager;
             VisitorContextRepository = visitorContextRepository;
             CurrencyManager = currencyManager;
+            CountryManager = countryManager;
         }
 
         private CartManager CartManager { get; }
@@ -57,6 +58,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         private ShippingManager ShippingManager { get; }
         private VisitorContextRepository VisitorContextRepository { get; }
         private CurrencyManager CurrencyManager { get; }
+        private CountryManager CountryManager { get; }
         private OrderManager OrderManager { get; }
         private AccountManager AccountManager { get; }
 
@@ -153,7 +155,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("GetCheckoutData", this, e);
-                return Json(new BaseJsonResult("GetCheckoutData", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("GetCheckoutData", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -186,7 +188,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("SubmitOrder", this, e);
-                return Json(new BaseJsonResult("SubmitOrder", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("SubmitOrder", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -218,7 +220,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("GetShippingMethods", this, e);
-                return Json(new BaseJsonResult("GetShippingMethods", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("GetShippingMethods", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -252,7 +254,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("SetShippingMethods", this, e);
-                return Json(new BaseJsonResult("SetShippingMethods", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("SetShippingMethods", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -286,7 +288,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("SetPaymentMethods", this, e);
-                return Json(new BaseJsonResult("SetPaymentMethods", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("SetPaymentMethods", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -308,7 +310,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public JsonResult GetAvailableStates(GetAvailableStatesInputModel model)
+        public JsonResult GetAvailableRegions(GetAvailableRegionsInputModel model)
         {
             try
             {
@@ -320,8 +322,8 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = OrderManager.GetAvailableRegions(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), model.CountryCode);
-                var result = new AvailableStatesApiModel(response.ServiceProviderResult);
+                var response = CountryManager.GetAvailableRegions(model.CountryCode);
+                var result = new AvailableRegionsApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
                     result.Initialize(response.Result);
@@ -331,8 +333,8 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("GetAvailableStates", this, e);
-                return Json(new BaseJsonResult("GetAvailableStates", e), JsonRequestBehavior.AllowGet);
+                CommerceLog.Current.Error("GetAvailableRegions", this, e);
+                return Json(new ErrorApiModel("GetAvailableRegions", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -357,7 +359,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [Obsolete("Please refactor")]
         private void GetAvailableCountries(CheckoutApiModel result)
         {
-            var response = OrderManager.GetAvailableCountries();
+            var response = CountryManager.GetAvailableCountries();
             var countries = new Dictionary<string, string>();
             if (response.ServiceProviderResult.Success && response.Result != null)
             {

@@ -373,7 +373,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 CatalogManager.FacetApplied(StorefrontManager.CurrentStorefront, facetValue, isApplied.Value);
             }
 
-            return new BaseJsonResult();
+            return new BaseApiModel();
         }
 
         [HttpPost]
@@ -385,7 +385,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 CatalogManager.SortOrderApplied(StorefrontManager.CurrentStorefront, sortField, sortDirection);
             }
 
-            return new BaseJsonResult();
+            return new BaseApiModel();
         }
 
         public ActionResult AddToCart()
@@ -594,7 +594,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("GetCurrentProductStockInfo", this, e);
-                return Json(new BaseJsonResult("GetCurrentProductStockInfo", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("GetCurrentProductStockInfo", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -628,7 +628,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("CheckGiftCardBalance", this, e);
-                return Json(new BaseJsonResult("CheckGiftCardBalance", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("CheckGiftCardBalance", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -648,14 +648,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 }
 
                 var response = InventoryManager.VisitorSignupForStockNotification(StorefrontManager.CurrentStorefront, model, string.Empty);
-                result = new BaseJsonResult(response.ServiceProviderResult);
+                result = new BaseApiModel(response.ServiceProviderResult);
 
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
                 CommerceLog.Current.Error("GetCurrentUser", this, e);
-                return Json(new BaseJsonResult("GetCurrentUser", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("GetCurrentUser", e), JsonRequestBehavior.AllowGet);
             }
         }
 

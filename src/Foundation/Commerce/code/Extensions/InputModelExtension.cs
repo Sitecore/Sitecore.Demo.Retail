@@ -132,7 +132,7 @@ namespace Sitecore.Foundation.Commerce.Extensions
                 ExternalId = string.IsNullOrWhiteSpace(item.PartyId) || item.PartyId == "0" ? Guid.NewGuid().ToString() : item.PartyId,
                 Name = $"Shipping_{item.Name}",
                 PartyId = item.PartyId,
-                State = item.State,
+                State = item.Region,
                 ZipPostalCode = item.ZipPostalCode
             };
 
@@ -154,7 +154,7 @@ namespace Sitecore.Foundation.Commerce.Extensions
                 ExternalId = Guid.NewGuid().ToString(),
                 Name = $"Billing_{item.Name}",
                 PartyId = item.PartyId,
-                State = item.State,
+                State = item.Region,
                 ZipPostalCode = item.ZipPostalCode
             };
 
@@ -171,7 +171,7 @@ namespace Sitecore.Foundation.Commerce.Extensions
                 ExternalId = item.ExternalId,
                 Name = item.Name,
                 PartyId = item.PartyId,
-                State = item.State,
+                State = item.Region,
                 ZipPostalCode = item.ZipPostalCode
             };
 

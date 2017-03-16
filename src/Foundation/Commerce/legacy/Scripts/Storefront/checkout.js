@@ -119,22 +119,22 @@ function setupCheckoutPage() {
 }
 
 // ----- JSON CALLS ----- //
-function GetAvailableStates(countryCode) {
-    var statesArray = [];
-    // Uncomment when the States are available
+function GetAvailableRegions(countryCode) {
+    var regionsArray = [];
+    // Uncomment when the Regions are available
     //
-    //AJAXPost(StorefrontUri("api/storefront/checkout/getAvailableStates"), '{ "CountryCode": "' + countryCode + '"}', function (data, success, sender){     
-    //    if (data.States != null) {
+    //AJAXPost(StorefrontUri("api/storefront/checkout/getAvailableRegions"), '{ "CountryCode": "' + countryCode + '"}', function (data, success, sender){     
+    //    if (data.Regions != null) {
     //        $.each(data.UserAddresses, function (index, value) {         
-    //            statesArray.push(new Country(value, index));
+    //            regionsArray.push(new Country(value, index));
     //        });
     //    }  
     //});
-    return statesArray;
+    return regionsArray;
 }
 
-function UpdateAvailableStates(countryCode) {
-    checkoutDataViewModel.states(GetAvailableStates(countryCode));
+function UpdateAvailableRegions(countryCode) {
+    checkoutDataViewModel.regions(GetAvailableRegions(countryCode));
 }
 
 function getCheckoutData() {
@@ -227,7 +227,7 @@ function setShippingMethods() {
             "Address1": checkoutDataViewModel.shippingAddress().address1(),
             "Country": checkoutDataViewModel.shippingAddress().country(),
             "City": checkoutDataViewModel.shippingAddress().city(),
-            "State": checkoutDataViewModel.shippingAddress().state(),
+            "Region": checkoutDataViewModel.shippingAddress().region(),
             "ZipPostalCode": checkoutDataViewModel.shippingAddress().zipPostalCode(),
             "ExternalId": partyId,
             "PartyId": partyId
@@ -247,7 +247,7 @@ function setShippingMethods() {
             "Address1": checkoutDataViewModel.store().address().address1(),
             "Country": checkoutDataViewModel.store().address().country(),
             "City": checkoutDataViewModel.store().address().city(),
-            "State": checkoutDataViewModel.store().address().state(),
+            "Region": checkoutDataViewModel.store().address().region(),
             "ZipPostalCode": checkoutDataViewModel.store().address().zipPostalCode(),
             "ExternalId": storeId,
             "PartyId": storeId
@@ -272,7 +272,7 @@ function setShippingMethods() {
                     "Address1": this.shippingAddress().address1(),
                     "Country": this.shippingAddress().country(),
                     "City": this.shippingAddress().city(),
-                    "State": this.shippingAddress().state(),
+                    "Region": this.shippingAddress().region(),
                     "ZipPostalCode": this.shippingAddress().zipPostalCode(),
                     "ExternalId": partyId,
                     "PartyId": partyId
@@ -294,7 +294,7 @@ function setShippingMethods() {
                     "Address1": this.store().address().address1(),
                     "Country": this.store().address().country(),
                     "City": this.store().address().city(),
-                    "State": this.store().address().state(),
+                    "Region": this.store().address().region(),
                     "ZipPostalCode": this.store().address().zipPostalCode(),
                     "ExternalId": storeId,
                     "PartyId": storeId
@@ -514,7 +514,7 @@ function renderAvailableStores(data, success, sender) {
                 + currentStoreLocation.Address.Address1 +
                 ' </p><p style="margin-bottom:0px;margin-top:0px;">'
                 + currentStoreLocation.Address.City + ', '
-                + currentStoreLocation.Address.State + ' '
+                + currentStoreLocation.Address.Region + ' '
                 + currentStoreLocation.Address.ZipPostalCode +
                 '</p></div>';
 
@@ -737,7 +737,7 @@ function setPaymentMethods() {
                     "Address1": ba.address1(),
                     "Country": ba.country(),
                     "City": ba.city(),
-                    "State": ba.state(),
+                    "Region": ba.region(),
                     "ZipPostalCode": ba.zipPostalCode(),
                     "ExternalId": ba.externalId(),
                     "PartyId": ba.externalId()
@@ -768,7 +768,7 @@ function setPaymentMethods() {
                 "Address1": ba.address1(),
                 "Country": ba.country(),
                 "City": ba.city(),
-                "State": ba.state(),
+                "Region": ba.region(),
                 "ZipPostalCode": ba.zipPostalCode(),
                 "ExternalId": ba.externalId(),
                 "PartyId": ba.externalId()
@@ -820,7 +820,7 @@ function setPaymentMethodsResponse(data, success, sender) {
                 ba.address1(address.Address1);
                 ba.country(address.Country);
                 ba.city(address.City);
-                ba.state(address.State);
+                ba.region(address.Region);
                 ba.zipPostalCode(address.ZipPostalCode);
             }
         }
@@ -873,7 +873,7 @@ function submitOrder() {
                 "Address1": ba.address1(),
                 "Country": ba.country(),
                 "City": ba.city(),
-                "State": ba.state(),
+                "Region": ba.region(),
                 "ZipPostalCode": ba.zipPostalCode(),
                 "ExternalId": ba.externalId(),
                 "PartyId": ba.externalId()

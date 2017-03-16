@@ -1,4 +1,5 @@
-﻿@using Sitecore.Foundation.Commerce.Managers
+﻿@using Sitecore.Foundation.Commerce.Extensions
+@using Sitecore.Foundation.Commerce.Managers
 @*//-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
@@ -12,7 +13,7 @@
 // -------------------------------------------------------------------------------------------*@
 
 <div class="text-right">
-    <a href="@Url.Action("LogOff", "Account")" class="btn btn-warning btn-lg">
-        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log out @* TODO: Hardcoded *@
+    <a href="@Url.Action("LogOffAndRedirect", "Account")" class="btn btn-warning btn-lg">
+        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> @Html.Sitecore().Text("/Customers/Log off/Log off", "Log off")
     </a>
 </div>

@@ -23,12 +23,12 @@ namespace Sitecore.Foundation.Commerce.Extensions
 {
     public static class ControllerExtensions
     {
-        public static BaseJsonResult CreateJsonResult(this Controller controller)
+        public static BaseApiModel CreateJsonResult(this Controller controller)
         {
-            return controller.CreateJsonResult<BaseJsonResult>();
+            return controller.CreateJsonResult<BaseApiModel>();
         }
 
-        public static T CreateJsonResult<T>(this Controller controller) where T : BaseJsonResult, new()
+        public static T CreateJsonResult<T>(this Controller controller) where T : BaseApiModel, new()
         {
             var result = new T();
             if (controller.ModelState.IsValid)

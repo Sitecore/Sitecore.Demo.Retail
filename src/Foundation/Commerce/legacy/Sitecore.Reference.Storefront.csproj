@@ -215,38 +215,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CartController.cs" />
-    <Compile Include="Controllers\CheckoutController.cs" />
-    <Compile Include="Controllers\NavigationSearchController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\StorefrontSearchController.cs" />
     <Compile Include="Infrastructure\ServicesConfigurator.cs" />
-    <Compile Include="Infrastructure\StorefrontSessionStateAttribute.cs" />
     <Compile Include="Models\JsonResults\AddressItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\AddressItemJsonResult.cs" />
     <Compile Include="Models\JsonResults\AddressListItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\AddressListItemJsonResult.cs" />
-    <Compile Include="Models\JsonResults\CancelOrderBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\CardPaymentAcceptUrlJsonResult.cs" />
     <Compile Include="Models\JsonResults\ForgotPasswordBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\CheckoutDataBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\ProfileBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\RegisterBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\ChangePasswordBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\ShippingMethodsBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\MiniCartBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\OrderHeaderItemBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\SubmitOrderBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\LoyaltyCardItemBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\LoyaltyCardsBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\LoyaltyRewardPointItemBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\ProfileBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\RegisterBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\ChangePasswordBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\OrderHeaderItemBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\UpdateLoyaltyCardBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\UserBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\OrdersBaseJsonResult.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\SiteContentListHeaderViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
@@ -265,27 +246,14 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\Local.pubxml" />
-    <None Include="Scripts\jquery-2.0.3.min.map" />
-    <None Include="Scripts\jsuri-1.1.1.min.js.map" />
-    <None Include="Scripts\knockout.validation-2.0.0.min.js.map" />
-    <Content Include="Sitecore\Copyrights\CastleWinsor_Apache.txt" />
-    <Content Include="Sitecore\Copyrights\Knockout.Validation_MIT.txt" />
-    <Content Include="Sitecore\Copyrights\Microsoft.AspNet.Mvc_rtw_enu.htm" />
-    <Content Include="Sitecore\Copyrights\Microsoft.AspNet.Razor_rtw_enu.htm" />
-    <Content Include="Sitecore\Copyrights\Microsoft.AspNet.WebApi_rtw_enu.htm" />
-    <Content Include="Sitecore\Copyrights\Microsoft.AspNet.WebPages_rtw_enu.htm" />
-    <Content Include="Sitecore\Copyrights\Microsoft.Web.Infrastructure-eula.htm" />
-    <Content Include="Sitecore\Copyrights\Newtonsoft.Json_MIT.txt" />
-    <Content Include="Sitecore\Copyrights\WebActivatorEx_MSPL.txt" />
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Account\AddressBook.cshtml" />
-    <Content Include="Views\Account\RecentOrders.cshtml" />
     <Content Include="Views\Account\Addresses.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\EditProfile.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Logoff.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsList.cshtml" />
@@ -299,8 +267,6 @@
     <Content Include="Views\Shared\SearchEvent.cshtml" />
     <Content Include="Views\Shared\ShareAndPrint.cshtml" />
     <Content Include="Views\Shared\SocialConnector.cshtml" />
-    <Content Include="Views\Account\MyOrder.cshtml" />
-    <Content Include="Views\Account\MyOrders.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsListHeader.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsPagination.cshtml" />
     <None Include="Views\Web.config">
@@ -315,37 +281,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\autoNumeric.js" />
-    <Content Include="Scripts\bootstrap-1.2.1.js" />
-    <Content Include="Scripts\bootstrap-1.2.1.min.js" />
-    <Content Include="Scripts\jquery-2.0.3.intellisense.js" />
-    <Content Include="Scripts\jquery-2.0.3.js" />
-    <Content Include="Scripts\jquery-2.0.3.min.js" />
-    <Content Include="Scripts\jquery-ui-1.10.4.js" />
-    <Content Include="Scripts\jquery.blockUI.js" />
-    <Content Include="Scripts\jquery.cookie.js" />
-    <Content Include="Scripts\jquery.placeholder.js" />
-    <Content Include="Scripts\jquery.placeholder.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\jsuri-1.1.1.js" />
-    <Content Include="Scripts\jsuri-1.1.1.min.js" />
-    <Content Include="Scripts\knockout-2.3.0.debug.js" />
-    <Content Include="Scripts\knockout-2.3.0.js" />
-    <Content Include="Scripts\knockout.mapping-latest.js" />
-    <Content Include="Scripts\knockout.validation-2.0.0.js" />
-    <Content Include="Scripts\knockout.validation-2.0.0.min.js" />
-    <Content Include="Scripts\modernizr-2.6.1.min.js" />
-    <Content Include="Scripts\number-polyfill.js" />
-    <Content Include="Scripts\number-polyfill.min.js" />
     <Content Include="Scripts\Storefront\order.js" />
     <Content Include="Scripts\Storefront\addresses.js" />
     <Content Include="Scripts\Storefront\bootstrap.js" />
@@ -384,6 +319,7 @@
       <Name>Sitecore.Foundation.Commerce</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

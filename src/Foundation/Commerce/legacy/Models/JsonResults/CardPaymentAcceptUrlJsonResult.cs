@@ -23,7 +23,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    public class CardPaymentAcceptUrlJsonResult : BaseJsonResult
+    public class CardPaymentAcceptUrlJsonResult : BaseApiModel
     {
         public CardPaymentAcceptUrlJsonResult(GetPaymentServiceUrlResult result) : base(result)
         {

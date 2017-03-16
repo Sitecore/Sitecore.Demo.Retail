@@ -1,10 +1,10 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="StorefrontSessionStateAttribute.cs" company="Sitecore Corporation">
+// <copyright file="BaseJsonResult.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Defines the Storefront session state method attribute.</summary>
+// <summary>Defines the BaseJsonResult class.</summary>
 //-----------------------------------------------------------------------
-// Copyright 2015 Sitecore Corporation A/S
+// Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
 // except in compliance with the License. You may obtain a copy of the License at
 //       http://www.apache.org/licenses/LICENSE-2.0
@@ -16,18 +16,25 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
-using System.Web.SessionState;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using Sitecore.Commerce.Services;
+using Sitecore.Data.Items;
+using Sitecore.Foundation.Commerce.Managers;
 
-namespace Sitecore.Reference.Storefront.Infrastructure
+namespace Sitecore.Foundation.Commerce.Models
 {
-    [AttributeUsage(AttributeTargets.Method)]
-    public sealed class StorefrontSessionStateAttribute : Attribute
+    public class ErrorApiModel : BaseApiModel
     {
-        public StorefrontSessionStateAttribute(SessionStateBehavior behavior)
+        public ErrorApiModel(string area, string errorMessage)
         {
-            Behavior = behavior;
+            Errors.Add($"{area}: {errorMessage}");
         }
 
-        public SessionStateBehavior Behavior { get; private set; }
-    }
+        public ErrorApiModel(string area, Exception exception)
+        {
+            SetErrors(area, exception);
+        }
+   }
 }

@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="AvailableStatesModel.cs" company="Sitecore Corporation">
+// <copyright file="CancelOrderBaseJsonResult.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Defines the AvailableStatesModel class.</summary>
+// <summary>Emits the Json result for an order cancellation.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -15,31 +15,27 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using Sitecore.Commerce.Services;
+using Sitecore.Commerce.Services.Orders;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class AvailableStatesApiModel : BaseJsonResult
+    public class CancelOrderApiModel : BaseApiModel
     {
-        public AvailableStatesApiModel()
+        public CancelOrderApiModel()
         {
         }
 
-        public AvailableStatesApiModel(ServiceProviderResult result)
-            : base(result)
+        public CancelOrderApiModel(VisitorCancelOrderResult result) : base(result)
         {
+            Assert.ArgumentNotNull(result, nameof(result));
+            if (result.CancellationStatus != null)
+            {
+                CancellationStatus = result.CancellationStatus.Name;
+            }
         }
 
-        public Dictionary<string, string> States { get; set; }
-
-        public void Initialize(Dictionary<string, string> states)
-        {
-            Assert.ArgumentNotNull(states, nameof(states));
-
-            States = states;
-        }
+        public string CancellationStatus { get; set; }
     }
 }

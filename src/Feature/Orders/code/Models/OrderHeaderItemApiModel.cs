@@ -20,11 +20,11 @@ using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 
-namespace Sitecore.Reference.Storefront.Models.JsonResults
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class OrderHeaderItemBaseJsonResult
+    public class OrderHeaderApiModel
     {
-        public OrderHeaderItemBaseJsonResult(OrderHeader header)
+        public OrderHeaderApiModel(OrderHeader header)
         {
             ExternalId = header.ExternalId;
             Status = LookupManager.GetOrderStatusName(header.Status);

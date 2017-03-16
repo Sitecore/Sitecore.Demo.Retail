@@ -22,31 +22,31 @@ function AddressViewModel(address) {
     self.name = populate ? ko.validatedObservable(address.Name).extend({ required: true }) : ko.validatedObservable().extend({ required: true });
     self.address1 = populate ? ko.validatedObservable(address.Address1).extend({ required: true }) : ko.validatedObservable().extend({ required: true });
     self.city = populate ? ko.validatedObservable(address.City).extend({ required: true }) : ko.validatedObservable().extend({ required: true });
-    self.state = populate ? ko.validatedObservable(address.State).extend({ required: true }) : ko.validatedObservable().extend({ required: true });
+    self.region = populate ? ko.validatedObservable(address.Region).extend({ required: true }) : ko.validatedObservable().extend({ required: true });
     self.zipPostalCode = populate ? ko.validatedObservable(address.ZipPostalCode).extend({ required: true }) : ko.validatedObservable().extend({ required: true });
     self.country = populate ? ko.validatedObservable(address.Country).extend({ required: true }) : ko.validatedObservable().extend({ required: true });
     self.isPrimary = populate ? ko.observable(address.IsPrimary) : ko.observable();
     self.fullAddress = populate ? ko.observable(address.FullAddress) : ko.observable();
     self.detailsUrl = populate ? ko.observable(address.DetailsUrl) : ko.observable();
 
-    self.states = ko.observableArray();
+    self.regions = ko.observableArray();
     self.country.subscribe(function (countryCode) {
-        self.states.removeAll();
-        // self.getStates(countryCode);
+        self.regions.removeAll();
+        // self.getRegions(countryCode);
     });
 
-    self.getStates = function (countryCode) {
-        AJAXPost(StorefrontUri("api/storefront/checkout/getAvailableStates"), '{ "CountryCode": "' + countryCode + '"}', function (data, success, sender){
-            if (data.States != null) {
-                $.each(data.States, function (code, name) {
-                    self.states.push(new CountryStateViewModel(name, code));
+    self.getRegions = function (countryCode) {
+        AJAXPost(StorefrontUri("api/storefront/checkout/getAvailableRegions"), '{ "CountryCode": "' + countryCode + '"}', function (data, success, sender) {
+            if (data.Regions != null) {
+                $.each(data.Regions, function (code, name) {
+                    self.regions.push(new CountryRegionViewModel(name, code));
                 });
             }
         });
     }
 }
 
-var CountryStateViewModel = function (name, code) {
+var CountryRegionViewModel = function (name, code) {
     this.name = name;
     this.code = code;
 };
@@ -67,7 +67,7 @@ function AddressListViewModel(data) {
     self.countries = ko.observableArray();
     if (data.Countries != null) {
         $.each(data.Countries, function (code, name) {
-            self.countries.push(new CountryStateViewModel(name, code));
+            self.countries.push(new CountryRegionViewModel(name, code));
         });
     }
 
@@ -108,7 +108,7 @@ function AddressListViewModel(data) {
         if (data.Countries != null && data.Countries.length > 0) {
             self.countries.removeAll();
             $.each(data.Countries, function (code, name) {
-                self.countries.push(new CountryStateViewModel(name, code));
+                self.countries.push(new CountryRegionViewModel(name, code));
             });
         }
 

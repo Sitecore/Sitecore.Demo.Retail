@@ -23,7 +23,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class GiftCardApiModel : BaseJsonResult
+    public class GiftCardApiModel : BaseApiModel
     {
         public GiftCardApiModel()
         {

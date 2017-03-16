@@ -21,7 +21,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    public class ProfileBaseJsonResult : BaseJsonResult
+    public class ProfileBaseJsonResult : BaseApiModel
     {
         public ProfileBaseJsonResult()
         {

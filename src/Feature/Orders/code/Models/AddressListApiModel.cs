@@ -26,7 +26,7 @@ using System;
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
     [Obsolete("Please refactor")]
-    public class AddressListApiModel : BaseJsonResult
+    public class AddressListApiModel : BaseApiModel
     {
         public AddressListApiModel()
         {

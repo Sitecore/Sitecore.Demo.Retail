@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="OrdersBaseJsonResult.cs" company="Sitecore Corporation">
+// <copyright file="AvailableRegionsModel.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Defines the OrdersBaseJsonResult class.</summary>
+// <summary>Defines the AvailableRegionsModel class.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -16,36 +16,29 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using Sitecore.Commerce.Connect.CommerceServer;
-using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Models;
 
-namespace Sitecore.Reference.Storefront.Models.JsonResults
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class OrdersBaseJsonResult : BaseJsonResult
+    public class AvailableRegionsApiModel : BaseApiModel
     {
-        public OrdersBaseJsonResult()
+        public AvailableRegionsApiModel()
         {
         }
 
-        public OrdersBaseJsonResult(ServiceProviderResult result)
-            : base(result)
+        public AvailableRegionsApiModel(ServiceProviderResult result) : base(result)
         {
         }
 
-        public List<OrderHeaderItemBaseJsonResult> Orders { get; } = new List<OrderHeaderItemBaseJsonResult>();
+        public Dictionary<string, string> Regions { get; set; }
 
-        public void Initialize(IEnumerable<OrderHeader> orderHeaders)
+        public void Initialize(Dictionary<string, string> regions)
         {
-            Assert.ArgumentNotNull(orderHeaders, nameof(orderHeaders));
+            Assert.ArgumentNotNull(regions, nameof(regions));
 
-            foreach (var orderHeader in orderHeaders)
-            {
-                var headerItem = new OrderHeaderItemBaseJsonResult(orderHeader);
-                Orders.Add(headerItem);
-            }
+            Regions = regions;
         }
     }
 }

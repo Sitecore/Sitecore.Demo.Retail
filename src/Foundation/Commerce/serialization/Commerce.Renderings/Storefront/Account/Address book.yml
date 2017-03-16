@@ -2,7 +2,7 @@
 ID: "2dc1e1dc-bea7-4023-9585-c75ff16c192c"
 Parent: "6b9d0b39-8f4b-4831-bc3a-c9cf49567bd4"
 Template: "99f8905d-4a87-4eb8-9f8b-a9bebfb3add6"
-Path: /sitecore/layout/Renderings/Storefront/Account/AddressBook
+Path: /sitecore/layout/Renderings/Storefront/Account/Address Book
 DB: master
 SharedFields:
 - ID: "51b435bc-f7b9-478a-9c51-52916af96ff5"

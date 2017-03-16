@@ -179,7 +179,6 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="App_Config\Include\Foundation\Foundation.Commerce.Lucene.config">
-    <Content Include="App_Config\Include\Foundation\Sitecore.Foundation.Commerce.Lucene.config">
       <SubType>Designer</SubType>
     </Content>
     <None Include="web.config.transform">
@@ -227,15 +226,17 @@
     <Compile Include="Managers\BaseManager.cs" />
     <Compile Include="Managers\CartManager.cs" />
     <Compile Include="Managers\CatalogManager.cs" />
+    <Compile Include="Managers\CountryManager.cs" />
     <Compile Include="Managers\GiftCardManager.cs" />
     <Compile Include="Managers\LookupManager.cs" />
     <Compile Include="Managers\CurrencyManager.cs" />
     <Compile Include="Models\ApiControllerMapping.cs" />
+    <Compile Include="Models\ErrorApiModel.cs" />
     <Compile Include="Models\CatalogContext.cs" />
     <Compile Include="Models\CatalogItemType.cs" />
     <Compile Include="Models\CurrencyContext.cs" />
     <Compile Include="Models\ICatalogItemContext.cs" />
-    <Compile Include="Models\BaseJsonResult.cs" />
+    <Compile Include="Models\BaseApiModel.cs" />
     <Compile Include="Models\ICatalogCategory.cs" />
     <Compile Include="Managers\InventoryManager.cs" />
     <Compile Include="Models\ICatalogProduct.cs" />

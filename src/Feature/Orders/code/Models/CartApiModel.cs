@@ -28,7 +28,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class CartApiModel : BaseJsonResult
+    public class CartApiModel : BaseApiModel
     {
         public CartApiModel()
         {

@@ -1,9 +1,9 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="GetAvailableRegionsInputModel.cs" company="Sitecore Corporation">
+﻿//---------------------------------------------------------------------
+// <copyright file="InitializeRoutes.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Controller parameters required to get the Near by Stores.</summary>
-//-----------------------------------------------------------------------
+// <summary>The route ininitialization</summary>
+//---------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
 // except in compliance with the License. You may obtain a copy of the License at
@@ -15,13 +15,19 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
+using System.Web.Routing;
+using Sitecore.Pipelines;
 
-namespace Sitecore.Foundation.Commerce.Models.InputModels
+namespace Sitecore.Feature.Commerce.Orders.Infrastructure.Pipelines
 {
-    public class GetAvailableRegionsInputModel
+    public class InitializeRoutes
     {
-        [Required]
-        public string CountryCode { get; set; }
+        public void Process(PipelineArgs args)
+        {
+            if (!Context.IsUnitTesting)
+            {
+                RouteConfig.RegisterRoutes(RouteTable.Routes);
+            }
+        }
     }
 }

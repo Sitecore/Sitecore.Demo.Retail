@@ -33,7 +33,7 @@ using Sitecore.Links;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class CartLineApiModel : BaseJsonResult
+    public class CartLineApiModel : BaseApiModel
     {
         public CartLineApiModel(CartLine line, Item productItem)
         {

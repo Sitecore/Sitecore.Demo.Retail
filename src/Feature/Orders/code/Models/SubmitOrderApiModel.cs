@@ -21,7 +21,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class SubmitOrderApiModel : BaseJsonResult
+    public class SubmitOrderApiModel : BaseApiModel
     {
         public SubmitOrderApiModel()
         {

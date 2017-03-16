@@ -22,7 +22,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    public class UserBaseJsonResult : BaseJsonResult
+    public class UserBaseJsonResult : BaseApiModel
     {
         public UserBaseJsonResult()
         {

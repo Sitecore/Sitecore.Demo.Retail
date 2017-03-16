@@ -22,7 +22,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class LineShippingOptionApiModel : BaseJsonResult
+    public class LineShippingOptionApiModel : BaseApiModel
     {
         public string LineId { get; set; }
 

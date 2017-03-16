@@ -25,7 +25,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class StockInfoApiModel : BaseJsonResult
+    public class StockInfoApiModel : BaseApiModel
     {
         public StockInfoApiModel()
         {

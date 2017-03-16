@@ -17,7 +17,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.SessionState;
@@ -25,13 +24,10 @@ using System.Web.UI;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Configuration;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
-using Sitecore.Commerce.Contacts;
 using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Entities.Customers;
-using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Configuration;
 using Sitecore.Diagnostics;
-using Sitecore.Foundation.Commerce;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
@@ -57,76 +53,21 @@ namespace Sitecore.Reference.Storefront.Controllers
             RemoveLoginSuccess
         }
 
-        public AccountController([NotNull] OrderManager orderManager, [NotNull] AccountManager accountManager, VisitorContextRepository visitorContextRepository)
+        public AccountController(AccountManager accountManager, CountryManager countryManager, VisitorContextRepository visitorContextRepository)
         {
-            Assert.ArgumentNotNull(orderManager, nameof(orderManager));
-
-            OrderManager = orderManager;
             AccountManager = accountManager;
             VisitorContextRepository = visitorContextRepository;
+            CountryManager = countryManager;
         }
 
-        private OrderManager OrderManager { get; set; }
+        private CountryManager CountryManager { get; }
         private AccountManager AccountManager { get; }
         private VisitorContextRepository VisitorContextRepository { get; }
-
-
-        [Authorize]
-        [HttpPost]
-        [ValidateJsonAntiForgeryToken]
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public JsonResult Reorder(ReorderInputModel inputModel)
-        {
-            try
-            {
-                Assert.ArgumentNotNull(inputModel, nameof(inputModel));
-                var validationResult = this.CreateJsonResult();
-                if (validationResult.HasErrors)
-                {
-                    return Json(validationResult, JsonRequestBehavior.AllowGet);
-                }
-
-                var response = OrderManager.Reorder(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
-                var result = new BaseJsonResult(response.ServiceProviderResult);
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception e)
-            {
-                CommerceLog.Current.Error("Reorder", this);
-                return Json(new BaseJsonResult("Reorder", e), JsonRequestBehavior.AllowGet);
-            }
-        }
-
-        [Authorize]
-        [HttpPost]
-        [ValidateJsonAntiForgeryToken]
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public JsonResult CancelOrder(CancelOrderInputModel inputModel)
-        {
-            try
-            {
-                Assert.ArgumentNotNull(inputModel, nameof(inputModel));
-                var validationResult = this.CreateJsonResult<CancelOrderBaseJsonResult>();
-                if (validationResult.HasErrors)
-                {
-                    return Json(validationResult, JsonRequestBehavior.AllowGet);
-                }
-
-                var response = OrderManager.CancelOrder(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
-                var result = new CancelOrderBaseJsonResult(response.ServiceProviderResult);
-
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception e)
-            {
-                CommerceLog.Current.Error("CancelOrder", this);
-                return Json(new BaseJsonResult("CancelOrder", e), JsonRequestBehavior.AllowGet);
-            }
-        }
+        public int MaxNumberOfAddresses => Settings.GetIntSetting("Storefront.MaxNumberOfAddresses", 10);
 
         [HttpGet]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public override ActionResult Index()
+        public ActionResult LogOff()
         {
             if (!Context.User.IsAuthenticated)
             {
@@ -147,7 +88,7 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult LogOff()
+        public ActionResult LogOffAndRedirect()
         {
             AccountManager.Logout();
 
@@ -263,7 +204,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("Register", this, e);
-                return Json(new BaseJsonResult("Register", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("Register", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -312,69 +253,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("ChangePassword", this, e);
-                return Json(new BaseJsonResult("ChangePassword", e), JsonRequestBehavior.AllowGet);
-            }
-        }
-
-        [HttpGet]
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public ActionResult MyOrders()
-        {
-            if (!Context.User.IsAuthenticated)
-            {
-                return Redirect("/login");
-            }
-
-            var commerceUser = AccountManager.GetUser(Context.User.Name).Result;
-            var orders = OrderManager.GetOrders(commerceUser.ExternalId, StorefrontManager.CurrentStorefront.ShopName).Result;
-            return View(orders.ToList());
-        }
-
-        [HttpGet]
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public ActionResult MyOrder(string id)
-        {
-            if (!Context.User.IsAuthenticated)
-            {
-                return Redirect("/login");
-            }
-
-            var response = OrderManager.GetOrderDetails(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), id);
-            ViewBag.IsItemShipping = response.Result.Shipping != null && response.Result.Shipping.Count > 1 && response.Result.Lines.Count > 1;
-            return View(response.Result);
-        }
-
-        [HttpPost]
-        [Authorize]
-        [ValidateJsonAntiForgeryToken]
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public JsonResult RecentOrders()
-        {
-            try
-            {
-                var recentOrders = new List<OrderHeader>();
-
-                var userResponse = AccountManager.GetUser(Context.User.Name);
-                var result = new OrdersBaseJsonResult(userResponse.ServiceProviderResult);
-                if (userResponse.ServiceProviderResult.Success && userResponse.Result != null)
-                {
-                    var commerceUser = userResponse.Result;
-                    var response = OrderManager.GetOrders(commerceUser.ExternalId, StorefrontManager.CurrentStorefront.ShopName);
-                    result.SetErrors(response.ServiceProviderResult);
-                    if (response.ServiceProviderResult.Success && response.Result != null)
-                    {
-                        var orders = response.Result.Cast<CommerceOrderHeader>().ToList();
-                        recentOrders = orders.Where(order => order.LastModified > DateTime.Today.AddDays(-30)).Take(5).Cast<OrderHeader>().ToList();
-                    }
-                }
-
-                result.Initialize(recentOrders);
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception e)
-            {
-                CommerceLog.Current.Error("RecentOrders", this, e);
-                return Json(new BaseJsonResult("RecentOrders", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("ChangePassword", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -422,7 +301,6 @@ namespace Sitecore.Reference.Storefront.Controllers
         [Authorize]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        [StorefrontSessionState(SessionStateBehavior.ReadOnly)]
         public JsonResult AddressList()
         {
             try
@@ -436,7 +314,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("AddressList", this, e);
-                return Json(new BaseJsonResult("AddressList", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("AddressList", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -470,7 +348,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("AddressDelete", this, e);
-                return Json(new BaseJsonResult("AddressDelete", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("AddressDelete", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -504,7 +382,7 @@ namespace Sitecore.Reference.Storefront.Controllers
                         Address1 = model.Address1,
                         City = model.City,
                         Country = model.Country,
-                        State = model.State,
+                        State = model.Region,
                         ZipPostalCode = model.ZipPostalCode,
                         PartyId = model.PartyId,
                         IsPrimary = model.IsPrimary
@@ -552,7 +430,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("AddressModify", this, e);
-                return Json(new BaseJsonResult("AddressModify", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("AddressModify", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -594,7 +472,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("UpdateProfile", this, e);
-                return Json(new BaseJsonResult("UpdateProfile", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("UpdateProfile", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -602,7 +480,6 @@ namespace Sitecore.Reference.Storefront.Controllers
         [AllowAnonymous]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        [StorefrontSessionState(SessionStateBehavior.ReadOnly)]
         public JsonResult GetCurrentUser()
         {
             try
@@ -626,7 +503,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("GetCurrentUser", this, e);
-                return Json(new BaseJsonResult("GetCurrentUser", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("GetCurrentUser", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -657,7 +534,7 @@ namespace Sitecore.Reference.Storefront.Controllers
             catch (Exception e)
             {
                 CommerceLog.Current.Error("ForgotPassword", this, e);
-                return Json(new BaseJsonResult("ForgotPassword", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("ForgotPassword", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -685,7 +562,7 @@ namespace Sitecore.Reference.Storefront.Controllers
         private Dictionary<string, string> GetAvailableCountries(AddressListItemJsonResult result)
         {
             var countries = new Dictionary<string, string>();
-            var response = OrderManager.GetAvailableCountries();
+            var response = CountryManager.GetAvailableCountries();
             if (response.ServiceProviderResult.Success && response.Result != null)
             {
                 countries = response.Result;
@@ -707,6 +584,5 @@ namespace Sitecore.Reference.Storefront.Controllers
             result.SetErrors(response.ServiceProviderResult);
             return addresses;
         }
-        public int MaxNumberOfAddresses => Settings.GetIntSetting("Storefront.MaxNumberOfAddresses", 10);
     }
 }

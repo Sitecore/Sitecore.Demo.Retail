@@ -24,7 +24,7 @@ using Sitecore.Mvc.Extensions;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    public class AddressListItemBaseJsonResult : BaseJsonResult
+    public class AddressListItemBaseJsonResult : BaseApiModel
     {
         public AddressListItemBaseJsonResult()
         {

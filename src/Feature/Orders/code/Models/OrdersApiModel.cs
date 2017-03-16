@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="CancelOrderBaseJsonResult.cs" company="Sitecore Corporation">
+// <copyright file="OrdersBaseJsonResult.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Emits the Json result for an order cancellation.</summary>
+// <summary>Defines the OrdersBaseJsonResult class.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -15,28 +15,36 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using Sitecore.Commerce.Services.Orders;
+using System.Collections.Generic;
+using Sitecore.Commerce.Entities.Orders;
+using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Models;
 
-namespace Sitecore.Reference.Storefront.Models.JsonResults
+namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class CancelOrderBaseJsonResult : BaseJsonResult
+    public class OrdersApiModel : BaseApiModel
     {
-        public CancelOrderBaseJsonResult()
+        public OrdersApiModel()
         {
         }
 
-        public CancelOrderBaseJsonResult(VisitorCancelOrderResult result)
+        public OrdersApiModel(ServiceProviderResult result)
             : base(result)
         {
-            Assert.ArgumentNotNull(result, nameof(result));
-            if (result.CancellationStatus != null)
-            {
-                CancellationStatus = result.CancellationStatus.Name;
-            }
         }
 
-        public string CancellationStatus { get; set; }
+        public List<OrderHeaderApiModel> Orders { get; } = new List<OrderHeaderApiModel>();
+
+        public void Initialize(IEnumerable<OrderHeader> orderHeaders)
+        {
+            Assert.ArgumentNotNull(orderHeaders, nameof(orderHeaders));
+
+            foreach (var orderHeader in orderHeaders)
+            {
+                var headerItem = new OrderHeaderApiModel(orderHeader);
+                Orders.Add(headerItem);
+            }
+        }
     }
 }

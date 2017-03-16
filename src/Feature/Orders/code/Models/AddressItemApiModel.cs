@@ -24,7 +24,7 @@ using System;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class AddressItemApiModel : BaseJsonResult
+    public class AddressItemApiModel : BaseApiModel
     {
         public AddressItemApiModel()
         {
@@ -45,7 +45,7 @@ namespace Sitecore.Feature.Commerce.Orders.Models
 
         public string City { get; set; }
 
-        public string State { get; set; }
+        public string Region { get; set; }
 
         public string Country { get; set; }
 
@@ -55,19 +55,19 @@ namespace Sitecore.Feature.Commerce.Orders.Models
 
         public string DetailsUrl { get; set; }
 
-        public void Initialize(Party address)
+        public void Initialize(Party party)
         {
-            Assert.ArgumentNotNull(address, nameof(address));
+            Assert.ArgumentNotNull(party, nameof(party));
 
-            ExternalId = address.ExternalId;
-            Address1 = address.Address1;
-            City = address.City;
-            State = address.State;
-            ZipPostalCode = address.ZipPostalCode;
-            Country = address.Country;
-            FullAddress = string.Concat(address.Address1, ", ", address.City, ", ", address.ZipPostalCode);
+            ExternalId = party.ExternalId;
+            Address1 = party.Address1;
+            City = party.City;
+            Region = party.State;
+            ZipPostalCode = party.ZipPostalCode;
+            Country = party.Country;
+            FullAddress = string.Concat(party.Address1, ", ", party.City, ", ", party.ZipPostalCode);
 #warning Remove hardcoded URL
-            DetailsUrl = string.Concat("/accountmanagement/addressbook", "?id=", address.ExternalId);
+            DetailsUrl = string.Concat("/accountmanagement/addressbook", "?id=", party.ExternalId);
         }
 
         public void Initialize(CommerceParty address)

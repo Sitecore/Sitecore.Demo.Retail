@@ -21,7 +21,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Reference.Storefront.Models.JsonResults
 {
-    public class ForgotPasswordBaseJsonResult : BaseJsonResult
+    public class ForgotPasswordBaseJsonResult : BaseApiModel
     {
         public ForgotPasswordBaseJsonResult()
         {

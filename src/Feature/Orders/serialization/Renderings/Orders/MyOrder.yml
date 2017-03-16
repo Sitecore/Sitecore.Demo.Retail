@@ -1,16 +1,16 @@
 ﻿---
-ID: "daeae6e9-344b-458c-a757-bca55c57d03e"
-Parent: "6b9d0b39-8f4b-4831-bc3a-c9cf49567bd4"
+ID: "70f244b9-e109-4729-bb28-73aed3da32a8"
+Parent: "2f0279de-62b2-4553-b125-a7574050d0ca"
 Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
-Path: /sitecore/layout/Renderings/Storefront/Account/AddressBook
+Path: /sitecore/layout/Renderings/Feature/Commerce/Orders/MyOrder
 DB: master
 SharedFields:
 - ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
   Hint: Controller Action
-  Value: Addresses
+  Value: MyOrder
 - ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
   Hint: Controller
-  Value: Account
+  Value: Order
 Languages:
 - Language: en
   Versions:
@@ -18,4 +18,4 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20150114T014622Z
+      Value: 20141229T200841Z

@@ -247,7 +247,7 @@ function CheckoutDataViewModel(data) {
             self.countries.push(new Country(value, index));
         });
     }
-    self.states = ko.observableArray(GetAvailableStates(defaultCountryCode));
+    self.regions = ko.observableArray(GetAvailableRegions(defaultCountryCode));
 
     self.getAddress = function (id) {
         var match = ko.utils.arrayFirst(self.userAddresses(), function (a) {

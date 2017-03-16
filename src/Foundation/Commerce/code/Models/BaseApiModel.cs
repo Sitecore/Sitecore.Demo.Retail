@@ -25,14 +25,14 @@ using Sitecore.Foundation.Commerce.Managers;
 
 namespace Sitecore.Foundation.Commerce.Models
 {
-    public class BaseJsonResult : JsonResult
+    public class BaseApiModel : JsonResult
     {
-        public BaseJsonResult()
+        public BaseApiModel()
         {
             Success = true;
         }
 
-        public BaseJsonResult(ServiceProviderResult result)
+        public BaseApiModel(ServiceProviderResult result)
         {
             Success = true;
 
@@ -42,14 +42,7 @@ namespace Sitecore.Foundation.Commerce.Models
             }
         }
 
-        public BaseJsonResult(string area, Exception exception)
-        {
-            Success = false;
-
-            SetErrors(area, exception);
-        }
-
-        public BaseJsonResult(string url)
+        public BaseApiModel(string url)
         {
             Success = false;
 

@@ -128,19 +128,6 @@ namespace Sitecore.Foundation.Commerce.Managers
             return info;
         }
 
-        public ManagerResponse<GetAvailableRegionsResult, Dictionary<string, string>> GetAvailableRegions([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext,[NotNull] string countryCode)
-        {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
-            Assert.ArgumentNotNullOrEmpty(countryCode, nameof(countryCode));
-
-            var request = new GetAvailableRegionsRequest(countryCode);
-            var result = OrderServiceProvider.GetAvailableRegions(request);
-
-            result.WriteToSitecoreLog();
-            return new ManagerResponse<GetAvailableRegionsResult, Dictionary<string, string>>(result, new Dictionary<string, string>(result.AvailableRegions));
-        }
-
         public ManagerResponse<GetVisitorOrdersResult, IEnumerable<OrderHeader>> GetOrders(string customerId, string shopName)
         {
             Assert.ArgumentNotNullOrEmpty(customerId, nameof(customerId));
@@ -208,15 +195,6 @@ namespace Sitecore.Foundation.Commerce.Managers
             var result = OrderServiceProvider.GetVisitorOrder(request);
             result.WriteToSitecoreLog();
             return new ManagerResponse<GetVisitorOrderResult, CommerceOrder>(result, result.Order as CommerceOrder);
-        }
-
-        public ManagerResponse<GetAvailableCountriesResult, Dictionary<string, string>> GetAvailableCountries()
-        {
-            var request = new GetAvailableCountriesRequest();
-            var result = OrderServiceProvider.GetAvailableCountries(request);
-            result.WriteToSitecoreLog();
-            return new ManagerResponse<GetAvailableCountriesResult, Dictionary<string, string>>(result,
-                new Dictionary<string, string>(result.AvailableCountries));
         }
     }
 }
