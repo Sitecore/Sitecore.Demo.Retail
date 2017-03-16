@@ -1,0 +1,18 @@
+﻿---
+ID: "df5e3e4e-b240-4c6d-aaaa-98c2adaa66e6"
+Parent: "caf02d6d-5cb8-4995-b4f3-e4ed6f54e5a7"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Project/Retail/Page Types/Checkout Page/Shipment Details
+DB: master
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 300
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170316T133241Z

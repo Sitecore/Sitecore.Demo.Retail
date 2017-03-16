@@ -16,6 +16,9 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20161209T150721Z
+    - ID: "3a5cf40a-d1ce-4db6-af7c-77923f546743"
+      Hint: Description
+      Value: Items to be Shipped
     - ID: "f311c61a-08dd-411a-b280-42e335ec6118"
       Hint: Title
       Value: Ship items
