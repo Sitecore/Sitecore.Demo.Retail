@@ -1,0 +1,28 @@
+﻿---
+ID: "32796194-2d96-495e-837d-2e3354b1e115"
+Parent: "7d1340c0-7c54-4437-bf3d-e1d65c2ec661"
+Template: "8015bb44-6d50-4c56-980b-435a77aa5b09"
+Path: "/sitecore/system/Social/Applications/Facebook-HabitatElectronics"
+DB: master
+SharedFields:
+- ID: "379d5d91-c5bc-4da9-920e-a001765b7abd"
+  Hint: Application Secret
+  Value: dae4774c286ed8f97ee4b98617991c12
+- ID: "aed4d0d5-8642-43d1-9485-64387919baa6"
+  Hint: Application ID
+  Value: 697850637053484
+- ID: "d0ebf5c0-e9b9-4615-a761-d68cd8108341"
+  Hint: Network
+  Value: "{D7429409-D6DA-46CD-91DD-8702781AE3C4}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170221T193207Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
