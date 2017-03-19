@@ -27,7 +27,7 @@ $(document).ready(function () {
 
 function RegisterSuccess(data) {
     if (data && data.Success) {
-        window.location.href = StorefrontUri("AccountManagement");
+        window.location.href = "/AccountManagement";
     }
 
     ClearGlobalMessages();

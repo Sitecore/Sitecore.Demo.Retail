@@ -34,7 +34,7 @@ function DeliveryAddressViewModel(address) {
     });
 
     self.getRegions = function (countryCode) {
-        AJAXPost(StorefrontUri("api/storefront/checkout/getAvailableRegions"), '{ "CountryCode": "' + countryCode + '"}', function (data, success, sender) {
+        AJAXPost("/api/storefront/checkout/getAvailableRegions", '{ "CountryCode": "' + countryCode + '"}', function (data, success, sender) {
             if (data.Regions != null) {
                 $.each(data.Regions, function (code, name) {
                     self.regions.push(new CountryRegionViewModel(name, code));

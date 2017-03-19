@@ -21,7 +21,7 @@ function ForgotPasswordSuccess(cntx) {
     $("#forgotPasswordButton").button('reset');
 
     if (cntx.Success && !cntx.HasErrors) {
-        window.location.href = StorefrontUri("ForgotPasswordConfirmation?username=" + cntx.UserName + "");
+        window.location.href = "/ForgotPasswordConfirmation?username=" + cntx.UserName;
     }
 
     ShowGlobalMessages(cntx);

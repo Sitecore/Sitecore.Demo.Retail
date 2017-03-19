@@ -15,24 +15,3 @@ function ErrorLineDetailViewModel(errorMessage) {
 
     self.errorMessage = errorMessage;
 }
-
-function ErrorSummaryViewModel(sectionId) {
-    var self = this;
-
-    self.sectionId = sectionId;
-    self.errorList = ko.observableArray();
-    self.shouldShowErrorList = ko.observable(false);
-
-    self.AddToErrorList = function (data) {
-        $(data.Errors).each(function () {
-            self.errorList.push(new ErrorLineDetailViewModel(this));
-        });
-
-        self.shouldShowErrorList(self.errorList && self.errorList().length > 0 ? true : false);
-    }
-
-    self.ClearMessages = function () {
-        self.errorList.removeAll();
-        self.shouldShowErrorList(false);
-    }
-}

@@ -10,9 +10,6 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-var ordersHeaderViewModel = null;
-
-// model
 function OrderHeaderModel(orderHeader) {
     var self = this;
 
@@ -21,29 +18,4 @@ function OrderHeaderModel(orderHeader) {
     self.status = orderHeader.Status;
     self.lastModified = orderHeader.LastModified;
     self.detailsUrl = orderHeader.DetailsUrl;
-}
-
-//viewmodel
-function OrderHeaderViewModel(data) {
-    var self = this;
-
-    self.orders = ko.observableArray();
-    $.each(data.Orders, function () {
-        self.orders().push(new OrderHeaderModel(this));
-    });
-
-    self.hasOrders = ko.observable(self.orders().length !== 0);
-    self.showLoader = ko.observable(true);
-}
-
-//data
-function initRecentOrders(sectionId) {
-    AJAXPost(StorefrontUri("api/storefront/orders/recentOrders"), null, function (data, success, sender) {
-        if (success && data.Success) {
-            ordersHeaderViewModel = new OrderHeaderViewModel(data);
-            ko.applyBindings(ordersHeaderViewModel, document.getElementById(sectionId));
-        }
-        ordersHeaderViewModel.showLoader(false);
-        ShowGlobalMessages(data);
-    });
 }

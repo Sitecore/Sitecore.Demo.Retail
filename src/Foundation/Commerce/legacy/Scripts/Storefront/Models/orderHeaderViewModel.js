@@ -10,25 +10,14 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-function ChangePasswordSuccess(cntx) {
-    ClearGlobalMessages();
-    $("#changePasswordButton").button('reset');
+function OrderHeaderViewModel(data) {
+    var self = this;
 
-    if (cntx.Success && !cntx.HasErrors) {
-        window.location.href = "/AccountManagement";
-    }
-
-    ShowGlobalMessages(cntx);
-}
-
-function ChangePasswordFailure(cntx) {
-    ClearGlobalMessages();
-    ShowGlobalMessages(cntx);
-    $("#changePasswordButton").button('reset');
-}
-
-function SetChangePasswordProcessingButton() {
-    $(document).ready(function () {
-        $("#changePasswordButton").button('loading');
+    self.orders = ko.observableArray();
+    $.each(data.Orders, function () {
+        self.orders().push(new OrderHeaderModel(this));
     });
+
+    self.hasOrders = ko.observable(self.orders().length !== 0);
+    self.showLoader = ko.observable(true);
 }

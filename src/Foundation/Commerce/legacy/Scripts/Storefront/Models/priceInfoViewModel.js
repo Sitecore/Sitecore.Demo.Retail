@@ -10,25 +10,25 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-function ChangePasswordSuccess(cntx) {
-    ClearGlobalMessages();
-    $("#changePasswordButton").button('reset');
+var PriceInfoViewModel = function () {
+    self = this;
 
-    if (cntx.Success && !cntx.HasErrors) {
-        window.location.href = "/AccountManagement";
-    }
+    self.priceBefore = ko.observable();
+    self.priceNow = ko.observable();
+    self.savingsMessage = ko.observable();
 
-    ShowGlobalMessages(cntx);
-}
+    self.switchInfo = function (priceBefore, priceNow, isOnSale, savingsMessage) {
+        self.priceNow(priceNow);
+        self.priceBefore(priceBefore);
+        self.savingsMessage(savingsMessage);
 
-function ChangePasswordFailure(cntx) {
-    ClearGlobalMessages();
-    ShowGlobalMessages(cntx);
-    $("#changePasswordButton").button('reset');
-}
-
-function SetChangePasswordProcessingButton() {
-    $(document).ready(function () {
-        $("#changePasswordButton").button('loading');
-    });
+        if (!isOnSale) {
+            $("#priceWithSavings").hide()
+            $("#priceOnly").show();
+        }
+        else {
+            $("#priceWithSavings").show()
+            $("#priceOnly").hide();
+        }
+    };
 }

@@ -99,7 +99,7 @@ function deleteLineItemResponse(data, success, sender) {
 
 function initShoppingCart(sectionId) {
     ClearGlobalMessages();
-    AJAXPost(StorefrontUri("api/storefront/cart/getcurrentcart"), null, function (data, success, sender) {
+    AJAXPost("/api/storefront/cart/getcurrentcart", null, function (data, success, sender) {
         if (success && data.Success) {
             lineItemListViewModel = new LineItemListViewModel(data);
             if (sectionId) {
@@ -119,7 +119,7 @@ function initShoppingCart(sectionId) {
 
 function UpdateShoppingCartView() {
     ClearGlobalMessages();
-    AJAXPost(StorefrontUri("api/storefront/cart/getcurrentcart"), null, function (data, success, sender) {
+    AJAXPost("/api/storefront/cart/getcurrentcart", null, function (data, success, sender) {
         if (success && data.Success) {
             lineItemListViewModel.reload(data);
         }

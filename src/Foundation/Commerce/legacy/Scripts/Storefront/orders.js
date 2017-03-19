@@ -10,25 +10,15 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-function ChangePasswordSuccess(cntx) {
-    ClearGlobalMessages();
-    $("#changePasswordButton").button('reset');
+var ordersHeaderViewModel = null;
 
-    if (cntx.Success && !cntx.HasErrors) {
-        window.location.href = "/AccountManagement";
-    }
-
-    ShowGlobalMessages(cntx);
-}
-
-function ChangePasswordFailure(cntx) {
-    ClearGlobalMessages();
-    ShowGlobalMessages(cntx);
-    $("#changePasswordButton").button('reset');
-}
-
-function SetChangePasswordProcessingButton() {
-    $(document).ready(function () {
-        $("#changePasswordButton").button('loading');
+function initRecentOrders(sectionId) {
+    AJAXPost("/api/storefront/orders/recentOrders", null, function (data, success, sender) {
+        if (success && data.Success) {
+            ordersHeaderViewModel = new OrderHeaderViewModel(data);
+            ko.applyBindings(ordersHeaderViewModel, document.getElementById(sectionId));
+        }
+        ordersHeaderViewModel.showLoader(false);
+        ShowGlobalMessages(data);
     });
 }

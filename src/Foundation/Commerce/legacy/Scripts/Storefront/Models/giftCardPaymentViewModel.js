@@ -44,7 +44,7 @@ function GiftCardPaymentViewModel(card) {
         states('giftCardPayment_GetBalance', 'loading');
         var data = {};
         data.GiftCardId = self.giftCardNumber();
-        AJAXPost(StorefrontUri('api/storefront/catalog/checkgiftcardbalance'), JSON.stringify(data), function (data, success, sender) {
+        AJAXPost('/api/storefront/catalog/checkgiftcardbalance', JSON.stringify(data), function (data, success, sender) {
             if (success && data.Success) {
                 self.reload(data);
             }

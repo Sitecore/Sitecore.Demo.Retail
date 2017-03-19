@@ -237,16 +237,22 @@
     </None>
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <Content Include="Scripts\Storefront\errorsummary.js" />
+    <Content Include="Scripts\Storefront\Models\priceInfoViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\stockInfoViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\stockInfoListViewModel.js" />
+    <Content Include="Scripts\Storefront\product-list.js" />
     <Content Include="Scripts\Storefront\minicart.js" />
-    <Content Include="Scripts\Storefront\ViewModels\LineItemListViewModel.js" />
-    <Content Include="Scripts\Storefront\ViewModels\CreditCardPaymentViewModel.js" />
-    <Content Include="Scripts\Storefront\ViewModels\ErrorLineDetailViewModel.js" />
-    <Content Include="Scripts\Storefront\ViewModels\GiftCardPaymentViewModel.js" />
-    <Content Include="Scripts\Storefront\ViewModels\CountryRegionViewModel.js" />
-    <Content Include="Scripts\Storefront\ViewModels\DeliveryAddressViewModel.js" />
-    <Content Include="Scripts\Storefront\ViewModels\AdjustmentViewModel.js" />
-    <Content Include="Scripts\Storefront\ViewModels\MiniCartViewModel.js" />
-    <Content Include="Scripts\Storefront\ViewModels\MiniCartItemViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\lineItemListViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\creditCardPaymentViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\errorLineDetailViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\giftCardPaymentViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\countryRegionViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\deliveryAddressViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\adjustmentViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\miniCartViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\miniCartItemViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\orderHeaderViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\orderHeaderModel.js" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsList.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_PrintLayout.cshtml" />
@@ -273,8 +279,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\Storefront\order.js" />
-    <Content Include="Scripts\Storefront\bootstrap.js" />
-    <Content Include="Scripts\Storefront\bootstrap.min.js" />
     <Content Include="Scripts\Storefront\cart.js" />
     <Content Include="Scripts\Storefront\checkout.js" />
     <Content Include="Scripts\Storefront\debug-knockout.js" />
@@ -285,16 +289,15 @@
     <Content Include="Scripts\Storefront\product-details.js" />
     <Content Include="Scripts\Storefront\register.js" />
     <Content Include="Scripts\Storefront\search.js" />
-    <Content Include="Scripts\Storefront\Sitecore.js" />
-    <Content Include="Scripts\Storefront\ViewModels\LineItemDataViewModel.js" />
-    <Content Include="Scripts\Storefront\ViewModels\CheckoutDataViewModel.js" />
-    <Content Include="Scripts\Storefront\ViewModels\ConfirmViewModel.js" />
-    <Content Include="Scripts\Storefront\ViewModels\StoreViewModel.js" />
-    <Content Include="Scripts\Storefront\ViewModels\ErrorSummaryViewModel.js" />
-    <Content Include="Scripts\Storefront\ViewModels\MiniCartItemListViewModel.js" />
-    <Content Include="Scripts\Storefront\ViewModels\orders_VM.js" />
-    <Content Include="Scripts\Storefront\ViewModels\StepIndicator.js" />
-    <Content Include="Scripts\_references.js" />
+    <Content Include="Scripts\Storefront\sitecore.js" />
+    <Content Include="Scripts\Storefront\Models\lineItemDataViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\checkoutDataViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\confirmViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\storeViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\errorSummaryViewModel.js" />
+    <Content Include="Scripts\Storefront\Models\miniCartItemListViewModel.js" />
+    <Content Include="Scripts\Storefront\orders.js" />
+    <Content Include="Scripts\Storefront\step-indicator.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DependencyInjection\code\Sitecore.Foundation.DependencyInjection.csproj">

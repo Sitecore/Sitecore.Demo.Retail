@@ -13,7 +13,7 @@
 var addressListViewModel = null;
 function initAddressList(sectionId) {
 
-    AJAXPost(StorefrontUri("api/storefront/customers/addressList"), null, function (data, success, sender) {
+    AJAXPost("/api/storefront/customers/addressList", null, function (data, success, sender) {
         if (success && data.Success) {
             addressListViewModel = new AddressListViewModel(data);
             ko.applyBindingsWithValidation(addressListViewModel, document.getElementById(sectionId));

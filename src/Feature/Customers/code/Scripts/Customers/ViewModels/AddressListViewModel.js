@@ -88,7 +88,7 @@ function AddressListViewModel(data) {
             self.enableDelete(false);
             var address = ko.toJSON(self.address);
 
-            AJAXPost(StorefrontUri('api/storefront/customers/addressmodify'), address, function (data, success, sender) {
+            AJAXPost('/api/storefront/customers/addressmodify', address, function (data, success, sender) {
                 if (success && data.Success) {
                     self.reload(data);
                 }
@@ -109,7 +109,7 @@ function AddressListViewModel(data) {
         self.enableSave(false);
         $("#cancelChanges").attr("disabled", "disabled");
 
-        AJAXPost(StorefrontUri('api/storefront/customers/addressdelete'), '{ "ExternalId": "' + self.address().externalId() + '"}', function (data, success, sender) {
+        AJAXPost('api/storefront/customers/addressdelete', '{ "ExternalId": "' + self.address().externalId() + '"}', function (data, success, sender) {
             if (success && data.Success) {
                 self.reload(data);
             }

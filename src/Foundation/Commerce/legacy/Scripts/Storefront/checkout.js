@@ -26,7 +26,7 @@ function setupCheckoutPage() {
             $("#orderGetShippingMethods").button('loading');
             var party = ko.toJS(checkoutDataViewModel.shippingAddress());
             var data = { "ShippingAddress": party, "ShippingPreferenceType": checkoutDataViewModel.selectedShippingOption(), "Lines": null };
-            AJAXPost(StorefrontUri("api/storefront/checkout/GetShippingMethods"), JSON.stringify(data), function (data, success, sender) {
+            AJAXPost("/api/storefront/checkout/GetShippingMethods", JSON.stringify(data), function (data, success, sender) {
                 if (data.Success && success) {
                     var methods = "";
                     checkoutDataViewModel.shippingMethods.removeAll();
@@ -62,7 +62,7 @@ function setupCheckoutPage() {
             var party = ko.toJS(line.shippingAddress());
             var lines = [{ "ExternalCartLineId": lineId, "ShippingPreferenceType": line.selectedShippingOption() }];
             var data = { "ShippingAddress": party, "ShippingPreferenceType": checkoutDataViewModel.selectedShippingOption(), "Lines": lines };
-            AJAXPost(StorefrontUri("api/storefront/checkout/GetShippingMethods"), JSON.stringify(data), function (data, success, sender) {
+            AJAXPost("/api/storefront/checkout/GetShippingMethods", JSON.stringify(data), function (data, success, sender) {
                 var lineId = sender.attr('id').replace('lineGetShippingMethods-', '');
                 if (data.Success && success && checkoutDataViewModel != null) {
                     var match = ko.utils.arrayFirst(checkoutDataViewModel.cart().cartLines(), function (item) {
@@ -122,7 +122,7 @@ function GetAvailableRegions(countryCode) {
     var regionsArray = [];
     // Uncomment when the Regions are available
     //
-    //AJAXPost(StorefrontUri("api/storefront/checkout/getAvailableRegions"), '{ "CountryCode": "' + countryCode + '"}', function (data, success, sender){     
+    //AJAXPost("/api/storefront/checkout/getAvailableRegions", '{ "CountryCode": "' + countryCode + '"}', function (data, success, sender){     
     //    if (data.Regions != null) {
     //        $.each(data.UserAddresses, function (index, value) {         
     //            regionsArray.push(new Country(value, index));
@@ -137,7 +137,7 @@ function UpdateAvailableRegions(countryCode) {
 }
 
 function getCheckoutData() {
-    AJAXPost(StorefrontUri("api/storefront/checkout/GetCheckoutData"), null, function (data, success, sender) {
+    AJAXPost("/api/storefront/checkout/GetCheckoutData", null, function (data, success, sender) {
         if (success && data.Success) {
             checkoutDataViewModel = new CheckoutDataViewModel(data);
             ko.applyBindingsWithValidation(checkoutDataViewModel, document.getElementById("checkoutSection"));
@@ -331,7 +331,7 @@ function setShippingMethods() {
     }
 
     var data = '{"OrderShippingPreferenceType": "' + orderShippingPreference + '", "ShippingMethods":' + JSON.stringify(shipping) + ', "ShippingAddresses":' + JSON.stringify(parties) + '}';
-    AJAXPost(StorefrontUri("api/storefront/checkout/SetShippingMethods"), data, setShippingMethodsResponse, $(this));
+    AJAXPost("/api/storefront/checkout/SetShippingMethods", data, setShippingMethodsResponse, $(this));
     return false;
 }
 
@@ -451,7 +451,7 @@ function geocodeError(request) {
 function getNearbyStores(searchResultsContainer) {
     var data = "{'latitude': '" + searchLocation.latitude + "', 'longitude':" + searchLocation.longitude + "}";
 
-    AJAXPost(StorefrontUri("api/storefront/checkout/GetNearbyStores"), data, renderAvailableStores, searchResultsContainer);
+    AJAXPost("/api/storefront/checkout/GetNearbyStores", data, renderAvailableStores, searchResultsContainer);
     return false;
 }
 
@@ -594,7 +594,7 @@ function initBillingPage() {
 
 function getCardPaymentAcceptUrl() {
     if (checkoutDataViewModel && checkoutDataViewModel.payFederatedPayment && checkoutDataViewModel.shippingAddress()) {
-        AJAXPost(StorefrontUri("api/storefront/checkout/GetCardPaymentAcceptUrl"), null, function (data, success, sender) {
+        AJAXPost("/api/storefront/checkout/GetCardPaymentAcceptUrl", null, function (data, success, sender) {
             if (data.Success && success) {
                 checkoutDataViewModel.cardPaymentAcceptPageUrl(data.ServiceUrl);
                 checkoutDataViewModel.messageOrigin = data.MessageOrigin;
@@ -798,7 +798,7 @@ function setPaymentMethods() {
 
     $("#ToConfirmButton").button('loading');
 
-    AJAXPost(StorefrontUri("api/storefront/checkout/SetPaymentMethods"), data, setPaymentMethodsResponse, $(this));
+    AJAXPost("/api/storefront/checkout/SetPaymentMethods", data, setPaymentMethodsResponse, $(this));
 }
 
 function setPaymentMethodsResponse(data, success, sender) {
@@ -895,7 +895,7 @@ function submitOrder() {
 
     $("#PlaceOrderButton").button('loading');
 
-    AJAXPost(StorefrontUri("api/storefront/checkout/SubmitOrder"), data, submitOrderResponse, $(this));
+    AJAXPost("/api/storefront/checkout/SubmitOrder", data, submitOrderResponse, $(this));
 }
 
 function submitOrderResponse(data, success, sender) {

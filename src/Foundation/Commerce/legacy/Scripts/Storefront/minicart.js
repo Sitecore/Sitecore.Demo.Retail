@@ -43,7 +43,7 @@ function removeItemResponse(data, success, sender) {
 
 function initMiniShoppingCart(sectionId) {
     ClearGlobalMessages();
-    AJAXPost(StorefrontUri("api/storefront/cart/getcurrentcart"), null, function (data, success, sender) {
+    AJAXPost("/api/storefront/cart/getcurrentcart", null, function (data, success, sender) {
         if (success && data.Success) {
             miniCartItemListViewModel = new MiniCartItemListViewModel(data);
             ko.applyBindings(miniCartItemListViewModel, document.getElementById(sectionId));
@@ -56,7 +56,7 @@ function initMiniShoppingCart(sectionId) {
 
 function UpdateMiniCart() {
     ClearGlobalMessages();
-    AJAXPost(StorefrontUri("api/storefront/cart/getcurrentcart"), null, function (data, success, sender) {
+    AJAXPost("/api/storefront/cart/getcurrentcart", null, function (data, success, sender) {
         if (success && data.Success) {
             miniCartItemListViewModel.reload(data);
         }
@@ -72,7 +72,7 @@ function initCartAmount(updateAmount) {
     }
 
     ClearGlobalMessages();
-    AJAXPost(StorefrontUri("api/storefront/cart/updateminicart"), null, function (data) {
+    AJAXPost("/api/storefront/cart/updateminicart", null, function (data) {
         if (success && data.Success) {
             miniCartViewModel = new MiniCartViewModel(data.LineItemCount, data.Total);
             ko.applyBindings(miniCartViewModel, document.getElementById("B02-Basket"));

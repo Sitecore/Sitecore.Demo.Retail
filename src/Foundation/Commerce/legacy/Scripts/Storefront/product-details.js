@@ -10,6 +10,14 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+$(document).ready(function () {
+    $(".thumbnails .thumbnail").on('click', function (e) {
+        e.preventDefault();
+
+        $('#prod-large-view').attr('src', $(this).attr('href'));
+    });
+});
+
 var VariantInfoModel = function (variantId, size, color, priceBefore, priceNow, isOnSale, savingsMessage) {
     var self = this;
 
@@ -23,30 +31,6 @@ var VariantInfoModel = function (variantId, size, color, priceBefore, priceNow, 
 }
 
 var priceInfoVM = null;
-
-var PriceInfoViewModel = function ()
-{
-    self = this;
-
-    self.priceBefore = ko.observable();
-    self.priceNow = ko.observable();
-    self.savingsMessage = ko.observable();
-
-    self.switchInfo = function (priceBefore, priceNow, isOnSale, savingsMessage) {
-        self.priceNow(priceNow);
-        self.priceBefore(priceBefore);
-        self.savingsMessage(savingsMessage);
-
-        if (!isOnSale) {
-            $("#priceWithSavings").hide()
-            $("#priceOnly").show();
-        }
-        else {
-            $("#priceWithSavings").show()
-            $("#priceOnly").hide();
-        }
-    };
-}
 
 function AddToCartSuccess(data) {
     if (data.Success) {
@@ -144,79 +128,6 @@ function SetAddButton() {
 //-----------------------------------------------------------------//
 //          SIGN UP FOR NOTIFICATION AND STOCK INFO                //
 //-----------------------------------------------------------------//
-var StockInfoViewModel = function(info) {
-    var populate = info != null;
-    var self = this;
-
-    self.productId = populate ? ko.observable(info.ProductId) : ko.observable();
-    self.variantId = populate ? ko.observable(info.VariantId) : ko.observable();
-    self.status = populate ? ko.observable(info.Status) : ko.observable();
-    self.count = populate ? ko.observable(info.Count) : ko.observable();
-    self.availabilityDate = populate ? ko.observable(info.AvailabilityDate) : ko.observable();
-    self.showSingleLabel = populate ? ko.observable(info.Count === 1) : ko.observable(false);
-    self.isOutOfStock = populate ? ko.observable(info.Status === "Out-Of-Stock") : ko.observable(false);
-    self.canShowSignupForNotification = populate ? ko.observable(info.CanShowSignupForNotification) : ko.observable(false);
-
-    self.showSignUpForNotification = self.canShowSignupForNotification() && self.isOutOfStock();
-}
-
-var StockInfoListViewModel = function () {
-    var self = this;
-
-    self.stockInfos = ko.observableArray();
-    self.statuses = ko.observableArray();
-    self.hasInfo = ko.observable(false);
-    self.selectedStockInfo = ko.observable(new StockInfoViewModel());
-    self.load = function () {
-        ClearGlobalMessages();
-        var data = {};
-        data.ProductId = $('#product-id').val();
-        AJAXPost(StorefrontUri("api/storefront/catalog/GetCurrentProductStockInfo"), JSON.stringify(data), function (data, success, sender) {
-            if (success && data && data.Success) {
-                $.each(data.StockInformations, function () {
-                    self.stockInfos.push(new StockInfoViewModel(this));
-                });
-
-                self.selectedStockInfo(new StockInfoViewModel(data.StockInformations[0]));
-                self.statuses(data.Statuses);
-                self.hasInfo(data.StockInformations.length > 0);
-
-                if (self.selectedStockInfo().isOutOfStock()) {
-                    $('#AddToCartButton').attr('disabled', 'disabled');
-                }
-            }
-
-            ShowGlobalMessages(data);
-        });
-    };
-
-    self.switchInfo = function () {
-        ClearGlobalMessages();
-
-        var productId = $("#product-id").val();
-        var variantId = $('#VariantId') && $('#VariantId').length > 0 ? $('#VariantId').val() : "";
-        var item = ko.utils.arrayFirst(this.stockInfos(), function (si) {
-            if (si.productId() === productId && si.variantId() === variantId) {
-                return si;
-            }
-
-            return null;
-        });
-
-        if (item == null) {
-            self.selectedStockInfo(self.stockInfos()[0]);
-        } else {
-            self.selectedStockInfo(item);
-        }
-
-        if (self.selectedStockInfo().isOutOfStock()) {
-            $('#AddToCartButton').attr('disabled', 'disabled');
-        } else {
-            $('#AddToCartButton').removeAttr('disabled');
-        }
-    };
-}
-
 var stockInfoVM = null;
 
 $(function() {
@@ -227,7 +138,7 @@ $(function() {
 
         load: function() {
             this.messages().ClearMessages();
-            AJAXPost(StorefrontUri("api/storefront/customers/getcurrentuser"), null, function(data, success, sender) {
+            AJAXPost("/api/storefront/customers/getcurrentuser", null, function(data, success, sender) {
                 if (success && data && data.Success) {
                     if (data.FullName && data.FullName.length > 0) {
                         signForNotificationVM.fullName(data.FullName);
@@ -255,7 +166,7 @@ $(function() {
                     "VariantId": stockInfoVM.selectedStockInfo().variantId()
                 };
 
-                AJAXPost(StorefrontUri('api/storefront/Catalog/signupforbackinstocknotification'), JSON.stringify(data), function(data, success, sender) {
+                AJAXPost('/api/storefront/Catalog/signupforbackinstocknotification', JSON.stringify(data), function(data, success, sender) {
                     if (data.Success && success) {
                         // CLEANING MODEL 
 

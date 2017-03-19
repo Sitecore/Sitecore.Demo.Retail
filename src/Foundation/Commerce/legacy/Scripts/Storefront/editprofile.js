@@ -22,7 +22,7 @@ function UpdateProfileSuccess(cntx) {
 
     if (cntx.Errors.length === 0) {
         $("#editProfileFail").show().fadeOut(4000);
-        window.location.href = StorefrontUri("AccountManagement");
+        window.location.href = "/AccountManagement";
     }
     else {
         ShowGlobalMessages(cntx);

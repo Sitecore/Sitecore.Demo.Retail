@@ -16,3 +16,28 @@ function initErrorSummary(sectionId) {
     errorSummaryViewModel = new ErrorSummaryViewModel(sectionId);
     ko.applyBindings(errorSummaryViewModel, document.getElementById(sectionId));
 }
+
+function ShowGlobalMessages(data) {
+    if (data && data.Url) {
+        var url = new Uri("/" + data.Url);
+        window.location.href = url;
+    }
+    if (errorSummaryViewModel && data && data.Errors && data.Errors.length > 0) {
+        errorSummaryViewModel.AddToErrorList(data);
+    }
+}
+
+function ClearGlobalMessages() {
+    if (errorSummaryViewModel) {
+        errorSummaryViewModel.ClearMessages();
+    }
+}
+
+function closeErrorMessage() {
+    $('.wrap-error').slideUp();
+};
+
+function showErrorMessage() {
+    $('.wrap-error').slideDown();
+};
+
