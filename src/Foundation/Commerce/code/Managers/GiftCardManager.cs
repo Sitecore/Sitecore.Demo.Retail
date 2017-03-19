@@ -24,7 +24,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
-    public class GiftCardManager : BaseManager
+    public class GiftCardManager : IManager
     {
         public GiftCardManager([NotNull] GiftCardServiceProvider giftCardServiceProvider)
         {

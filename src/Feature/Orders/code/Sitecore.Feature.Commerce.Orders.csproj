@@ -162,7 +162,6 @@
     <Compile Include="Infrastructure\Pipelines\RegisterDataModelExtensions.cs" />
     <Compile Include="Models\AddressItemApiModel.cs" />
     <Compile Include="Models\AddressListItemApiModel.cs" />
-    <Compile Include="Models\AddressListApiModel.cs" />
     <Compile Include="Models\AvailableRegionsApiModel.cs" />
     <Compile Include="Models\CancelOrderApiModel.cs" />
     <Compile Include="Models\CartAdjustmentApiModel.cs" />

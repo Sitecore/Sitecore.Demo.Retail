@@ -110,6 +110,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.ContentSearch.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.ContentSearch.Linq.Lucene">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.ContentSearch.Linq.Lucene.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.Dictionary">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
     </Reference>
@@ -230,6 +233,8 @@
     <Compile Include="Managers\GiftCardManager.cs" />
     <Compile Include="Managers\LookupManager.cs" />
     <Compile Include="Managers\CurrencyManager.cs" />
+    <Compile Include="Managers\ProductSearchManager.cs" />
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\ApiControllerMapping.cs" />
     <Compile Include="Models\ErrorApiModel.cs" />
     <Compile Include="Models\CatalogContext.cs" />
@@ -240,6 +245,7 @@
     <Compile Include="Models\ICatalogCategory.cs" />
     <Compile Include="Managers\InventoryManager.cs" />
     <Compile Include="Models\ICatalogProduct.cs" />
+    <Compile Include="Models\IParty.cs" />
     <Compile Include="Models\IProductVariant.cs" />
     <Compile Include="Models\ICatalogProductVariant.cs" />
     <Compile Include="Models\IProductStockStatus.cs" />
@@ -250,6 +256,9 @@
     <Compile Include="Managers\PricingManager.cs" />
     <Compile Include="Managers\ShippingManager.cs" />
     <Compile Include="Managers\StorefrontManager.cs" />
+    <Compile Include="Models\QueryFacet.cs" />
+    <Compile Include="Models\QuerySortField.cs" />
+    <Compile Include="Models\SearchOptions.cs" />
     <Compile Include="Models\VisitorContext.cs" />
     <Compile Include="Models\CurrencyInformationModel.cs" />
     <Compile Include="Models\InputModels\AddCartLineInputModel.cs" />

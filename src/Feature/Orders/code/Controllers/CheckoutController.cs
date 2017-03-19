@@ -19,13 +19,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI;
-using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Contacts;
 using Sitecore.Commerce.Entities.Payments;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Diagnostics;
-using Sitecore.Foundation.Commerce;
+using Sitecore.Feature.Commerce.Orders.Models;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
@@ -33,7 +32,6 @@ using Sitecore.Foundation.Commerce.Models.InputModels;
 using Sitecore.Foundation.Commerce.Repositories;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
-using Sitecore.Feature.Commerce.Orders.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Controllers
 {
@@ -41,7 +39,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
     {
         private const string ConfirmationIdQueryString = "confirmationId";
 
-        public CheckoutController(CartManager cartManager, OrderManager orderManager, AccountManager accountManager, PaymentManager paymentManager, ShippingManager shippingManager, ContactFactory contactFactory, VisitorContextRepository visitorContextRepository, CurrencyManager currencyManager, CountryManager countryManager)
+        public CheckoutController(CartManager cartManager, OrderManager orderManager, AccountManager accountManager, PaymentManager paymentManager, ShippingManager shippingManager, VisitorContextRepository visitorContextRepository, CurrencyManager currencyManager, CountryManager countryManager)
         {
             CartManager = cartManager;
             OrderManager = orderManager;
@@ -154,7 +152,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("GetCheckoutData", this, e);
                 return Json(new ErrorApiModel("GetCheckoutData", e), JsonRequestBehavior.AllowGet);
             }
         }
@@ -187,7 +184,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("SubmitOrder", this, e);
                 return Json(new ErrorApiModel("SubmitOrder", e), JsonRequestBehavior.AllowGet);
             }
         }
@@ -219,7 +215,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("GetShippingMethods", this, e);
                 return Json(new ErrorApiModel("GetShippingMethods", e), JsonRequestBehavior.AllowGet);
             }
         }
@@ -253,7 +248,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("SetShippingMethods", this, e);
                 return Json(new ErrorApiModel("SetShippingMethods", e), JsonRequestBehavior.AllowGet);
             }
         }
@@ -287,7 +281,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("SetPaymentMethods", this, e);
                 return Json(new ErrorApiModel("SetPaymentMethods", e), JsonRequestBehavior.AllowGet);
             }
         }
@@ -333,7 +326,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("GetAvailableRegions", this, e);
                 return Json(new ErrorApiModel("GetAvailableRegions", e), JsonRequestBehavior.AllowGet);
             }
         }
@@ -445,15 +437,15 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 return;
             }
 
-            var addresses = new List<CommerceParty>();
+            var addresses = new List<IParty>();
             var response = AccountManager.GetCurrentCustomerParties(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent());
             if (response.ServiceProviderResult.Success && response.Result != null)
             {
                 addresses = response.Result.ToList();
             }
 
-            var addressesResult = new AddressListItemApiModel();
-            addressesResult.Initialize(addresses, null);
+            var addressesResult = new AddressListApiModel();
+            addressesResult.Initialize(addresses);
             result.UserAddresses = addressesResult;
             result.SetErrors(response.ServiceProviderResult);
         }

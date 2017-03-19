@@ -36,7 +36,7 @@ using Sitecore.Foundation.Dictionary.Repositories;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
-    public class OrderManager : BaseManager
+    public class OrderManager : IManager
     {
         public OrderManager(OrderServiceProvider orderServiceProvider, [NotNull] CartManager cartManager, CartCacheHelper cartCacheHelper)
         {

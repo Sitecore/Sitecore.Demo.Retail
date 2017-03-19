@@ -17,13 +17,12 @@
 
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Globalization;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Automation.Data.Items;
-using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Data.Managers;
+using Sitecore.Diagnostics;
 using Sitecore.Install.Framework;
 
 namespace Sitecore.Foundation.Commerce.Util
@@ -96,7 +95,7 @@ namespace Sitecore.Foundation.Commerce.Util
                     continue;
                 }
 
-                CommerceLog.Current.Error($"Error creating engagement plan '{plan.Name}'.", this);
+                Log.Error($"Error creating engagement plan '{plan.Name}'.", this);
             }
         }
 
@@ -115,7 +114,7 @@ namespace Sitecore.Foundation.Commerce.Util
 
                 if (!result)
                 {
-                    CommerceLog.Current.Error($"Error deploying engagement plan '{planInfo.Name}'.", this);
+                    Log.Error($"Error deploying engagement plan '{planInfo.Name}'.", this);
                 }
             }
         }

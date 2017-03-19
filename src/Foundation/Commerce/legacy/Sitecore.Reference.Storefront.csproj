@@ -131,6 +131,9 @@
     <Reference Include="Sitecore.Foundation.Alerts">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Alerts.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Foundation.Assets">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Assets.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.Dictionary">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
     </Reference>
@@ -214,27 +217,14 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\StorefrontSearchController.cs" />
     <Compile Include="Infrastructure\ServicesConfigurator.cs" />
-    <Compile Include="Models\JsonResults\AddressItemBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\AddressItemJsonResult.cs" />
-    <Compile Include="Models\JsonResults\AddressListItemBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\AddressListItemJsonResult.cs" />
-    <Compile Include="Models\JsonResults\CardPaymentAcceptUrlJsonResult.cs" />
-    <Compile Include="Models\JsonResults\ForgotPasswordBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\ProfileBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\ChangePasswordBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\RegisterBaseJsonResult.cs" />
-    <Compile Include="Models\JsonResults\UserBaseJsonResult.cs" />
-    <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Infrastructure\SitecorePipelines\AddCommerceAssets.cs" />
     <Compile Include="Models\SiteContentListHeaderViewModel.cs" />
-    <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\PaginationViewModel.cs" />
     <Compile Include="Models\SearchBarViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Infrastructure\SitecorePipelines\InitializeBundles.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\InitializeRoutes.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -246,16 +236,17 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\Local.pubxml" />
-    <Content Include="Views\Account\Profile.cshtml" />
-    <Content Include="Views\Account\AddressBook.cshtml" />
-    <Content Include="Views\Account\Addresses.cshtml" />
-    <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Account\EditProfile.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Logoff.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Scripts\Storefront\errorsummary.js" />
+    <Content Include="Scripts\Storefront\minicart.js" />
+    <Content Include="Scripts\Storefront\ViewModels\LineItemListViewModel.js" />
+    <Content Include="Scripts\Storefront\ViewModels\CreditCardPaymentViewModel.js" />
+    <Content Include="Scripts\Storefront\ViewModels\ErrorLineDetailViewModel.js" />
+    <Content Include="Scripts\Storefront\ViewModels\GiftCardPaymentViewModel.js" />
+    <Content Include="Scripts\Storefront\ViewModels\CountryRegionViewModel.js" />
+    <Content Include="Scripts\Storefront\ViewModels\DeliveryAddressViewModel.js" />
+    <Content Include="Scripts\Storefront\ViewModels\AdjustmentViewModel.js" />
+    <Content Include="Scripts\Storefront\ViewModels\MiniCartViewModel.js" />
+    <Content Include="Scripts\Storefront\ViewModels\MiniCartItemViewModel.js" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsList.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_PrintLayout.cshtml" />
@@ -282,7 +273,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\Storefront\order.js" />
-    <Content Include="Scripts\Storefront\addresses.js" />
     <Content Include="Scripts\Storefront\bootstrap.js" />
     <Content Include="Scripts\Storefront\bootstrap.min.js" />
     <Content Include="Scripts\Storefront\cart.js" />
@@ -292,19 +282,16 @@
     <Content Include="Scripts\Storefront\knockout-3.2.0.debug.js" />
     <Content Include="Scripts\Storefront\main.js" />
     <Content Include="Scripts\Storefront\maps.js" />
-    <Content Include="Scripts\Storefront\passwordmanagement.js" />
     <Content Include="Scripts\Storefront\product-details.js" />
     <Content Include="Scripts\Storefront\register.js" />
     <Content Include="Scripts\Storefront\search.js" />
     <Content Include="Scripts\Storefront\Sitecore.js" />
-    <Content Include="Scripts\Storefront\ViewModels\addresses_VM.js" />
-    <Content Include="Scripts\Storefront\ViewModels\billing_VM.js" />
-    <Content Include="Scripts\Storefront\ViewModels\CartKnockoutModels.js" />
-    <Content Include="Scripts\Storefront\ViewModels\checkoutData_VM.js" />
-    <Content Include="Scripts\Storefront\ViewModels\confirm_VM.js" />
-    <Content Include="Scripts\Storefront\ViewModels\delivery_VM.js" />
-    <Content Include="Scripts\Storefront\ViewModels\errorsummary_VM.js" />
-    <Content Include="Scripts\Storefront\ViewModels\minicart_VM.js" />
+    <Content Include="Scripts\Storefront\ViewModels\LineItemDataViewModel.js" />
+    <Content Include="Scripts\Storefront\ViewModels\CheckoutDataViewModel.js" />
+    <Content Include="Scripts\Storefront\ViewModels\ConfirmViewModel.js" />
+    <Content Include="Scripts\Storefront\ViewModels\StoreViewModel.js" />
+    <Content Include="Scripts\Storefront\ViewModels\ErrorSummaryViewModel.js" />
+    <Content Include="Scripts\Storefront\ViewModels\MiniCartItemListViewModel.js" />
     <Content Include="Scripts\Storefront\ViewModels\orders_VM.js" />
     <Content Include="Scripts\Storefront\ViewModels\StepIndicator.js" />
     <Content Include="Scripts\_references.js" />

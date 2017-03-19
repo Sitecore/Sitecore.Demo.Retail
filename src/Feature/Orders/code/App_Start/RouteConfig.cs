@@ -39,6 +39,9 @@ namespace Sitecore.Feature.Commerce.Orders
             new ApiControllerMapping("checkout-setshippingmethod", "Checkout", "SetShippingMethods"),
             new ApiControllerMapping("checkout-setpaymentmethod", "Checkout", "SetPaymentMethods"),
             new ApiControllerMapping("checkout-submitorder", "Checkout", "SubmitOrder"),
+            new ApiControllerMapping("orders-recentorders", "Orders", "RecentOrders"),
+            new ApiControllerMapping("orders-reorder", "Orders", "Reorder"),
+            new ApiControllerMapping("orders-cancelorder", "Orders", "CancelOrder"),
         };
 
         public static void RegisterRoutes(RouteCollection routes)

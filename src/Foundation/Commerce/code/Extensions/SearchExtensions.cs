@@ -16,32 +16,62 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Linq;
+using System.Web.Helpers;
+using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.ContentSearch.Linq;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Foundation.Commerce.Extensions
 {
     public static class SearchExtensions
     {
-        public static void Clean(this CommerceQueryFacet facet)
+        public static QueryFacet ToQueryFacet(this CommerceQueryFacet facet)
         {
-            if (facet.FoundValues != null)
+            return new QueryFacet
             {
-                var items = facet.FoundValues.Where(v => string.IsNullOrEmpty(v.Name) || v.AggregateCount == 0);
-                items.ToList().ForEach(v => facet.FoundValues.Remove(v));
-            }
+                Name = facet.Name,
+                DisplayName = facet.DisplayName,
+                Values = facet.Values,
+                FoundValues = facet.FoundValues,
+            };
         }
 
-        public static bool IsValid(this CommerceQueryFacet facet)
+        public static CommerceSearchOptions ToCommerceSearchOptions(this SearchOptions searchOptions)
         {
-            facet.Clean();
+            return new CommerceSearchOptions
+            {
+                NumberOfItemsToReturn = searchOptions.NumberOfItemsToReturn,
+                StartPageIndex = searchOptions.StartPageIndex,
+                FacetFields = searchOptions.FacetFields.Select(f => f.ToCommerceQueryFacet()),
+                SortDirection = searchOptions.SortDirection == SortDirection.Ascending ? CommerceConstants.SortDirection.Asc : CommerceConstants.SortDirection.Desc,
+                SortField = searchOptions.SortField
+            };
+        }
 
-            return facet.FoundValues != null && facet.FoundValues.Count > 0;
+        public static CommerceQueryFacet ToCommerceQueryFacet(this QueryFacet queryFacet)
+        {
+            return new CommerceQueryFacet
+            {
+                DisplayName = queryFacet.DisplayName,
+                Name = queryFacet.Name,
+                Values = queryFacet.Values,
+                FoundValues = queryFacet.FoundValues
+            };
+        }
+
+        public static QuerySortField ToQuerySortField(this CommerceQuerySort querySortField)
+        {
+            return new QuerySortField
+            {
+                Name = querySortField.Name,
+                DisplayName = querySortField.DisplayName
+            };
         }
 
         public static bool IsValid(this FacetValue value)
         {
-            return value.AggregateCount > 0;
+            return value != null && value.AggregateCount > 0;
         }
     }
 }

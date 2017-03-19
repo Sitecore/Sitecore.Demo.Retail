@@ -21,6 +21,7 @@ using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Models;
 using System;
+using Party = Sitecore.Commerce.Entities.Party;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
@@ -55,26 +56,21 @@ namespace Sitecore.Feature.Commerce.Orders.Models
 
         public string DetailsUrl { get; set; }
 
-        public void Initialize(Party party)
+        public void Initialize(IParty party)
         {
             Assert.ArgumentNotNull(party, nameof(party));
 
+            Name = party.Name;
+            IsPrimary = party.IsPrimary;
             ExternalId = party.ExternalId;
             Address1 = party.Address1;
             City = party.City;
-            Region = party.State;
+            Region = party.Region;
             ZipPostalCode = party.ZipPostalCode;
             Country = party.Country;
             FullAddress = string.Concat(party.Address1, ", ", party.City, ", ", party.ZipPostalCode);
 #warning Remove hardcoded URL
             DetailsUrl = string.Concat("/accountmanagement/addressbook", "?id=", party.ExternalId);
-        }
-
-        public void Initialize(CommerceParty address)
-        {
-            Initialize((Party)address);
-            Name = address.Name;
-            IsPrimary = address.IsPrimary;
         }
     }
 }

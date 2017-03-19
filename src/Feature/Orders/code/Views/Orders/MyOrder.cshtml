@@ -168,28 +168,27 @@
                     }
                     @if (isLineShipping)
                     {
-                        var lineAddressId = shipments.Where(shipping => shipping.LineIDs.ToList().Contains(cartLine.ExternalCartLineId) && shipping.LineIDs.Count == 1).Select(s => s.PartyID).FirstOrDefault();
-                        var lineAddress = parties.FirstOrDefault(p => p.ExternalId.Equals(lineAddressId, StringComparison.OrdinalIgnoreCase));
+                        var linePartyId = shipments.Where(shipping => shipping.LineIDs.ToList().Contains(cartLine.ExternalCartLineId) && shipping.LineIDs.Count == 1).Select(s => s.PartyId).FirstOrDefault();
+                        var lineParty = parties.FirstOrDefault(p => p.ExternalId.Equals(linePartyId, StringComparison.OrdinalIgnoreCase))?.ToEntity();
 
-                        if (lineAddress is CommerceParty)
+                        if (lineParty != null)
                         {
-                            var party = lineAddress as CommerceParty;
                             <div class="cart-delivery">
                                 <ul pid="lineShippingAddress">
-                                    <li pid="lineShippingAddressName">@party.Name</li>
+                                    <li pid="lineShippingAddressName">@lineParty.Name</li>
                                     <li>
                                         <span pid="lineShippingAddressLine">
-                                            @party.Address1,
+                                            @lineParty.Address1,
                                         </span>
                                         <span pid="lineShippingAddressCity">
-                                            @party.City
+                                            @lineParty.City
                                         </span>
                                     </li>
                                     <li>
-                                        <span pid="lineShippingAddressState">@party.State, </span>
-                                        <span pid="lineShippingAddressZipCode">@party.ZipPostalCode</span>
+                                        <span pid="lineShippingAddressState">@lineParty.Region, </span>
+                                        <span pid="lineShippingAddressZipCode">@lineParty.ZipPostalCode</span>
                                     </li>
-                                    <li pid="lineShippingAddressCountry">@party.Country</li>
+                                    <li pid="lineShippingAddressCountry">@lineParty.Country</li>
                                 </ul>
                             </div>
                         }
@@ -266,7 +265,7 @@
         <div class="col-md-4 col-sm-6 col-xs-6" id="confirm-shippingAddressContainer">
             @foreach (var shipping in shipments)
             {
-                var partyId = shipping.PartyID;
+                var partyId = shipping.PartyId;
                 var shippingAddress = parties.FirstOrDefault(p => p.ExternalId.Equals(partyId, StringComparison.OrdinalIgnoreCase)) as CommerceParty;
                 if (shippingAddress == null)
                 {
@@ -296,7 +295,7 @@
     <div class="col-md-4 col-sm-6 col-xs-6" id="confirm-billingAddressContainer">
         @foreach (var payment in payments)
         {
-            var partyId = payment.PartyID;
+            var partyId = payment.PartyId;
             var billingAddress = parties.FirstOrDefault(p => p.ExternalId.Equals(partyId, StringComparison.OrdinalIgnoreCase)) as CommerceParty;
             if (billingAddress == null)
             {

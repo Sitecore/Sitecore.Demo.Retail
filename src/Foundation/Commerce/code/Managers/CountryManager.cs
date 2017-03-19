@@ -10,7 +10,7 @@ using Sitecore.Foundation.Commerce.Util;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
-    public class CountryManager
+    public class CountryManager : IManager
     {
         public CountryManager(OrderServiceProvider orderServiceProvider)
         {

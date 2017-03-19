@@ -26,15 +26,15 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
     {
         public ProductFacetsViewModel()
         {
-            ChildProductFacets = new List<CommerceQueryFacet>();
-            ActiveFacets = new List<CommerceQueryFacet>();
+            ChildProductFacets = new List<QueryFacet>();
+            ActiveFacets = new List<QueryFacet>();
         }
 
-        public IEnumerable<CommerceQueryFacet> ChildProductFacets { get; protected set; }
+        public IEnumerable<QueryFacet> ChildProductFacets { get; protected set; }
 
-        public IEnumerable<CommerceQueryFacet> ActiveFacets { get; protected set; }
+        public IEnumerable<QueryFacet> ActiveFacets { get; protected set; }
 
-        public void Initialize(Rendering rendering, SearchResults products, CommerceSearchOptions searchOptions)
+        public void Initialize(Rendering rendering, SearchResults products, SearchOptions searchOptions)
         {
             base.Initialize(rendering);
 

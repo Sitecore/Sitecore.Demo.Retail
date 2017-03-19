@@ -227,7 +227,7 @@ $(function() {
 
         load: function() {
             this.messages().ClearMessages();
-            AJAXPost(StorefrontUri("api/storefront/account/getcurrentuser"), null, function(data, success, sender) {
+            AJAXPost(StorefrontUri("api/storefront/customers/getcurrentuser"), null, function(data, success, sender) {
                 if (success && data && data.Success) {
                     if (data.FullName && data.FullName.length > 0) {
                         signForNotificationVM.fullName(data.FullName);

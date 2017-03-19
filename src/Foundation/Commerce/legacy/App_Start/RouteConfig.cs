@@ -26,16 +26,6 @@ namespace Sitecore.Reference.Storefront
     {
         private static readonly List<ApiControllerMapping> _apiInfoList = new List<ApiControllerMapping>
         {
-            new ApiControllerMapping("account-getcurrentuser", "Account", "GetCurrentUser"),
-            new ApiControllerMapping("account-register", "Account", "Register"),
-            new ApiControllerMapping("account-addresslist", "Account", "AddressList"),
-            new ApiControllerMapping("account-recentorders", "Account", "RecentOrders"),
-            new ApiControllerMapping("account-reorder", "Account", "Reorder"),
-            new ApiControllerMapping("account-cancelorder", "Account", "CancelOrder"),
-            new ApiControllerMapping("account-addressdelete", "Account", "AddressDelete"),
-            new ApiControllerMapping("account-addressmodify", "Account", "AddressModify"),
-            new ApiControllerMapping("account-updateprofile", "Account", "UpdateProfile"),
-            new ApiControllerMapping("account-changepassword", "Account", "ChangePassword"),
             new ApiControllerMapping("global-culturechosen", "Shared", "CultureChosen")
         };
 

@@ -42,7 +42,6 @@
                             @foreach (var value in facet.FoundValues)
                             {
                                 var facetValueSelected = false;
-                                var facetCount = value.AggregateCount;
                                 if (value.IsValid())
                                 {
                                     var name = value.Name;
@@ -77,7 +76,7 @@
                                                 <small class="glyphicon glyphicon-ok text-info"></small>
                                             }
                                             <span pid="facetName">@name</span>
-                                            <small pid="facetCount">(@facetCount)</small>
+                                            <small pid="facetCount">(@value.AggregateCount)</small>
                                         </a>
                                     </li>
                                 }

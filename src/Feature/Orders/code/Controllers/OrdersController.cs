@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Diagnostics;
@@ -20,16 +18,16 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
 {
     public class OrdersController : Controller
     {
-        private OrderManager OrderManager { get; }
-        private AccountManager AccountManager { get; }
-        private VisitorContextRepository VisitorContextRepository { get; }
-
         public OrdersController(OrderManager orderManager, AccountManager accountManager, VisitorContextRepository visitorContextRepository)
         {
             OrderManager = orderManager;
             AccountManager = accountManager;
             VisitorContextRepository = visitorContextRepository;
         }
+
+        private OrderManager OrderManager { get; }
+        private AccountManager AccountManager { get; }
+        private VisitorContextRepository VisitorContextRepository { get; }
 
 
         [HttpGet]
@@ -68,7 +66,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         {
             if (!Context.User.IsAuthenticated)
             {
-                Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                Response.StatusCode = (int) HttpStatusCode.Unauthorized;
                 return null;
             }
 
@@ -95,7 +93,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("RecentOrders", this, e);
                 return Json(new ErrorApiModel("RecentOrders", e), JsonRequestBehavior.AllowGet);
             }
         }
@@ -121,7 +118,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("Reorder", this);
                 return Json(new ErrorApiModel("Reorder", e), JsonRequestBehavior.AllowGet);
             }
         }
@@ -149,7 +145,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("CancelOrder", this);
                 return Json(new ErrorApiModel("CancelOrder", e), JsonRequestBehavior.AllowGet);
             }
         }

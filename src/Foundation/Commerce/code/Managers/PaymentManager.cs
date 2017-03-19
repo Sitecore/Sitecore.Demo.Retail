@@ -28,7 +28,7 @@ using GetPaymentMethodsRequest = Sitecore.Commerce.Engine.Connect.Services.Payme
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
-    public class PaymentManager : BaseManager
+    public class PaymentManager : IManager
     {
         public PaymentManager([NotNull] PaymentServiceProvider paymentServiceProvider, [NotNull] CartManager cartManager)
         {

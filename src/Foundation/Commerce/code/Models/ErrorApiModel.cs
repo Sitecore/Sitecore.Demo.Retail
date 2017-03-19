@@ -21,20 +21,25 @@ using System.Linq;
 using System.Web.Mvc;
 using Sitecore.Commerce.Services;
 using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Managers;
 
 namespace Sitecore.Foundation.Commerce.Models
 {
     public class ErrorApiModel : BaseApiModel
     {
-        public ErrorApiModel(string area, string errorMessage)
+        public ErrorApiModel(string method, string errorMessage)
         {
-            Errors.Add($"{area}: {errorMessage}");
+            Success = false;
+            Errors.Add($"{method}: {errorMessage}");
+            Log.Error($"{method} failed: {errorMessage}", this);
         }
 
-        public ErrorApiModel(string area, Exception exception)
+        public ErrorApiModel(string method, Exception exception)
         {
-            SetErrors(area, exception);
+
+            SetErrors(method, exception);
+            Log.Error($"{method} failed", exception, this);
         }
-   }
+    }
 }

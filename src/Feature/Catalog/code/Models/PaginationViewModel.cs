@@ -29,7 +29,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public string QueryStringToken { get; set; }
 
-        public void Initialize(Rendering rendering, SearchResults products, CommerceSearchOptions searchOptions)
+        public void Initialize(Rendering rendering, SearchResults products, SearchOptions searchOptions)
         {
             base.Initialize(rendering);
             QueryStringToken = Constants.QueryString.Paging;

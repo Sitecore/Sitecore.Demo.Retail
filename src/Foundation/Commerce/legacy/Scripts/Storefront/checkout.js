@@ -12,7 +12,6 @@
 
 // Global Vars
 var checkoutDataViewModel = null;
-var defaultCountryCode = "USA";
 var methodsViewModel = null;
 var method = null;
 var expirationDates = ko.observableArray();
@@ -237,7 +236,7 @@ function setShippingMethods() {
             "ShippingMethodID": checkoutDataViewModel.shippingMethod().id,
             "ShippingMethodName": checkoutDataViewModel.shippingMethod().description,
             "ShippingPreferenceType": orderShippingPreference,
-            "PartyID": partyId
+            "PartyId": partyId
         });
     }
     else if (orderShippingPreference === 2) {
@@ -257,7 +256,7 @@ function setShippingMethods() {
             "ShippingMethodID": checkoutDataViewModel.shipToStoreDeliveryMethod().ExternalId,
             "ShippingMethodName": checkoutDataViewModel.shipToStoreDeliveryMethod().Description,
             "ShippingPreferenceType": orderShippingPreference,
-            "PartyID": storeId
+            "PartyId": storeId
         });
     }
     else if (orderShippingPreference === 4) {
@@ -282,7 +281,7 @@ function setShippingMethods() {
                     "ShippingMethodID": this.shippingMethod().id,
                     "ShippingMethodName": this.shippingMethod().description,
                     "ShippingPreferenceType": lineDeliveryPreference,
-                    "PartyID": partyId,
+                    "PartyId": partyId,
                     "LineIDs": [lineId]
                 });
             }
@@ -304,7 +303,7 @@ function setShippingMethods() {
                     "ShippingMethodID": checkoutDataViewModel.shipToStoreDeliveryMethod().ExternalId,
                     "ShippingMethodName": checkoutDataViewModel.shipToStoreDeliveryMethod().Description,
                     "ShippingPreferenceType": lineDeliveryPreference,
-                    "PartyID": storeId,
+                    "PartyId": storeId,
                     "LineIDs": [lineId]
                 });
             }
@@ -758,7 +757,7 @@ function setPaymentMethods() {
                 "ExpirationYear": cc.expirationYear(),
                 "CustomerNameOnPayment": cc.customerNameOnPayment(),
                 "Amount": cc.creditCardAmount(),
-                "PartyID": $('#billingAddress-ExternalId').val()
+                "PartyId": $('#billingAddress-ExternalId').val()
             };
 
             var ba = checkoutDataViewModel.billingAddress();
@@ -863,7 +862,7 @@ function submitOrder() {
                 "ExpirationYear": cc.expirationYear(),
                 "CustomerNameOnPayment": cc.customerNameOnPayment(),
                 "Amount": cc.creditCardAmount(),
-                "PartyID": $('#billingAddress-ExternalId').val()
+                "PartyId": $('#billingAddress-ExternalId').val()
             };
 
             var ba = checkoutDataViewModel.billingAddress();

@@ -17,13 +17,11 @@
 
 using System;
 using System.Web.Mvc;
-using Sitecore.Commerce.Contacts;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
-using Sitecore.Reference.Storefront.Models.JsonResults;
 
 namespace Sitecore.Reference.Storefront.Controllers
 {
