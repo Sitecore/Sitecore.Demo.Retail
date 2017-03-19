@@ -116,11 +116,13 @@
     <Content Include="App_Config\Include\Feature\Feature.Commerce.Customers.Serialization.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <Content Include="Scripts\Customers\addresses.js" />
+    <Content Include="Scripts\Customers\editprofile.js" />
     <Content Include="Scripts\Customers\forgotpassword.js" />
     <Content Include="Scripts\Customers\changepassword.js" />
-    <Content Include="Scripts\Customers\ViewModels\AddressListViewModel.js" />
-    <Content Include="Scripts\Customers\ViewModels\AddressViewModel.js" />
-    <Content Include="Scripts\Customers\ViewModels\CountryRegionViewModel.js" />
+    <Content Include="Scripts\Customers\addressListViewModel.js" />
+    <Content Include="Scripts\Customers\addressViewModel.js" />
+    <Content Include="Scripts\Customers\countryRegionViewModel.js" />
+    <Content Include="Scripts\Customers\register.js" />
     <Content Include="Views\Customers\AddressBook.cshtml" />
     <Content Include="Views\Customers\Addresses.cshtml" />
     <Content Include="Views\Customers\ChangePassword.cshtml" />

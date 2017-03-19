@@ -11,9 +11,9 @@ SharedFields:
 - ID: "e514a1eb-ddba-44f7-8528-82ca2280f778"
   Hint: JavaScript assets
   Value: |
-    /Scripts/Customers/ViewModels/AddressListViewModel.js
-    /Scripts/Customers/ViewModels/AddressViewModel.js
-    /Scripts/Customers/ViewModels/CountryRegionViewModel.js
+    /Scripts/Customers/addressListViewModel.js
+    /Scripts/Customers/addressViewModel.js
+    /Scripts/Customers/countryRegionViewModel.js
     /Scripts/Customers/addresses.js
 - ID: "ef7c5528-7307-4e19-863b-da19eed6a9ed"
   Hint: Open Properties after Add

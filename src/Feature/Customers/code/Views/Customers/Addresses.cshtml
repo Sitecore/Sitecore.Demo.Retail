@@ -96,6 +96,8 @@
 </div>
 
     <script type="text/javascript">
-        ko.validation.localize({ required: '@requiredFieldMessage' });
-        initAddressList("addressesSection");
+        $(document).ready(function () {
+            ko.validation.localize({ required: '@requiredFieldMessage' });
+            initAddressList("addressesSection");
+        });
     </script>

@@ -43,7 +43,6 @@ namespace Sitecore.Reference.Storefront.Infrastructure.SitecorePipelines
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/Models/storeViewModel.js", ScriptLocation.Head, true);
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/cart.js", ScriptLocation.Head, true);
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/checkout.js", ScriptLocation.Head, true);
-            AssetRepository.Current.AddScriptFile("/Scripts/Storefront/editprofile.js", ScriptLocation.Head, true);
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/errorsummary.js", ScriptLocation.Head, true);
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/maps.js", ScriptLocation.Head, true);
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/minicart.js", ScriptLocation.Head, true);
@@ -51,7 +50,6 @@ namespace Sitecore.Reference.Storefront.Infrastructure.SitecorePipelines
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/orders.js", ScriptLocation.Head, true);
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/product-details.js", ScriptLocation.Head, true);
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/product-list.js", ScriptLocation.Head, true);
-            AssetRepository.Current.AddScriptFile("/Scripts/Storefront/register.js", ScriptLocation.Head, true);
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/search.js", ScriptLocation.Head, true);
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/step-indicator.js", ScriptLocation.Head, true);
         }

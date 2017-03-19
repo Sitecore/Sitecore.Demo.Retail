@@ -282,12 +282,10 @@
     <Content Include="Scripts\Storefront\cart.js" />
     <Content Include="Scripts\Storefront\checkout.js" />
     <Content Include="Scripts\Storefront\debug-knockout.js" />
-    <Content Include="Scripts\Storefront\editprofile.js" />
     <Content Include="Scripts\Storefront\knockout-3.2.0.debug.js" />
     <Content Include="Scripts\Storefront\main.js" />
     <Content Include="Scripts\Storefront\maps.js" />
     <Content Include="Scripts\Storefront\product-details.js" />
-    <Content Include="Scripts\Storefront\register.js" />
     <Content Include="Scripts\Storefront\search.js" />
     <Content Include="Scripts\Storefront\sitecore.js" />
     <Content Include="Scripts\Storefront\Models\lineItemDataViewModel.js" />
