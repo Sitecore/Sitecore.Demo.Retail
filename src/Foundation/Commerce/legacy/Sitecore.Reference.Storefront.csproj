@@ -261,7 +261,6 @@
     <Content Include="Views\Shared\NavigationButtons.cshtml" />
     <Content Include="Views\Shared\PrintOnly.cshtml" />
     <Content Include="Views\Shared\SearchBar.cshtml" />
-    <Content Include="Views\Shared\SearchEvent.cshtml" />
     <Content Include="Views\Shared\ShareAndPrint.cshtml" />
     <Content Include="Views\Shared\SocialConnector.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsListHeader.cshtml" />
@@ -286,7 +285,6 @@
     <Content Include="Scripts\Storefront\main.js" />
     <Content Include="Scripts\Storefront\maps.js" />
     <Content Include="Scripts\Storefront\product-details.js" />
-    <Content Include="Scripts\Storefront\search.js" />
     <Content Include="Scripts\Storefront\sitecore.js" />
     <Content Include="Scripts\Storefront\Models\lineItemDataViewModel.js" />
     <Content Include="Scripts\Storefront\Models\checkoutDataViewModel.js" />

@@ -190,6 +190,7 @@
   <ItemGroup>
     <Compile Include="Factories\ProductViewModelFactory.cs" />
     <Compile Include="Infrastructure\Dialogs\InsertLinkForm.cs" />
+    <Compile Include="Infrastructure\Pipelines\ProductItemRedirector.cs" />
     <Compile Include="Models\SearchInfo.cs" />
     <Compile Include="Factories\CatalogItemContextFactory.cs" />
     <Compile Include="Models\RelationshipViewModel.cs" />

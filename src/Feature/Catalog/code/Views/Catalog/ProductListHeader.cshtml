@@ -18,7 +18,7 @@
     }
 }
 
-<div id="C04-ProductListHeader" class="row m-b-1">
+<div class="row m-b-1">
     @{
         var headerText = Model.Rendering.Item["Header"];
         if (!string.IsNullOrWhiteSpace(headerText))
@@ -34,7 +34,7 @@
                     @if (Model.Pagination.NumberOfPages > 1)
                     {
                         <div class="showing-amount">
-                            <h6>@Html.Sitecore().Field("Showing", Model.Item) <span id="C04-ProductListHeader-StartItem">@Model.Pagination.StartResultIndex</span> - <span id="C04-ProductListHeader-EndItem">@Model.Pagination.EndResultIndex</span> @Html.Sitecore().Field("Of", Model.Item) <span id="C04-ProductListHeader-TotalCount">@Model.Pagination.TotalResultCount</span></h6>
+                            <h6>@Html.Sitecore().Field("Showing", Model.Item) <span>@Model.Pagination.StartResultIndex</span> - <span>@Model.Pagination.EndResultIndex</span> @Html.Sitecore().Field("Of", Model.Item) <span>@Model.Pagination.TotalResultCount</span></h6>
                         </div>
                     }
                 </div>

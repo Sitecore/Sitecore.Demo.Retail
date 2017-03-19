@@ -59,30 +59,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         public CatalogItemContext CatalogItemContext { get; }
         private CatalogManager CatalogManager { get; }
 
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public ActionResult SearchEvent(
-            [Bind(Prefix = Foundation.Commerce.Constants.QueryString.SearchKeyword)] string searchKeyword,
-            [Bind(Prefix = Constants.QueryString.Paging)] int? pageNumber,
-            [Bind(Prefix = Constants.QueryString.Facets)] string facetValues,
-            [Bind(Prefix = Constants.QueryString.Sort)] string sortField,
-            [Bind(Prefix = Constants.QueryString.PageSize)] int? pageSize,
-            [Bind(Prefix = Constants.QueryString.SortDirection)] SortDirection? sortDirection)
-        {
-            if (CatalogManager.CatalogContext == null)
-            {
-                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
-            }
-
-            var searchInfo = GetSearchInfo(searchKeyword, pageNumber, facetValues, sortField, pageSize, sortDirection);
-            var searchResult = GetSearchResults(searchInfo.SearchOptions, searchKeyword, searchInfo.Catalog.Name);
-            if (!string.IsNullOrWhiteSpace(searchKeyword))
-            {
-                CatalogManager.RegisterSearchEvent(StorefrontManager.CurrentStorefront, searchKeyword, searchResult.TotalItemCount);
-            }
-
-            return View();
-        }
-
         public ActionResult ProductSearchResultsListHeader(
             [Bind(Prefix = Foundation.Commerce.Constants.QueryString.SearchKeyword)] string searchKeyword,
             [Bind(Prefix = Constants.QueryString.Paging)] int? pageNumber,
@@ -182,6 +158,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             {
                 return null;
             }
+
+            CatalogManager.RegisterSearchEvent(StorefrontManager.CurrentStorefront, searchInfo.SearchKeyword, results.TotalItemCount);
+
             viewModel = new SearchResultViewModel(results);
 
             var products = viewModel.Items.Where(i => i is ProductViewModel).Cast<ProductViewModel>().ToList();

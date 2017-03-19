@@ -914,7 +914,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         private Category GetCurrentCategory()
         {
-            var categoryId = CatalogItemContext.Current.CategoryId;
+            var categoryId = CatalogItemContext.Current?.CategoryId;
+            if (categoryId == null)
+                return null;
             var virtualCategoryCacheKey = $"VirtualCategory_{categoryId}";
             var currentCategory = this.GetFromCache<Category>(virtualCategoryCacheKey);
             if (currentCategory != null)
