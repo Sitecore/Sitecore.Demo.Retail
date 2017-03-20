@@ -1,4 +1,4 @@
-﻿{
+{
     "version":  "1.0.2301",
     "description":  "A Sample Payments Plugin using Braintree.",
     "copyright":  "Â© 2017 Sitecore Corporation A/S. All rights reserved. SitecoreÂ® is a registered trademark of Sitecore Corporation A/S.",
@@ -40,6 +40,11 @@
                                                                 "optimize":  true
                                                             }
                                        },
+        "Demo-Retail": {
+            "buildOptions": {
+                "warningsAsErrors": true
+            }
+        },
                            "Debug":  {
                                          "buildOptions":  {
                                                               "warningsAsErrors":  true

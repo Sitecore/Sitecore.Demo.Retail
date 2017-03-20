@@ -1,4 +1,4 @@
-﻿{
+{
     "version":  "1.0.2301",
     "description":  "The Sitecore Commerce Habitat Sample Plugin.",
     "copyright":  "© 2017 Sitecore Corporation A/S. All rights reserved. Sitecore® is a registered trademark of Sitecore Corporation A/S.",
@@ -44,6 +44,11 @@
                                                                 "optimize":  true
                                                             }
                                        },
+        "Demo-Retail": {
+            "buildOptions": {
+                "warningsAsErrors": true
+            }
+        },
                            "Debug":  {
                                          "buildOptions":  {
                                                               "warningsAsErrors":  true
