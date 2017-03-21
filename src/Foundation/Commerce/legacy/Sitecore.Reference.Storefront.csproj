@@ -223,6 +223,7 @@
     <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\RegisterDataModelExtensionsBase.cs" />
     <Compile Include="Infrastructure\StorefrontSessionStateAttribute.cs" />
+    <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\JsonResults\AddressItemJsonResult.cs" />
     <Compile Include="Models\JsonResults\AddressListItemJsonResult.cs" />
     <Compile Include="Models\JsonResults\CancelOrderBaseJsonResult.cs" />
@@ -330,6 +331,7 @@
     <Content Include="Views\Account\MyOrders.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsListHeader.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsPagination.cshtml" />
+    <Content Include="Views\Checkout\Checkout.cshtml" />
     <None Include="Views\Web.config">
       <SubType>Designer</SubType>
     </None>

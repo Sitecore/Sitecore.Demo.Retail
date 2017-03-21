@@ -35,6 +35,7 @@ using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using Sitecore.Reference.Storefront.Models;
 using Sitecore.Reference.Storefront.Models.JsonResults;
+using Sitecore.Commerce.Entities.Carts;
 
 namespace Sitecore.Reference.Storefront.Controllers
 {
@@ -63,11 +64,56 @@ namespace Sitecore.Reference.Storefront.Controllers
 
         [AllowAnonymous]
         [HttpGet]
+        public ActionResult Checkout()
+        {
+            var model = new CheckoutViewModel();
+            var cartResponse = CartManager.GetCurrentCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), true);
+            var cart = cartResponse.ServiceProviderResult.Cart as CommerceCart;
+
+            if (cart != null && cart.Lines != null && cart.Lines.Any())
+            {
+                var prefsResponse = ShippingManager.GetShippingPreferences(cart);
+                if (prefsResponse.ServiceProviderResult.Success && prefsResponse.Result != null)
+                {
+                    var lineShippingOptions = prefsResponse.ServiceProviderResult.LineShippingPreferences.ToList();
+                    foreach (var line in cart.Lines)
+                    {
+                        var option = lineShippingOptions?.FirstOrDefault(lso =>
+                            lso.LineId == line.ExternalCartLineId)?.ShippingOptions?.FirstOrDefault();
+                        if (option != null)
+                        {
+                            if (!model.CartLinesMap.ContainsKey(option))
+                            {
+                                model.CartLinesMap[option] = new List<CartLine>();
+                            }
+                            model.CartLinesMap[option].Add(line);
+                        }
+                    }
+                }
+            }
+            else if (!Context.PageMode.IsExperienceEditor)
+            {
+                #warning Remove hardcoded URL
+                var cartPageUrl = "/shoppingcart";
+                return Redirect(cartPageUrl);
+            }
+            //response = ShippingManager.GetShippingMethods(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
+            //var result = new ShippingMethodsJsonResult(response.ServiceProviderResult);
+            //if (response.ServiceProviderResult.Success)
+            //{
+            //    result.Initialize(response.ServiceProviderResult.ShippingMethods, response.ServiceProviderResult.ShippingMethodsPerItem);
+            //}
+
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
         public ActionResult StartCheckout()
         {
             var response = CartManager.GetCurrentCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), true);
             var cart = (CommerceCart) response.ServiceProviderResult.Cart;
-            if (cart.Lines == null || !cart.Lines.Any())
+            if (!Context.PageMode.IsExperienceEditor && (cart.Lines == null || !cart.Lines.Any()))
             {
 #warning Remove hardcoded URL
                 var cartPageUrl = "/shoppingcart";

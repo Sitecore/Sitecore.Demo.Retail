@@ -1,0 +1,206 @@
+﻿@*//-----------------------------------------------------------------------
+    // Copyright 2016 Sitecore Corporation A/S
+    // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+    // except in compliance with the License. You may obtain a copy of the License at
+    //       http://www.apache.org/licenses/LICENSE-2.0
+    //
+    // Unless required by applicable law or agreed to in writing, software distributed under the
+    // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    // either express or implied. See the License for the specific language governing permissions
+    // and limitations under the License.
+    // -------------------------------------------------------------------------------------------*@
+@using Sitecore.Reference.Storefront.Models
+@model CheckoutViewModel
+
+<!--
+@Html.Sitecore().Field("FIELD", Html.Sitecore().CurrentItem)    
+-->
+
+<div class="row">
+    <div class="col-md-12">
+        @foreach (var shippingOption in Model.CartLinesMap.Keys)
+        {
+            <div class="m-b-1">
+                <h4>@shippingOption.Description</h4>
+                <table class="table">
+                    <tbody>
+                        <tr class="row">
+                            <th class="col-md-6 hidden-xs" colspan="2">@Html.Sitecore().Field("Product Label", Html.Sitecore().CurrentItem)</th>
+                            <th class="col-md-4 visible-xs">@Html.Sitecore().Field("Product Label", Html.Sitecore().CurrentItem)</th>
+                            <th class="col-md-1">@Html.Sitecore().Field("Quantity Label", Html.Sitecore().CurrentItem)</th>
+                            <th class="col-md-2 hidden-xs text-right">@Html.Sitecore().Field("Unit Price Label", Html.Sitecore().CurrentItem)</th>
+                            <th class="col-md-2 text-right">@Html.Sitecore().Field("Total Label", Html.Sitecore().CurrentItem)</th>
+                            <th class="col-md-1">&nbsp;</th>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        @foreach (var line in Model.CartLinesMap[shippingOption])
+                        {
+                            <tr class="row">
+                                <td class="hidden-xs">
+                                    <a href="/shop/DefaultRecommendations_defaultrecommendations/Habitat-Ellipse-65%E2%80%9D-Curved-UHD-Television_6042283/">
+                                        <img class="img-responsive" data-bind="attr: {src: image}" alt="a" pid="image" src="//retail.dev.local/-/media/Retail/Catalog/Ellipse-CurvedUHD.jpg?h=100&amp;w=100&amp;hash=F9A260506546AAD70BF74E10CDD593A00AABF818">
+                                    </a>
+                                </td>
+                                <td class="cart-info">
+                                    <a data-bind="attr:{'href' : productUrl}" href="/shop/DefaultRecommendations_defaultrecommendations/Habitat-Ellipse-65%E2%80%9D-Curved-UHD-Television_6042283/">
+                                        <h5 pid="title" data-bind="text: title">Habitat Ellipse 65” Curved UHD Television</h5>
+                                    </a>
+                                    <!-- ko if: color != null -->
+                                    <!-- /ko -->
+                                </td>
+                                <td class="cart-quantity" style="width: 10%;">
+                                    <input pid="quantity" type="number" class="form-control form-control-quantity" placeholder="1" data-bind="attr: {value: quantity, 'data-ajax-lineitemid': externalCartLineId}" value="1" data-ajax-lineitemid="36bc1ca2889e4809a40ceda060a5aaf5">
+                                </td>
+                                <td class="cart-price text-right hidden-xs">
+                                    <span pid="price" data-bind="text: linePrice">719.52 US$</span>
+                                    <p data-bind="visible: shouldShowDiscountOffers" class="m-b-0" style="display: none;">
+                                        <span>Discount:</span>
+                                        <span pid="discountNames" data-bind="text: discountOfferNames" class="savings"></span>
+                                    </p>
+                                </td>
+                                <td class="cart-total text-right">
+                                    <strong pid="total" data-bind="text: lineTotal">719.52 US$</strong>
+                                    <p data-bind="visible: shouldShowSavings">
+                                        <span>Discount: </span>
+                                        <span pid="discount" data-bind="text: lineItemDiscount" class="savings">0.00 US$</span>
+                                    </p>
+                                </td>
+                                <td class="cart-delete">
+                                    <a pid="remove" class="delete-item" data-bind="attr: {'data-ajax-lineitemid': externalCartLineId}" data-ajax-lineitemid="36bc1ca2889e4809a40ceda060a5aaf5">
+                                        <span class="glyphicon glyphicon-remove icon-md"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        <tr class="row">
+                            <td class="hidden-xs">
+                                <a data-bind="attr:{'href' : productUrl}" href="/shop/DefaultRecommendations_defaultrecommendations/Habitat-Ellipse-65%E2%80%9D-Curved-UHD-Television_6042283/">
+                                    <img class="img-responsive" data-bind="attr: {src: image}" alt="a" pid="image" src="//retail.dev.local/-/media/Retail/Catalog/Ellipse-CurvedUHD.jpg?h=100&amp;w=100&amp;hash=F9A260506546AAD70BF74E10CDD593A00AABF818">
+                                </a>
+                            </td>
+                            <td class="cart-info">
+                                <a data-bind="attr:{'href' : productUrl}" href="/shop/DefaultRecommendations_defaultrecommendations/Habitat-Ellipse-65%E2%80%9D-Curved-UHD-Television_6042283/">
+                                    <h5 pid="title" data-bind="text: title">Habitat Ellipse 65” Curved UHD Television</h5>
+                                </a>
+                                <!-- ko if: color != null -->
+                                <!-- /ko -->
+                            </td>
+                            <td class="cart-quantity" style="width: 10%;">
+                                <input pid="quantity" type="number" class="form-control form-control-quantity" placeholder="1" data-bind="attr: {value: quantity, 'data-ajax-lineitemid': externalCartLineId}" value="1" data-ajax-lineitemid="36bc1ca2889e4809a40ceda060a5aaf5">
+                            </td>
+                            <td class="cart-price text-right hidden-xs">
+                                <span pid="price" data-bind="text: linePrice">719.52 US$</span>
+                                <p data-bind="visible: shouldShowDiscountOffers" class="m-b-0" style="display: none;">
+                                    <span>Discount:</span>
+                                    <span pid="discountNames" data-bind="text: discountOfferNames" class="savings"></span>
+                                </p>
+                            </td>
+                            <td class="cart-total text-right">
+                                <strong pid="total" data-bind="text: lineTotal">719.52 US$</strong>
+                                <p data-bind="visible: shouldShowSavings">
+                                    <span>Discount: </span>
+                                    <span pid="discount" data-bind="text: lineItemDiscount" class="savings">0.00 US$</span>
+                                </p>
+                            </td>
+                            <td class="cart-delete">
+                                <a pid="remove" class="delete-item" data-bind="attr: {'data-ajax-lineitemid': externalCartLineId}" data-ajax-lineitemid="36bc1ca2889e4809a40ceda060a5aaf5">
+                                    <span class="glyphicon glyphicon-remove icon-md"></span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr class="row">
+                            <td class="hidden-xs">
+                                <a data-bind="attr:{'href' : productUrl}" href="/shop/Cameras_cameras/Seeker-II-Drone%E2%80%944K-12MP_7042129/">
+                                    <img class="img-responsive" data-bind="attr: {src: image}" alt="a" pid="image" src="//retail.dev.local/-/media/Images/Habitat/7042129_01.jpg?h=100&amp;w=100&amp;hash=D785A4D1828B6AE5FB927FD5D72B73ACA2E3F883">
+                                </a>
+                            </td>
+                            <td class="cart-info">
+                                <a data-bind="attr:{'href' : productUrl}" href="/shop/Cameras_cameras/Seeker-II-Drone%E2%80%944K-12MP_7042129/">
+                                    <h5 pid="title" data-bind="text: title">Seeker II Drone—4K 12MP</h5>
+                                </a>
+                                <!-- ko if: color != null -->
+                                <!-- /ko -->
+                            </td>
+                            <td class="cart-quantity" style="width: 10%;">
+                                <input pid="quantity" type="number" class="form-control form-control-quantity" placeholder="1" data-bind="attr: {value: quantity, 'data-ajax-lineitemid': externalCartLineId}" value="1" data-ajax-lineitemid="e868ea522de74efa977357c13c47ed18">
+                            </td>
+                            <td class="cart-price text-right hidden-xs">
+                                <span pid="price" data-bind="text: linePrice">394.80 US$</span>
+                                <p data-bind="visible: shouldShowDiscountOffers" class="m-b-0" style="display: none;">
+                                    <span>Discount:</span>
+                                    <span pid="discountNames" data-bind="text: discountOfferNames" class="savings"></span>
+                                </p>
+                            </td>
+                            <td class="cart-total text-right">
+                                <strong pid="total" data-bind="text: lineTotal">394.80 US$</strong>
+                                <p data-bind="visible: shouldShowSavings">
+                                    <span>Discount: </span>
+                                    <span pid="discount" data-bind="text: lineItemDiscount" class="savings">0.00 US$</span>
+                                </p>
+                            </td>
+                            <td class="cart-delete">
+                                <a pid="remove" class="delete-item" data-bind="attr: {'data-ajax-lineitemid': externalCartLineId}" data-ajax-lineitemid="e868ea522de74efa977357c13c47ed18">
+                                    <span class="glyphicon glyphicon-remove icon-md"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+        <div class="m-b-1">
+            <h4>Digital Delivery</h4>
+            <table class="table">
+                <tbody>
+                    <tr class="row">
+                        <th class="col-md-6 hidden-xs" colspan="2">Product details</th>
+                        <th class="col-md-4 visible-xs">Product details</th>
+                        <th class="col-md-1">Quantity</th>
+                        <th class="col-md-2 hidden-xs text-right">Unit price</th>
+                        <th class="col-md-2 text-right">Total</th>
+                        <th class="col-md-1">&nbsp;</th>
+                    </tr>
+                </tbody>
+                <tbody data-bind="foreach: cartLines">
+                    <tr class="row">
+                        <td class="hidden-xs">
+                            <a data-bind="attr:{'href' : productUrl}" href="/shop/Gaming_gaming/Habitat-NextCube-Now%E2%80%94Princess-Kitten-%2C-a-%2C-Co%2C-d-%2C-1-month-Subscription_6042522/">
+                                <img class="img-responsive" data-bind="attr: {src: image}" alt="a" pid="image" src="//retail.dev.local/-/media/Images/Habitat/6042522_01.jpg?h=100&amp;w=100&amp;hash=E92948A798430141FF18166FF341A8C291989757">
+                            </a>
+                        </td>
+                        <td class="cart-info">
+                            <a data-bind="attr:{'href' : productUrl}" href="/shop/Gaming_gaming/Habitat-NextCube-Now%E2%80%94Princess-Kitten-%2C-a-%2C-Co%2C-d-%2C-1-month-Subscription_6042522/">
+                                <h5 pid="title" data-bind="text: title">Habitat NextCube Now—Princess Kitten &amp;Co. 1 month Subscription</h5>
+                            </a>
+                            <!-- ko if: color != null -->
+                            <!-- /ko -->
+                        </td>
+                        <td class="cart-quantity" style="width: 10%;">
+                            <input pid="quantity" type="number" class="form-control form-control-quantity" placeholder="1" data-bind="attr: {value: quantity, 'data-ajax-lineitemid': externalCartLineId}" value="1" data-ajax-lineitemid="36fc33e8039e48599638b5af5873046b">
+                        </td>
+                        <td class="cart-price text-right hidden-xs">
+                            <span pid="price" data-bind="text: linePrice">9.99 US$</span>
+                            <p data-bind="visible: shouldShowDiscountOffers" class="m-b-0" style="display: none;">
+                                <span>Discount:</span>
+                                <span pid="discountNames" data-bind="text: discountOfferNames" class="savings"></span>
+                            </p>
+                        </td>
+                        <td class="cart-total text-right">
+                            <strong pid="total" data-bind="text: lineTotal">9.99 US$</strong>
+                            <p data-bind="visible: shouldShowSavings">
+                                <span>Discount: </span>
+                                <span pid="discount" data-bind="text: lineItemDiscount" class="savings">0.00 US$</span>
+                            </p>
+                        </td>
+                        <td class="cart-delete">
+                            <a pid="remove" class="delete-item" data-bind="attr: {'data-ajax-lineitemid': externalCartLineId}" data-ajax-lineitemid="36fc33e8039e48599638b5af5873046b">
+                                <span class="glyphicon glyphicon-remove icon-md"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
