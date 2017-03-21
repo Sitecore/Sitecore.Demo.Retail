@@ -1,28 +1,28 @@
 {
     "resources": [ 
         [   {   "id": "install",
-                "path": "C:\\Projects\\Sitecore.Demo.Retail\\Install",
+                "path": ".\\Install",
                 "files": [
                     [   {   "id": "commerceInstaller", "fileName": "CommerceServer-11.4.148.exe"}   ]
                 ]   
             }   
         ],
         [   {   "id": "projectDatabaseScripts",
-                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Project\\Retail\\Database",
+                "path": ".\\src\\Project\\Retail\\Database",
                 "files": [
                     [   {   "id": "profileDacpac", "fileName": "Commerce.Storefront.ProfileDatabase.dacpac", "databaseId": "CommerceProfilesDB"  }   ]
                 ]   
             }   
         ],
         [   {   "id": "foundationDatabaseScripts",
-                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Foundation\\Commerce\\Database",
+                "path": ".\\src\\Foundation\\Commerce\\Database",
                 "files": [
                     [   {   "id": "commerceEngineScript", "fileName": "CommerceServicesDbScript.sql", "databaseId": "commerceEngineGlobalDB", "useDatabaseName": false  }   ]
                 ]   
             }   
         ],
         [   {   "id": "commerceServerResources",
-                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Project\\Retail\\Database",
+                "path": ".\\src\\Project\\Retail\\Database",
                 "files": [
                     [   {   "id": "catalog",      "fileName": "Catalog.xml"   }   ],
 				    [   {   "id": "inventory",    "fileName": "Inventory.xml" }   ],
@@ -38,12 +38,12 @@
             }   
         ],
         [   {   "id": "commerceEngineProject",
-                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Foundation\\Commerce\\Engine\\code",
+                "path": ".\\src\\Foundation\\Commerce\\Engine\\code",
                 "files": []   
             }   
         ],  
         [   {   "id": "solutionRoot",
-                "path": "C:\\Projects\\Sitecore.Demo.Retail",
+                "path": ".\\Sitecore.Demo.Retail",
                 "files": []   
             }   
         ] 
