@@ -26,4 +26,4 @@ Languages:
     - ID: "fe71c30e-f07d-4052-8594-c3028cd76e1f"
       Hint: Link
       Value: |
-        <link linktype="external" url="http://retail.dev.local/shop/eGift-Cards-and-Gift-Wrapping_egift%20cards%20and%20gift%20wrapping" />
+        <link linktype="external" url="/shop/eGift-Cards-and-Gift-Wrapping_egift%20cards%20and%20gift%20wrapping" anchor="" target="" />
