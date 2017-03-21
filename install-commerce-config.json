@@ -43,7 +43,7 @@
             }   
         ],  
         [   {   "id": "solutionRoot",
-                "path": ".\\Sitecore.Demo.Retail",
+                "path": ".\\",
                 "files": []   
             }   
         ] 
