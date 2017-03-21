@@ -5,7 +5,7 @@ module.exports = function() {
     sitecoreLibraries: instanceRoot + "\\Website\\bin",
     licensePath: instanceRoot + "\\Data\\license.xml",
     solutionName: "Sitecore.Demo.Retail",
-    buildConfiguration: "Debug",
+    buildConfiguration: "Demo-Retail",
     runCleanBuilds: false,
     commerceServerSiteName: "Habitat",
     commerceEngineRoot: instanceRoot + "\\CommerceEngine",

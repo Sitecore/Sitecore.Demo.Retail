@@ -22,35 +22,32 @@
         "Plugin.Sample.Payments.Braintree": "1.0.2301",
         "Sitecore.Commerce.Plugin.AdventureWorks": "1.0.2301"
     },
-
   "tools": {
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"
   },
-
   "frameworks": {
     "net452": {
     }
   },
-
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true
   },
-
   "runtimeOptions": {
     "configProperties": {
       "System.GC.Server": true
     }
   },
-
   "publishOptions": {
     "include": [
       "wwwroot",
       "web.config"
     ]
   },
-
-  "scripts": {
-    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
-  }
+    "scripts": {
+        "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+    },
+    "configurations": {
+        "Demo-Retail": {}
+    }
 }
