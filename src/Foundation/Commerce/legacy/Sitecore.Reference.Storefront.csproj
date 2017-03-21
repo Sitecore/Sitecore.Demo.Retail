@@ -236,6 +236,16 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="Scripts\jquery-ui-1.10.4.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jsuri-1.1.1.js" />
+    <Content Include="Scripts\jsuri-1.1.1.min.js" />
+    <Content Include="Scripts\knockout-2.3.0.debug.js" />
+    <Content Include="Scripts\knockout-2.3.0.js" />
+    <Content Include="Scripts\knockout.validation-2.0.0.js" />
+    <Content Include="Scripts\knockout.validation-2.0.0.min.js" />
     <Content Include="Scripts\Storefront\errorsummary.js" />
     <Content Include="Scripts\Storefront\Models\priceInfoViewModel.js" />
     <Content Include="Scripts\Storefront\Models\stockInfoViewModel.js" />
@@ -265,6 +275,8 @@
     <Content Include="Views\Shared\SocialConnector.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsListHeader.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsPagination.cshtml" />
+    <Content Include="Scripts\jsuri-1.1.1.min.js.map" />
+    <Content Include="Scripts\knockout.validation-2.0.0.min.js.map" />
     <None Include="Views\Web.config">
       <SubType>Designer</SubType>
     </None>

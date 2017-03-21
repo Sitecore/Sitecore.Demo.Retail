@@ -305,7 +305,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             var currentCategory = GetCurrentCategory();
             var productSearchOptions = GetCategorySearchOptions(currentCategory, pageNumber, facetValues, pageSize, sortField, sortDirection);
 
-            var viewModel = GetProductListHeaderViewModel(productSearchOptions, currentCategory.SortFields, currentCategory.InnerItem, RenderingContext.Current.Rendering);
+            var viewModel = GetProductListHeaderViewModel(productSearchOptions, currentCategory.SortFields, currentCategory, RenderingContext.Current.Rendering);
 
             return View(viewModel);
         }
@@ -322,7 +322,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
             var currentCategory = GetCurrentCategory();
             var productSearchOptions = GetCategorySearchOptions(currentCategory, pageNumber, facetValues, pageSize);
-            var viewModel = GetPaginationViewModel(productSearchOptions, currentCategory.InnerItem, RenderingContext.Current.Rendering);
+            var viewModel = GetPaginationViewModel(productSearchOptions, currentCategory, RenderingContext.Current.Rendering);
 
             return View(viewModel);
         }
@@ -343,7 +343,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
             var searchOptions = GetCategorySearchOptions(currentCategory, pageNumber, facetValues, pageSize, sortField, sortDirection);
 
-            var viewModel = GetProductFacetsViewModel(searchOptions, currentCategory.InnerItem, RenderingContext.Current.Rendering);
+            var viewModel = GetProductFacetsViewModel(searchOptions, currentCategory, RenderingContext.Current.Rendering);
 
             return View(viewModel);
         }
@@ -639,14 +639,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             }
         }
 
-        public ProductListHeaderViewModel GetProductListHeaderViewModel(SearchOptions productSearchOptions, IEnumerable<QuerySortField> sortFields, Item categoryItem, Rendering rendering)
+        public ProductListHeaderViewModel GetProductListHeaderViewModel(SearchOptions productSearchOptions, IEnumerable<QuerySortField> sortFields, Category category, Rendering rendering)
         {
             var viewModel = new ProductListHeaderViewModel();
 
             SearchResults childProducts = null;
             if (productSearchOptions != null)
             {
-                childProducts = GetChildProducts(productSearchOptions, categoryItem);
+                childProducts = GetChildProducts(category, productSearchOptions);
             }
 
             viewModel.Initialize(rendering, childProducts, sortFields, productSearchOptions);
@@ -654,14 +654,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             return viewModel;
         }
 
-        public PaginationViewModel GetPaginationViewModel(SearchOptions productSearchOptions, Item categoryItem, Rendering rendering)
+        public PaginationViewModel GetPaginationViewModel(SearchOptions productSearchOptions, Category category, Rendering rendering)
         {
             var viewModel = new PaginationViewModel();
 
             SearchResults childProducts = null;
             if (productSearchOptions != null)
             {
-                childProducts = GetChildProducts(productSearchOptions, categoryItem);
+                childProducts = GetChildProducts(category, productSearchOptions);
             }
 
             viewModel.Initialize(rendering, childProducts, productSearchOptions);
@@ -669,17 +669,15 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             return viewModel;
         }
 
-        public ProductFacetsViewModel GetProductFacetsViewModel(SearchOptions productSearchOptions, Item categoryItem, Rendering rendering)
+        public ProductFacetsViewModel GetProductFacetsViewModel(SearchOptions productSearchOptions, Category category, Rendering rendering)
         {
-            var viewModel = new ProductFacetsViewModel();
-
             SearchResults childProducts = null;
             if (productSearchOptions != null)
             {
-                childProducts = GetChildProducts(productSearchOptions, categoryItem);
+                childProducts = GetChildProducts(category, productSearchOptions);
             }
 
-            viewModel.Initialize(rendering, childProducts, productSearchOptions);
+            var viewModel = new ProductFacetsViewModel(childProducts?.Facets ?? productSearchOptions?.FacetFields);
 
             return viewModel;
         }
@@ -693,7 +691,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         {
             Assert.IsNotNull(category, nameof(category));
 
-            var cacheKey = $"Category/{category.InnerItem.ID}/{productSearchOptions}";
+            var cacheKey = CreateCacheKey("Category", category, productSearchOptions);
 
             var categoryViewModel = this.GetFromCache<CategoryViewModel>(cacheKey);
             if (categoryViewModel != null)
@@ -704,7 +702,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             SearchResults childProducts = null;
             if (productSearchOptions != null)
             {
-                childProducts = GetChildProducts(productSearchOptions, category.InnerItem);
+                childProducts = GetChildProducts(category, productSearchOptions);
             }
 
             categoryViewModel = new CategoryViewModel(category.InnerItem, childProducts, category.SortFields, productSearchOptions);
@@ -723,9 +721,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             return this.AddToCache(cacheKey, categoryViewModel);
         }
 
+        private static string CreateCacheKey(string cacheId, Category category, SearchOptions productSearchOptions)
+        {
+            return $"{cacheId}/{category.InnerItem.ID}/{productSearchOptions}";
+        }
+
         private NavigationViewModel GetNavigationViewModel(Category category)
         {
-            var cacheKey = "Navigation/" + category.Name;
+            var cacheKey = CreateCacheKey("Navigation", category, null);
 
             var navigationViewModel = this.GetFromCache<NavigationViewModel>(cacheKey);
             if (navigationViewModel != null)
@@ -740,16 +743,16 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             return this.AddToCache(cacheKey, navigationViewModel);
         }
 
-        private SearchResults GetChildProducts(SearchOptions searchOptions, Item categoryItem)
+        private SearchResults GetChildProducts(Category category, SearchOptions searchOptions)
         {
-            var cacheKey = $"ChildProductSearch_{categoryItem.ID}";
+            var cacheKey = CreateCacheKey("ChildProducts", category, searchOptions);
 
             var results = this.GetFromCache<SearchResults>(cacheKey);
             if (results != null)
             {
                 return results;
             }
-            results = CatalogManager.GetChildProducts(searchOptions, categoryItem);
+            results = CatalogManager.GetChildProducts(category.InnerItem, searchOptions);
 
             return this.AddToCache(cacheKey, results);
         }

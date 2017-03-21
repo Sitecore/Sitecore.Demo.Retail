@@ -23,18 +23,18 @@
     }
 }
 
-<div id="C05-ProductList" class="row">
+<ul class="list-unstyled list-divided">
     @foreach (var item in Model.Items)
     {
-        <div class="col-sm-4 col-xs-12">
+        <li>
             @if (item is ProductViewModel)
             {
-                @Html.Partial("~/views/Catalog/_ProductSummary.cshtml", (ProductViewModel)item)
+                @Html.Partial("_ProductSearchResultDetails", (ProductViewModel)item)
             }
             else if (item is CategoryViewModel)
             {
-                @Html.Partial("~/views/Catalog/_CategorySummary.cshtml", (CategoryViewModel)item)
+                @Html.Partial("_CategorySearchResultDetails", (CategoryViewModel)item)
             }
-        </div>
+        </li>
     }
-</div>
+</ul>

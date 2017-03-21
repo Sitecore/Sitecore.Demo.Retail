@@ -27,5 +27,10 @@ namespace Sitecore.Foundation.Commerce.Models
             Clean();
             return FoundValues != null && FoundValues.Count > 0;
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + $"_{Name}";
+        }
     }
 }

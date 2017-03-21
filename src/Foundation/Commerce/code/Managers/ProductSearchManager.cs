@@ -23,27 +23,27 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         private CommerceSearchManager CommerceSearchManager { get; }
 
-        public SearchResults GetSearchResults(SearchOptions searchOptions, string searchKeyword, string catalogName)
+        public SearchResults GetSearchResults(string catalogName, string keyword, SearchOptions searchOptions)
         {
-            Assert.ArgumentNotNull(searchKeyword, nameof(searchKeyword));
-            Assert.ArgumentNotNull(searchKeyword, nameof(searchKeyword));
-            Assert.ArgumentNotNull(searchKeyword, nameof(searchKeyword));
+            Assert.ArgumentNotNull(catalogName, nameof(catalogName));
+            Assert.ArgumentNotNull(keyword, nameof(keyword));
+            Assert.ArgumentNotNull(searchOptions, nameof(searchOptions));
 
             var returnList = new List<Item>();
             var totalPageCount = 0;
             var totalProductCount = 0;
-            var facets = Enumerable.Empty<QueryFacet>();
+            List<QueryFacet> facets = new List<QueryFacet>();
 
-            if (RenderingContext.Current.Rendering.Item != null && !string.IsNullOrEmpty(searchKeyword.Trim()))
+            if (!string.IsNullOrEmpty(keyword.Trim()))
             {
-                var searchResponse = SearchCatalogItemsByKeyword(searchKeyword, catalogName, searchOptions);
+                var searchResponse = SearchCatalogItemsByKeyword(catalogName, keyword, searchOptions);
 
                 if (searchResponse != null)
                 {
                     returnList.AddRange(searchResponse.ResponseItems);
                     totalProductCount = searchResponse.TotalItemCount;
                     totalPageCount = searchResponse.TotalPageCount;
-                    facets = searchResponse.Facets.Select(f => f.ToQueryFacet());
+                    facets = searchResponse.Facets.Select(f => f.ToQueryFacet()).ToList();
                 }
             }
 
@@ -51,9 +51,8 @@ namespace Sitecore.Foundation.Commerce.Managers
         }
 
 
-        private SearchResponse SearchCatalogItemsByKeyword(string keyword, string catalogName, SearchOptions searchOptions)
+        private SearchResponse SearchCatalogItemsByKeyword(string catalogName, string keyword, SearchOptions searchOptions)
         {
-            Assert.ArgumentNotNullOrEmpty(catalogName, nameof(catalogName));
             var searchIndex = CommerceSearchManager.GetIndex(catalogName);
 
             using (var context = searchIndex.CreateSearchContext())
@@ -76,6 +75,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 {
                     var results = searchResults.GetResults();
                     var response = SearchResponse.CreateFromSearchResultsItems(options, results);
+                    searchOptions = options.ToSearchOptions();
                     return response;
                 }
                 catch (TooManyClausesException e)

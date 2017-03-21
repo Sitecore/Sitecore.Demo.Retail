@@ -112,7 +112,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             var totalPageCount = 0;
 
             var returnList = new List<Item>();
-            IEnumerable<QueryFacet> facets = null;
+            List<QueryFacet> facets = null;
             var searchOptions = new SearchOptions(-1, 0);
             var searchResponse = FindCatalogItems(dataSource, searchOptions);
             if (searchResponse != null)
@@ -121,7 +121,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
                 totalProductCount = searchResponse.TotalItemCount;
                 totalPageCount = searchResponse.TotalPageCount;
-                facets = searchResponse.Facets.Select(f => f.ToQueryFacet());
+                facets = searchResponse.Facets.Select(f => f.ToQueryFacet()).ToList();
             }
 
             return new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex, facets);
@@ -312,10 +312,12 @@ namespace Sitecore.Foundation.Commerce.Managers
                 {
                     var query = LinqHelper.CreateQuery<SitecoreUISearchResultItem>(context, searchStringModel).Where(item => item.Language == Context.Language.Name);
 
-                    query = CommerceSearchManager.AddSearchOptionsToQuery(query, searchOptions.ToCommerceSearchOptions());
+                    var commerceSearchOptions = searchOptions.ToCommerceSearchOptions();
+                    query = CommerceSearchManager.AddSearchOptionsToQuery(query, commerceSearchOptions);
 
                     var results = query.GetResults();
-                    var response = SearchResponse.CreateFromUISearchResultsItems(searchOptions.ToCommerceSearchOptions(), results);
+                    var response = SearchResponse.CreateFromUISearchResultsItems(commerceSearchOptions, results);
+                    searchOptions = commerceSearchOptions.ToSearchOptions();
 
                     return response;
                 }
@@ -341,9 +343,9 @@ namespace Sitecore.Foundation.Commerce.Managers
         }
 
 
-        public SearchResults GetChildProducts(SearchOptions searchOptions, Item categoryItem)
+        public SearchResults GetChildProducts(Item categoryItem, SearchOptions searchOptions)
         {
-            IEnumerable<QueryFacet> facets = null;
+            List<QueryFacet> facets = null;
             var returnList = new List<Item>();
             var totalPageCount = 0;
             var totalProductCount = 0;
@@ -356,7 +358,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
                 totalProductCount = searchResponse.TotalItemCount;
                 totalPageCount = searchResponse.TotalPageCount;
-                facets = searchResponse.Facets.Select(f => f.ToQueryFacet());
+                facets = searchResponse.Facets.Select(f => f.ToQueryFacet()).ToList();
             }
 
             var results = new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex, facets);
@@ -384,10 +386,13 @@ namespace Sitecore.Foundation.Commerce.Managers
                         Uri = p.Uri
                     });
 
-                searchResults = CommerceSearchManager.AddSearchOptionsToQuery(searchResults, searchOptions.ToCommerceSearchOptions());
+                var commerceSearchOptions = searchOptions.ToCommerceSearchOptions();
+                searchResults = CommerceSearchManager.AddSearchOptionsToQuery(searchResults, commerceSearchOptions);
 
                 var results = searchResults.GetResults();
-                var response = SearchResponse.CreateFromSearchResultsItems(searchOptions.ToCommerceSearchOptions(), results);
+                var response = SearchResponse.CreateFromSearchResultsItems(commerceSearchOptions, results);
+
+                searchOptions = commerceSearchOptions.ToSearchOptions();
 
                 return response;
             }

@@ -80,13 +80,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         private ProductListHeaderViewModel GetProductListHeaderViewModel(SearchInfo searchInfo)
         {
             SearchResults searchResults = null;
-            if (searchInfo.SearchOptions != null)
+            var options = searchInfo.SearchOptions;
+            if (options != null)
             {
-                searchResults = GetSearchResults(searchInfo.SearchOptions, searchInfo.SearchKeyword, searchInfo.Catalog.Name);
+                searchResults = GetSearchResults(searchInfo.Catalog.Name, searchInfo.SearchKeyword, options);
             }
 
             var viewModel = new ProductListHeaderViewModel();
-            viewModel.Initialize(RenderingContext.Current.Rendering, searchResults, searchInfo.SortFields, searchInfo.SearchOptions);
+            viewModel.Initialize(RenderingContext.Current.Rendering, searchResults, searchInfo.SortFields, options);
             return viewModel;
         }
 
@@ -109,21 +110,19 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             }
 
             var searchInfo = GetSearchInfo(searchKeyword, pageNumber, facetValues, sortField, pageSize, sortDirection);
-            var viewModel = GetProductFacetsViewModel(searchInfo.SearchOptions, searchKeyword, searchInfo.Catalog.Name);
+            var viewModel = GetProductFacetsViewModel(searchInfo.Catalog.Name, searchKeyword, searchInfo.SearchOptions);
             return View(viewModel);
         }
 
-        private ProductFacetsViewModel GetProductFacetsViewModel(SearchOptions searchOptions, string searchKeyword, string catalogName)
+        private ProductFacetsViewModel GetProductFacetsViewModel(string catalogName, string searchKeyword, SearchOptions searchOptions)
         {
-            var viewModel = new ProductFacetsViewModel();
-
             SearchResults searchResults = null;
             if (searchOptions != null)
             {
-                searchResults = GetSearchResults(searchOptions, searchKeyword, catalogName);
+                searchResults = GetSearchResults(catalogName, searchKeyword, searchOptions);
             }
 
-            viewModel.Initialize(RenderingContext.Current.Rendering, searchResults, searchOptions);
+            var viewModel = new ProductFacetsViewModel(searchResults?.Facets ?? searchOptions?.FacetFields);
 
             return viewModel;
         }
@@ -153,7 +152,8 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             {
                 return viewModel;
             }
-            var results = GetSearchResults(searchInfo.SearchOptions, searchInfo.SearchKeyword, searchInfo.Catalog.Name);
+            var options = searchInfo.SearchOptions;
+            var results = GetSearchResults(searchInfo.Catalog.Name, searchInfo.SearchKeyword, options);
             if (results == null || results.SearchResultItems.Count <= 0)
             {
                 return null;
@@ -174,7 +174,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             return this.AddToCache(CurrentCategoryViewModelKeyName, viewModel);
         }
 
-        private SearchResults GetSearchResults(SearchOptions searchOptions, string searchKeyword, string catalogName)
+        private SearchResults GetSearchResults(string catalogName, string searchKeyword, SearchOptions searchOptions)
         {
             var results = this.GetFromCache<SearchResults>(CurrentSearchProductResultsKeyName);
             if (results != null)
@@ -183,7 +183,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             }
 
 
-            results = ProductSearchManager.GetSearchResults(searchOptions, searchKeyword, catalogName);
+            results = ProductSearchManager.GetSearchResults(catalogName, searchKeyword, searchOptions);
 
             return this.AddToCache(CurrentSearchProductResultsKeyName, results);
         }
@@ -218,7 +218,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             SearchResults searchResults = null;
             if (searchOptions != null)
             {
-                searchResults = GetSearchResults(searchOptions, searchInfo.SearchKeyword, searchInfo.Catalog.Name);
+                searchResults = GetSearchResults(searchInfo.Catalog.Name, searchInfo.SearchKeyword, searchOptions);
             }
 
             viewModel.Initialize(RenderingContext.Current.Rendering, searchResults, searchOptions);

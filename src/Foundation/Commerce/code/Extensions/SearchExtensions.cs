@@ -43,9 +43,21 @@ namespace Sitecore.Foundation.Commerce.Extensions
             {
                 NumberOfItemsToReturn = searchOptions.NumberOfItemsToReturn,
                 StartPageIndex = searchOptions.StartPageIndex,
-                FacetFields = searchOptions.FacetFields.Select(f => f.ToCommerceQueryFacet()),
+                FacetFields = searchOptions.FacetFields.Select(f => f.ToCommerceQueryFacet()).ToList(),
                 SortDirection = searchOptions.SortDirection == SortDirection.Ascending ? CommerceConstants.SortDirection.Asc : CommerceConstants.SortDirection.Desc,
                 SortField = searchOptions.SortField
+            };
+        }
+
+        public static SearchOptions ToSearchOptions(this CommerceSearchOptions commerceSearchOptions)
+        {
+            return new SearchOptions
+            {
+                NumberOfItemsToReturn = commerceSearchOptions.NumberOfItemsToReturn,
+                StartPageIndex = commerceSearchOptions.StartPageIndex,
+                FacetFields = commerceSearchOptions.FacetFields.Select(f => f.ToQueryFacet()).ToList(),
+                SortDirection = commerceSearchOptions.SortDirection == CommerceConstants.SortDirection.Asc ? SortDirection.Ascending : SortDirection.Descending,
+                SortField = commerceSearchOptions.SortField
             };
         }
 

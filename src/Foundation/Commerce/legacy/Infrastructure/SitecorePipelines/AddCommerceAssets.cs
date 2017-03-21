@@ -34,6 +34,7 @@ namespace Sitecore.Reference.Storefront.Infrastructure.SitecorePipelines
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/Models/lineItemDataViewModel.js", ScriptLocation.Head, true);
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/Models/lineItemListViewModel.js", ScriptLocation.Head, true);
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/Models/miniCartItemListViewModel.js", ScriptLocation.Head, true);
+            AssetRepository.Current.AddScriptFile("/Scripts/Storefront/Models/miniCartItemViewModel.js", ScriptLocation.Head, true);
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/Models/miniCartViewModel.js", ScriptLocation.Head, true);
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/Models/orderHeaderModel.js", ScriptLocation.Head, true);
             AssetRepository.Current.AddScriptFile("/Scripts/Storefront/Models/orderHeaderViewModel.js", ScriptLocation.Head, true);

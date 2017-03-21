@@ -14,7 +14,7 @@
 @using Sitecore.Foundation.Commerce.Extensions
 @model Sitecore.Feature.Commerce.Catalog.Models.ProductFacetsViewModel
 @{
-    if (Model == null || Model.ChildProductFacets == null || !Model.ChildProductFacets.Any())
+    if (Model?.Facets == null || !Model.Facets.Any())
     {
         return;
     }
@@ -29,7 +29,7 @@
     </button>
     <div class="sidebar-collapse collapse" id="facets-sidebar">
         <!-- Toggle facets for mobile -->
-        @foreach (var facet in Model.ActiveFacets)
+        @foreach (var facet in Model.Facets)
         {
             var facetId = "facet" + Guid.NewGuid().ToString("N");
             if (facet.IsValid())
@@ -61,7 +61,7 @@
                                             break;
                                     }
 
-                                    foreach (var activeFacet in Model.ActiveFacets)
+                                    foreach (var activeFacet in Model.Facets)
                                     {
                                         if (activeFacet.Values.Contains(value.Name))
                                         {
