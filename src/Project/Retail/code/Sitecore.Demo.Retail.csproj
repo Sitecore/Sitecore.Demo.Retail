@@ -123,10 +123,23 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Properties\PublishProfiles\commerce3.pubxml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
-    <Content Include="styles\commerce.css" />
+    <Content Include="styles\niteflight.css">
+      <DependentUpon>niteflight.scss</DependentUpon>
+    </Content>
+    <Content Include="styles\niteflight.min.css">
+      <DependentUpon>niteflight.css</DependentUpon>
+    </Content>
     <Content Include="Views\Retail\Layouts\Retail.cshtml" />
+    <Content Include="styles\niteflight\_fonts.scss" />
+    <Content Include="styles\niteflight\_overrides.scss" />
+    <Content Include="styles\niteflight\_variables.scss" />
+    <Content Include="styles\niteflight.scss" />
     <None Include="Web.config">
       <SubType>Designer</SubType>
     </None>
