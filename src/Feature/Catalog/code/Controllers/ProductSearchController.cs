@@ -18,11 +18,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.UI;
-using Sitecore.Commerce.Connect.CommerceServer;
-using Sitecore.Commerce.Connect.CommerceServer.Search;
-using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.Commerce.Contacts;
 using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.Linq;
@@ -45,7 +43,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         private const string CurrentCategoryViewModelKeyName = "CurrentCategoryViewModel";
         private const string CurrentSearchProductResultsKeyName = "CurrentSearchProductResults";
 
-        public ProductSearchController([NotNull] AccountManager accountManager, [NotNull] CatalogManager catalogManager, [NotNull] ContactFactory contactFactory, [NotNull] VisitorContextRepository visitorContextRepository, CatalogItemContext catalogItemContext, ICommerceSearchManager commerceSearchManager)
+        public ProductSearchController([NotNull] AccountManager accountManager, [NotNull] CatalogManager catalogManager, [NotNull] ContactFactory contactFactory, [NotNull] VisitorContextRepository visitorContextRepository, CatalogItemContext catalogItemContext, ProductSearchManager productSearchManager)
         {
             Assert.ArgumentNotNull(catalogManager, nameof(catalogManager));
             Assert.ArgumentNotNull(visitorContextRepository, nameof(visitorContextRepository));
@@ -53,38 +51,13 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             VisitorContextRepository = visitorContextRepository;
             CatalogItemContext = catalogItemContext;
             CatalogManager = catalogManager;
-            CommerceSearchManager = commerceSearchManager;
+            ProductSearchManager = productSearchManager;
         }
 
-        private ICommerceSearchManager CommerceSearchManager { get; }
-
+        private ProductSearchManager ProductSearchManager { get; }
         private VisitorContextRepository VisitorContextRepository { get; }
         public CatalogItemContext CatalogItemContext { get; }
         private CatalogManager CatalogManager { get; }
-
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public ActionResult SearchEvent(
-            [Bind(Prefix = Foundation.Commerce.Constants.QueryString.SearchKeyword)] string searchKeyword,
-            [Bind(Prefix = Constants.QueryString.Paging)] int? pageNumber,
-            [Bind(Prefix = Constants.QueryString.Facets)] string facetValues,
-            [Bind(Prefix = Constants.QueryString.Sort)] string sortField,
-            [Bind(Prefix = Constants.QueryString.PageSize)] int? pageSize,
-            [Bind(Prefix = Constants.QueryString.SortDirection)] CommerceConstants.SortDirection? sortDirection)
-        {
-            if (CatalogManager.CatalogContext == null)
-            {
-                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
-            }
-
-            var searchInfo = GetSearchInfo(searchKeyword, pageNumber, facetValues, sortField, pageSize, sortDirection);
-            var searchResult = GetSearchResults(searchInfo.SearchOptions, searchKeyword, searchInfo.Catalog.Name);
-            if (!string.IsNullOrWhiteSpace(searchKeyword))
-            {
-                CatalogManager.RegisterSearchEvent(StorefrontManager.CurrentStorefront, searchKeyword, searchResult.TotalItemCount);
-            }
-
-            return View();
-        }
 
         public ActionResult ProductSearchResultsListHeader(
             [Bind(Prefix = Foundation.Commerce.Constants.QueryString.SearchKeyword)] string searchKeyword,
@@ -92,7 +65,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             [Bind(Prefix = Constants.QueryString.Facets)] string facetValues,
             [Bind(Prefix = Constants.QueryString.Sort)] string sortField,
             [Bind(Prefix = Constants.QueryString.PageSize)] int? pageSize,
-            [Bind(Prefix = Constants.QueryString.SortDirection)] CommerceConstants.SortDirection? sortDirection)
+            [Bind(Prefix = Constants.QueryString.SortDirection)] SortDirection? sortDirection)
         {
             if (CatalogManager.CatalogContext == null)
             {
@@ -107,13 +80,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         private ProductListHeaderViewModel GetProductListHeaderViewModel(SearchInfo searchInfo)
         {
             SearchResults searchResults = null;
-            if (searchInfo.SearchOptions != null)
+            var options = searchInfo.SearchOptions;
+            if (options != null)
             {
-                searchResults = GetSearchResults(searchInfo.SearchOptions, searchInfo.SearchKeyword, searchInfo.Catalog.Name);
+                searchResults = GetSearchResults(searchInfo.Catalog.Name, searchInfo.SearchKeyword, options);
             }
 
             var viewModel = new ProductListHeaderViewModel();
-            viewModel.Initialize(RenderingContext.Current.Rendering, searchResults, searchInfo.SortFields, searchInfo.SearchOptions);
+            viewModel.Initialize(RenderingContext.Current.Rendering, searchResults, searchInfo.SortFields, options);
             return viewModel;
         }
 
@@ -123,7 +97,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             [Bind(Prefix = Constants.QueryString.Facets)] string facetValues,
             [Bind(Prefix = Constants.QueryString.Sort)] string sortField,
             [Bind(Prefix = Constants.QueryString.PageSize)] int? pageSize,
-            [Bind(Prefix = Constants.QueryString.SortDirection)] CommerceConstants.SortDirection? sortDirection)
+            [Bind(Prefix = Constants.QueryString.SortDirection)] SortDirection? sortDirection)
         {
             if (CatalogManager.CatalogContext == null)
             {
@@ -136,21 +110,19 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             }
 
             var searchInfo = GetSearchInfo(searchKeyword, pageNumber, facetValues, sortField, pageSize, sortDirection);
-            var viewModel = GetProductFacetsViewModel(searchInfo.SearchOptions, searchKeyword, searchInfo.Catalog.Name);
+            var viewModel = GetProductFacetsViewModel(searchInfo.Catalog.Name, searchKeyword, searchInfo.SearchOptions);
             return View(viewModel);
         }
 
-        private ProductFacetsViewModel GetProductFacetsViewModel(CommerceSearchOptions searchOptions, string searchKeyword, string catalogName)
+        private ProductFacetsViewModel GetProductFacetsViewModel(string catalogName, string searchKeyword, SearchOptions searchOptions)
         {
-            var viewModel = new ProductFacetsViewModel();
-
             SearchResults searchResults = null;
             if (searchOptions != null)
             {
-                searchResults = GetSearchResults(searchOptions, searchKeyword, catalogName);
+                searchResults = GetSearchResults(catalogName, searchKeyword, searchOptions);
             }
 
-            viewModel.Initialize(RenderingContext.Current.Rendering, searchResults, searchOptions);
+            var viewModel = new ProductFacetsViewModel(searchResults?.Facets ?? searchOptions?.FacetFields);
 
             return viewModel;
         }
@@ -161,7 +133,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             [Bind(Prefix = Constants.QueryString.Facets)] string facetValues,
             [Bind(Prefix = Constants.QueryString.Sort)] string sortField,
             [Bind(Prefix = Constants.QueryString.PageSize)] int? pageSize,
-            [Bind(Prefix = Constants.QueryString.SortDirection)] CommerceConstants.SortDirection? sortDirection)
+            [Bind(Prefix = Constants.QueryString.SortDirection)] SortDirection? sortDirection)
         {
             if (CatalogManager.CatalogContext == null)
             {
@@ -180,11 +152,15 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             {
                 return viewModel;
             }
-            var results = GetSearchResults(searchInfo.SearchOptions, searchInfo.SearchKeyword, searchInfo.Catalog.Name);
+            var options = searchInfo.SearchOptions;
+            var results = GetSearchResults(searchInfo.Catalog.Name, searchInfo.SearchKeyword, options);
             if (results == null || results.SearchResultItems.Count <= 0)
             {
                 return null;
             }
+
+            CatalogManager.RegisterSearchEvent(StorefrontManager.CurrentStorefront, searchInfo.SearchKeyword, results.TotalItemCount);
+
             viewModel = new SearchResultViewModel(results);
 
             var products = viewModel.Items.Where(i => i is ProductViewModel).Cast<ProductViewModel>().ToList();
@@ -198,7 +174,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             return this.AddToCache(CurrentCategoryViewModelKeyName, viewModel);
         }
 
-        private SearchResults GetSearchResults(CommerceSearchOptions searchOptions, string searchKeyword, string catalogName)
+        private SearchResults GetSearchResults(string catalogName, string searchKeyword, SearchOptions searchOptions)
         {
             var results = this.GetFromCache<SearchResults>(CurrentSearchProductResultsKeyName);
             if (results != null)
@@ -206,29 +182,8 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 return results;
             }
 
-            Assert.ArgumentNotNull(searchKeyword, nameof(searchKeyword));
-            Assert.ArgumentNotNull(searchKeyword, nameof(searchKeyword));
-            Assert.ArgumentNotNull(searchKeyword, nameof(searchKeyword));
 
-            var returnList = new List<Item>();
-            var totalPageCount = 0;
-            var totalProductCount = 0;
-            var facets = Enumerable.Empty<CommerceQueryFacet>();
-
-            if (RenderingContext.Current.Rendering.Item != null && !string.IsNullOrEmpty(searchKeyword.Trim()))
-            {
-                var searchResponse = SearchCatalogItemsByKeyword(searchKeyword, catalogName, searchOptions);
-
-                if (searchResponse != null)
-                {
-                    returnList.AddRange(searchResponse.ResponseItems);
-                    totalProductCount = searchResponse.TotalItemCount;
-                    totalPageCount = searchResponse.TotalPageCount;
-                    facets = searchResponse.Facets;
-                }
-            }
-
-            results = new SearchResults(returnList, totalProductCount, totalPageCount, searchOptions.StartPageIndex, facets);
+            results = ProductSearchManager.GetSearchResults(catalogName, searchKeyword, searchOptions);
 
             return this.AddToCache(CurrentSearchProductResultsKeyName, results);
         }
@@ -239,7 +194,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             [Bind(Prefix = Constants.QueryString.Facets)] string facetValues,
             [Bind(Prefix = Constants.QueryString.Sort)] string sortField,
             [Bind(Prefix = Constants.QueryString.PageSize)] int? pageSize,
-            [Bind(Prefix = Constants.QueryString.SortDirection)] CommerceConstants.SortDirection? sortDirection)
+            [Bind(Prefix = Constants.QueryString.SortDirection)] SortDirection? sortDirection)
         {
             if (CatalogManager.CatalogContext == null)
             {
@@ -248,6 +203,10 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
             var searchInfo = GetSearchInfo(searchKeyword, pageNumber, facetValues, sortField, pageSize, sortDirection);
             var viewModel = GetPaginationViewModel(searchInfo);
+            if (viewModel.Pagination.NumberOfPages <= 1)
+            {
+                return new EmptyResult();
+            }
             return View(viewModel);
         }
 
@@ -259,20 +218,20 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             SearchResults searchResults = null;
             if (searchOptions != null)
             {
-                searchResults = GetSearchResults(searchOptions, searchInfo.SearchKeyword, searchInfo.Catalog.Name);
+                searchResults = GetSearchResults(searchInfo.Catalog.Name, searchInfo.SearchKeyword, searchOptions);
             }
 
             viewModel.Initialize(RenderingContext.Current.Rendering, searchResults, searchOptions);
             return viewModel;
         }
 
-        private void UpdateOptionsWithFacets(IEnumerable<CommerceQueryFacet> facets, string valueQueryString, CommerceSearchOptions productSearchOptions)
+        private void UpdateOptionsWithFacets(IEnumerable<QueryFacet> facets, string valueQueryString, SearchOptions productSearchOptions)
         {
             if (facets == null)
                 return;
 
-            var commerceQueryFacets = facets as CommerceQueryFacet[] ?? facets.ToArray();
-            if (!commerceQueryFacets.Any())
+            var queryFacets = facets.ToList();
+            if (!queryFacets.Any())
             {
                 return;
             }
@@ -285,7 +244,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 {
                     var facetValues = facetValuesCombo.Split('=');
                     var name = facetValues[0];
-                    var existingFacet = commerceQueryFacets.FirstOrDefault(item => item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+                    var existingFacet = queryFacets.FirstOrDefault(item => item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
                     if (existingFacet == null)
                     {
                         continue;
@@ -299,10 +258,10 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 }
             }
 
-            productSearchOptions.FacetFields = commerceQueryFacets;
+            productSearchOptions.FacetFields = queryFacets;
         }
 
-        private void UpdateOptionsWithSorting(string sortField, CommerceConstants.SortDirection? sortDirection, CommerceSearchOptions productSearchOptions)
+        private void UpdateOptionsWithSorting(string sortField, SortDirection? sortDirection, SearchOptions productSearchOptions)
         {
             if (!string.IsNullOrEmpty(sortField))
             {
@@ -318,7 +277,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             }
         }
 
-        private SearchInfo GetSearchInfo(string searchKeyword, int? pageNumber, string facetValues, string sortField, int? pageSize, CommerceConstants.SortDirection? sortDirection)
+        private SearchInfo GetSearchInfo(string searchKeyword, int? pageNumber, string facetValues, string sortField, int? pageSize, SortDirection? sortDirection)
         {
             var searchInfo = this.GetFromCache<SearchInfo>("CurrentProductSearchInfo");
             if (searchInfo != null)
@@ -329,57 +288,22 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             searchInfo = new SearchInfo
             {
                 SearchKeyword = searchKeyword ?? string.Empty,
-                RequiredFacets = CommerceSearchManager.GetFacetFieldsForItem(RenderingContext.Current.Rendering.Item),
-                SortFields = CommerceSearchManager.GetSortFieldsForItem(RenderingContext.Current.Rendering.Item),
+                RequiredFacets = ProductSearchManager.GetFacetFieldsForItem(RenderingContext.Current.Rendering.Item),
+                SortFields = ProductSearchManager.GetSortFieldsForItem(RenderingContext.Current.Rendering.Item),
                 Catalog = CatalogManager.CatalogContext.CurrentCatalog,
-                ItemsPerPage = pageSize ?? CommerceSearchManager.GetItemsPerPageForItem(RenderingContext.Current.Rendering.Item)
+                ItemsPerPage = pageSize ?? ProductSearchManager.GetItemsPerPageForItem(RenderingContext.Current.Rendering.Item)
             };
             if (searchInfo.ItemsPerPage <= 0)
             {
                 searchInfo.ItemsPerPage = 12;
             }
 
-            var productSearchOptions = new CommerceSearchOptions(searchInfo.ItemsPerPage, pageNumber.GetValueOrDefault(0));
+            var productSearchOptions = new SearchOptions(searchInfo.ItemsPerPage, pageNumber.GetValueOrDefault(0));
             UpdateOptionsWithFacets(searchInfo.RequiredFacets, facetValues, productSearchOptions);
             UpdateOptionsWithSorting(sortField, sortDirection, productSearchOptions);
             searchInfo.SearchOptions = productSearchOptions;
 
             return this.AddToCache("CurrentProductSearchInfo", searchInfo);
-        }
-
-        private SearchResponse SearchCatalogItemsByKeyword(string keyword, string catalogName, CommerceSearchOptions searchOptions)
-        {
-            Assert.ArgumentNotNullOrEmpty(catalogName, nameof(catalogName));
-            var searchIndex = CommerceSearchManager.GetIndex(catalogName);
-
-            using (var context = searchIndex.CreateSearchContext())
-            {
-                var searchResults = context.GetQueryable<CommerceProductSearchResultItem>()
-                    .Where(item => item.Name.Equals(keyword) || item[BuiltinFields.DisplayName].Equals(keyword) || item.Content.Contains(keyword))
-                    .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product || item.CommerceSearchItemType == CommerceSearchResultItemType.Category)
-                    .Where(item => item.CatalogName == catalogName)
-                    .Where(item => item.Language == Context.Language.Name)
-                    .Select(p => new CommerceProductSearchResultItem
-                    {
-                        ItemId = p.ItemId,
-                        Uri = p.Uri
-                    });
-
-                searchResults = CommerceSearchManager.AddSearchOptionsToQuery(searchResults, searchOptions);
-
-                try
-                {
-                    var results = searchResults.GetResults();
-                    var response = SearchResponse.CreateFromSearchResultsItems(searchOptions, results);
-                    return response;
-                }
-                catch (ContentSearch.Linq.Lucene.Exceptions.TooManyClausesException e)
-                {
-                    //In some cases a very broad keyword may cause the query to be too big.
-                    Log.Warn($"Could not search for '{keyword}'. Results in too many clauses.", e, this);
-                    return null;
-                }
-            }
         }
     }
 }

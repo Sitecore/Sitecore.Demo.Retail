@@ -20,7 +20,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
-    public class CurrencyManager : BaseManager
+    public class CurrencyManager : IManager
     {
         public CurrencyContext CurrencyContext
         {

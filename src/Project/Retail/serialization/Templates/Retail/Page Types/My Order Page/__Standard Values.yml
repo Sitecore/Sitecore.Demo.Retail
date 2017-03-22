@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <r>
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -57,7 +57,6 @@ SharedFields:
           ph="navbar-activity"
           uid="{347E800E-8774-4939-B802-AEACC2EAEC1B}" />
         <r
-          ds=""
           id="{9AA8E388-A6BD-46E1-A73B-DDEF601DE6F8}"
           ph="navbar-activity"
           uid="{1FC0194C-979F-4AD9-9D6E-46138F5EA0BE}" />
@@ -66,6 +65,14 @@ SharedFields:
           par="UseStaticPlaceholderNames=1"
           ph="page-layout"
           uid="{17B8F02F-5ED5-40A0-B66A-673CA0520262}" />
+        <r
+          id="{E6BA23C6-08F7-43D0-BE00-BB2129D6F288}"
+          ph="/page-layout/page-header"
+          uid="{AB7D4AA0-9A61-4E96-A13D-B42957C4850F}" />
+        <r
+          id="{45B8E1D9-D522-49E0-B9B7-04C965CC7089}"
+          ph="/page-layout/page-header"
+          uid="{9CB1397C-5F40-4186-8744-C202288F565F}" />
         <r
           id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
           ph="/page-layout/page-header"
@@ -76,13 +83,21 @@ SharedFields:
           ph="page-layout"
           uid="{352818F4-7D7B-4FA4-96E3-15338F277C8E}" />
         <r
-          id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
+          id="{AB7054DD-B8E3-41D6-A75F-B54F2F37D08B}"
           par="UseStaticPlaceholderNames=1"
           ph="/page-layout/section"
-          uid="{47757922-2585-481F-9C37-503574C851A6}" />
+          uid="{5885FB3F-9EF9-4180-A56D-D682AE7ED70A}" />
+        <r
+          id="{3F7AD288-FA57-441F-AD79-CA60DC0C0A8D}"
+          ph="/page-layout/section/col-narrow-1"
+          uid="{66305006-6BCA-4232-90C8-E1EC5671230A}" />
+        <r
+          id="{87C089CC-C0B6-479D-9876-05D77CF6B42F}"
+          ph="/page-layout/section/col-narrow-1"
+          uid="{F7EFD82E-6175-4458-88EA-2C76AD6CA2D3}" />
         <r
           id="{70F244B9-E109-4729-BB28-73AED3DA32A8}"
-          ph="/page-layout/section/col-huge"
+          ph="/page-layout/section/col-wide-1"
           uid="{9DE12E81-5D05-4724-A417-9CFA6FA765E8}" />
         <r
           id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"

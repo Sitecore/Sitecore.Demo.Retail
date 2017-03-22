@@ -23,7 +23,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure
     {
         public void Configure(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddTypesImplementingInCurrentAssembly<BaseManager>(Lifetime.Transient);
+            serviceCollection.AddTypesImplementingInCurrentAssembly<IManager>(Lifetime.Transient);
             serviceCollection.AddTransient<CountryRepository>();
             serviceCollection.AddSingleton<CatalogItemContext>();
             serviceCollection.AddTransient<VisitorContextRepository>();

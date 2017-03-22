@@ -12,7 +12,6 @@
 
 // Global Vars
 var checkoutDataViewModel = null;
-var defaultCountryCode = "USA";
 var methodsViewModel = null;
 var method = null;
 var expirationDates = ko.observableArray();
@@ -27,7 +26,7 @@ function setupCheckoutPage() {
             $("#orderGetShippingMethods").button('loading');
             var party = ko.toJS(checkoutDataViewModel.shippingAddress());
             var data = { "ShippingAddress": party, "ShippingPreferenceType": checkoutDataViewModel.selectedShippingOption(), "Lines": null };
-            AJAXPost(StorefrontUri("api/storefront/checkout/GetShippingMethods"), JSON.stringify(data), function (data, success, sender) {
+            AJAXPost("/api/storefront/checkout/GetShippingMethods", JSON.stringify(data), function (data, success, sender) {
                 if (data.Success && success) {
                     var methods = "";
                     checkoutDataViewModel.shippingMethods.removeAll();
@@ -63,7 +62,7 @@ function setupCheckoutPage() {
             var party = ko.toJS(line.shippingAddress());
             var lines = [{ "ExternalCartLineId": lineId, "ShippingPreferenceType": line.selectedShippingOption() }];
             var data = { "ShippingAddress": party, "ShippingPreferenceType": checkoutDataViewModel.selectedShippingOption(), "Lines": lines };
-            AJAXPost(StorefrontUri("api/storefront/checkout/GetShippingMethods"), JSON.stringify(data), function (data, success, sender) {
+            AJAXPost("/api/storefront/checkout/GetShippingMethods", JSON.stringify(data), function (data, success, sender) {
                 var lineId = sender.attr('id').replace('lineGetShippingMethods-', '');
                 if (data.Success && success && checkoutDataViewModel != null) {
                     var match = ko.utils.arrayFirst(checkoutDataViewModel.cart().cartLines(), function (item) {
@@ -119,26 +118,26 @@ function setupCheckoutPage() {
 }
 
 // ----- JSON CALLS ----- //
-function GetAvailableStates(countryCode) {
-    var statesArray = [];
-    // Uncomment when the States are available
+function GetAvailableRegions(countryCode) {
+    var regionsArray = [];
+    // Uncomment when the Regions are available
     //
-    //AJAXPost(StorefrontUri("api/storefront/checkout/getAvailableStates"), '{ "CountryCode": "' + countryCode + '"}', function (data, success, sender){     
-    //    if (data.States != null) {
+    //AJAXPost("/api/storefront/checkout/getAvailableRegions", '{ "CountryCode": "' + countryCode + '"}', function (data, success, sender){     
+    //    if (data.Regions != null) {
     //        $.each(data.UserAddresses, function (index, value) {         
-    //            statesArray.push(new Country(value, index));
+    //            regionsArray.push(new Country(value, index));
     //        });
     //    }  
     //});
-    return statesArray;
+    return regionsArray;
 }
 
-function UpdateAvailableStates(countryCode) {
-    checkoutDataViewModel.states(GetAvailableStates(countryCode));
+function UpdateAvailableRegions(countryCode) {
+    checkoutDataViewModel.regions(GetAvailableRegions(countryCode));
 }
 
 function getCheckoutData() {
-    AJAXPost(StorefrontUri("api/storefront/checkout/GetCheckoutData"), null, function (data, success, sender) {
+    AJAXPost("/api/storefront/checkout/GetCheckoutData", null, function (data, success, sender) {
         if (success && data.Success) {
             checkoutDataViewModel = new CheckoutDataViewModel(data);
             ko.applyBindingsWithValidation(checkoutDataViewModel, document.getElementById("checkoutSection"));
@@ -227,7 +226,7 @@ function setShippingMethods() {
             "Address1": checkoutDataViewModel.shippingAddress().address1(),
             "Country": checkoutDataViewModel.shippingAddress().country(),
             "City": checkoutDataViewModel.shippingAddress().city(),
-            "State": checkoutDataViewModel.shippingAddress().state(),
+            "Region": checkoutDataViewModel.shippingAddress().region(),
             "ZipPostalCode": checkoutDataViewModel.shippingAddress().zipPostalCode(),
             "ExternalId": partyId,
             "PartyId": partyId
@@ -237,7 +236,7 @@ function setShippingMethods() {
             "ShippingMethodID": checkoutDataViewModel.shippingMethod().id,
             "ShippingMethodName": checkoutDataViewModel.shippingMethod().description,
             "ShippingPreferenceType": orderShippingPreference,
-            "PartyID": partyId
+            "PartyId": partyId
         });
     }
     else if (orderShippingPreference === 2) {
@@ -247,7 +246,7 @@ function setShippingMethods() {
             "Address1": checkoutDataViewModel.store().address().address1(),
             "Country": checkoutDataViewModel.store().address().country(),
             "City": checkoutDataViewModel.store().address().city(),
-            "State": checkoutDataViewModel.store().address().state(),
+            "Region": checkoutDataViewModel.store().address().region(),
             "ZipPostalCode": checkoutDataViewModel.store().address().zipPostalCode(),
             "ExternalId": storeId,
             "PartyId": storeId
@@ -257,7 +256,7 @@ function setShippingMethods() {
             "ShippingMethodID": checkoutDataViewModel.shipToStoreDeliveryMethod().ExternalId,
             "ShippingMethodName": checkoutDataViewModel.shipToStoreDeliveryMethod().Description,
             "ShippingPreferenceType": orderShippingPreference,
-            "PartyID": storeId
+            "PartyId": storeId
         });
     }
     else if (orderShippingPreference === 4) {
@@ -272,7 +271,7 @@ function setShippingMethods() {
                     "Address1": this.shippingAddress().address1(),
                     "Country": this.shippingAddress().country(),
                     "City": this.shippingAddress().city(),
-                    "State": this.shippingAddress().state(),
+                    "Region": this.shippingAddress().region(),
                     "ZipPostalCode": this.shippingAddress().zipPostalCode(),
                     "ExternalId": partyId,
                     "PartyId": partyId
@@ -282,7 +281,7 @@ function setShippingMethods() {
                     "ShippingMethodID": this.shippingMethod().id,
                     "ShippingMethodName": this.shippingMethod().description,
                     "ShippingPreferenceType": lineDeliveryPreference,
-                    "PartyID": partyId,
+                    "PartyId": partyId,
                     "LineIDs": [lineId]
                 });
             }
@@ -294,7 +293,7 @@ function setShippingMethods() {
                     "Address1": this.store().address().address1(),
                     "Country": this.store().address().country(),
                     "City": this.store().address().city(),
-                    "State": this.store().address().state(),
+                    "Region": this.store().address().region(),
                     "ZipPostalCode": this.store().address().zipPostalCode(),
                     "ExternalId": storeId,
                     "PartyId": storeId
@@ -304,7 +303,7 @@ function setShippingMethods() {
                     "ShippingMethodID": checkoutDataViewModel.shipToStoreDeliveryMethod().ExternalId,
                     "ShippingMethodName": checkoutDataViewModel.shipToStoreDeliveryMethod().Description,
                     "ShippingPreferenceType": lineDeliveryPreference,
-                    "PartyID": storeId,
+                    "PartyId": storeId,
                     "LineIDs": [lineId]
                 });
             }
@@ -332,7 +331,7 @@ function setShippingMethods() {
     }
 
     var data = '{"OrderShippingPreferenceType": "' + orderShippingPreference + '", "ShippingMethods":' + JSON.stringify(shipping) + ', "ShippingAddresses":' + JSON.stringify(parties) + '}';
-    AJAXPost(StorefrontUri("api/storefront/checkout/SetShippingMethods"), data, setShippingMethodsResponse, $(this));
+    AJAXPost("/api/storefront/checkout/SetShippingMethods", data, setShippingMethodsResponse, $(this));
     return false;
 }
 
@@ -452,7 +451,7 @@ function geocodeError(request) {
 function getNearbyStores(searchResultsContainer) {
     var data = "{'latitude': '" + searchLocation.latitude + "', 'longitude':" + searchLocation.longitude + "}";
 
-    AJAXPost(StorefrontUri("api/storefront/checkout/GetNearbyStores"), data, renderAvailableStores, searchResultsContainer);
+    AJAXPost("/api/storefront/checkout/GetNearbyStores", data, renderAvailableStores, searchResultsContainer);
     return false;
 }
 
@@ -514,7 +513,7 @@ function renderAvailableStores(data, success, sender) {
                 + currentStoreLocation.Address.Address1 +
                 ' </p><p style="margin-bottom:0px;margin-top:0px;">'
                 + currentStoreLocation.Address.City + ', '
-                + currentStoreLocation.Address.State + ' '
+                + currentStoreLocation.Address.Region + ' '
                 + currentStoreLocation.Address.ZipPostalCode +
                 '</p></div>';
 
@@ -595,7 +594,7 @@ function initBillingPage() {
 
 function getCardPaymentAcceptUrl() {
     if (checkoutDataViewModel && checkoutDataViewModel.payFederatedPayment && checkoutDataViewModel.shippingAddress()) {
-        AJAXPost(StorefrontUri("api/storefront/checkout/GetCardPaymentAcceptUrl"), null, function (data, success, sender) {
+        AJAXPost("/api/storefront/checkout/GetCardPaymentAcceptUrl", null, function (data, success, sender) {
             if (data.Success && success) {
                 checkoutDataViewModel.cardPaymentAcceptPageUrl(data.ServiceUrl);
                 checkoutDataViewModel.messageOrigin = data.MessageOrigin;
@@ -737,7 +736,7 @@ function setPaymentMethods() {
                     "Address1": ba.address1(),
                     "Country": ba.country(),
                     "City": ba.city(),
-                    "State": ba.state(),
+                    "Region": ba.region(),
                     "ZipPostalCode": ba.zipPostalCode(),
                     "ExternalId": ba.externalId(),
                     "PartyId": ba.externalId()
@@ -758,7 +757,7 @@ function setPaymentMethods() {
                 "ExpirationYear": cc.expirationYear(),
                 "CustomerNameOnPayment": cc.customerNameOnPayment(),
                 "Amount": cc.creditCardAmount(),
-                "PartyID": $('#billingAddress-ExternalId').val()
+                "PartyId": $('#billingAddress-ExternalId').val()
             };
 
             var ba = checkoutDataViewModel.billingAddress();
@@ -768,7 +767,7 @@ function setPaymentMethods() {
                 "Address1": ba.address1(),
                 "Country": ba.country(),
                 "City": ba.city(),
-                "State": ba.state(),
+                "Region": ba.region(),
                 "ZipPostalCode": ba.zipPostalCode(),
                 "ExternalId": ba.externalId(),
                 "PartyId": ba.externalId()
@@ -799,7 +798,7 @@ function setPaymentMethods() {
 
     $("#ToConfirmButton").button('loading');
 
-    AJAXPost(StorefrontUri("api/storefront/checkout/SetPaymentMethods"), data, setPaymentMethodsResponse, $(this));
+    AJAXPost("/api/storefront/checkout/SetPaymentMethods", data, setPaymentMethodsResponse, $(this));
 }
 
 function setPaymentMethodsResponse(data, success, sender) {
@@ -820,7 +819,7 @@ function setPaymentMethodsResponse(data, success, sender) {
                 ba.address1(address.Address1);
                 ba.country(address.Country);
                 ba.city(address.City);
-                ba.state(address.State);
+                ba.region(address.Region);
                 ba.zipPostalCode(address.ZipPostalCode);
             }
         }
@@ -863,7 +862,7 @@ function submitOrder() {
                 "ExpirationYear": cc.expirationYear(),
                 "CustomerNameOnPayment": cc.customerNameOnPayment(),
                 "Amount": cc.creditCardAmount(),
-                "PartyID": $('#billingAddress-ExternalId').val()
+                "PartyId": $('#billingAddress-ExternalId').val()
             };
 
             var ba = checkoutDataViewModel.billingAddress();
@@ -873,7 +872,7 @@ function submitOrder() {
                 "Address1": ba.address1(),
                 "Country": ba.country(),
                 "City": ba.city(),
-                "State": ba.state(),
+                "Region": ba.region(),
                 "ZipPostalCode": ba.zipPostalCode(),
                 "ExternalId": ba.externalId(),
                 "PartyId": ba.externalId()
@@ -896,7 +895,7 @@ function submitOrder() {
 
     $("#PlaceOrderButton").button('loading');
 
-    AJAXPost(StorefrontUri("api/storefront/checkout/SubmitOrder"), data, submitOrderResponse, $(this));
+    AJAXPost("/api/storefront/checkout/SubmitOrder", data, submitOrderResponse, $(this));
 }
 
 function submitOrderResponse(data, success, sender) {

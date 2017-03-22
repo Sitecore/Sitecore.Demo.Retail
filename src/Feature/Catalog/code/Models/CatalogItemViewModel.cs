@@ -6,6 +6,7 @@ using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Links;
+using Sitecore.Resources.Media;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models
 {
@@ -22,6 +23,19 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
         }
 
         public MediaItem DefaultImage => Images?.FirstOrDefault();
+
+        public string GetThumbnailUrl(int maxWidth)
+        {
+            if (DefaultImage == null)
+                return null;
+
+            var options = new MediaUrlOptions { MaxWidth = maxWidth };
+            var url = MediaManager.GetMediaUrl(DefaultImage, options);
+            var cleanUrl = StringUtil.EnsurePrefix('/', url);
+            var hashedUrl = HashingUtils.ProtectAssetUrl(cleanUrl);
+
+            return hashedUrl;
+        }
 
         public List<MediaItem> Images
         {

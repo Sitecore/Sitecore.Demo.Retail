@@ -14,7 +14,7 @@
 @using Sitecore.Foundation.Commerce.Extensions
 @model Sitecore.Feature.Commerce.Catalog.Models.ProductFacetsViewModel
 @{
-    if (Model == null || Model.ChildProductFacets == null || !Model.ChildProductFacets.Any())
+    if (Model?.Facets == null || !Model.Facets.Any())
     {
         return;
     }
@@ -29,7 +29,7 @@
     </button>
     <div class="sidebar-collapse collapse" id="facets-sidebar">
         <!-- Toggle facets for mobile -->
-        @foreach (var facet in Model.ActiveFacets)
+        @foreach (var facet in Model.Facets)
         {
             var facetId = "facet" + Guid.NewGuid().ToString("N");
             if (facet.IsValid())
@@ -42,7 +42,6 @@
                             @foreach (var value in facet.FoundValues)
                             {
                                 var facetValueSelected = false;
-                                var facetCount = value.AggregateCount;
                                 if (value.IsValid())
                                 {
                                     var name = value.Name;
@@ -62,20 +61,22 @@
                                             break;
                                     }
 
-                                    var activeFacetClass = string.Empty;
-                                    foreach (var activeFacet in Model.ActiveFacets)
+                                    foreach (var activeFacet in Model.Facets)
                                     {
                                         if (activeFacet.Values.Contains(value.Name))
                                         {
-                                            activeFacetClass = "class=active";
                                             facetValueSelected = true;
                                         }
                                     }
 
-                                    <li @activeFacetClass>
+                                    <li class="@(facetValueSelected ? "active" : "")">
                                         <a href="#" onclick="FireFacetApplied('@facet.Name', '@value.Name', @(facetValueSelected ? 0 : 1), '@Url.AddToFacets(facet.Name, value.Name)')">
-                                            <span pid="facetName">@name</span> 
-                                            <span pid="facetCount">(@facetCount)</span>
+                                            @if (facetValueSelected)
+                                            {
+                                                <small class="glyphicon glyphicon-ok text-info"></small>
+                                            }
+                                            <span pid="facetName">@name</span>
+                                            <small pid="facetCount">(@value.AggregateCount)</small>
                                         </a>
                                     </li>
                                 }
@@ -91,7 +92,7 @@
 <script type="text/javascript">
     function FireFacetApplied(facetName, facetValue, isApplied, url) {
         var facet = facetName + "=" + facetValue;
-        AJAXPost(StorefrontUri("api/storefront/catalog/facetapplied"),
+        AJAXPost("/api/storefront/catalog/facetapplied",
             "{\"facetValue\":\"" + facet + "\", \"isApplied\":" + isApplied + "}",
             function(data, success, sender) {
                 window.location.href = url;

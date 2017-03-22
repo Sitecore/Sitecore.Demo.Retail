@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="GetAvailableStatesInputModel.cs" company="Sitecore Corporation">
+// <copyright file="GetAvailableRegionsInputModel.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
 // <summary>Controller parameters required to get the Near by Stores.</summary>
@@ -19,7 +19,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Sitecore.Foundation.Commerce.Models.InputModels
 {
-    public class GetAvailableStatesInputModel
+    public class GetAvailableRegionsInputModel
     {
         [Required]
         public string CountryCode { get; set; }

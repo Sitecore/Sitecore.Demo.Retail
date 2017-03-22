@@ -63,63 +63,9 @@ function AJAXCall(callType, url, data, responseFunction, sender) {
     });
 }
 
-function StorefrontUri(route) {
-    return "/" + route;
-}
-
-function ShowGlobalMessages(data) {
-    if (data && data.Url) {
-        var url = new Uri(StorefrontUri(data.Url));
-        window.location.href = url;
-    }
-    if (errorSummaryViewModel && data && data.Errors && data.Errors.length > 0) {
-        errorSummaryViewModel.AddToErrorList(data);
-    }    
-}
-
-function ClearGlobalMessages() {
-    if (errorSummaryViewModel) {
-        errorSummaryViewModel.ClearMessages();
-    }
-}
-
 var toString = Object.prototype.toString;
 isString = function (obj) {
     return toString.call(obj) == '[object String]';
-}
-
-//
-// - 
-function productRecommendationClick(e) {
-    e.preventDefault();
-    var clickedElement = $(this);
-
-    clickedElement.closest("ul").find(".active").removeClass("active");
-    clickedElement.closest("li").addClass('active');
-
-    var selector = clickedElement.attr('data-carousel-id');
-    var carousel = $('#' + selector);
-    var parent = carousel.parent();
-    parent.find(".product-slider").each(function () {
-        $(this).attr("style", "display:none");
-    });
-    carousel.attr("style", "");
-    $(".product-controls").closest("div").find("a").each(function () {
-        $(this).attr("href", '#' + selector);
-    });
-};
-
-function resetUrl() {
-    var url = new Uri(window.location.href)
-        .deleteQueryParam(queryStringParamerterSort)
-        .deleteQueryParam(queryStringParamerterSortDirection)
-        .deleteQueryParam(queryStringParamerterPage)
-        .deleteQueryParam(queryStringParamerterPageSize)
-        .deleteQueryParam(queryStringParameterSiteContentPage)
-        .deleteQueryParam(queryStringParameterSiteContentPageSize)
-        .toString();
-
-    window.location.href = url;
 }
 
 var queryStringParamerterSort = "s";
@@ -132,77 +78,7 @@ var queryStringParamerterPageSize = "ps";
 var queryStringParameterSiteContentPage = "scpg";
 var queryStringParameterSiteContentPageSize = "scps";
 
-$(window).on("load", function () {
-    setEqualHeight($(".product-list div.col-sm-4"));
-});
-
 $(document).ready(function () {
-    $('.product-recommendation-click').on('click', productRecommendationClick);
-
-    $(".sortDropdown").change(function () {
-        var val = $(this).find("option:selected").attr("value");
-
-        if (val != null && val != "") {
-            var fieldName = val.substr(0, val.length - 1);
-            var direction = val.charAt(val.length - 1) == queryStringParamerterSortDirectionAscShort ? queryStringParamerterSortDirectionAsc : queryStringParamerterSortDirectionDesc;
-
-            AJAXPost(StorefrontUri("api/storefront/catalog/sortorderapplied"), "{\"sortField\":\"" + fieldName + "\", \"sortDirection\":\"" + direction + "\"}", function (data, success, sender) {
-                var url = new Uri(window.location.href)
-                    .deleteQueryParam(queryStringParamerterSort)
-                    .deleteQueryParam(queryStringParamerterSortDirection)
-                    .addQueryParam(queryStringParamerterSort, fieldName)
-                    .addQueryParam(queryStringParamerterSortDirection, direction)
-                    .deleteQueryParam(queryStringParamerterPage)
-                    .toString();
-
-                window.location.href = url;
-            });
-        }
-        else {
-            resetUrl();
-        }
-    });
-
-    $(".changePageSize").change(function () {
-        var val = $(this).find("option:selected").attr("value");
-
-        if (val != null && val != "") {
-            var url = new Uri(window.location.href)
-                .deleteQueryParam(queryStringParamerterPageSize)
-                .addQueryParam(queryStringParamerterPageSize, val)
-                .deleteQueryParam(queryStringParamerterPage)
-                .toString();
-
-            window.location.href = url;
-        }
-        else {
-            resetUrl();
-        }
-    });
-
-    $(".changeSiteContentPageSize").change(function () {
-        var val = $(this).find("option:selected").attr("value");
-
-        if (val != null && val != "") {
-            var url = new Uri(window.location.href)
-                .deleteQueryParam(queryStringParameterSiteContentPageSize)
-                .addQueryParam(queryStringParameterSiteContentPageSize, val)
-                .deleteQueryParam(queryStringParamerterPage)
-                .toString();
-
-            window.location.href = url;
-        }
-        else {
-            resetUrl();
-        }
-    });
-
-    $(".thumbnails .thumbnail").on('click', function (e) {
-        e.preventDefault();
-
-        $('#prod-large-view').attr('src', $(this).attr('href'));
-    });
-
     // This change stops the shopping chart from closing of a user clicks on it.
     $(document).on('click', 'div.dropdown-menu', function (e) {
         e.stopPropagation();
@@ -220,15 +96,6 @@ function changeClass(e) {
 function states(sender, event) {
     var $btn = $('#' + sender).button(event);
 }
-
-// ERROR DIV
-function closeErrorMessage() {
-    $('.wrap-error').slideUp();
-};
-
-function showErrorMessage() {
-    $('.wrap-error').slideDown();
-};
 
 function getUrlParameter(url, param) {
     url = url.split('?');
@@ -253,17 +120,6 @@ function printPage() {
     w.onload = function () {
         $(document).ajaxStart().ajaxStop(w.print());
     };
-}
-
-function setEqualHeight(columns) {
-    var tallestcolumn = 0;
-    columns.each(function () {
-        currentHeight = $(this).height();
-        if (currentHeight > tallestcolumn) {
-            tallestcolumn = currentHeight;
-        }
-    });
-    columns.height(tallestcolumn);
 }
 
 function formatCurrency(x, precision, seperator, isoCurrencySymbol, groupSeperator) {

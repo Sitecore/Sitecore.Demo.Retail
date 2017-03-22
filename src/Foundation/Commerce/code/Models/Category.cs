@@ -32,8 +32,8 @@ namespace Sitecore.Foundation.Commerce.Models
 
         public string Name => InnerItem.Name;
         public string Title => InnerItem.DisplayName;
-        public List<CommerceQueryFacet> RequiredFacets { get; set; }
-        public List<CommerceQuerySort> SortFields { get; set; }
+        public List<QueryFacet> RequiredFacets { get; set; }
+        public List<QuerySortField> SortFields { get; set; }
 
         public int ItemsPerPage
         {

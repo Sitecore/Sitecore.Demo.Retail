@@ -1,0 +1,69 @@
+﻿@*//-----------------------------------------------------------------------
+    // Copyright 2016 Sitecore Corporation A/S
+    // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+    // except in compliance with the License. You may obtain a copy of the License at
+    //       http://www.apache.org/licenses/LICENSE-2.0
+    //
+    // Unless required by applicable law or agreed to in writing, software distributed under the
+    // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    // either express or implied. See the License for the specific language governing permissions
+    // and limitations under the License.
+    // -------------------------------------------------------------------------------------------*@
+@using Sitecore.Collections
+@using Sitecore.Foundation.SitecoreExtensions.Extensions
+@using Sitecore.Commerce.Connect.CommerceServer
+@using Sitecore.Commerce.Entities.Inventory
+@using Sitecore.Feature.Commerce.Catalog
+@using Sitecore.Foundation.Commerce.Extensions
+@model Sitecore.Feature.Commerce.Catalog.Models.ProductViewModel
+@{
+    if (Model == null)
+    {
+        return;
+    }
+}
+
+<div class="media">
+    <div class="media-body">
+        <div>
+            @Html.Partial("~/Views/Catalog/_ProductLabels.cshtml", Model)
+        </div>
+        <h2 class="media-title">
+            <a href="@Model.GetLink()">
+                @Model.Title
+            </a>
+        </h2>
+        <p>
+            @Model.DescriptionRender
+        </p>
+        <div class="row">
+            <div class="col-md-6">
+                @Html.Partial("~/Views/Catalog/_ProductPrice.cshtml", Model)
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="@Model.GetLink()" class="btn btn-xs btn-link" title="@Model.Title">
+                    @Html.Sitecore().Text("/Catalog/Search Results/Product Link", "See details") <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    @{
+        var thumbnailUrl = Model.GetThumbnailUrl(150);
+        if (thumbnailUrl != null)
+        {
+            // TODO: Move the following hard-coded style settings to .css.
+            <div class="media-right" style="position: relative;">
+                <a href="@Model.GetLink()">
+                    <img src="@thumbnailUrl" alt="@Model.Title" title="@Model.Title" />
+
+                    @if (Model.IsOnSale && Model.OnSaleOverlayImage != null)
+                    {
+                        <div style="position: absolute; top:0px; left:0px;">
+                            <img src="@(Model.OnSaleOverlayImage.ImageUrl(50,50))" alt="@Html.Sitecore().Text("/Catalog/Search Results/On Sale", "On Sale")" />
+                        </div>
+                    }
+                </a>
+            </div>
+        }
+    }
+</div>

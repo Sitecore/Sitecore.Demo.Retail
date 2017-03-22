@@ -97,7 +97,7 @@
                         <li pid="lineShippingAddressLine" data-bind="text: address().address1, attr: {id: 'confirm-shippingAddressLine-' + $parent.externalCartLineId}"></li>
                         <li>
                             <span pid="lineShippingAddressCity" data-bind="text: address().city, attr: {id: 'confirm-shippingAddressCity-' + $parent.externalCartLineId}"></span>,
-                            <span pid="lineShippingAddressState" data-bind="text: address().state, attr: {id: 'confirm-shippingAddressState-' + $parent.externalCartLineId}"></span>,
+                            <span pid="lineShippingAddressState" data-bind="text: address().region, attr: {id: 'confirm-shippingAddressState-' + $parent.externalCartLineId}"></span>,
                             <span pid="lineShippingAddressCountry" data-bind="text: address().country, attr: {id: 'confirm-shippingAddressCountry-' + $parent.externalCartLineId}"></span>
                         </li>
                         <li pid="lineShippingAddressZipCode" data-bind="text: address().zipPostalCode, attr: {id: 'confirm-shippingAddressZipCode-' + $parent.externalCartLineId}"></li>
@@ -109,7 +109,7 @@
                         <li pid="lineShippingAddressLine" data-bind="text: address1, attr: {id: 'confirm-shippingAddressLine-' + $parent.externalCartLineId}"></li>
                         <li>
                             <span pid="lineShippingAddressCity" data-bind="text: city, attr: {id: 'confirm-shippingAddressCity-' + $parent.externalCartLineId}"></span>,
-                            <span pid="lineShippingAddressState" data-bind="text: state, attr: {id: 'confirm-shippingAddressState-' + $parent.externalCartLineId}"></span>,
+                            <span pid="lineShippingAddressState" data-bind="text: region, attr: {id: 'confirm-shippingAddressState-' + $parent.externalCartLineId}"></span>,
                             <span pid="lineShippingAddressCountry" data-bind="text: country, attr: {id: 'confirm-shippingAddressCountry-' + $parent.externalCartLineId}"></span>
                         </li>
                         <li pid="lineShippingAddressZipCode" data-bind="text: zipPostalCode, attr: {id: 'confirm-shippingAddressZipCode-' + $parent.externalCartLineId}"></li>
@@ -188,7 +188,7 @@
                     <li id="confirm-shippingAddressLine" data-bind="text: address().address1"></li>
                     <li>
                         <span id="confirm-shippingAddressCity" data-bind="text: address().city"></span>,
-                        <span id="confirm-shippingAddressState" data-bind="text: address().state"></span>,
+                        <span id="confirm-shippingAddressState" data-bind="text: address().region"></span>,
                         <span id="confirm-shippingAddressCountry" data-bind="text: address().country"></span>
                     </li>
                     <li id="confirm-shippingAddressZipCode" data-bind="text: address().zipPostalCode"></li>
@@ -214,7 +214,7 @@
                     <li id="confirm-shippingAddressName" data-bind="text: name"></li>
                     <li id="confirm-shippingAddressLine" data-bind="text: address1"></li>
                     <li>
-                        <span id="confirm-shippingAddressCity" data-bind="text: city"></span>, <span id="confirm-shippingAddressState" data-bind="text: state"></span>, <span id="confirm-shippingAddressCountry" data-bind="text: country"></span>
+                        <span id="confirm-shippingAddressCity" data-bind="text: city"></span>, <span id="confirm-shippingAddressState" data-bind="text: region"></span>, <span id="confirm-shippingAddressCountry" data-bind="text: country"></span>
                     </li>
                     <li id="confirm-shippingAddressZipCode" data-bind="text: zipPostalCode"></li>
                 </ul>
@@ -239,7 +239,7 @@
                     <li id="confirm-billingAddressName" data-bind="text: name"></li>
                     <li id="confirm-billingAddressLine" data-bind="text: address1"></li>
                     <li>
-                        <span id="confirm-billingAddressCity" data-bind="text: city"></span>, <span id="confirm-billingAddressState" data-bind="text: state"></span>, <span id="confirm-billingAddressCountry" data-bind="text: country"></span>
+                        <span id="confirm-billingAddressCity" data-bind="text: city"></span>, <span id="confirm-billingAddressState" data-bind="text: region"></span>, <span id="confirm-billingAddressCountry" data-bind="text: country"></span>
                     </li>
                     <li id="confirm-billingAddressZipCode" data-bind="text: zipPostalCode"></li>
                 </ul>
