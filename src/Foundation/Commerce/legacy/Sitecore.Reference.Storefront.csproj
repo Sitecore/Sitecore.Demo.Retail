@@ -230,7 +230,6 @@
     <Compile Include="Controllers\StorefrontSearchController.cs" />
     <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Infrastructure\StorefrontSessionStateAttribute.cs" />
-    <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\JsonResults\AddressItemBaseJsonResult.cs" />
     <Compile Include="Models\JsonResults\AddressItemJsonResult.cs" />
     <Compile Include="Models\JsonResults\AddressListItemBaseJsonResult.cs" />
@@ -300,7 +299,6 @@
     <Content Include="Views\Account\MyOrders.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsListHeader.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsPagination.cshtml" />
-    <Content Include="Views\Checkout\Checkout.cshtml" />
     <None Include="Views\Web.config">
       <SubType>Designer</SubType>
     </None>
@@ -381,6 +379,9 @@
       <Project>{662345ac-23ee-4125-87a6-0785795c2409}</Project>
       <Name>Sitecore.Foundation.Commerce</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Checkout\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -35,6 +35,7 @@ using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
 using Sitecore.Feature.Commerce.Orders.Models;
 using Sitecore.Commerce.Entities.Carts;
+using Sitecore.Data;
 
 namespace Sitecore.Feature.Commerce.Orders.Controllers
 {
@@ -66,26 +67,27 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         public ActionResult Checkout()
         {
             var model = new CheckoutViewModel();
-            var cartResponse = CartManager.GetCurrentCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), true);
-            var cart = cartResponse.ServiceProviderResult.Cart as CommerceCart;
+            var cartResponse = CartManager.GetCurrentCart(StorefrontManager.CurrentStorefront,
+                VisitorContextRepository.GetCurrent(), true);
+            model.Cart = cartResponse.ServiceProviderResult.Cart as CommerceCart;
 
-            if (cart != null && cart.Lines != null && cart.Lines.Any())
+            if (model.Cart != null && model.Cart.Lines != null && model.Cart.Lines.Any())
             {
-                var prefsResponse = ShippingManager.GetShippingPreferences(cart);
+                var prefsResponse = ShippingManager.GetShippingPreferences(model.Cart);
                 if (prefsResponse.ServiceProviderResult.Success && prefsResponse.Result != null)
                 {
                     var lineShippingOptions = prefsResponse.ServiceProviderResult.LineShippingPreferences.ToList();
-                    foreach (var line in cart.Lines)
+                    foreach (CommerceCartLineWithImages line in model.Cart.Lines)
                     {
                         var option = lineShippingOptions?.FirstOrDefault(lso =>
                             lso.LineId == line.ExternalCartLineId)?.ShippingOptions?.FirstOrDefault();
                         if (option != null)
                         {
-                            if (!model.CartLinesMap.ContainsKey(option))
+                            if (!model.CartLinesMap.ContainsKey(option.Description))
                             {
-                                model.CartLinesMap[option] = new List<CartLine>();
+                                model.CartLinesMap[option.Description] = new List<CommerceCartLineWithImages>();
                             }
-                            model.CartLinesMap[option].Add(line);
+                            model.CartLinesMap[option.Description].Add(line);
                         }
                     }
                 }
@@ -96,12 +98,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 var cartPageUrl = "/shoppingcart";
                 return Redirect(cartPageUrl);
             }
-            //response = ShippingManager.GetShippingMethods(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
-            //var result = new ShippingMethodsJsonResult(response.ServiceProviderResult);
-            //if (response.ServiceProviderResult.Success)
-            //{
-            //    result.Initialize(response.ServiceProviderResult.ShippingMethods, response.ServiceProviderResult.ShippingMethodsPerItem);
-            //}
 
             return View(model);
         }

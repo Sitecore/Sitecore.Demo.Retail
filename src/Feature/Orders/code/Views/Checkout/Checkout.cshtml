@@ -1,0 +1,244 @@
+﻿@*//-----------------------------------------------------------------------
+    // Copyright 2016 Sitecore Corporation A/S
+    // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+    // except in compliance with the License. You may obtain a copy of the License at
+    //       http://www.apache.org/licenses/LICENSE-2.0
+    //
+    // Unless required by applicable law or agreed to in writing, software distributed under the
+    // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    // either express or implied. See the License for the specific language governing permissions
+    // and limitations under the License.
+    // -------------------------------------------------------------------------------------------*@
+@using Sitecore.Feature.Commerce.Orders.Models
+@using Sitecore.Foundation.SitecoreExtensions.Extensions
+@using Sitecore.Foundation.Commerce.Extensions
+
+@model CheckoutViewModel
+
+@*
+    @Html.Sitecore().Field("FIELD", Html.Sitecore().CurrentItem)
+*@
+
+<div class="row">
+    <div class="col-md-12">
+        @foreach (var shippingOption in Model.CartLinesMap.Keys)
+        {
+            <div class="m-b-1">
+                <h4>@shippingOption</h4>
+                <table class="table">
+                    <tbody>
+                        <tr class="row">
+                            <th class="col-md-6 hidden-xs" colspan="2">@Html.Sitecore().Field("Product Label", Html.Sitecore().CurrentItem)</th>
+                            <th class="col-md-4 visible-xs">@Html.Sitecore().Field("Product Label", Html.Sitecore().CurrentItem)</th>
+                            <th class="col-md-1">@Html.Sitecore().Field("Quantity Label", Html.Sitecore().CurrentItem)</th>
+                            <th class="col-md-2 hidden-xs text-right">@Html.Sitecore().Field("Unit Price Label", Html.Sitecore().CurrentItem)</th>
+                            <th class="col-md-2 text-right">@Html.Sitecore().Field("Total Label", Html.Sitecore().CurrentItem)</th>
+                            <th class="col-md-1">&nbsp;</th>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        @foreach (var line in Model.CartLinesMap[shippingOption])
+                        {
+                            <tr class="row">
+                                <td class="hidden-xs">
+                                    <a href="@Model.GetProductLink(line)">
+                                        <img class="img-responsive" alt="a" pid="image"
+                                             src="@line.DefaultImage.ImageUrl(100, 100)">
+                                    </a>
+                                </td>
+                                <td class="cart-info">
+                                    <a href="@Model.GetProductLink(line)">
+                                        <h5 pid="title">@line.Product.ProductName</h5>
+                                    </a>
+                                </td>
+                                <td class="cart-quantity" style="width: 10%;">
+                                    <input pid="quantity" type="number" class="form-control form-control-quantity"
+                                           placeholder="1" value="@line.Quantity">
+                                </td>
+                                <td class="cart-price text-right hidden-xs">
+                                    <span pid="price">@line.Product.Price.Amount.ToCurrency()</span>
+                                </td>
+                                <td class="cart-total text-right">
+                                    <strong pid="total">@line.Total.Amount.ToCurrency()</strong>
+                                </td>
+                                <td class="cart-delete">
+                                    <a pid="remove" class="delete-item">
+                                        <span class="glyphicon glyphicon-remove icon-md"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="row m-b-1">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@Html.Sitecore().Field("Shipment Details Header", Html.Sitecore().CurrentItem)</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong>@Html.Sitecore().Field("Shipping Address Label", Html.Sitecore().CurrentItem)</strong>
+                    </div>
+                    <div class="col-md-7">
+                        John Smith
+                        <br>
+                        101 Nowhere Ave
+                        <br>
+                        Somewhereville OH, 32100
+                    </div>
+                    <div class="col-md-2">
+                        <a href="">Change</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong>@Html.Sitecore().Field("Shipment Options Label", Html.Sitecore().CurrentItem)</strong>
+                    </div>
+                    <div class="col-md-9">
+                        <div id="shippingMethodsContainer" class="form-group shipping-options" data-bind="foreach: shippingMethods">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="radio" style="margin-left: 20px" data-bind="attr: {'name': 'shippingMethodId', pvalue: id}, checkMe: $root.shippingMethod" name="shippingMethodId" pvalue="e14965b9-306a-43c4-bffc-3c67be8726fa">
+                                        <span data-bind="text: description">Ground</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="radio" style="margin-left: 20px" data-bind="attr: {'name': 'shippingMethodId', pvalue: id}, checkMe: $root.shippingMethod" name="shippingMethodId" pvalue="939a3ea6-f453-4eb0-987d-45a5ee226985">
+                                        <span data-bind="text: description">Next day air</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="radio" style="margin-left: 20px" data-bind="attr: {'name': 'shippingMethodId', pvalue: id}, checkMe: $root.shippingMethod" name="shippingMethodId" pvalue="12cf3b10-d308-47a1-b140-ef6cc1419c9d">
+                                        <span data-bind="text: description">Standard</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="radio" style="margin-left: 20px" data-bind="attr: {'name': 'shippingMethodId', pvalue: id}, checkMe: $root.shippingMethod" name="shippingMethodId" pvalue="9119b37a-90f4-45e4-af32-688e689b5b0a">
+                                        <span data-bind="text: description">Standard overnight</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@Html.Sitecore().Field("Payment Details Header", Html.Sitecore().CurrentItem)</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong>@Html.Sitecore().Field("Payment Address Label", Html.Sitecore().CurrentItem)</strong>
+                    </div>
+                    <div class="col-md-7">
+                        Same as shipping address
+                    </div>
+                    <div class="col-md-2">
+                        <a href="">Change</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">&nbsp;</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong>@Html.Sitecore().Field("Payment Type Label", Html.Sitecore().CurrentItem)</strong>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Credit Card
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li>
+                                    <a href="#">Credit Card</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="#">Paypal</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="creditCardNumber" class="col-md-2 control-label">@Html.Sitecore().Field("Credit Card Number Label", Html.Sitecore().CurrentItem)</label>
+                            <div class="col-md-5">
+                                <input type="number" class="form-control" id="creditCardNumber" placeholder="">
+                            </div>
+                            <label for="creditCartExpiration" class="col-md-2 control-label">@Html.Sitecore().Field("Credit Card Expiration Label", Html.Sitecore().CurrentItem)</label>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control" id="creditCartExpiration" placeholder="MM/YY">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="pull-right">
+                &nbsp;
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td class="text">
+                                <strong>@Html.Sitecore().Field("Items Label", Html.Sitecore().CurrentItem)</strong>
+                            </td>
+                            <td id="confirm-subTotal" class="text-right" pid="subtotal">
+                                <strong>@Model.Total.Subtotal.ToCurrency()</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text">
+                                @Html.Sitecore().Field("Shipping Label", Html.Sitecore().CurrentItem)
+                            </td>
+                            <td id="confirm-shippingTotal" class="text-right" pid="shippingTotal">@Model.Total.ShippingTotal.ToCurrency()</td>
+                        </tr>
+                        <tr>
+                            <td class="text">@Html.Sitecore().Field("Taxes Label", Html.Sitecore().CurrentItem)</td>
+                            <td idd="confirm-taxTotal" class="text-right" pid="taxTotal">@Model.Total.TaxTotal.Amount.ToCurrency()</td>
+                        </tr>
+                        <tr>
+                            <td class="text">
+                                <em>@Html.Sitecore().Field("Savings Label", Html.Sitecore().CurrentItem)</em>
+                            </td>
+                            <td id="confirm-discountTotal" class="text-right">
+                                <em data-bind="text: cart().discount">@Model.Total.OrderLevelDiscountAmount.ToCurrency()</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text">
+                                <strong>@Html.Sitecore().Field("Total Label", Html.Sitecore().CurrentItem)</strong>
+                            </td>
+                            <td id="confirm-total" class="text-right">
+                                <strong data-bind="text: cart().total">@Model.Cart.Total.Amount.ToCurrency()</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

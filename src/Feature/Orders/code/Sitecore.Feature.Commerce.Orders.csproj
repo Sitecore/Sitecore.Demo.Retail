@@ -148,6 +148,7 @@
     <Content Include="Views\Checkout\_StepIndicator.cshtml" />
     <Content Include="Views\Checkout\OrderConfirmation.cshtml" />
     <Content Include="Views\Checkout\StartCheckout.cshtml" />
+    <Content Include="Views\Checkout\Checkout.cshtml" />
     <None Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +163,7 @@
     <Compile Include="Models\CartLineApiModel.cs" />
     <Compile Include="Models\CartApiModel.cs" />
     <Compile Include="Models\CheckoutApiModel.cs" />
+    <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\LineShippingOptionApiModel.cs" />
     <Compile Include="Models\MiniCartApiModel.cs" />
     <Compile Include="Models\ShippingMethodApiModel.cs" />
