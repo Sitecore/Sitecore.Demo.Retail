@@ -1,0 +1,46 @@
+﻿---
+ID: "1de1f060-fc1d-4e24-9494-79c4aa63090a"
+Parent: "662344c9-d908-46d8-9a1a-cbf2eaa32e93"
+Template: "cf9c8a2a-2794-4fea-980a-ef8426f3d6c3"
+Path: /sitecore/content/Storefront/Retail Campaigns
+DB: master
+SharedFields:
+- ID: "19b597d3-2edd-4ae2-aefe-4a94c7f10e31"
+  Hint: __Source Item
+  Value: "sitecore://master/{CEB8B632-3B51-4B28-94FF-77B010E5277B}"
+- ID: "1b963507-6176-4336-a14d-d5070c3b0286"
+  Hint: Base URL
+  Value: "http://retail.dev.local"
+- ID: "52d572ad-9678-423f-96e2-477528418ba1"
+  Hint: "Global Opt-out List"
+  Value: "64fd6c34-3ea1-4514-bc0c-64835ae67e13"
+- ID: "5c4af5b4-52d0-4db7-ac78-4eb030d6edc2"
+  Hint: Subscriber Profile
+  Value: "{D5CEA46D-5E7A-42D9-B654-652040D66483}"
+- ID: "943d8e5d-b924-41f8-ba1e-e0b630960e6e"
+  Hint: Preview base URL
+  Value: "http://retail.dev.local"
+- ID: "9b82216d-f53b-4558-b30a-e6952c8587f3"
+  Hint: Website Site Configuration Name
+  Value: retail
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: 
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "1b86697d-60ca-4d80-83fb-7555a2e6ce1c"
+      Hint: __Source
+      Value: "sitecore://master/{CEB8B632-3B51-4B28-94FF-77B010E5277B}?lang=en&ver=1"
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170322T160612Z
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: 
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
