@@ -20,6 +20,14 @@ SharedFields:
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
+        <p
+          uid="{EC00AF10-ECED-4C5E-B954-708C570C676B}"
+          key="col-narrow-1"
+          md="/sitecore/layout/Placeholder Settings/Project/Retail/Columns/col-narrow-1" />
+        <p
+          uid="{4F6693C0-912C-432D-B23B-A16CA9E509B9}"
+          key="col-narrow-2"
+          md="/sitecore/layout/Placeholder Settings/Project/Retail/Columns/col-narrow-2" />
         <r
           id="{E7AE3F87-CF66-40F2-A9F5-33ECF08BC777}"
           ph="head"

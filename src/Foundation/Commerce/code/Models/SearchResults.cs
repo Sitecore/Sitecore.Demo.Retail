@@ -24,19 +24,19 @@ namespace Sitecore.Foundation.Commerce.Models
 {
     public class SearchResults
     {
-        private IEnumerable<CommerceQueryFacet> _facets;
+        private List<QueryFacet> _facets;
         private List<Item> _searchResultItems;
 
         public SearchResults() : this(null, 0, 0, 0, null)
         {
         }
 
-        public SearchResults(List<Item> searchResultItems, int totalItemCount, int totalPageCount, int currentPageNumber, IEnumerable<CommerceQueryFacet> facets)
+        public SearchResults(List<Item> searchResultItems, int totalItemCount, int totalPageCount, int currentPageNumber, List<QueryFacet> facets)
         {
             SearchResultItems = searchResultItems ?? new List<Item>();
             TotalPageCount = totalPageCount;
             TotalItemCount = totalItemCount;
-            Facets = facets ?? Enumerable.Empty<CommerceQueryFacet>();
+            Facets = facets ?? new List<QueryFacet>();
             CurrentPageNumber = currentPageNumber;
         }
 
@@ -58,7 +58,7 @@ namespace Sitecore.Foundation.Commerce.Models
         public int CurrentPageNumber { get; set; }
         public string Title { get; set; }
 
-        public IEnumerable<CommerceQueryFacet> Facets
+        public List<QueryFacet> Facets
         {
             get { return _facets; }
 

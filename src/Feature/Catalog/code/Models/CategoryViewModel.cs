@@ -38,7 +38,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
             ChildProducts = new List<ProductViewModel>();
         }
 
-        public CategoryViewModel(Item categoryItem, SearchResults products, IEnumerable<CommerceQuerySort> sortFields, CommerceSearchOptions searchOptions) : this(categoryItem)
+        public CategoryViewModel(Item categoryItem, SearchResults products, IEnumerable<QuerySortField> sortFields, SearchOptions searchOptions) : this(categoryItem)
         {
             var itemsPerPage = searchOptions?.NumberOfItemsToReturn ?? 0;
 
@@ -70,9 +70,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
             SortFields = sortFields;
         }
 
-        public IEnumerable<CommerceQueryFacet> ChildProductFacets { get; protected set; }
+        public IEnumerable<QueryFacet> ChildProductFacets { get; protected set; }
 
-        public IEnumerable<CommerceQuerySort> SortFields { get; protected set; }
+        public IEnumerable<QuerySortField> SortFields { get; protected set; }
 
         public List<ProductViewModel> ChildProducts { get; set; }
 

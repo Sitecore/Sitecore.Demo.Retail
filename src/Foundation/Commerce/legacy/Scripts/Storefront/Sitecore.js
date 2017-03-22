@@ -74,7 +74,7 @@ $(document).ready(function () {
             var selectedIndex = $('#languageSelector')[0].selectedIndex;
 
             if (selectedIndex > 0) {
-                window.location.href = StorefrontUri("?sc_lang=" + selectedLanguage);
+                window.location.href = "/?sc_lang=" + selectedLanguage;
             }
         }
     );

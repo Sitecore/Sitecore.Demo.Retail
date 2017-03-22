@@ -31,7 +31,7 @@ namespace Sitecore.Foundation.Commerce.Models.InputModels
         [Required]
         public string ShippingPreferenceType { get; set; }
 
-        public string PartyID { get; set; }
+        public string PartyId { get; set; }
 
         [EmailAddress]
         public string ElectronicDeliveryEmail { get; set; }

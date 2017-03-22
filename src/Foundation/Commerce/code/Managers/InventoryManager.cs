@@ -38,7 +38,7 @@ using Sitecore.Foundation.Commerce.Models.Search;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
-    public class InventoryManager : BaseManager
+    public class InventoryManager : IManager
     {
         private readonly CommerceContextBase _obecContext;
 

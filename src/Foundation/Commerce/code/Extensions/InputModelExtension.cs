@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
@@ -25,6 +26,7 @@ using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Commerce.Entities.GiftCards;
 using Sitecore.Commerce.Entities.Shipping;
+using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
 
 namespace Sitecore.Foundation.Commerce.Extensions
@@ -45,7 +47,7 @@ namespace Sitecore.Foundation.Commerce.Extensions
                 CustomerNameOnPayment = item.CustomerNameOnPayment,
                 ExpirationMonth = item.ExpirationMonth,
                 ExpirationYear = item.ExpirationYear,
-                PartyID = item.PartyID,
+                PartyID = item.PartyId,
                 PaymentMethodID = item.PaymentMethodID,
                 ValidationCode = item.ValidationCode
             };
@@ -53,7 +55,42 @@ namespace Sitecore.Foundation.Commerce.Extensions
             return paymentInfo;
         }
 
-        public static FederatedPaymentInfo ToCreditCardPaymentInfo(this FederatedPaymentInputModelItem item)
+        public static IParty ToEntity(this Party party)
+        {
+            return new PartyEntity
+            {
+                Name = (party as CommerceParty)?.Name ?? string.Join(" ", party.FirstName, party.LastName),
+                IsPrimary = party.IsPrimary,
+                ExternalId = party.ExternalId,
+                Address1 = party.Address1,
+                Address2 = party.Address2,
+                City = party.City,
+                Region = party.State,
+                ZipPostalCode = party.ZipPostalCode,
+                Country = (party as CommerceParty)?.CountryCode ?? (party as CommerceParty)?.Country,
+                PartyId = party.PartyId,
+            };
+        }
+
+        internal static Party ToCommerceParty(this IParty party)
+        {
+            return new CommerceParty
+            {
+                Name = party.Name,
+                IsPrimary = party.IsPrimary,
+                ExternalId = party.ExternalId,
+                Address1 = party.Address1,
+                Address2 = party.Address2,
+                City = party.City,
+                RegionCode = party.Region,
+                ZipPostalCode = party.ZipPostalCode,
+                CountryCode = party.Country,
+                PartyId = party.PartyId,
+                State = party.Region
+            };
+        }
+
+        public static FederatedPaymentInfo ToFederatedPaymentInfo(this FederatedPaymentInputModelItem item)
         {
             var paymentInfo = new FederatedPaymentInfo
             {
@@ -117,11 +154,6 @@ namespace Sitecore.Foundation.Commerce.Extensions
             return string.Empty;
         }
 
-        public static List<Party> ToNewShippingParties(this IEnumerable<PartyInputModelItem> items)
-        {
-            return (from PartyInputModelItem item in items select item.ToNewShippingParty()).ToList();
-        }
-
         public static Party ToNewShippingParty(this PartyInputModelItem item)
         {
             var party = new CommerceParty
@@ -132,16 +164,11 @@ namespace Sitecore.Foundation.Commerce.Extensions
                 ExternalId = string.IsNullOrWhiteSpace(item.PartyId) || item.PartyId == "0" ? Guid.NewGuid().ToString() : item.PartyId,
                 Name = $"Shipping_{item.Name}",
                 PartyId = item.PartyId,
-                State = item.State,
+                State = item.Region,
                 ZipPostalCode = item.ZipPostalCode
             };
 
             return party;
-        }
-
-        public static List<CommerceParty> ToNewBillingParties(this IEnumerable<PartyInputModelItem> items)
-        {
-            return (from PartyInputModelItem item in items select item.ToNewBillingParty()).ToList();
         }
 
         public static CommerceParty ToNewBillingParty(this PartyInputModelItem item)
@@ -154,7 +181,7 @@ namespace Sitecore.Foundation.Commerce.Extensions
                 ExternalId = Guid.NewGuid().ToString(),
                 Name = $"Billing_{item.Name}",
                 PartyId = item.PartyId,
-                State = item.State,
+                State = item.Region,
                 ZipPostalCode = item.ZipPostalCode
             };
 
@@ -171,28 +198,18 @@ namespace Sitecore.Foundation.Commerce.Extensions
                 ExternalId = item.ExternalId,
                 Name = item.Name,
                 PartyId = item.PartyId,
-                State = item.State,
+                State = item.Region,
                 ZipPostalCode = item.ZipPostalCode
             };
 
             return party;
         }
 
-        public static List<CommerceParty> ToParties(this IEnumerable<PartyInputModelItem> items)
-        {
-            return (from PartyInputModelItem item in items select item.ToParty()).ToList();
-        }
-
-        public static List<CommerceShippingInfo> ToShippingInfoList(this List<ShippingMethodInputModelItem> items)
-        {
-            return (from ShippingMethodInputModelItem item in items select item.ToShippingInfo()).ToList();
-        }
-
         public static CommerceShippingInfo ToShippingInfo(this ShippingMethodInputModelItem item)
         {
             var shippingInfo = new CommerceShippingInfo
             {
-                PartyID = item.PartyID,
+                PartyID = item.PartyId,
                 ShippingMethodID = item.ShippingMethodID,
                 ShippingMethodName = item.ShippingMethodName,
                 ShippingOptionType = GetShippingOptionType(item.ShippingPreferenceType),

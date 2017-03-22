@@ -52,7 +52,7 @@ function addOrderItemsToCart() {
     };
 
     ClearGlobalMessages();
-    AJAXPost(StorefrontUri('api/storefront/account/reorder'), JSON.stringify(data), function (data, success, sender) {
+    AJAXPost('/api/storefront/orders/reorder', JSON.stringify(data), function (data, success, sender) {
         if (success && data.Success) {
             $('.item-to-selected').removeAttr('checked');
             $('#selectAllOrderItems').removeAttr('checked');
@@ -94,7 +94,7 @@ function cancelOrderItems() {
     };
 
     ClearGlobalMessages();
-    AJAXPost(StorefrontUri('api/storefront/account/cancelorder'), JSON.stringify(data), function (data, success, sender) {
+    AJAXPost('/api/storefront/orders/cancelorder', JSON.stringify(data), function (data, success, sender) {
         if (success && data.Success) {
             $('.item-to-selected').removeAttr('checked');
             $('#selectAllOrderItems').removeAttr('checked');

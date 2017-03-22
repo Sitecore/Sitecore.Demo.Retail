@@ -21,30 +21,30 @@ using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Services;
 using System;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    [Obsolete("Please refactor")]
-    public class AddressListItemApiModel : AddressListApiModel
+    public class AddressListApiModel : BaseApiModel
     {
-        public AddressListItemApiModel()
+        public AddressListApiModel()
         {
         }
 
-        public AddressListItemApiModel(ServiceProviderResult result)
-            : base(result)
+        public AddressListApiModel(ServiceProviderResult result) : base(result)
         {
         }
 
-        public override void Initialize(IEnumerable<Party> addresses, Dictionary<string, string> countries)
+        public List<AddressItemApiModel> Addresses { get; } = new List<AddressItemApiModel>();
+
+        public void Initialize(IEnumerable<IParty> addresses)
         {
-            var addressArray = addresses as Party[] ?? addresses.ToArray();
-            base.Initialize(addressArray, countries);
+            var addressArray = addresses as IParty[] ?? addresses.ToArray();
 
             foreach (var address in addressArray)
             {
                 var result = new AddressItemApiModel();
-                result.Initialize(address as CommerceParty);
+                result.Initialize(address);
                 Addresses.Add(result);
             }
         }

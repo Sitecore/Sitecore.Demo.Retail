@@ -1,0 +1,28 @@
+﻿---
+ID: "2dc1e1dc-bea7-4023-9585-c75ff16c192c"
+Parent: "8522ba24-a176-4b75-9377-7291e526f6d8"
+Template: "99f8905d-4a87-4eb8-9f8b-a9bebfb3add6"
+Path: /sitecore/layout/Renderings/Feature/Commerce/Customers/Address Book
+DB: master
+SharedFields:
+- ID: "51b435bc-f7b9-478a-9c51-52916af96ff5"
+  Hint: Path
+  Value: /Views/Customers/AddressBook.cshtml
+- ID: "e514a1eb-ddba-44f7-8528-82ca2280f778"
+  Hint: JavaScript assets
+  Value: |
+    /Scripts/Customers/addressListViewModel.js
+    /Scripts/Customers/addressViewModel.js
+    /Scripts/Customers/countryRegionViewModel.js
+    /Scripts/Customers/addresses.js
+- ID: "ef7c5528-7307-4e19-863b-da19eed6a9ed"
+  Hint: Open Properties after Add
+  Value: 
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161116T232710Z
