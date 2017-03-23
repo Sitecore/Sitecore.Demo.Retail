@@ -72,20 +72,85 @@
                 <h3 class="panel-title">@Html.Sitecore().Field("Shipment Details Header", Html.Sitecore().CurrentItem)</h3>
             </div>
             <div class="panel-body">
-                <div class="row">
+                <div class="row" data-bind="ifnot: isChangingShippingAddress">
                     <div class="col-md-3">
                         <strong>@Html.Sitecore().Field("Shipping Address Label", Html.Sitecore().CurrentItem)</strong>
                     </div>
                     <div class="col-md-7">
-                        John Smith
-                        <br>
-                        101 Nowhere Ave
-                        <br>
-                        Somewhereville OH, 32100
+                        <span data-bind="text: shippingAddress.recipient"></span><br>
+                        <span data-bind="text: shippingAddress.addressLine1"></span><br>
+                        <span data-bind="text: shippingAddress.addressLine2"></span><br data-bind="visible: shippingAddress.addressLine2">
+                        <span data-bind="text: shippingAddress.city"></span>
+                        <span data-bind="text: shippingAddress.province"></span>
+                        <span data-bind="text: shippingAddress.postalCode"></span><br>
+                        <span data-bind="text: shippingAddress.country"></span>
                     </div>
                     <div class="col-md-2">
-                        <a href="">Change</a>
+                        <a href="javascript: model.isChangingShippingAddress(true);">@Html.Sitecore().Field("Address Change Link Text", Html.Sitecore().CurrentItem)</a>
                     </div>
+                </div>
+                <div class="row" data-bind="if: isChangingShippingAddress">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="shippingAddress.recipient" class="col-md-2 control-label">@Html.Sitecore().Field("Recipient Label", Html.Sitecore().CurrentItem)</label>
+                            <div class="col-md-9">
+                                <input type="text" id="shippingAddress.recipient" class="form-control input-sm"
+                                       placeholder="@Html.Sitecore().Field("Recipient Label", Html.Sitecore().CurrentItem)"
+                                       data-bind="value: shippingAddress.recipient">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shippingAddress.addressLine1" class="col-md-2 control-label">@Html.Sitecore().Field("Address Line 1 Label", Html.Sitecore().CurrentItem)</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control input-sm" id="shippingAddress.addressLine1"
+                                       placeholder="@Html.Sitecore().Field("Address Line 1 Label", Html.Sitecore().CurrentItem)"
+                                       data-bind="value: shippingAddress.addressLine1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shippingAddress.addressLine2" class="col-md-2 control-label">@Html.Sitecore().Field("Address Line 2 Label", Html.Sitecore().CurrentItem)</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control input-sm" id="shippingAddress.addressLine2"
+                                       placeholder="@Html.Sitecore().Field("Address Line 2 Label", Html.Sitecore().CurrentItem)"
+                                       data-bind="value: shippingAddress.addressLine2">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shippingAddress.city" class="col-md-2 control-label">@Html.Sitecore().Field("Address City Label", Html.Sitecore().CurrentItem)</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control input-sm" id="shippingAddress.city"
+                                       placeholder="@Html.Sitecore().Field("Address City Label", Html.Sitecore().CurrentItem)"
+                                       data-bind="value: shippingAddress.city">
+                            </div>
+                            <label for="shippingAddress.province" class="col-md-1 control-label">@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)</label>
+                            <div class="col-md-2">
+                                <select id="shippingAddress.province" class="form-control">
+                                    <option>@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)</option>
+                                    <option>FL</option>
+                                    <option>NC</option>
+                                    <option>NE</option>
+                                </select>
+                            </div>
+                            <label for="shippingAddress.postalCode" class="col-md-1 control-label">@Html.Sitecore().Field("Address Postal Code Label", Html.Sitecore().CurrentItem)</label>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control input-sm" id="shippingAddress.city"
+                                       data-bind="value: shippingAddress.postalCode">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shippingAddress.country" class="col-md-2 control-label">@Html.Sitecore().Field("Address Country Label", Html.Sitecore().CurrentItem)</label>
+                            <div class="col-md-7">
+                                <select id="shippingAddress.country" class="form-control">
+                                    <option>@Html.Sitecore().Field("Address Country Label", Html.Sitecore().CurrentItem)</option>
+                                    <option>Canada</option>
+                                    <option>United States</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-default" onclick="setShippingAddress(); return false;">Done</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="row">
                     <div class="col-md-3">
@@ -234,6 +299,8 @@
 </div>
 
 <script>
+	var rendering = $("main section div.container");
+
     var currencyFormat = function() {
         var currency = '@Html.Raw(((decimal)1111111111.222222).ToCurrency())'; // 1111111111.222222 transformed with ToCurrency.
 
@@ -313,6 +380,63 @@
             return num.toCurrency();
     }
 
+    function createAddress() {
+    	return {
+    		recipient: null,
+    		addressLine1: null,
+    		addressLine2: null,
+    		city: null,
+    		province: null,
+    		postalCode: null,
+    		country: null
+    	}
+    }
+
+    function setShippingAddress() {
+    	var errors = [];
+
+    	if (!model.shippingAddress.recipient)
+    		errors.push('@Html.Sitecore().Field("Recipient Label", Html.Sitecore().CurrentItem) is a required field.');
+
+    	if (!model.shippingAddress.addressLine1)
+    		errors.push('@Html.Sitecore().Field("Address Line 1 Label", Html.Sitecore().CurrentItem) is a required field.');
+
+    	if (!model.shippingAddress.city)
+    		errors.push('@Html.Sitecore().Field("Address City Label", Html.Sitecore().CurrentItem) is a required field.');
+
+    	//if (!model.shippingAddress.province)
+    	//	errors.push('@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem) is a required field.');
+
+    	if (!model.shippingAddress.postalCode)
+    		errors.push('@Html.Sitecore().Field("Address Postal Code Label", Html.Sitecore().CurrentItem) is a required field.');
+
+    	if (errors.length) {
+    		showErrors("Error Saving Address", errors);
+    		return;
+    	}
+
+    	Cookies.set('shippingAddress', JSON.stringify(model.shippingAddress));
+    	model.isChangingShippingAddress(false);
+    }
+
+    function showErrors(caption, errors) {
+    	if (errors.constructor == String)
+    		errors = [errors];
+
+    	var html =
+			'<div class="alert alert-danger alert-dismissible" role="alert">' +
+			'<button type="button" class="close pull-right" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+		if (caption)
+			html += '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"> ' +
+				'<strong>' + caption + '</strong><br>';
+
+		html += errors.join('<br>');
+		html += '</div>';
+		rendering.prepend($(html));
+
+		window.scrollTo(0, 0);
+    }
+
 
 
     var model = @Html.Raw(JsonConvert.SerializeObject(Model));
@@ -325,5 +449,11 @@
         model.groupedLines[option.Description].push(line);
     });
 
-    ko.applyBindings(model, $("main section div.container")[0]);
+    model.shippingAddress = JSON.parse(Cookies.get('shippingAddress') || null);
+    model.isChangingShippingAddress = ko.observable(!model.shippingAddress);
+    if (model.isChangingShippingAddress())
+    	model.shippingAddress = createAddress();
+    model.paymentAddress = JSON.parse(Cookies.get('paymentAddress') || null);
+
+    ko.applyBindings(model, rendering[0]);
 </script>
