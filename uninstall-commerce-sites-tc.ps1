@@ -1,4 +1,4 @@
-param([String]$prNumber, [String]$jsonFile)
+param([String]$prNumber)
 Write-Host 'Ready to modify '  $jsonFile 
 
 $catalogDBName = 'habitat'+ $prNumber + '_CommerceServer.ProductCatalog'
