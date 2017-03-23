@@ -15,40 +15,16 @@ namespace Sitecore.Feature.Commerce.Orders.Models
 
     public class CheckoutViewModel
     {
-        public IDictionary<string, IList<CommerceCartLineWithImages>> CartLinesMap { get; set; } =
-            new Dictionary<string, IList<CommerceCartLineWithImages>>();
-
         public CommerceCart Cart { get; set; }
-        public CommerceTotal Total => Cart.Total as CommerceTotal;
 
-        public string GetProductLink(CartLine line)
-        {
-            var productItem = GetProductItem(line);
-            return LinkManager.GetDynamicUrl(productItem).TrimEnd('/');
-        }
+        public IDictionary<string, string> LineHrefs { get; set; } =
+            new Dictionary<string, string>();
 
-        public Item GetProductItem(CartLine line)
-        {
-            // The SitecoreProductItemId is the ID to variant under a product.
-            // Get the item and then return its parent.
-            var productVariantItemId = line.Product.SitecoreProductItemId;
-            var productVariantItem = Context.Database.GetItem(productVariantItemId);
-            return productVariantItem.Parent;
-        }
+        public IDictionary<string, string> LineImgSrcs { get; set; } =
+            new Dictionary<string, string>();
 
-        public decimal GetSubTotal()
-        {
-            decimal subTotal = 0;
-            if (Cart != null && Cart.Lines != null && Cart.Lines.Any())
-            {
-                foreach (var line in Cart.Lines)
-                {
-                    subTotal += line.Total.Amount;
-                }
-            }
-            return subTotal;
-        }
-
+        public IDictionary<string, ShippingOption> LineShippingOptions { get; set; } =
+            new Dictionary<string, ShippingOption>();
     }
 
 }

@@ -12,66 +12,56 @@
 @using Sitecore.Feature.Commerce.Orders.Models
 @using Sitecore.Foundation.SitecoreExtensions.Extensions
 @using Sitecore.Foundation.Commerce.Extensions
+@using Newtonsoft.Json;
 
 @model CheckoutViewModel
 
-@*
-    @Html.Sitecore().Field("FIELD", Html.Sitecore().CurrentItem)
-*@
-
 <div class="row">
-    <div class="col-md-12">
-        @foreach (var shippingOption in Model.CartLinesMap.Keys)
-        {
-            <div class="m-b-1">
-                <h4>@shippingOption</h4>
-                <table class="table">
-                    <tbody>
-                        <tr class="row">
-                            <th class="col-md-6 hidden-xs" colspan="2">@Html.Sitecore().Field("Product Label", Html.Sitecore().CurrentItem)</th>
-                            <th class="col-md-4 visible-xs">@Html.Sitecore().Field("Product Label", Html.Sitecore().CurrentItem)</th>
-                            <th class="col-md-1">@Html.Sitecore().Field("Quantity Label", Html.Sitecore().CurrentItem)</th>
-                            <th class="col-md-2 hidden-xs text-right">@Html.Sitecore().Field("Unit Price Label", Html.Sitecore().CurrentItem)</th>
-                            <th class="col-md-2 text-right">@Html.Sitecore().Field("Total Label", Html.Sitecore().CurrentItem)</th>
-                            <th class="col-md-1">&nbsp;</th>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        @foreach (var line in Model.CartLinesMap[shippingOption])
-                        {
-                            <tr class="row">
-                                <td class="hidden-xs">
-                                    <a href="@Model.GetProductLink(line)">
-                                        <img class="img-responsive" alt="a" pid="image"
-                                             src="@line.DefaultImage.ImageUrl(100, 100)">
-                                    </a>
-                                </td>
-                                <td class="cart-info">
-                                    <a href="@Model.GetProductLink(line)">
-                                        <h5 pid="title">@line.Product.ProductName</h5>
-                                    </a>
-                                </td>
-                                <td class="cart-quantity" style="width: 10%;">
-                                    <input pid="quantity" type="number" class="form-control form-control-quantity"
-                                           placeholder="1" value="@line.Quantity">
-                                </td>
-                                <td class="cart-price text-right hidden-xs">
-                                    <span pid="price">@line.Product.Price.Amount.ToCurrency()</span>
-                                </td>
-                                <td class="cart-total text-right">
-                                    <strong pid="total">@line.Total.Amount.ToCurrency()</strong>
-                                </td>
-                                <td class="cart-delete">
-                                    <a pid="remove" class="delete-item">
-                                        <span class="glyphicon glyphicon-remove icon-md"></span>
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        }
+    <div class="col-md-12" data-bind="foreach: Object.keys(groupedLines)">
+        <div class="m-b-1">
+            <h4 data-bind="text: $data"></h4>
+            <table class="table">
+                <tbody>
+                    <tr class="row">
+                        <th class="col-md-6 hidden-xs" colspan="2">@Html.Sitecore().Field("Product Label", Html.Sitecore().CurrentItem)</th>
+                        <th class="col-md-4 visible-xs">@Html.Sitecore().Field("Product Label", Html.Sitecore().CurrentItem)</th>
+                        <th class="col-md-1">@Html.Sitecore().Field("Quantity Label", Html.Sitecore().CurrentItem)</th>
+                        <th class="col-md-2 hidden-xs text-right">@Html.Sitecore().Field("Unit Price Label", Html.Sitecore().CurrentItem)</th>
+                        <th class="col-md-2 text-right">@Html.Sitecore().Field("Total Label", Html.Sitecore().CurrentItem)</th>
+                        <th class="col-md-1">&nbsp;</th>
+                    </tr>
+                </tbody>
+                <tbody data-bind="foreach: model.groupedLines[$data]">
+                    <tr class="row">
+                        <td class="hidden-xs">
+                            <a data-bind="attr: {href: model.LineHrefs[$data.ExternalCartLineId]}">
+                                <img class="img-responsive" data-bind="attr: {src: model.LineImgSrcs[$data.ExternalCartLineId]}">
+                            </a>
+                        </td>
+                        <td class="cart-info">
+                            <a data-bind="attr: {href: model.LineHrefs[$data.ExternalCartLineId]}">
+                                <h5 pid="title" data-bind="text: $data.Product.ProductName"></h5>
+                            </a>
+                        </td>
+                        <td class="cart-quantity" style="width: 10%;">
+                            <input pid="quantity" type="number" class="form-control form-control-quantity"
+                                   placeholder="1" data-bind="value: $data.Quantity">
+                        </td>
+                        <td class="cart-price text-right hidden-xs">
+                            <span pid="price" data-bind="text: $data.Product.Price.Amount.toCurrency()"></span>
+                        </td>
+                        <td class="cart-total text-right">
+                            <strong pid="total" data-bind="text: $data.Total.Amount.toCurrency()"></strong>
+                        </td>
+                        <td class="cart-delete">
+                            <a pid="remove" class="delete-item">
+                                <span class="glyphicon glyphicon-remove icon-md"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -102,36 +92,36 @@
                         <strong>@Html.Sitecore().Field("Shipment Options Label", Html.Sitecore().CurrentItem)</strong>
                     </div>
                     <div class="col-md-9">
-                        <div id="shippingMethodsContainer" class="form-group shipping-options" data-bind="foreach: shippingMethods">
+                        <div id="shippingMethodsContainer" class="form-group shipping-options">
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="radio" style="margin-left: 20px" data-bind="attr: {'name': 'shippingMethodId', pvalue: id}, checkMe: $root.shippingMethod" name="shippingMethodId" pvalue="e14965b9-306a-43c4-bffc-3c67be8726fa">
-                                        <span data-bind="text: description">Ground</span>
+                                        <input type="radio" style="margin-left: 20px" name="shippingMethodId" pvalue="e14965b9-306a-43c4-bffc-3c67be8726fa">
+                                        <span>Ground</span>
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="radio" style="margin-left: 20px" data-bind="attr: {'name': 'shippingMethodId', pvalue: id}, checkMe: $root.shippingMethod" name="shippingMethodId" pvalue="939a3ea6-f453-4eb0-987d-45a5ee226985">
-                                        <span data-bind="text: description">Next day air</span>
+                                        <input type="radio" style="margin-left: 20px" name="shippingMethodId" pvalue="939a3ea6-f453-4eb0-987d-45a5ee226985">
+                                        <span>Next day air</span>
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="radio" style="margin-left: 20px" data-bind="attr: {'name': 'shippingMethodId', pvalue: id}, checkMe: $root.shippingMethod" name="shippingMethodId" pvalue="12cf3b10-d308-47a1-b140-ef6cc1419c9d">
-                                        <span data-bind="text: description">Standard</span>
+                                        <input type="radio" style="margin-left: 20px" name="shippingMethodId" pvalue="12cf3b10-d308-47a1-b140-ef6cc1419c9d">
+                                        <span>Standard</span>
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="radio" style="margin-left: 20px" data-bind="attr: {'name': 'shippingMethodId', pvalue: id}, checkMe: $root.shippingMethod" name="shippingMethodId" pvalue="9119b37a-90f4-45e4-af32-688e689b5b0a">
-                                        <span data-bind="text: description">Standard overnight</span>
+                                        <input type="radio" style="margin-left: 20px" name="shippingMethodId" pvalue="9119b37a-90f4-45e4-af32-688e689b5b0a">
+                                        <span>Standard overnight</span>
                                     </label>
                                 </div>
                             </div>
@@ -207,25 +197,25 @@
                                 <strong>@Html.Sitecore().Field("Items Label", Html.Sitecore().CurrentItem)</strong>
                             </td>
                             <td id="confirm-subTotal" class="text-right" pid="subtotal">
-                                <strong>@Model.Total.Subtotal.ToCurrency()</strong>
+                                <strong data-bind="text: Cart.Total.Subtotal.toCurrency()"></strong>
                             </td>
                         </tr>
                         <tr>
                             <td class="text">
                                 @Html.Sitecore().Field("Shipping Label", Html.Sitecore().CurrentItem)
                             </td>
-                            <td id="confirm-shippingTotal" class="text-right" pid="shippingTotal">@Model.Total.ShippingTotal.ToCurrency()</td>
+                            <td id="confirm-shippingTotal" class="text-right" pid="shippingTotal" data-bind="text: Cart.Total.ShippingTotal.toCurrency()"></td>
                         </tr>
                         <tr>
                             <td class="text">@Html.Sitecore().Field("Taxes Label", Html.Sitecore().CurrentItem)</td>
-                            <td idd="confirm-taxTotal" class="text-right" pid="taxTotal">@Model.Total.TaxTotal.Amount.ToCurrency()</td>
+                            <td idd="confirm-taxTotal" class="text-right" pid="taxTotal" data-bind="text: Cart.Total.TaxTotal.Amount.toCurrency()"></td>
                         </tr>
                         <tr>
                             <td class="text">
                                 <em>@Html.Sitecore().Field("Savings Label", Html.Sitecore().CurrentItem)</em>
                             </td>
                             <td id="confirm-discountTotal" class="text-right">
-                                <em data-bind="text: cart().discount">@Model.Total.OrderLevelDiscountAmount.ToCurrency()</em>
+                                <em data-bind="text: Cart.Total.OrderLevelDiscountAmount.toCurrency()"></em>
                             </td>
                         </tr>
                         <tr>
@@ -233,7 +223,7 @@
                                 <strong>@Html.Sitecore().Field("Total Label", Html.Sitecore().CurrentItem)</strong>
                             </td>
                             <td id="confirm-total" class="text-right">
-                                <strong data-bind="text: cart().total">@Model.Cart.Total.Amount.ToCurrency()</strong>
+                                <strong data-bind="text: Cart.Total.Amount.toCurrency()"></strong>
                             </td>
                         </tr>
                     </tbody>
@@ -242,3 +232,98 @@
         </div>
     </div>
 </div>
+
+<script>
+    var currencyFormat = function() {
+        var currency = '@Html.Raw(((decimal)1111111111.222222).ToCurrency())'; // 1111111111.222222 transformed with ToCurrency.
+
+        var format = {
+            decimalDelimiter: null,
+            decimalPlaces: 0,
+            wholeNumberDelimiter: null,
+            wholeNumberPlaces: null
+        };
+
+        // However many 2's there are is the number of decimal places there are.
+        for (var c = 0; c < currency.length; c++)
+            if (currency[c] == '2')
+                format.decimalPlaces++;
+
+        // The character immediately before the first '2' should be the decimal delimiter.
+        // If that happens to be a 1, there is something very wrong.  Just set the
+        // decimalDelimiter to '.' and run away.
+        var index = currency.indexOf('2');
+        if (index > 0)
+            format.decimalDelimiter = currency[index - 1];
+        if (format.decimalDelimiter == '1') {
+            format.decimalDelimiter = '.';
+            return format;
+        }
+
+        // Start at the last '1' and move forward until there isn't a 1.
+        // The first character not a 1 before the first 1 should be the
+        // wholeNumberDelimiter and we will know how many places there
+        // are per whole number group.  However, if we only see 1's
+        // without a non-1 between them, there is no delimiter.
+        index = currency.lastIndexOf('1');
+        var firstOne = currency.indexOf('1');
+        var count = 0;
+        while (index > firstOne) {
+            count++;
+            index--;
+            if (currency[index] != '1') {
+                format.wholeNumberDelimiter = currency[index];
+                format.wholeNumberPlaces = count;
+                break;
+            }
+        }
+
+        return format;
+    }();
+
+    Number.prototype.toCurrency = function() {
+        var numStr = this.toFixed(currencyFormat.decimalPlaces);
+        var numSplit = numStr.split('.');
+
+        if (currencyFormat.wholeNumberPlaces)
+        {
+            var i = numSplit[0].length - currencyFormat.wholeNumberPlaces;
+            while (i > 0) {
+                numSplit[0].substring(0, i) +
+                    currencyFormat.wholeNumberDelimiter +
+                    numSplit[0].substring(i)
+                i -= currencyFormat.wholeNumberPlaces;
+            }
+        }
+
+        numStr = numSplit[0];
+        if (numSplit.length > 0)
+            numStr += currencyFormat.decimalDelimiter + numSplit[1];
+
+        var onePointTwos = '@Html.Raw(((decimal)1.222222).ToCurrency())'; // 1.222222 transformed with ToCurrency.
+        var token = '1';
+        if (currencyFormat.decimalPlaces)
+            token += currencyFormat.decimalDelimiter + '2'.repeat(currencyFormat.decimalPlaces);
+        return onePointTwos.split(token).join(numStr);
+    }
+
+    String.prototype.toCurrency = function() {
+        var num = parseFloat(this);
+        if (num)
+            return num.toCurrency();
+    }
+
+
+
+    var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+    model.groupedLines = {};
+    $.each(model.Cart.Lines, function(index, line) {
+        var option = model.LineShippingOptions[line.ExternalCartLineId];
+        if (!model.groupedLines[option.Description])
+            model.groupedLines[option.Description] = [];
+        model.groupedLines[option.Description].push(line);
+    });
+
+    ko.applyBindings(model, $("main section div.container")[0]);
+</script>

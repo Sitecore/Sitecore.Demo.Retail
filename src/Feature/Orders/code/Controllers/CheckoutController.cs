@@ -36,6 +36,8 @@ using Sitecore.Mvc.Presentation;
 using Sitecore.Feature.Commerce.Orders.Models;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Data;
+using Sitecore.Links;
+using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Feature.Commerce.Orders.Controllers
 {
@@ -70,36 +72,70 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             var cartResponse = CartManager.GetCurrentCart(StorefrontManager.CurrentStorefront,
                 VisitorContextRepository.GetCurrent(), true);
             model.Cart = cartResponse.ServiceProviderResult.Cart as CommerceCart;
+            InitLineShippingOptions(model);
+            InitLineHrefs(model);
+            InitLineImgSrcs(model);
 
-            if (model.Cart != null && model.Cart.Lines != null && model.Cart.Lines.Any())
-            {
-                var prefsResponse = ShippingManager.GetShippingPreferences(model.Cart);
-                if (prefsResponse.ServiceProviderResult.Success && prefsResponse.Result != null)
-                {
-                    var lineShippingOptions = prefsResponse.ServiceProviderResult.LineShippingPreferences.ToList();
-                    foreach (CommerceCartLineWithImages line in model.Cart.Lines)
-                    {
-                        var option = lineShippingOptions?.FirstOrDefault(lso =>
-                            lso.LineId == line.ExternalCartLineId)?.ShippingOptions?.FirstOrDefault();
-                        if (option != null)
-                        {
-                            if (!model.CartLinesMap.ContainsKey(option.Description))
-                            {
-                                model.CartLinesMap[option.Description] = new List<CommerceCartLineWithImages>();
-                            }
-                            model.CartLinesMap[option.Description].Add(line);
-                        }
-                    }
-                }
-            }
-            else if (!Context.PageMode.IsExperienceEditor)
-            {
-                #warning Remove hardcoded URL
-                var cartPageUrl = "/shoppingcart";
-                return Redirect(cartPageUrl);
-            }
+            //else if (!Context.PageMode.IsExperienceEditor)
+            //{
+            //    #warning Remove hardcoded URL
+            //    var cartPageUrl = "/shoppingcart";
+            //    return Redirect(cartPageUrl);
+            //}
 
             return View(model);
+        }
+
+        private void InitLineShippingOptions(CheckoutViewModel model)
+        {
+            if (model.Cart == null || model.Cart.Lines == null || !model.Cart.Lines.Any())
+            {
+                return;
+            }
+
+            var prefsResponse = ShippingManager.GetShippingPreferences(model.Cart);
+            if (!prefsResponse.ServiceProviderResult.Success || prefsResponse.Result == null)
+            {
+                return;
+            }
+
+            var lineShippingOptions = prefsResponse.ServiceProviderResult.LineShippingPreferences.ToList();
+            foreach (CommerceCartLineWithImages line in model.Cart.Lines)
+            {
+                var option = lineShippingOptions?.FirstOrDefault(lso =>
+                    lso.LineId == line.ExternalCartLineId)?.ShippingOptions?.FirstOrDefault();
+                model.LineShippingOptions[line.ExternalCartLineId] = option;
+            }
+        }
+
+        private void InitLineHrefs(CheckoutViewModel model)
+        {
+            if (model.Cart == null || model.Cart.Lines == null || !model.Cart.Lines.Any())
+            {
+                return;
+            }
+
+            foreach (CommerceCartLineWithImages line in model.Cart.Lines)
+            {
+                var productVariantItemId = line.Product.SitecoreProductItemId;
+                var productVariantItem = Context.Database.GetItem(productVariantItemId);
+                var url = LinkManager.GetDynamicUrl(productVariantItem.Parent).TrimEnd('/');
+                model.LineHrefs[line.ExternalCartLineId] = url;
+            }
+        }
+
+        private void InitLineImgSrcs(CheckoutViewModel model)
+        {
+            if (model.Cart == null || model.Cart.Lines == null || !model.Cart.Lines.Any())
+            {
+                return;
+            }
+
+            foreach (CommerceCartLineWithImages line in model.Cart.Lines)
+            {
+                var src = line?.DefaultImage?.ImageUrl(100, 100);
+                model.LineImgSrcs[line.ExternalCartLineId] = src;
+            }
         }
 
         [AllowAnonymous]
