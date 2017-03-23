@@ -42,6 +42,6 @@ namespace Sitecore.Foundation.Commerce.Models.InputModels
         [Required]
         public decimal Amount { get; set; }
 
-        public string PartyID { get; set; }
+        public string PartyId { get; set; }
     }
 }

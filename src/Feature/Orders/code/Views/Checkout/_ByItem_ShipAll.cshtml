@@ -23,8 +23,8 @@
     var cityLabel = Html.Sitecore().Field("City Label", deliveryPage);
     var cityLabelPlaceholder = deliveryPage["City Label"];
     var countryLabel = Html.Sitecore().Field("Country Label", deliveryPage);
-    var stateLabel = Html.Sitecore().Field("State Label", deliveryPage);
-    var stateLabelPlaceholder = deliveryPage["State Label"];
+    var regionLabel = Html.Sitecore().Field("State Label", deliveryPage);
+    var regionLabelPlaceholder = deliveryPage["State Label"];
     var address1Label = Html.Sitecore().Field("Address Label", deliveryPage);
     var address1LabelPlaceholder = deliveryPage["Address Label"];
     var zipcodeLabel = Html.Sitecore().Field("Zipcode Label", deliveryPage);
@@ -70,12 +70,12 @@
                         <select class="form-control" data-bind="attr:{id:'ShipAllItemsInput-Country-'+ $parent.externalCartLineId}, options: $root.countries, optionsText:'country', optionsValue:'code', value: country, event: {change: $parent.shippingAddressFieldChanged}"></select>
                     </div>
                     <div class="form-group">
-                        <label data-bind="attr:{for:'ShipAllItemsInput-State-'+ $parent.externalCartLineId}">@stateLabel</label>
-                        <!-- ko if: states == 'undefined' -->
-                        <select class="form-control" data-bind="attr:{id:'ShipAllItemsInput-State-'+ $parent.externalCartLineId}, options: $root.states, optionsText:'name', optionsValue:'code', value: state, event: {change: $parent.shippingAddressFieldChanged}"></select>
+                        <label data-bind="attr:{for:'ShipAllItemsInput-State-'+ $parent.externalCartLineId}">@regionLabel</label>
+                        <!-- ko if: regions == 'undefined' -->
+                        <select class="form-control" data-bind="attr:{id:'ShipAllItemsInput-State-'+ $parent.externalCartLineId}, options: $root.regions, optionsText:'name', optionsValue:'code', value: region, event: {change: $parent.shippingAddressFieldChanged}"></select>
                         <!-- /ko -->
-                        <!-- ko if: states != 'undefined' -->
-                        <input type="text" class="form-control" data-bind="attr:{id:'ShipAllItemsInput-State-'+ $parent.externalCartLineId}, value: state, event: {change: $parent.shippingAddressFieldChanged}" placeholder="@stateLabelPlaceholder">
+                        <!-- ko if: regions != 'undefined' -->
+                        <input type="text" class="form-control" data-bind="attr:{id:'ShipAllItemsInput-State-'+ $parent.externalCartLineId}, value: region, event: {change: $parent.shippingAddressFieldChanged}" placeholder="@regionLabelPlaceholder">
                         <!-- /ko -->
                     </div>
                 </div>

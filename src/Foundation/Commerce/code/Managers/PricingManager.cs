@@ -30,7 +30,7 @@ using GetSupportedCurrenciesRequest = Sitecore.Foundation.Commerce.Infrastructur
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
-    public class PricingManager : BaseManager
+    public class PricingManager : IManager
     {
         private static readonly string[] _defaultPriceTypeIds = {PriceTypes.List, PriceTypes.Adjusted, PriceTypes.LowestPricedVariant, PriceTypes.LowestPricedVariantListPrice, PriceTypes.HighestPricedVariant};
 

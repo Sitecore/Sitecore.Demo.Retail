@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <r>
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -53,11 +53,10 @@ SharedFields:
           ph="navbar-activity"
           uid="{4D6BB0EF-ECD6-4F8A-8479-575C0502DBB7}" />
         <r
-          id="{B6C0593E-1C35-4C61-8DB5-E7C7AA19D955}"
+          id="{604ECBB6-2BBF-45AF-AC6E-BA9F853E7A03}"
           ph="navbar-activity"
-          uid="{87EACF4E-C0F9-4AE1-BF44-8FAE8903F2BF}" />
+          uid="{4C38B801-D3E2-4D54-85DC-4F18F3CB878B}" />
         <r
-          ds=""
           id="{9AA8E388-A6BD-46E1-A73B-DDEF601DE6F8}"
           ph="navbar-activity"
           uid="{9E3164C5-B71B-4684-95F9-6C23010F3CD4}" />
@@ -66,6 +65,14 @@ SharedFields:
           par="UseStaticPlaceholderNames=1"
           ph="page-layout"
           uid="{4B3E25BE-C4C0-41C3-9118-E87490295E44}" />
+        <r
+          id="{E6BA23C6-08F7-43D0-BE00-BB2129D6F288}"
+          ph="/page-layout/page-header"
+          uid="{B978FDB7-FC19-40EA-B15B-8D383701E358}" />
+        <r
+          id="{45B8E1D9-D522-49E0-B9B7-04C965CC7089}"
+          ph="/page-layout/page-header"
+          uid="{8AA383CE-544A-4D5A-8903-8C33A74E7963}" />
         <r
           id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
           ph="/page-layout/page-header"
@@ -76,32 +83,30 @@ SharedFields:
           ph="page-layout"
           uid="{C4F3162E-7389-4F56-9DC9-346A76BCE6D9}" />
         <r
-          id="{1B92270B-EC01-4939-B579-0ADFEB758A95}"
+          id="{AB7054DD-B8E3-41D6-A75F-B54F2F37D08B}"
           par="UseStaticPlaceholderNames=1"
           ph="/page-layout/section"
           uid="{85C74672-7236-4604-B84B-6C0A39B3D40C}" />
         <r
-          ds=""
-          id="{33DC43C9-15E5-48A9-9D0A-8D0168BD2A4C}"
-          par=""
-          ph="/page-layout/section/col-wide-1"
-          uid="{0473DF40-F1E1-4C58-9184-EE536B7BF1BA}" />
-        <r
-          ds=""
-          id="{54A79A70-C374-4AF1-B77C-C5655E096AEA}"
-          par=""
-          ph="/page-layout/section/col-wide-2"
-          uid="{0E8C248E-322B-4B37-BE1D-858C9A3BB367}" />
-        <r
-          ds=""
-          id="{2DC1E1DC-BEA7-4023-9585-C75FF16C192C}"
-          par=""
-          ph="/page-layout/section/col-wide-2"
-          uid="{6EC5DDA9-3CA4-46F0-A3C4-D70B837D7545}" />
+          id="{3F7AD288-FA57-441F-AD79-CA60DC0C0A8D}"
+          ph="/page-layout/section/col-narrow-1"
+          uid="{D01701EE-8B87-49C7-91A4-907D496CDC83}" />
         <r
           id="{87C089CC-C0B6-479D-9876-05D77CF6B42F}"
-          ph="col-wide-2"
+          ph="/page-layout/section/col-narrow-1"
           uid="{F4ABB916-A2B6-4248-946E-9E384A1CFBC0}" />
+        <r
+          id="{54A79A70-C374-4AF1-B77C-C5655E096AEA}"
+          ph="/page-layout/section/col-wide-1"
+          uid="{0E8C248E-322B-4B37-BE1D-858C9A3BB367}" />
+        <r
+          id="{2DC1E1DC-BEA7-4023-9585-C75FF16C192C}"
+          ph="/page-layout/section/col-wide-1"
+          uid="{6EC5DDA9-3CA4-46F0-A3C4-D70B837D7545}" />
+        <r
+          id="{33DC43C9-15E5-48A9-9D0A-8D0168BD2A4C}"
+          ph="/page-layout/section/col-wide-1"
+          uid="{0473DF40-F1E1-4C58-9184-EE536B7BF1BA}" />
         <r
           id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"
           ph="footer"
@@ -153,23 +158,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
-      Hint: __Final Renderings
-      Type: Layout
-      Value: |
-        <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
-          <d
-            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-            <r
-              uid="{DE209DB6-5D8C-4186-9CE3-3B25B865F13D}"
-              p:after="r[@uid='{4B3E25BE-C4C0-41C3-9118-E87490295E44}']"
-              s:ds=""
-              s:id="{45B8E1D9-D522-49E0-B9B7-04C965CC7089}"
-              s:par=""
-              s:ph="/page-layout/page-header" />
-          </d>
-        </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150313T133507Z

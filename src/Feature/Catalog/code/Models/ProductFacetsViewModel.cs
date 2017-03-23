@@ -22,28 +22,13 @@ using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class ProductFacetsViewModel : RenderingModel
+    public class ProductFacetsViewModel
     {
-        public ProductFacetsViewModel()
+        public ProductFacetsViewModel(IEnumerable<QueryFacet> facets)
         {
-            ChildProductFacets = new List<CommerceQueryFacet>();
-            ActiveFacets = new List<CommerceQueryFacet>();
+            Facets = facets;
         }
 
-        public IEnumerable<CommerceQueryFacet> ChildProductFacets { get; protected set; }
-
-        public IEnumerable<CommerceQueryFacet> ActiveFacets { get; protected set; }
-
-        public void Initialize(Rendering rendering, SearchResults products, CommerceSearchOptions searchOptions)
-        {
-            base.Initialize(rendering);
-
-            if (products != null)
-            {
-                ChildProductFacets = products.Facets;
-            }
-
-            ActiveFacets = searchOptions.FacetFields;
-        }
+        public IEnumerable<QueryFacet> Facets { get; protected set; }
     }
 }

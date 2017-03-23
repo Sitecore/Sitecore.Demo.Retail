@@ -38,8 +38,14 @@ Languages:
               s:id="{A1AD34DD-535E-47AF-A911-34C57CCC26F6}"
               s:ph="/page-layout/section/col-narrow-1" />
             <r
-              uid="{B1A9CC86-34CA-4F3C-A9C6-CBBF9294030F}"
+              uid="{29576770-69D1-4DD7-B89E-B3B27C1EA36A}"
               p:after="r[@uid='{727073F6-5054-4B93-BED1-1A9EA58F7069}']"
+              s:ds="{57F460CE-2393-4C66-AB28-CD44564F7E6B}"
+              s:id="{B2BDE50B-BC4E-4624-8C45-E3EA443A6C5D}"
+              s:ph="/page-layout/section/col-narrow-1" />
+            <r
+              uid="{B1A9CC86-34CA-4F3C-A9C6-CBBF9294030F}"
+              p:after="r[@uid='{29576770-69D1-4DD7-B89E-B3B27C1EA36A}']"
               s:ds="{819897D5-31EE-4D81-8A3E-297C6E4447CA}"
               s:id="{A1AD34DD-535E-47AF-A911-34C57CCC26F6}"
               s:ph="/page-layout/section/col-narrow-1" />
@@ -78,7 +84,7 @@ Languages:
         <p><strong>&ldquo;What is the difference between standard and professional appliances?&rdquo;</strong>&nbsp;</p>
         <p>Pro appliances are pricier but tend to be more durable and powerful, and they are designed beautifully, for example the <a href="/shop/Refrigerators_refrigerators/HelixViva4-Door220CubicFootRefrigeratorwithIceMakerandTouchscreen_6042570">Helix Viva 4 Door</a>. For serious cooks, heavy entertainers, or large families, they are a good choice. There are also many options in standard appliances, which also get the job done and can be beautiful as well. The investment you make is a personal decision based on lifestyle, budget, and taste.</p>
         <p><strong>&ldquo;How much room do I have?&rdquo;</strong>&nbsp;</p>
-        <p>If you have a massive kitchen, then your choice of appliances is massive too. However, is space is a little tight, you might think about combining your appliances. For example, rather than buying the <a href="/shop/Appliances_appliances/Habitat-Centerpiece-1%2C-d-%2C7-Cu%2C-d-%2C-Ft%2C-d-%2C-Over-the-Range-Microwave_6042769">Habitat Centerpiece&nbsp;Over-the-Range Microwave</a> and the <a href="/shop/Appliances_appliances/Habitat-Centerpiece-5%2C-d-%2C8-Cu%2C-d-%2C-Ft%2C-d-%2C-Dual-Door-Gas-Range_6042737">Habitat Centerpiece&nbsp;Gas Range</a> you might just buy the <a href="/shop/Appliances_appliances/Habitat-Centerpiece-2%2C-d-%2C1-Cu%2C-d-%2C-Ft%2C-d-%2C-Countertop-Microwave-with-Grill_6042765">Habitat Centerpiece&nbsp;Countertop Microwave with Grill</a>. OK, you might miss out on the top end of sophisticated meals but you can cook just about everything else and the space saving is very significant.</p>
+        <p>If you have a massive kitchen, then your choice of appliances is massive too. However, is space is a little tight, you might think about combining your appliances. For example, rather than buying the <a href="/shop/Appliances_appliances/Habitat-Centerpiece-1,-d-,7-Cu,-d-,-Ft,-d-,-Over-the-Range-Microwave_6042769">Habitat Centerpiece&nbsp;Over-the-Range Microwave</a> and the <a href="/shop/Appliances_appliances/Habitat-Centerpiece-5,-d-,8-Cu,-d-,-Ft,-d-,-Dual-Door-Gas-Range_6042737">Habitat Centerpiece&nbsp;Gas Range</a> you might just buy the <a href="/shop/Appliances_appliances/Habitat-Centerpiece-2,-d-,1-Cu,-d-,-Ft,-d-,-Countertop-Microwave-with-Grill_6042765">Habitat Centerpiece&nbsp;Countertop Microwave with Grill</a>. OK, you might miss out on the top end of sophisticated meals but you can cook just about everything else and the space saving is very significant.</p>
         <p><strong>&ldquo;Where should I buy my appliances?&rdquo;</strong></p>
         <p>You can buy them on your own or through your kitchen designer. We highly recommend clients purchase their appliance package through Habitat for several reasons, and if you are working with a professional kitchen designer, I recommend you do the same. Here&rsquo;s why: Your kitchen designer can offer highly competitive and often the lowest prices available for your appliances. Take a look at our <a href="/shop/Appliances_appliances">appliances</a> section.</p>
         <p><strong>&ldquo;How do I select my appliances within my budget?&rdquo;</strong>&nbsp;</p>

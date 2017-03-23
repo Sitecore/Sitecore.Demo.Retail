@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <r>
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -53,11 +53,10 @@ SharedFields:
           ph="navbar-activity"
           uid="{003D137F-94B8-4466-99AA-C307F0BB5FB4}" />
         <r
-          id="{B6C0593E-1C35-4C61-8DB5-E7C7AA19D955}"
+          id="{604ECBB6-2BBF-45AF-AC6E-BA9F853E7A03}"
           ph="navbar-activity"
-          uid="{70C1592C-AFD6-4794-BCF0-B823CED55E64}" />
+          uid="{38EDADBB-F002-43E3-996B-DE7963FB7B3E}" />
         <r
-          ds=""
           id="{9AA8E388-A6BD-46E1-A73B-DDEF601DE6F8}"
           ph="navbar-activity"
           uid="{6D400C8C-70AE-44DF-AA63-5A7C8631C283}" />
@@ -66,6 +65,14 @@ SharedFields:
           par="UseStaticPlaceholderNames=1"
           ph="page-layout"
           uid="{E7B12D87-2D83-4BCD-9CCA-458762A2F471}" />
+        <r
+          id="{E6BA23C6-08F7-43D0-BE00-BB2129D6F288}"
+          ph="/page-layout/page-header"
+          uid="{0D41A808-BCF4-49CA-BAF4-B484F4B747E2}" />
+        <r
+          id="{45B8E1D9-D522-49E0-B9B7-04C965CC7089}"
+          ph="/page-layout/page-header"
+          uid="{3F0DA5AE-49C1-401D-8124-878EECA0D92D}" />
         <r
           id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
           ph="/page-layout/page-header"
@@ -76,13 +83,21 @@ SharedFields:
           ph="page-layout"
           uid="{0AFD2732-B450-4BB0-BAB8-8C76A6D07AC8}" />
         <r
-          id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
+          id="{AB7054DD-B8E3-41D6-A75F-B54F2F37D08B}"
           par="UseStaticPlaceholderNames=1"
           ph="/page-layout/section"
-          uid="{699A40F0-5F69-4C49-A286-BDE72FC1A52A}" />
+          uid="{6BAE9F8E-4014-4183-8DA6-8AFF08FCF43D}" />
+        <r
+          id="{3F7AD288-FA57-441F-AD79-CA60DC0C0A8D}"
+          ph="/page-layout/section/col-narrow-1"
+          uid="{FA02D8A0-C34D-4886-A061-61E408012651}" />
+        <r
+          id="{87C089CC-C0B6-479D-9876-05D77CF6B42F}"
+          ph="/page-layout/section/col-narrow-1"
+          uid="{234FB004-46D5-437E-BC06-6C1B214B5B4B}" />
         <r
           id="{0AD697A5-B069-4AC5-8F18-488DAE074A06}"
-          ph="/page-layout/section/col-huge"
+          ph="/page-layout/section/col-wide-1"
           uid="{6B3F72C0-DE53-48DB-90C6-AE1C4A2741E3}" />
         <r
           id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"

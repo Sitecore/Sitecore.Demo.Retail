@@ -20,40 +20,26 @@
     }
 }
 
-<div id="C08-ProductImages" class="product-image-container">
-    <div class="row">
-        <div class="col-md-12 prod-img">
-            @using (Html.BeginEditFrame(Model.Item.Paths.FullPath, CommerceConstants.KnownItemPaths.EditFrameImages))
-            {
-                if (Model.Images == null || !Model.Images.Any())
-                {
-                    @Html.Sitecore().Field("Image", Html.Sitecore().CurrentItem, new
-                    {
-                        Parameters = new SafeDictionary<string>
-                        {
-                            {"class", "img-responsive"},
-                            {"id", "prod-large-view"}
-                        }
-                    })
-                }
-                else
-                {
-                    <img src="@(Model.DefaultImage?.ImageUrl(770, 625))" class="img-responsive" alt="a" id="prod-large-view"/>
-                }
-            }
+@using (Html.BeginEditFrame(Model.Item.Paths.FullPath, CommerceConstants.KnownItemPaths.EditFrameImages))
+{
+    <div id="C08-ProductImages" class="product-image-container">
+        <div class="row">
+            <div class="col-md-12 prod-img">
+                <img src="@(Model.DefaultImage?.ImageUrl(770, 625))" class="img-responsive" alt="a" id="prod-large-view"/>
+            </div>
         </div>
+        @if (Model.Images != null && Model.Images.Count > 1)
+        {
+            <div class="row thumbnails">
+                @foreach (var mediaItem in Model.Images)
+                {
+                    <div class="col-md-3 col-sm-3 col-xs-4">
+                        <a class="thumbnail" href="@(mediaItem?.ImageUrl(770, 625))">
+                            <img src="@(mediaItem?.ImageUrl(770 / 4, 625 / 4))" class="img-responsive" alt="a"/>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
     </div>
-    @if (Model.Images != null && Model.Images.Any())
-    {
-        <div class="row thumbnails">
-            @foreach (var mediaItem in Model.Images)
-            {
-                <div class="col-md-3 col-sm-3 col-xs-4">
-                    <a class="thumbnail" href="@(mediaItem?.ImageUrl(770, 625))">
-                        <img src="@(mediaItem?.ImageUrl(770 / 4, 625 / 4))" class="img-responsive" alt="a"/>
-                    </a>
-                </div>
-            }
-        </div>
-    }
-</div>
+}            

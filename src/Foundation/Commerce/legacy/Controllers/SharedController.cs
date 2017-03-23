@@ -17,13 +17,11 @@
 
 using System;
 using System.Web.Mvc;
-using Sitecore.Commerce.Contacts;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
-using Sitecore.Reference.Storefront.Models.JsonResults;
 
 namespace Sitecore.Reference.Storefront.Controllers
 {
@@ -61,11 +59,6 @@ namespace Sitecore.Reference.Storefront.Controllers
             return View();
         }
 
-        public ActionResult ShareAndPrint()
-        {
-            return View();
-        }
-
         public ActionResult SocialConnector()
         {
             return View();
@@ -83,10 +76,10 @@ namespace Sitecore.Reference.Storefront.Controllers
             }
             catch (Exception e)
             {
-                return Json(new BaseJsonResult("CultureChosen", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("CultureChosen", e), JsonRequestBehavior.AllowGet);
             }
 
-            var json = new BaseJsonResult {Success = success};
+            var json = new BaseApiModel {Success = success};
             return json;
         }
     }

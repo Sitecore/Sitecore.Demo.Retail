@@ -30,7 +30,7 @@ namespace Sitecore.Reference.Storefront.Models
 
         public string QueryStringToken { get; set; }
 
-        public void Initialize(SearchResults products, CommerceSearchOptions searchOptions)
+        public void Initialize(SearchResults products, SearchOptions searchOptions)
         {
             QueryStringToken = StorefrontSearchController.SiteContentPaging;
 

@@ -21,7 +21,7 @@ using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models
 {
-    public class RelatedCatalogItemsViewModel : RenderingModel
+    public class RelatedCatalogItemsViewModel
     {
         public RelatedCatalogItemsViewModel()
         {

@@ -25,7 +25,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <r>
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -69,11 +69,10 @@ SharedFields:
           ph="navbar-activity"
           uid="{E0D1F66D-7963-4A49-AA69-4EDC16A00390}" />
         <r
-          id="{B6C0593E-1C35-4C61-8DB5-E7C7AA19D955}"
+          id="{604ECBB6-2BBF-45AF-AC6E-BA9F853E7A03}"
           ph="navbar-activity"
-          uid="{685521B8-3040-4CE3-BD93-32E580F2AA58}" />
+          uid="{654CC0D1-1236-49C3-A61F-516912D15BE6}" />
         <r
-          ds=""
           id="{9AA8E388-A6BD-46E1-A73B-DDEF601DE6F8}"
           ph="navbar-activity"
           uid="{DE40A8F4-F8D7-4916-BCDF-C3D724FF96E2}" />
@@ -87,6 +86,10 @@ SharedFields:
           ph="/page-layout/page-header"
           uid="{9A330B78-4526-4C50-A8DB-F2FA8E1854CC}" />
         <r
+          id="{45B8E1D9-D522-49E0-B9B7-04C965CC7089}"
+          ph="/page-layout/page-header"
+          uid="{1DE91068-1717-4B37-BAFD-A7BF7ACAB156}" />
+        <r
           id="{D201A487-5099-48A1-8189-55944F70C6CB}"
           par="UseStaticPlaceholderNames=1"
           ph="page-layout"
@@ -97,7 +100,7 @@ SharedFields:
           ph="/page-layout/section"
           uid="{897C99D8-9A09-4A4B-8336-B7D0E95FA84F}" />
         <r
-          id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}"
+          id="{D3FCD548-7FA3-49D1-BB81-E025FD7B62AA}"
           ph="/page-layout/section/col-narrow-1"
           uid="{73D00F74-0956-495D-B055-DDCF76AE26A3}" />
         <r
@@ -110,28 +113,9 @@ SharedFields:
           ph="/page-layout/section/col-wide-1"
           uid="{85517EC8-30AA-44BD-B996-867C66F08F1D}" />
         <r
-          ds=""
           id="{16D92136-9228-4EFE-9969-BA1930520CBE}"
           ph="/page-layout/section/col-wide-1"
           uid="{6600C8E6-D9C3-4252-A64B-D3E6B6805596}" />
-        <r
-          id="{A2556698-78BD-4242-9D5C-D1AD5788984A}"
-          ph="/page-layout/section/col-wide-1"
-          uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}" />
-        <r
-          ds="{CD29D0CE-ACB7-4023-AF46-E4386BF4054B}"
-          id="{84761F65-E049-488F-959D-C24543612EF4}"
-          ph="/page-layout/section/col-wide-1"
-          uid="{0EBFF6E0-B868-429D-B794-B4F8DC19ADC2}" />
-        <r
-          id="{8B9E7071-0898-4AF7-BDA3-53E1B2A31990}"
-          ph="/page-layout/section/col-wide-1"
-          uid="{A3670133-E6F2-4467-A564-7F99C2F38F58}" />
-        <r
-          ds=""
-          id="{74A2340A-3DE0-4A78-B68D-D35F699B1F9A}"
-          ph="/page-layout/section/col-wide-1"
-          uid="{550A3DC7-2E07-4B05-A975-723FF55873C6}" />
         <r
           id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"
           ph="footer"
@@ -165,22 +149,6 @@ SharedFields:
           ph="page-sidebar"
           uid="{742B102E-A0FE-45B1-8A58-1946102593F2}" />
       </d>
-      <d
-        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-        l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
-        <r
-          id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}"
-          ph="left"
-          uid="{5A82789B-26EB-4727-87A7-FB19E5C08986}" />
-        <r
-          id="{1A3D1CE3-0C73-4D6E-809B-272E60BE006D}"
-          ph="center"
-          uid="{E5A0168F-394B-4487-8F7E-91A23A8760E4}" />
-        <r
-          id="{8B9E7071-0898-4AF7-BDA3-53E1B2A31990}"
-          ph="center"
-          uid="{B38221CE-9BC0-4B63-8AC6-CA2F90112B76}" />
-      </d>
     </r>
 - ID: "fd4e2050-186c-4375-8b99-e8a85dd7436e"
   Hint: __Enable item fallback
@@ -194,23 +162,7 @@ Languages:
     - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
       Hint: __Final Renderings
       Type: Layout
-      Value: |
-        <r xmlns:p="p" xmlns:s="s"
-          p:p="1"
-          s:xsd="http://www.w3.org/2001/XMLSchema">
-          <d
-            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-            <r
-              uid="{6600C8E6-D9C3-4252-A64B-D3E6B6805596}"
-              s:ds="" />
-            <r
-              uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}"
-              s:ph="center" />
-            <r
-              uid="{550A3DC7-2E07-4B05-A975-723FF55873C6}"
-              s:ds="" />
-          </d>
-        </r>
+      Value: 
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
       Hint: Save percent lead
       Value: Save up to
@@ -226,13 +178,12 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1"
-          s:xsd="http://www.w3.org/2001/XMLSchema">
+          p:p="1">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}"
-              s:ph="center" />
+              uid="{9A330B78-4526-4C50-A8DB-F2FA8E1854CC}"
+              p:after="r[@uid='{1DE91068-1717-4B37-BAFD-A7BF7ACAB156}']" />
           </d>
         </r>
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
@@ -248,23 +199,7 @@ Languages:
     - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
       Hint: __Final Renderings
       Type: Layout
-      Value: |
-        <r xmlns:p="p" xmlns:s="s"
-          p:p="1"
-          s:xsd="http://www.w3.org/2001/XMLSchema">
-          <d
-            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-            <r
-              uid="{6600C8E6-D9C3-4252-A64B-D3E6B6805596}"
-              s:ds="" />
-            <r
-              uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}"
-              s:ph="center" />
-            <r
-              uid="{550A3DC7-2E07-4B05-A975-723FF55873C6}"
-              s:ds="" />
-          </d>
-        </r>
+      Value: 
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
       Hint: Save percent lead
       Value: Save up to
@@ -278,23 +213,7 @@ Languages:
     - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
       Hint: __Final Renderings
       Type: Layout
-      Value: |
-        <r xmlns:p="p" xmlns:s="s"
-          p:p="1"
-          s:xsd="http://www.w3.org/2001/XMLSchema">
-          <d
-            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-            <r
-              uid="{6600C8E6-D9C3-4252-A64B-D3E6B6805596}"
-              s:ds="" />
-            <r
-              uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}"
-              s:ph="center" />
-            <r
-              uid="{550A3DC7-2E07-4B05-A975-723FF55873C6}"
-              s:ds="" />
-          </d>
-        </r>
+      Value: 
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
       Hint: Save percent lead
       Value: Save up to

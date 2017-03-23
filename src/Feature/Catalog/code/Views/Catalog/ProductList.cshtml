@@ -21,7 +21,7 @@
 <div id="C05-ProductList" class="product-list row">
     @foreach (ProductViewModel product in Model.ChildProducts)
     {
-        <div class="col-sm-4 col-xs-12">
+        <div class="col-sm-4 col-xs-12 product-item">
             @Html.Partial("_ProductSummary", product)
         </div>
     }

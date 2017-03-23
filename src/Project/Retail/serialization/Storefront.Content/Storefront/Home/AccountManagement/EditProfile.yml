@@ -4,6 +4,10 @@ Parent: "4d316bba-345f-4929-9e84-a2208c0f7aa6"
 Template: "292b2761-f08f-4d9a-9820-87cf7cbed2cc"
 Path: /sitecore/content/Storefront/Home/AccountManagement/EditProfile
 DB: master
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 0
 Languages:
 - Language: en
   Versions:

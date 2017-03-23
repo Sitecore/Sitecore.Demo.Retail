@@ -119,10 +119,6 @@ SharedFields:
           ph="/page-layout/section/col-wide-1"
           uid="{6600C8E6-D9C3-4252-A64B-D3E6B6805596}" />
         <r
-          id="{A2556698-78BD-4242-9D5C-D1AD5788984A}"
-          ph="/page-layout/section/col-wide-1"
-          uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}" />
-        <r
           ds="{CD29D0CE-ACB7-4023-AF46-E4386BF4054B}"
           id="{84761F65-E049-488F-959D-C24543612EF4}"
           ph="/page-layout/section/col-wide-1"
@@ -205,13 +201,7 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}"
-              s:ph="center" />
-          </d>
-          <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
-            <r
-              uid="{E30D9461-67E1-4C44-8CE7-34077CAB298C}">
+              uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}">
               <p:d />
             </r>
           </d>
@@ -236,13 +226,7 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}"
-              s:ph="center" />
-          </d>
-          <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
-            <r
-              uid="{E30D9461-67E1-4C44-8CE7-34077CAB298C}">
+              uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}">
               <p:d />
             </r>
           </d>
@@ -267,13 +251,7 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}"
-              s:ph="center" />
-          </d>
-          <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
-            <r
-              uid="{E30D9461-67E1-4C44-8CE7-34077CAB298C}">
+              uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}">
               <p:d />
             </r>
           </d>
@@ -298,13 +276,7 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}"
-              s:ph="center" />
-          </d>
-          <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
-            <r
-              uid="{E30D9461-67E1-4C44-8CE7-34077CAB298C}">
+              uid="{6FC2FEA6-6497-4ED5-980C-B364F2277E88}">
               <p:d />
             </r>
           </d>

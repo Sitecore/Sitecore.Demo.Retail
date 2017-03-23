@@ -26,7 +26,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class CheckoutApiModel : BaseJsonResult
+    public class CheckoutApiModel : BaseApiModel
     {
         public CheckoutApiModel()
         {

@@ -26,29 +26,6 @@ namespace Sitecore.Reference.Storefront
     {
         private static readonly List<ApiControllerMapping> _apiInfoList = new List<ApiControllerMapping>
         {
-            new ApiControllerMapping("account-getcurrentuser", "Account", "GetCurrentUser"),
-            new ApiControllerMapping("account-register", "Account", "Register"),
-            new ApiControllerMapping("account-addresslist", "Account", "AddressList"),
-            new ApiControllerMapping("account-recentorders", "Account", "RecentOrders"),
-            new ApiControllerMapping("account-reorder", "Account", "Reorder"),
-            new ApiControllerMapping("account-cancelorder", "Account", "CancelOrder"),
-            new ApiControllerMapping("account-addressdelete", "Account", "AddressDelete"),
-            new ApiControllerMapping("account-addressmodify", "Account", "AddressModify"),
-            new ApiControllerMapping("account-updateprofile", "Account", "UpdateProfile"),
-            new ApiControllerMapping("account-changepassword", "Account", "ChangePassword"),
-            new ApiControllerMapping("cart-addcartline", "Cart", "AddCartLine"),
-            new ApiControllerMapping("cart-applydiscount", "Cart", "ApplyDiscount"),
-            new ApiControllerMapping("cart-deletelineitem", "Cart", "DeleteLineItem"),
-            new ApiControllerMapping("cart-getcurrentcart", "Cart", "GetCurrentCart"),
-            new ApiControllerMapping("cart-removediscount", "Cart", "RemoveDiscount"),
-            new ApiControllerMapping("cart-updatelineitem", "Cart", "UpdateLineItem"),
-            new ApiControllerMapping("cart-updateminicart", "Cart", "UpdateMiniCart"),
-            new ApiControllerMapping("checkout-getavailablestates", "Checkout", "GetAvailableStates"),
-            new ApiControllerMapping("checkout-getcheckoutdata", "Checkout", "GetCheckoutData"),
-            new ApiControllerMapping("checkout-getshippingmethods", "Checkout", "GetShippingMethods"),
-            new ApiControllerMapping("checkout-setshippingmethod", "Checkout", "SetShippingMethods"),
-            new ApiControllerMapping("checkout-setpaymentmethod", "Checkout", "SetPaymentMethods"),
-            new ApiControllerMapping("checkout-submitorder", "Checkout", "SubmitOrder"),
             new ApiControllerMapping("global-culturechosen", "Shared", "CultureChosen")
         };
 
@@ -61,12 +38,6 @@ namespace Sitecore.Reference.Storefront
                     apiInfo.Url,
                     new {controller = apiInfo.Controller, action = apiInfo.Action, id = UrlParameter.Optional});
             }
-
-            routes.MapRoute(
-                "logoff",
-                "logoff",
-                new {controller = "Account", action = "LogOff", storefront = UrlParameter.Optional}
-            );
         }
     }
 }

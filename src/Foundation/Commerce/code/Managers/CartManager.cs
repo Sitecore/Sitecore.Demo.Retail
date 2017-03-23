@@ -24,6 +24,7 @@ using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Orders;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines;
+using Sitecore.Commerce.Engine.Connect.Entities.Carts;
 using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Commerce.Entities.Inventory;
@@ -38,10 +39,11 @@ using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Foundation.Dictionary.Repositories;
 using WebGrease.Css.Extensions;
 using AddShippingInfoRequest = Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest;
+using Party = Sitecore.Commerce.Entities.Party;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
-    public class CartManager : BaseManager
+    public class CartManager : IManager
     {
         public CartManager([NotNull] InventoryManager inventoryManager, [NotNull] CommerceCartServiceProvider cartServiceProvider, CartCacheHelper cartCacheHelper)
         {
@@ -331,11 +333,11 @@ namespace Sitecore.Foundation.Commerce.Managers
             if (inputModel.ShippingAddresses != null && inputModel.ShippingAddresses.Any())
             {
                 var cartParties = cart.Parties.ToList();
-                cartParties.AddRange(inputModel.ShippingAddresses.ToParties());
+                cartParties.AddRange(inputModel.ShippingAddresses.Select(item => item.ToParty()).ToList());
                 cart.Parties = cartParties.AsReadOnly();
             }
 
-            var internalShippingList = inputModel.ShippingMethods.ToShippingInfoList();
+            var internalShippingList = (List<CommerceShippingInfo>) (inputModel.ShippingMethods.Select(item => item.ToShippingInfo())).ToList();
             var orderPreferenceType = InputModelExtension.GetShippingOptionType(inputModel.OrderShippingPreferenceType);
             if (orderPreferenceType != ShippingOptionType.DeliverItemsIndividually)
             {
@@ -371,7 +373,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             var payments = new List<PaymentInfo>();
             var cart = (CommerceCart) response.ServiceProviderResult.Cart;
-            if (inputModel.CreditCardPayment != null && !string.IsNullOrEmpty(inputModel.CreditCardPayment.PaymentMethodID) && inputModel.BillingAddress != null)
+            if (!string.IsNullOrEmpty(inputModel.CreditCardPayment?.PaymentMethodID) && inputModel.BillingAddress != null)
             {
                 var billingParty = inputModel.BillingAddress.ToParty();
                 var parties = cart.Parties.ToList();
@@ -381,19 +383,19 @@ namespace Sitecore.Foundation.Commerce.Managers
                 payments.Add(inputModel.CreditCardPayment.ToCreditCardPaymentInfo());
             }
 
-            if (inputModel.FederatedPayment != null && !string.IsNullOrEmpty(inputModel.FederatedPayment.CardToken) && inputModel.BillingAddress != null)
+            if (!string.IsNullOrEmpty(inputModel.FederatedPayment?.CardToken) && inputModel.BillingAddress != null)
             {
                 var billingParty = inputModel.BillingAddress.ToParty();
                 var parties = cart.Parties.ToList();
                 parties.Add(billingParty);
                 cart.Parties = parties.AsSafeReadOnly();
 
-                var federatedPayment = inputModel.FederatedPayment.ToCreditCardPaymentInfo();
+                var federatedPayment = inputModel.FederatedPayment.ToFederatedPaymentInfo();
                 federatedPayment.PartyID = billingParty.PartyId;
                 payments.Add(federatedPayment);
             }
 
-            if (inputModel.GiftCardPayment != null && !string.IsNullOrEmpty(inputModel.GiftCardPayment.PaymentMethodID))
+            if (!string.IsNullOrEmpty(inputModel.GiftCardPayment?.PaymentMethodID))
             {
                 payments.Add(inputModel.GiftCardPayment.ToGiftCardPaymentInfo());
             }
@@ -568,7 +570,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                         emailPartyList.Add(party);
 
                         // Set the party id to the newly created email party in order to create the association in CS.
-                        inputModel.PartyID = party.ExternalId;
+                        inputModel.PartyId = party.ExternalId;
 
                         i++;
                     }

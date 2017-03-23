@@ -53,11 +53,10 @@ SharedFields:
           ph="navbar-activity"
           uid="{1E13526F-910A-44F7-92EE-BB192A0C08BE}" />
         <r
-          id="{B6C0593E-1C35-4C61-8DB5-E7C7AA19D955}"
+          id="{604ECBB6-2BBF-45AF-AC6E-BA9F853E7A03}"
           ph="navbar-activity"
-          uid="{4F463767-4D70-4EC9-8732-068E6CC5F1F8}" />
+          uid="{6C52E704-D605-4526-823F-4FF493E46013}" />
         <r
-          ds=""
           id="{9AA8E388-A6BD-46E1-A73B-DDEF601DE6F8}"
           ph="navbar-activity"
           uid="{892BBFF6-55FF-4292-9F06-9E944E59A593}" />
@@ -81,38 +80,29 @@ SharedFields:
           ph="/page-layout/section"
           uid="{80587E8D-67C3-47AF-97AC-4FAA0F81D9D4}" />
         <r
-          ds=""
           id="{A7CEEE33-046A-49DA-8D0B-636BAC05F97F}"
-          par=""
           ph="/page-layout/section/col-wide-1"
           uid="{CBF8B050-CFD6-4013-83BF-5EF3AAF64682}" />
         <r
           id="{AAF9B3B2-BE53-4B85-BDBF-E7704C0B28D2}"
-          ph="col-wide-2"
+          ph="/page-layout/section/col-wide-2"
           uid="{8C2C1F8D-59F1-4B59-8B17-FC5BE9CF1765}" />
         <r
           id="{49424190-0EFA-4414-8D18-4569CC8EA5FD}"
-          ph="col-wide-2"
+          ph="/page-layout/section/col-wide-2"
           uid="{3B217F90-4061-48A6-BDCF-23A624D69491}" />
         <r
-          ds=""
           id="{83DA4C94-D96C-4957-B026-6C9AC77DB964}"
-          ph="col-wide-2"
+          ph="/page-layout/section/col-wide-2"
           uid="{D671C715-DAE0-4EFD-8336-7ACB73E3DE47}" />
         <r
           id="{B0D07BC6-467D-4AEE-9D4B-21A1752215BA}"
-          ph="col-wide-2"
+          ph="/page-layout/section/col-wide-2"
           uid="{329A65A6-5100-42CD-BD5A-74C3356BB8F7}" />
         <r
-          ds=""
           id="{5DB98A10-52BD-4AB0-9E2B-C40C45FD2FAE}"
-          ph="col-wide-2"
+          ph="/page-layout/section/col-wide-2"
           uid="{59246F17-EC96-46F0-A632-BE4671929091}" />
-        <r
-          ds="{E48E2CCA-493D-410D-9B15-B2E1A0939730}"
-          id="{A6D72BB2-F51C-4468-97A2-75FB8EA100D0}"
-          ph="col-wide-2"
-          uid="{9B706406-941F-4707-BBB1-A298CC0FEE82}" />
         <r
           id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
           par="UseStaticPlaceholderNames=1"
@@ -171,7 +161,6 @@ SharedFields:
           ph="productrating"
           uid="{235DB62B-2625-4BD5-8BB2-70A7972F672D}" />
         <r
-          ds=""
           id="{83DA4C94-D96C-4957-B026-6C9AC77DB964}"
           ph="productinformation"
           uid="{E7FE989C-0A17-4879-86B6-8C7886A32DF2}" />
@@ -186,28 +175,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
-      Hint: __Final Renderings
-      Type: Layout
-      Value: |
-        <r xmlns:p="p" xmlns:s="s"
-          p:p="1"
-          s:xsd="http://www.w3.org/2001/XMLSchema">
-          <d
-            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-            <r
-              uid="{59246F17-EC96-46F0-A632-BE4671929091}"
-              s:par="" />
-          </d>
-          <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
-            <r
-              uid="{DF62B3B5-68B5-4D6C-8AD3-E5B82C2A3B36}"
-              p:after="*[1=2]"
-              s:id="{0B0ECF42-1026-4DDA-866B-EEE84778E831}"
-              s:ph="center" />
-          </d>
-        </r>
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
       Hint: Save percent lead
       Value: "- Save up to "
@@ -248,39 +215,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
-      Hint: __Final Renderings
-      Type: Layout
-      Value: |
-        <r xmlns:p="p" xmlns:s="s"
-          p:p="1"
-          s:xsd="http://www.w3.org/2001/XMLSchema">
-          <d
-            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-            <r
-              uid="{CBF8B050-CFD6-4013-83BF-5EF3AAF64682}">
-              <p:d />
-            </r>
-            <r
-              uid="{17CEEB73-56B8-4029-A487-A1AA0ACFC0ED}"
-              p:after="r[@uid='{80587E8D-67C3-47AF-97AC-4FAA0F81D9D4}']"
-              s:ds=""
-              s:id="{A7CEEE33-046A-49DA-8D0B-636BAC05F97F}"
-              s:par=""
-              s:ph="/page-layout/section/col-wide-1" />
-            <r
-              uid="{59246F17-EC96-46F0-A632-BE4671929091}"
-              s:par="" />
-          </d>
-          <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
-            <r
-              uid="{DF62B3B5-68B5-4D6C-8AD3-E5B82C2A3B36}"
-              p:after="*[1=2]"
-              s:id="{0B0ECF42-1026-4DDA-866B-EEE84778E831}"
-              s:ph="center" />
-          </d>
-        </r>
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
       Hint: Save percent lead
       Value: "- Save up to "
@@ -321,31 +255,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
-      Hint: __Final Renderings
-      Type: Layout
-      Value: |
-        <r xmlns:p="p" xmlns:s="s"
-          p:p="1"
-          s:xsd="http://www.w3.org/2001/XMLSchema">
-          <d
-            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-            <r
-              uid="{892BBFF6-55FF-4292-9F06-9E944E59A593}"
-              s:ds="" />
-            <r
-              uid="{59246F17-EC96-46F0-A632-BE4671929091}"
-              s:par="" />
-          </d>
-          <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
-            <r
-              uid="{DF62B3B5-68B5-4D6C-8AD3-E5B82C2A3B36}"
-              p:after="*[1=2]"
-              s:id="{0B0ECF42-1026-4DDA-866B-EEE84778E831}"
-              s:ph="center" />
-          </d>
-        </r>
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
       Hint: Save percent lead
       Value: "- Save up to "
@@ -386,31 +295,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
-      Hint: __Final Renderings
-      Type: Layout
-      Value: |
-        <r xmlns:p="p" xmlns:s="s"
-          p:p="1"
-          s:xsd="http://www.w3.org/2001/XMLSchema">
-          <d
-            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-            <r
-              uid="{892BBFF6-55FF-4292-9F06-9E944E59A593}"
-              s:ds="" />
-            <r
-              uid="{59246F17-EC96-46F0-A632-BE4671929091}"
-              s:par="" />
-          </d>
-          <d
-            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
-            <r
-              uid="{DF62B3B5-68B5-4D6C-8AD3-E5B82C2A3B36}"
-              p:after="*[1=2]"
-              s:id="{0B0ECF42-1026-4DDA-866B-EEE84778E831}"
-              s:ph="center" />
-          </d>
-        </r>
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
       Hint: Save percent lead
       Value: "- Save up to "
