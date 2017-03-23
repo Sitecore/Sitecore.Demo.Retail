@@ -25,7 +25,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <r>
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -69,11 +69,10 @@ SharedFields:
           ph="navbar-activity"
           uid="{E0D1F66D-7963-4A49-AA69-4EDC16A00390}" />
         <r
-          id="{B6C0593E-1C35-4C61-8DB5-E7C7AA19D955}"
+          id="{604ECBB6-2BBF-45AF-AC6E-BA9F853E7A03}"
           ph="navbar-activity"
-          uid="{685521B8-3040-4CE3-BD93-32E580F2AA58}" />
+          uid="{654CC0D1-1236-49C3-A61F-516912D15BE6}" />
         <r
-          ds=""
           id="{9AA8E388-A6BD-46E1-A73B-DDEF601DE6F8}"
           ph="navbar-activity"
           uid="{DE40A8F4-F8D7-4916-BCDF-C3D724FF96E2}" />
@@ -83,15 +82,11 @@ SharedFields:
           ph="page-layout"
           uid="{496F70C1-ACDB-49BB-B9B7-CEC6BF0A12F9}" />
         <r
-          ds=""
           id="{11680CDD-D6CF-4F1A-A770-B9815A6F7CEC}"
-          par=""
           ph="/page-layout/page-header"
           uid="{9A330B78-4526-4C50-A8DB-F2FA8E1854CC}" />
         <r
-          ds=""
           id="{45B8E1D9-D522-49E0-B9B7-04C965CC7089}"
-          par=""
           ph="/page-layout/page-header"
           uid="{1DE91068-1717-4B37-BAFD-A7BF7ACAB156}" />
         <r
@@ -100,9 +95,8 @@ SharedFields:
           ph="page-layout"
           uid="{F57AC5DE-D0F0-40C4-95AE-7E3371FD16F8}" />
         <r
-          ds=""
           id="{EADA94FA-315F-4DF2-AC49-13346DFDAF12}"
-          par="Background&amp;ContainerIsFluid&amp;UseStaticPlaceholderNames=1"
+          par="UseStaticPlaceholderNames=1"
           ph="/page-layout/section"
           uid="{897C99D8-9A09-4A4B-8336-B7D0E95FA84F}" />
         <r
@@ -119,7 +113,6 @@ SharedFields:
           ph="/page-layout/section/col-wide-1"
           uid="{85517EC8-30AA-44BD-B996-867C66F08F1D}" />
         <r
-          ds=""
           id="{16D92136-9228-4EFE-9969-BA1930520CBE}"
           ph="/page-layout/section/col-wide-1"
           uid="{6600C8E6-D9C3-4252-A64B-D3E6B6805596}" />

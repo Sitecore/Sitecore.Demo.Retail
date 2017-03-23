@@ -275,13 +275,10 @@
     <Content Include="Scripts\Storefront\Models\orderHeaderModel.js" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsList.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_PrintLayout.cshtml" />
     <Content Include="Views\Shared\ErrorsSummary.cshtml" />
     <Content Include="Views\Shared\LanguageSelector.cshtml" />
     <Content Include="Views\Shared\NavigationButtons.cshtml" />
-    <Content Include="Views\Shared\PrintOnly.cshtml" />
     <Content Include="Views\Shared\SearchBar.cshtml" />
-    <Content Include="Views\Shared\ShareAndPrint.cshtml" />
     <Content Include="Views\Shared\SocialConnector.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsListHeader.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsPagination.cshtml" />

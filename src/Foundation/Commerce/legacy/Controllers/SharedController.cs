@@ -59,11 +59,6 @@ namespace Sitecore.Reference.Storefront.Controllers
             return View();
         }
 
-        public ActionResult ShareAndPrint()
-        {
-            return View();
-        }
-
         public ActionResult SocialConnector()
         {
             return View();

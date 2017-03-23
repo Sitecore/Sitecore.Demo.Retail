@@ -128,11 +128,6 @@ SharedFields:
           ph="col-wide-2"
           uid="{59246F17-EC96-46F0-A632-BE4671929091}" />
         <r
-          ds="{E48E2CCA-493D-410D-9B15-B2E1A0939730}"
-          id="{A6D72BB2-F51C-4468-97A2-75FB8EA100D0}"
-          ph="col-wide-2"
-          uid="{9B706406-941F-4707-BBB1-A298CC0FEE82}" />
-        <r
           id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
           par="UseStaticPlaceholderNames=1"
           ph="/page-layout/section"

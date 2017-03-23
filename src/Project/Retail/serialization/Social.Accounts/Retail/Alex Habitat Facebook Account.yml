@@ -1,8 +1,8 @@
 ﻿---
-ID: "37eef7d9-d93e-4541-b77a-73167272f83d"
-Parent: "bd726323-e745-47d0-99f7-d25a870fe211"
+ID: "4f5a721e-5549-4655-959a-df99e8d99e02"
+Parent: "62cefdd2-31b2-4dd4-84ba-6284d1d133e0"
 Template: "2c0b92b7-6f32-48ac-a880-14a07995f118"
-Path: /sitecore/system/Social/Accounts/HabitatCommerce Twitter Account
+Path: /sitecore/system/Social/Accounts/Retail/Alex Habitat Facebook Account
 DB: master
 SharedFields:
 - ID: "07554386-05b8-41f2-91f6-300770b42fcd"
@@ -11,16 +11,16 @@ SharedFields:
     sitecore\Sitecore Client Authoring
 - ID: "205d2427-99ae-4012-8200-011745c48d30"
   Hint: AccessTokenSecret
-  Value: LDmOI73hJTHbHNo07PWSIeCGrz8NUD2wDOcDY82eDmzO4
+  Value: EAAJ6sQNT7iwBACjCrC38rriSry5Uc7ljDeZCQuWMqVUqfx5vbP9RfTp3zrghqQoVtI3sxCZBsRxZCoZCCXAIPQP9TYgJZBObaJkHMpJZBlnCD6cp3XyvcAPGOnziHOZBARdgitZAXg7MddGQLuAV38mFiI9QmNOKJTqPdFxmyKJNsgZDZD
 - ID: "26491425-aa5c-40f9-9e0b-c766d273c17e"
   Hint: Application
-  Value: "{C5CEA5AD-C5F0-4C4D-A623-22EADEF9FBBC}"
+  Value: "{EF2378C6-1D16-4A89-B845-B99948B95B52}"
 - ID: "893ca71d-2cc2-42c0-aad5-02609d9e8200"
   Hint: AccessToken
-  Value: "833783819752861703-jWjYSnH94G16U9U7nYpB3Yr7RiFGyHI"
+  Value: 117227745466905
 - ID: "8bfa1d0d-46b5-4c99-b40f-eac683c1c9d3"
   Hint: LastRenewalDate
-  Value: 20170221T164035Z
+  Value: 20170310T191751Z
 - ID: "a77ed059-b590-4518-8b51-d7397fc0dae9"
   Hint: Workflow
   Value: "{D7545D99-5DF2-4BE6-872B-2E66D8DFEE8D}"
@@ -31,7 +31,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20170221T164035Z
+      Value: 20170310T191751Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
