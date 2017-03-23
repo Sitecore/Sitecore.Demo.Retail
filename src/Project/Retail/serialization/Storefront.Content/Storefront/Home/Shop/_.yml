@@ -4,42 +4,11 @@ Parent: "ce40089d-6e73-4562-bdaf-3989688c2b01"
 Template: "9de07365-6b42-464b-b819-5423b563095c"
 Path: /sitecore/content/Storefront/Home/Shop/*
 DB: master
-SharedFields:
-- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
-  Hint: __Renderings
-  Type: layout
-  Value: |
-    <r xmlns:p="p" xmlns:s="s"
-      p:p="1"
-      s:xsd="http://www.w3.org/2001/XMLSchema">
-      <d
-        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-        <r
-          uid="{10C1BE30-D1C5-46F2-A04E-F804CB3E5C66}"
-          s:ds=""
-          s:par="" />
-      </d>
-    </r>
 Languages:
 - Language: en
   Versions:
   - Version: 1
     Fields:
-    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
-      Hint: __Final Renderings
-      Type: Layout
-      Value: |
-        <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
-          <d
-            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-            <r
-              uid="{CF7CB618-9710-4ACA-A9A9-ACED4629D7E1}"
-              p:before="*"
-              s:id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
-              s:ph="/footer/section" />
-          </d>
-        </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150108T213308Z
