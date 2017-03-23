@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <r>
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -53,11 +53,10 @@ SharedFields:
           ph="navbar-activity"
           uid="{14ED5BB8-BD15-43DD-97D6-CABA822B6A9D}" />
         <r
-          id="{B6C0593E-1C35-4C61-8DB5-E7C7AA19D955}"
+          id="{604ECBB6-2BBF-45AF-AC6E-BA9F853E7A03}"
           ph="navbar-activity"
-          uid="{07D4B949-EE9B-4638-B43A-8DF8AB429241}" />
+          uid="{6F468934-E01E-446D-A12C-077F05D60FFD}" />
         <r
-          ds=""
           id="{9AA8E388-A6BD-46E1-A73B-DDEF601DE6F8}"
           ph="navbar-activity"
           uid="{52B67631-57D6-447F-BBB0-0C6EA833AD45}" />
