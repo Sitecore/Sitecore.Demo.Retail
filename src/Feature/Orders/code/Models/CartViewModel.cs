@@ -20,7 +20,7 @@ using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class CartViewModel : RenderingModel
+    public class CartViewModel
     {
         public CartViewModel(CommerceCart cart)
         {
@@ -28,14 +28,6 @@ namespace Sitecore.Feature.Commerce.Orders.Models
         }
 
         public CommerceCart Cart { get; set; }
-
-        public static CartViewModel Get(CommerceCart cart, Rendering rendering)
-        {
-            var model = new CartViewModel(cart);
-
-            model.Initialize(rendering);
-
-            return model;
-        }
+        public string MapKey { get; set; }
     }
 }

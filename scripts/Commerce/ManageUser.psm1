@@ -27,7 +27,7 @@ function Add-User
     {
         if (Test-User -Username $user.username)
         {
-            Write-Verbose "User '$($user.username)' allready exists"
+            Write-Verbose "User '$($user.username)' already exists"
         }
         else 
         {
@@ -38,7 +38,7 @@ function Add-User
         }
         if (Test-GroupMember -GroupName $user.defaultGroupMembership -Member $user.username)
         {
-            Write-Verbose "User '$($user.username)' allready member of '$($user.defaultGroupMembership)'"
+            Write-Verbose "User '$($user.username)' already member of '$($user.defaultGroupMembership)'"
         }
         else 
         {

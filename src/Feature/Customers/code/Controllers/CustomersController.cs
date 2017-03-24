@@ -45,16 +45,18 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
             RemoveLoginSuccess
         }
 
-        public CustomersController(AccountManager accountManager, CountryManager countryManager, VisitorContextRepository visitorContextRepository)
+        public CustomersController(AccountManager accountManager, CountryManager countryManager, VisitorContextRepository visitorContextRepository, StorefrontManager storefrontManager)
         {
             AccountManager = accountManager;
             VisitorContextRepository = visitorContextRepository;
+            StorefrontManager = storefrontManager;
             CountryManager = countryManager;
         }
 
         private CountryManager CountryManager { get; }
         private AccountManager AccountManager { get; }
         private VisitorContextRepository VisitorContextRepository { get; }
+        public StorefrontManager StorefrontManager { get; }
         public int MaxNumberOfAddresses => Settings.GetIntSetting("Storefront.MaxNumberOfAddresses", 10);
 
         [HttpGet]
@@ -180,11 +182,11 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
 
                 var anonymousVisitorId = VisitorContextRepository.GetCurrent().UserId;
 
-                var response = AccountManager.RegisterUser(StorefrontManager.CurrentStorefront, inputModel);
+                var response = AccountManager.RegisterUser(StorefrontManager.Current, inputModel);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
                     result.Initialize(response.Result);
-                    AccountManager.Login(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), anonymousVisitorId, response.Result.UserName, inputModel.Password, false);
+                    AccountManager.Login(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), anonymousVisitorId, response.Result.UserName, inputModel.Password, false);
                 }
                 else
                 {
@@ -207,7 +209,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
         {
             var anonymousVisitorId = VisitorContextRepository.GetCurrent().UserId;
 
-            if (ModelState.IsValid && AccountManager.Login(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), anonymousVisitorId, UpdateUserName(model.UserName), model.Password, model.RememberMe))
+            if (ModelState.IsValid && AccountManager.Login(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), anonymousVisitorId, UpdateUserName(model.UserName), model.Password, model.RememberMe))
             {
                 return RedirectToLocal("/");
             }
@@ -232,7 +234,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = AccountManager.UpdateUserPassword(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
+                var response = AccountManager.UpdateUserPassword(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel);
                 result = new ChangePasswordApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success)
                 {
@@ -324,7 +326,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
                 }
 
                 var addresses = new List<IParty>();
-                var response = AccountManager.RemovePartiesFromCurrentUser(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), model.ExternalId);
+                var response = AccountManager.RemovePartiesFromCurrentUser(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), model.ExternalId);
                 var result = new AddressListItemApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success)
                 {
@@ -377,7 +379,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
                         {
                             model.ExternalId = Guid.NewGuid().ToString("B");
 
-                            var response = AccountManager.AddParties(StorefrontManager.CurrentStorefront, commerceUser.ExternalId, new List<IParty> { model });
+                            var response = AccountManager.AddParties(StorefrontManager.Current, commerceUser.ExternalId, new List<IParty> { model });
                             result.SetErrors(response.ServiceProviderResult);
                             if (response.ServiceProviderResult.Success)
                             {
@@ -389,7 +391,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
                     }
                     else
                     {
-                        var response = AccountManager.UpdateParties(StorefrontManager.CurrentStorefront, commerceUser.ExternalId, new List<IParty> { model });
+                        var response = AccountManager.UpdateParties(StorefrontManager.Current, commerceUser.ExternalId, new List<IParty> { model });
                         result.SetErrors(response.ServiceProviderResult);
                         if (response.ServiceProviderResult.Success)
                         {
@@ -428,12 +430,12 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
                     return Json(result);
                 }
 
-                var response = AccountManager.UpdateUser(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), model);
+                var response = AccountManager.UpdateUser(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), model);
                 result.SetErrors(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && !string.IsNullOrWhiteSpace(model.Password) && !string.IsNullOrWhiteSpace(model.PasswordRepeat))
                 {
                     var changePasswordModel = new ChangePasswordInputModel {NewPassword = model.Password, ConfirmPassword = model.PasswordRepeat};
-                    var passwordChangeResponse = AccountManager.UpdateUserPassword(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), changePasswordModel);
+                    var passwordChangeResponse = AccountManager.UpdateUserPassword(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), changePasswordModel);
                     result.SetErrors(passwordChangeResponse.ServiceProviderResult);
                     if (passwordChangeResponse.ServiceProviderResult.Success)
                     {
@@ -493,7 +495,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
 
-                var resetResponse = AccountManager.ResetUserPassword(StorefrontManager.CurrentStorefront, model);
+                var resetResponse = AccountManager.ResetUserPassword(StorefrontManager.Current, model);
                 if (!resetResponse.ServiceProviderResult.Success)
                 {
                     return Json(new ForgotPasswordApiModel(resetResponse.ServiceProviderResult));
@@ -541,7 +543,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
         private List<IParty> AllAddresses(AddressListItemApiModel result)
         {
             var addresses = new List<IParty>();
-            var response = AccountManager.GetCurrentCustomerParties(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent());
+            var response = AccountManager.GetCurrentCustomerParties(StorefrontManager.Current, VisitorContextRepository.GetCurrent());
             if (response.ServiceProviderResult.Success && response.Result != null)
             {
                 addresses = response.Result.ToList();
