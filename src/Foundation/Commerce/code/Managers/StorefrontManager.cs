@@ -26,9 +26,9 @@ using Sitecore.Links;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
-    public static class StorefrontManager
+    public class StorefrontManager : IManager
     {
-        public static CommerceStorefront CurrentStorefront
+        public CommerceStorefront Current
         {
             get
             {
@@ -44,6 +44,6 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
         }
 
-        public static string StorefrontHome => LinkManager.GetItemUrl(CurrentStorefront.HomeItem);
+        public string StorefrontHome => LinkManager.GetItemUrl(Current.HomeItem);
     }
 }
