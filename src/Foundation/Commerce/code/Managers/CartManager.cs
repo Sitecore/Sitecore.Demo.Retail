@@ -45,17 +45,16 @@ namespace Sitecore.Foundation.Commerce.Managers
 {
     public class CartManager : IManager
     {
-        public CartManager([NotNull] InventoryManager inventoryManager, [NotNull] CommerceCartServiceProvider cartServiceProvider, CartCacheHelper cartCacheHelper)
+        public CartManager(InventoryManager inventoryManager, CommerceCartServiceProvider cartServiceProvider, CartCacheHelper cartCacheHelper, StorefrontManager storefrontManager)
         {
-            Assert.ArgumentNotNull(inventoryManager, nameof(inventoryManager));
-            Assert.ArgumentNotNull(cartServiceProvider, nameof(cartServiceProvider));
-
             InventoryManager = inventoryManager;
             CartServiceProvider = cartServiceProvider;
             CartCacheHelper = cartCacheHelper;
+            StorefrontManager = storefrontManager;
         }
 
         private CartCacheHelper CartCacheHelper { get; set; }
+        public StorefrontManager StorefrontManager { get; }
 
         private InventoryManager InventoryManager { get; set; }
 
@@ -634,9 +633,10 @@ namespace Sitecore.Foundation.Commerce.Managers
                 info.Refresh = refresh;
             }
         }
-        public static string GetMapKey()
+
+        public string GetMapKey()
         {
-            return StorefrontManager.CurrentStorefront.HomeItem[StorefrontConstants.KnownFieldNames.MapKey];
+            return StorefrontManager.Current.HomeItem[StorefrontConstants.KnownFieldNames.MapKey];
         }
     }
 }

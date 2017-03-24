@@ -45,21 +45,19 @@ namespace Sitecore.Foundation.Commerce.Managers
 {
     public class CatalogManager : IManager
     {
-        public CatalogManager([NotNull] CatalogServiceProvider catalogServiceProvider, [NotNull] GlobalizationServiceProvider globalizationServiceProvider, [NotNull] PricingManager pricingManager, [NotNull] InventoryManager inventoryManager, CatalogItemContext catalogItemContext, ICommerceSearchManager commerceSearchManager)
+        public CatalogManager(CatalogServiceProvider catalogServiceProvider, GlobalizationServiceProvider globalizationServiceProvider, PricingManager pricingManager, InventoryManager inventoryManager, CatalogItemContext catalogItemContext, ICommerceSearchManager commerceSearchManager, StorefrontManager storefrontManager)
         {
-            Assert.ArgumentNotNull(catalogServiceProvider, nameof(catalogServiceProvider));
-            Assert.ArgumentNotNull(pricingManager, nameof(pricingManager));
-            Assert.ArgumentNotNull(inventoryManager, nameof(inventoryManager));
-
             CatalogServiceProvider = catalogServiceProvider;
             GlobalizationServiceProvider = globalizationServiceProvider;
             PricingManager = pricingManager;
             InventoryManager = inventoryManager;
             CatalogItemContext = catalogItemContext;
             CommerceSearchManager = commerceSearchManager;
+            StorefrontManager = storefrontManager;
         }
 
         public ICommerceSearchManager CommerceSearchManager { get; set; }
+        public StorefrontManager StorefrontManager { get; }
         public CatalogServiceProvider CatalogServiceProvider { get; protected set; }
         public GlobalizationServiceProvider GlobalizationServiceProvider { get; protected set; }
         public InventoryManager InventoryManager { get; protected set; }
@@ -561,7 +559,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 products.Add(new CommerceInventoryProduct {ProductId = productId, CatalogName = catalogName});
             }
 
-            var response = InventoryManager.GetStockInformation(StorefrontManager.CurrentStorefront, products, StockDetailsLevel.All);
+            var response = InventoryManager.GetStockInformation(StorefrontManager.Current, products, StockDetailsLevel.All);
             return response;
         }
     }

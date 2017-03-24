@@ -29,25 +29,14 @@ namespace Sitecore.Reference.Storefront.Controllers
     {
         private readonly RenderingModel _model;
 
-        public SharedController([NotNull] CatalogManager catalogManager)
+        public SharedController(CatalogManager catalogManager, StorefrontManager storefrontManager)
         {
-            Assert.ArgumentNotNull(catalogManager, nameof(catalogManager));
-
-            _model = new RenderingModel();
-
             CatalogManager = catalogManager;
+            StorefrontManager = storefrontManager;
         }
 
         public CatalogManager CatalogManager { get; }
-
-        internal RenderingModel CurrentRenderingModel
-        {
-            get
-            {
-                _model.Initialize(RenderingContext.Current.Rendering);
-                return _model;
-            }
-        }
+        public StorefrontManager StorefrontManager { get; }
 
         public ActionResult ErrorsSummary()
         {
@@ -71,7 +60,7 @@ namespace Sitecore.Reference.Storefront.Controllers
 
             try
             {
-                var result = CatalogManager.RaiseCultureChosenPageEvent(StorefrontManager.CurrentStorefront, culture);
+                var result = CatalogManager.RaiseCultureChosenPageEvent(StorefrontManager.Current, culture);
                 success = result.Result;
             }
             catch (Exception e)

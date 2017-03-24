@@ -94,7 +94,8 @@ namespace Sitecore.Foundation.Commerce.Managers
                 return string.Empty;
             }
 
-            var item = StorefrontManager.CurrentStorefront.GlobalItem.Axes.GetItem(string.Concat(StorefrontConstants.KnowItemNames.Lookups, "/", tableName, "/", itemName));
+            var storefrontManager = DependencyResolver.Current.GetService<StorefrontManager>();
+            var item = storefrontManager.Current.GlobalItem.Axes.GetItem(string.Concat(StorefrontConstants.KnowItemNames.Lookups, "/", tableName, "/", itemName));
             if (item == null)
             {
                 return insertBracketsWhenNotFound ? $"[{itemName}]" : itemName;
