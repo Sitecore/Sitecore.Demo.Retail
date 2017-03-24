@@ -18,40 +18,45 @@
         "Sitecore.Framework.Rules.Serialization": "1.1.12",
         "Microsoft.AspNetCore.StaticFiles": "1.1.0",
         "Sitecore.Framework.Diagnostics": "1.1.4",
-        "Engine.HabitatData": "1.0.0-*",
         "Sitecore.Commerce.Plugin.Catalog.Cs": "1.0.2301",
         "Sitecore.Commerce.Plugin.Payments": "1.0.2301",
         "Sitecore.Commerce.Plugin.Inventory.Cs": "1.0.2301",
         "Sitecore.Commerce.Plugin.Tax": "1.0.2301",
+        "Sitecore.Commerce.Plugin.Customers.Cs": "1.0.2301",
+        "Sitecore.Commerce.Plugin.GiftCards": "1.0.2301",
+        "Sitecore.Commerce.Plugin.Journaling": "1.0.2301",
+        "Sitecore.Commerce.Plugin.Orders.DelayedAvailability": "1.0.2301",
+        "Sitecore.Commerce.Plugin.Returns": "1.0.2301",
+        "Sitecore.Commerce.Plugin.SQL": "1.0.2301",
+        "Engine.Entitlements": "1.0.0-*",
         "Engine.Payments": "1.0.0-*",
-        "Engine.Entitlements": "1.0.0-*"
+        "Engine.HabitatData": "1.0.0-*"
     },
-  "tools": {
-    "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"
-  },
-  "frameworks": {
-    "net452": {
-    }
-  },
-  "buildOptions": {
-    "emitEntryPoint": true,
-    "preserveCompilationContext": true
-  },
-  "runtimeOptions": {
-    "configProperties": {
-      "System.GC.Server": true
-    }
-  },
-  "publishOptions": {
-    "include": [
-      "wwwroot",
-      "web.config"
-    ]
-  },
+    "tools": {
+        "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"
+    },
+    "frameworks": {
+        "net452": {
+        }
+    },
+    "buildOptions": {
+        "emitEntryPoint": true,
+        "preserveCompilationContext": true
+    },
+    "runtimeOptions": {
+        "configProperties": {
+            "System.GC.Server": true
+        }
+    },
+    "publishOptions": {
+        "include": [
+            "wwwroot",
+            "web.config"
+        ]
+    },
     "scripts": {
         "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
     },
     "configurations": {
-        "Demo-Retail": {}
     }
 }

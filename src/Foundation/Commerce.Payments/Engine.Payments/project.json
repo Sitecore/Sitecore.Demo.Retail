@@ -1,15 +1,15 @@
 {
-  "version": "1.0.0-*",
-
+    "version": "1.0.0-*",
     "dependencies": {
         "Braintree": "3.6.0",
         "Sitecore.Commerce.Core": "1.0.2301",
         "Sitecore.Commerce.Plugin.Orders": "1.0.2301",
         "Sitecore.Commerce.Plugin.Payments": "1.0.2301"
     },
-
-  "frameworks": {
+    "frameworks": {
         "net452": {
+        }
+    },
+    "configurations": {
     }
-  }
 }
