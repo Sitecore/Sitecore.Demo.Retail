@@ -38,7 +38,7 @@
             }   
         ],
         [   {   "id": "commerceEngineProject",
-                "path": ".\\src\\Foundation\\Commerce\\Engine\\code",
+                "path": ".\\src\\Foundation\\Commerce\\Engine",
                 "files": []   
             }   
         ],  
