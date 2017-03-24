@@ -301,7 +301,7 @@ function New-Certificate
             $cmd = invoke-expression "$($env:WINDIR)\system32\inetsrv\Appcmd list site `"$($certificateSetting.siteName)`" /Config"
             If($cmd -Match $escaped)
             {
-                Write-Verbose "IIS configuration allready applied."
+                Write-Verbose "IIS configuration already applied."
             }
             Else
             {
