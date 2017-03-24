@@ -38,6 +38,7 @@ using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Data;
 using Sitecore.Links;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
+using Sitecore.Data.Items;
 
 namespace Sitecore.Feature.Commerce.Orders.Controllers
 {
@@ -72,27 +73,27 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             var cartResponse = CartManager.GetCurrentCart(StorefrontManager.CurrentStorefront,
                 VisitorContextRepository.GetCurrent(), true);
             model.Cart = cartResponse.ServiceProviderResult.Cart as CommerceCart;
-            InitLineShippingOptions(model);
-            InitLineHrefs(model);
-            InitLineImgSrcs(model);
 
-            //else if (!Context.PageMode.IsExperienceEditor)
-            //{
-            //    #warning Remove hardcoded URL
-            //    var cartPageUrl = "/shoppingcart";
-            //    return Redirect(cartPageUrl);
-            //}
+            if (model?.Cart?.Lines != null && model.Cart.Lines.Any())
+            {
+                InitLineShippingOptions(model);
+                InitLineHrefs(model);
+                InitLineImgSrcs(model);
+            }
+            else if (!Context.PageMode.IsExperienceEditor)
+            {
+                #warning Remove hardcoded URL
+                var cartPageUrl = "/shoppingcart";
+                return Redirect(cartPageUrl);
+            }
+
+            InitCountriesRegions(model);
 
             return View(model);
         }
 
         private void InitLineShippingOptions(CheckoutViewModel model)
         {
-            if (model.Cart == null || model.Cart.Lines == null || !model.Cart.Lines.Any())
-            {
-                return;
-            }
-
             var prefsResponse = ShippingManager.GetShippingPreferences(model.Cart);
             if (!prefsResponse.ServiceProviderResult.Success || prefsResponse.Result == null)
             {
@@ -110,11 +111,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
 
         private void InitLineHrefs(CheckoutViewModel model)
         {
-            if (model.Cart == null || model.Cart.Lines == null || !model.Cart.Lines.Any())
-            {
-                return;
-            }
-
             foreach (CommerceCartLineWithImages line in model.Cart.Lines)
             {
                 var productVariantItemId = line.Product.SitecoreProductItemId;
@@ -126,15 +122,26 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
 
         private void InitLineImgSrcs(CheckoutViewModel model)
         {
-            if (model.Cart == null || model.Cart.Lines == null || !model.Cart.Lines.Any())
-            {
-                return;
-            }
-
             foreach (CommerceCartLineWithImages line in model.Cart.Lines)
             {
                 var src = line?.DefaultImage?.ImageUrl(100, 100);
                 model.LineImgSrcs[line.ExternalCartLineId] = src;
+            }
+        }
+
+        private void InitCountriesRegions(CheckoutViewModel model)
+        {
+            // Get the proper node in Sitecore...
+            Item countriesRegionsItem = Context.Database.GetItem("/sitecore/Commerce/Commerce Control Panel/Shared Settings/Countries-Regions");
+            foreach (Item countryItem in countriesRegionsItem.Children)
+            {
+                string country = countryItem["Country Code"] + "|" + countryItem["Name"];
+                model.CountriesRegions[country] = new List<string>();
+                foreach (Item regionItem in countryItem.Children)
+                {
+                    string region = regionItem["Code"] + "|" + regionItem["Name"];
+                    model.CountriesRegions[country].Add(region);
+                }
             }
         }
 
