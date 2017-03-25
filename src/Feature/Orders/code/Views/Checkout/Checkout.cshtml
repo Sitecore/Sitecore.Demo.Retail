@@ -159,36 +159,14 @@
                         <strong>@Html.Sitecore().Field("Shipment Options Label", Html.Sitecore().CurrentItem)</strong>
                     </div>
                     <div class="col-md-9">
-                        <div id="shippingMethodsContainer" class="form-group shipping-options">
+                        <div id="shippingMethodsContainer" class="form-group shipping-options"
+                             data-bind="foreach: Object.keys(ShippingOptions)">
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="radio" style="margin-left: 20px" name="shippingMethodId" pvalue="e14965b9-306a-43c4-bffc-3c67be8726fa">
-                                        <span>Ground</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="radio" style="margin-left: 20px" name="shippingMethodId" pvalue="939a3ea6-f453-4eb0-987d-45a5ee226985">
-                                        <span>Next day air</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="radio" style="margin-left: 20px" name="shippingMethodId" pvalue="12cf3b10-d308-47a1-b140-ef6cc1419c9d">
-                                        <span>Standard</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="radio" style="margin-left: 20px" name="shippingMethodId" pvalue="9119b37a-90f4-45e4-af32-688e689b5b0a">
-                                        <span>Standard overnight</span>
+                                        <input type="radio" style="margin-left: 20px" name="shippingMethodId"
+                                               data-bind="attr: {pvalue: $data}">
+                                        <span data-bind="text: ShippingOptions[$data]"></span>
                                     </label>
                                 </div>
                             </div>

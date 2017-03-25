@@ -17,6 +17,14 @@ namespace Sitecore.Feature.Commerce.Orders.Models
     {
         public CommerceCart Cart { get; set; }
 
+        /// <summary>
+        ///   This collection holds all countries and their provinces (if any).
+        ///   Each country and province is expressed as "code|name".  For example,
+        ///   the US is "US|United States" and New York is "NY|New York".
+        /// </summary>
+        public IDictionary<string, IList<string>> CountriesRegions { get; set; } =
+            new Dictionary<string, IList<string>>();
+
         public IDictionary<string, string> LineHrefs { get; set; } =
             new Dictionary<string, string>();
 
@@ -26,13 +34,7 @@ namespace Sitecore.Feature.Commerce.Orders.Models
         public IDictionary<string, ShippingOption> LineShippingOptions { get; set; } =
             new Dictionary<string, ShippingOption>();
 
-        /// <summary>
-        ///   This collection holds all countries and their provinces (if any).
-        ///   Each country and province is expressed as "code|name".  For example,
-        ///   the US is "US|United States" and New York is "NY|New York".
-        /// </summary>
-        public IDictionary<string, IList<string>> CountriesRegions { get; set; } =
-            new Dictionary<string, IList<string>>();
+        public IDictionary<string, string> ShippingOptions { get; set; } =
+            new Dictionary<string, string>();
     }
-
 }

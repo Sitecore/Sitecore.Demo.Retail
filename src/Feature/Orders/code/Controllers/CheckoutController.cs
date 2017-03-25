@@ -88,6 +88,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
 
             InitCountriesRegions(model);
+            InitShippingOptions(model);
 
             return View(model);
         }
@@ -142,6 +143,16 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     string region = regionItem["Code"] + "|" + regionItem["Name"];
                     model.CountriesRegions[country].Add(region);
                 }
+            }
+        }
+
+        private void InitShippingOptions(CheckoutViewModel model)
+        {
+            Item shipItemsItem = Context.Database.GetItem("/sitecore/Commerce/Commerce Control Panel/Shared Settings/Fulfillment Options/Ship items");
+            foreach (Item shippingOptionItem in shipItemsItem.Children)
+            {
+                string shippingOption = shippingOptionItem["Title"];
+                model.ShippingOptions[shippingOptionItem.ID.ToString()] = shippingOption;
             }
         }
 
