@@ -93,55 +93,55 @@
                 <div class="row" data-bind="if: groupedLines['Ship items'] && isChangingShippingAddress">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label for="shippingAddress.recipient" class="col-md-2 control-label">@Html.Sitecore().Field("Recipient Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_recipient" class="col-md-2 control-label">@Html.Sitecore().Field("Recipient Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-9">
-                                <input type="text" id="shippingAddress.recipient" class="form-control input-sm"
+                                <input type="text" id="shippingAddress_recipient" class="form-control input-sm"
                                        placeholder="@Html.Sitecore().Field("Recipient Label", Html.Sitecore().CurrentItem)"
                                        data-bind="value: shippingAddress.recipient">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="shippingAddress.addressLine1" class="col-md-2 control-label">@Html.Sitecore().Field("Address Line 1 Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_addressLine1" class="col-md-2 control-label">@Html.Sitecore().Field("Address Line 1 Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control input-sm" id="shippingAddress.addressLine1"
+                                <input type="text" class="form-control input-sm" id="shippingAddress_addressLine1"
                                        placeholder="@Html.Sitecore().Field("Address Line 1 Label", Html.Sitecore().CurrentItem)"
                                        data-bind="value: shippingAddress.addressLine1">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="shippingAddress.addressLine2" class="col-md-2 control-label">@Html.Sitecore().Field("Address Line 2 Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_addressLine2" class="col-md-2 control-label">@Html.Sitecore().Field("Address Line 2 Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control input-sm" id="shippingAddress.addressLine2"
+                                <input type="text" class="form-control input-sm" id="shippingAddress_addressLine2"
                                        placeholder="@Html.Sitecore().Field("Address Line 2 Label", Html.Sitecore().CurrentItem)"
                                        data-bind="value: shippingAddress.addressLine2">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="shippingAddress.city" class="col-md-2 control-label">@Html.Sitecore().Field("Address City Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_city" class="col-md-2 control-label">@Html.Sitecore().Field("Address City Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control input-sm" id="shippingAddress.city"
+                                <input type="text" class="form-control input-sm" id="shippingAddress_city"
                                        placeholder="@Html.Sitecore().Field("Address City Label", Html.Sitecore().CurrentItem)"
                                        data-bind="value: shippingAddress.city">
                             </div>
-                            <label for="shippingAddress.province" class="col-md-1 control-label">@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_province" class="col-md-1 control-label">@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-2">
-                                <select id="shippingAddress.province" class="form-control"
+                                <select id="shippingAddress_province" class="form-control"
                                         data-bind="value: shippingAddress.province,
                                                options: model.activeShippingRegions,
                                                optionsValue: function(c) { return c.split('|')[0]; },
                                                optionsText: function(c) { return c.split('|')[1]; },
                                                optionsCaption: '@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)'"></select>
                             </div>
-                            <label for="shippingAddress.postalCode" class="col-md-1 control-label">@Html.Sitecore().Field("Address Postal Code Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_postalCode" class="col-md-1 control-label">@Html.Sitecore().Field("Address Postal Code Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-2">
-                                <input type="text" class="form-control input-sm" id="shippingAddress.city"
+                                <input type="text" class="form-control input-sm" id="shippingAddress_postalCode"
                                        data-bind="value: shippingAddress.postalCode">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="shippingAddress.country" class="col-md-2 control-label">@Html.Sitecore().Field("Address Country Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_country" class="col-md-2 control-label">@Html.Sitecore().Field("Address Country Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-7">
-                                <select id="shippingAddress.country" class="form-control" onchange="setTimeout(updateRegions, 200);"
+                                <select id="shippingAddress_country" class="form-control" onchange="setTimeout(updateRegions, 200);"
                                         data-bind="value: shippingAddress.country,
                                                options: Object.keys(model.CountriesRegions),
                                                optionsValue: function(c) { return c.split('|')[0]; },
@@ -176,11 +176,12 @@
                 <div data-bind="if: groupedLines['Digital']">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label for="shippingAddress.recipient" class="col-md-3 control-label">@Html.Sitecore().Field("Shipment Email Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_email" class="col-md-3 control-label">@Html.Sitecore().Field("Shipment Email Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-8">
-                                <input type="text" id="email" class="form-control input-sm"
+                                <input type="text" id="shippingAddress_email" class="form-control input-sm"
+                                       onfocusout="saveEmail();"
                                        placeholder="@Html.Sitecore().Field("Shipment Email Label", Html.Sitecore().CurrentItem)"
-                                       data-bind="value: emailAddress">
+                                       data-bind="value: email">
                             </div>
                         </div>
                     </form>
@@ -344,8 +345,7 @@
         var numStr = this.toFixed(currencyFormat.decimalPlaces);
         var numSplit = numStr.split('.');
 
-        if (currencyFormat.wholeNumberPlaces)
-        {
+        if (currencyFormat.wholeNumberPlaces) {
             var i = numSplit[0].length - currencyFormat.wholeNumberPlaces;
             while (i > 0) {
                 numSplit[0].substring(0, i) +
@@ -388,6 +388,10 @@
         return _.find(Object.keys(model.CountriesRegions), function(c) {
             return c.substr(0, 2) == countryCode;
         });
+    }
+
+    function saveEmail() {
+    	Cookies.set("email", $("#shippingAddress_email").val());
     }
 
     function setShippingAddress() {
@@ -462,7 +466,7 @@
     if (!model.selectedShippingMethod)
     	model.selectedShippingMethod = _.head(Object.keys(model.ShippingOptions));
 
-    model.emailAddress = JSON.parse(Cookies.get('emailAddress') || null);
+    model.email = Cookies.get('email');
 
     model.paymentAddress = JSON.parse(Cookies.get('paymentAddress') || null);
 
