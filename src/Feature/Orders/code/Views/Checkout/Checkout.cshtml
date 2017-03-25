@@ -165,8 +165,8 @@
                                 <div class="checkbox">
                                     <label>
                                         <input type="radio" style="margin-left: 20px" name="shippingMethodId"
-                                               data-bind="attr: {pvalue: $data}">
-                                        <span data-bind="text: ShippingOptions[$data]"></span>
+                                               data-bind="value: $data, checked: model.selectedShippingMethod"> &nbsp;
+                                        <span data-bind="text: model.ShippingOptions[$data]"></span>
                                     </label>
                                 </div>
                             </div>
@@ -459,6 +459,8 @@
     model.isChangingShippingAddress = ko.observable(!model.shippingAddress);
     if (model.isChangingShippingAddress())
         model.shippingAddress = createAddress();
+    if (!model.selectedShippingMethod)
+    	model.selectedShippingMethod = _.head(Object.keys(model.ShippingOptions));
 
     model.emailAddress = JSON.parse(Cookies.get('emailAddress') || null);
 
