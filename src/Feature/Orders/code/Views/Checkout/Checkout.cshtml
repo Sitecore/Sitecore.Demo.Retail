@@ -372,6 +372,12 @@
             return num.toCurrency();
     }
 
+    function cleanGuid(guid) {
+        guid = guid.split('{').join('');
+        guid = guid.split('}').join('');
+        return guid.toLowerCase();
+    }
+
     function createAddress() {
         return {
             recipient: null,
@@ -391,7 +397,7 @@
     }
 
     function saveEmail() {
-    	Cookies.set("email", $("#shippingAddress_email").val());
+        Cookies.set("email", $("#shippingAddress_email").val());
     }
 
     function setShippingAddress() {
@@ -422,6 +428,53 @@
 
         Cookies.set('shippingAddress', JSON.stringify(model.shippingAddress));
         model.isChangingShippingAddress(false);
+    }
+
+    function setShippingMethods() {
+        ClearGlobalMessages();
+        var parties = [];
+        var shipping = [];
+
+        if (model.groupedLines['Ship items'] && model.groupedLines['Ship items'].length) {
+            parties.push({
+                Name: model.shippingAddress.recipient,
+                Address1: model.shippingAddress.addressLine1,
+                Country: model.shippingAddress.country,
+                City: model.shippingAddress.city,
+                State: model.shippingAddress.province,
+                ZipPostalCode: model.shippingAddress.postalCode,
+                ExternalId: '0',
+                PartyId: '0'
+            });
+
+            shipping.push({
+                ShippingMethodID: cleanGuid(model.selectedShippingMethod),
+                ShippingMethodName: model.ShippingOptions[model.selectedShippingMethod],
+                ShippingPreferenceType: 1,
+                PartyID: 0,
+                LineIDs: _.map(model.groupedLines['Ship items'], 'ExternalCartLineId')
+            });
+        }
+
+        if (model.groupedLines['Digital'] && model.groupedLines['Digital'].length)
+            shipping.push({
+                ShippingMethodID: cleanGuid(model.EmailOptionId),
+                ShippingMethodName: 'Email',
+                ShippingPreferenceType: 3,
+                ElectronicDeliveryEmail: model.email,
+                ElectronicDeliveryEmailContent: '',
+                LineIDs: _.map(model.groupedLines['Digital'], 'ExternalCartLineId')
+            });
+
+        var data = {
+            OrderShippingPreferenceType: 4,
+            ShippingMethods: shipping,
+            ShippingAddresses: parties
+        };
+        AJAXPost(StorefrontUri("api/storefront/checkout/SetShippingMethods"), JSON.stringify(data), function() {
+            console.log(arguments);
+        }, $(this));
+        return false;
     }
 
     function showErrors(caption, errors) {
@@ -464,7 +517,7 @@
     if (model.isChangingShippingAddress())
         model.shippingAddress = createAddress();
     if (!model.selectedShippingMethod)
-    	model.selectedShippingMethod = _.head(Object.keys(model.ShippingOptions));
+        model.selectedShippingMethod = _.head(Object.keys(model.ShippingOptions));
 
     model.email = Cookies.get('email');
 

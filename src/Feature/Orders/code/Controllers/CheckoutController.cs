@@ -89,6 +89,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
 
             InitCountriesRegions(model);
             InitShippingOptions(model);
+            InitEmailOptionId(model);
 
             return View(model);
         }
@@ -154,6 +155,12 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 string shippingOption = shippingOptionItem["Title"];
                 model.ShippingOptions[shippingOptionItem.ID.ToString()] = shippingOption;
             }
+        }
+
+        private void InitEmailOptionId(CheckoutViewModel model)
+        {
+            Item emailItem = Context.Database.GetItem("/sitecore/Commerce/Commerce Control Panel/Shared Settings/Fulfillment Options/Digital/Email");
+            model.EmailOptionId = emailItem.ID.ToString();
         }
 
         [AllowAnonymous]
