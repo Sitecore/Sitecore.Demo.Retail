@@ -21,10 +21,12 @@ using System.Collections.Generic;
 using System.Xml;
 using Sitecore.Analytics.Pipelines.StartTracking;
 using Sitecore.Configuration;
+using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Pipelines;
 
 namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
 {
+    [Service]
     public class ExcludeUrlTracking
     {
         private static List<string> _urlsToExclude;

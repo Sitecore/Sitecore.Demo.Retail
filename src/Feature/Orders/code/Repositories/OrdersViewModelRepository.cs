@@ -4,10 +4,12 @@ using System.Linq;
 using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Feature.Commerce.Orders.Models;
 using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Security.Accounts;
 
 namespace Sitecore.Feature.Commerce.Orders.Repositories
 {
+    [Service]
     public class OrdersViewModelRepository
     {
         public OrdersViewModelRepository(OrderManager orderManager, AccountManager accountManager, StorefrontManager storefrontManager, OrderViewModelRepository orderViewModelRepository)

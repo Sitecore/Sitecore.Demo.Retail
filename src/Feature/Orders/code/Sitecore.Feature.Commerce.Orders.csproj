@@ -48,10 +48,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.1.0.0\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
       <Private>True</Private>
@@ -78,6 +74,10 @@
     <Reference Include="Sitecore.Commerce.Engine.Connect, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Commerce.Engine.Connect.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Foundation.DependencyInjection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.DependencyInjection.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Foundation.Dictionary">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
@@ -166,7 +166,6 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
-    <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Models\OrderLineViewModel.cs" />
     <Compile Include="Models\PaymentInfoViewModel.cs" />
     <Compile Include="Models\PaymentType.cs" />

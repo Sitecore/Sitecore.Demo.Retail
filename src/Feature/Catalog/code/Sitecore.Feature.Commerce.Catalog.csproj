@@ -56,10 +56,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.1.0.0\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
       <Private>True</Private>
@@ -91,6 +87,10 @@
     </Reference>
     <Reference Include="Sitecore.Foundation.Alerts">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Alerts.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Foundation.DependencyInjection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.DependencyInjection.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Foundation.Dictionary">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
@@ -165,7 +165,7 @@
     <Content Include="Views\Catalog\CheckGiftCardBalance.cshtml" />
     <Content Include="Views\Catalog\ChildCategoryNavigation.cshtml" />
     <Content Include="Views\Catalog\Pagination.cshtml" />
-	<Content Include="Views\Catalog\ProductFacets.cshtml" />
+    <Content Include="Views\Catalog\ProductFacets.cshtml" />
     <Content Include="Views\Catalog\ProductImages.cshtml" />
     <Content Include="Views\Catalog\ProductInformation.cshtml" />
     <Content Include="Views\Catalog\ProductList.cshtml" />
@@ -205,7 +205,6 @@
     <Compile Include="Infrastructure\Pipelines\InitializeRoutes.cs" />
     <Compile Include="Infrastructure\Pipelines\ProductItemResolver.cs" />
     <Compile Include="Infrastructure\Provider\CatalogLinkProvider.cs" />
-    <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Models\CatalogRouteRoot.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\GiftCardApiModel.cs" />
@@ -235,10 +234,6 @@
     <ProjectReference Include="..\..\..\Foundation\Commerce\code\Sitecore.Foundation.Commerce.csproj">
       <Project>{662345ac-23ee-4125-87a6-0785795c2409}</Project>
       <Name>Sitecore.Foundation.Commerce</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Foundation\DependencyInjection\code\Sitecore.Foundation.DependencyInjection.csproj">
-      <Project>{366148B7-2392-4F42-80D6-786B7A3682AE}</Project>
-      <Name>Sitecore.Foundation.DependencyInjection</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

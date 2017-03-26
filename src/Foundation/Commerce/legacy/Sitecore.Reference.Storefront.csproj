@@ -144,6 +144,10 @@
     <Reference Include="Sitecore.Foundation.Assets">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Assets.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Foundation.DependencyInjection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.DependencyInjection.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.Dictionary">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
     </Reference>
@@ -315,10 +319,6 @@
     <Content Include="Scripts\Storefront\step-indicator.js" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DependencyInjection\code\Sitecore.Foundation.DependencyInjection.csproj">
-      <Project>{366148b7-2392-4f42-80d6-786b7a3682ae}</Project>
-      <Name>Sitecore.Foundation.DependencyInjection</Name>
-    </ProjectReference>
     <ProjectReference Include="..\code\Sitecore.Foundation.Commerce.csproj">
       <Project>{662345ac-23ee-4125-87a6-0785795c2409}</Project>
       <Name>Sitecore.Foundation.Commerce</Name>
