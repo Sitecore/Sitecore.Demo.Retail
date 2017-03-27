@@ -17,18 +17,20 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
 {
     public class ProductViewModelFactory
     {
-        public ProductViewModelFactory(CatalogItemContext catalogItemContext, CatalogManager catalogManager, InventoryManager inventoryManager, VisitorContextRepository visitorContextRepository)
+        public ProductViewModelFactory(CatalogItemContext catalogItemContext, CatalogManager catalogManager, InventoryManager inventoryManager, VisitorContextRepository visitorContextRepository, StorefrontManager storefrontManager)
         {
             CatalogItemContext = catalogItemContext;
             CatalogManager = catalogManager;
             InventoryManager = inventoryManager;
             VisitorContextRepository = visitorContextRepository;
+            StorefrontManager = storefrontManager;
         }
 
         private CatalogItemContext CatalogItemContext { get; }
         public CatalogManager CatalogManager { get; }
         public InventoryManager InventoryManager { get; }
         public VisitorContextRepository VisitorContextRepository { get; }
+        public StorefrontManager StorefrontManager { get; }
 
         public ProductViewModel CreateFromCatalogItemContext()
         {
@@ -104,7 +106,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
         private void PopulateStockInformation(ProductViewModel model)
         {
             var inventoryProducts = new List<CommerceInventoryProduct> { new CommerceInventoryProduct { ProductId = model.ProductId, CatalogName = model.CatalogName } };
-            var response = InventoryManager.GetStockInformation(StorefrontManager.CurrentStorefront, inventoryProducts, StockDetailsLevel.StatusAndAvailability);
+            var response = InventoryManager.GetStockInformation(StorefrontManager.Current, inventoryProducts, StockDetailsLevel.StatusAndAvailability);
             if (!response.ServiceProviderResult.Success || response.Result == null)
             {
                 return;
