@@ -25,8 +25,6 @@ namespace Sitecore.Feature.Commerce.Orders.Models
         public IDictionary<string, IList<string>> CountriesRegions { get; set; } =
             new Dictionary<string, IList<string>>();
 
-        public string EmailOptionId { get; set; }
-
         public IDictionary<string, string> LineHrefs { get; set; } =
             new Dictionary<string, string>();
 
@@ -38,5 +36,7 @@ namespace Sitecore.Feature.Commerce.Orders.Models
 
         public IDictionary<string, string> ShippingOptions { get; set; } =
             new Dictionary<string, string>();
+
+        public bool HasLines => Cart?.Lines != null && Cart.Lines.Any();
     }
 }

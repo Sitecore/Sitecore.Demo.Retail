@@ -77,14 +77,14 @@
                         <strong>@Html.Sitecore().Field("Shipping Address Label", Html.Sitecore().CurrentItem)</strong>
                     </div>
                     <div class="col-md-7">
-                        <span data-bind="text: shippingAddress.recipient"></span><br>
-                        <span data-bind="text: shippingAddress.addressLine1"></span><br>
-                        <span data-bind="text: shippingAddress.addressLine2"></span>
-                        <br data-bind="visible: shippingAddress.addressLine2">
-                        <span data-bind="text: shippingAddress.city"></span>
-                        <span data-bind="text: shippingAddress.province"></span>
-                        <span data-bind="text: shippingAddress.postalCode"></span><br>
-                        <span data-bind="text: getCountryElement(shippingAddress.country).split('|')[1]"></span>
+                        <span data-bind="text: shippingAddress.Name"></span><br>
+                        <span data-bind="text: shippingAddress.Address1"></span><br>
+                        <span data-bind="text: shippingAddress.address2"></span>
+                        <br data-bind="visible: shippingAddress.Address2">
+                        <span data-bind="text: shippingAddress.City"></span>
+                        <span data-bind="text: shippingAddress.State"></span>
+                        <span data-bind="text: shippingAddress.ZipPostalCode"></span><br>
+                        <span data-bind="text: getCountryElement(shippingAddress.Country).split('|')[1]"></span>
                     </div>
                     <div class="col-md-2">
                         <a href="javascript: model.isChangingShippingAddress(true);">@Html.Sitecore().Field("Address Change Link Text", Html.Sitecore().CurrentItem)</a>
@@ -93,56 +93,56 @@
                 <div class="row" data-bind="if: groupedLines['Ship items'] && isChangingShippingAddress">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label for="shippingAddress_recipient" class="col-md-2 control-label">@Html.Sitecore().Field("Recipient Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_Name" class="col-md-2 control-label">@Html.Sitecore().Field("Recipient Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-9">
-                                <input type="text" id="shippingAddress_recipient" class="form-control input-sm"
+                                <input type="text" id="shippingAddress_Name" class="form-control input-sm"
                                        placeholder="@Html.Sitecore().Field("Recipient Label", Html.Sitecore().CurrentItem)"
-                                       data-bind="value: shippingAddress.recipient">
+                                       data-bind="value: shippingAddress.Name">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="shippingAddress_addressLine1" class="col-md-2 control-label">@Html.Sitecore().Field("Address Line 1 Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_Address1" class="col-md-2 control-label">@Html.Sitecore().Field("Address Line 1 Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control input-sm" id="shippingAddress_addressLine1"
+                                <input type="text" id="shippingAddress_Address1" class="form-control input-sm"
                                        placeholder="@Html.Sitecore().Field("Address Line 1 Label", Html.Sitecore().CurrentItem)"
-                                       data-bind="value: shippingAddress.addressLine1">
+                                       data-bind="value: shippingAddress.Address1">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="shippingAddress_addressLine2" class="col-md-2 control-label">@Html.Sitecore().Field("Address Line 2 Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_Address2" class="col-md-2 control-label">@Html.Sitecore().Field("Address Line 2 Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control input-sm" id="shippingAddress_addressLine2"
+                                <input type="text" id="shippingAddress_Address2" class="form-control input-sm"
                                        placeholder="@Html.Sitecore().Field("Address Line 2 Label", Html.Sitecore().CurrentItem)"
-                                       data-bind="value: shippingAddress.addressLine2">
+                                       data-bind="value: shippingAddress.Address2">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="shippingAddress_city" class="col-md-2 control-label">@Html.Sitecore().Field("Address City Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_City" class="col-md-2 control-label">@Html.Sitecore().Field("Address City Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control input-sm" id="shippingAddress_city"
+                                <input type="text" id="shippingAddress_City" class="form-control input-sm"
                                        placeholder="@Html.Sitecore().Field("Address City Label", Html.Sitecore().CurrentItem)"
-                                       data-bind="value: shippingAddress.city">
+                                       data-bind="value: shippingAddress.City">
                             </div>
-                            <label for="shippingAddress_province" class="col-md-1 control-label">@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_State" class="col-md-1 control-label">@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-2">
-                                <select id="shippingAddress_province" class="form-control"
-                                        data-bind="value: shippingAddress.province,
+                                <select id="shippingAddress_State" class="form-control"
+                                        data-bind="value: shippingAddress.State,
                                                options: model.activeShippingRegions,
                                                optionsValue: function(c) { return c.split('|')[0]; },
                                                optionsText: function(c) { return c.split('|')[1]; },
                                                optionsCaption: '@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)'"></select>
                             </div>
-                            <label for="shippingAddress_postalCode" class="col-md-1 control-label">@Html.Sitecore().Field("Address Postal Code Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_ZipPostalCode" class="col-md-1 control-label">@Html.Sitecore().Field("Address Postal Code Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-2">
-                                <input type="text" class="form-control input-sm" id="shippingAddress_postalCode"
-                                       data-bind="value: shippingAddress.postalCode">
+                                <input type="text" id="shippingAddress_ZipPostalCode" class="form-control input-sm"
+                                       data-bind="value: shippingAddress.ZipPostalCode">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="shippingAddress_country" class="col-md-2 control-label">@Html.Sitecore().Field("Address Country Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="shippingAddress_Country" class="col-md-2 control-label">@Html.Sitecore().Field("Address Country Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-7">
-                                <select id="shippingAddress_country" class="form-control" onchange="setTimeout(updateRegions, 200);"
-                                        data-bind="value: shippingAddress.country,
+                                <select id="shippingAddress_Country" class="form-control" onchange="setTimeout(updateRegions, 200);"
+                                        data-bind="value: shippingAddress.Country,
                                                options: Object.keys(model.CountriesRegions),
                                                optionsValue: function(c) { return c.split('|')[0]; },
                                                optionsText: function(c) { return c.split('|')[1]; },
@@ -164,8 +164,9 @@
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="radio" style="margin-left: 20px" name="shippingMethodId"
-                                               data-bind="value: $data, checked: model.selectedShippingMethod"> &nbsp;
+                                        <input type="radio" style="margin-left: 20px" name="shippingOptionID"
+                                               data-bind="value: $data, checked: model.shippingOptionID"
+                                               onchange="setShippingOptionID(value);"> &nbsp;
                                         <span data-bind="text: model.ShippingOptions[$data]"></span>
                                     </label>
                                 </div>
@@ -176,10 +177,10 @@
                 <div data-bind="if: groupedLines['Digital']">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label for="shippingAddress_email" class="col-md-3 control-label">@Html.Sitecore().Field("Shipment Email Label", Html.Sitecore().CurrentItem)</label>
+                            <label for="email" class="col-md-3 control-label">@Html.Sitecore().Field("Shipment Email Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-8">
-                                <input type="text" id="shippingAddress_email" class="form-control input-sm"
-                                       onfocusout="saveEmail();"
+                                <input type="text" id="email" class="form-control input-sm"
+                                       onfocusout="setEmail();"
                                        placeholder="@Html.Sitecore().Field("Shipment Email Label", Html.Sitecore().CurrentItem)"
                                        data-bind="value: email">
                             </div>
@@ -372,6 +373,39 @@
             return num.toCurrency();
     }
 
+
+
+    function applyModel() {
+    	applyModel.originalHTML = applyModel.originalHTML || rendering[0].innerHTML;
+    	rendering[0].innerHTML = applyModel.originalHTML;
+
+        model.groupedLines = {};
+        $.each(model.Cart.Lines, function(index, line) {
+            var option = model.LineShippingOptions[line.ExternalCartLineId];
+            if (!model.groupedLines[option.Description])
+                model.groupedLines[option.Description] = [];
+            model.groupedLines[option.Description].push(line);
+        });
+
+        model.shippingAddress = JSON.parse(Cookies.get('shippingAddress') || null);
+        model.isChangingShippingAddress = ko.observable(!model.shippingAddress);
+        if (model.isChangingShippingAddress())
+            model.shippingAddress = createAddress();
+
+        model.shippingOptionID = Cookies.get('shippingOptionID') ||
+        	_.head(Object.keys(model.ShippingOptions));
+
+        model.email = Cookies.get('email');
+
+        model.paymentAddress = JSON.parse(Cookies.get('paymentAddress') || null);
+
+        model.activeShippingRegions = ko.observableArray();
+        updateRegions();
+
+        ko.cleanNode(rendering[0]);
+        ko.applyBindings(model, rendering[0]);
+    }
+
     function cleanGuid(guid) {
         guid = guid.split('{').join('');
         guid = guid.split('}').join('');
@@ -380,13 +414,13 @@
 
     function createAddress() {
         return {
-            recipient: null,
-            addressLine1: null,
-            addressLine2: null,
-            city: null,
-            province: null,
-            postalCode: null,
-            country: 'US'
+            Name: null,
+            Address1: null,
+            Address2: null,
+            City: null,
+            State: null,
+            ZipPostalCode: null,
+            Country: 'US'
         }
     }
 
@@ -396,29 +430,30 @@
         });
     }
 
-    function saveEmail() {
-        Cookies.set("email", $("#shippingAddress_email").val());
+    function setEmail() {
+        Cookies.set("email", $("#email").val());
+        updateModel();
     }
 
     function setShippingAddress() {
         var errors = [];
 
-        if (!model.shippingAddress.recipient)
+        if (!model.shippingAddress.Name)
             errors.push('@Html.Sitecore().Field("Recipient Label", Html.Sitecore().CurrentItem) is a required field.');
 
-        if (!model.shippingAddress.addressLine1)
+        if (!model.shippingAddress.Address1)
             errors.push('@Html.Sitecore().Field("Address Line 1 Label", Html.Sitecore().CurrentItem) is a required field.');
 
-        if (!model.shippingAddress.city)
+        if (!model.shippingAddress.City)
             errors.push('@Html.Sitecore().Field("Address City Label", Html.Sitecore().CurrentItem) is a required field.');
 
-        if (!model.shippingAddress.province && model.activeShippingRegions().length)
+        if (!model.shippingAddress.State && model.activeShippingRegions().length)
             errors.push('@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem) is a required field.');
 
-        if (!model.shippingAddress.postalCode)
+        if (!model.shippingAddress.ZipPostalCode)
             errors.push('@Html.Sitecore().Field("Address Postal Code Label", Html.Sitecore().CurrentItem) is a required field.');
 
-        if (!model.shippingAddress.country)
+        if (!model.shippingAddress.Country)
             errors.push('@Html.Sitecore().Field("Address Country Label", Html.Sitecore().CurrentItem) is a required field.');
 
         if (errors.length) {
@@ -427,54 +462,12 @@
         }
 
         Cookies.set('shippingAddress', JSON.stringify(model.shippingAddress));
-        model.isChangingShippingAddress(false);
+        updateModel();
     }
 
-    function setShippingMethods() {
-        ClearGlobalMessages();
-        var parties = [];
-        var shipping = [];
-
-        if (model.groupedLines['Ship items'] && model.groupedLines['Ship items'].length) {
-            parties.push({
-                Name: model.shippingAddress.recipient,
-                Address1: model.shippingAddress.addressLine1,
-                Country: model.shippingAddress.country,
-                City: model.shippingAddress.city,
-                State: model.shippingAddress.province,
-                ZipPostalCode: model.shippingAddress.postalCode,
-                ExternalId: '0',
-                PartyId: '0'
-            });
-
-            shipping.push({
-                ShippingMethodID: cleanGuid(model.selectedShippingMethod),
-                ShippingMethodName: model.ShippingOptions[model.selectedShippingMethod],
-                ShippingPreferenceType: 1,
-                PartyID: 0,
-                LineIDs: _.map(model.groupedLines['Ship items'], 'ExternalCartLineId')
-            });
-        }
-
-        if (model.groupedLines['Digital'] && model.groupedLines['Digital'].length)
-            shipping.push({
-                ShippingMethodID: cleanGuid(model.EmailOptionId),
-                ShippingMethodName: 'Email',
-                ShippingPreferenceType: 3,
-                ElectronicDeliveryEmail: model.email,
-                ElectronicDeliveryEmailContent: '',
-                LineIDs: _.map(model.groupedLines['Digital'], 'ExternalCartLineId')
-            });
-
-        var data = {
-            OrderShippingPreferenceType: 4,
-            ShippingMethods: shipping,
-            ShippingAddresses: parties
-        };
-        AJAXPost(StorefrontUri("api/storefront/checkout/SetShippingMethods"), JSON.stringify(data), function() {
-            console.log(arguments);
-        }, $(this));
-        return false;
+    function setShippingOptionID(shippingOptionID) {
+        Cookies.set("shippingOptionID", shippingOptionID);
+        updateModel();
     }
 
     function showErrors(caption, errors) {
@@ -495,36 +488,21 @@
         window.scrollTo(0, 0);
     }
 
+    function updateModel() {
+        AJAXPost(StorefrontUri("api/storefront/checkout/UpdateModel"), '', function(newModel) {
+            model = newModel;
+            applyModel();
+        });
+    }
+
     function updateRegions() {
-        var country = getCountryElement(model.shippingAddress.country);
+        var country = getCountryElement(model.shippingAddress.Country);
         model.activeShippingRegions(model.CountriesRegions[country] || []);
     }
 
 
 
     var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+    applyModel();
 
-    model.groupedLines = {};
-    $.each(model.Cart.Lines, function(index, line) {
-        var option = model.LineShippingOptions[line.ExternalCartLineId];
-        if (!model.groupedLines[option.Description])
-            model.groupedLines[option.Description] = [];
-        model.groupedLines[option.Description].push(line);
-    });
-
-    model.shippingAddress = JSON.parse(Cookies.get('shippingAddress') || null);
-    model.isChangingShippingAddress = ko.observable(!model.shippingAddress);
-    if (model.isChangingShippingAddress())
-        model.shippingAddress = createAddress();
-    if (!model.selectedShippingMethod)
-        model.selectedShippingMethod = _.head(Object.keys(model.ShippingOptions));
-
-    model.email = Cookies.get('email');
-
-    model.paymentAddress = JSON.parse(Cookies.get('paymentAddress') || null);
-
-    model.activeShippingRegions = ko.observableArray();
-    updateRegions();
-
-    ko.applyBindings(model, rendering[0]);
 </script>

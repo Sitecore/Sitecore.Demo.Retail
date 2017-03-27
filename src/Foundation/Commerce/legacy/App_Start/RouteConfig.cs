@@ -48,6 +48,7 @@ namespace Sitecore.Reference.Storefront
             new ApiControllerMapping("checkout-getshippingmethods", "Checkout", "GetShippingMethods"),
             new ApiControllerMapping("checkout-setshippingmethod", "Checkout", "SetShippingMethods"),
             new ApiControllerMapping("checkout-setpaymentmethod", "Checkout", "SetPaymentMethods"),
+            new ApiControllerMapping("checkout-updatemodel", "Checkout", "UpdateModel"),
             new ApiControllerMapping("checkout-submitorder", "Checkout", "SubmitOrder"),
             new ApiControllerMapping("global-culturechosen", "Shared", "CultureChosen")
         };

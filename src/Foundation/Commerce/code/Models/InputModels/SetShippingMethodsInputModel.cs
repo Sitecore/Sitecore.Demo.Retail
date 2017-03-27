@@ -26,8 +26,10 @@ namespace Sitecore.Foundation.Commerce.Models.InputModels
         public string OrderShippingPreferenceType { get; set; }
 
         [Required]
-        public List<ShippingMethodInputModelItem> ShippingMethods { get; set; }
+        public List<ShippingMethodInputModelItem> ShippingMethods { get; set; } =
+            new List<ShippingMethodInputModelItem>();
 
-        public List<PartyInputModelItem> ShippingAddresses { get; set; }
+        public List<PartyInputModelItem> ShippingAddresses { get; set; } =
+            new List<PartyInputModelItem>();
     }
 }
