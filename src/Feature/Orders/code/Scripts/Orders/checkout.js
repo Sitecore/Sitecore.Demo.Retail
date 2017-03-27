@@ -83,39 +83,23 @@ function setupCheckoutPage() {
         }
     });
 
-    $('body').on('click', '.lineSearchStores', function () {
-        var lineId = $(this).attr('id').replace('SearchStores-', '');
-        searchStores($('#StoreSearchResultsContainer-' + lineId), $('#StoreAddressSearch-' + lineId), 'StoresMap-' + lineId);
-    });
-
-    $('body').on('keypress', '.lineStoreAddressSearch', function (e) {
-        var lineId = $(this).attr('id').replace('StoreAddressSearch-', '');
-        var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
-        if (keycode == 13) {
-            $('#SearchStores-' + lineId).trigger('click');
-        }
-    });
-
-    $('#SearchStores').click(function () {
-        searchStores($('#StoreSearchResultsContainer'), $('#StoreAddressSearch'), 'storesMap');
-    });
-
     $('form').submit(function (e) {
         e.preventDefault();
         return false;
-    });
-
-    $('#StoreAddressSearch').keypress(function (e) {
-        var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
-        if (keycode == 13) {
-            $('#SearchStores').trigger('click');
-        }
     });
 
     $("#submitOrder").click(function () {
         submitOrder();
     });
 }
+
+function changeClass(e) {
+    e.preventDefault();
+    var clickedElement = $(this);
+
+    clickedElement.closest("ul").find(".active").removeClass("active");
+    clickedElement.closest("li").addClass('active');
+};
 
 // ----- JSON CALLS ----- //
 function GetAvailableRegions(countryCode) {
@@ -177,12 +161,10 @@ function initObservables() {
 
 var abde = null;
 
-function initCheckoutData(abdeContext) {
+function initCheckoutData() {
     getExpirationDates();
     getExpirationYears();
     getCheckoutData();
-
-    abde = abdeContext;
 }
 
 // ----- SHIPPING ----- //
@@ -239,26 +221,6 @@ function setShippingMethods() {
             "PartyId": partyId
         });
     }
-    else if (orderShippingPreference === 2) {
-        var storeId = checkoutDataViewModel.store().externalId();
-        parties.push({
-            "Name": checkoutDataViewModel.store().name(),
-            "Address1": checkoutDataViewModel.store().address().address1(),
-            "Country": checkoutDataViewModel.store().address().country(),
-            "City": checkoutDataViewModel.store().address().city(),
-            "Region": checkoutDataViewModel.store().address().region(),
-            "ZipPostalCode": checkoutDataViewModel.store().address().zipPostalCode(),
-            "ExternalId": storeId,
-            "PartyId": storeId
-        });
-
-        shipping.push({
-            "ShippingMethodID": checkoutDataViewModel.shipToStoreDeliveryMethod().ExternalId,
-            "ShippingMethodName": checkoutDataViewModel.shipToStoreDeliveryMethod().Description,
-            "ShippingPreferenceType": orderShippingPreference,
-            "PartyId": storeId
-        });
-    }
     else if (orderShippingPreference === 4) {
         $.each(checkoutDataViewModel.cart().cartLines(), function () {
             var lineDeliveryPreference = this.selectedShippingOption();
@@ -282,28 +244,6 @@ function setShippingMethods() {
                     "ShippingMethodName": this.shippingMethod().description,
                     "ShippingPreferenceType": lineDeliveryPreference,
                     "PartyId": partyId,
-                    "LineIDs": [lineId]
-                });
-            }
-
-            if (lineDeliveryPreference === 2) {
-                var storeId = this.store().externalId();
-                parties.push({
-                    "Name": this.store().name(),
-                    "Address1": this.store().address().address1(),
-                    "Country": this.store().address().country(),
-                    "City": this.store().address().city(),
-                    "Region": this.store().address().region(),
-                    "ZipPostalCode": this.store().address().zipPostalCode(),
-                    "ExternalId": storeId,
-                    "PartyId": storeId
-                });
-
-                shipping.push({
-                    "ShippingMethodID": checkoutDataViewModel.shipToStoreDeliveryMethod().ExternalId,
-                    "ShippingMethodName": checkoutDataViewModel.shipToStoreDeliveryMethod().Description,
-                    "ShippingPreferenceType": lineDeliveryPreference,
-                    "PartyId": storeId,
                     "LineIDs": [lineId]
                 });
             }
@@ -376,186 +316,6 @@ function setShippingMethodsResponse(data, success, sender) {
     ShowGlobalMessages(data);
     $("#ToBillingButton").button('reset');
     $("#BackToBillingButton").button('reset');
-}
-
-// ----- MAP & STORES ----- //
-var map = null;
-
-function getMap(storesMapContainer) {
-    if (map) {
-        //map.dispose();
-    }
-
-    var mapOptions = {
-        credentials: abde,
-        zoom: 1,
-        disableTouchInput: true
-    };
-
-    map = new Microsoft.Maps.Map(document.getElementById(storesMapContainer), mapOptions);
-    Microsoft.Maps.loadModule('Microsoft.Maps.Search');
-}
-
-function searchStores(searchResultsContainer, addressToSearch, storesMapContainer) {
-    searchResultsContainer.children().remove('.toRemove');
-    this.getMap(storesMapContainer);
-    var searchManager = new Microsoft.Maps.Search.SearchManager(this.map);
-    var geocodeRequest = {
-        where: addressToSearch.val(),
-        count: 1,
-        callback: geocodeCallback,
-        errorCallback: geocodeError,
-        userData: searchResultsContainer
-    };
-    searchManager.geocode(geocodeRequest);
-}
-
-function setMyLocation() {
-    var geoLocationProvider = new Microsoft.Maps.GeoLocationProvider(map);
-
-    geoLocationProvider.getCurrentPosition({
-        successCallback: displayCenter, showAccuracyCircle: false
-    });
-}
-
-function geocodeCallback(geocodeResult, userData) {
-    // This function is called when a geocode query has successfully executed.
-    // Report an error if the geocoding did not return any results.
-    // This will be caused by a poorly formed location input by the user.
-    if (!geocodeResult.results[0]) {
-        alert('Sorry, we were not able to decipher the address you gave us.  Please enter a valid Address.');
-        return;
-    }
-
-    searchLocation = geocodeResult.results[0].location;
-
-    // Center the map based on the location result returned and a starting (city level) zoom
-    // This will trigger the map view change event that will render the store plots
-    map.setView({ zoom: 11, center: this.searchLocation });
-
-    //Add a handler for the map change event. This event is used to render the store location plots each time the user zooms or scrolls to a new viewport
-    Microsoft.Maps.Events.addHandler(this.mapStoreLocator, 'viewchanged', renderAvailableStores.bind(this));
-
-    // Call the CRT to obtain a list of stores with a radius of the location provided.
-    // Note that we request stores for the maximum radius we want to support (200).  The map control
-    // is used to determine the "within" scope based on the users zoom settings at runtime.
-    getNearbyStores(userData);
-}
-
-function geocodeError(request) {
-    // This function handles an error from the geocoding service
-    // These errors are thrown due to connectivity or system faults, not poorly formed location inputs. 
-    alert("Sorry, something went wrong. An error has occured while looking up the address you provided. Please refresh the page and try again.");
-}
-
-function getNearbyStores(searchResultsContainer) {
-    var data = "{'latitude': '" + searchLocation.latitude + "', 'longitude':" + searchLocation.longitude + "}";
-
-    AJAXPost("/api/storefront/checkout/GetNearbyStores", data, renderAvailableStores, searchResultsContainer);
-    return false;
-}
-
-function renderAvailableStores(data, success, sender) {
-    map.entities.clear();
-    sender.hide();
-
-    var lineId = sender.selector.replace('#StoreSearchResultsContainer-', '');
-
-    if (lineId === "#StoreSearchResultsContainer") {
-        lineId = "";
-    } else {
-        lineId = "-" + lineId;
-    }
-
-    if (!success) {
-        return;
-    }
-
-    var storeCount = 0;
-    var pin;
-    var pinInfoBox;
-    var mapBounds = map.getBounds();
-    var stores = data.Stores;
-
-    // Display search location
-    if (searchLocation != null && searchLocation != undefined && mapBounds.contains(searchLocation)) {
-        // Plot the location to the map
-        pin = new Microsoft.Maps.Pushpin(searchLocation, { draggable: false, text: "X" });
-        map.entities.push(pin);
-    }
-
-    // If we have stores, plot them on the map
-    if (stores.length > 0) {
-        for (var i = 0; i < stores.length; i++) {
-            var currentStoreLocation = stores[i];
-            currentStoreLocation.location = { latitude: currentStoreLocation.Latitude, longitude: currentStoreLocation.Longitude };
-
-            // Test each location to see if it is within the bounding rectangle
-            if (mapBounds.contains(currentStoreLocation.location)) {
-                sender.show();
-
-                //  Increment the counter used to manage the sequential entity index
-                storeCount++;
-                currentStoreLocation.LocationCount = storeCount;
-
-                // This is the html that appears when a push pin is clicked on the map
-                var storeAddressText = '<div style="width:80%;height:100%;">\
-                    <p style="background-color:gray;color:black;margin-bottom:5px;">\
-                        <span style="padding-right:45px;">Store</span>\
-                            <span style="font-weight:bold;">Distance</span>\
-                                <p><p style="margin-bottom:0px;margin-top:0px;">\
-                                    <span style="color:black;padding-right:35px;">'
-                                        + currentStoreLocation.Name +
-                '</span><span style="color:black;">'
-                + currentStoreLocation.Distance +
-                ' miles</span>\
-                </p><p style="margin-bottom:0px;margin-top:0px;">'
-                + currentStoreLocation.Address.Address1 +
-                ' </p><p style="margin-bottom:0px;margin-top:0px;">'
-                + currentStoreLocation.Address.City + ', '
-                + currentStoreLocation.Address.Region + ' '
-                + currentStoreLocation.Address.ZipPostalCode +
-                '</p></div>';
-
-                // Plot the location to the map	
-                pin = new Microsoft.Maps.Pushpin(currentStoreLocation.location, { draggable: false, text: "" + storeCount + "" });
-
-                // Populating the Bing map push pin popup with store location data
-                pinInfoBox = new Microsoft.Maps.Infobox(currentStoreLocation.location, { width: 225, offset: new Microsoft.Maps.Point(0, 10), showPointer: true, visible: false, description: storeAddressText });
-
-                // Registering the event that fires when a pushpin on a Bing map is clicked
-                Microsoft.Maps.Events.addHandler(pin, 'click', (function (pinInfoBox) {
-                    return function () {
-                        pinInfoBox.setOptions({ visible: true });
-                    }
-                })(pinInfoBox));
-
-                map.entities.push(pin);
-                map.entities.push(pinInfoBox);
-
-                currentStoreLocation.Address.Name = currentStoreLocation.Name;
-                lineId = lineId.replace('-', '');
-                if (lineId === '') {
-                    checkoutDataViewModel.stores.push(new StoreViewModel(currentStoreLocation));
-                    if (storeCount === 1) {
-                        checkoutDataViewModel.store(new StoreViewModel(currentStoreLocation));
-                    }
-                } else {
-                    var selectedLine = ko.utils.arrayFirst(checkoutDataViewModel.cart().cartLines(), function (line) {
-                        return line.externalCartLineId === lineId;
-                    });
-                    if (selectedLine != null) {
-                        selectedLine.stores.push(new StoreViewModel(currentStoreLocation));
-                        if (storeCount === 1) {
-                            selectedLine.store(new StoreViewModel(currentStoreLocation));
-                        }
-                    }
-
-                    shippingMethodsArray.push(lineId);
-                }
-            }
-        }
-    }
 }
 
 // ----- BILLING ----- //
@@ -907,6 +667,16 @@ function submitOrderResponse(data, success, sender) {
     $("#PlaceOrderButton").button('reset');
 }
 
+// ----- LOCALIZED MESSAGE DICTIONARY ----- //
+var messageDictionary = new Array();
+function AddMessage(key, value) {
+    messageDictionary[key] = value;
+}
+
+function GetMessage(key) {
+    return messageDictionary[key];
+}
+
 // ----- CHECKOUT GENERAL ----- //
 function switchingCheckoutStep(step) {
     ClearGlobalMessages();
@@ -977,6 +747,41 @@ function switchingCheckoutStep(step) {
     }
 }
 
+function setupStepIndicator() {
+    $(document).ready(function () {
+        $("#checkoutNavigation1").click(function (e) {
+            switchingCheckoutStep("shipping");
+            $("#checkoutNavigation1").parent().addClass("active");
+            $("#checkoutNavigation2").parent().removeClass("active");
+            $("#checkoutNavigation3").parent().removeClass("active");
+        });
+        $("#checkoutNavigation2").click(function (e) {
+            if (!$("#ToBillingButton").prop("disabled")) {
+                switchingCheckoutStep("billing");
+                $("#checkoutNavigation2").parent().addClass("active");
+                $("#checkoutNavigation1").parent().removeClass("active");
+                $("#checkoutNavigation3").parent().removeClass("active");
+            } else {
+                $("#checkoutNavigation1").parent().addClass("active");
+                $("#checkoutNavigation2").parent().removeClass("active");
+                $("#checkoutNavigation3").parent().removeClass("active");
+            }
+        });
+        $("#checkoutNavigation3").click(function (e) {
+            if (!$("#ToBillingButton").prop("disabled")) {
+                switchingCheckoutStep("confirm");
+                $("#checkoutNavigation3").parent().addClass("active");
+                $("#checkoutNavigation2").parent().removeClass("active");
+                $("#checkoutNavigation1").parent().removeClass("active");
+            } else {
+                $("#checkoutNavigation1").parent().addClass("active");
+                $("#checkoutNavigation2").parent().removeClass("active");
+                $("#checkoutNavigation3").parent().removeClass("active");
+            }
+        });
+    });
+}
+
 function shippingButtons(show) {
     if (!show) {
         $('#btn-delivery-next').hide();
@@ -1021,7 +826,25 @@ function getUrlVars() {
     return vars;
 }
 
-var toString = Object.prototype.toString;
-isString = function (obj) {
-    return toString.call(obj) == '[object String]';
+function formatCurrency(x, precision, seperator, isoCurrencySymbol, groupSeperator) {
+    var options = {
+        precision: precision || 2,
+        seperator: seperator || ',',
+        groupSeperator: groupSeperator || " "
+    }
+
+    var currencyValue = (x.__ko_proto__ === ko.dependentObservable || x.__ko_proto__ === ko.observable) ? x() : x;
+
+    var formatted = parseFloat(currencyValue, 10).toFixed(options.precision);
+
+    var regex = new RegExp('^(\\d+)[^\\d](\\d{' + options.precision + '})$');
+    formatted = formatted.replace(regex, '$1' + options.seperator + '$2');
+    formatted = formatted.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1" + options.groupSeperator)
+
+    if (isoCurrencySymbol && isoCurrencySymbol.length > 0) {
+        return formatted + " " + isoCurrencySymbol;
+    }
+    else {
+        return formatted;
+    }
 }

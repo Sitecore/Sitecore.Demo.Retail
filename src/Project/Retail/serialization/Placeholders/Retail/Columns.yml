@@ -1,0 +1,18 @@
+﻿---
+ID: "307ccc85-a6f4-4c40-9b98-0c3d0057788b"
+Parent: "6631fe51-f2d6-4f25-9dc3-7db52dffaf71"
+Template: "c3b037a0-46e5-4b67-ac7a-a144b962a56f"
+Path: /sitecore/layout/Placeholder Settings/Project/Retail/Columns
+DB: master
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 0
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150921T020119Z

@@ -11,7 +11,7 @@
     // -------------------------------------------------------------------------------------------*@
 
 
-<div id="globalErrors" class="wrap-error generic-error-handler" data-bind="visible: shouldShowErrorList">
+<div id="globalErrors" class="wrap-error generic-error-handler" data-bind="visible: shouldShowErrorList" style="display: none;">
     <div class="container">
         <div class="row">
             <div class="alert alert-danger" role="alert" data-bind="foreach: errorList">
@@ -22,5 +22,7 @@
 </div>
 
 <script type="text/javascript">
-    initErrorSummary("globalErrors");
+    $(document).ready(function () {
+        initErrorSummary("globalErrors");
+    });
 </script>

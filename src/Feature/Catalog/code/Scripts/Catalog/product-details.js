@@ -11,12 +11,30 @@
 // -------------------------------------------------------------------------------------------
 
 $(document).ready(function () {
-    $(".thumbnails .thumbnail").on('click', function (e) {
+    $(".product-image-container .thumbnails .thumbnail").on('click', function (e) {
         e.preventDefault();
 
-        $('#prod-large-view').attr('src', $(this).attr('href'));
+        $('.product-image-container .prod-large-view').attr('src', $(this).attr('href'));
     });
 });
+
+//-----------------------------------------------------------------//
+//          PRICE INFO                                             //
+//-----------------------------------------------------------------//
+
+priceInfoVM = new PriceInfoViewModel();
+
+function initProductPriceInfo(sectionId) {
+    ko.applyBindingsWithValidation(priceInfoVM, document.getElementById(sectionId));
+}
+
+function switchProductPriceInfo(listPriceText, adjustedPriceText, isOnSale, savingsText) {
+    priceInfoVM.switchInfo(listPriceText, adjustedPriceText, isOnSale, savingsText);
+}
+
+//-----------------------------------------------------------------//
+//          VARIANTS                                               //
+//-----------------------------------------------------------------//
 
 var VariantInfoModel = function (variantId, size, color, priceBefore, priceNow, isOnSale, savingsMessage) {
     var self = this;
@@ -28,25 +46,6 @@ var VariantInfoModel = function (variantId, size, color, priceBefore, priceNow, 
     self.priceBefore = priceBefore;
     self.isOnSale = isOnSale;
     self.savingsMessage = savingsMessage;
-}
-
-var priceInfoVM = null;
-
-function AddToCartSuccess(data) {
-    if (data.Success) {
-        $("#addToCartSuccess").show().fadeOut(4000);
-        UpdateMiniCart();
-    }
-
-    ShowGlobalMessages(data);
-    // Update Button State
-    $('#AddToCartButton').button('reset');
-}
-
-function AddToCartFailure(data) {
-    ShowGlobalMessages(data);
-    // Update Button State
-    $('#AddToCartButton').button('reset');
 }
 
 function AddVariantCombination(size, productColor, id, listPrice, adjustedPrice, isOnSale, savingsMessage) {
@@ -83,9 +82,7 @@ function VariantSelectionChanged() {
         if (stockInfoVM) {
             stockInfoVM.switchInfo();
         }
-        if (priceInfoVM) {
-            priceInfoVM.switchInfo(variantInfo.priceBefore, variantInfo.priceNow, variantInfo.isOnSale, variantInfo.savingsMessage);
-        }
+        switchProductPriceInfo(variantInfo.priceBefore, variantInfo.priceNow, variantInfo.isOnSale, variantInfo.savingsMessage);
     }
 }
 
@@ -104,7 +101,7 @@ function CheckGiftCardBalance() {
         return;
     }
 
-    states('CheckGiftCardBalanceButton', 'loading');
+    $('#CheckGiftCardBalanceButton').button('loading');
     var data = {};
     data.GiftCardId = giftCardId;
     ClearGlobalMessages();
@@ -116,13 +113,6 @@ function CheckGiftCardBalance() {
         $('#CheckGiftCardBalanceButton').button('reset');
         ShowGlobalMessages(data);
     }, this);
-}
-
-function SetAddButton() {
-    $(document).ready(function () {
-        ClearGlobalMessages();
-        $("#AddToCartButton").button('loading');
-    });
 }
 
 //-----------------------------------------------------------------//
@@ -157,7 +147,7 @@ $(function() {
         signUp: function() {
             this.messages().ClearMessages();
             if (this.errors().length === 0) {
-                states('signForNotificationButton', 'loading');
+                $('#signForNotificationButton').button('loading');
                 var data = {
                     "ProductId": stockInfoVM.selectedStockInfo().productId(),
                     "CatalogName":  $("#product-catalog").val(),
@@ -186,14 +176,14 @@ $(function() {
             $('#signForNotificationModal').modal('hide');
         }
     };
-
     signForNotificationVM.confirmEmail = ko.validatedObservable().extend({
         validation: {
-            validator: mustEqual,
+            validator: function(val, other) { return val === other; },
             message: 'Emails do not match.',
             params: signForNotificationVM.email
         }
     });
+
 
     signForNotificationVM.errors = ko.validation.group(signForNotificationVM);
 
@@ -224,3 +214,31 @@ $(function() {
         });
     }
 });
+
+//-----------------------------------------------------------------//
+//          ADD TO CART                                            //
+//-----------------------------------------------------------------//
+
+function AddToCartSuccess(data) {
+    if (data.Success) {
+        $("#addToCartSuccess").show().fadeOut(4000);
+        UpdateMiniCart();
+    }
+
+    ShowGlobalMessages(data);
+    // Update Button State
+    $('#AddToCartButton').button('reset');
+}
+
+function AddToCartFailure(data) {
+    ShowGlobalMessages(data);
+    // Update Button State
+    $('#AddToCartButton').button('reset');
+}
+
+function SetAddButton() {
+    $(document).ready(function () {
+        ClearGlobalMessages();
+        $("#AddToCartButton").button('loading');
+    });
+}

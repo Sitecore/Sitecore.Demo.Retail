@@ -157,6 +157,12 @@
     <Content Include="App_Config\Include\Feature\Feature.Commerce.Catalog.config" />
     <Content Include="App_Config\Include\Feature\Feature.Commerce.Catalog.Serialization.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="Scripts\Catalog\jsuri.js" />
+    <Content Include="Scripts\Catalog\priceInfoViewModel.js" />
+    <Content Include="Scripts\Catalog\product-details.js" />
+    <Content Include="Scripts\Catalog\product-list.js" />
+    <Content Include="Scripts\Catalog\stockInfoListViewModel.js" />
+    <Content Include="Scripts\Catalog\stockInfoViewModel.js" />
     <Content Include="Sitecore\shell\override\Controls\Rich Text Editor\InsertLink\InsertLink.xml" />
     <Content Include="Views\Catalog\_ProductSummary.cshtml" />
     <Content Include="Views\Catalog\_RelatedCatalogItemsSlide.cshtml" />

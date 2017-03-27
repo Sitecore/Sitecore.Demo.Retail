@@ -108,8 +108,6 @@ namespace Sitecore.Foundation.Commerce
 
             public static readonly string SenderEmailAddress = "Sender Email Address";
 
-            public static readonly string MapKey = "Map Key";
-
             public static readonly string NamedSearches = "Named Searches";
 
             public static readonly string EmailAddressOfExistingCustomer = "Email Address Of Existing Customer";

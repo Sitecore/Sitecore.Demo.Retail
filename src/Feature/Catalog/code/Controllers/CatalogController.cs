@@ -742,6 +742,17 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             var childCategories = GetChildCategories(category);
             navigationViewModel.ChildCategories.AddRange(childCategories.Select(i => GetCategoryViewModel(CatalogManager.GetCategory(i))));
 
+            if (CatalogItemContext.Current != null)
+            {
+                if (CatalogItemContext.IsCategory)
+                    navigationViewModel.ActiveCategoryID = CatalogItemContext.Current?.Item?.ID;
+                else
+                {
+                    var categoryItem = CatalogManager.GetCategory(CatalogItemContext.Current.CategoryId);
+                    navigationViewModel.ActiveCategoryID = categoryItem?.InnerItem.ID;
+                }
+            }
+
             return this.AddToCache(cacheKey, navigationViewModel);
         }
 

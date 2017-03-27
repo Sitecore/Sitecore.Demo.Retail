@@ -10,11 +10,15 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-$(window).on("load", function () {
-    setEqualHeight($(".product-list .product-item"));
-});
-
 $(document).ready(function () {
+    var queryStringParamerterSort = "s";
+    var queryStringParamerterSortDirection = "sd";
+    var queryStringParamerterSortDirectionAsc = "asc";
+    var queryStringParamerterSortDirectionAscShort = "+";
+    var queryStringParamerterSortDirectionDesc = "desc";
+    var queryStringParamerterPage = "pg";
+    var queryStringParamerterPageSize = "ps";
+
     $(".sortDropdown").change(function () {
         var val = $(this).find("option:selected").attr("value");
 
@@ -55,35 +59,7 @@ $(document).ready(function () {
             resetUrl();
         }
     });
-
-    $(".changeSiteContentPageSize").change(function () {
-        var val = $(this).find("option:selected").attr("value");
-
-        if (val != null && val != "") {
-            var url = new Uri(window.location.href)
-                .deleteQueryParam(queryStringParameterSiteContentPageSize)
-                .addQueryParam(queryStringParameterSiteContentPageSize, val)
-                .deleteQueryParam(queryStringParamerterPage)
-                .toString();
-
-            window.location.href = url;
-        }
-        else {
-            resetUrl();
-        }
-    });
 });
-
-function setEqualHeight(columns) {
-    var tallestcolumn = 0;
-    columns.each(function () {
-        currentHeight = $(this).height();
-        if (currentHeight > tallestcolumn) {
-            tallestcolumn = currentHeight;
-        }
-    });
-    columns.height(tallestcolumn);
-}
 
 function resetUrl() {
     var url = new Uri(window.location.href)
@@ -96,4 +72,19 @@ function resetUrl() {
         .toString();
 
     window.location.href = url;
+}
+
+$(window).on("load", function () {
+    setEqualHeight($(".product-list .product-item"));
+});
+
+function setEqualHeight(columns) {
+    var tallestcolumn = 0;
+    columns.each(function () {
+        currentHeight = $(this).height();
+        if (currentHeight > tallestcolumn) {
+            tallestcolumn = currentHeight;
+        }
+    });
+    columns.height(tallestcolumn);
 }

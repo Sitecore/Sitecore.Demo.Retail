@@ -19,8 +19,7 @@ function initErrorSummary(sectionId) {
 
 function ShowGlobalMessages(data) {
     if (data && data.Url) {
-        var url = new Uri("/" + data.Url);
-        window.location.href = url;
+        window.location.href = "/" + data.Url;
     }
     if (errorSummaryViewModel && data && data.Errors && data.Errors.length > 0) {
         errorSummaryViewModel.AddToErrorList(data);

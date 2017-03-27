@@ -36,7 +36,6 @@ function LineItemDataViewModel(line) {
     }
 
     self.isLineShipAll = ko.observable(false);
-    self.isLineShipToStore = ko.observable(false);
     self.isLineShipToEmail = ko.observable(false);
     self.showShipOptionContent = ko.observable(false);
     self.selectedShippingOptionName = ko.observable(GetMessage('SelectDeliveryFirstMessage'));
@@ -47,13 +46,8 @@ function LineItemDataViewModel(line) {
     self.selectedShippingOption = ko.observable('0');
     self.selectedShippingOption.subscribe(function (option) {
         self.isLineShipAll(option === 1);
-        self.isLineShipToStore(option === 2);
         self.isLineShipToEmail(option === 3);
         self.showShipOptionContent(option !== 0);
-
-        if (option === 2) {
-            getMap('StoresMap-' + self.externalCartLineId);
-        }
 
         var match = ko.utils.arrayFirst(self.shippingOptions(), function (o) {
             return o.ShippingOptionType.Value === option;

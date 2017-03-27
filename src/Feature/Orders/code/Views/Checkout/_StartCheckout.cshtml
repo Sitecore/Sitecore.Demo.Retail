@@ -17,12 +17,6 @@
     {
         return;
     }
-
-    var requiredFieldMessage = DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Required Field", "This field is required."); ;
-    var requiredEmailMessage = DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Requires Email Address", "Please enter a valid email address."); ;
-    var requiredNumberMessage = DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Requires Number", "Please enter a number.");
-    var emailsMustMatchMessage = DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Emails Must Match", "The entered emails does not match.");
-    var selectDeliveryFirstMessage = DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Select Delivery First", "Please select delivery before proceeding.");
 }
 
 <div id="checkoutContainer">
@@ -45,13 +39,15 @@
     }
 
     <script type="text/javascript">
-        ko.validation.localize({ required: '@requiredFieldMessage' });
-        ko.validation.localize({ email: '@requiredEmailMessage' });
-        ko.validation.localize({ number: '@requiredNumberMessage' });
+        $(document).ready(function () {
+            ko.validation.localize({ required: '@DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Required Field", "This field is required.")' });
+            ko.validation.localize({ email: '@DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Requires Email Address", "Please enter a valid email address.")' });
+            ko.validation.localize({ number: '@DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Requires Number", "Please enter a number.")' });
 
-        AddMessage('SelectDeliveryFirstMessage', '@selectDeliveryFirstMessage');
-        AddMessage('EmailsMustMatchMessage', '@emailsMustMatchMessage');
+            AddMessage('SelectDeliveryFirstMessage', '@DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Select Delivery First", "Please select delivery before proceeding.")');
+            AddMessage('EmailsMustMatchMessage', '@DictionaryPhraseRepository.Current.Get("/Cart/Checkout/Emails Must Match", "The entered emails does not match.")');
 
-        initCheckoutData("@Model.MapKey");
+            initCheckoutData();
+        });
     </script>
 </div>
