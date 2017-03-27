@@ -17,7 +17,7 @@ function Invoke-WebRequest
         If ($bindingSetting -eq $null) { Write-Host "Website '$($websiteSetting.id)' has no specified binding." -ForegroundColor red; return 1; }
         
         $uri = $bindingSetting.protocol + "://" + $bindingSetting.hostName + ":" + $bindingSetting.port + "/" + $relativeUri
-        $response = (Microsoft.PowerShell.Utility\Invoke-webrequest -uri $uri -UseBasicParsing -TimeoutSec 60)
+        $response = (Microsoft.PowerShell.Utility\Invoke-webrequest -uri $uri -UseBasicParsing -TimeoutSec 300)
         
         If($response.statuscode -ne 200)
         {
