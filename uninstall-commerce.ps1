@@ -58,8 +58,11 @@ Write-Host "`nStep 6: Remove Users" -foregroundcolor Yellow
 #$runTimeUserSetting = ($settings.accounts | Where { $_.id -eq "runTime" } | Select)
 #ManageUser\Remove-User -username $runTimeUserSetting.username -Verbose
 
-# Step 4 Remove sql login
+# Step 7 Remove sql login
 Write-Host "`nStep 7: Remove Sql Login" -foregroundcolor Yellow
 ManageSqlServer\Remove-SqlLogin -accountId "runTime" -databaseId "commerceAdminDB" -accountSettingList $settings.accounts -databaseSettingList $settings.databases -Verbose
 
+# Step 8 Clean up hosts file
+Write-Host "`nStep 8: Configure Host File" -foregroundcolor Yellow
+If((ManageIIS\Remove-HostEntries -hostEntryList $settings.iis.hostEntries -Verbose) -ne 0) { Exit }
 

@@ -43,8 +43,6 @@ namespace Sitecore.Feature.Commerce.Orders.Models
 
         public ShippingMethodApiModel EmailDeliveryMethod { get; set; }
 
-        public ShippingMethodApiModel ShipToStoreDeliveryMethod { get; set; }
-
         public IDictionary<string, string> Countries { get; set; }
 
         public IEnumerable<PaymentOption> PaymentOptions { get; set; }

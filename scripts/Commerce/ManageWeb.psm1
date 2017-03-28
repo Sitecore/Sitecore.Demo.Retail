@@ -35,7 +35,7 @@ function Invoke-WebRequest
     {
         Try
         {
-            $response = (Microsoft.PowerShell.Utility\Invoke-webrequest -uri $uri -UseBasicParsing -TimeoutSec 60)
+            $response = (Microsoft.PowerShell.Utility\Invoke-webrequest -uri $uri -UseBasicParsing -TimeoutSec 360)
         
             If($response.statuscode -ne 200)
             {

@@ -4,10 +4,12 @@ using System.Linq;
 using Sitecore.Commerce.Multishop;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
+using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Foundation.Commerce.Repositories
 {
+    [Service]
     public class CountryRepository
     {
         public Dictionary<string, string> GetCountriesAsDictionary()

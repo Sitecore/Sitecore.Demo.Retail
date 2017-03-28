@@ -30,20 +30,6 @@
 </head>
 
 <body class="@(Sitecore.Context.PageMode.IsExperienceEditor ? "header-static" : "") @(Sitecore.Context.PageMode.IsNormal ? "" : (Sitecore.Context.PageMode.IsExperienceEditor ? "pagemode-edit" : "pagemode-preview"))">
-    <script type="text/javascript">
-        var currentCategory;
-
-        @{
-            var context = DependencyResolver.Current.GetService<CatalogItemContext>();
-            bool isCategory = context.IsCategory;
-            var catalogItem = context.Current?.Item;
-            if (isCategory && catalogItem != null)
-            {
-                @:currentCategory = "@catalogItem.ID.ToString()";
-            }
-        }
-    </script>
-
     <form id="_CRSFform" action="#" method="post">
         @Html.AntiForgeryToken()
     </form>
