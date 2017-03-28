@@ -30,3 +30,4 @@ nCrunchTemp*.*
 /src/Foundation/Commerce/serialization/Commerce.Templates.CommerceProduct/Commerce Product/Commerce/PriceCardName.yml
 project.lock.json
 **/wwwroot/logs/*
+/src/Foundation/Commerce/Engine/Properties/launchSettings.json

@@ -176,7 +176,8 @@ namespace Sitecore.Feature.Commerce.Catalog.Services
             {
                 if (includeFriendlyNames)
                 {
-                    route.Append(EncodeUrlToken(catalogItem.ProductName, true));
+                    // Replace plus (+) character with dash to prevent URL "Double Escaping" errors.
+                    route.Append(EncodeUrlToken(catalogItem.ProductName.Replace("+","-"), true));
                     route.Append(_urlTokenDelimiter);
                 }
 
