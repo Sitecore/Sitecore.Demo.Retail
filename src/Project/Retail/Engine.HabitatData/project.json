@@ -1,0 +1,19 @@
+{
+    "version": "1.0.0-*",
+
+    "dependencies": {
+        "Sitecore.Commerce.Core": "1.0.2301",
+        "Sitecore.Commerce.Plugin.Availability": "1.0.2301",
+        "Sitecore.Commerce.Plugin.Catalog": "1.0.2301",
+        "Sitecore.Commerce.Plugin.Coupons": "1.0.2301",
+        "Sitecore.Commerce.Plugin.Fulfillment": "1.0.2301",
+        "Sitecore.Commerce.Plugin.ManagedLists": "1.0.2301",
+        "Sitecore.Commerce.Plugin.Pricing": "1.0.2301",
+        "Sitecore.Framework.Pipelines": "2.0.65"
+    },
+
+    "frameworks": {
+        "net452": {
+        }
+    }
+}
