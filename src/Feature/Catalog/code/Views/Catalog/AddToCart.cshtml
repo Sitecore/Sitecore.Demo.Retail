@@ -48,6 +48,8 @@
 @if (Model.Variants != null && Model.Variants.Any())
 {
     <script type="text/javascript">
-        VariantSelectionChanged();
+        $(document).ready(function () {
+            VariantSelectionChanged();
+        });
     </script>
 }

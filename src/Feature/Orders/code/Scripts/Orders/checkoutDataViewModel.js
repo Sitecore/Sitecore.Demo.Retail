@@ -17,11 +17,9 @@ function CheckoutDataViewModel(data) {
 
     // delivery //
     self.isShipAll = ko.observable(false);
-    self.isShipToStore = ko.observable(false);
     self.isShipToEmail = ko.observable(false);
     self.isShipItems = ko.observable(false);
     self.emailDeliveryMethod = ko.observable(data.EmailDeliveryMethod);
-    self.shipToStoreDeliveryMethod = ko.observable(data.ShipToStoreDeliveryMethod);
     self.paymentClientToken = ko.observable(data.PaymentClientToken);
 
     self.orderShippingOptions = ko.observableArray();
@@ -33,13 +31,8 @@ function CheckoutDataViewModel(data) {
     self.selectedShippingOption = ko.observable('0');
     self.selectedShippingOption.subscribe(function (option) {
         self.isShipAll(option === 1);
-        self.isShipToStore(option === 2);
         self.isShipToEmail(option === 3);
         self.isShipItems(option === 4);
-        if (option === 2) {
-            getMap('storesMap');
-            setMyLocation();
-        }
     }.bind(this));
 
     self.isAuthenticated = false;
@@ -98,10 +91,6 @@ function CheckoutDataViewModel(data) {
                 return self.shippingMethod.isValid() && self.shippingAddress.isValid()
             }
 
-            if (self.isShipToStore()) {
-                return self.store.isValid() && self.store().address.isValid();
-            }
-
             if (self.isShipItems()) {
                 var isValid = [];
                 $.each(self.cart().cartLines(), function () {
@@ -111,9 +100,7 @@ function CheckoutDataViewModel(data) {
                     else if (this.isLineShipAll()) {
                         isValid.push(this.shippingMethod.isValid() && this.shippingAddress.isValid());
                     }
-                    else if (this.isLineShipToStore()) {
-                        isValid.push(this.store.isValid() && this.store().address.isValid());
-                    } else {
+                    else {
                         isValid.push(false);
                     }
                 });
@@ -128,7 +115,7 @@ function CheckoutDataViewModel(data) {
 
     // billing //
     self.billingEmail = ko.validatedObservable(self.userEmail).extend({ required: true, email: true });
-    self.billingConfirmEmail = ko.validatedObservable(self.userEmail).extend({ validation: { validator: mustEqual, message: GetMessage('EmailsMustMatchMessage'), params: self.billingEmail } });
+    self.billingConfirmEmail = ko.validatedObservable(self.userEmail).extend({ validation: { validator: function (val, other) { return val === other; }, message: GetMessage('EmailsMustMatchMessage'), params: self.billingEmail } });
     self.payCard = false;
     self.payFederatedPayment = false;
     self.payGiftCard = false;

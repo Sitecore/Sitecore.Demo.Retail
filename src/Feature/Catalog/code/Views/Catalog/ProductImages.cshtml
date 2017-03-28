@@ -22,10 +22,10 @@
 
 @using (Html.BeginEditFrame(Model.Item.Paths.FullPath, CommerceConstants.KnownItemPaths.EditFrameImages))
 {
-    <div id="C08-ProductImages" class="product-image-container">
+    <div class="product-image-container">
         <div class="row">
             <div class="col-md-12 prod-img">
-                <img src="@(Model.DefaultImage?.ImageUrl(770, 625))" class="img-responsive" alt="a" id="prod-large-view"/>
+                <img src="@(Model.DefaultImage?.ImageUrl(770, 625))" class="img-responsive prod-large-view" alt="a"/>
             </div>
         </div>
         @if (Model.Images != null && Model.Images.Count > 1)

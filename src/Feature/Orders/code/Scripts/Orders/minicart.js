@@ -13,6 +13,13 @@
 var miniCartViewModel = null;
 var miniCartItemListViewModel = null;
 
+$(document).ready(function () {
+    // This change stops the shopping chart from closing of a user clicks on it.
+    $(document).on('click', 'div.dropdown-menu', function (e) {
+        e.stopPropagation();
+    });
+});
+
 function manageMiniCartActions() {
     $(document).ready(function () {
         $('.minicart-content').on('click', ".minicart-delete", function (event) {
@@ -75,7 +82,7 @@ function initCartAmount(updateAmount) {
     AJAXPost("/api/storefront/cart/updateminicart", null, function (data) {
         if (success && data.Success) {
             miniCartViewModel = new MiniCartViewModel(data.LineItemCount, data.Total);
-            ko.applyBindings(miniCartViewModel, document.getElementById("B02-Basket"));
+            ko.applyBindings(miniCartViewModel, document.getElementById("miniCart"));
         }
 
         ShowGlobalMessages(data);

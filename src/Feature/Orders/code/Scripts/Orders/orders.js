@@ -10,6 +10,19 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+var ordersHeaderViewModel = null;
+
+function initRecentOrders(sectionId) {
+    AJAXPost("/api/storefront/orders/recentOrders", null, function (data, success, sender) {
+        if (success && data.Success) {
+            ordersHeaderViewModel = new OrderHeaderViewModel(data);
+            ko.applyBindings(ordersHeaderViewModel, document.getElementById(sectionId));
+        }
+        ordersHeaderViewModel.showLoader(false);
+        ShowGlobalMessages(data);
+    });
+}
+
 function selectAllOrderItems(element) {
     var isChecked = $(element).is(':checked');
     $('.item-to-selected').prop('checked', isChecked);
@@ -41,7 +54,7 @@ function addOrderItemsToCart() {
 
     var reorderLines = [];
     if (!$("#selectAllOrderItems").is(':checked')) {
-        $('.item-to-selected').filter(':checked').each(function() {
+        $('.item-to-selected').filter(':checked').each(function () {
             reorderLines.push($(this).attr('data-externalId'));
         });
     }

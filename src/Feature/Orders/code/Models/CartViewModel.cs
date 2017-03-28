@@ -28,6 +28,5 @@ namespace Sitecore.Feature.Commerce.Orders.Models
         }
 
         public CommerceCart Cart { get; set; }
-        public string MapKey { get; set; }
     }
 }
