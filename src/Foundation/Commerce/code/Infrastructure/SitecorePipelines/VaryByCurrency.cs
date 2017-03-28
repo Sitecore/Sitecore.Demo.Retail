@@ -18,10 +18,12 @@
 using System.Web;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Mvc.Pipelines.Response.RenderRendering;
 
 namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
 {
+    [Service]
     public class VaryByCurrency : RenderRenderingProcessor
     {
         public VaryByCurrency(CurrencyManager currencyManager)

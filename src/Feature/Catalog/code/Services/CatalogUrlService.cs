@@ -26,12 +26,14 @@ using Sitecore.Feature.Commerce.Catalog.Models;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Repositories;
+using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Links;
 using Sitecore.Web;
 
 namespace Sitecore.Feature.Commerce.Catalog.Services
 {
+    [Service]
     public class CatalogUrlService
     {
         private readonly string _urlTokenDelimiter = Settings.GetSetting("Storefront.UrlTokenDelimiter", "_");
