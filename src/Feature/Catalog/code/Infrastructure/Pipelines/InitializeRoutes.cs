@@ -16,10 +16,12 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Web.Routing;
+using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Pipelines;
 
 namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines
 {
+    [Service]
     public class InitializeRoutes
     {
         public void Process(PipelineArgs args)

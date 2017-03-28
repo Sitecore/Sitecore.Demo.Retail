@@ -8,6 +8,12 @@ SharedFields:
 - ID: "51b435bc-f7b9-478a-9c51-52916af96ff5"
   Hint: Path
   Value: /Views/Orders/RecentOrders.cshtml
+- ID: "e514a1eb-ddba-44f7-8528-82ca2280f778"
+  Hint: JavaScript assets
+  Value: |
+    /Scripts/Orders/orderHeaderModel.js
+    /Scripts/Orders/orderHeaderViewModel.js
+    /Scripts/Orders/orders.js
 - ID: "ef7c5528-7307-4e19-863b-da19eed6a9ed"
   Hint: Open Properties after Add
   Value: 

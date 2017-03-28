@@ -1,0 +1,31 @@
+﻿---
+ID: "6ca8de81-159f-4fca-955d-3b3ef2756cd9"
+Parent: "e999fb2e-6684-4b55-87ba-3bb00a0e099c"
+Template: "ecf0a9c8-fe56-45d8-b750-6bde3a34a532"
+Path: /sitecore/content/Storefront/Retail Campaigns/Messages/Service Messages/Status Messages/Triggered Notification
+DB: master
+SharedFields:
+- ID: "19b597d3-2edd-4ae2-aefe-4a94c7f10e31"
+  Hint: __Source Item
+  Value: "sitecore://master/{1E4ABBD8-809C-42E8-96D0-AFB6D69621A0}"
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: 
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "1b86697d-60ca-4d80-83fb-7555a2e6ce1c"
+      Hint: __Source
+      Value: "sitecore://master/{1E4ABBD8-809C-42E8-96D0-AFB6D69621A0}?lang=en&ver=1"
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170322T160619Z
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: 
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

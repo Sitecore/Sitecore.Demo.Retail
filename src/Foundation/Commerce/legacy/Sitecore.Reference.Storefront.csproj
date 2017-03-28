@@ -144,6 +144,10 @@
     <Reference Include="Sitecore.Foundation.Assets">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Assets.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Foundation.DependencyInjection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.DependencyInjection.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.Dictionary">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
     </Reference>
@@ -246,46 +250,21 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\Local.pubxml" />
-    <Content Include="Scripts\jquery-ui-1.10.4.js" />
-    <Content Include="Scripts\jquery.cookie.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jsuri-1.1.1.js" />
-    <Content Include="Scripts\jsuri-1.1.1.min.js" />
     <Content Include="Scripts\knockout-2.3.0.debug.js" />
     <Content Include="Scripts\knockout-2.3.0.js" />
     <Content Include="Scripts\knockout.validation-2.0.0.js" />
     <Content Include="Scripts\knockout.validation-2.0.0.min.js" />
     <Content Include="Scripts\Storefront\errorsummary.js" />
-    <Content Include="Scripts\Storefront\Models\priceInfoViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\stockInfoViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\stockInfoListViewModel.js" />
-    <Content Include="Scripts\Storefront\product-list.js" />
-    <Content Include="Scripts\Storefront\minicart.js" />
-    <Content Include="Scripts\Storefront\Models\lineItemListViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\creditCardPaymentViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\errorLineDetailViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\giftCardPaymentViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\countryRegionViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\deliveryAddressViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\adjustmentViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\miniCartViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\miniCartItemViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\orderHeaderViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\orderHeaderModel.js" />
+    <Content Include="Scripts\Storefront\errorLineDetailViewModel.js" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsList.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_PrintLayout.cshtml" />
     <Content Include="Views\Shared\ErrorsSummary.cshtml" />
     <Content Include="Views\Shared\LanguageSelector.cshtml" />
     <Content Include="Views\Shared\NavigationButtons.cshtml" />
-    <Content Include="Views\Shared\PrintOnly.cshtml" />
     <Content Include="Views\Shared\SearchBar.cshtml" />
-    <Content Include="Views\Shared\ShareAndPrint.cshtml" />
     <Content Include="Views\Shared\SocialConnector.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsListHeader.cshtml" />
     <Content Include="Views\StorefrontSearch\SiteContentSearchResultsPagination.cshtml" />
-    <Content Include="Scripts\jsuri-1.1.1.min.js.map" />
     <Content Include="Scripts\knockout.validation-2.0.0.min.js.map" />
     <None Include="Views\Web.config">
       <SubType>Designer</SubType>
@@ -299,29 +278,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\Storefront\order.js" />
-    <Content Include="Scripts\Storefront\cart.js" />
-    <Content Include="Scripts\Storefront\checkout.js" />
     <Content Include="Scripts\Storefront\debug-knockout.js" />
-    <Content Include="Scripts\Storefront\knockout-3.2.0.debug.js" />
-    <Content Include="Scripts\Storefront\main.js" />
-    <Content Include="Scripts\Storefront\maps.js" />
-    <Content Include="Scripts\Storefront\product-details.js" />
-    <Content Include="Scripts\Storefront\sitecore.js" />
-    <Content Include="Scripts\Storefront\Models\lineItemDataViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\checkoutDataViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\confirmViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\storeViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\errorSummaryViewModel.js" />
-    <Content Include="Scripts\Storefront\Models\miniCartItemListViewModel.js" />
-    <Content Include="Scripts\Storefront\orders.js" />
-    <Content Include="Scripts\Storefront\step-indicator.js" />
+    <Content Include="Scripts\Storefront\ajax-helpers.js" />
+    <Content Include="Scripts\Storefront\errorSummaryViewModel.js" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DependencyInjection\code\Sitecore.Foundation.DependencyInjection.csproj">
-      <Project>{366148b7-2392-4f42-80d6-786b7a3682ae}</Project>
-      <Name>Sitecore.Foundation.DependencyInjection</Name>
-    </ProjectReference>
     <ProjectReference Include="..\code\Sitecore.Foundation.Commerce.csproj">
       <Project>{662345ac-23ee-4125-87a6-0785795c2409}</Project>
       <Name>Sitecore.Foundation.Commerce</Name>

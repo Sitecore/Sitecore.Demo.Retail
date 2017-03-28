@@ -15,32 +15,27 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System;
 using System.Web;
 using System.Web.Routing;
-using Sitecore.Commerce.Connect.CommerceServer;
-using Sitecore.Commerce.Connect.CommerceServer.Caching;
-using Sitecore.Data;
-using Sitecore.Data.Items;
 using Sitecore.Feature.Commerce.Catalog.Factories;
-using Sitecore.Feature.Commerce.Catalog.Models;
-using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
-using Sitecore.Foundation.Commerce.Repositories;
+using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Pipelines.HttpRequest;
-using Sitecore.Web;
 
 namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines
 {
+    [Service]
     public class ProductItemResolver : HttpRequestProcessor
     {
-        public ProductItemResolver(CatalogItemContext catalogItemContext, CatalogManager catalogManager, CatalogItemContextFactory catalogContextFactory)
+        public ProductItemResolver(CatalogItemContext catalogItemContext, CatalogItemContextFactory catalogContextFactory)
         {
             CatalogItemContext = catalogItemContext;
             CatalogContextFactory = catalogContextFactory;
         }
 
         private CatalogItemContext CatalogItemContext { get; }
+
+        private CatalogItemContextFactory CatalogContextFactory { get; }
 
         private ICatalogItemContext GetCatalogContextFromIncomingRequest()
         {
@@ -49,8 +44,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines
 
             return routeData == null ? null : CatalogContextFactory.Create(routeData, Context.Database);
         }
-
-        private CatalogItemContextFactory CatalogContextFactory { get; }
 
         public override void Process(HttpRequestArgs args)
         {

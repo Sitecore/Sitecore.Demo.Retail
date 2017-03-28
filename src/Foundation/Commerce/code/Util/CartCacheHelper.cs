@@ -21,9 +21,11 @@ using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Caching;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.DependencyInjection;
 
 namespace Sitecore.Foundation.Commerce.Util
 {
+    [Service]
     public class CartCacheHelper
     {
         public void InvalidateCartCache([NotNull] string customerId)

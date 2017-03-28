@@ -51,7 +51,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 {
     public class CatalogController : SitecoreController
     {
-        public CatalogController(InventoryManager inventoryManager, ContactFactory contactFactory, ProductViewModelFactory productViewModelFactory, AccountManager accountManager, CatalogManager catalogManager, GiftCardManager giftCardManager, PricingManager pricingManager, [NotNull] CartManager cartManager, VisitorContextRepository visitorContextRepository, CatalogItemContext catalogItemContext, CatalogUrlService catalogUrlRepository)
+        public CatalogController(InventoryManager inventoryManager, ContactFactory contactFactory, ProductViewModelFactory productViewModelFactory, AccountManager accountManager, CatalogManager catalogManager, GiftCardManager giftCardManager, PricingManager pricingManager, [NotNull] CartManager cartManager, VisitorContextRepository visitorContextRepository, CatalogItemContext catalogItemContext, CatalogUrlService catalogUrlRepository, StorefrontManager storefrontManager)
         {
             InventoryManager = inventoryManager;
             ProductViewModelFactory = productViewModelFactory;
@@ -59,10 +59,12 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             GiftCardManager = giftCardManager;
             VisitorContextRepository = visitorContextRepository;
             CatalogItemContext = catalogItemContext;
+            StorefrontManager = storefrontManager;
         }
 
         private VisitorContextRepository VisitorContextRepository { get; }
         private CatalogItemContext CatalogItemContext { get; }
+        public StorefrontManager StorefrontManager { get; }
         private InventoryManager InventoryManager { get; }
         public ProductViewModelFactory ProductViewModelFactory { get; }
         private CatalogManager CatalogManager { get; }
@@ -115,7 +117,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
             var products = viewModel.ProductSearchResults.SelectMany(productSearchResult => productSearchResult.Items.Where(i => i is ProductViewModel).Cast<ProductViewModel>()).ToList();
             CatalogManager.GetProductBulkPrices(VisitorContextRepository.GetCurrent(), products);
-            CatalogManager.InventoryManager.GetProductsStockStatusForList(StorefrontManager.CurrentStorefront, products);
+            CatalogManager.InventoryManager.GetProductsStockStatusForList(StorefrontManager.Current, products);
 
             foreach (var productViewModel in products)
             {
@@ -371,7 +373,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         {
             if (!string.IsNullOrWhiteSpace(facetValue) && isApplied.HasValue)
             {
-                CatalogManager.FacetApplied(StorefrontManager.CurrentStorefront, facetValue, isApplied.Value);
+                CatalogManager.FacetApplied(StorefrontManager.Current, facetValue, isApplied.Value);
             }
 
             return new BaseApiModel();
@@ -383,7 +385,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         {
             if (!string.IsNullOrWhiteSpace(sortField))
             {
-                CatalogManager.SortOrderApplied(StorefrontManager.CurrentStorefront, sortField, sortDirection);
+                CatalogManager.SortOrderApplied(StorefrontManager.Current, sortField, sortDirection);
             }
 
             return new BaseApiModel();
@@ -484,7 +486,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
             if (model != null)
             {
-                CatalogManager.VisitedProductDetailsPage(StorefrontManager.CurrentStorefront, model.ProductId, model.ProductName, model.ParentCategoryId, model.ParentCategoryName);
+                CatalogManager.VisitedProductDetailsPage(StorefrontManager.Current, model.ProductId, model.ProductName, model.ParentCategoryId, model.ParentCategoryName);
             }
 
             return new EmptyResult();
@@ -511,7 +513,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 return new EmptyResult();
             }
 
-            CatalogManager.VisitedCategoryPage(StorefrontManager.CurrentStorefront, currentCategory.Name, currentCategory.Title);
+            CatalogManager.VisitedCategoryPage(StorefrontManager.Current, currentCategory.Name, currentCategory.Title);
             CategoryCookieHelper.SetLastVisitedCategory(VisitorContextRepository.GetCurrent().GetCustomerId(), currentCategory.Name);
 
             return new EmptyResult();
@@ -527,7 +529,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             var isCatalogItem = RenderingContext.Current.Rendering.Item.IsDerived(Foundation.Commerce.Templates.Commerce.CatalogItem.Id);
 
             var catalogItem = isCatalogItem ? RenderingContext.Current.Rendering.Item : CatalogItemContext.Current?.Item;
-            var relatedCatalogItemsModel = GetRelationshipsFromItem(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), catalogItem, RenderingContext.Current.Rendering);
+            var relatedCatalogItemsModel = GetRelationshipsFromItem(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), catalogItem, RenderingContext.Current.Rendering);
             return View(relatedCatalogItemsModel);
         }
 
@@ -569,7 +571,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 var stockInfo = response.Result.FirstOrDefault();
                 if (stockInfo != null)
                 {
-                    InventoryManager.VisitedProductStockStatus(StorefrontManager.CurrentStorefront, stockInfo, string.Empty);
+                    InventoryManager.VisitedProductStockStatus(StorefrontManager.Current, stockInfo, string.Empty);
                 }
 
                 return Json(result, JsonRequestBehavior.AllowGet);
@@ -596,7 +598,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = GiftCardManager.GetGiftCardBalance(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel.GiftCardId);
+                var response = GiftCardManager.GetGiftCardBalance(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel.GiftCardId);
                 var result = new GiftCardApiModel(response.ServiceProviderResult);
                 if (!response.ServiceProviderResult.Success || response.ServiceProviderResult.GiftCard == null)
                 {
@@ -628,7 +630,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = InventoryManager.VisitorSignupForStockNotification(StorefrontManager.CurrentStorefront, model, string.Empty);
+                var response = InventoryManager.VisitorSignupForStockNotification(StorefrontManager.Current, model, string.Empty);
                 result = new BaseApiModel(response.ServiceProviderResult);
 
                 return Json(result, JsonRequestBehavior.AllowGet);
@@ -710,7 +712,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             if (childProducts != null && childProducts.SearchResultItems.Count > 0)
             {
                 CatalogManager.GetProductBulkPrices(VisitorContextRepository.GetCurrent(), categoryViewModel.ChildProducts);
-                InventoryManager.GetProductsStockStatusForList(StorefrontManager.CurrentStorefront, categoryViewModel.ChildProducts);
+                InventoryManager.GetProductsStockStatusForList(StorefrontManager.Current, categoryViewModel.ChildProducts);
 
                 foreach (var productViewModel in categoryViewModel.ChildProducts)
                 {
@@ -739,6 +741,17 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             navigationViewModel = new NavigationViewModel(GetCategoryViewModel(category));
             var childCategories = GetChildCategories(category);
             navigationViewModel.ChildCategories.AddRange(childCategories.Select(i => GetCategoryViewModel(CatalogManager.GetCategory(i))));
+
+            if (CatalogItemContext.Current != null)
+            {
+                if (CatalogItemContext.IsCategory)
+                    navigationViewModel.ActiveCategoryID = CatalogItemContext.Current?.Item?.ID;
+                else
+                {
+                    var categoryItem = CatalogManager.GetCategory(CatalogItemContext.Current.CategoryId);
+                    navigationViewModel.ActiveCategoryID = categoryItem?.InnerItem.ID;
+                }
+            }
 
             return this.AddToCache(cacheKey, navigationViewModel);
         }

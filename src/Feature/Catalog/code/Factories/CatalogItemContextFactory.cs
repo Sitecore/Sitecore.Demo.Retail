@@ -8,10 +8,12 @@ using Sitecore.Feature.Commerce.Catalog.Models;
 using Sitecore.Feature.Commerce.Catalog.Services;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Feature.Commerce.Catalog.Factories
 {
+    [Service]
     public class CatalogItemContextFactory
     {
         public CatalogItemContextFactory(CatalogManager catalogManager, CatalogUrlService catalogUrlRepository)

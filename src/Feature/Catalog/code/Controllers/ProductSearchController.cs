@@ -43,18 +43,17 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         private const string CurrentCategoryViewModelKeyName = "CurrentCategoryViewModel";
         private const string CurrentSearchProductResultsKeyName = "CurrentSearchProductResults";
 
-        public ProductSearchController([NotNull] AccountManager accountManager, [NotNull] CatalogManager catalogManager, [NotNull] ContactFactory contactFactory, [NotNull] VisitorContextRepository visitorContextRepository, CatalogItemContext catalogItemContext, ProductSearchManager productSearchManager)
+        public ProductSearchController(AccountManager accountManager, CatalogManager catalogManager, ContactFactory contactFactory, VisitorContextRepository visitorContextRepository, CatalogItemContext catalogItemContext, ProductSearchManager productSearchManager, StorefrontManager storefrontManager)
         {
-            Assert.ArgumentNotNull(catalogManager, nameof(catalogManager));
-            Assert.ArgumentNotNull(visitorContextRepository, nameof(visitorContextRepository));
-
             VisitorContextRepository = visitorContextRepository;
             CatalogItemContext = catalogItemContext;
             CatalogManager = catalogManager;
             ProductSearchManager = productSearchManager;
+            StorefrontManager = storefrontManager;
         }
 
         private ProductSearchManager ProductSearchManager { get; }
+        public StorefrontManager StorefrontManager { get; }
         private VisitorContextRepository VisitorContextRepository { get; }
         public CatalogItemContext CatalogItemContext { get; }
         private CatalogManager CatalogManager { get; }
@@ -159,13 +158,13 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 return null;
             }
 
-            CatalogManager.RegisterSearchEvent(StorefrontManager.CurrentStorefront, searchInfo.SearchKeyword, results.TotalItemCount);
+            CatalogManager.RegisterSearchEvent(StorefrontManager.Current, searchInfo.SearchKeyword, results.TotalItemCount);
 
             viewModel = new SearchResultViewModel(results);
 
             var products = viewModel.Items.Where(i => i is ProductViewModel).Cast<ProductViewModel>().ToList();
             CatalogManager.GetProductBulkPrices(VisitorContextRepository.GetCurrent(), products);
-            CatalogManager.InventoryManager.GetProductsStockStatusForList(StorefrontManager.CurrentStorefront, products);
+            CatalogManager.InventoryManager.GetProductsStockStatusForList(StorefrontManager.Current, products);
             foreach (var productViewModel in products)
             {
                 productViewModel.CustomerAverageRating = CatalogManager.GetProductRating(productViewModel.Item);

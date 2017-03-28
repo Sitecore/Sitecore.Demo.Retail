@@ -4,21 +4,6 @@ Parent: "4833d35e-3b01-4395-93d5-273aa8398505"
 Template: "64ca6109-64ab-487f-853f-a406ff3115b6"
 Path: /sitecore/content/Storefront/Home/Product/*
 DB: master
-SharedFields:
-- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
-  Hint: __Renderings
-  Type: layout
-  Value: |
-    <r xmlns:p="p" xmlns:s="s"
-      p:p="1">
-      <d
-        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
-        <r
-          uid="{DF62B3B5-68B5-4D6C-8AD3-E5B82C2A3B36}">
-          <p:d />
-        </r>
-      </d>
-    </r>
 Languages:
 - Language: en
   Versions:

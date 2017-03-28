@@ -19,10 +19,12 @@ using System.Collections;
 using System.Web;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Data.Items;
+using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Foundation.Commerce.Models
 {
+    [Service]
     public class CatalogItemContext
     {
         public bool IsCategory => Current?.ItemType == CatalogItemType.Category;

@@ -11,7 +11,7 @@
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
 
-<li class="dropdown" id="B02-Basket">
+<li class="dropdown" id="miniCart">
     <a href="#" class="dropdown-toggle toggle-cart" data-toggle="dropdown">
         <span class="glyphicon glyphicon-shopping-cart"></span><span class="badge bg-primary" id="miniCartItemCount" data-bind="text: lineitemcount"></span> 
     </a>
@@ -51,12 +51,14 @@
     </div>
 </li>
 
-<li class="dropdown" id="B02-Basket-responsive">
+<li class="dropdown" id="miniCart-responsive">
     <a href="@("/ShoppingCart")">
         <span class="glyphicon glyphicon-shopping-cart"></span>
     </a>
 </li>
 
 <script type="text/javascript">
-    initMiniShoppingCart("B02-Basket");
+    $(document).ready(function () {
+        initMiniShoppingCart("miniCart");
+    });
 </script>

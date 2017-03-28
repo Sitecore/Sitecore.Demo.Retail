@@ -4,45 +4,11 @@ Parent: "a0616639-4bf9-4eba-a6a6-ae9fc851af63"
 Template: "64ca6109-64ab-487f-853f-a406ff3115b6"
 Path: /sitecore/content/Storefront/Home/Shop/*/*
 DB: master
-SharedFields:
-- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
-  Hint: __Renderings
-  Type: layout
-  Value: |
-    <r xmlns:p="p" xmlns:s="s"
-      p:p="1">
-      <d
-        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
-        <r
-          uid="{DF62B3B5-68B5-4D6C-8AD3-E5B82C2A3B36}">
-          <p:d />
-        </r>
-      </d>
-    </r>
 Languages:
 - Language: en
   Versions:
   - Version: 1
     Fields:
-    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
-      Hint: __Final Renderings
-      Type: Layout
-      Value: |
-        <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
-          <d
-            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-            <r
-              uid="{983F751B-E135-413E-8EFB-88F4B7A36339}"
-              p:before="*"
-              s:id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
-              s:ph="/footer/section" />
-            <r
-              uid="{657D052D-24A8-4F3A-A421-D28EB2E21D7F}"
-              s:ds=""
-              s:par="" />
-          </d>
-        </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150108T213319Z
