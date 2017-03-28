@@ -8,11 +8,12 @@ Import-Module $PSScriptRoot\Scripts\Commerce\ManageUser.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageFile.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageCommerceServer.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageRegistry.psm1 -Force
+Import-Module $PSScriptRoot\Scripts\Commerce\ManageIIS.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageSqlServer.psm1 -Force
 cd $PSScriptRoot
 
-If ((ManageUser\Confirm-Admin) -ne $true) { Write-Host "Please run script as administrator"; exit }
-If ((ManageRegistry\Get-InternetExplorerEnhancedSecurityEnabled -Verbose) -eq $true) { Write-Host "Please disable Internet Explorer Enhanced Security"; exit }
+If ((ManageUser\Confirm-Admin) -ne $true) { Write-Host "Please run script as administrator" -ForegroundColor red; exit }
+If ((ManageRegistry\Get-InternetExplorerEnhancedSecurityEnabled -Verbose) -eq $true) { Write-Host "Please disable Internet Explorer Enhanced Security" -ForegroundColor red; exit }
 
 $settings = ((Get-Content $PSScriptRoot\install-commerce-config.json -Raw) | ConvertFrom-Json)
 $runTimeUserSetting = ($settings.accounts | Where { $_.id -eq "runTime" } | Select)
@@ -34,10 +35,19 @@ If((ManageUser\Add-User -user $runTimeUserSetting -Verbose) -ne 0) { Exit }
 Write-Host "`nStep 2: Create Database Logins" -foregroundcolor Yellow
 If((ManageSqlServer\New-SqlLogin -accountId "runTime" -databaseId "commerceAdminDB" -accountSettingList $settings.accounts -databaseSettingList $settings.databases -Verbose) -ne 0) { Exit }
 
-# Step 3: Run Commerce Server Installer
-Write-Host "`nStep 3: Run Commerce Server Installer" -foregroundcolor Yellow
+# Step 3: Enable Windows Authentication
+Write-Host "`nStep 3: Enable Windows Authentication" -foregroundcolor Yellow
+If((ManageIIS\Enable-WindowsAuthentication -Verbose) -ne 0) { Exit }
+
+# Step 4: Install Windows Feature - Windows Identity Foundation
+Write-Host "`nStep 4: Install Windows Feature - Windows Identity Foundation" -foregroundcolor Yellow
+$test2 = &"$env:WINDIR\sysnative\windowspowershell\v1.0\powershell.exe" -NonInteractive  -Command "& {Install-WindowsFeature windows-identity-foundation}" | Out-String
+If($test2 -notlike "*True    No*") { Write-Host "Error, expected windows idenity feature to successfully install and not require a reboot. Output from command '$test2'"; exit } 
+
+# Step 5: Run Commerce Server Installer
+Write-Host "`nStep 5: Run Commerce Server Installer" -foregroundcolor Yellow
 If((ManageCommerceServer\Install-CS -installFolderSetting $installFolderSetting -Verbose) -ne 0) { Exit }
 
-# Step 4: Run Commerce Server Configuration
-Write-Host "`nStep 4: Run Commerce Server Configuration" -foregroundcolor Yellow
+# Step 6: Run Commerce Server Configuration
+Write-Host "`nStep 6: Run Commerce Server Configuration" -foregroundcolor Yellow
 If((ManageCommerceServer\Enable-CS -path $installFolderSetting.path -csConfigSetting $settings.sitecoreCommerce.csInstallerConfig -databaseSettingList $settings.databases -accountSettingList $settings.accounts -Verbose) -ne 0) { Exit }

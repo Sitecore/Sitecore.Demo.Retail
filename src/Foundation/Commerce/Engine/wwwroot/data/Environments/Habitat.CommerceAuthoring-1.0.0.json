@@ -761,7 +761,7 @@
                 "UserName": "",
                 "Password": "",
                 "Server": ".",
-                "Database": "SitecoreCommerce_SharedEnvironments",
+                "Database": "demo.local_SitecoreCommerce.SharedEnvironments",
                 "AdditionalParameters": "",
                 "ConnectTimeout": 120000,
                 "CleanEnvironmentTimeout": 120000,

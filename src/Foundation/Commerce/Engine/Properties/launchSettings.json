@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://habitat.commerceengine.dev.local:5000/commerceops/Bootstrap()",
+      "applicationUrl": "http://habitat.commerceengine.dev.local:5000/",
       "sslPort": 0
     }
   },

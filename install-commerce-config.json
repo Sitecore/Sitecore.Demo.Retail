@@ -53,11 +53,22 @@
     ],
     "iis": {
         "appPools": [
+            [   {   "id": "sitecore", "name": "habitat.dev.local", "managedRuntimeVersion": "v4.0", "accountId": "runTime" }   ],
             [   {   "id": "commerceServerServices", "name": "habitat.csservices.dev.local", "managedRuntimeVersion": "v4.0", "accountId": "runTime" }   ],
             [   {   "id": "commerceEngine", "name": "habitat.commerceengine.dev.local", "managedRuntimeVersion": "", "accountId": "runTime" }   ]
 
         ],
         "websites": [
+            [   {   "id": "sitecore", 
+                    "siteName": "habitat.dev.local", 
+                    "physicalPath": "C:\\Websites\\habitat.dev.local\\Website" ,
+                    "appPoolId":  "sitecore",
+                    "bindings": [
+                        [   {   "protocol": "http", "ipAddress": "*", "port": "80", "hostName": "habitat.dev.local"  }   ],
+                        [   {   "protocol": "http", "ipAddress": "*", "port": "80", "hostName": "retail.dev.local"  }   ]
+                    ]
+                }
+            ],
             [   {   "id": "commerceServerServices", 
                     "siteName": "habitat.csservices.dev.local", 
                     "physicalPath": "C:\\Websites\\habitat.dev.local\\CSServices" ,
@@ -89,8 +100,8 @@
         [   {   "id": "commerceAdminDB", "server": ".", "name": "MSCS_Admin"    }   ],
         [   {   "id": "commerceCatalogDB", "server": ".", "name": "demo.local_CommerceServer.ProductCatalog"    }   ],
         [   {   "id": "commerceProfilesDB", "server": ".", "name": "demo.local_CommerceServer.Profiles"    }   ],
-        [   {   "id": "commerceEngineGlobalDB", "server": ".", "name": "SitecoreCommerce_Global"    }   ],
-        [   {   "id": "commerceEngineSharedEnvironmentDB", "server": ".", "name": "SitecoreCommerce_SharedEnvironments"    }   ]     
+        [   {   "id": "commerceEngineGlobalDB", "server": ".", "name": "demo.local_SitecoreCommerce.Global"    }   ],
+        [   {   "id": "commerceEngineSharedEnvironmentDB", "server": ".", "name": "demo.local_SitecoreCommerce.SharedEnvironments"    }   ]     
     ],
     "sitecoreCommerce": {
         "csInstallerConfig":  {   "adminDatabaseId": "commerceAdminDB", "windowsSecurity": "yes", "username": "", "password": "", "stagingServiceAccountId": "runTime" },

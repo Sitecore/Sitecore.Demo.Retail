@@ -76,6 +76,11 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sitecore.Foundation.Commerc
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sitecore.Foundation.Commerce.Engine.Plugin.Payments", "src\Foundation\Commerce.Payments\Engine.Payments\Sitecore.Foundation.Commerce.Engine.Plugin.Payments.xproj", "{7AC44B7F-641E-4284-A182-C962E5D56C3F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{0A43829F-D357-4702-9C23-FEDE8C0024A2}"
+	ProjectSection(SolutionItems) = preProject
+		src\Foundation\Commerce\Database\CommerceServicesDbScript.sql = src\Foundation\Commerce\Database\CommerceServicesDbScript.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -173,5 +178,6 @@ Global
 		{7F35C803-0290-4BFD-A806-F1EDDF1E24D2} = {C01BE502-C648-4368-84FC-3F2B212541BC}
 		{47A05070-727E-444F-85A8-CF50620ACE04} = {717FA6E0-F01B-4491-9254-48620F5A44A7}
 		{7AC44B7F-641E-4284-A182-C962E5D56C3F} = {2247437C-D41C-4E67-A509-E2870B1BB3E2}
+		{0A43829F-D357-4702-9C23-FEDE8C0024A2} = {F12F210F-76B3-4142-8AB9-06677BCAED1E}
 	EndGlobalSection
 EndGlobal

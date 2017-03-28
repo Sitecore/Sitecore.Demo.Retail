@@ -118,7 +118,7 @@ function Enable-CS
         Set-CSConfigurationFile -path $path -csConfigSetting $csConfigSetting -adminDatabaseSetting $adminDatabaseSetting -stagingServiceAccountSetting $stagingServiceAccountSetting
         
         $cmd = $env:COMMERCE_SERVER_ROOT + "CSConfig.exe"
-        $configfile = "$path\config.xml"
+        $configfile = "$path\csconfig.xml"
         $logfile = "$path\csconfig.log"
         $options = "/l $logfile /s $configfile" # /u - to remove, /f - to reapply 
 
@@ -160,7 +160,7 @@ function Set-CSConfigurationFile
     {
         # Example: http://commercesdn.sitecore.net/SCpbCS81/SitecoreCommerceDeploymentGuide/en-us/c_CommerceServerConfiguration.html
         # Set the File Name
-        $filePath = "$path\config.xml"
+        $filePath = "$path\csconfig.xml"
      
         # Create The Document
         $XmlWriter = New-Object System.XMl.XmlTextWriter($filePath,$Null)
