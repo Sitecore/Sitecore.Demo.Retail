@@ -14,11 +14,13 @@ using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Repositories;
+using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Links;
 
 namespace Sitecore.Feature.Commerce.Orders.Repositories
 {
+    [Service]
     public class OrderViewModelRepository
     {
         public OrderViewModelRepository(VisitorContextRepository visitorContextRepository, OrderManager orderManager, StorefrontManager storefrontManager, CatalogManager catalogManager)

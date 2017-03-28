@@ -10,11 +10,13 @@ using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Repositories;
+using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Feature.Commerce.Catalog.Factories
 {
+    [Service]
     public class ProductViewModelFactory
     {
         public ProductViewModelFactory(CatalogItemContext catalogItemContext, CatalogManager catalogManager, InventoryManager inventoryManager, VisitorContextRepository visitorContextRepository, StorefrontManager storefrontManager)

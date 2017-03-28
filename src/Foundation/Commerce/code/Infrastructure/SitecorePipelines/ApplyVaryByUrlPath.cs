@@ -18,10 +18,12 @@
 using System.Globalization;
 using System.Web;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Mvc.Pipelines.Response.RenderRendering;
 
 namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
 {
+    [Service]
     public class ApplyVaryByUrlPath : RenderRenderingProcessor
     {
         public override void Process(RenderRenderingArgs args)
