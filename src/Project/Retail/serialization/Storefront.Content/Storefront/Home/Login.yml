@@ -55,7 +55,7 @@ Languages:
       Value: Enter activation code to link to existing account
     - ID: "9f832330-d023-478c-93fc-220c1129c714"
       Hint: Signing Button
-      Value: Signing ...
+      Value: Signing In...
     - ID: "a5461769-1021-4358-8395-108d39606cb0"
       Hint: Guest Checkout Button
       Value: Checkout as guest
