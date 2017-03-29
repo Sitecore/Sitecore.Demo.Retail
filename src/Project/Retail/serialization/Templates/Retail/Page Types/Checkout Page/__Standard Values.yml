@@ -192,6 +192,9 @@ Languages:
     - ID: "7716d1b6-2db1-413e-908d-90c77fad2743"
       Hint: Address Postal Code Label
       Value: Zip
+    - ID: "83adc8ca-7338-4426-90ac-de12d02078e8"
+      Hint: Same As Shipping Address Text
+      Value: Same as Shipping Address
     - ID: "8577210e-f362-4124-b6c2-1c3318334a34"
       Hint: Unit Price Label
       Value: Unit Price
@@ -210,6 +213,9 @@ Languages:
     - ID: "c2099ba9-e3f7-4e68-ba13-2b4185638e21"
       Hint: Taxes Label
       Value: Taxes
+    - ID: "c73b91e0-a0d9-4942-b647-1fce293f9460"
+      Hint: Use Shipping Address Button Text
+      Value: Use Shipping Address
     - ID: "c9e4a1a1-653e-4a39-9d7a-a716ca9b2dae"
       Hint: Address City Label
       Value: City
