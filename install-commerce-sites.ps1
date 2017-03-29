@@ -95,5 +95,5 @@ If((ManageWeb\Test-Certificate -certificateSettingList $settings.iis.certificate
 # Step 15: Bootstrap Commerce Engine and Initialise Environments
 Write-Host "`nStep 15: Test Commerce Engine" -foregroundcolor Yellow
 If((ManageWeb\Invoke-WebRequestWithWebsiteId -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/Bootstrap()" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
-If((ManageWeb\Invoke-WebRequestWithWebsiteId -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/InitializeEnvironment(environment='HabitatShops')" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
 If((ManageWeb\Invoke-WebRequestWithWebsiteId -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/InitializeEnvironment(environment='HabitatAuthoring')" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
+If((ManageWeb\Invoke-WebRequestWithWebsiteId -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/InitializeEnvironment(environment='HabitatShops')" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }

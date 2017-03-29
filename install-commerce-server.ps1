@@ -41,8 +41,8 @@ If((ManageIIS\Enable-WindowsAuthentication -Verbose) -ne 0) { Exit }
 
 # Step 4: Install Windows Feature - Windows Identity Foundation
 Write-Host "`nStep 4: Install Windows Feature - Windows Identity Foundation" -foregroundcolor Yellow
-$test2 = &"$env:WINDIR\sysnative\windowspowershell\v1.0\powershell.exe" -NonInteractive  -Command "& {Install-WindowsFeature windows-identity-foundation}" | Out-String
-If($test2 -notlike "*True    No*") { Write-Host "Error, expected windows idenity feature to successfully install and not require a reboot. Output from command '$test2'"; exit } 
+$result = &"$env:WINDIR\sysnative\windowspowershell\v1.0\powershell.exe" -NonInteractive  -Command "& {Install-WindowsFeature windows-identity-foundation}" | Out-String
+If($result -notlike "*True    No*") { Write-Host "Error, expected windows idenity feature to successfully install and not require a reboot. Output from command '$result'"; exit } 
 
 # Step 5: Run Commerce Server Installer
 Write-Host "`nStep 5: Run Commerce Server Installer" -foregroundcolor Yellow
