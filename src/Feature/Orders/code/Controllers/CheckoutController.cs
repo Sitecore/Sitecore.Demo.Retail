@@ -75,7 +75,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 return Redirect(cartPageUrl);
             }
 
-            var cartViewModel = new CartViewModel(cart) {MapKey = CartManager.GetMapKey()};
+            var cartViewModel = new CartViewModel(cart);
             return View(cartViewModel);
         }
 
@@ -292,20 +292,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public JsonResult GetNearbyStoresJson(GetNearbyStoresInputModel inputModel)
-        {
-            Assert.ArgumentNotNull(inputModel, nameof(inputModel));
-
-            //var response = this.StoreManager.GetNearbyStores(CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
-            //var result = new GetNearbyStoresJsonResult(response.ServiceProviderResult);
-            //return Json(result, JsonRequestBehavior.AllowGet);
-            return Json(new {success = false, errors = new List<string> {"Not supported in CS Connect"}});
-        }
-
-        [AllowAnonymous]
-        [HttpPost]
-        [ValidateJsonAntiForgeryToken]
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public JsonResult GetAvailableRegions(GetAvailableRegionsInputModel model)
         {
             try
@@ -422,10 +408,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 return;
             }
 
-            var shippingToStoreJsonResult = new ShippingMethodApiModel();
-
             result.EmailDeliveryMethod = shippingMethodJsonResult;
-            result.ShipToStoreDeliveryMethod = shippingToStoreJsonResult;
             result.SetErrors(response.ServiceProviderResult);
         }
 

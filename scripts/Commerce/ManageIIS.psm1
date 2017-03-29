@@ -150,6 +150,35 @@ function Set-HostFile
     }
 }
 
+function Remove-HostEntries
+{
+    param 
+    (
+        [Parameter(Mandatory=$True)][PSCustomObject]$hostEntryList
+    )
+
+    begin 
+    {
+        Write-Verbose "Cleaning up Host File"
+    }
+    process
+    {
+        Foreach ($hostEntry in $hostEntryList)
+        {
+            Write-Verbose "Removing Host Entry: $($hostEntry.hostName)"
+
+            Remove-HostsEntry -HostName $hostEntry.hostName 
+        }
+
+        return 0;
+    }
+    end
+    {
+        Write-Verbose "Cleaning up Host File Completed"
+    }
+}
+
+
 function Remove-Site
 {
     param 
@@ -400,4 +429,4 @@ function Enable-WindowsAuthentication
     return 0; 
 }
 
-Export-ModuleMember New-AppPool, New-Website, Set-HostFile, Remove-Site, Remove-AppPool, Test-WebService, New-Certificate, Enable-WindowsAuthentication
+Export-ModuleMember New-AppPool, New-Website, Set-HostFile, Remove-Site, Remove-AppPool, Test-WebService, New-Certificate, Enable-WindowsAuthentication,  Remove-HostEntries

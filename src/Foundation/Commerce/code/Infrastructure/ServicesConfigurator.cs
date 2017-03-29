@@ -24,13 +24,8 @@ namespace Sitecore.Foundation.Commerce.Infrastructure
         public void Configure(IServiceCollection serviceCollection)
         {
             serviceCollection.AddTypesImplementingInCurrentAssembly<IManager>(Lifetime.Transient);
-            serviceCollection.AddTransient<CountryRepository>();
-            serviceCollection.AddSingleton<CatalogItemContext>();
-            serviceCollection.AddTransient<VisitorContextRepository>();
-            serviceCollection.AddSingleton<CartCacheHelper>();
             serviceCollection.AddTypesImplementing<object>(Lifetime.Transient, "Sitecore.Commerce.Connect.CommerceServer");
             serviceCollection.AddTypesImplementing<object>(Lifetime.Transient, "Sitecore.Commerce");
-            serviceCollection.AddByWildcard(Lifetime.Transient, "*Pipelines.*");
             serviceCollection.Add(new ServiceDescriptor(typeof(ICommerceSearchManager), provider => CommerceTypeLoader.CreateInstance<ICommerceSearchManager>(), ServiceLifetime.Singleton));
             serviceCollection.Add(new ServiceDescriptor(typeof(ICatalogRepository), provider => CommerceTypeLoader.CreateInstance<ICatalogRepository>(), ServiceLifetime.Singleton));
         }

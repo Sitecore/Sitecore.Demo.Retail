@@ -25,9 +25,6 @@
 <div id="ShipAllItems" data-bind="visible: $root.isShipAll" style="display: none;">
     @Html.Partial("_ShipAll")
 </div>
-<div id="PickupStore" data-bind="visible: $root.isShipToStore" style="display: none;">
-    @Html.Partial("_PickAtStore")
-</div>
 <div id="SendByEmail" data-bind="visible: $root.isShipToEmail" style="display: none;">
     @Html.Partial("_SendByEmail")
 </div>
@@ -35,10 +32,11 @@
     @Html.Partial("_PickDeliveryByItem")
 </div>
 
-<script type="text/javascript" src="//ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&mkt=en-us"></script>
 <input type="hidden" id="deliveryMethodSet" />
 
 <script type="text/javascript">
-    setupCheckoutPage();
-    InitDeliveryPage();
+    $(document).ready(function () {
+        setupCheckoutPage();
+        InitDeliveryPage();
+    });
 </script>

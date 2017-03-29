@@ -16,6 +16,7 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Foundation.Commerce;
 using Sitecore.Foundation.Commerce.Managers;
@@ -28,6 +29,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
     {
         public CategoryViewModel TopCategory { get; }
         public List<CategoryViewModel> ChildCategories { get; }
+        public ID ActiveCategoryID { get; set; }
 
         public NavigationViewModel(CategoryViewModel topCategory)
         {

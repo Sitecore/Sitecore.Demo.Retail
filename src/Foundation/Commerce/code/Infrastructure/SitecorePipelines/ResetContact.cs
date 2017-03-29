@@ -17,10 +17,12 @@
 // -------------------------------------------------------------------------------------------
 
 using Sitecore.Analytics.Pipelines.InitializeTracker;
+using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Pipelines;
 
 namespace Sitecore.Foundation.Commerce.Infrastructure.SitecorePipelines
 {
+    [Service]
     public class ResetContact
     {
         public void Process(PipelineArgs args)

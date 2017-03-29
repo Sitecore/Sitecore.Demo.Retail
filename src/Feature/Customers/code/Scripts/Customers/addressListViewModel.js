@@ -83,7 +83,7 @@ function AddressListViewModel(data) {
     self.saveAddress = function () {
         ClearGlobalMessages();
         if (self.address.errors().length === 0) {
-            states('saveAddress', 'loading');
+            $('#saveAddress').button('loading');
             $("#cancelChanges").attr("disabled", "disabled");
             self.enableDelete(false);
             var address = ko.toJSON(self.address);
@@ -121,4 +121,14 @@ function AddressListViewModel(data) {
     }
 
     self.showLoader = ko.observable(true);
+}
+
+function getUrlParameter(url, param) {
+    url = url.split('?');
+    if (url.length === 1) {
+        return null;
+    }
+
+    var pattern = new RegExp(param + '=(.*?)(;|&|$)', 'gi');
+    return url[1].split(pattern)[1];
 }

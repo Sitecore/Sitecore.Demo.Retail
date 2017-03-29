@@ -65,9 +65,16 @@ Languages:
       Hint: Image
       Value: |
         <image mediaid="{96071499-B41D-45B4-B749-630970D7981B}" />
+    - ID: "ac3fd4db-8266-476d-9635-67814d91e901"
+      Hint: Summary
+      Value: <p>Our Customer Service department helps customers every minute. On this page we have provided some of the questions we most often hear from our happy customers.</p>
     - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
       Hint: Title
-      Value: FAQ
+      Value: Frequently Asked Questions
     - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
       Hint: BrowserTitle
       Value: FAQ
+    - ID: "d74f396d-5c5e-4916-bd0a-bfd58b6b1967"
+      Hint: Body
+      Value: |
+        <p>Please check the list below for some of the most asked questions at our customer support. If you cannot find your question here, feel free to contact our friendly <a href="~/link.aspx?_id=FECC893F7B4E436E9E283CBB959DF098&amp;_z=z">Customer Support</a>.</p>
