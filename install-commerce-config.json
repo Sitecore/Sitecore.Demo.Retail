@@ -89,8 +89,10 @@
             ]
         ],
         "hostEntries": [
-            [   {   "ipAddress": "127.0.0.1", "hostName": "habitat.csservices.dev.local", "description": "Commerce server services site"   }   ],
-            [   {   "ipAddress": "127.0.0.1", "hostName": "habitat.commerceengine.dev.local", "description": "Sitecore Commerce Engine site"   }   ]
+            [   {   "ipAddress": "127.0.0.1", "hostName": "habitat.dev.local", "description": "Sitecore site"   }   ],
+            [   {   "ipAddress": "127.0.0.1", "hostName": "retail.dev.local", "description": "Sitecore commerce site"   }   ],
+            [   {   "ipAddress": "127.0.0.1", "hostName": "habitat.csservices.dev.local", "description": "Sitecore commerce server services site"   }   ],
+            [   {   "ipAddress": "127.0.0.1", "hostName": "habitat.commerceengine.dev.local", "description": "Sitecore commerce engine site"   }   ]
         ],
         "certificates": [
             [   {   "DnsName": "retail.dev.local", "siteName": "habitat.dev.local"  }   ]

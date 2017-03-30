@@ -52,11 +52,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commerce.Payments", "Commer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Feature.Commerce.Orders", "src\Feature\Orders\code\Sitecore.Feature.Commerce.Orders.csproj", "{9CC4BF07-1259-43FF-B205-AFD1E59E5834}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{BA71DDCB-F72A-42A8-86EE-E81669BC5F1A}"
-	ProjectSection(SolutionItems) = preProject
-		src\Foundation\Commerce\Database\CommerceServicesDbScript.sql = src\Foundation\Commerce\Database\CommerceServicesDbScript.sql
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Databases", "Databases", "{8B1B7EE8-17D0-4D90-BABD-249C971EBDFB}"
 	ProjectSection(SolutionItems) = preProject
 		src\Project\Retail\Database\Catalog.xml = src\Project\Retail\Database\Catalog.xml

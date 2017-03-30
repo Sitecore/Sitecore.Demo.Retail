@@ -42,9 +42,6 @@
                 "InitialArtifactSets": {
                     "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
                     "$values": [
-                        "Catalog.DefaultSellableItems-1.0",
-                        "GiftCards.DefaultGiftCard-1.0",
-                        "Environment.Habitat.SellableItems-1.0"
                     ]
                 },
                 "PolicyId": "db1674059c344e33899c5f1f45c6508b",

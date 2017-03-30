@@ -14,6 +14,7 @@ cd $PSScriptRoot
 
 If ((ManageUser\Confirm-Admin) -ne $true) { Write-Host "Please run script as administrator" -ForegroundColor red; exit }
 If ((ManageRegistry\Get-InternetExplorerEnhancedSecurityEnabled -Verbose) -eq $true) { Write-Host "Please disable Internet Explorer Enhanced Security" -ForegroundColor red; exit }
+If ((ManageRegistry\Get-WindowsIdentityFoundationEnabled -Verbose) -eq $true) { Write-Host "Please install Windows Feature - Windows Identity Foundation" -foregroundcolor red; Exit }
 
 $settings = ((Get-Content $PSScriptRoot\install-commerce-config.json -Raw) | ConvertFrom-Json)
 $runTimeUserSetting = ($settings.accounts | Where { $_.id -eq "runTime" } | Select)
@@ -23,6 +24,7 @@ If ($installFolderSetting -eq $null) { Write-Host "Expected install resources" -
   
 $csResourceFolderSetting = ($settings.resources | Where { $_.id -eq "commerceServerResources" } | Select)
 If ($csResourceFolderSetting -eq $null) { Write-Host "Expected dacpac resources" -ForegroundColor red; exit; }         
+
 # Step 0: check if all files exist that are needed
 Write-Host "`nStep 0: Checking if all needed files exist" -foregroundcolor Yellow
 if ((ManageFile\Confirm-Resources $settings.resources -verbose) -ne 0) { Exit }
@@ -39,24 +41,10 @@ If((ManageSqlServer\New-SqlLogin -accountId "runTime" -databaseId "commerceAdmin
 Write-Host "`nStep 3: Enable Windows Authentication" -foregroundcolor Yellow
 If((ManageIIS\Enable-WindowsAuthentication -Verbose) -ne 0) { Exit }
 
-# Step 4: Install Windows Feature - Windows Identity Foundation
-Write-Host "`nStep 4: Install Windows Feature - Windows Identity Foundation" -foregroundcolor Yellow
-$isInstalled = $(Get-WindowsOptionalFeature -Online | Where {$_.State -eq 'enabled' -and $_.FeatureName -eq 'Windows-Identity-Foundation'} | Select FeatureName | measure).Count
-if ($isInstalled -eq 1) 
-	{Write-Host "Feature : 'Windows Identity Foundation' already installed" }
-Else
-	{ `
-		$result = Dism /online /Enable-Feature /FeatureName:Windows-Identity-Foundation | select-string -pattern "successfully"  `
-		If($result -notlike "The operation completed successfully.") { Write-Host "Error, expected windows identity feature to successfully install and not require a reboot. Output from command '$result'"; exit }  `
-	}
-	
-Write-Host $result
-
-
-# Step 5: Run Commerce Server Installer
-Write-Host "`nStep 5: Run Commerce Server Installer" -foregroundcolor Yellow
+# Step 4: Run Commerce Server Installer
+Write-Host "`nStep 4: Run Commerce Server Installer" -foregroundcolor Yellow
 If((ManageCommerceServer\Install-CS -installFolderSetting $installFolderSetting -Verbose) -ne 0) { Exit }
 
-# Step 6: Run Commerce Server Configuration
-Write-Host "`nStep 6: Run Commerce Server Configuration" -foregroundcolor Yellow
+# Step 5: Run Commerce Server Configuration
+Write-Host "`nStep 5: Run Commerce Server Configuration" -foregroundcolor Yellow
 If((ManageCommerceServer\Enable-CS -path $installFolderSetting.path -csConfigSetting $settings.sitecoreCommerce.csInstallerConfig -databaseSettingList $settings.databases -accountSettingList $settings.accounts -Verbose) -ne 0) { Exit }
