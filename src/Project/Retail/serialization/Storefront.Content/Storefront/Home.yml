@@ -18,9 +18,6 @@ SharedFields:
 - ID: "a204f8d6-b81a-4c1b-88ef-2dbc9471c18a"
   Hint: Category Images
   Value: 
-- ID: "a8925eb2-72e3-4636-9f21-c894a61975b8"
-  Hint: Sender Email Address
-  Value: "no-reply@sitecore.commerce.storefront.com"
 - ID: "ae00dc8b-c90d-412f-b262-19ef55a20506"
   Hint: Product Images
   Value: 
@@ -30,20 +27,16 @@ SharedFields:
 - ID: "c15a939b-1c97-48e8-b055-37f80da99c40"
   Hint: Catalog Root
   Value: "{889A6934-BCDC-4294-94B7-6D141E7312B4}"
-- ID: "cd92dff9-ae15-443c-8de5-661d23b5ac6c"
-  Hint: On Sale Overlay Image
-  Value: "{CDD9F63A-2FF1-442C-87E1-286C98D506E1}"
 - ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
   Hint: __Renderings
   Type: layout
   Value: |
     <r xmlns:p="p" xmlns:s="s"
-      p:p="1">
+      p:p="1"
+      s:xsd="http://www.w3.org/2001/XMLSchema">
       <d
-        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-        <r
-          uid="{8C308774-5362-4996-A416-527ED85204F1}"
-          s:ds="" />
+        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+        <p:d />
       </d>
     </r>
 - ID: "fbf2bba1-47bc-4b2e-bf76-133c8faea0fb"
@@ -61,6 +54,9 @@ Languages:
       Hint: __Created by
       Value: |
         sitecore\admin
+    - ID: "cd92dff9-ae15-443c-8de5-661d23b5ac6c"
+      Hint: On Sale Overlay Image
+      Value: "{CDD9F63A-2FF1-442C-87E1-286C98D506E1}"
 - Language: en
   Versions:
   - Version: 1
@@ -70,7 +66,8 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
@@ -290,6 +287,10 @@ Languages:
               s:id="{1149A3C7-C69A-4E6B-A6C3-32687EC2F8D4}"
               s:ph="page-layout" />
           </d>
+          <d
+            id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
+            <p:d />
+          </d>
         </r>
     - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
       Hint: NavigationTitle
@@ -304,6 +305,9 @@ Languages:
     - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
       Hint: BrowserTitle
       Value: Experience True Technology Wonders
+    - ID: "cd92dff9-ae15-443c-8de5-661d23b5ac6c"
+      Hint: On Sale Overlay Image
+      Value: "{CDD9F63A-2FF1-442C-87E1-286C98D506E1}"
 - Language: "fr-FR"
   Versions:
   - Version: 1
@@ -315,6 +319,9 @@ Languages:
       Hint: __Created by
       Value: |
         sitecore\admin
+    - ID: "cd92dff9-ae15-443c-8de5-661d23b5ac6c"
+      Hint: On Sale Overlay Image
+      Value: "{CDD9F63A-2FF1-442C-87E1-286C98D506E1}"
 - Language: "ja-JP"
   Versions:
   - Version: 1
@@ -322,3 +329,6 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: "20161220T232036:636178728360828997Z"
+    - ID: "cd92dff9-ae15-443c-8de5-661d23b5ac6c"
+      Hint: On Sale Overlay Image
+      Value: "{CDD9F63A-2FF1-442C-87E1-286C98D506E1}"

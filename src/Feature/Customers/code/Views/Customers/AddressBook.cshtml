@@ -10,13 +10,13 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-@using Sitecore.Foundation.Commerce.Managers
+@using Sitecore.Foundation.Commerce.Extensions
 
 <div class="panel panel-default" id="addressesSection">
     <div class="panel-heading">
         <h2 class="panel-title">
             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-            @Html.Sitecore().Field("Address Book Title", Html.Sitecore().CurrentItem)
+            @Html.Sitecore().Text("/Customers/Address Book/Title", "Address book")
         </h2>
     </div>
     <div class="panel-body" data-bind="visible: isEmpty" >
@@ -24,17 +24,17 @@
             <span class="fa fa-spinner fa-pulse fa-3x"></span>
         </div>
         <div id="addressesEmpty" data-bind="visible: isEmpty" style="display: none;">
-            @Html.Sitecore().Field("AddressBook Empty Text", Html.Sitecore().CurrentItem)
+            @Html.Sitecore().Text("/Customers/Address Book/No addresses", "Your address book is empty")
         </div>
     </div>
     <table class="table table-hover" id="addresses" data-bind="visible: isNotEmpty" style="display: none;">
         <thead>
             <tr>
                 <th>
-                    @Html.Sitecore().Field("Address Label", Html.Sitecore().CurrentItem)
+                    @Html.Sitecore().Text("/Customers/Address Book/Address", "Address")
                 </th>
                 <th class="pull-right">
-                    @Html.Sitecore().Field("Primary Address Label", Html.Sitecore().CurrentItem)
+                    @Html.Sitecore().Text("/Customers/Address Book/Primary Address", "Primary")
                 </th>
             </tr>
         </thead>

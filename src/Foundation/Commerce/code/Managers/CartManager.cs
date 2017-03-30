@@ -24,7 +24,6 @@ using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Orders;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines;
-using Sitecore.Commerce.Engine.Connect.Entities.Carts;
 using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Commerce.Entities.Inventory;
@@ -39,42 +38,33 @@ using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Foundation.Dictionary.Repositories;
 using WebGrease.Css.Extensions;
 using AddShippingInfoRequest = Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest;
-using Party = Sitecore.Commerce.Entities.Party;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
     public class CartManager : IManager
     {
-        public CartManager(InventoryManager inventoryManager, CommerceCartServiceProvider cartServiceProvider, CartCacheHelper cartCacheHelper, StorefrontManager storefrontManager)
+        public CartManager(InventoryManager inventoryManager, CommerceCartServiceProvider cartServiceProvider, CartCacheHelper cartCacheHelper, StorefrontContext storefrontContext)
         {
             InventoryManager = inventoryManager;
             CartServiceProvider = cartServiceProvider;
             CartCacheHelper = cartCacheHelper;
-            StorefrontManager = storefrontManager;
+            StorefrontContext = storefrontContext;
         }
 
-        private CartCacheHelper CartCacheHelper { get; set; }
-        public StorefrontManager StorefrontManager { get; }
-
-        private InventoryManager InventoryManager { get; set; }
-
-        private CartServiceProvider CartServiceProvider { get; set; }
+        private CartCacheHelper CartCacheHelper { get; }
+        private StorefrontContext StorefrontContext { get; }
+        private InventoryManager InventoryManager { get; }
+        private CartServiceProvider CartServiceProvider { get; }
 
         [Obsolete("Please refactor - should return an entity not the connect model")]
-        public ManagerResponse<CartResult, CommerceCart> GetCurrentCart([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, bool refresh = false)
-        {
-            return GetCurrentCart(storefront, visitorContext.GetCustomerId(), refresh);
-        }
-
-        [Obsolete("Please refactor - should return an entity not the connect model")]
-        public ManagerResponse<CartResult, CommerceCart> GetCurrentCart([NotNull] CommerceStorefront storefront, [NotNull] string customerId, bool refresh = false)
+        public ManagerResponse<CartResult, CommerceCart> GetCart(string userId, bool refresh = false)
         {
             if (refresh)
             {
-                CartCacheHelper.InvalidateCartCache(customerId);
+                CartCacheHelper.InvalidateCartCache(userId);
             }
 
-            var cart = CartCacheHelper.GetCart(customerId);
+            var cart = CartCacheHelper.GetCart(userId);
             if (cart != null)
             {
                 var result = new CartResult {Cart = cart};
@@ -82,7 +72,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 return new ManagerResponse<CartResult, CommerceCart>(result, cart);
             }
 
-            var cartResult = LoadCartByName(storefront.ShopName, CommerceConstants.CartSettings.DefaultCartName, customerId, refresh);
+            var cartResult = LoadCartByName(CommerceConstants.CartSettings.DefaultCartName, userId, refresh);
             if (cartResult.Success && cartResult.Cart != null)
             {
                 cart = cartResult.Cart as CommerceCart;
@@ -100,13 +90,11 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CartResult, CommerceCart>(cartResult, cart);
         }
 
-        public ManagerResponse<CartResult, bool> UpdateCartCurrency([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string currencyCode)
+        public ManagerResponse<CartResult, bool> UpdateCartCurrency(string userId, string currencyCode)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNullOrEmpty(currencyCode, nameof(currencyCode));
 
-            var result = GetCurrentCart(storefront, visitorContext);
+            var result = GetCart(userId);
             if (!result.ServiceProviderResult.Success)
             {
                 return new ManagerResponse<CartResult, bool>(new CartResult {Success = false}, false);
@@ -115,22 +103,20 @@ namespace Sitecore.Foundation.Commerce.Managers
             var cart = result.Result;
             var changes = new CommerceCart {CurrencyCode = currencyCode};
 
-            var updateCartResult = UpdateCart(storefront, visitorContext, cart, changes);
+            var updateCartResult = UpdateCart(cart, changes);
             if (updateCartResult.ServiceProviderResult.Success)
             {
-                var customerId = visitorContext.GetCustomerId();
-
-                CartCacheHelper.InvalidateCartCache(customerId);
+                CartCacheHelper.InvalidateCartCache(userId);
             }
 
             return new ManagerResponse<CartResult, bool>(updateCartResult.ServiceProviderResult, updateCartResult.ServiceProviderResult.Success);
         }
 
-        public ManagerResponse<CartResult, bool> AddLineItemsToCart([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, IEnumerable<AddCartLineInputModel> inputModelList)
+        public ManagerResponse<CartResult, bool> AddLineItemsToCart(string userId, IEnumerable<AddCartLineInputModel> inputModelList)
         {
             Assert.ArgumentNotNull(inputModelList, nameof(inputModelList));
 
-            var cartResult = LoadCartByName(storefront.ShopName, CommerceConstants.CartSettings.DefaultCartName, visitorContext.UserId, false);
+            var cartResult = LoadCartByName(CommerceConstants.CartSettings.DefaultCartName, userId, false);
             if (!cartResult.Success || cartResult.Cart == null)
             {
                 var message = DictionaryPhraseRepository.Current.Get("/System Messages/Cart/Cart Not Found Error", "Could not retrieve the cart for the current user");
@@ -159,12 +145,12 @@ namespace Sitecore.Foundation.Commerce.Managers
                         ["ImageUrl"] = inputModel.ImageUrl
                     }
                 };
-                // UpdateStockInformation(storefront, visitorContext, cartLine, inputModel.CatalogName);      
+                //UpdateStockInformation(cartLine, inputModel.CatalogName);      
 
                 lines.Add(cartLine);
             }
 
-            CartCacheHelper.InvalidateCartCache(visitorContext.GetCustomerId());
+            CartCacheHelper.InvalidateCartCache(userId);
 
             var cart = cartResult.Cart as CommerceCart;
             var addLinesRequest = new AddCartLinesRequest(cart, lines);
@@ -181,11 +167,11 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CartResult, bool>(addLinesResult, addLinesResult.Success);
         }
 
-        public ManagerResponse<CartResult, CommerceCart> RemoveLineItemFromCart([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string externalCartLineId)
+        public ManagerResponse<CartResult, CommerceCart> RemoveLineItemFromCart(string userId, string externalCartLineId)
         {
             Assert.ArgumentNotNullOrEmpty(externalCartLineId, nameof(externalCartLineId));
 
-            var cartResult = LoadCartByName(storefront.ShopName, CommerceConstants.CartSettings.DefaultCartName, visitorContext.UserId, false);
+            var cartResult = LoadCartByName(CommerceConstants.CartSettings.DefaultCartName, userId);
             if (!cartResult.Success || cartResult.Cart == null)
             {
                 var message = DictionaryPhraseRepository.Current.Get("/System Messages/Cart/Cart Not Found Error", "Could not retrieve the cart for the current user");
@@ -193,7 +179,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 return new ManagerResponse<CartResult, CommerceCart>(cartResult, cartResult.Cart as CommerceCart);
             }
 
-            CartCacheHelper.InvalidateCartCache(visitorContext.GetCustomerId());
+            CartCacheHelper.InvalidateCartCache(userId);
 
             var cart = cartResult.Cart as CommerceCart;
             var lineToRemove = cart.Lines.SingleOrDefault(cl => cl.ExternalCartLineId == externalCartLineId);
@@ -216,12 +202,12 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CartResult, CommerceCart>(removeLinesResult, removeLinesResult.Cart as CommerceCart);
         }
 
-        public ManagerResponse<CartResult, CommerceCart> ChangeLineQuantity([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] UpdateCartLineInputModel inputModel)
+        public ManagerResponse<CartResult, CommerceCart> ChangeLineQuantity(string userId, UpdateCartLineInputModel inputModel)
         {
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));
             Assert.ArgumentNotNullOrEmpty(inputModel.ExternalCartLineId, nameof(inputModel.ExternalCartLineId));
 
-            var cartResult = LoadCartByName(storefront.ShopName, CommerceConstants.CartSettings.DefaultCartName, visitorContext.UserId);
+            var cartResult = LoadCartByName(CommerceConstants.CartSettings.DefaultCartName, userId);
             if (!cartResult.Success || cartResult.Cart == null)
             {
                 var message = DictionaryPhraseRepository.Current.Get("/System Messages/Cart/Cart Not Found Error", "Could not retrieve the cart for the current user");
@@ -229,7 +215,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 return new ManagerResponse<CartResult, CommerceCart>(cartResult, cartResult.Cart as CommerceCart);
             }
 
-            CartCacheHelper.InvalidateCartCache(visitorContext.GetCustomerId());
+            CartCacheHelper.InvalidateCartCache(userId);
 
             var cart = cartResult.Cart;
             var result = new CartResult {Cart = cart, Success = true};
@@ -256,12 +242,12 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CartResult, CommerceCart>(result, result.Cart as CommerceCart);
         }
 
-        public ManagerResponse<AddPromoCodeResult, CommerceCart> AddPromoCodeToCart([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string promoCode)
+        public ManagerResponse<AddPromoCodeResult, CommerceCart> AddPromoCodeToCart(string userId, string promoCode)
         {
             Assert.ArgumentNotNullOrEmpty(promoCode, nameof(promoCode));
 
             var result = new AddPromoCodeResult {Success = false};
-            var cartResult = LoadCartByName(storefront.ShopName, CommerceConstants.CartSettings.DefaultCartName, visitorContext.UserId);
+            var cartResult = LoadCartByName(CommerceConstants.CartSettings.DefaultCartName, userId);
             if (!cartResult.Success || cartResult.Cart == null)
             {
                 var message = DictionaryPhraseRepository.Current.Get("/System Messages/Cart/Cart Not Found Error", "Could not retrieve the cart for the current user");
@@ -269,7 +255,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 return new ManagerResponse<AddPromoCodeResult, CommerceCart>(result, cartResult.Cart as CommerceCart);
             }
 
-            CartCacheHelper.InvalidateCartCache(visitorContext.GetCustomerId());
+            CartCacheHelper.InvalidateCartCache(userId);
 
             var cart = cartResult.Cart as CommerceCart;
             var request = new AddPromoCodeRequest(cart, promoCode);
@@ -284,14 +270,12 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<AddPromoCodeResult, CommerceCart>(result, result.Cart as CommerceCart);
         }
 
-        public ManagerResponse<RemovePromoCodeResult, CommerceCart> RemovePromoCodeFromCart([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string promoCode)
+        public ManagerResponse<RemovePromoCodeResult, CommerceCart> RemovePromoCodeFromCart(string userId, string promoCode)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNullOrEmpty(promoCode, nameof(promoCode));
 
             var result = new RemovePromoCodeResult {Success = false};
-            var cartResult = LoadCartByName(storefront.ShopName, CommerceConstants.CartSettings.DefaultCartName, visitorContext.UserId);
+            var cartResult = LoadCartByName(CommerceConstants.CartSettings.DefaultCartName, userId);
             if (!cartResult.Success || cartResult.Cart == null)
             {
                 var message = DictionaryPhraseRepository.Current.Get("/System Messages/Cart/Cart Not Found Error", "Could not retrieve the cart for the current user");
@@ -301,7 +285,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             var cart = cartResult.Cart as CommerceCart;
 
-            CartCacheHelper.InvalidateCartCache(visitorContext.GetCustomerId());
+            CartCacheHelper.InvalidateCartCache(userId);
 
             var request = new RemovePromoCodeRequest(cart, promoCode);
             RefreshCart(request, true); // We need the CS pipelines to run.
@@ -315,14 +299,12 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<RemovePromoCodeResult, CommerceCart>(result, result.Cart as CommerceCart);
         }
 
-        public ManagerResponse<AddShippingInfoResult, CommerceCart> SetShippingMethods([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] SetShippingMethodsInputModel inputModel)
+        public ManagerResponse<AddShippingInfoResult, CommerceCart> SetShippingMethods(string userId, SetShippingMethodsInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
             var result = new AddShippingInfoResult {Success = false};
-            var response = GetCurrentCart(storefront, visitorContext, true);
+            var response = GetCart(userId, true);
             if (!response.ServiceProviderResult.Success || response.Result == null)
             {
                 return new ManagerResponse<AddShippingInfoResult, CommerceCart>(result, response.Result);
@@ -336,7 +318,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 cart.Parties = cartParties.AsReadOnly();
             }
 
-            var internalShippingList = (List<CommerceShippingInfo>) (inputModel.ShippingMethods.Select(item => item.ToShippingInfo())).ToList();
+            var internalShippingList = inputModel.ShippingMethods.Select(item => item.ToShippingInfo()).ToList();
             var orderPreferenceType = InputModelExtension.GetShippingOptionType(inputModel.OrderShippingPreferenceType);
             if (orderPreferenceType != ShippingOptionType.DeliverItemsIndividually)
             {
@@ -346,7 +328,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 }
             }
 
-            CartCacheHelper.InvalidateCartCache(visitorContext.GetCustomerId());
+            CartCacheHelper.InvalidateCartCache(userId);
 
             result = AddShippingInfoToCart(cart, orderPreferenceType, internalShippingList);
             if (result.Success && result.Cart != null)
@@ -357,14 +339,12 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<AddShippingInfoResult, CommerceCart>(result, result.Cart as CommerceCart);
         }
 
-        public ManagerResponse<CartResult, CommerceCart> SetPaymentMethods([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] PaymentInputModel inputModel)
+        public ManagerResponse<CartResult, CommerceCart> SetPaymentMethods(string userId, PaymentInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
             var result = new AddPaymentInfoResult {Success = false};
-            var response = GetCurrentCart(storefront, visitorContext, true);
+            var response = GetCart(userId, true);
             if (!response.ServiceProviderResult.Success || response.Result == null)
             {
                 return new ManagerResponse<CartResult, CommerceCart>(result, response.Result);
@@ -406,25 +386,22 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CartResult, CommerceCart>(result, result.Cart as CommerceCart);
         }
 
-        public ManagerResponse<CartResult, CommerceCart> MergeCarts([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, string anonymousVisitorId, Cart anonymousVisitorCart)
+        public ManagerResponse<CartResult, CommerceCart> MergeCarts(string newUserId, string previousUserId, Cart anonymousVisitorCart)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
-            Assert.ArgumentNotNullOrEmpty(anonymousVisitorId, nameof(anonymousVisitorId));
+            Assert.ArgumentNotNullOrEmpty(previousUserId, nameof(previousUserId));
+            Assert.ArgumentNotNullOrEmpty(newUserId, nameof(newUserId));
 
-            var userId = visitorContext.UserId;
-            var cartResult = LoadCartByName(storefront.ShopName, CommerceConstants.CartSettings.DefaultCartName, userId, true);
+            var cartResult = LoadCartByName(CommerceConstants.CartSettings.DefaultCartName, newUserId, true);
             if (!cartResult.Success || cartResult.Cart == null)
             {
-                var message = DictionaryPhraseRepository.Current.Get("/System Messages/Cart/Cart Not Found Error", "Could not retrieve the cart for the current user");
-                cartResult.SystemMessages.Add(new SystemMessage {Message = message});
+                cartResult.SystemMessages.Add(new SystemMessage {Message = DictionaryPhraseRepository.Current.Get("/System Messages/Cart/Cart Not Found Error", "Could not retrieve the cart for the current user")});
                 return new ManagerResponse<CartResult, CommerceCart>(cartResult, cartResult.Cart as CommerceCart);
             }
 
             var currentCart = (CommerceCart) cartResult.Cart;
             var result = new CartResult {Cart = currentCart, Success = true};
 
-            if (userId != anonymousVisitorId)
+            if (newUserId != previousUserId)
             {
                 var anonymousCartHasPromocodes = anonymousVisitorCart is CommerceCart &&
                                                  ((CommerceCart) anonymousVisitorCart).OrderForms.Any(of => of.PromoCodes.Any());
@@ -441,17 +418,15 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             if (result.Success && result.Cart != null)
             {
-                CartCacheHelper.InvalidateCartCache(anonymousVisitorId);
+                CartCacheHelper.InvalidateCartCache(previousUserId);
                 CartCacheHelper.AddCartToCache(result.Cart as CommerceCart);
             }
 
             return new ManagerResponse<CartResult, CommerceCart>(result, result.Cart as CommerceCart);
         }
 
-        public ManagerResponse<CartResult, CommerceCart> UpdateCart([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] CommerceCart cart, [NotNull] CommerceCart cartChanges)
+        public ManagerResponse<CartResult, CommerceCart> UpdateCart(CommerceCart cart, CommerceCart cartChanges)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNull(cart, nameof(cart));
             Assert.ArgumentNotNull(cartChanges, nameof(cartChanges));
 
@@ -462,9 +437,14 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CartResult, CommerceCart>(result, result.Cart as CommerceCart);
         }
 
-        private CartResult LoadCartByName(string shopName, string cartName, string userName, bool refreshCart = false)
+        private CartResult LoadCartByName(string cartName, string userName, bool refreshCart = false)
         {
-            var request = new LoadCartByNameRequest(shopName, cartName, userName);
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
+
+            var request = new LoadCartByNameRequest(StorefrontContext.Current.ShopName, cartName, userName);
             RefreshCart(request, refreshCart);
 
             var result = CartServiceProvider.LoadCart(request);
@@ -484,7 +464,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return result;
         }
 
-        private AddShippingInfoResult AddShippingInfoToCart([NotNull] CommerceCart cart, [NotNull] ShippingOptionType orderShippingPreferenceType, [NotNull] IEnumerable<ShippingInfo> shipments)
+        private AddShippingInfoResult AddShippingInfoToCart(CommerceCart cart, ShippingOptionType orderShippingPreferenceType, IEnumerable<ShippingInfo> shipments)
         {
             Assert.ArgumentNotNull(cart, nameof(cart));
             Assert.ArgumentNotNull(orderShippingPreferenceType, nameof(orderShippingPreferenceType));
@@ -496,12 +476,12 @@ namespace Sitecore.Foundation.Commerce.Managers
             return result;
         }
 
-        private void UpdateStockInformation([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] CommerceCartLine cartLine, [NotNull] string catalogName)
+        private void UpdateStockInformation(CommerceCartLine cartLine, string catalogName)
         {
             Assert.ArgumentNotNull(cartLine, nameof(cartLine));
 
             var products = new List<InventoryProduct> {new CommerceInventoryProduct {ProductId = cartLine.Product.ProductId, CatalogName = catalogName}};
-            var stockInfoResult = InventoryManager.GetStockInformation(storefront, products, StockDetailsLevel.Status).ServiceProviderResult;
+            var stockInfoResult = InventoryManager.GetStockInformation(products, StockDetailsLevel.Status).ServiceProviderResult;
             if (stockInfoResult.StockInformation == null || !stockInfoResult.StockInformation.Any())
             {
                 return;
@@ -513,7 +493,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             {
                 if (Equals(stockInfo.Status, StockStatus.PreOrderable))
                 {
-                    var preOrderableResult = InventoryManager.GetPreOrderableInformation(storefront, products).ServiceProviderResult;
+                    var preOrderableResult = InventoryManager.GetPreOrderableInformation(products).ServiceProviderResult;
                     if (preOrderableResult.OrderableInformation != null && preOrderableResult.OrderableInformation.Any())
                     {
                         orderableInfo = preOrderableResult.OrderableInformation.FirstOrDefault();
@@ -521,7 +501,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 }
                 else if (Equals(stockInfo.Status, StockStatus.BackOrderable))
                 {
-                    var backOrderableResult = InventoryManager.GetBackOrderableInformation(storefront, products).ServiceProviderResult;
+                    var backOrderableResult = InventoryManager.GetBackOrderableInformation(products).ServiceProviderResult;
                     if (backOrderableResult.OrderableInformation != null && backOrderableResult.OrderableInformation.Any())
                     {
                         orderableInfo = backOrderableResult.OrderableInformation.FirstOrDefault();

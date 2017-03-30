@@ -27,7 +27,7 @@ namespace Sitecore.Feature.Commerce.Orders.Models
         public OrderHeaderApiModel(OrderHeader header)
         {
             ExternalId = header.ExternalId;
-            Status = LookupManager.GetOrderStatusName(header.Status);
+            Status = OrderManager.GetOrderStatusName(header.Status);
             LastModified = ((CommerceOrderHeader) header).LastModified.ToDisplayedDate();
             DetailsUrl = string.Concat("/accountmanagement/myorder", "?id=", header.ExternalId);
             OrderId = header.OrderID;

@@ -2,11 +2,6 @@
 {
     public class Constants
     {
-        public static class QueryString
-        {
-            public const string SearchKeyword = "q";
-        }
-
         public static class CommerceIndex
         {
             public static class Fields

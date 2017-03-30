@@ -45,7 +45,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 {
     public class CatalogManager : IManager
     {
-        public CatalogManager(CatalogServiceProvider catalogServiceProvider, GlobalizationServiceProvider globalizationServiceProvider, PricingManager pricingManager, InventoryManager inventoryManager, CatalogItemContext catalogItemContext, ICommerceSearchManager commerceSearchManager, StorefrontManager storefrontManager)
+        public CatalogManager(CatalogServiceProvider catalogServiceProvider, GlobalizationServiceProvider globalizationServiceProvider, PricingManager pricingManager, InventoryManager inventoryManager, CatalogItemContext catalogItemContext, ICommerceSearchManager commerceSearchManager, StorefrontContext storefrontContext)
         {
             CatalogServiceProvider = catalogServiceProvider;
             GlobalizationServiceProvider = globalizationServiceProvider;
@@ -53,11 +53,11 @@ namespace Sitecore.Foundation.Commerce.Managers
             InventoryManager = inventoryManager;
             CatalogItemContext = catalogItemContext;
             CommerceSearchManager = commerceSearchManager;
-            StorefrontManager = storefrontManager;
+            StorefrontContext = storefrontContext;
         }
 
         public ICommerceSearchManager CommerceSearchManager { get; set; }
-        public StorefrontManager StorefrontManager { get; }
+        public StorefrontContext StorefrontContext { get; }
         public CatalogServiceProvider CatalogServiceProvider { get; protected set; }
         public GlobalizationServiceProvider GlobalizationServiceProvider { get; protected set; }
         public InventoryManager InventoryManager { get; protected set; }
@@ -74,25 +74,35 @@ namespace Sitecore.Foundation.Commerce.Managers
                 {
                     return context;
                 }
+                if (StorefrontContext.Current == null)
+                {
+                    return null;
+                }
                 context = CatalogContext.CreateFromContext();
                 HttpContext.Current.Items["_catalogContext"] = context;
                 return context;
             }
         }
 
-        public CatalogResult VisitedCategoryPage([NotNull] CommerceStorefront storefront, [NotNull] string categoryId, string categoryName)
+        public CatalogResult VisitedCategoryPage(string categoryId, string categoryName)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
 
-            var request = new VisitedCategoryPageRequest(storefront.ShopName, categoryId, categoryName);
+            var request = new VisitedCategoryPageRequest(StorefrontContext.Current.ShopName, categoryId, categoryName);
             return CatalogServiceProvider.VisitedCategoryPage(request);
         }
 
-        public CatalogResult VisitedProductDetailsPage([NotNull] CommerceStorefront storefront, [NotNull] string productId, string productName, string parentCategoryId, string parentCategoryName)
+        public CatalogResult VisitedProductDetailsPage(string productId, string productName, string parentCategoryId, string parentCategoryName)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
 
-            var request = new VisitedProductDetailsPageRequest(storefront.ShopName, productId, productName, parentCategoryId, parentCategoryName);
+            var request = new VisitedProductDetailsPageRequest(StorefrontContext.Current.ShopName, productId, productName, parentCategoryId, parentCategoryName);
             return CatalogServiceProvider.VisitedProductDetailsPage(request);
         }
 
@@ -148,7 +158,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return category;
         }
 
-        public void GetProductPrice([NotNull] VisitorContext visitorContext, ICatalogProduct productViewModel)
+        public void GetProductPrice(ICatalogProduct productViewModel)
         {
             if (productViewModel == null)
             {
@@ -156,7 +166,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
 
             var includeVariants = productViewModel.Variants != null && productViewModel.Variants.Any();
-            var pricesResponse = PricingManager.GetProductPrices(visitorContext, productViewModel.CatalogName, productViewModel.ProductId, includeVariants, null);
+            var pricesResponse = PricingManager.GetProductPrices(productViewModel.CatalogName, productViewModel.ProductId, includeVariants, null);
             if (pricesResponse == null || !pricesResponse.ServiceProviderResult.Success || pricesResponse.Result == null)
             {
                 return;
@@ -188,7 +198,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             }
         }
 
-        public void GetProductBulkPrices([NotNull] VisitorContext visitorContext, IEnumerable<ICatalogProduct> catalogProducts)
+        public void GetProductBulkPrices(IEnumerable<ICatalogProduct> catalogProducts)
         {
             var catalogProductsArray = catalogProducts as ICatalogProduct[] ?? catalogProducts?.ToArray();
             if (catalogProductsArray == null || !catalogProductsArray.Any())
@@ -228,22 +238,22 @@ namespace Sitecore.Foundation.Commerce.Managers
             return decimal.TryParse(ratingString, out rating) ? rating : 0;
         }
 
-        public ManagerResponse<CatalogResult, bool> FacetApplied([NotNull] CommerceStorefront storefront,
-            string facet, bool isApplied)
+        public ManagerResponse<CatalogResult, bool> FacetApplied(string facet, bool isApplied)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
 
-            var request = new FacetAppliedRequest(storefront.ShopName, facet, isApplied);
+            var request = new FacetAppliedRequest(StorefrontContext.Current.ShopName, facet, isApplied);
             var result = CatalogServiceProvider.FacetApplied(request);
             result.WriteToSitecoreLog();
 
             return new ManagerResponse<CatalogResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<CatalogResult, bool> SortOrderApplied([NotNull] CommerceStorefront storefront, string sortKey, SortDirection? sortDirection)
+        public ManagerResponse<CatalogResult, bool> SortOrderApplied(string sortKey, SortDirection? sortDirection)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-
             var connectSortDirection = SortDirection.Ascending;
             if (sortDirection.HasValue)
             {
@@ -260,31 +270,44 @@ namespace Sitecore.Foundation.Commerce.Managers
                 }
             }
 
-            var request = new ProductSortingRequest(storefront.ShopName, sortKey, connectSortDirection == SortDirection.Ascending ? Sitecore.Commerce.Entities.Catalog.SortDirection.Ascending : Sitecore.Commerce.Entities.Catalog.SortDirection.Descending);
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
+
+            var request = new ProductSortingRequest(StorefrontContext.Current.ShopName, sortKey, connectSortDirection == SortDirection.Ascending ? Sitecore.Commerce.Entities.Catalog.SortDirection.Ascending : Sitecore.Commerce.Entities.Catalog.SortDirection.Descending);
             var result = CatalogServiceProvider.ProductSorting(request);
             result.WriteToSitecoreLog();
 
             return new ManagerResponse<CatalogResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<CatalogResult, bool> RegisterSearchEvent([NotNull] CommerceStorefront storefront, string searchKeyword, int numberOfHits)
+        public ManagerResponse<CatalogResult, bool> RegisterSearchEvent(string searchKeyword, int numberOfHits)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNullOrEmpty(searchKeyword, nameof(searchKeyword));
 
-            var request = new SearchInitiatedRequest(storefront.ShopName, searchKeyword, numberOfHits);
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
+
+            var request = new SearchInitiatedRequest(StorefrontContext.Current.ShopName, searchKeyword, numberOfHits);
             var result = CatalogServiceProvider.SearchInitiated(request);
             result.WriteToSitecoreLog();
 
             return new ManagerResponse<CatalogResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<GlobalizationResult, bool> RaiseCultureChosenPageEvent([NotNull] CommerceStorefront storefront, string culture)
+        public ManagerResponse<GlobalizationResult, bool> RaiseCultureChosenPageEvent(string culture)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNullOrEmpty(culture, nameof(culture));
 
-            var result = GlobalizationServiceProvider.CultureChosen(new CultureChosenRequest(storefront.ShopName, culture));
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
+
+            var result = GlobalizationServiceProvider.CultureChosen(new CultureChosenRequest(StorefrontContext.Current.ShopName, culture));
 
             return new ManagerResponse<GlobalizationResult, bool>(result, result.Success);
         }
@@ -559,7 +582,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 products.Add(new CommerceInventoryProduct {ProductId = productId, CatalogName = catalogName});
             }
 
-            var response = InventoryManager.GetStockInformation(StorefrontManager.Current, products, StockDetailsLevel.All);
+            var response = InventoryManager.GetStockInformation(products, StockDetailsLevel.All);
             return response;
         }
     }

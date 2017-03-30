@@ -23,11 +23,11 @@ using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Diagnostics;
 using Sitecore.Feature.Commerce.Orders.Models;
+using Sitecore.Foundation.Commerce;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
-using Sitecore.Foundation.Commerce.Repositories;
 using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Mvc.Controllers;
 
@@ -35,24 +35,24 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
 {
     public class CartController : SitecoreController
     {
-        public CartController(CartManager cartManager, VisitorContextRepository visitorContextRepository, CartCacheHelper cartCacheHelper, PricingManager pricingManager, CurrencyManager currencyManager, StorefrontManager storefrontManager)
+        public CartController(CartManager cartManager, CommerceUserContext commerceUserContext, CartCacheHelper cartCacheHelper, PricingManager pricingManager, CurrencyManager currencyManager, StorefrontContext storefrontContext)
         {
             Assert.ArgumentNotNull(cartManager, nameof(cartManager));
 
             CartManager = cartManager;
-            VisitorContextRepository = visitorContextRepository;
+            CommerceUserContext = commerceUserContext;
             CartCacheHelper = cartCacheHelper;
             PricingManager = pricingManager;
             CurrencyManager = currencyManager;
-            StorefrontManager = storefrontManager;
+            StorefrontContext = storefrontContext;
         }
 
         private CartManager CartManager { get; }
-        private VisitorContextRepository VisitorContextRepository { get; }
+        private CommerceUserContext CommerceUserContext { get; }
         private CartCacheHelper CartCacheHelper { get; }
         private PricingManager PricingManager { get; }
         private CurrencyManager CurrencyManager { get; }
-        public StorefrontManager StorefrontManager { get; }
+        public StorefrontContext StorefrontContext { get; }
 
         [HttpGet]
         public override ActionResult Index()
@@ -72,8 +72,8 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             {
                 if (!string.IsNullOrWhiteSpace(currency))
                 {
-                    PricingManager.CurrencyChosenPageEvent(StorefrontManager.Current, CurrencyManager.CurrencyContext.CurrencyCode);
-                    CartManager.UpdateCartCurrency(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), CurrencyManager.CurrencyContext.CurrencyCode);
+                    PricingManager.CurrencyChosenPageEvent(CurrencyManager.CurrencyContext.CurrencyCode);
+                    CartManager.UpdateCartCurrency(CommerceUserContext.Current.UserId, CurrencyManager.CurrencyContext.CurrencyCode);
                 }
             }
             catch (Exception e)
@@ -99,7 +99,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         {
             try
             {
-                var response = CartManager.GetCurrentCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), updateCart);
+                var response = CartManager.GetCart(CommerceUserContext.Current.UserId, updateCart);
                 var result = new MiniCartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
@@ -122,14 +122,14 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         {
             try
             {
-                var id = VisitorContextRepository.GetCurrent().GetCustomerId();
+                var id = CommerceUserContext.Current.UserId;
                 var cart = CartCacheHelper.GetCart(id);
                 CartApiModel cartResult;
 
                 // The following condition stops the creation of empty carts on startup.
                 if (cart == null && CartCookieHelper.DoesCookieExistForCustomer(id))
                 {
-                    var response = CartManager.GetCurrentCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), true);
+                    var response = CartManager.GetCart(CommerceUserContext.Current.UserId, true);
                     cartResult = new CartApiModel(response.ServiceProviderResult);
                     if (response.ServiceProviderResult.Success && response.Result != null)
                     {
@@ -170,7 +170,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.AddLineItemsToCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), new List<AddCartLineInputModel> {inputModel});
+                var response = CartManager.AddLineItemsToCart(CommerceUserContext.Current.UserId, new List<AddCartLineInputModel> {inputModel});
                 var result = new BaseApiModel(response.ServiceProviderResult);
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -196,7 +196,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.AddLineItemsToCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModels);
+                var response = CartManager.AddLineItemsToCart(CommerceUserContext.Current.UserId, inputModels);
                 var result = new BaseApiModel(response.ServiceProviderResult);
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -222,7 +222,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.RemoveLineItemFromCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), model.ExternalCartLineId);
+                var response = CartManager.RemoveLineItemFromCart(CommerceUserContext.Current.UserId, model.ExternalCartLineId);
                 var result = new CartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
@@ -253,7 +253,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.ChangeLineQuantity(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel);
+                var response = CartManager.ChangeLineQuantity(CommerceUserContext.Current.UserId, inputModel);
                 var result = new CartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
@@ -263,7 +263,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     {
                         // We clear the cart from the cache when basket errors are detected.  This stops the message from being displayed over and over as the
                         // cart will be retrieved again from CS and the pipelines will be executed.
-                        CartCacheHelper.InvalidateCartCache(VisitorContextRepository.GetCurrent().GetCustomerId());
+                        CartCacheHelper.InvalidateCartCache(CommerceUserContext.Current.UserId);
                     }
                 }
 
@@ -291,7 +291,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.AddPromoCodeToCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), model.PromoCode);
+                var response = CartManager.AddPromoCodeToCart(CommerceUserContext.Current.UserId, model.PromoCode);
                 var result = new CartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
@@ -322,7 +322,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.RemovePromoCodeFromCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), model.PromoCode);
+                var response = CartManager.RemovePromoCodeFromCart(CommerceUserContext.Current.UserId, model.PromoCode);
                 var result = new CartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {

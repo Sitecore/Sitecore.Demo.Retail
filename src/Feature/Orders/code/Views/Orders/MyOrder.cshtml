@@ -9,18 +9,9 @@
     // either express or implied. See the License for the specific language governing permissions
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
-@using System.Text
-@using Sitecore.Commerce.Engine.Connect.Entities.Carts
-@using Sitecore.Commerce.Entities.GiftCards
-@using Sitecore.Data
-@using Sitecore.Data.Items
-@using Sitecore.Foundation.Commerce
+@using Sitecore.Feature.Commerce.Orders.Models
 @using Sitecore.Foundation.Commerce.Extensions
 @using Sitecore.Foundation.SitecoreExtensions.Extensions
-@using Sitecore.Foundation.Commerce.Managers
-@using Sitecore.Commerce.Connect.CommerceServer.Orders.Models
-@using Sitecore.Feature.Commerce.Orders.Models
-@using Sitecore.Links
 @using Sitecore.Resources.Media
 @model Sitecore.Feature.Commerce.Orders.Models.OrderViewModel
 <div class="row">
@@ -42,7 +33,7 @@
                 @Html.Sitecore().Text("/Orders/My Order/Order Status", "Order Status:")
             </dt>
             <dd>
-                @LookupManager.GetOrderStatusName(Model.Status)
+                @Model.StatusText
             </dd>
         </dl>
     </div>
@@ -75,7 +66,7 @@
                         @if (orderLine.Image != null)
                         {
                             <a href="@MediaManager.GetMediaUrl(orderLine.Image)" data-toggle="lightbox" data-type="image" data-title="@orderLine.Title">
-                                <img src="@orderLine.Image.ImageUrl(110, 110)" class="img-responsive" alt="@orderLine.Image.Alt" pid="image" />
+                                <img src="@orderLine.Image.ImageUrl(110, 110)" class="img-responsive" alt="@orderLine.Image.Alt" pid="image"/>
                             </a>
                         }
                     </td>

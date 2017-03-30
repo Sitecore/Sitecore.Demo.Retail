@@ -4,6 +4,7 @@
     {
         public static class QueryString
         {
+            public const string SearchKeyword = "q";
             public const string Sort = "s";
             public const string SortDirection = "sd";
             public const string PageSize = "ps";

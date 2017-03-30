@@ -10,11 +10,9 @@
   // and limitations under the License.
   // -------------------------------------------------------------------------------------------*@
 @using Sitecore.Foundation.Commerce
+@using Sitecore.Foundation.Commerce.Extensions
 @using Sitecore.Mvc.Configuration
 @model Sitecore.Feature.Commerce.Customers.Models.LoginViewModel
-@{
-    var signing = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.SigningButton];
-}
 
 @using (Html.BeginRouteForm(MvcSettings.SitecoreRouteName, new
                                                            {
@@ -28,41 +26,35 @@
 
     <!-- CONTENT CONTAINER -->
     <div class="form-group">
-        <label for="UserName">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.Email, Html.Sitecore().CurrentItem)</label><span class="required">*</span>
+        <label for="UserName">@Html.Sitecore().Text("/Customers/Login/Email", "E-mail")</label><span class="required">*</span>
         @Html.TextBoxFor(m => m.UserName, new
                                             {
-                                                placeholder = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.EmailAddressPlaceholder],
-                                                data_val_required = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.EmailMissingMessage],
+                                                placeholder = Html.Sitecore().Text("/Customers/Login/Enter Email", "Enter your e-mail address"),
+                                                data_val_required = Html.Sitecore().Text("/Customers/Login/Email Required", "Please enter your e-mail address."),
                                                 @class = "form-control"
                                             })
         @Html.ValidationMessageFor(m => m.UserName)
     </div>
     <div class="form-group">
-        <label for="Password">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.Password, Html.Sitecore().CurrentItem)</label><span class="required">*</span>
+        <label for="Password">@Html.Sitecore().Text("/Customers/Login/Password", "Password")</label><span class="required">*</span>
         @Html.PasswordFor(m => m.Password, new
                                             {
-                                                placeholder = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordPlaceholder],
-                                                data_val_required = Html.Sitecore().CurrentItem[StorefrontConstants.KnownFieldNames.PasswordMissingMessage],
+                                                placeholder = Html.Sitecore().Text("/Customers/Login/Enter Password", "Enter your password"),
+                                                data_val_required = Html.Sitecore().Text("/Customers/Login/Password Required", "Please enter your password."),
                                                 @class = "form-control",
                                                 autocomplete = "off"
                                             })
 
         @Html.ValidationMessageFor(m => m.Password)
     </div>
-    <button type="submit" id="SignInButton" data-loading-text="@signing" class="btn btn-primary btn-lg btn-block">@Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.SignInButton, Html.Sitecore().CurrentItem)</button>
+    <button type="submit" id="SignInButton" data-loading-text="@Html.Sitecore().Text("/Customers/Login/Signing In", "Signing In...")" class="btn btn-primary btn-lg btn-block">@Html.Sitecore().Text("/Customers/Login/Sign In", "Sign In")</button>
 
-    <div class="m-b-1">
-        <a class="btn btn-link" href="@("/forgotpassword")">@Html.Sitecore().Field("Forgot Password", Html.Sitecore().CurrentItem)</a>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-6 m-b-1">
-            <button type="button" id="GetToRegisterButton" onclick="window.location.href = '@("/Register")'" class="btn btn-default btn-lg btn-block">@Html.Sitecore().Field("Register New Account", Html.Sitecore().CurrentItem)</button>
+    <div class="row m-t-1">
+        <div class="col-lg-6">
+            <button type="button" id="GetToRegisterButton" onclick="window.location.href = '@("/Register")'" class="btn btn-default btn-lg btn-block">@Html.Sitecore().Text("/Customers/Login/Register", "Register")</button>
         </div>
         <div class="col-lg-6">
-            <button type="button" class="btn btn-default btn-lg btn-block" onclick="window.location.href = '@("/Checkout")'">
-                @Html.Sitecore().Field(StorefrontConstants.KnownFieldNames.GuestCheckoutButton, Html.Sitecore().CurrentItem)
-            </button>
+            <a class="btn btn-link btn-lg btn-block" href="@("/forgotpassword")">@Html.Sitecore().Field("Forgot Password", Html.Sitecore().CurrentItem)</a>
         </div>
     </div>
 }

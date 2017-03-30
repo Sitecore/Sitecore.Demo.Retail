@@ -51,14 +51,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public HtmlString DescriptionRender => PageContext.Current.HtmlHelper.Sitecore().Field(Foundation.Commerce.Templates.Commerce.Product.Fields.Description, Item);
 
-        public MediaItem OnSaleOverlayImage
-        {
-            get
-            {
-                var storefrontManager = DependencyResolver.Current.GetService<StorefrontManager>();
-                return storefrontManager.Current.OnSaleOverlayImage;
-            }
-        }
+        public MediaItem OverlayImage { get; set; }
 
         public string ListPriceWithCurrency => ListPrice.HasValue ? ListPrice.ToCurrency() : string.Empty;
 

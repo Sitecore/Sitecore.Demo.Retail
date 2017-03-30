@@ -5,6 +5,23 @@ namespace Sitecore.Foundation.Commerce
 {
     public static class Templates
     {
+        public struct MailTemplate
+        {
+            public static readonly ID ID = new ID("{5AB2BB7B-811E-4050-A147-0317E60668C5}");
+
+            public struct Fields
+            {
+                public static readonly ID From = new ID("{A8925EB2-72E3-4636-9F21-C894A61975B8}");
+                public static readonly ID Subject = new ID("{F092096E-BFFB-4834-ADB9-66480ED5CF81}");
+                public static readonly ID Body = new ID("{10624C02-1F6E-48C4-8ADE-90CDFCF64C22}");
+            }
+        }
+
+        public static class MailFolder
+        {
+            public static readonly ID ID = new ID("{F6FA45FA-ED12-4423-AA07-38393F7BE27F}");
+        }
+
         public static class CurrencyContext
         {
             public static readonly ID ID = new ID("{B0A3F504-6AA6-42B7-99FE-8280D8CC01B1}");
@@ -124,5 +141,6 @@ namespace Sitecore.Foundation.Commerce
                 public static readonly ID CatalogRoot = new ID("{C15A939B-1C97-48E8-B055-37F80DA99C40}");
             }
         }
+
     }
 }

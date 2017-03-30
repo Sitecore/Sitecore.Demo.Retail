@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -35,51 +34,47 @@ using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
-using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Foundation.Dictionary.Repositories;
 using Sitecore.Security.Authentication;
+using CommerceUser = Sitecore.Commerce.Entities.Customers.CommerceUser;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
     public class AccountManager : IManager
     {
-        public AccountManager(CartManager cartManager, [NotNull] CustomerServiceProvider customerServiceProvider,
-            [NotNull] ContactFactory contactFactory)
+        public AccountManager(CartManager cartManager, CustomerServiceProvider customerServiceProvider, ContactFactory contactFactory, MailManager mailManager, StorefrontContext storefrontContext)
         {
-            Assert.ArgumentNotNull(customerServiceProvider, nameof(customerServiceProvider));
-            Assert.ArgumentNotNull(contactFactory, nameof(contactFactory));
-
             CartManager = cartManager;
             CustomerServiceProvider = customerServiceProvider;
             ContactFactory = contactFactory;
+            MailManager = mailManager;
+            StorefrontContext = storefrontContext;
         }
 
-        public CartManager CartManager { get; set; }
+        private MailManager MailManager { get; }
+        private CartManager CartManager { get; }
+        private CustomerServiceProvider CustomerServiceProvider { get; }
+        private ContactFactory ContactFactory { get; }
+        private StorefrontContext StorefrontContext { get; }
 
-        public CustomerServiceProvider CustomerServiceProvider { get; protected set; }
-
-        public ContactFactory ContactFactory { get; set; }
-
-        public bool Login([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext,
-            [NotNull] string anonymousVisitorId, string userName, string password, bool persistent)
+        public bool Login(string userName, string password, bool persistent)
         {
             Assert.ArgumentNotNullOrEmpty(userName, nameof(userName));
             Assert.ArgumentNotNullOrEmpty(password, nameof(password));
 
-            var anonymousVisitorCart = CartManager.GetCurrentCart(storefront, anonymousVisitorId).Result;
-
-            var isLoggedIn = AuthenticationManager.Login(userName, password, persistent);
-            if (isLoggedIn)
+            if (!AuthenticationManager.Login(userName, password, persistent))
             {
-                if (Tracker.Current != null)
-                {
-                    Tracker.Current.Session.Identify(userName);
-                }
-                visitorContext.SetCommerceUser(ResolveCommerceUser().Result);
-                CartManager.MergeCarts(storefront, visitorContext, anonymousVisitorId, anonymousVisitorCart);
+                return false;
             }
+            if (Tracker.Current != null)
+            {
+                Tracker.Current.Session.Identify(userName);
+            }
+            //CommerceUserContext.Current.SetUser(ResolveCommerceUser().Result);
+            //var anonymousVisitorCart = CartManager.GetCurrentCart().Result;
+            //CartManager.MergeCarts(CommerceUserContext.Current.UserId, anonymousVisitorCart);
 
-            return isLoggedIn;
+            return true;
         }
 
         public void Logout()
@@ -88,7 +83,6 @@ namespace Sitecore.Foundation.Commerce.Managers
             {
                 Tracker.Current.EndVisit(true);
             }
-            HttpContext.Current.Session.Abandon();
             AuthenticationManager.Logout();
         }
 
@@ -108,13 +102,8 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetUserResult, CommerceUser>(result, result.CommerceUser);
         }
 
-        public ManagerResponse<DeleteUserResult, bool> DeleteUser([NotNull] CommerceStorefront storefront,
-            [NotNull] VisitorContext visitorContext)
+        public ManagerResponse<DeleteUserResult, bool> DeleteUser(string userName)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
-
-            var userName = visitorContext.UserName;
             var commerceUser = GetUser(userName).Result;
 
             if (commerceUser == null)
@@ -130,15 +119,12 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<DeleteUserResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<UpdateUserResult, CommerceUser> UpdateUser([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, ProfileModel inputModel)
+        public ManagerResponse<UpdateUserResult, CommerceUser> UpdateUser(string userName, ProfileModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
             UpdateUserResult result;
 
-            var userName = visitorContext.UserName;
             var commerceUser = GetUser(userName).Result;
             if (commerceUser != null)
             {
@@ -171,9 +157,8 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<UpdateUserResult, CommerceUser>(result, result.CommerceUser);
         }
 
-        public ManagerResponse<GetPartiesResult, IEnumerable<IParty>> GetParties([NotNull] CommerceStorefront storefront, [NotNull] CommerceCustomer customer)
+        public ManagerResponse<GetPartiesResult, IEnumerable<IParty>> GetParties(CommerceCustomer customer)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(customer, nameof(customer));
 
             var request = new GetPartiesRequest(customer);
@@ -184,44 +169,35 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetPartiesResult, IEnumerable<IParty>>(result, partyList);
         }
 
-        public ManagerResponse<GetPartiesResult, IEnumerable<IParty>> GetCurrentCustomerParties([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext)
+        public ManagerResponse<GetPartiesResult, IEnumerable<IParty>> GetCustomerParties(string userName)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
-
             var result = new GetPartiesResult {Success = false};
-            var getUserResponse = GetUser(visitorContext.UserName);
+            var getUserResponse = GetUser(userName);
             if (!getUserResponse.ServiceProviderResult.Success || getUserResponse.Result == null)
             {
                 result.SystemMessages.ToList().AddRange(getUserResponse.ServiceProviderResult.SystemMessages);
                 return new ManagerResponse<GetPartiesResult, IEnumerable<IParty>>(result, null);
             }
 
-            return GetParties(storefront, new CommerceCustomer {ExternalId = getUserResponse.Result.ExternalId});
+            return GetParties(new CommerceCustomer {ExternalId = getUserResponse.Result.ExternalId});
         }
 
-        public ManagerResponse<CustomerResult, bool> RemoveParties([NotNull] CommerceStorefront storefront,
-            [NotNull] CommerceCustomer user, List<CommerceParty> parties)
+        public ManagerResponse<CustomerResult, bool> RemoveParties(CommerceCustomer user, List<CommerceParty> parties)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(user, nameof(user));
             Assert.ArgumentNotNull(parties, nameof(parties));
 
-            var request = new RemovePartiesRequest(user, parties.Cast<Sitecore.Commerce.Entities.Party>().ToList());
+            var request = new RemovePartiesRequest(user, parties.Cast<Party>().ToList());
             var result = CustomerServiceProvider.RemoveParties(request);
             result.WriteToSitecoreLog();
             return new ManagerResponse<CustomerResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<CustomerResult, bool> RemovePartiesFromCurrentUser(
-            [NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext,
-            [NotNull] string addressExternalId)
+        public ManagerResponse<CustomerResult, bool> RemovePartiesFromUser(string userName, string addressExternalId)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNullOrEmpty(addressExternalId, nameof(addressExternalId));
 
-            var getUserResponse = GetUser(Context.User.Name);
+            var getUserResponse = GetUser(userName);
             if (getUserResponse.Result == null)
             {
                 var customerResult = new CustomerResult {Success = false};
@@ -232,16 +208,20 @@ namespace Sitecore.Foundation.Commerce.Managers
             var customer = new CommerceCustomer {ExternalId = getUserResponse.Result.ExternalId};
             var parties = new List<CommerceParty> {new CommerceParty {ExternalId = addressExternalId}};
 
-            return RemoveParties(storefront, customer, parties);
+            return RemoveParties(customer, parties);
         }
 
-        public ManagerResponse<CustomerResult, bool> UpdateParties([NotNull] CommerceStorefront storefront, [NotNull] string customerId, List<IParty> parties)
+        public ManagerResponse<CustomerResult, bool> UpdateParties(string userName, List<IParty> parties)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(customerId, nameof(customerId));
+            Assert.ArgumentNotNull(userName, nameof(userName));
             Assert.ArgumentNotNull(parties, nameof(parties));
 
-            var customer = new CommerceCustomer() { ExternalId = customerId };
+            var getUserResponse = GetUser(userName);
+            if (getUserResponse.Result == null)
+            {
+                throw new ArgumentException("User not found, invalid userName", nameof(userName));
+            }
+            var customer = new CommerceCustomer {ExternalId = getUserResponse.Result.ExternalId};
             var request = new UpdatePartiesRequest(customer, parties.Select(p => p.ToCommerceParty()).ToList());
             var result = CustomerServiceProvider.UpdateParties(request);
             result.WriteToSitecoreLog();
@@ -249,33 +229,40 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CustomerResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<AddPartiesResult, bool> AddParties([NotNull] CommerceStorefront storefront, [NotNull] string customerId, List<IParty> parties)
+        public ManagerResponse<AddPartiesResult, bool> AddParties(string userName, List<IParty> parties)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(customerId, nameof(customerId));
+            Assert.ArgumentNotNull(userName, nameof(userName));
             Assert.ArgumentNotNull(parties, nameof(parties));
 
-            var customer = new CommerceCustomer() {ExternalId = customerId};
-            var request = new AddPartiesRequest(customer, parties.Select(a => (Sitecore.Commerce.Entities.Party)a.ToCommerceParty()).ToList());
+            var getUserResponse = GetUser(userName);
+            if (getUserResponse.Result == null)
+            {
+                throw new ArgumentException("User not found, invalid userName", nameof(userName));
+            }
+            var customer = new CommerceCustomer { ExternalId = getUserResponse.Result.ExternalId };
+            var request = new AddPartiesRequest(customer, parties.Select(a => a.ToCommerceParty()).ToList());
             var result = CustomerServiceProvider.AddParties(request);
             result.WriteToSitecoreLog();
 
             return new ManagerResponse<AddPartiesResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<CreateUserResult, CommerceUser> RegisterUser([NotNull] CommerceStorefront storefront, RegisterUserInputModel inputModel)
+        public ManagerResponse<CreateUserResult, CommerceUser> RegisterUser(RegisterUserInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));
             Assert.ArgumentNotNullOrEmpty(inputModel.UserName, nameof(inputModel.UserName));
             Assert.ArgumentNotNullOrEmpty(inputModel.Password, nameof(inputModel.Password));
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
 
             CreateUserResult result;
 
             // Attempt to register the user
             try
             {
-                var request = new CreateUserRequest(inputModel.UserName, inputModel.Password, inputModel.UserName, storefront.ShopName);
+                var request = new CreateUserRequest(inputModel.UserName, inputModel.Password, inputModel.UserName, StorefrontContext.Current.ShopName);
                 result = CustomerServiceProvider.CreateUser(request);
                 result.WriteToSitecoreLog();
 
@@ -299,17 +286,11 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CreateUserResult, CommerceUser>(result, result.CommerceUser);
         }
 
-        public ManagerResponse<UpdatePasswordResult, bool> UpdateUserPassword(
-            [NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext,
-            ChangePasswordInputModel inputModel)
+        public ManagerResponse<UpdatePasswordResult, bool> UpdateUserPassword(string userName, ChangePasswordInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));
             Assert.ArgumentNotNullOrEmpty(inputModel.OldPassword, nameof(inputModel.OldPassword));
             Assert.ArgumentNotNullOrEmpty(inputModel.NewPassword, nameof(inputModel.NewPassword));
-
-            var userName = visitorContext.UserName;
 
             var request = new UpdatePasswordRequest(userName, inputModel.OldPassword, inputModel.NewPassword);
             var result = CustomerServiceProvider.UpdatePassword(request);
@@ -323,10 +304,8 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<UpdatePasswordResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<UpdatePasswordResult, bool> ResetUserPassword(
-            [NotNull] CommerceStorefront storefront, ForgotPasswordInputModel inputModel)
+        public ManagerResponse<UpdatePasswordResult, bool> ResetUserPassword(ForgotPasswordInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));
             Assert.ArgumentNotNullOrEmpty(inputModel.Email, nameof(inputModel.Email));
 
@@ -347,10 +326,9 @@ namespace Sitecore.Foundation.Commerce.Managers
                 {
                     var userIpAddress = HttpContext.Current != null ? HttpContext.Current.Request.UserHostAddress : string.Empty;
                     var provisionalPassword = Membership.Provider.ResetPassword(getUserResponse.Result.UserName,
-                        string.Empty);
+                                                                                string.Empty);
 
-                    var mailUtil = new MailUtil();
-                    var wasEmailSent = mailUtil.SendMail("ForgotPassword", inputModel.Email, storefront.SenderEmailAddress, new object(), new object[] {userIpAddress, provisionalPassword});
+                    var wasEmailSent = MailManager.SendMail("ForgotPassword", inputModel.Email, userIpAddress, provisionalPassword);
 
                     if (!wasEmailSent)
                     {
@@ -371,13 +349,11 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<UpdatePasswordResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<CustomerResult, bool> SetPrimaryAddress([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string addressExternalId)
+        public ManagerResponse<CustomerResult, bool> SetPrimaryAddress(string userName, string addressExternalId)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNullOrEmpty(addressExternalId, nameof(addressExternalId));
 
-            var userPartiesResponse = GetCurrentCustomerParties(storefront, visitorContext);
+            var userPartiesResponse = GetCustomerParties(userName);
             if (userPartiesResponse.ServiceProviderResult.Success)
             {
                 var customerResult = new CustomerResult {Success = false};
@@ -398,18 +374,17 @@ namespace Sitecore.Foundation.Commerce.Managers
             primaryAddress.IsPrimary = true;
             addressesToUpdate.Add(primaryAddress);
 
-            var updatePartiesResponse = UpdateParties(storefront, visitorContext.UserId, addressesToUpdate);
+            var updatePartiesResponse = UpdateParties(userName, addressesToUpdate);
 
             return new ManagerResponse<CustomerResult, bool>(updatePartiesResponse.ServiceProviderResult, updatePartiesResponse.Result);
         }
 
         public ManagerResponse<GetUserResult, CommerceUser> ResolveCommerceUser()
         {
-            if (Tracker.Current == null || Tracker.Current.Contact == null ||
-                Tracker.Current.Contact.ContactId == Guid.Empty)
+            if (Tracker.Current == null || Tracker.Current.Contact == null || Tracker.Current.Contact.ContactId == Guid.Empty)
             {
                 return new ManagerResponse<GetUserResult, CommerceUser>(new GetUserResult {Success = true},
-                    new CommerceUser {FirstName = "Test", LastName = "User"});
+                                                                        new CommerceUser {FirstName = "Test", LastName = "User"});
             }
 
             var userName = ContactFactory.GetContact();
@@ -419,19 +394,6 @@ namespace Sitecore.Foundation.Commerce.Managers
             Assert.IsNotNull(commerceUser, "The user '{0}' could not be found.", userName);
 
             return new ManagerResponse<GetUserResult, CommerceUser>(response.ServiceProviderResult, commerceUser);
-        }
-
-        private string UpdateUserName(string userName)
-        {
-            var defaultDomain = CommerceServerSitecoreConfig.Current.DefaultCommerceUsersDomain;
-            if (string.IsNullOrWhiteSpace(defaultDomain))
-            {
-                defaultDomain = CommerceConstants.ProfilesStrings.CommerceUsersDomainName;
-            }
-
-            return !userName.StartsWith(defaultDomain, StringComparison.OrdinalIgnoreCase)
-                ? string.Concat(defaultDomain, @"\", userName)
-                : userName;
         }
 
         private string ErrorCodeToString(MembershipCreateStatus createStatus)

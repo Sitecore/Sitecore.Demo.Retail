@@ -29,6 +29,7 @@ using Sitecore.Diagnostics;
 using Sitecore.Feature.Commerce.Catalog.Models;
 using Sitecore.Foundation.Alerts.Extensions;
 using Sitecore.Foundation.Alerts.Models;
+using Sitecore.Foundation.Commerce;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
@@ -43,23 +44,23 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         private const string CurrentCategoryViewModelKeyName = "CurrentCategoryViewModel";
         private const string CurrentSearchProductResultsKeyName = "CurrentSearchProductResults";
 
-        public ProductSearchController(AccountManager accountManager, CatalogManager catalogManager, ContactFactory contactFactory, VisitorContextRepository visitorContextRepository, CatalogItemContext catalogItemContext, ProductSearchManager productSearchManager, StorefrontManager storefrontManager)
+        public ProductSearchController(AccountManager accountManager, CatalogManager catalogManager, ContactFactory contactFactory, CommerceUserContext commerceUserContext, CatalogItemContext catalogItemContext, ProductSearchManager productSearchManager, StorefrontContext storefrontContext)
         {
-            VisitorContextRepository = visitorContextRepository;
+            CommerceUserContext = commerceUserContext;
             CatalogItemContext = catalogItemContext;
             CatalogManager = catalogManager;
             ProductSearchManager = productSearchManager;
-            StorefrontManager = storefrontManager;
+            StorefrontContext = storefrontContext;
         }
 
         private ProductSearchManager ProductSearchManager { get; }
-        public StorefrontManager StorefrontManager { get; }
-        private VisitorContextRepository VisitorContextRepository { get; }
+        public StorefrontContext StorefrontContext { get; }
+        private CommerceUserContext CommerceUserContext { get; }
         public CatalogItemContext CatalogItemContext { get; }
         private CatalogManager CatalogManager { get; }
 
         public ActionResult ProductSearchResultsListHeader(
-            [Bind(Prefix = Foundation.Commerce.Constants.QueryString.SearchKeyword)] string searchKeyword,
+            [Bind(Prefix = Constants.QueryString.SearchKeyword)] string searchKeyword,
             [Bind(Prefix = Constants.QueryString.Paging)] int? pageNumber,
             [Bind(Prefix = Constants.QueryString.Facets)] string facetValues,
             [Bind(Prefix = Constants.QueryString.Sort)] string sortField,
@@ -91,7 +92,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         }
 
         public ActionResult ProductSearchResultsFacets(
-            [Bind(Prefix = Foundation.Commerce.Constants.QueryString.SearchKeyword)] string searchKeyword,
+            [Bind(Prefix = Constants.QueryString.SearchKeyword)] string searchKeyword,
             [Bind(Prefix = Constants.QueryString.Paging)] int? pageNumber,
             [Bind(Prefix = Constants.QueryString.Facets)] string facetValues,
             [Bind(Prefix = Constants.QueryString.Sort)] string sortField,
@@ -126,8 +127,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             return viewModel;
         }
 
+        public ActionResult SearchBar([Bind(Prefix = Constants.QueryString.SearchKeyword)] string searchKeyword)
+        {
+            var model = new SearchBarViewModel { SearchKeyword = searchKeyword };
+            return View(model);
+        }
+
         public ActionResult ProductSearchResultsList(
-            [Bind(Prefix = Foundation.Commerce.Constants.QueryString.SearchKeyword)] string searchKeyword,
+            [Bind(Prefix = Constants.QueryString.SearchKeyword)] string searchKeyword,
             [Bind(Prefix = Constants.QueryString.Paging)] int? pageNumber,
             [Bind(Prefix = Constants.QueryString.Facets)] string facetValues,
             [Bind(Prefix = Constants.QueryString.Sort)] string sortField,
@@ -158,13 +165,13 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 return null;
             }
 
-            CatalogManager.RegisterSearchEvent(StorefrontManager.Current, searchInfo.SearchKeyword, results.TotalItemCount);
+            CatalogManager.RegisterSearchEvent(searchInfo.SearchKeyword, results.TotalItemCount);
 
             viewModel = new SearchResultViewModel(results);
 
             var products = viewModel.Items.Where(i => i is ProductViewModel).Cast<ProductViewModel>().ToList();
-            CatalogManager.GetProductBulkPrices(VisitorContextRepository.GetCurrent(), products);
-            CatalogManager.InventoryManager.GetProductsStockStatusForList(StorefrontManager.Current, products);
+            CatalogManager.GetProductBulkPrices(products);
+            CatalogManager.InventoryManager.GetProductsStockStatusForList(products);
             foreach (var productViewModel in products)
             {
                 productViewModel.CustomerAverageRating = CatalogManager.GetProductRating(productViewModel.Item);
@@ -188,7 +195,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         }
 
         public ActionResult ProductSearchResultsPagination(
-            [Bind(Prefix = Foundation.Commerce.Constants.QueryString.SearchKeyword)] string searchKeyword,
+            [Bind(Prefix = Constants.QueryString.SearchKeyword)] string searchKeyword,
             [Bind(Prefix = Constants.QueryString.Paging)] int? pageNumber,
             [Bind(Prefix = Constants.QueryString.Facets)] string facetValues,
             [Bind(Prefix = Constants.QueryString.Sort)] string sortField,

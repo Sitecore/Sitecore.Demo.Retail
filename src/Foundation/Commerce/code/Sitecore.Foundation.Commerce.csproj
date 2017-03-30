@@ -113,6 +113,12 @@
     <Reference Include="Sitecore.ContentSearch.Linq.Lucene">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.ContentSearch.Linq.Lucene.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Foundation.Accounts">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Accounts.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Foundation.Assets">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Assets.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.DependencyInjection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.DependencyInjection.dll</HintPath>
@@ -181,6 +187,12 @@
     <Content Include="packages.config" />
     <Content Include="App_Config\Include\Foundation\Foundation.Commerce.Customer.config" />
     <Content Include="App_Config\Include\Y.Commerce.Engine\Sitecore.Commerce.Engine.config" />
+    <Content Include="Scripts\Commerce\ajax-helpers.js" />
+    <Content Include="Scripts\Commerce\debug-knockout.js" />
+    <Content Include="Scripts\Commerce\knockout-2.3.0.debug.js" />
+    <Content Include="Scripts\Commerce\knockout-2.3.0.js" />
+    <Content Include="Scripts\Commerce\knockout.validation-2.0.0.js" />
+    <Content Include="Scripts\Commerce\knockout.validation-2.0.0.min.js" />
     <None Include="App_Config\CommerceServer.Core.config.example.transform" />
     <None Include="web.config.transform">
       <SubType>Designer</SubType>
@@ -196,10 +208,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommerceServerStorefrontConstants.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Extensions\ItemExtensions.cs" />
+    <Compile Include="Extensions\SiteContextExtensions.cs" />
     <Compile Include="Infrastructure\ComputedFields\VariantInfoComputedField.cs" />
     <Compile Include="Infrastructure\Connect\Arguments\GetProductBulkPricesRequest.cs" />
     <Compile Include="Infrastructure\Connect\Arguments\GetSupportedCurrenciesRequest.cs" />
@@ -224,18 +236,20 @@
     <Compile Include="Extensions\SimpleTypesExtensions.cs" />
     <Compile Include="Extensions\UrlExtensionMethods.cs" />
     <Compile Include="Extensions\ValidateJsonAntiForgeryTokenAttribute.cs" />
+    <Compile Include="Infrastructure\Pipelines\LoggedIn\MergeCarts.cs" />
     <Compile Include="Infrastructure\ServicesConfigurator.cs" />
-    <Compile Include="Infrastructure\SitecorePipelines\ApplyVaryByUrlPath.cs" />
-    <Compile Include="Infrastructure\SitecorePipelines\ExcludeUrlTracking.cs" />
-    <Compile Include="Infrastructure\SitecorePipelines\ResetContact.cs" />
-    <Compile Include="Infrastructure\SitecorePipelines\VaryByCurrency.cs" />
+    <Compile Include="Infrastructure\Pipelines\AddCommerceAssets.cs" />
+    <Compile Include="Infrastructure\Pipelines\ApplyVaryByUrlPath.cs" />
+    <Compile Include="Infrastructure\Pipelines\ExcludeUrlTracking.cs" />
+    <Compile Include="Infrastructure\Pipelines\ResetContact.cs" />
+    <Compile Include="Infrastructure\Pipelines\LoggedIn\SetCommerceUser.cs" />
+    <Compile Include="Infrastructure\Pipelines\VaryByCurrency.cs" />
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Managers\BaseManager.cs" />
     <Compile Include="Managers\CartManager.cs" />
     <Compile Include="Managers\CatalogManager.cs" />
     <Compile Include="Managers\CountryManager.cs" />
     <Compile Include="Managers\GiftCardManager.cs" />
-    <Compile Include="Managers\LookupManager.cs" />
     <Compile Include="Managers\CurrencyManager.cs" />
     <Compile Include="Managers\ProductSearchManager.cs" />
     <Compile Include="Models\Address.cs" />
@@ -249,6 +263,7 @@
     <Compile Include="Models\ICatalogCategory.cs" />
     <Compile Include="Managers\InventoryManager.cs" />
     <Compile Include="Models\ICatalogProduct.cs" />
+    <Compile Include="Models\ICommerceUser.cs" />
     <Compile Include="Models\IParty.cs" />
     <Compile Include="Models\IProductVariant.cs" />
     <Compile Include="Models\ICatalogProductVariant.cs" />
@@ -259,11 +274,11 @@
     <Compile Include="Managers\PaymentManager.cs" />
     <Compile Include="Managers\PricingManager.cs" />
     <Compile Include="Managers\ShippingManager.cs" />
-    <Compile Include="Managers\StorefrontManager.cs" />
+    <Compile Include="StorefrontContext.cs" />
     <Compile Include="Models\QueryFacet.cs" />
     <Compile Include="Models\QuerySortField.cs" />
     <Compile Include="Models\SearchOptions.cs" />
-    <Compile Include="Models\VisitorContext.cs" />
+    <Compile Include="Models\CommerceUser.cs" />
     <Compile Include="Models\CurrencyInformationModel.cs" />
     <Compile Include="Models\InputModels\AddCartLineInputModel.cs" />
     <Compile Include="Models\InputModels\CancelOrderInputModel.cs" />
@@ -291,7 +306,6 @@
     <Compile Include="Models\InputModels\SignUpForNotificationInputModel.cs" />
     <Compile Include="Models\InputModels\SubmitOrderInputModel.cs" />
     <Compile Include="Models\InputModels\UpdateCartLineInputModel.cs" />
-    <Compile Include="Models\MailTemplate.cs" />
     <Compile Include="Models\PaginationModel.cs" />
     <Compile Include="Models\PriceTypes.cs" />
     <Compile Include="Models\ProfileModel.cs" />
@@ -309,16 +323,14 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CommerceStorefront.cs" />
     <Compile Include="Models\SitecoreItemBase.cs" />
-    <Compile Include="Repositories\VisitorContextRepository.cs" />
+    <Compile Include="CommerceUserContext.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
-    <Compile Include="StorefrontConstants.cs" />
     <Compile Include="Templates.cs" />
     <Compile Include="Util\CartCacheHelper.cs" />
     <Compile Include="Util\CartCookieHelper.cs" />
-    <Compile Include="Util\CategoryCookieHelper.cs" />
     <Compile Include="Util\EaPlanInfo.cs" />
     <Compile Include="Util\InstallPostStep.cs" />
-    <Compile Include="Util\MailUtil.cs" />
+    <Compile Include="Managers\MailManager.cs" />
     <Compile Include="Util\QueryStringCollection.cs" />
     <Compile Include="Models\CatalogItemContext.cs" />
     <Compile Include="Util\StringUtility.cs" />
@@ -335,7 +347,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
