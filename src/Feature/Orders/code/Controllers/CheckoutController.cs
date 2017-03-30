@@ -112,30 +112,25 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             InitLineShippingOptions(model);
             InitLineHrefs(model);
             InitLineImgSrcs(model);
+            InitPaymentClientToken(model);
 
             return model;
         }
 
-        private void InitLineShippingOptions(CheckoutViewModel model)
+        private void InitCountriesRegions(CheckoutViewModel model)
         {
-            if (!model.HasLines)
-                return;
-
-            var prefsResponse = ShippingManager.GetShippingPreferences(model.Cart);
-            if (!prefsResponse.ServiceProviderResult.Success || prefsResponse.Result == null)
+            // Get the proper node in Sitecore...
+            Item countriesRegionsItem = Context.Database.GetItem("/sitecore/Commerce/Commerce Control Panel/Shared Settings/Countries-Regions");
+            foreach (Item countryItem in countriesRegionsItem.Children)
             {
-                return;
+                string country = countryItem["Country Code"] + "|" + countryItem["Name"];
+                model.CountriesRegions[country] = new List<string>();
+                foreach (Item regionItem in countryItem.Children)
+                {
+                    string region = regionItem["Code"] + "|" + regionItem["Name"];
+                    model.CountriesRegions[country].Add(region);
+                }
             }
-
-            var lineShippingOptions = prefsResponse.ServiceProviderResult.LineShippingPreferences.ToList();
-            foreach (CommerceCartLineWithImages line in model.Cart.Lines)
-            {
-                var option = lineShippingOptions?.FirstOrDefault(lso =>
-                    lso.LineId == line.ExternalCartLineId)?.ShippingOptions?.FirstOrDefault();
-                model.LineShippingOptions[line.ExternalCartLineId] = option;
-            }
-
-            SetShippingMethods(model);
         }
 
         private void InitLineHrefs(CheckoutViewModel model)
@@ -164,19 +159,34 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
         }
 
-        private void InitCountriesRegions(CheckoutViewModel model)
+        private void InitLineShippingOptions(CheckoutViewModel model)
         {
-            // Get the proper node in Sitecore...
-            Item countriesRegionsItem = Context.Database.GetItem("/sitecore/Commerce/Commerce Control Panel/Shared Settings/Countries-Regions");
-            foreach (Item countryItem in countriesRegionsItem.Children)
+            if (!model.HasLines)
+                return;
+
+            var prefsResponse = ShippingManager.GetShippingPreferences(model.Cart);
+            if (!prefsResponse.ServiceProviderResult.Success || prefsResponse.Result == null)
             {
-                string country = countryItem["Country Code"] + "|" + countryItem["Name"];
-                model.CountriesRegions[country] = new List<string>();
-                foreach (Item regionItem in countryItem.Children)
-                {
-                    string region = regionItem["Code"] + "|" + regionItem["Name"];
-                    model.CountriesRegions[country].Add(region);
-                }
+                return;
+            }
+
+            var lineShippingOptions = prefsResponse.ServiceProviderResult.LineShippingPreferences.ToList();
+            foreach (CommerceCartLineWithImages line in model.Cart.Lines)
+            {
+                var option = lineShippingOptions?.FirstOrDefault(lso =>
+                    lso.LineId == line.ExternalCartLineId)?.ShippingOptions?.FirstOrDefault();
+                model.LineShippingOptions[line.ExternalCartLineId] = option;
+            }
+
+            SetShippingMethods(model);
+        }
+
+        private void InitPaymentClientToken(CheckoutViewModel model)
+        {
+            var response = PaymentManager.GetPaymentClientToken();
+            if (response.ServiceProviderResult.Success)
+            {
+                model.PaymentClientToken = response.ServiceProviderResult.ClientToken;
             }
         }
 

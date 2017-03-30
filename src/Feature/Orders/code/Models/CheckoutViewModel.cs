@@ -34,6 +34,8 @@ namespace Sitecore.Feature.Commerce.Orders.Models
         public IDictionary<string, ShippingOption> LineShippingOptions { get; set; } =
             new Dictionary<string, ShippingOption>();
 
+        public string PaymentClientToken { get; set; }
+
         public IDictionary<string, string> ShippingOptions { get; set; } =
             new Dictionary<string, string>();
 

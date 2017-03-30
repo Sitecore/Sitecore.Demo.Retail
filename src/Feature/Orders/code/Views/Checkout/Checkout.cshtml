@@ -1,14 +1,14 @@
 ﻿@*//-----------------------------------------------------------------------
-    // Copyright 2016 Sitecore Corporation A/S
-    // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+        // Copyright 2016 Sitecore Corporation A/S
+        // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
     // except in compliance with the License. You may obtain a copy of the License at
-    //       http://www.apache.org/licenses/LICENSE-2.0
-    //
-    // Unless required by applicable law or agreed to in writing, software distributed under the
-    // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-    // either express or implied. See the License for the specific language governing permissions
-    // and limitations under the License.
-    // -------------------------------------------------------------------------------------------*@
+        //       http://www.apache.org/licenses/LICENSE-2.0
+        //
+        // Unless required by applicable law or agreed to in writing, software distributed under the
+        // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+        // either express or implied. See the License for the specific language governing permissions
+        // and limitations under the License.
+        // -------------------------------------------------------------------------------------------*@
 @using Sitecore.Feature.Commerce.Orders.Models
 @using Sitecore.Foundation.SitecoreExtensions.Extensions
 @using Sitecore.Foundation.Commerce.Extensions
@@ -17,7 +17,7 @@
 @model CheckoutViewModel
 
 <div class="row">
-    <div class="col-md-12" data-bind="foreach: Object.keys(groupedLines)">
+    <div class="col-md-10" data-bind="foreach: Object.keys(groupedLines)">
         <div class="m-b-1">
             <h4 data-bind="text: $data"></h4>
             <table class="table">
@@ -63,10 +63,31 @@
             </table>
         </div>
     </div>
+    <div class="col-md-2">
+        &nbsp;<br><br>
+        <div class="panel panel-default affix">
+            <div class="panel-body">
+                <strong>@Html.Sitecore().Field("Items Label", Html.Sitecore().CurrentItem)</strong> &nbsp;
+                <strong class="pull-right" data-bind="text: Cart.Total.Subtotal.toCurrency()"></strong>
+                <br><br>
+                @Html.Sitecore().Field("Shipping Label", Html.Sitecore().CurrentItem)
+                <span class="pull-right" data-bind="text: Cart.Total.ShippingTotal.toCurrency()"></span> &nbsp;
+                <br><br>
+                @Html.Sitecore().Field("Taxes Label", Html.Sitecore().CurrentItem)
+                <span class="pull-right" data-bind="text: Cart.Total.TaxTotal.Amount.toCurrency()"></span> &nbsp;
+                <br><br>
+                <em>@Html.Sitecore().Field("Savings Label", Html.Sitecore().CurrentItem)</em> &nbsp;
+                <em class="pull-right" data-bind="text: Cart.Total.OrderLevelDiscountAmount.toCurrency()"></em>
+                <br><br>
+                <strong>@Html.Sitecore().Field("Total Label", Html.Sitecore().CurrentItem)</strong> &nbsp;
+                <strong class="pull-right" data-bind="text: Cart.Total.Amount.toCurrency()"></strong>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row m-b-1">
-    <div class="col-md-6">
+<div class="row">
+    <div class="col-md-5">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">@Html.Sitecore().Field("Shipment Details Header", Html.Sitecore().CurrentItem)</h3>
@@ -123,32 +144,34 @@
                                        placeholder="@Html.Sitecore().Field("Address City Label", Html.Sitecore().CurrentItem)"
                                        data-bind="value: shippingAddress.City">
                             </div>
-                            <label for="shippingAddress_State" class="col-md-1 control-label">@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)</label>
-                            <div class="col-md-2">
+                            <label for="shippingAddress_State" class="col-md-2 control-label">@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)</label>
+                            <div class="col-md-4">
                                 <select id="shippingAddress_State" class="form-control"
                                         data-bind="value: shippingAddress.State,
-                                               options: model.activeShippingRegions,
-                                               optionsValue: function(c) { return c.split('|')[0]; },
-                                               optionsText: function(c) { return c.split('|')[1]; },
-                                               optionsCaption: '@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)'"></select>
-                            </div>
-                            <label for="shippingAddress_ZipPostalCode" class="col-md-1 control-label">@Html.Sitecore().Field("Address Postal Code Label", Html.Sitecore().CurrentItem)</label>
-                            <div class="col-md-2">
-                                <input type="text" id="shippingAddress_ZipPostalCode" class="form-control input-sm"
-                                       data-bind="value: shippingAddress.ZipPostalCode">
+                                                   options: model.activeShippingRegions,
+                                                   optionsValue: function(c) { return c.split('|')[0]; },
+                                                   optionsText: function(c) { return c.split('|')[1]; },
+                                                   optionsCaption: '@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)'"></select>
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="shippingAddress_ZipPostalCode" class="col-md-2 control-label">@Html.Sitecore().Field("Address Postal Code Label", Html.Sitecore().CurrentItem)</label>
+                            <div class="col-md-3">
+                                <input type="text" id="shippingAddress_ZipPostalCode" class="form-control input-sm"
+                                       data-bind="value: shippingAddress.ZipPostalCode">
+                            </div>
                             <label for="shippingAddress_Country" class="col-md-2 control-label">@Html.Sitecore().Field("Address Country Label", Html.Sitecore().CurrentItem)</label>
-                            <div class="col-md-7">
+                            <div class="col-md-4">
                                 <select id="shippingAddress_Country" class="form-control" onchange="setTimeout(updateShippingRegions, 200);"
                                         data-bind="value: shippingAddress.Country,
-                                               options: Object.keys(model.CountriesRegions),
-                                               optionsValue: function(c) { return c.split('|')[0]; },
-                                               optionsText: function(c) { return c.split('|')[1]; },
-                                               optionsCaption: '@Html.Sitecore().Field("Address Country Label", Html.Sitecore().CurrentItem)'"></select>
+                                                   options: Object.keys(model.CountriesRegions),
+                                                   optionsValue: function(c) { return c.split('|')[0]; },
+                                                   optionsText: function(c) { return c.split('|')[1]; },
+                                                   optionsCaption: '@Html.Sitecore().Field("Address Country Label", Html.Sitecore().CurrentItem)'"></select>
                             </div>
-                            <div class="col-md-2">
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2 col-md-offset-9">
                                 <button type="button" class="btn btn-default" onclick="setShippingAddress(); return false;">
                                     @Html.Sitecore().Field("Address Done Button Text", Html.Sitecore().CurrentItem)
                                 </button>
@@ -192,7 +215,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">@Html.Sitecore().Field("Payment Details Header", Html.Sitecore().CurrentItem)</h3>
@@ -254,41 +277,41 @@
                                        placeholder="@Html.Sitecore().Field("Address City Label", Html.Sitecore().CurrentItem)"
                                        data-bind="value: billingAddress.City">
                             </div>
-                            <label for="billingAddress_State" class="col-md-1 control-label">@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)</label>
-                            <div class="col-md-2">
+                            <label for="billingAddress_State" class="col-md-2 control-label">@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)</label>
+                            <div class="col-md-4">
                                 <select id="billingAddress_State" class="form-control"
                                         data-bind="value: billingAddress.State,
-                                               options: model.activeBillingRegions,
-                                               optionsValue: function(c) { return c.split('|')[0]; },
-                                               optionsText: function(c) { return c.split('|')[1]; },
-                                               optionsCaption: '@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)'"></select>
-                            </div>
-                            <label for="billingAddress_ZipPostalCode" class="col-md-1 control-label">@Html.Sitecore().Field("Address Postal Code Label", Html.Sitecore().CurrentItem)</label>
-                            <div class="col-md-2">
-                                <input type="text" id="billingAddress_ZipPostalCode" class="form-control input-sm"
-                                       data-bind="value: billingAddress.ZipPostalCode">
+                                                   options: model.activeBillingRegions,
+                                                   optionsValue: function(c) { return c.split('|')[0]; },
+                                                   optionsText: function(c) { return c.split('|')[1]; },
+                                                   optionsCaption: '@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)'"></select>
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="billingAddress_ZipPostalCode" class="col-md-2 control-label">@Html.Sitecore().Field("Address Postal Code Label", Html.Sitecore().CurrentItem)</label>
+                            <div class="col-md-3">
+                                <input type="text" id="billingAddress_ZipPostalCode" class="form-control input-sm"
+                                       data-bind="value: billingAddress.ZipPostalCode">
+                            </div>
                             <label for="billingAddress_Country" class="col-md-2 control-label">@Html.Sitecore().Field("Address Country Label", Html.Sitecore().CurrentItem)</label>
-                            <div class="col-md-7">
+                            <div class="col-md-4">
                                 <select id="billingAddress_Country" class="form-control" onchange="setTimeout(updateBillingRegions, 200);"
                                         data-bind="value: billingAddress.Country,
-                                               options: Object.keys(model.CountriesRegions),
-                                               optionsValue: function(c) { return c.split('|')[0]; },
-                                               optionsText: function(c) { return c.split('|')[1]; },
-                                               optionsCaption: '@Html.Sitecore().Field("Address Country Label", Html.Sitecore().CurrentItem)'"></select>
+                                                   options: Object.keys(model.CountriesRegions),
+                                                   optionsValue: function(c) { return c.split('|')[0]; },
+                                                   optionsText: function(c) { return c.split('|')[1]; },
+                                                   optionsCaption: '@Html.Sitecore().Field("Address Country Label", Html.Sitecore().CurrentItem)'"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-9">
+                                <button type="button" class="btn btn-default" onclick="useShippingAddress(); return false;">
+                                    @Html.Sitecore().Field("Use Shipping Address Button Text", Html.Sitecore().CurrentItem)
+                                </button>
                             </div>
                             <div class="col-md-2">
                                 <button type="button" class="btn btn-default" onclick="setBillingAddress(); return false;">
                                     @Html.Sitecore().Field("Address Done Button Text", Html.Sitecore().CurrentItem)
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-11">
-                                <button type="button" class="btn btn-default pull-right" onclick="useShippingAddress(); return false;">
-                                    @Html.Sitecore().Field("Use Shipping Address Button Text", Html.Sitecore().CurrentItem)
                                 </button>
                             </div>
                         </div>
@@ -298,87 +321,20 @@
                     <div class="col-md-12">&nbsp;</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
-                        <strong>@Html.Sitecore().Field("Payment Type Label", Html.Sitecore().CurrentItem)</strong>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Credit Card
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li>
-                                    <a href="#">Credit Card</a>
-                                </li>
-                                <li role="separator" class="divider"></li>
-                                <li>
-                                    <a href="#">Paypal</a>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="col-md-10 col-md-offset-1">
+                        <form id="checkout" method="post" action="/checkout">
+                            <div id="payment-form"></div>
+                            <input type="submit" class="btn btn-success pull-right"
+                                   value="@Html.Sitecore().Field("Confirm Button Text", Html.Sitecore().CurrentItem)">
+                        </form>
                     </div>
                 </div>
-                <div class="row">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label for="creditCardNumber" class="col-md-2 control-label">@Html.Sitecore().Field("Credit Card Number Label", Html.Sitecore().CurrentItem)</label>
-                            <div class="col-md-5">
-                                <input type="number" class="form-control" id="creditCardNumber" placeholder="">
-                            </div>
-                            <label for="creditCartExpiration" class="col-md-2 control-label">@Html.Sitecore().Field("Credit Card Expiration Label", Html.Sitecore().CurrentItem)</label>
-                            <div class="col-md-2">
-                                <input type="text" class="form-control" id="creditCartExpiration" placeholder="MM/YY">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="pull-right">
-                &nbsp;
-                <table class="table table-striped">
-                    <tbody>
-                        <tr>
-                            <td class="text">
-                                <strong>@Html.Sitecore().Field("Items Label", Html.Sitecore().CurrentItem)</strong>
-                            </td>
-                            <td id="confirm-subTotal" class="text-right" pid="subtotal">
-                                <strong data-bind="text: Cart.Total.Subtotal.toCurrency()"></strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text">
-                                @Html.Sitecore().Field("Shipping Label", Html.Sitecore().CurrentItem)
-                            </td>
-                            <td id="confirm-shippingTotal" class="text-right" pid="shippingTotal" data-bind="text: Cart.Total.ShippingTotal.toCurrency()"></td>
-                        </tr>
-                        <tr>
-                            <td class="text">@Html.Sitecore().Field("Taxes Label", Html.Sitecore().CurrentItem)</td>
-                            <td idd="confirm-taxTotal" class="text-right" pid="taxTotal" data-bind="text: Cart.Total.TaxTotal.Amount.toCurrency()"></td>
-                        </tr>
-                        <tr>
-                            <td class="text">
-                                <em>@Html.Sitecore().Field("Savings Label", Html.Sitecore().CurrentItem)</em>
-                            </td>
-                            <td id="confirm-discountTotal" class="text-right">
-                                <em data-bind="text: Cart.Total.OrderLevelDiscountAmount.toCurrency()"></em>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text">
-                                <strong>@Html.Sitecore().Field("Total Label", Html.Sitecore().CurrentItem)</strong>
-                            </td>
-                            <td id="confirm-total" class="text-right">
-                                <strong data-bind="text: Cart.Total.Amount.toCurrency()"></strong>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
 </div>
 
+<script src="https://js.braintreegateway.com/js/braintree-2.27.0.min.js"></script>
 <script>
     var rendering = $("main section div.container");
 
@@ -501,6 +457,21 @@
         // Apply model
         ko.cleanNode(rendering[0]);
         ko.applyBindings(model, rendering[0]);
+
+        /*
+        braintree.setup(model.PaymentClientToken, 'dropin', {
+            container: 'dropin-container',
+            paymentMethodNonceReceived: function (event, nonce) {
+                if (nonce.length > 0) {
+                    checkoutDataViewModel.cardPaymentResultAccessCode = nonce;
+                    checkoutDataViewModel.cardPaymentAcceptCardPrefix = "paypal";
+                }
+            }
+        });
+        */
+        braintree.setup(model.PaymentClientToken, "dropin", {
+		    container: "payment-form"
+		});
     }
 
     function changeBillingAddress() {
