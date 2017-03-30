@@ -43,8 +43,7 @@
                     "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
                     "$values": [
                         "Environment.Habitat.SellableItems-1.0",
-                        "Environment.Habitat.Pricing-1.0",
-                        "Environment.Habitat.Promotions-1.0"
+                        "Environment.Habitat.Pricing-1.0"
                     ]
                 },
                 "PolicyId": "db1674059c344e33899c5f1f45c6508b",
