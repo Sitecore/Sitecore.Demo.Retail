@@ -31,16 +31,138 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{B8310DA3-9580-4F3A-8388-86229EF8BC9D}"
+              uid="{F4EB72BC-EB6F-4F87-89C1-23D6EFA4B594}"
+              p:before="*"
+              s:ds="{A12C0831-708F-47B4-8463-5DCB6AEF417D}"
+              s:id="{45B8E1D9-D522-49E0-B9B7-04C965CC7089}"
+              s:ph="/page-layout/page-header" />
+            <r
+              uid="{F9040CE7-A6CE-4691-8038-3B377AD3FA20}"
+              p:after="r[@uid='{F4EB72BC-EB6F-4F87-89C1-23D6EFA4B594}']"
+              s:ds="{A87C1002-FE99-4358-8B6C-4A2EDB134C5C}"
+              s:id="{B2BDE50B-BC4E-4624-8C45-E3EA443A6C5D}"
+              s:ph="/page-layout/section_e8262130-d43a-4847-b791-acce5bda1635/col-huge_5fcedab7-eeb0-43b0-a06b-b19e1937f085/teaser-placeholder-5_88c7b83d-c9b9-41bd-a32e-78a2ec45b67b" />
+            <r
+              uid="{DA2FEEF4-B747-425E-89B3-167AED0C9DBB}"
+              p:after="r[@uid='{F9040CE7-A6CE-4691-8038-3B377AD3FA20}']"
+              s:ds="{1A6584F1-2988-439E-9E19-2091E3C42BE5}"
+              s:id="{B2BDE50B-BC4E-4624-8C45-E3EA443A6C5D}"
+              s:ph="/page-layout/section_e8262130-d43a-4847-b791-acce5bda1635/col-huge_5fcedab7-eeb0-43b0-a06b-b19e1937f085/teaser-placeholder-2_88c7b83d-c9b9-41bd-a32e-78a2ec45b67b" />
+            <r
+              uid="{174C2603-81AC-4573-81D5-29BBF0CB898D}"
+              p:after="r[@uid='{DA2FEEF4-B747-425E-89B3-167AED0C9DBB}']"
+              s:ds="{0FD2E24D-5369-49FA-A2DE-23BA9C6A46D3}"
+              s:id="{B2BDE50B-BC4E-4624-8C45-E3EA443A6C5D}"
+              s:ph="/page-layout/section_e8262130-d43a-4847-b791-acce5bda1635/col-huge_5fcedab7-eeb0-43b0-a06b-b19e1937f085/teaser-placeholder-3_88c7b83d-c9b9-41bd-a32e-78a2ec45b67b" />
+            <r
+              uid="{61D4BD4F-4AC8-478F-B30E-07BE12334733}"
+              p:after="r[@uid='{174C2603-81AC-4573-81D5-29BBF0CB898D}']"
+              s:ds="{1BB51B87-779C-4A4C-9793-0462EB10D806}"
+              s:id="{B2BDE50B-BC4E-4624-8C45-E3EA443A6C5D}"
+              s:ph="/page-layout/section_e8262130-d43a-4847-b791-acce5bda1635/col-huge_5fcedab7-eeb0-43b0-a06b-b19e1937f085/teaser-placeholder-4_88c7b83d-c9b9-41bd-a32e-78a2ec45b67b" />
+            <r
+              uid="{D7F7E2DD-5973-4102-8111-3230309015B7}"
+              p:after="r[@uid='{61D4BD4F-4AC8-478F-B30E-07BE12334733}']"
+              s:ds="{82A2BE31-851C-4E87-B9E3-69C292FE942A}"
+              s:id="{B2BDE50B-BC4E-4624-8C45-E3EA443A6C5D}"
+              s:ph="/page-layout/section_e8262130-d43a-4847-b791-acce5bda1635/col-huge_5fcedab7-eeb0-43b0-a06b-b19e1937f085/teaser-placeholder-1_88c7b83d-c9b9-41bd-a32e-78a2ec45b67b" />
+            <r
+              uid="{88C7B83D-C9B9-41BD-A32E-78A2EC45B67B}"
+              p:after="r[@uid='{D7F7E2DD-5973-4102-8111-3230309015B7}']"
+              s:ds="{258A7789-D5D1-4D1C-883F-69A4E10D7C2E}"
+              s:id="{5D35C31F-0770-4498-BAB8-C88BEF41F153}"
+              s:ph="/page-layout/section_e8262130-d43a-4847-b791-acce5bda1635/col-huge_5fcedab7-eeb0-43b0-a06b-b19e1937f085" />
+            <r
+              uid="{5FCEDAB7-EEB0-43B0-A06B-B19E1937F085}"
+              p:after="r[@uid='{88C7B83D-C9B9-41BD-A32E-78A2EC45B67B}']"
+              s:id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
+              s:ph="/page-layout/section_e8262130-d43a-4847-b791-acce5bda1635" />
+            <r
+              uid="{E2E379C0-50E6-4392-8038-12795EAEA314}"
+              p:after="r[@uid='{5FCEDAB7-EEB0-43B0-A06B-B19E1937F085}']"
+              s:ds="{C72811DA-8642-451A-9318-5A71E5622A46}"
+              s:id="{EE5A9F3D-C2CB-4710-8053-04D1A7135EBE}"
+              s:ph="/page-layout/section_698c381c-d1c9-4f2e-937a-25a61248e44f/col-huge_66baa4aa-dc47-4ff4-805d-98df9afbbb61" />
+            <r
+              uid="{66BAA4AA-DC47-4FF4-805D-98DF9AFBBB61}"
+              p:after="r[@uid='{E2E379C0-50E6-4392-8038-12795EAEA314}']"
+              s:id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
+              s:ph="/page-layout/section_698c381c-d1c9-4f2e-937a-25a61248e44f" />
+            <r
+              uid="{54BB59F8-BC99-4859-B21E-B6625E8D5C39}"
+              p:after="r[@uid='{66BAA4AA-DC47-4FF4-805D-98DF9AFBBB61}']"
+              s:ds="{0FD2E24D-5369-49FA-A2DE-23BA9C6A46D3}"
+              s:id="{B2BDE50B-BC4E-4624-8C45-E3EA443A6C5D}"
+              s:ph="/page-layout/section/col-huge_abba86c3-0aaf-4e31-a0ab-64b209686ed6/teaser-placeholder-1_56fde856-b45f-45a0-b13c-8e79eda3100b" />
+            <r
+              uid="{1A5BA97F-BBE2-4E3A-9368-8B2A44E8B718}"
+              p:after="r[@uid='{54BB59F8-BC99-4859-B21E-B6625E8D5C39}']"
+              s:ds="{1A6584F1-2988-439E-9E19-2091E3C42BE5}"
+              s:id="{B2BDE50B-BC4E-4624-8C45-E3EA443A6C5D}"
+              s:ph="/page-layout/section/col-huge_abba86c3-0aaf-4e31-a0ab-64b209686ed6/teaser-placeholder-5_56fde856-b45f-45a0-b13c-8e79eda3100b" />
+            <r
+              uid="{9BFE83F0-7FB5-4DC3-A166-5D84C8EE72EA}"
+              p:after="r[@uid='{1A5BA97F-BBE2-4E3A-9368-8B2A44E8B718}']"
+              s:ds="{1BB51B87-779C-4A4C-9793-0462EB10D806}"
+              s:id="{B2BDE50B-BC4E-4624-8C45-E3EA443A6C5D}"
+              s:ph="/page-layout/section/col-huge_abba86c3-0aaf-4e31-a0ab-64b209686ed6/teaser-placeholder-4_56fde856-b45f-45a0-b13c-8e79eda3100b" />
+            <r
+              uid="{5C1F0B6E-3993-4149-B0EE-6263D480D6AA}"
+              p:after="r[@uid='{9BFE83F0-7FB5-4DC3-A166-5D84C8EE72EA}']"
+              s:ds="{0FD2E24D-5369-49FA-A2DE-23BA9C6A46D3}"
+              s:id="{B2BDE50B-BC4E-4624-8C45-E3EA443A6C5D}"
+              s:ph="/page-layout/section/col-huge_abba86c3-0aaf-4e31-a0ab-64b209686ed6/teaser-placeholder-3_56fde856-b45f-45a0-b13c-8e79eda3100b" />
+            <r
+              uid="{9E856F8C-7AE7-4FDB-8354-49606ACB034C}"
+              p:after="r[@uid='{5C1F0B6E-3993-4149-B0EE-6263D480D6AA}']"
+              s:ds="{82A2BE31-851C-4E87-B9E3-69C292FE942A}"
+              s:id="{B2BDE50B-BC4E-4624-8C45-E3EA443A6C5D}"
+              s:ph="/page-layout/section/col-huge_abba86c3-0aaf-4e31-a0ab-64b209686ed6/teaser-placeholder-2_56fde856-b45f-45a0-b13c-8e79eda3100b" />
+            <r
+              uid="{56FDE856-B45F-45A0-B13C-8E79EDA3100B}"
+              p:after="r[@uid='{9E856F8C-7AE7-4FDB-8354-49606ACB034C}']"
+              s:ds="{258A7789-D5D1-4D1C-883F-69A4E10D7C2E}"
+              s:id="{5D35C31F-0770-4498-BAB8-C88BEF41F153}"
+              s:ph="/page-layout/section/col-huge_abba86c3-0aaf-4e31-a0ab-64b209686ed6" />
+            <r
+              uid="{3CDF4DD8-28A4-4185-8C09-A73CAA4633F7}">
+              <p:d />
+            </r>
+            <r
+              uid="{698C381C-D1C9-4F2E-937A-25A61248E44F}"
+              p:after="r[@uid='{69DEF693-8A46-4558-9018-2C5B431824B1}']"
+              s:ds=""
+              s:id="{1149A3C7-C69A-4E6B-A6C3-32687EC2F8D4}"
+              s:par="UseStaticPlaceholderNames&amp;Type=bg-primary&amp;Media&amp;Parallax"
+              s:ph="page-layout" />
+            <r
+              uid="{E8262130-D43A-4847-B791-ACCE5BDA1635}"
+              p:after="r[@uid='{698C381C-D1C9-4F2E-937A-25A61248E44F}']"
+              s:id="{D201A487-5099-48A1-8189-55944F70C6CB}"
+              s:ph="page-layout" />
+            <r
+              uid="{02BB0A3D-1C11-48D0-8B4B-9410D445F9E1}"
               p:after="r[@uid='{4B68986D-5436-4CEA-AFD9-39FD441AC039}']"
+              s:ds="{6E530F0C-DBC3-4764-9A57-6A662D109798}"
+              s:id="{A1AD34DD-535E-47AF-A911-34C57CCC26F6}"
+              s:ph="/page-layout/section/col-narrow-1" />
+            <r
+              uid="{B8310DA3-9580-4F3A-8388-86229EF8BC9D}"
+              p:after="r[@uid='{02BB0A3D-1C11-48D0-8B4B-9410D445F9E1}']"
               s:ds="{FD0BE5D4-F8C2-49A9-816C-E71E826EF11F}"
               s:id="{B2BDE50B-BC4E-4624-8C45-E3EA443A6C5D}"
               s:ph="/page-layout/section/col-narrow-1" />
             <r
-              uid="{02BB0A3D-1C11-48D0-8B4B-9410D445F9E1}"
+              uid="{726AC284-5757-4102-A8D5-0F2D5A4DDC3C}"
               p:after="r[@uid='{B8310DA3-9580-4F3A-8388-86229EF8BC9D}']"
-              s:ds="{6E530F0C-DBC3-4764-9A57-6A662D109798}"
+              s:ds="{E71CA6C1-6A90-431B-ADA9-1D194065F726}"
               s:id="{A1AD34DD-535E-47AF-A911-34C57CCC26F6}"
+              s:ph="/page-layout/section/col-narrow-1" />
+            <r
+              uid="{4CD39C34-28BC-45C4-8B80-3206D5449110}"
+              p:after="r[@uid='{726AC284-5757-4102-A8D5-0F2D5A4DDC3C}']"
+              s:ds="{0FD2E24D-5369-49FA-A2DE-23BA9C6A46D3}"
+              s:id="{B2BDE50B-BC4E-4624-8C45-E3EA443A6C5D}"
               s:ph="/page-layout/section/col-narrow-1" />
           </d>
         </r>
@@ -74,38 +196,23 @@ Languages:
         <p><strong><a href="/shop/SmartTVs_smart tvs">Smart TVs</a></strong></p>
         <p>For some, a smart TV might actually be the route to go. Smart TVs connect to the internet and can stream content that way. They often include applications like Netflix, as does our <a href="~/link.aspx?_id=CC05CB6D14994BEA9F734049C19F1415&amp;_z=z">Helix Sage Smart TV</a>, so customers need&nbsp;fewer devices to get started with their movie or TV-watching. Some connect via wifi, while others might only have an ethernet jack. If you don&rsquo;t want to deal with a lot of wires and want an uncluttered space around the TV, a smart TV might be the best option. If space is no problem, maybe you should try the spectacular 88 inch &nbsp;<a href="/shop/SmartTVs_smart tvs/HelixSage88âLEDSmartHDTV_6042291">Helix Sage 88</a> TV.</p>
         <p><strong><a href="/shop/4K_4k">4K TVs</a></strong></p>
-        <p>You might be seeing a lot start to pop up about 4K TVs and the&nbsp;<a href="/shop/Televisions_televisions/Habitat-Spectra-48”-4K-LED-Ultra-HD-Television_6042262">Spectra Ultra HD</a>&nbsp;is an excellent example. Just as 1080 was the buzz number when HD TVs were coming into fashion, 4K is simply the next step. A 1080p screen has 1,080 pixels in each vertical column and 1,920 pixels in each horizontal row. The 4K defies the convention by counting the horizontal pixels instead. If you&rsquo;re really curious, read on, but the main thing to know right now is that there is not a lot of content out there to actually watch on a 4K TV, so those buying them now are buying prematurely and will be paying a hefty premium to do so &mdash; maybe think about waiting another year or two for 4K TVs to really become mainstream and for 4K content to be more readily available.</p>
-        <p>What&rsquo;s important to note is that the number of pixels on a screen doesn&rsquo;t define the clarity of the image, but rather the density of those pixels does, along with the source resolution. If you have a 24&Prime; 1080p TV and compare it to a 48&Prime; 4K TV, they will have about the same pixel density. So, unless the two TVs are displaying images that are higher than a 1080p resolution, they will have the same level of clarity, but the 4K TV will show it at four times the size, which may still help you see details better. Of course, if a 4K TV and 1080p TV are the same size, the 4K TV will have notably higher image clarity for everything above&nbsp;1080p resolution. Just keep in mind that a TV being 4K doesn&rsquo;t mean you should ignore all the other aspects of the TV.</p>
+        <p>You might be seeing a lot start to pop up about 4K TVs and the&nbsp;<a href="/shop/Televisions_televisions/Habitat-Spectra-48”-4K-LED-Ultra-HD-Television_6042262">Spectra Ultra HD</a>&nbsp;is an excellent example. Just as 1080 was the buzz number when HD TVs were coming into fashion, 4K is simply the next step. A 1080p screen has 1,080 pixels in each vertical column and 1,920 pixels in each horizontal row. The 4K defies the convention by counting the horizontal pixels instead.  Of course, if a 4K TV and 1080p TV are the same size, the 4K TV will have notably higher image clarity for everything above&nbsp;1080p resolution. Just keep in mind that a TV being 4K doesn&rsquo;t mean you should ignore all the other aspects of the TV.</p>
         <p><strong>Display types</strong></p>
-        <p>One of the first things you&rsquo;ll want to do is narrow down what type of&nbsp;TV&nbsp;you want. There are LCD TVs, LED TVs, OLED TVs, and plasma TVs to chose from.</p>
+        <p>One of the first things you&rsquo;ll want to do is narrow down what type of&nbsp;TV&nbsp;you want. There are LCD TVs, LED TVs, OLED TVs, and plasma TVs to chose from.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         <ul>
-            <li><strong>Plasma:</strong>&nbsp;If you&rsquo;re planning on getting a relatively big TV and are going to focus on high-quality cinematic viewing, a plasma TV might be for you. They have excellent color quality and a high contrast ratio which makes for&nbsp;a beautiful image. On top of that, they often have a wide viewing angle, so it&rsquo;s easier for multiple people to gather around the screen and still see a clear picture from where they&rsquo;re sitting, without odd color distortion. They aren&rsquo;t the brightest&nbsp;TVs, so ambient light can become a particular problem for plasmas.
+            <li><strong>LCD:</strong>&nbsp;Liquid Crystal Displays are common to find, and often are the cheapest option. They&rsquo;re energy efficient and usually have good color. In general, they are more basic but can get the job done. However, if you&rsquo;re trying to do high frame-rate gaming, they might not be the best choice.&nbsp;&nbsp;&nbsp;
             <p>&nbsp;</p>
             </li>
-            <li><strong>LCD:</strong>&nbsp;Liquid Crystal Displays are common to find, and often are the cheapest option. They&rsquo;re energy efficient and usually have good color. In general, they are more basic but can get the job done. However, if you&rsquo;re trying to do high frame-rate gaming, they might not be the best choice. In addition, they tend to have limited viewing angles, so the person sitting right at the side of the screen is going to have a hard time seeing images on-screen.
+            <li><strong>LED:</strong>&nbsp;TVs branded as LED are actually just LCD TVs that use LEDs as a backlight for the liquid crystals in the display. If a TV&nbsp;has &ldquo;local dimming,&rdquo; it will have an advantage when it comes to contrast ratio, which is a plus. More so, LED TVs&nbsp;are less power hungry than standard LCDs and plasma.
             <p>&nbsp;</p>
             </li>
-            <li><strong>LED:</strong>&nbsp;TVs branded as LED are actually just LCD TVs that use LEDs as a backlight for the liquid crystals in the display. If a TV&nbsp;has &ldquo;local dimming,&rdquo; it will have an advantage when it comes to contrast ratio, which is a plus. More so, LED TVs&nbsp;are less power hungry than standard LCDs and plasma. Unfortunately though, they may be more expensive.
-            <p>&nbsp;</p>
-            </li>
-            <li><strong>OLED:</strong>&nbsp;Organic Light Emitting Diode TVs actually&nbsp;<em>are</em>&nbsp;different from LCD TVs. OLED TVs use colored LED lights to create the image, so they save on power, though not always as much as LED TVs. They do manage to create a high-quality image, and a bright one at that, so they may be best for those planning on watching TV a lot during brighter hours, when glare could otherwise be a problem. They also have high contrast ratios, as black pixels will actually be emitting no light, which creates&nbsp;great cinematic visuals. Unfortunately, OLED screens are&nbsp;costly to make, so you&rsquo;ll have&nbsp;to pay a bit more. They also suffer from some of the viewing angle problems that affect LCD TVs.</li>
+            <li><strong>OLED:</strong>&nbsp;Organic Light Emitting Diode TVs actually&nbsp;<em>are</em>&nbsp;different from LCD TVs. OLED TVs use colored LED lights to create the image, so they save on power, though not always as much as LED TVs. They do manage to create a high-quality image, and a bright one at that, so they may be best for those planning on watching TV a lot during brighter hours, when glare could otherwise be a problem. </li>
         </ul>
-        <p>&nbsp;</p>
         <p><strong>Contrast ratio</strong></p>
         <p>Many companies determine the contrast ratio of their TVs very differently. The contrast ratio is simply the difference in brightness between the darkest black and whitest white the TV can produce.</p>
-        <p>With a low contrast ratio, black areas of an image might appear more like a washed-out gray, or bright areas may lack vibrancy. You&rsquo;ll often see numbers like 2,000:1 or 5,000:1 to indicate the contrast ratio, and the bigger that ratio, the better&mdash;in theory. Because manufacturers measure and report the ratios differently, you might come across a TV with a 1,000,000:1 contrast ratio that still won&rsquo;t create as pretty an image as a TV which the&nbsp;manufacturers reported as having only a 5,000:1 contrast ratio.</p>
         <p>Your best bet is to check out an external review site that tests contrast ratios. Otherwise, be sure to view the TV in a dark place, as ambient light will make it hard to tell how dark the TV&rsquo;s blacks can get. If you know you might not have time to do all that while browsing, just pay attention to when a contrast ratio is advertised as &ldquo;true&rdquo; or &ldquo;native&rdquo; as opposed to &ldquo;dynamic.&rdquo; The true or native contrast ratios are more likely to give you numbers within reason, which means you&rsquo;ll be able to compare the figure to that of other TVs.</p>
-        <p><strong>Color reproduction and color depth</strong></p>
-        <p>This doesn't apply as much to higher end televisions. However, if you&rsquo;re shopping for a bargain-priced TV, you may want to make sure that you get one with a bit depth of &ldquo;8 bits per channel&rdquo; or more, with particular emphasis on &ldquo;per channel.&rdquo; This will ensure that the&nbsp;TV is able to create enough colors to satisfy the human eye and present photo-realistic images</p>
-        <p><strong>Aspect ratio</strong></p>
-        <p>The aspect ratio is simply the ratio of a television&rsquo;s width to its height. It has no particular effect on the quality of the image created by the TV. It&rsquo;s most important for what you plan to view most, as you&rsquo;ll want to be sure the TV&rsquo;s aspect ratio is close to the aspect ratio of whatever you watch most. If you watch a lot of films, you&rsquo;ll probably be looking toward wider aspect ratios, so you don&rsquo;t have to leave a large portion of your screen functioning as a letterbox. You&rsquo;ll likely&nbsp;find a lot of 16:9, and that will probably be good enough, but if you want to watch a lot of modern, widescreen Hollywood movies, you may look around for 2.4:1.</p>
         <p><strong>Refresh rate</strong></p>
         <p>The refresh rate of your TV is the number of times the image on the screen is refreshed per second. It&rsquo;s measured in hertz, so you might see 60Hz, 120Hz, or even 144Hz listed on the box. Fortunately, you can trust this number a lot more than you could trust the contrast ratio. Higher refresh rates create a smoother flow between images and reduce motion blur, which is handy if you watch a lot of action movies. High refresh rates can also be good for gaming.</p>
-        <p>It&rsquo;s important to keep in mind that the TV&rsquo;s refresh rate might not always match the refresh rate of the content going in. If you&rsquo;re watching a show at 30 frames-per-second, or maybe playing a video game at 60 frames-per-second,&nbsp;on a&nbsp;120Hz TV, the TV will have to do something to fill in the gaps. Some TVs will do what is called interpolation, which creates an image that fits between the images it&rsquo;s given, effectively multiplying&nbsp;the frame rate of whatever you&rsquo;re watching. Sometimes this feature is desirable, other times it creates an odd effect that makes the video too smooth and seem more like a soap opera than a feature film. Keep an eye out for features with the words &ldquo;smooth,&rdquo; &ldquo;motion,&rdquo; or &ldquo;scan&rdquo; in them, as that will likely indicate interpolation &mdash; fortunately, it generally can be turned off.</p>
-        <p>If you&rsquo;re wondering which refresh rate is best, it will be important to think about the content you&rsquo;re most interested in.&nbsp;For the best experience, you want the TV&rsquo;s refresh rate to be evenly divisible by the frame-rate of the content going in. Take film for example, which is generally shot at 24 frames-per-second: both a 120Hz and 144Hz TV can play back 24fps content cleanly as 24 goes into 120 an even five times and goes into 144 an even six.</p>
-        <p><strong>Input lag</strong></p>
-        <p>This specification is of particular importance for gamers. Input lag is the time gap between an input going into the TV and the TV creating the image, and is measured in milliseconds. The greater the lag, the further behind the screen is from what&rsquo;s actually happening in the game. Aside from just making the controls feel unresponsive in a game, a long lag can make playing a fast-paced game impossible.</p>
-        <p>Knowing that, it&rsquo;s obvious that gamers should look for TVs with shorter lag. Some TVs will feature a special gaming mode that allows the input signal to skip through certain processing that would otherwise create lag. Non-gamers don&rsquo;t have to worry much about this, as the TV should still be in sync with the audio, and if a separate audio system&nbsp;is in use, you may&nbsp;be able to adjust the delay of the audio to match the delay of the TV.</p>
         <p><strong>Inputs</strong></p>
         <p>The TVs you look at may have more input options than you will ever know what to do with. What&rsquo;s important is that you know what you will be trying to connect to your TV. If the TV has a coaxial F connector, you don&rsquo;t need to worry about it&nbsp;if you only plan on plugging things in via HMDI and it has plenty of those.</p>
         <p style="margin-bottom: 15px;">To input a signal from a computer, modern game console, or Blu-ray players, you&rsquo;ll probably want HDMI or DisplayPort inputs. If you feel the need to connect an old VCR or DVD player, you&rsquo;ll want to make sure it has analog composite inputs. For a cable box, look for a coaxial cable input. Also, if you&rsquo;re planning to connect a device that uses HDCP (High-bandwidth Digital Content Protection), like many Blu-ray players, you&rsquo;ll want to make sure that the TV you buy also uses HDCP.</p>
