@@ -1,0 +1,17 @@
+{
+    "version": "1.0.0-*",
+    "dependencies": {
+        "Braintree": "3.6.0",
+        "Microsoft.Extensions.DependencyInjection": "1.1.0",
+        "Sitecore.Commerce.Core": "1.0.2301",
+        "Sitecore.Commerce.Plugin.Entitlements": "1.0.2301",
+        "Sitecore.Framework.Configuration": "1.1.42",
+        "Sitecore.Framework.Pipelines": "2.0.65"
+    },
+    "frameworks": {
+        "net452": {
+        }
+    },
+    "configurations": {
+    }
+}
