@@ -233,7 +233,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public decimal GetProductRating(Item productItem)
         {
-            var ratingString = productItem[Templates.Commerce.Product.Fields.Rating];
+            var ratingString = productItem[Templates.Commerce.Product.FieldNames.Rating];
             decimal rating;
             return decimal.TryParse(ratingString, out rating) ? rating : 0;
         }

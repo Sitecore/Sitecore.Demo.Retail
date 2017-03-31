@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Castle.DynamicProxy.Generators.Emitters;
 using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Data;
 using Sitecore.Data.Items;
+using Sitecore.Diagnostics;
 using Sitecore.Feature.Commerce.Catalog.Models;
-using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
@@ -19,25 +14,66 @@ namespace Sitecore.Feature.Commerce.Catalog.Services
     {
         public MediaItem GetProductOverlayImage(ProductViewModel product)
         {
-            var productOverlaysItem = GetProductOverlayImagesItem(product.Item);
+            if (product == null)
+            {
+                throw new ArgumentNullException(nameof(product));
+            }
+
+            Item productOverlaysItem = GetProductOverlayImagesItemFromProductOrContext(product);
             if (productOverlaysItem == null)
+            {
+                Log.Warn($"Could not find ProductOverlayImages content for product {product.ProductId} and site {Context.Site.Name}", this);
                 return null;
+            }
 
             if (product.IsOnSale)
+            {
                 return GetProductOverlayImage(productOverlaysItem, Templates.ProductOverlayImages.Fields.OnSaleOverlayImage);
+            }
             if (product.StockStatus == StockStatus.OutOfStock)
+            {
                 return GetProductOverlayImage(productOverlaysItem, Templates.ProductOverlayImages.Fields.OutOfStockOverlayImage);
+            }
             if (product.StockCount > 0 && product.StockCount < GetAlmostOutOfStockLimit(product.Item))
+            {
                 return GetProductOverlayImage(productOverlaysItem, Templates.ProductOverlayImages.Fields.AlmostOutOfStockLimit);
+            }
             if (product.StockStatus == StockStatus.PreOrderable)
+            {
                 return GetProductOverlayImage(productOverlaysItem, Templates.ProductOverlayImages.Fields.PreorderOverlayImage);
+            }
+            return null;
+        }
+
+        private Item GetProductOverlayImagesItemFromProductOrContext(ProductViewModel product)
+        {
+            var productOverlaysItem = GetProductOverlayImagesItem(product.Item);
+            if (productOverlaysItem != null)
+            {
+                return productOverlaysItem;
+            }
+
+            productOverlaysItem = GetProductOverlayImagesItemFromContext(product, Context.Item);
+            return productOverlaysItem ?? GetProductOverlayImagesItemFromContext(product, Context.Site.GetStartItem());
+        }
+
+        private Item GetProductOverlayImagesItemFromContext(ProductViewModel product, Item contextItem)
+        {
+            if (contextItem == null || product.Item.Database != contextItem.Database)
+                return null;
+            if (product.Item.ID != contextItem.ID && !contextItem.Axes.IsAncestorOf(product.Item))
+            {
+                return GetProductOverlayImagesItem(contextItem);
+            }
             return null;
         }
 
         private double GetAlmostOutOfStockLimit(Item productOverlaysItem)
         {
             if (!productOverlaysItem.FieldHasValue(Templates.ProductOverlayImages.Fields.AlmostOutOfStockLimit))
+            {
                 return double.MaxValue;
+            }
             var returnValue = productOverlaysItem.GetInteger(Templates.ProductOverlayImages.Fields.AlmostOutOfStockLimit);
             return returnValue ?? double.MaxValue;
         }
@@ -49,10 +85,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Services
 
         private Item GetProductOverlayImagesItem(Item contextItem)
         {
-            var overlayImages = contextItem.GetAncestorOrSelfOfTemplate(Templates.ProductOverlayImages.ID);
-            if (overlayImages != null)
-                return overlayImages;
-            return GetProductOverlayImagesItem(Sitecore.Context.Item) ?? GetProductOverlayImagesItem(Sitecore.Context.Site.GetStartItem());
+            return contextItem.GetAncestorOrSelfOfTemplate(Templates.ProductOverlayImages.ID);
         }
     }
 }

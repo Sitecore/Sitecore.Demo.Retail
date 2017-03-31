@@ -318,7 +318,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
         }
 
-        [Obsolete("Please refactor")]
+#warning Please refactor
         private void AddShippingOptionsToResult(CheckoutApiModel result, CommerceCart cart)
         {
             var response = ShippingManager.GetShippingPreferences(cart);
@@ -336,7 +336,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             result.SetErrors(response.ServiceProviderResult);
         }
 
-        [Obsolete("Please refactor")]
+#warning Please refactor
         private void GetAvailableCountries(CheckoutApiModel result)
         {
             var response = CountryManager.GetAvailableCountries();
@@ -350,7 +350,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             result.SetErrors(response.ServiceProviderResult);
         }
 
-        [Obsolete("Please refactor")]
+#warning Please refactor
         private void GetPaymentOptions(CheckoutApiModel result)
         {
             var response = PaymentManager.GetPaymentOptions(CommerceUserContext.Current.UserId);
@@ -365,7 +365,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             result.SetErrors(response.ServiceProviderResult);
         }
 
-        [Obsolete("Please refactor")]
+#warning Please refactor
         private void GetPaymentMethods(CheckoutApiModel result)
         {
             var paymentMethodList = new List<PaymentMethod>();
@@ -382,7 +382,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             result.PaymentMethods = paymentMethodList;
         }
 
-        [Obsolete("Please refactor")]
+#warning Please refactor
         private void GetPaymentClientToken(CheckoutApiModel result)
         {
             var response = PaymentManager.GetPaymentClientToken();
@@ -394,7 +394,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             result.SetErrors(response.ServiceProviderResult);
         }
 
-        [Obsolete("Please refactor")]
+#warning Please refactor
         private void AddShippingMethodsToResult(CheckoutApiModel result)
         {
             var shippingMethodJsonResult = new ShippingMethodApiModel();
@@ -411,7 +411,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             result.SetErrors(response.ServiceProviderResult);
         }
 
-        [Obsolete("Please refactor")]
+#warning Please refactor
         private void GetUserInfo(CheckoutApiModel result)
         {
             if (CommerceUserContext.Current == null)

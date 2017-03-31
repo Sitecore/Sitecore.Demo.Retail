@@ -42,9 +42,8 @@ namespace Sitecore.Foundation.Commerce.Managers
 {
     public class AccountManager : IManager
     {
-        public AccountManager(CartManager cartManager, CustomerServiceProvider customerServiceProvider, ContactFactory contactFactory, MailManager mailManager, StorefrontContext storefrontContext)
+        public AccountManager(CustomerServiceProvider customerServiceProvider, ContactFactory contactFactory, MailManager mailManager, StorefrontContext storefrontContext)
         {
-            CartManager = cartManager;
             CustomerServiceProvider = customerServiceProvider;
             ContactFactory = contactFactory;
             MailManager = mailManager;
@@ -52,11 +51,11 @@ namespace Sitecore.Foundation.Commerce.Managers
         }
 
         private MailManager MailManager { get; }
-        private CartManager CartManager { get; }
         private CustomerServiceProvider CustomerServiceProvider { get; }
         private ContactFactory ContactFactory { get; }
         private StorefrontContext StorefrontContext { get; }
 
+#warning Refactor to use Habitat login
         public bool Login(string userName, string password, bool persistent)
         {
             Assert.ArgumentNotNullOrEmpty(userName, nameof(userName));
@@ -70,13 +69,11 @@ namespace Sitecore.Foundation.Commerce.Managers
             {
                 Tracker.Current.Session.Identify(userName);
             }
-            //CommerceUserContext.Current.SetUser(ResolveCommerceUser().Result);
-            //var anonymousVisitorCart = CartManager.GetCurrentCart().Result;
-            //CartManager.MergeCarts(CommerceUserContext.Current.UserId, anonymousVisitorCart);
 
             return true;
         }
 
+#warning Refactor to use Habitat logout
         public void Logout()
         {
             if (Tracker.Current != null)
@@ -247,6 +244,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<AddPartiesResult, bool>(result, result.Success);
         }
 
+#warning Refactor to use Habitat register
         public ManagerResponse<CreateUserResult, CommerceUser> RegisterUser(RegisterUserInputModel inputModel)
         {
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));
@@ -286,6 +284,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CreateUserResult, CommerceUser>(result, result.CommerceUser);
         }
 
+#warning Refactor to use Habitat change password
         public ManagerResponse<UpdatePasswordResult, bool> UpdateUserPassword(string userName, ChangePasswordInputModel inputModel)
         {
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));
@@ -304,6 +303,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<UpdatePasswordResult, bool>(result, result.Success);
         }
 
+#warning Refactor to use Habitat forgot password
         public ManagerResponse<UpdatePasswordResult, bool> ResetUserPassword(ForgotPasswordInputModel inputModel)
         {
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));

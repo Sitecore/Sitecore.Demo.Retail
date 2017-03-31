@@ -72,15 +72,6 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public ActionResult Login(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
         public ActionResult LogOffAndRedirect()
         {
             AccountManager.Logout();
@@ -196,22 +187,6 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
             {
                 return Json(new ErrorApiModel("Register", e), JsonRequestBehavior.AllowGet);
             }
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public ActionResult Login(LoginViewModel model)
-        {
-            if (ModelState.IsValid && AccountManager.Login(UpdateUserName(model.UserName), model.Password, model.RememberMe))
-            {
-                return RedirectToLocal("/");
-            }
-
-            // If we got this far, something failed, redisplay form
-            ModelState.AddModelError(string.Empty, "The user name or password provided is incorrect.");
-            return View();
         }
 
         [HttpPost]

@@ -56,7 +56,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         private InventoryManager InventoryManager { get; }
         private CartServiceProvider CartServiceProvider { get; }
 
-        [Obsolete("Please refactor - should return an entity not the connect model")]
+#warning Please refactor - should return an entity not the connect model
         public ManagerResponse<CartResult, CommerceCart> GetCart(string userId, bool refresh = false)
         {
             if (refresh)
