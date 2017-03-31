@@ -365,11 +365,25 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         private void SetShippingMethods(CheckoutViewModel model)
         {
             var inputModel = new SetShippingMethodsInputModel();
-            inputModel.OrderShippingPreferenceType = "4";
 
-            PartyInputModelItem address = GetPartyInputModelItem();
+            var digitalLines = model.Cart.Lines.Where(l =>
+                model.LineShippingOptions[l.ExternalCartLineId].Name == "Digital");
             var shipItemsLines = model.Cart.Lines.Where(l =>
                 model.LineShippingOptions[l.ExternalCartLineId].Name == "Ship items");
+
+            if (digitalLines.Any() && shipItemsLines.Any())
+                inputModel.OrderShippingPreferenceType = "4";
+            else if (digitalLines.Any() && !shipItemsLines.Any())
+                inputModel.OrderShippingPreferenceType = "3";
+            else if (!digitalLines.Any() && shipItemsLines.Any())
+                inputModel.OrderShippingPreferenceType = "1";
+            else
+                return;
+
+            PartyInputModelItem address = GetPartyInputModelItem();
+            if (address == null && inputModel.OrderShippingPreferenceType != "3")
+                return;
+
             if (address != null && shipItemsLines.Any())
             {
                 if (address != null)
@@ -386,8 +400,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
 
             var email = Request.Cookies["email"]?.Value;
-            var digitalLines = model.Cart.Lines.Where(l =>
-                model.LineShippingOptions[l.ExternalCartLineId].Name == "Digital");
             if (!string.IsNullOrWhiteSpace(email) && digitalLines.Any())
             {
                 var emailMethod = new ShippingMethodInputModelItem();

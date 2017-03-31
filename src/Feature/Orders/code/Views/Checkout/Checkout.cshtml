@@ -419,10 +419,10 @@
 
 
     function applyModel() {
-    	applyModel.originalHTML = applyModel.originalHTML || rendering[0].innerHTML;
-    	rendering[0].innerHTML = applyModel.originalHTML;
+        applyModel.originalHTML = applyModel.originalHTML || rendering[0].innerHTML;
+        rendering[0].innerHTML = applyModel.originalHTML;
 
-    	// Cart
+        // Cart
         model.groupedLines = {};
         $.each(model.Cart.Lines, function(index, line) {
             var option = model.LineShippingOptions[line.ExternalCartLineId];
@@ -438,7 +438,7 @@
             model.shippingAddress = createAddress();
 
         model.shippingOptionID = Cookies.get('shippingOptionID') ||
-        	_.head(Object.keys(model.ShippingOptions));
+            _.head(Object.keys(model.ShippingOptions));
 
         model.activeShippingRegions = ko.observableArray();
         updateShippingRegions();
@@ -448,7 +448,7 @@
         // Payment Details
         model.billingAddress = JSON.parse(Cookies.get('billingAddress') || null);
         model.isChangingBillingAddress = ko.observable(!model.billingAddress &&
-        	(!model.groupedLines['Ship items'] || !model.shippingAddress));
+            (!model.groupedLines['Ship items'] || !model.shippingAddress));
         if (model.isChangingBillingAddress())
             model.billingAddress = createAddress();
 
@@ -470,14 +470,14 @@
         });
         */
         braintree.setup(model.PaymentClientToken, "dropin", {
-		    container: "payment-form"
-		});
+            container: "payment-form"
+        });
     }
 
     function changeBillingAddress() {
-    	model.billingAddress = model.billingAddress || createAddress();
+        model.billingAddress = model.billingAddress || createAddress();
         updateBillingRegions();
-    	model.isChangingBillingAddress(true);
+        model.isChangingBillingAddress(true);
     }
 
     function cleanGuid(guid) {
@@ -505,8 +505,8 @@
     }
 
     function setBillingAddress() {
-    	if (model.billingAddress && !validateAddress(model.billingAddress))
-    		return;
+        if (model.billingAddress && !validateAddress(model.billingAddress))
+            return;
 
         Cookies.set('billingAddress', JSON.stringify(model.billingAddress));
         model.isChangingBillingAddress(false);
@@ -518,8 +518,8 @@
     }
 
     function setShippingAddress() {
-    	if (!validateAddress(model.shippingAddress))
-    		return;
+        if (!validateAddress(model.shippingAddress))
+            return;
 
         Cookies.set('shippingAddress', JSON.stringify(model.shippingAddress));
         updateModel();
@@ -549,8 +549,8 @@
     }
 
     function updateBillingRegions() {
-    	if (!model.billingAddress || !model.billingAddress.Country)
-    		return;
+        if (!model.billingAddress || !model.billingAddress.Country)
+            return;
 
         var country = getCountryElement(model.billingAddress.Country);
         model.activeBillingRegions(model.CountriesRegions[country] || []);
@@ -564,16 +564,16 @@
     }
 
     function updateShippingRegions() {
-    	if (!model.shippingAddress || !model.shippingAddress.Country)
-    		return;
+        if (!model.shippingAddress || !model.shippingAddress.Country)
+            return;
 
         var country = getCountryElement(model.shippingAddress.Country);
         model.activeShippingRegions(model.CountriesRegions[country] || []);
     }
 
     function useShippingAddress() {
-    	model.billingAddress = null;
-    	setBillingAddress();
+        model.billingAddress = null;
+        setBillingAddress();
     }
 
     function validateAddress(address) {
