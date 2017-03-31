@@ -295,7 +295,6 @@
     <Compile Include="Models\InputModels\GetNearbyStoresInputModel.cs" />
     <Compile Include="Models\InputModels\GetShippingMethodsInputModel.cs" />
     <Compile Include="Models\InputModels\GiftCardPaymentInputModelItem.cs" />
-    <Compile Include="Models\InputModels\OrderConfirmationInputModel.cs" />
     <Compile Include="Models\InputModels\PartyInputModelItem.cs" />
     <Compile Include="Models\InputModels\PaymentInputModel.cs" />
     <Compile Include="Models\InputModels\ProductStockInfoInputModel.cs" />
