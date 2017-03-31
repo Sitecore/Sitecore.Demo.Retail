@@ -47,14 +47,18 @@ cd SQLSERVER:\SQL
 Write-Host "`nStep 3: Remove Websites" -foregroundcolor Yellow
 Foreach ($website in $settings.iis.websites)
 {
-    ManageIIS\Remove-Site -name $website.siteName -Verbose
+	If ( $website.id -ne "sitecore") {
+		ManageIIS\Remove-Site -name $website.siteName -Verbose
+	}
 }
 
 # Step 4: Uninstall Application Pools
 Write-Host "`nStep 4: Remove Application Pools" -foregroundcolor Yellow
 Foreach ($appPool in $settings.iis.appPools)
 {
-    ManageIIS\Remove-AppPool -name $appPool.name -Verbose
+	If ( $appPool.id -ne "sitecore") {
+		ManageIIS\Remove-AppPool -name $appPool.name -Verbose
+	}
 }
 
 # Step 5: Configure host file
