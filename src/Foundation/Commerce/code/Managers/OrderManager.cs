@@ -91,10 +91,18 @@ namespace Sitecore.Foundation.Commerce.Managers
             {
                 CartCacheHelper.InvalidateCartCache(userId);
 
-                var wasEmailSent = MailManager.SendMail("PurchaseConfirmation", inputModel.UserEmail, string.Join(" ", cart.Parties.FirstOrDefault()?.FirstName, cart.Parties.FirstOrDefault()?.LastName), errorResult.Order.TrackingNumber, errorResult.Order.OrderDate, string.Join(", ", cart.Lines.Select(x => x.Product.ProductName)), cart.Total.Amount.ToCurrency(cart.Total.CurrencyCode));
-
-                if (!wasEmailSent)
+                try
                 {
+                    var wasEmailSent = MailManager.SendMail("PurchaseConfirmation", inputModel.UserEmail, string.Join(" ", cart.Parties.FirstOrDefault()?.FirstName, cart.Parties.FirstOrDefault()?.LastName), errorResult.Order.TrackingNumber, errorResult.Order.OrderDate, string.Join(", ", cart.Lines.Select(x => x.Product.ProductName)), cart.Total.Amount.ToCurrency(cart.Total.CurrencyCode));
+                    if (!wasEmailSent)
+                    {
+                        var message = DictionaryPhraseRepository.Current.Get("/System Messages/Orders/Could Not Send Email Error", "Sorry, the email could not be sent");
+                        errorResult.SystemMessages.Add(new SystemMessage(message));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Could not send Purchase Confirmation mail message", ex, this);
                     var message = DictionaryPhraseRepository.Current.Get("/System Messages/Orders/Could Not Send Email Error", "Sorry, the email could not be sent");
                     errorResult.SystemMessages.Add(new SystemMessage(message));
                 }

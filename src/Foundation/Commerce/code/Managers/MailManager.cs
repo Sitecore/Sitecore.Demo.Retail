@@ -20,6 +20,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Web.Mvc;
+using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Models;
@@ -38,40 +39,25 @@ namespace Sitecore.Foundation.Commerce.Managers
             var mailTemplates = GetMailTemplatesRoot();
             if (mailTemplates == null)
             {
+                Log.Error($"Invalid mailTemplatesRoot on the site '{Sitecore.Context.Site.Name}'", this);
                 return false;
             }
 
             var mailTemplate = mailTemplates.Children[templateName];
-            if (mailTemplate == null)
+            if (mailTemplate == null || mailTemplate.IsDerived(Templates.MailTemplate.ID))
             {
                 Log.Error($"Could not find email template {templateName}", this);
                 return false;
             }
 
-            var subjectField = mailTemplate.Fields[Templates.MailTemplate.Fields.Subject];
-            if (subjectField == null)
+            var subject = mailTemplate.Fields[Templates.MailTemplate.Fields.Subject].Value;
+            var body = string.Format(mailTemplate.Fields[Templates.MailTemplate.Fields.Body].Value, bodyParameters);
+            var from = mailTemplate.Fields[Templates.MailTemplate.Fields.From].Value;
+            if (string.IsNullOrEmpty(from) || string.IsNullOrEmpty(subject))
             {
-                Log.Error($"Could not find email subject for template {templateName}", this);
+                Log.Error($"Sender is not set on email template {templateName}", this);
                 return false;
             }
-
-            var bodyField = mailTemplate.Fields[Templates.MailTemplate.Fields.Body];
-            if (bodyField == null)
-            {
-                Log.Error($"Could not find email body message for template {templateName}", this);
-                return false;
-            }
-
-            var fromEmail = mailTemplate.Fields[Templates.MailTemplate.Fields.From];
-            if (fromEmail == null)
-            {
-                Log.Error($"Could not find email sender address for template {templateName}", this);
-                return false;
-            }
-
-            var subject = string.Format(subjectField.Value);
-            var body = string.Format(bodyField.Value, bodyParameters);
-            var from = fromEmail.Value;
 
             return SendMail(toEmail, from, subject, body, string.Empty);
         }
@@ -79,9 +65,11 @@ namespace Sitecore.Foundation.Commerce.Managers
         private Item GetMailTemplatesRoot()
         {
             var mailTemplatesRoot = Context.Site.Properties["mailTemplatesRoot"];
+            if (mailTemplatesRoot == null)
+            {
+                return null;
+            }
             var item = Context.Site.Database.GetItem(mailTemplatesRoot);
-            if (item == null)
-                Log.Warn($"Invalid mailTemplatesRoot on the site '{Sitecore.Context.Site.Name}'", this);
             return item;
         }
 

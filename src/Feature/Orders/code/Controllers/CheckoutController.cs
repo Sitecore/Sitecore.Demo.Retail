@@ -86,7 +86,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         {
             var viewModel = new OrderConfirmationViewModel();
 
-            if (string.IsNullOrWhiteSpace(confirmationId))
+            if (!string.IsNullOrWhiteSpace(confirmationId))
             {
                 var response = OrderManager.GetOrderDetails(CommerceUserContext.Current.UserId, confirmationId);
                 if (response.ServiceProviderResult.Success)
