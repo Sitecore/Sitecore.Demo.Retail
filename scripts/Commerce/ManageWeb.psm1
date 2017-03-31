@@ -1,4 +1,4 @@
-function Invoke-WebRequest
+function Invoke-WebRequestWithWebsiteId
 {
     param 
     (
@@ -17,25 +17,75 @@ function Invoke-WebRequest
         If ($bindingSetting -eq $null) { Write-Host "Website '$($websiteSetting.id)' has no specified binding." -ForegroundColor red; return 1; }
         
         $uri = $bindingSetting.protocol + "://" + $bindingSetting.hostName + ":" + $bindingSetting.port + "/" + $relativeUri
-        $response = (Microsoft.PowerShell.Utility\Invoke-webrequest -uri $uri -UseBasicParsing -TimeoutSec 300)
         
-        If($response.statuscode -ne 200)
+        return ManageWeb\Invoke-WebRequest -Uri $uri -errorString $errorString
+    }
+    end { }
+}
+
+function Invoke-WebRequest
+{
+    param 
+    (
+        [Parameter(Mandatory=$True)][string]$uri,
+                                    [string]$errorString = $null
+    )
+    begin {}
+    process
+    {
+        Try
         {
-            Write-Host "Webrequest failed to '$uri' with status code $($response.statuscode)" -foregroundcolor red
-            Write-Host "Webrequest content: $($response.content)" -foregroundcolor red
+            $response = (Microsoft.PowerShell.Utility\Invoke-webrequest -uri $uri -UseBasicParsing -TimeoutSec 360)
+        
+            If($response.statuscode -ne 200)
+            {
+                Write-Host "Webrequest failed to '$uri' with status code $($response.statuscode)" -foregroundcolor red
+                Write-Host "Webrequest content: $($response.content)" -foregroundcolor red
+                return 1;
+            }
+            ElseIf (($errorString -ne "") -and ($response.content -like $errorString))
+            {
+                Write-Host "Error string '$errorString' detected in web response from '$uri' with status code $($response.statuscode)" -foregroundcolor red
+                Write-Host "Webrequest content: $($response.content)" -foregroundcolor red
+                return 1;
+            }
+
+            Write-verbose "Webrequest successful to '$uri' with status code $($response.statuscode)"
+            return 0;
+        }
+        Catch
+        {
+            Write-Host "Webrequest failed to '$uri' with Error '$($_.Exception.Message)'" -foregroundcolor red
             return 1;
         }
-        ElseIf (($errorString -ne "") -and ($response.content -like $errorString))
+    }
+    end { }
+}
+
+function Test-Certificate
+{
+        param 
+    (
+        [Parameter(Mandatory=$True)][PSCustomObject]$certificateSettingList
+    )
+    begin 
+    {
+        Write-Verbose "Checking Certificates"
+    }
+    process
+    {
+        Foreach ($certificateSetting in $certificateSettingList)
         {
-            Write-Host "Error string '$errorString' detected in web response from '$uri' with status code $($response.statuscode)" -foregroundcolor red
-            Write-Host "Webrequest content: $($response.content)" -foregroundcolor red
-            return 1;
+            Write-Verbose "Checking certificate '$($certificateSetting.dnsName)'"
+            
+            $uri = "https://" + $certificateSetting.dnsName
+        
+            return Invoke-WebRequest -Uri $uri
         }
 
-        Write-verbose "Webrequest successful to '$uri' with status code $($response.statuscode)"
         return 0;
     }
     end { }
 }
 
-Export-ModuleMember Invoke-WebRequest
+Export-ModuleMember Invoke-WebRequestWithWebsiteId, Invoke-WebRequest, Test-Certificate

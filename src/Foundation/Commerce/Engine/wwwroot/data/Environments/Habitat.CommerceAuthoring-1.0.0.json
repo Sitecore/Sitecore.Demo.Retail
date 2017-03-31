@@ -41,13 +41,13 @@
                 "$type": "Sitecore.Commerce.Core.EnvironmentInitializationPolicy, Sitecore.Commerce.Core",
                 "InitialArtifactSets": {
                     "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
-                    "$values": [
-                        "Catalog.DefaultSellableItems-1.0",
-                        "GiftCards.DefaultGiftCard-1.0",
-                        "Environment.Habitat.SellableItems-1.0",
-                        "Environment.Habitat.Pricing-1.0",
-                        "Environment.Habitat.Promotions-1.0"
-                    ]
+						"$values": [
+							"Catalog.DefaultSellableItems-1.0",
+							"Environment.Habitat.SellableItems-1.0",
+							"Environment.Habitat.Pricing-1.0",
+							"Environment.Habitat.Promotions-1.0"
+
+																	]
                 },
                 "PolicyId": "db1674059c344e33899c5f1f45c6508b",
                 "Models": {
@@ -761,7 +761,7 @@
                 "UserName": "",
                 "Password": "",
                 "Server": ".",
-                "Database": "SitecoreCommerce_SharedEnvironments",
+                "Database": "demo.local_SitecoreCommerce.SharedEnvironments",
                 "AdditionalParameters": "",
                 "ConnectTimeout": 120000,
                 "CleanEnvironmentTimeout": 120000,
