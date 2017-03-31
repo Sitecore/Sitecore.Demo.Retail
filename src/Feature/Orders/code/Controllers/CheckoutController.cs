@@ -92,7 +92,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 if (response.ServiceProviderResult.Success)
                 {
                     var order = response.Result;
-                    viewModel.Initialize(RenderingContext.Current.Rendering, order.TrackingNumber, OrderManager.GetOrderStatusName(order.StatusCode));
+                    viewModel.Initialize(RenderingContext.Current.Rendering, order.TrackingNumber, OrderManager.GetOrderStatusName(order.Status));
                 }
             }
 
