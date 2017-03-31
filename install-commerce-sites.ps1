@@ -90,7 +90,7 @@ If((ManageIIS\New-Certificate -certificateSettingList $settings.iis.certificates
 
 # Step 14: Check certificates
 Write-Host "`nStep 14: Check certificates" -foregroundcolor Yellow
-#If((ManageWeb\Test-Certificate -certificateSettingList $settings.iis.certificates -Verbose) -ne 0) { Exit }
+If((ManageWeb\Test-Certificate -certificateSettingList $settings.iis.certificates -Verbose) -ne 0) { Exit }
 
 # Step 15: Fix Authorization Store
 Write-Host "`nStep 15: Setting up Authorization Store" -foregroundcolor Yellow
