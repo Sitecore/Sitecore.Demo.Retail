@@ -1,6 +1,34 @@
 Import-Module PKI
 Import-Module WebAdministration
 
+function Reset-IIS
+{
+	begin
+	{
+		Write-Verbose "Restarting IIS"
+	}
+	process
+	{
+		[System.Reflection.Assembly]::LoadWithPartialName("System.Diagnostics").FullName
+		$procinfo = New-object System.Diagnostics.ProcessStartInfo
+		$procinfo.CreateNoWindow = $true
+		$procinfo.UseShellExecute = $false
+		$procinfo.RedirectStandardOutput = $true
+		$procinfo.RedirectStandardError = $true
+		$procinfo.FileName = "C:\Windows\System32\iisreset.exe"
+		$procinfo.Arguments = "/restart"
+		$proc = New-Object System.Diagnostics.Process
+		$proc.StartInfo = $procinfo
+		[void]$proc.Start()
+		$proc.WaitForExit()
+		$exited = $proc.ExitCode
+		$proc.Dispose()
+		return $exited
+	
+	}
+	end{}
+}
+
 function New-AppPool
 {
     param 
@@ -32,7 +60,7 @@ function New-AppPool
 
                 $pool = invoke-expression "$($env:WINDIR)\system32\inetsrv\Appcmd list apppool $($appPool.name) /config"
 
-                If($pool -Like "*userName=`"$($account.username)*")
+                If($pool -Like "*userName=`"$($account.username)`"*")
                 {
                     Write-Verbose "App Pool identity is correct"
                 }
@@ -429,4 +457,4 @@ function Enable-WindowsAuthentication
     return 0; 
 }
 
-Export-ModuleMember New-AppPool, New-Website, Set-HostFile, Remove-Site, Remove-AppPool, Test-WebService, New-Certificate, Enable-WindowsAuthentication,  Remove-HostEntries
+Export-ModuleMember New-AppPool, New-Website, Set-HostFile, Remove-Site, Remove-AppPool, Test-WebService, New-Certificate, Enable-WindowsAuthentication,  Remove-HostEntries, Reset-IIS
