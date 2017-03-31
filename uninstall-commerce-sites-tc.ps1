@@ -35,7 +35,7 @@ Else
     Write-Host "CSPS PoswerShell Module not installed so assuming no commerce site exists"
 }
 # Step 2: Remove databases from SQL
-Write-Host "`nStep 3: Remove databases from SQL" -foregroundcolor Yellow
+Write-Host "`nStep 2: Remove databases from SQL" -foregroundcolor Yellow
 cd SQLSERVER:\SQL
     
 	ManageSqlServer\Remove-Database -dbname $catalogDBName -Verbose
@@ -44,18 +44,22 @@ cd SQLSERVER:\SQL
 	cd $PSScriptRoot
 
 # Step 3: Uninstall websites
-Write-Host "`nStep 4: Remove Websites" -foregroundcolor Yellow
+Write-Host "`nStep 3: Remove Websites" -foregroundcolor Yellow
 Foreach ($website in $settings.iis.websites)
 {
     ManageIIS\Remove-Site -name $website.siteName -Verbose
 }
 
 # Step 4: Uninstall Application Pools
-Write-Host "`nStep 5: Remove Application Pools" -foregroundcolor Yellow
+Write-Host "`nStep 4: Remove Application Pools" -foregroundcolor Yellow
 Foreach ($appPool in $settings.iis.appPools)
 {
     ManageIIS\Remove-AppPool -name $appPool.name -Verbose
 }
+
+# Step 5: Configure host file
+Write-Host "`nStep 5: Configure Host File" -foregroundcolor Yellow
+If((ManageIIS\Remove-HostEntries -hostEntryList $settings.iis.hostEntries -Verbose) -ne 0) { Exit }
 
 
 

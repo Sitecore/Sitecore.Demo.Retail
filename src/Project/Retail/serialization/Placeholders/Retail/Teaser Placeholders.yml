@@ -1,0 +1,18 @@
+﻿---
+ID: "b28c2930-3471-4a73-91c0-ff36d1d0c2e1"
+Parent: "6631fe51-f2d6-4f25-9dc3-7db52dffaf71"
+Template: "c3b037a0-46e5-4b67-ac7a-a144b962a56f"
+Path: /sitecore/layout/Placeholder Settings/Project/Retail/Teaser Placeholders
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170330T133659Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

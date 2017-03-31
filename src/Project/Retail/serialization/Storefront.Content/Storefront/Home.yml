@@ -71,8 +71,15 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{821101B8-F075-423A-AD6D-136AB29A3191}"
+              uid="{AD002B7C-6B60-4099-A67C-280A3B9CBC38}"
               p:before="*"
+              s:ds="{E8A40684-4165-43FE-A7FA-B3107FA04F6D}"
+              s:id="{FDFCD088-3C9E-49C4-97FF-2DDE5D339BA0}"
+              s:mvt="{EF573560-9CCE-4E56-B0DA-E293829CF949}"
+              s:ph="/page-layout/section/col-narrow-3_3bdfbd2c-5c58-4d47-be52-542dae3b8c1a" />
+            <r
+              uid="{821101B8-F075-423A-AD6D-136AB29A3191}"
+              p:after="r[@uid='{AD002B7C-6B60-4099-A67C-280A3B9CBC38}']"
               s:ds="{20564ED2-6836-4E21-9946-26FFB0644CDD}"
               s:id="{A9B002E1-963F-4F35-B6DB-14A8D4BF171A}"
               s:ph="/page-layout/page-header">
@@ -158,14 +165,8 @@ Languages:
               s:id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
               s:ph="/page-layout/section_2b3b12a8-7d16-4ef4-a9f8-99f264b3ca86" />
             <r
-              uid="{88C976A8-F310-4200-AA9D-44576162DE6A}"
-              p:after="r[@uid='{8C37D6FB-7978-47E8-81C8-6855A2354E95}']"
-              s:ds="{932B892D-9EF3-4965-B80B-0982EAB4D0F1}"
-              s:id="{FDFCD088-3C9E-49C4-97FF-2DDE5D339BA0}"
-              s:ph="/page-layout/section/col-narrow-3_3bdfbd2c-5c58-4d47-be52-542dae3b8c1a" />
-            <r
               uid="{01B562C7-24C5-419F-8F74-4D3FADF47464}"
-              p:after="r[@uid='{88C976A8-F310-4200-AA9D-44576162DE6A}']"
+              p:after="r[@uid='{8C37D6FB-7978-47E8-81C8-6855A2354E95}']"
               s:ds="{CE793B56-A7B3-4A19-B18C-D1271A40499C}"
               s:id="{FDFCD088-3C9E-49C4-97FF-2DDE5D339BA0}"
               s:ph="/page-layout/section/col-narrow-2_3bdfbd2c-5c58-4d47-be52-542dae3b8c1a" />
@@ -279,7 +280,7 @@ Languages:
               p:after="r[@uid='{8BE50F19-C969-4AC1-843F-3BCF8E4FB610}']"
               s:ds=""
               s:id="{1149A3C7-C69A-4E6B-A6C3-32687EC2F8D4}"
-              s:par="Media={656260C8-B8DE-484A-A25B-1FF7CC920752}&amp;Parallax=1"
+              s:par="UseStaticPlaceholderNames&amp;Type=bg-media&amp;Media={656260C8-B8DE-484A-A25B-1FF7CC920752}&amp;Parallax=1"
               s:ph="page-layout" />
             <r
               uid="{8A1BBCAC-F675-4EC3-ACB2-F7D0B8ABBED5}"
