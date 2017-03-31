@@ -31,7 +31,7 @@ $sitecoreWebsiteFolderSetting = ($settings.iis.websites | Where { $_.id -eq "sit
 If ($sitecoreWebsiteFolderSetting -eq $null) { Write-Host "Expected sitecore iis website settings" -ForegroundColor red; exit; }
       
 # Step 0: check if all files exist that are needed
-Write-Host "`nStep 0: Checking if all needed files exist" -foregroundcolor Yellow
+#Write-Host "`nStep 0: Checking if all needed files exist" -foregroundcolor Yellow
 if ((ManageFile\Confirm-Resources $settings.resources -verbose) -ne 0) { Exit }
 
 # Step 1: Enable commerce config
@@ -90,10 +90,18 @@ If((ManageIIS\New-Certificate -certificateSettingList $settings.iis.certificates
 
 # Step 14: Check certificates
 Write-Host "`nStep 14: Check certificates" -foregroundcolor Yellow
-If((ManageWeb\Test-Certificate -certificateSettingList $settings.iis.certificates -Verbose) -ne 0) { Exit }
+#If((ManageWeb\Test-Certificate -certificateSettingList $settings.iis.certificates -Verbose) -ne 0) { Exit }
 
-# Step 15: Bootstrap Commerce Engine and Initialise Environments
-Write-Host "`nStep 15: Test Commerce Engine" -foregroundcolor Yellow
+# Step 15: Fix Authorization Store
+Write-Host "`nStep 15: Setting up Authorization Store" -foregroundcolor Yellow
+If((ManageCommerceServer\Fix-AuthorizationStores -csSiteSetting $settings.sitecoreCommerce.csSite -accountSettingList $settings.accounts -appPoolSettingList $settings.iis.appPools -websiteSettingList $settings.iis.websites -Verbose) -ne 0) { Exit }
+
+# Step 16 Restarting IIS 
+Write-Host "Restarting IIS for after Authorization Store changes"
+If((ManageIIS\Reset-IIS -Verbose) -ne 0) { If((ManageIIS\Reset-IIS -Verbose) -ne 0) { Exit } }
+
+# Step 16: Bootstrap Commerce Engine and Initialise Environments
+Write-Host "`nStep 16: Bootstrap Commerce Engine and Initialise Environments" -foregroundcolor Yellow
 If((ManageWeb\Invoke-WebRequestWithWebsiteId -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/Bootstrap()" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
 If((ManageWeb\Invoke-WebRequestWithWebsiteId -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/InitializeEnvironment(environment='HabitatAuthoring')" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }
 If((ManageWeb\Invoke-WebRequestWithWebsiteId -websiteSettingList $settings.iis.websites -websiteId "commerceEngine" -relativeUri "commerceops/InitializeEnvironment(environment='HabitatShops')" -errorString "*ResponseCode`":`"Error*" -Verbose) -ne 0) { Exit }

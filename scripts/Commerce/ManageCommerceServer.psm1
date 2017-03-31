@@ -214,6 +214,57 @@ function Set-CSConfigurationFile
     }
     end{}
 }
+function Fix-AuthorizationStores
+{
+    param 
+    (
+	     [Parameter(Mandatory=$True)][PSCustomObject]$csSiteSetting,
+		 [Parameter(Mandatory=$True)][PSCustomObject]$accountSettingList,
+         [Parameter(Mandatory=$True)][PSCustomObject]$appPoolSettingList,
+		 [Parameter(Mandatory=$True)][PSCustomObject]$websiteSettingList
+   
+	)
+	begin
+	{
+		Write-Verbose "Adding Catalog Scope"
+	}
+	process
+	{
+	
+	
+		$csServicesWebsiteSetting = ($websiteSettingList | Where { $_.id -eq $csSiteSetting.csServicesWebsiteId} | Select)
+        If ($csServicesWebsiteSetting -eq $null) { Write-Host "Can't derive website from WebsiteId '$($csSiteSetting.csServicesWebsiteId)' when processing CS Site '$($csSiteSetting.name)'." -ForegroundColor red; return 1; }
+		
+		$catalogAppPoolSetting = ($appPoolSettingList | Where { $_.id -eq $csSiteSetting.catalogAppPoolId } | Select)
+		$catalogAccountSetting = ($accountSettingList | Where { $_.id -eq $catalogAppPoolSetting.accountId } | Select)
+        If ($catalogAccountSetting -eq $null) { Write-Host "Can't derive application pool identity from AppPoolId '$($csSiteSetting.catalogAppPoolId)' when processing CS Site '$($csSiteSetting.name)'." -ForegroundColor red; return 1; }
+        
+        $profilesAppPoolSetting = ($appPoolSettingList | Where { $_.id -eq $csSiteSetting.profilesAppPoolId } | Select)
+        $profilesAccountSetting = ($accountSettingList | Where { $_.id -eq $profilesAppPoolSetting.accountId } | Select)
+        If ($profilesAccountSetting -eq $null) { Write-Host "Can't derive application pool identity from AppPoolId '$($csSiteSetting.profilesAppPoolId)' when processing CS Site '$($csSiteSetting.name)'." -ForegroundColor red; return 1; }
+
+		
+		$catalogAzmanFile = $csServicesWebsiteSetting.physicalPath + "\" + $csSiteSetting.name + "_CatalogWebService\CatalogAuthorizationStore.xml"        
+        $profilesAzmanFile = $csServicesWebsiteSetting.physicalPath + "\" + $csSiteSetting.name + "_ProfilesWebService\ProfilesAuthorizationStore.xml" 
+		
+		& 'C:\Program Files (x86)\Commerce Server 11\Tools\CreateCatalogAuthorizationStore.exe' $csSiteSetting.name $catalogAzmanFile 
+		
+        Grant-CSCatalogWebServicePermissions -File $catalogAzmanFile -Identity $catalogAccountSetting.username -Role "Administrator" | Write-Verbose;
+        Grant-CSProfilesWebServicePermissions –File $profilesAzmanFile -Identity $profilesAccountSetting.username -Role "ProfileAdministrator" | Write-Verbose;
+		$currentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+		
+		Grant-CSCatalogWebServicePermissions -File $catalogAzmanFile -Identity $currentUser -Role "Administrator" | Write-Verbose;
+        Grant-CSProfilesWebServicePermissions –File $profilesAzmanFile -Identity $currentUser -Role "ProfileAdministrator" | Write-Verbose;
+		
+		
+		
+		return 0;
+	}
+	end
+	{
+		Write-Verbose "Added Authorization Scope for site: $($csSiteSetting.name)"
+	}
+}
 
 function New-CSWebsite
 {
@@ -481,4 +532,4 @@ function Test-CSWebservices
     end { }
 }
 
-Export-ModuleMember Install-CS, Uninstall-CS, Enable-CS, New-CSWebsite, Remove-CSWebsite, New-CSProfileKey, Import-CSSiteData, Test-CSWebservices
+Export-ModuleMember Install-CS, Uninstall-CS, Enable-CS, New-CSWebsite, Remove-CSWebsite, New-CSProfileKey, Import-CSSiteData, Test-CSWebservices, Fix-AuthorizationStores
