@@ -31,7 +31,7 @@ $sitecoreWebsiteFolderSetting = ($settings.iis.websites | Where { $_.id -eq "sit
 If ($sitecoreWebsiteFolderSetting -eq $null) { Write-Host "Expected sitecore iis website settings" -ForegroundColor red; exit; }
       
 # Step 0: check if all files exist that are needed
-#Write-Host "`nStep 0: Checking if all needed files exist" -foregroundcolor Yellow
+Write-Host "`nStep 0: Checking if all needed files exist" -foregroundcolor Yellow
 if ((ManageFile\Confirm-Resources $settings.resources -verbose) -ne 0) { Exit }
 
 # Step 1: Enable commerce config
