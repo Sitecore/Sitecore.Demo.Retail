@@ -68,9 +68,11 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         private AccountManager AccountManager { get; }
 
         [AllowAnonymous]
-        [HttpGet]
         public ActionResult Checkout()
         {
+            if (Request.HttpMethod == "POST")
+                return SubmitOrder();
+
             var model = CreateViewModel();
             if (!model.HasLines && !Context.PageMode.IsExperienceEditor)
             {
@@ -79,6 +81,33 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 return Redirect(cartPageUrl);
             }
             return View(model);
+        }
+
+        private RedirectResult SubmitOrder()
+        {
+            try
+            {
+                var inputModel = new SubmitOrderInputModel();
+                inputModel.UserEmail = Request.Cookies["email"]?.Value;
+                inputModel.FederatedPayment = new FederatedPaymentInputModelItem();
+                inputModel.FederatedPayment.Amount = GetCart().Total.Amount;
+                inputModel.FederatedPayment.CardPaymentAcceptCardPrefix = "paypal";
+                inputModel.FederatedPayment.CardToken = Request.Form["payment_method_nonce"];
+
+                var response = OrderManager.SubmitVisitorOrder(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
+                if (!response.ServiceProviderResult.Success || response.Result == null || response.ServiceProviderResult.CartWithErrors != null)
+                {
+                    throw new Exception("Error submitting order: " +
+                        string.Join(", ", response.ServiceProviderResult.SystemMessages.Select(sm => sm.Message)));
+                }
+
+                return Redirect($"OrderConfirmation?{ConfirmationIdQueryString}={response.Result.OrderID}");
+            }
+            catch (Exception e)
+            {
+                CommerceLog.Current.Error("SubmitOrder", this, e);
+                throw;
+            }
         }
 
         [AllowAnonymous]
@@ -102,9 +131,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
 
         private CheckoutViewModel CreateViewModel() {
             var model = new CheckoutViewModel();
-            var cartResponse = CartManager.GetCurrentCart(StorefrontManager.CurrentStorefront,
-                VisitorContextRepository.GetCurrent(), true);
-            model.Cart = cartResponse.ServiceProviderResult.Cart as CommerceCart;
+            model.Cart = GetCart();
 
             InitCountriesRegions(model);
             InitShippingOptions(model);
@@ -115,6 +142,13 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             InitPaymentClientToken(model);
 
             return model;
+        }
+
+        private CommerceCart GetCart()
+        {
+            var cartResponse = CartManager.GetCurrentCart(StorefrontManager.CurrentStorefront,
+                VisitorContextRepository.GetCurrent(), true);
+            return cartResponse.ServiceProviderResult.Cart as CommerceCart;
         }
 
         private void InitCountriesRegions(CheckoutViewModel model)
@@ -418,8 +452,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 var response = CartManager.SetShippingMethods(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
                 if (!response.ServiceProviderResult.Success || response.Result == null)
                     throw new Exception("Error setting shipping methods: " +
-                        string.Join(",", response.ServiceProviderResult.SystemMessages.Select(s =>
-                            s.Message)));
+                        string.Join(",", response.ServiceProviderResult.SystemMessages.Select(sm => sm.Message)));
                 model.Cart = response.Result;
             }
             catch (Exception e)

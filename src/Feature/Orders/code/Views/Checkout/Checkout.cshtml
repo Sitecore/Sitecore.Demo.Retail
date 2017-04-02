@@ -199,7 +199,7 @@
                         </div>
                     </div>
                 </div>
-                <div data-bind="if: groupedLines['Digital']">
+                <div>
                     <form class="form-horizontal">
                         <div class="form-group">
                             <label for="email" class="col-md-3 control-label">@Html.Sitecore().Field("Shipment Email Label", Html.Sitecore().CurrentItem)</label>
@@ -325,7 +325,8 @@
                         <form id="checkout" method="post" action="/checkout">
                             <div id="payment-form"></div>
                             <input type="submit" class="btn btn-success pull-right"
-                                   value="@Html.Sitecore().Field("Confirm Button Text", Html.Sitecore().CurrentItem)">
+                                   value="@Html.Sitecore().Field("Confirm Button Text", Html.Sitecore().CurrentItem)"
+                                   data-bind="visible: model.isReadyToCheckout()">
                         </form>
                     </div>
                 </div>
@@ -454,6 +455,9 @@
 
         model.activeBillingRegions = ko.observableArray();
 
+        model.isReadyToCheckout = ko.observable();
+        updateIsReadyToCheckout();
+
         // Apply model
         ko.cleanNode(rendering[0]);
         ko.applyBindings(model, rendering[0]);
@@ -514,7 +518,7 @@
 
     function setEmail() {
         Cookies.set("email", $("#email").val());
-        updateModel();
+        updateIsReadyToCheckout();
     }
 
     function setShippingAddress() {
@@ -554,6 +558,14 @@
 
         var country = getCountryElement(model.billingAddress.Country);
         model.activeBillingRegions(model.CountriesRegions[country] || []);
+    }
+
+    function updateIsReadyToCheckout() {
+        var hasAddress = (model.groupedLines['Ship items'] &&
+            model.groupedLines['Ship items'].length &&
+            Cookies.get('shippingAddress')) ||
+            Cookies.get('billingAddress');
+        model.isReadyToCheckout(Cookies.get('email') && hasAddress);
     }
 
     function updateModel() {
