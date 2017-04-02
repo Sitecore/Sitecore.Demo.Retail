@@ -44,8 +44,9 @@
                             </a>
                         </td>
                         <td class="cart-quantity" style="width: 10%;">
-                            <input pid="quantity" type="number" class="form-control form-control-quantity"
-                                   placeholder="1" data-bind="value: $data.Quantity">
+                            <input pid="quantity" type="number" class="form-control form-control-quantity" placeholder="1"
+                                data-bind="value: $data.Quantity, attr: {'data-ExternalCartLineId': $data.ExternalCartLineId}"
+                                onfocusout="var input = this; setTimeout(function() { updateLineItem(input); }, 200);">
                         </td>
                         <td class="cart-price text-right hidden-xs">
                             <span pid="price" data-bind="text: $data.Product.Price.Amount.toCurrency()"></span>
@@ -54,8 +55,8 @@
                             <strong pid="total" data-bind="text: $data.Total.Amount.toCurrency()"></strong>
                         </td>
                         <td class="cart-delete">
-                            <a pid="remove" class="delete-item" data-bind="click: deleteLineItem">
-                                <span class="glyphicon glyphicon-remove icon-md"></span>
+                            <a pid="remove" class="delete-item" href="#" data-bind="click: deleteLineItem">
+                              <span class="glyphicon glyphicon-remove icon-md"></span>
                             </a>
                         </td>
                     </tr>
@@ -306,7 +307,7 @@
                         <div class="form-group">
                             <div class="col-md-9">
                                 <button type="button" class="btn btn-default" onclick="useShippingAddress(); return false;"
-                                        data-bind="visible: model.groupedLines['Ship items'] && model.groupedLines['Ship items'].length">
+                                    data-bind="visible: model.groupedLines['Ship items'] && model.groupedLines['Ship items'].length">
                                     @Html.Sitecore().Field("Use Shipping Address Button Text", Html.Sitecore().CurrentItem)
                                 </button>
                             </div>
@@ -504,11 +505,11 @@
     }
 
     function deleteLineItem(cartLine, event) {
-    	var $target = $(event.target);
-    	$target.attr('class', 'icon-md fa fa-refresh fa-spin fa-3x fa-fw');
-    	AJAXPost('//retail.dev.local/api/storefront/cart/DeleteLineItem',
-    		JSON.stringify({ExternalCartLineId: cartLine.ExternalCartLineId}),
-    		updateModel);
+        var $target = $(event.target);
+        $target.attr('class', 'icon-md fa fa-refresh fa-spin fa-3x fa-fw');
+        AJAXPost(StorefrontUri('api/storefront/cart/DeleteLineItem'),
+            JSON.stringify({ExternalCartLineId: cartLine.ExternalCartLineId}),
+            updateModel);
     }
 
     function getCountryElement(countryCode) {
@@ -535,6 +536,10 @@
         if (!validateAddress(model.shippingAddress))
             return;
 
+        var $button = $("button[onclick*='setShippingAddress']");
+        $button.width($button.width());
+        $button.html('<i class="fa fa-refresh fa-spin"></i>');
+        $button.prop('disabled', true);
         Cookies.set('shippingAddress', JSON.stringify(model.shippingAddress));
         updateModel();
     }
@@ -578,10 +583,20 @@
         model.isReadyToCheckout(Cookies.get('email') && hasAddress);
     }
 
+    function updateLineItem(input) {
+        var $input = $(input);
+        AJAXPost(StorefrontUri('api/storefront/cart/UpdateLineItem'),
+            JSON.stringify({ExternalCartLineId: $input.attr('data-ExternalCartLineId'), Quantity: $input.val()}),
+            updateModel);
+    }
+
     function updateModel() {
-        AJAXPost(StorefrontUri("api/storefront/checkout/UpdateModel"), '', function(newModel) {
+        AJAXPost(StorefrontUri('api/storefront/checkout/UpdateModel'), '', function(newModel) {
             model = newModel;
-            applyModel();
+            if (!model.HasLines)
+                location.href = StorefrontUri('ShoppingCart');
+            else
+                applyModel();
         });
     }
 
