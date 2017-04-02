@@ -54,7 +54,7 @@
                             <strong pid="total" data-bind="text: $data.Total.Amount.toCurrency()"></strong>
                         </td>
                         <td class="cart-delete">
-                            <a pid="remove" class="delete-item">
+                            <a pid="remove" class="delete-item" data-bind="click: deleteLineItem">
                                 <span class="glyphicon glyphicon-remove icon-md"></span>
                             </a>
                         </td>
@@ -501,6 +501,14 @@
             ZipPostalCode: null,
             Country: 'US'
         }
+    }
+
+    function deleteLineItem(cartLine, event) {
+    	var $target = $(event.target);
+    	$target.attr('class', 'icon-md fa fa-refresh fa-spin fa-3x fa-fw');
+    	AJAXPost('//retail.dev.local/api/storefront/cart/DeleteLineItem',
+    		JSON.stringify({ExternalCartLineId: cartLine.ExternalCartLineId}),
+    		updateModel);
     }
 
     function getCountryElement(countryCode) {

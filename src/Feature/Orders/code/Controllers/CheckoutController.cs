@@ -67,6 +67,8 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         private OrderManager OrderManager { get; }
         private AccountManager AccountManager { get; }
 
+        #region CheckoutRenderingMethods
+
         [AllowAnonymous]
         public ActionResult Checkout()
         {
@@ -234,6 +236,96 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
         }
 
+        private void SetShippingMethods(CheckoutViewModel model)
+        {
+            var inputModel = new SetShippingMethodsInputModel();
+
+            var digitalLines = model.Cart.Lines.Where(l =>
+                model.LineShippingOptions[l.ExternalCartLineId].Name == "Digital");
+            var shipItemsLines = model.Cart.Lines.Where(l =>
+                model.LineShippingOptions[l.ExternalCartLineId].Name == "Ship items");
+
+            PartyInputModelItem address = GetPartyInputModelItem();
+            string email = Request.Cookies["email"]?.Value;
+            if (digitalLines.Any() && shipItemsLines.Any() &&
+                address != null && !string.IsNullOrWhiteSpace(email))
+                inputModel.OrderShippingPreferenceType = "4";
+            else if (digitalLines.Any() && !shipItemsLines.Any() &&
+                !string.IsNullOrWhiteSpace(email))
+                inputModel.OrderShippingPreferenceType = "3";
+            else if (!digitalLines.Any() && shipItemsLines.Any() &&
+                address != null)
+                inputModel.OrderShippingPreferenceType = "1";
+            else
+                return;
+
+            if (new[] { "4", "1" }.Contains(inputModel.OrderShippingPreferenceType))
+            {
+                if (address != null)
+                    inputModel.ShippingAddresses.Add(address);
+
+                var shipItemsMethod = new ShippingMethodInputModelItem();
+                string shippingOptionID = GetShippingOptionID(model);
+                shipItemsMethod.ShippingMethodID = CleanGuid(shippingOptionID);
+                shipItemsMethod.ShippingMethodName = model.ShippingOptions[shippingOptionID];
+                shipItemsMethod.ShippingPreferenceType = "1";
+                shipItemsMethod.PartyID = "0";
+                shipItemsMethod.LineIDs = shipItemsLines.Select(l => l.ExternalCartLineId).ToList();
+                inputModel.ShippingMethods.Add(shipItemsMethod);
+            }
+
+            if (new[] { "4", "3" }.Contains(inputModel.OrderShippingPreferenceType))
+            {
+                var emailMethod = new ShippingMethodInputModelItem();
+                Item emailItem = Context.Database.GetItem("/sitecore/Commerce/Commerce Control Panel/Shared Settings/Fulfillment Options/Digital/Email");
+                emailMethod.ShippingMethodID = CleanGuid(emailItem.ID.ToString());
+                emailMethod.ShippingMethodName = "Email";
+                emailMethod.ShippingPreferenceType = "3";
+                emailMethod.ElectronicDeliveryEmail = email;
+                emailMethod.ElectronicDeliveryEmailContent = "";
+                emailMethod.LineIDs = digitalLines.Select(l => l.ExternalCartLineId).ToList();
+                inputModel.ShippingMethods.Add(emailMethod);
+            }
+
+            try
+            {
+                var response = CartManager.SetShippingMethods(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
+                if (!response.ServiceProviderResult.Success || response.Result == null)
+                    throw new Exception("Error setting shipping methods: " +
+                        string.Join(",", response.ServiceProviderResult.SystemMessages.Select(sm => sm.Message)));
+                model.Cart = response.Result;
+            }
+            catch (Exception e)
+            {
+                CommerceLog.Current.Error("SetShippingMethods", this, e);
+                throw;
+            }
+
+        }
+
+        private PartyInputModelItem GetPartyInputModelItem()
+        {
+            var shippingAddress = Request.Cookies["shippingAddress"]?.Value;
+            if (shippingAddress == null)
+                return null;
+
+            shippingAddress = HttpUtility.UrlDecode(shippingAddress);
+            var item = JsonConvert.DeserializeObject<PartyInputModelItem>(shippingAddress);
+            item.PartyId = "0";
+            item.ExternalId = "0";
+            return item;
+        }
+
+        private string GetShippingOptionID(CheckoutViewModel model)
+        {
+            var shippingOptionID = Request.Cookies["shippingOptionID"]?.Value;
+            if (shippingOptionID == null)
+                shippingOptionID = model.ShippingOptions.First(so => so.Value == "Ground").Key;
+            return shippingOptionID;
+        }
+
+        #endregion
+
         [AllowAnonymous]
         [HttpGet]
         public ActionResult StartCheckout()
@@ -394,94 +486,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 CommerceLog.Current.Error("GetShippingMethods", this, e);
                 return Json(new BaseJsonResult("GetShippingMethods", e), JsonRequestBehavior.AllowGet);
             }
-        }
-
-        private void SetShippingMethods(CheckoutViewModel model)
-        {
-            var inputModel = new SetShippingMethodsInputModel();
-
-            var digitalLines = model.Cart.Lines.Where(l =>
-                model.LineShippingOptions[l.ExternalCartLineId].Name == "Digital");
-            var shipItemsLines = model.Cart.Lines.Where(l =>
-                model.LineShippingOptions[l.ExternalCartLineId].Name == "Ship items");
-
-            PartyInputModelItem address = GetPartyInputModelItem();
-            string email = Request.Cookies["email"]?.Value;
-            if (digitalLines.Any() && shipItemsLines.Any() &&
-                address != null && !string.IsNullOrWhiteSpace(email))
-                inputModel.OrderShippingPreferenceType = "4";
-            else if (digitalLines.Any() && !shipItemsLines.Any() &&
-                !string.IsNullOrWhiteSpace(email))
-                inputModel.OrderShippingPreferenceType = "3";
-            else if (!digitalLines.Any() && shipItemsLines.Any() &&
-                address != null)
-                inputModel.OrderShippingPreferenceType = "1";
-            else
-                return;
-
-            if (new[] { "4", "1" }.Contains(inputModel.OrderShippingPreferenceType))
-            {
-                if (address != null)
-                    inputModel.ShippingAddresses.Add(address);
-
-                var shipItemsMethod = new ShippingMethodInputModelItem();
-                string shippingOptionID = GetShippingOptionID(model);
-                shipItemsMethod.ShippingMethodID = CleanGuid(shippingOptionID);
-                shipItemsMethod.ShippingMethodName = model.ShippingOptions[shippingOptionID];
-                shipItemsMethod.ShippingPreferenceType = "1";
-                shipItemsMethod.PartyID = "0";
-                shipItemsMethod.LineIDs = shipItemsLines.Select(l => l.ExternalCartLineId).ToList();
-                inputModel.ShippingMethods.Add(shipItemsMethod);
-            }
-
-            if (new[] { "4", "3" }.Contains(inputModel.OrderShippingPreferenceType))
-            {
-                var emailMethod = new ShippingMethodInputModelItem();
-                Item emailItem = Context.Database.GetItem("/sitecore/Commerce/Commerce Control Panel/Shared Settings/Fulfillment Options/Digital/Email");
-                emailMethod.ShippingMethodID = CleanGuid(emailItem.ID.ToString());
-                emailMethod.ShippingMethodName = "Email";
-                emailMethod.ShippingPreferenceType = "3";
-                emailMethod.ElectronicDeliveryEmail = email;
-                emailMethod.ElectronicDeliveryEmailContent = "";
-                emailMethod.LineIDs = digitalLines.Select(l => l.ExternalCartLineId).ToList();
-                inputModel.ShippingMethods.Add(emailMethod);
-            }
-
-            try
-            {
-                var response = CartManager.SetShippingMethods(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
-                if (!response.ServiceProviderResult.Success || response.Result == null)
-                    throw new Exception("Error setting shipping methods: " +
-                        string.Join(",", response.ServiceProviderResult.SystemMessages.Select(sm => sm.Message)));
-                model.Cart = response.Result;
-            }
-            catch (Exception e)
-            {
-                CommerceLog.Current.Error("SetShippingMethods", this, e);
-                throw;
-            }
-
-        }
-
-        private PartyInputModelItem GetPartyInputModelItem()
-        {
-            var shippingAddress = Request.Cookies["shippingAddress"]?.Value;
-            if (shippingAddress == null)
-                return null;
-
-            shippingAddress = HttpUtility.UrlDecode(shippingAddress);
-            var item = JsonConvert.DeserializeObject<PartyInputModelItem>(shippingAddress);
-            item.PartyId = "0";
-            item.ExternalId = "0";
-            return item;
-        }
-
-        private string GetShippingOptionID(CheckoutViewModel model)
-        {
-            var shippingOptionID = Request.Cookies["shippingOptionID"]?.Value;
-            if (shippingOptionID == null)
-                shippingOptionID = model.ShippingOptions.First(so => so.Value == "Ground").Key;
-            return shippingOptionID;
         }
 
         [AllowAnonymous]
