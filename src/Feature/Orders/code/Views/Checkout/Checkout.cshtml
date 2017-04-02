@@ -305,7 +305,8 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-9">
-                                <button type="button" class="btn btn-default" onclick="useShippingAddress(); return false;">
+                                <button type="button" class="btn btn-default" onclick="useShippingAddress(); return false;"
+                                        data-bind="visible: model.groupedLines['Ship items'] && model.groupedLines['Ship items'].length">
                                     @Html.Sitecore().Field("Use Shipping Address Button Text", Html.Sitecore().CurrentItem)
                                 </button>
                             </div>
@@ -454,6 +455,7 @@
             model.billingAddress = createAddress();
 
         model.activeBillingRegions = ko.observableArray();
+        updateBillingRegions();
 
         model.isReadyToCheckout = ko.observable();
         updateIsReadyToCheckout();
@@ -480,7 +482,6 @@
 
     function changeBillingAddress() {
         model.billingAddress = model.billingAddress || createAddress();
-        updateBillingRegions();
         model.isChangingBillingAddress(true);
     }
 
@@ -514,6 +515,7 @@
 
         Cookies.set('billingAddress', JSON.stringify(model.billingAddress));
         model.isChangingBillingAddress(false);
+        updateIsReadyToCheckout();
     }
 
     function setEmail() {
@@ -563,8 +565,8 @@
     function updateIsReadyToCheckout() {
         var hasAddress = (model.groupedLines['Ship items'] &&
             model.groupedLines['Ship items'].length &&
-            Cookies.get('shippingAddress')) ||
-            Cookies.get('billingAddress');
+            JSON.parse(Cookies.get('shippingAddress') || null)) ||
+            JSON.parse(Cookies.get('billingAddress') || null);
         model.isReadyToCheckout(Cookies.get('email') && hasAddress);
     }
 
