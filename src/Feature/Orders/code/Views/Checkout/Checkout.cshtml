@@ -326,7 +326,7 @@
                             <div id="payment-form"></div>
                             <input type="submit" class="btn btn-success pull-right"
                                    value="@Html.Sitecore().Field("Confirm Button Text", Html.Sitecore().CurrentItem)"
-                                   data-bind="visible: model.isReadyToCheckout()">
+                                   data-bind="enable: model.isReadyToCheckout()">
                         </form>
                     </div>
                 </div>

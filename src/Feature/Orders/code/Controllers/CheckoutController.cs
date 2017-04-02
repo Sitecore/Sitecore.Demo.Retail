@@ -405,20 +405,21 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             var shipItemsLines = model.Cart.Lines.Where(l =>
                 model.LineShippingOptions[l.ExternalCartLineId].Name == "Ship items");
 
-            if (digitalLines.Any() && shipItemsLines.Any())
+            PartyInputModelItem address = GetPartyInputModelItem();
+            string email = Request.Cookies["email"]?.Value;
+            if (digitalLines.Any() && shipItemsLines.Any() &&
+                address != null && !string.IsNullOrWhiteSpace(email))
                 inputModel.OrderShippingPreferenceType = "4";
-            else if (digitalLines.Any() && !shipItemsLines.Any())
+            else if (digitalLines.Any() && !shipItemsLines.Any() &&
+                !string.IsNullOrWhiteSpace(email))
                 inputModel.OrderShippingPreferenceType = "3";
-            else if (!digitalLines.Any() && shipItemsLines.Any())
+            else if (!digitalLines.Any() && shipItemsLines.Any() &&
+                address != null)
                 inputModel.OrderShippingPreferenceType = "1";
             else
                 return;
 
-            PartyInputModelItem address = GetPartyInputModelItem();
-            if (address == null && inputModel.OrderShippingPreferenceType != "3")
-                return;
-
-            if (address != null && shipItemsLines.Any())
+            if (new[] { "4", "1" }.Contains(inputModel.OrderShippingPreferenceType))
             {
                 if (address != null)
                     inputModel.ShippingAddresses.Add(address);
@@ -433,8 +434,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 inputModel.ShippingMethods.Add(shipItemsMethod);
             }
 
-            var email = Request.Cookies["email"]?.Value;
-            if (!string.IsNullOrWhiteSpace(email) && digitalLines.Any())
+            if (new[] { "4", "3" }.Contains(inputModel.OrderShippingPreferenceType))
             {
                 var emailMethod = new ShippingMethodInputModelItem();
                 Item emailItem = Context.Database.GetItem("/sitecore/Commerce/Commerce Control Panel/Shared Settings/Fulfillment Options/Digital/Email");
