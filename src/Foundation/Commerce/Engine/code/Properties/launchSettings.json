@@ -14,13 +14,6 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
-    "Sitecore.Foundation.Commerce.Engine": {
-      "commandName": "Project",
-      "launchUrl": "http://habitat.commerceengine.dev.local:5000/commerceops/Bootstrap()",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
     }
   }
 }

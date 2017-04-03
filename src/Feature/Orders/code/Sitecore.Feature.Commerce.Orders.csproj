@@ -48,6 +48,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -70,6 +74,10 @@
     <Reference Include="Sitecore.Commerce.Engine.Connect, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Commerce.Engine.Connect.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Foundation.DependencyInjection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.DependencyInjection.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Foundation.Dictionary">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
@@ -128,6 +136,24 @@
     <Content Include="App_Config\Include\Feature\Feature.Commerce.Orders.Serialization.config" />
     <Content Include="App_Config\Include\Feature\Feature.Commerce.Orders.Processing.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="Scripts\Orders\adjustmentViewModel.js" />
+    <Content Include="Scripts\Orders\cart.js" />
+    <Content Include="Scripts\Orders\checkout.js" />
+    <Content Include="Scripts\Orders\checkoutDataViewModel.js" />
+    <Content Include="Scripts\Orders\countryRegionViewModel.js" />
+    <Content Include="Scripts\Orders\creditCardPaymentViewModel.js" />
+    <Content Include="Scripts\Orders\deliveryAddressViewModel.js" />
+    <Content Include="Scripts\Orders\giftCardPaymentViewModel.js" />
+    <Content Include="Scripts\Orders\lineItemDataViewModel.js" />
+    <Content Include="Scripts\Orders\lineItemListViewModel.js" />
+    <Content Include="Scripts\Orders\minicart.js" />
+    <Content Include="Scripts\Orders\miniCartItemListViewModel.js" />
+    <Content Include="Scripts\Orders\miniCartItemViewModel.js" />
+    <Content Include="Scripts\Orders\miniCartViewModel.js" />
+    <Content Include="Scripts\Orders\orderHeaderModel.js" />
+    <Content Include="Scripts\Orders\orderHeaderViewModel.js" />
+    <Content Include="Scripts\Orders\orders.js" />
+    <Content Include="Scripts\Orders\storeViewModel.js" />
     <Content Include="Views\Cart\_CartSummary.cshtml" />
     <Content Include="Views\Cart\_LineItem.cshtml" />
     <Content Include="Views\Cart\CheckoutButtons.cshtml" />
@@ -136,11 +162,9 @@
     <Content Include="Views\Checkout\_Billing.cshtml" />
     <Content Include="Views\Checkout\_ByItem_SendByEmail.cshtml" />
     <Content Include="Views\Checkout\_ByItem_ShipAll.cshtml" />
-    <Content Include="Views\Checkout\_ByItem_Store.cshtml" />
     <Content Include="Views\Checkout\_CheckoutFooter.cshtml" />
     <Content Include="Views\Checkout\_Confirm.cshtml" />
     <Content Include="Views\Checkout\_Delivery.cshtml" />
-    <Content Include="Views\Checkout\_PickAtStore.cshtml" />
     <Content Include="Views\Checkout\_PickDeliveryByItem.cshtml" />
     <Content Include="Views\Checkout\_SendByEmail.cshtml" />
     <Content Include="Views\Checkout\_ShipAll.cshtml" />
@@ -149,16 +173,29 @@
     <Content Include="Views\Checkout\OrderConfirmation.cshtml" />
     <Content Include="Views\Checkout\StartCheckout.cshtml" />
     <Content Include="Views\Checkout\Checkout.cshtml" />
+    <Content Include="Views\Orders\MyOrder.cshtml" />
+    <Content Include="Views\Orders\MyOrders.cshtml" />
+    <Content Include="Views\Orders\RecentOrders.cshtml" />
     <None Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Models\OrderLineViewModel.cs" />
+    <Compile Include="Models\PaymentInfoViewModel.cs" />
+    <Compile Include="Models\PaymentType.cs" />
+    <Compile Include="Repositories\OrderViewModelRepository.cs" />
+    <Compile Include="Models\OrdersViewModel.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
+    <Compile Include="Repositories\OrdersViewModelRepository.cs" />
+    <Compile Include="Infrastructure\Pipelines\InitializeRoutes.cs" />
     <Compile Include="Infrastructure\Pipelines\RegisterDataModelExtensions.cs" />
     <Compile Include="Models\AddressItemApiModel.cs" />
     <Compile Include="Models\AddressListItemApiModel.cs" />
-    <Compile Include="Models\AddressListApiModel.cs" />
-    <Compile Include="Models\AvailableStatesApiModel.cs" />
+    <Compile Include="Models\AvailableRegionsApiModel.cs" />
+    <Compile Include="Models\CancelOrderApiModel.cs" />
     <Compile Include="Models\CartAdjustmentApiModel.cs" />
     <Compile Include="Models\CartLineApiModel.cs" />
     <Compile Include="Models\CartApiModel.cs" />
@@ -166,6 +203,8 @@
     <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\LineShippingOptionApiModel.cs" />
     <Compile Include="Models\MiniCartApiModel.cs" />
+    <Compile Include="Models\OrderHeaderItemApiModel.cs" />
+    <Compile Include="Models\OrdersApiModel.cs" />
     <Compile Include="Models\ShippingMethodApiModel.cs" />
     <Compile Include="Models\ShippingMethodPerItemApiModel.cs" />
     <Compile Include="Models\ShippingMethodsApiModel.cs" />

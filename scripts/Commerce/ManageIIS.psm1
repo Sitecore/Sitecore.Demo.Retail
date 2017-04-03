@@ -1,6 +1,34 @@
 Import-Module PKI
 Import-Module WebAdministration
 
+function Reset-IIS
+{
+	begin
+	{
+		Write-Verbose "Restarting IIS"
+	}
+	process
+	{
+		[System.Reflection.Assembly]::LoadWithPartialName("System.Diagnostics").FullName
+		$procinfo = New-object System.Diagnostics.ProcessStartInfo
+		$procinfo.CreateNoWindow = $true
+		$procinfo.UseShellExecute = $false
+		$procinfo.RedirectStandardOutput = $true
+		$procinfo.RedirectStandardError = $true
+		$procinfo.FileName = "C:\Windows\System32\iisreset.exe"
+		$procinfo.Arguments = "/restart"
+		$proc = New-Object System.Diagnostics.Process
+		$proc.StartInfo = $procinfo
+		[void]$proc.Start()
+		$proc.WaitForExit()
+		$exited = $proc.ExitCode
+		$proc.Dispose()
+		return $exited
+	
+	}
+	end{}
+}
+
 function New-AppPool
 {
     param 
@@ -17,20 +45,43 @@ function New-AppPool
     {
         Foreach ($appPool in $appPoolSettingList)
         {
+            Write-Verbose "Managing app pool id='$($appPool.id)', name='$($appPool.name)'"
+
+            $account = ($accountSettingList | Where { $_.id -eq $appPool.accountId } | Select)
+            If ($account -eq $null)
+            {
+                Write-Host "Account '$($appPool.accountId)' can't be found in list of supplied accounts when processing application pool '$($appPool.id)'." -ForegroundColor red
+                return 1;
+            }
+
             if (Test-IisAppPool -Name $appPool.name)
             {
-                Write-Verbose "App Pool already exists: $($appPool.id)"
+                Write-Verbose "App Pool already exists"
+
+                $pool = invoke-expression "$($env:WINDIR)\system32\inetsrv\Appcmd list apppool $($appPool.name) /config"
+
+                If($pool -Like "*userName=`"$($account.username)`"*")
+                {
+                    Write-Verbose "App Pool identity is correct"
+                }
+                Else
+                {
+                    $cmd = invoke-expression "$($env:WINDIR)\system32\inetsrv\Appcmd set config /section:applicationPools /`"[name='$($appPool.name)'].processModel.identityType:SpecificUser`" /`"[name='$($appPool.name)'].processModel.userName:$($account.username)`" /`"[name='$($appPool.name)'].processModel.password:$($account.password)`""
+
+                    If($cmd -Like "Applied Configuration Changes*")
+                    {
+                        Write-Verbose "App Pool '$($appPool.name)', identity has been changed to '$($account.username)'"
+                    }
+                    Else
+                    {
+                        Write-Host "Error, could not change app pool '$($appPool.name)' identity to '$($account.username)'" -ForegroundColor red
+                        return 1;
+                    }
+                }
             }
             else 
             {
                 Write-Verbose "Creating App Pool: $($appPool.id)"
-
-                $account = ($accountSettingList | Where { $_.id -eq $appPool.accountId } | Select)
-                If ($account -eq $null)
-                {
-                    Write-Host "Account '$($appPool.accountId)' can't be found in list of supplied accounts when processing application pool '$($appPool.id)'." -ForegroundColor red
-                    return 1;
-                }
 
                 $secpasswd = ConvertTo-SecureString $account.password -AsPlainText -Force
                 $appPoolCredential = New-Object System.Management.Automation.PSCredential ($account.username, $secpasswd)
@@ -59,9 +110,16 @@ function New-Website
     {
         Foreach ($website in $websiteSettingList)
         {
+            Write-Verbose "Managing website '$($website.siteName)'"
+
             if (Test-IisWebsite -Name $website.siteName)
             {
                 Write-Verbose "Website already exists: $($website.id)"
+
+                Foreach ($binding in $website.bindings)
+                {
+                    If((Set-Binding -siteName $website.siteName -protocol $binding.protocol -ipAddress $binding.ipAddress -port $binding.port -dnsName $binding.hostName) -ne 0) { return 1 }
+                }
             }
             else 
             {
@@ -119,6 +177,35 @@ function Set-HostFile
         Write-Verbose "Setting Up Host File Completed"
     }
 }
+
+function Remove-HostEntries
+{
+    param 
+    (
+        [Parameter(Mandatory=$True)][PSCustomObject]$hostEntryList
+    )
+
+    begin 
+    {
+        Write-Verbose "Cleaning up Host File"
+    }
+    process
+    {
+        Foreach ($hostEntry in $hostEntryList)
+        {
+            Write-Verbose "Removing Host Entry: $($hostEntry.hostName)"
+
+            Remove-HostsEntry -HostName $hostEntry.hostName 
+        }
+
+        return 0;
+    }
+    end
+    {
+        Write-Verbose "Cleaning up Host File Completed"
+    }
+}
+
 
 function Remove-Site
 {
@@ -220,6 +307,7 @@ function New-Certificate
         $myCertStoreLocation = "cert:\LocalMachine\My"
         $rootCertStoreLocation = "cert:\LocalMachine\Root"
         $protocol = "https"
+        $ipAddress = "*"
         $port = "443"
 
         Foreach ($certificateSetting in $certificateSettingList)
@@ -295,26 +383,47 @@ function New-Certificate
                 return 1; 
             }
 
-            # Change the IIS metadata so we can see the SSL\Port configuration in IIS Manager
-            $bindingInformation = "*:$($port):$($certificateSetting.dnsName)"
-            $escaped = [Regex]::Escape($bindingInformation)
-            $cmd = invoke-expression "$($env:WINDIR)\system32\inetsrv\Appcmd list site `"$($certificateSetting.siteName)`" /Config"
-            If($cmd -Match $escaped)
+            If((Set-Binding -siteName $certificateSetting.siteName -protocol $protocol -ipAddress $ipAddress -port $port -dnsName $certificateSetting.dnsName) -ne 0) { return 1 }
+        }
+
+        return 0;
+    }
+    end { }  
+}
+
+function Set-Binding
+{
+    param 
+    (
+        [Parameter(Mandatory=$True)][string]$siteName,
+        [Parameter(Mandatory=$True)][string]$protocol,
+        [Parameter(Mandatory=$True)][string]$ipAddress,
+        [Parameter(Mandatory=$True)][string]$port,
+        [Parameter(Mandatory=$True)][string]$dnsName
+    )
+    begin {}
+    process
+    {
+
+        # Change the IIS metadata so we can see the SSL\Port configuration in IIS Manager
+        $bindingInformation = "$($ipAddress):$($port):$($dnsName)"
+        $escaped = [Regex]::Escape($bindingInformation)
+        $cmd = invoke-expression "$($env:WINDIR)\system32\inetsrv\Appcmd list site `"$siteName`" /Config"
+        If($cmd -Match $escaped)
+        {
+            Write-Verbose "Binding already exists for site '$siteName', binding '$bindingInformation'."
+        }
+        Else
+        {
+            $cmd = invoke-expression "$($env:WINDIR)\system32\inetsrv\Appcmd set site /site.name: `"$siteName`" /+`"bindings.[protocol='$protocol',bindingInformation='$bindingInformation',sslFlags='0']`" /commit:apphost"
+            if($cmd -Like "SITE object * changed")
             {
-                Write-Verbose "IIS configuration allready applied."
+                Write-Verbose "Binding successfully set for site '$siteName', binding '$bindingInformation'."
             }
             Else
             {
-                $cmd = invoke-expression "$($env:WINDIR)\system32\inetsrv\Appcmd set site /site.name: `"$($certificateSetting.siteName)`" /+`"bindings.[protocol='https',bindingInformation='$bindingInformation',sslFlags='0']`" /commit:apphost"
-                if($cmd -Like "SITE object * changed")
-                {
-                    Write-Verbose "IIS  successfully bound to host '$($certificateSetting.dnsName)' and port '$port'."
-                }
-                Else
-                {
-                    Write-Host "Error, unable to create IIS metadata for binding of certificate '$($certificateSetting.dnsName)'. Response from command '$cmd'." -ForegroundColor red
-                    return 1; 
-                }
+                Write-Host "Error, unable to create IIS metadata for binding '$dnsName'. Response from command '$cmd'." -ForegroundColor red
+                return 1; 
             }
         }
 
@@ -323,4 +432,29 @@ function New-Certificate
     end { }  
 }
 
-Export-ModuleMember New-AppPool, New-Website, Set-HostFile, Remove-Site, Remove-AppPool, Test-WebService, New-Certificate
+function Enable-WindowsAuthentication
+{
+    $cmd = invoke-expression "$($env:WINDIR)\system32\inetsrv\Appcmd list config /section:windowsAuthentication /clr:4"
+    if($cmd -Like "*enabled=`"true`"*")
+    {
+        Write-Verbose "IIS Windows Authentication already enabled."
+    }
+    Else
+    {
+        $cmd = invoke-expression "$($env:WINDIR)\system32\inetsrv\Appcmd set config /section:windowsAuthentication /enabled:true"
+        if($cmd -Like "Applied configuration changes*")
+        {
+            Write-Verbose "IIS Windows Authentication enabled."
+        }
+        Else
+        {
+            Write-Host "Error, unable to enable Windows Authentication. Response from command '$cmd'." -ForegroundColor red
+
+            return 1;
+        } 
+   }
+
+    return 0; 
+}
+
+Export-ModuleMember New-AppPool, New-Website, Set-HostFile, Remove-Site, Remove-AppPool, Test-WebService, New-Certificate, Enable-WindowsAuthentication,  Remove-HostEntries, Reset-IIS

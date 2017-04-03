@@ -75,9 +75,6 @@
                     <!-- ko if: $root.isShipAll -->
                     <span data-bind="text: $root.shippingMethod().description" pid="lineSippingMethodName"></span>
                     <!-- /ko -->
-                    <!-- ko if: $root.isShipToStore -->
-                    <span data-bind="text: $root.shipToStoreDeliveryMethod().Description" pid="lineSippingMethodName"></span>
-                    <!-- /ko -->
                     <!-- ko if: $root.isShipToEmail -->
                     <span data-bind="text: $root.emailDeliveryMethod().Description" pid="lineSippingMethodName"></span>
                     <!-- /ko -->
@@ -87,29 +84,14 @@
                     <!-- ko if: isLineShipToEmail -->
                     <span data-bind="text: $root.emailDeliveryMethod().Description" pid="lineSippingMethodName"></span>
                     <!-- /ko -->
-                    <!-- ko if: isLineShipToStore -->
-                    <span data-bind="text: $root.shipToStoreDeliveryMethod().Description" pid="lineSippingMethodName"></span>
-                    <!-- /ko -->
                 </p>
-                <div data-bind="if: isLineShipToStore" class="cart-delivery">
-                    <ul data-bind="with: store" pid="lineShippingAddress">
-                        <li pid="lineShippingAddressName" data-bind="text: name, attr: {id: 'confirm-shippingAddressName-' + $parent.externalCartLineId}"></li>
-                        <li pid="lineShippingAddressLine" data-bind="text: address().address1, attr: {id: 'confirm-shippingAddressLine-' + $parent.externalCartLineId}"></li>
-                        <li>
-                            <span pid="lineShippingAddressCity" data-bind="text: address().city, attr: {id: 'confirm-shippingAddressCity-' + $parent.externalCartLineId}"></span>,
-                            <span pid="lineShippingAddressState" data-bind="text: address().state, attr: {id: 'confirm-shippingAddressState-' + $parent.externalCartLineId}"></span>,
-                            <span pid="lineShippingAddressCountry" data-bind="text: address().country, attr: {id: 'confirm-shippingAddressCountry-' + $parent.externalCartLineId}"></span>
-                        </li>
-                        <li pid="lineShippingAddressZipCode" data-bind="text: address().zipPostalCode, attr: {id: 'confirm-shippingAddressZipCode-' + $parent.externalCartLineId}"></li>
-                    </ul>
-                </div>
                 <div data-bind="if: isLineShipAll" class="cart-delivery">
                     <ul data-bind="with: shippingAddress" pid="lineShippingAddress">
                         <li pid="lineShippingAddressName" data-bind="text: name, attr: {id: 'confirm-shippingAddressName-' + $parent.externalCartLineId}"></li>
                         <li pid="lineShippingAddressLine" data-bind="text: address1, attr: {id: 'confirm-shippingAddressLine-' + $parent.externalCartLineId}"></li>
                         <li>
                             <span pid="lineShippingAddressCity" data-bind="text: city, attr: {id: 'confirm-shippingAddressCity-' + $parent.externalCartLineId}"></span>,
-                            <span pid="lineShippingAddressState" data-bind="text: state, attr: {id: 'confirm-shippingAddressState-' + $parent.externalCartLineId}"></span>,
+                            <span pid="lineShippingAddressState" data-bind="text: region, attr: {id: 'confirm-shippingAddressState-' + $parent.externalCartLineId}"></span>,
                             <span pid="lineShippingAddressCountry" data-bind="text: country, attr: {id: 'confirm-shippingAddressCountry-' + $parent.externalCartLineId}"></span>
                         </li>
                         <li pid="lineShippingAddressZipCode" data-bind="text: zipPostalCode, attr: {id: 'confirm-shippingAddressZipCode-' + $parent.externalCartLineId}"></li>
@@ -176,33 +158,6 @@
     </div>
 </div>
 <div class="row">
-    <!-- ko if: isShipToStore -->
-    <div class="col-md-3 col-sm-6 col-xs-6" id="confirm-shippingAddressContainer">
-        <div class="panel panel-default" data-bind="with: store">
-            <div class="panel-heading">
-                <h4 class="panel-title">@ShippingAddress</h4>
-            </div>
-            <div class="panel-body">
-                <ul class="list-unstyled">
-                    <li id="confirm-shippingAddressName" data-bind="text: name"></li>
-                    <li id="confirm-shippingAddressLine" data-bind="text: address().address1"></li>
-                    <li>
-                        <span id="confirm-shippingAddressCity" data-bind="text: address().city"></span>,
-                        <span id="confirm-shippingAddressState" data-bind="text: address().state"></span>,
-                        <span id="confirm-shippingAddressCountry" data-bind="text: address().country"></span>
-                    </li>
-                    <li id="confirm-shippingAddressZipCode" data-bind="text: address().zipPostalCode"></li>
-                </ul>
-            </div>
-            <div class="panel-footer">
-                <a href="#" class="btn btn-default">
-                    <span class="glyphicon glyphicon-edit toBilling"></span>
-                    @EditShippingAddress
-                </a>
-            </div>
-        </div>
-    </div>
-    <!-- /ko -->
     <!-- ko if: isShipAll -->
     <div class="col-md-3 col-sm-6 col-xs-6" id="confirm-shippingAddressContainer">
         <div class="panel panel-default" data-bind="with: shippingAddress">
@@ -214,7 +169,7 @@
                     <li id="confirm-shippingAddressName" data-bind="text: name"></li>
                     <li id="confirm-shippingAddressLine" data-bind="text: address1"></li>
                     <li>
-                        <span id="confirm-shippingAddressCity" data-bind="text: city"></span>, <span id="confirm-shippingAddressState" data-bind="text: state"></span>, <span id="confirm-shippingAddressCountry" data-bind="text: country"></span>
+                        <span id="confirm-shippingAddressCity" data-bind="text: city"></span>, <span id="confirm-shippingAddressState" data-bind="text: region"></span>, <span id="confirm-shippingAddressCountry" data-bind="text: country"></span>
                     </li>
                     <li id="confirm-shippingAddressZipCode" data-bind="text: zipPostalCode"></li>
                 </ul>
@@ -239,7 +194,7 @@
                     <li id="confirm-billingAddressName" data-bind="text: name"></li>
                     <li id="confirm-billingAddressLine" data-bind="text: address1"></li>
                     <li>
-                        <span id="confirm-billingAddressCity" data-bind="text: city"></span>, <span id="confirm-billingAddressState" data-bind="text: state"></span>, <span id="confirm-billingAddressCountry" data-bind="text: country"></span>
+                        <span id="confirm-billingAddressCity" data-bind="text: city"></span>, <span id="confirm-billingAddressState" data-bind="text: region"></span>, <span id="confirm-billingAddressCountry" data-bind="text: country"></span>
                     </li>
                     <li id="confirm-billingAddressZipCode" data-bind="text: zipPostalCode"></li>
                 </ul>

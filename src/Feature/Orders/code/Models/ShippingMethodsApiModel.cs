@@ -25,7 +25,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class ShippingMethodsApiModel : BaseJsonResult
+    public class ShippingMethodsApiModel : BaseApiModel
     {
         public ShippingMethodsApiModel()
         {

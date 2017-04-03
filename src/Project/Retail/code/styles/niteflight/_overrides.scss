@@ -1,0 +1,9 @@
+/* Fixes to cart on mobile */
+@media(max-width: 991px) {
+    .navbar-right li { display: none; }
+    #miniCart-responsive { display: inherit; }
+}
+
+@media (min-width: 992px) {
+    #miniCart-responsive { display: none; }
+}

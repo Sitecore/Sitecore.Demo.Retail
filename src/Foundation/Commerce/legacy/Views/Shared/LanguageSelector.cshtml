@@ -49,7 +49,7 @@
 
     <script type="text/javascript">
         function SwitchToLanguage(language, currentLanguage) {
-            AJAXPost(StorefrontUri("api/storefront/shared/culturechosen"),
+            AJAXPost("/api/storefront/shared/culturechosen",
                 "{\"Culture\":\"" + language + "\"}",
                 function(data, success, sender) {
                     var path = window.location.pathname.replace('/' + currentLanguage + '/', '');

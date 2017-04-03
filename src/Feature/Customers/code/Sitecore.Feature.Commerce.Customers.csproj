@@ -48,6 +48,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Sitecore.Commerce">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Commerce.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.Dictionary">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
     </Reference>
@@ -101,22 +104,56 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Customers.config" />
-    <Content Include="App_Config\Include\Feature\Sitecore.Feature.Commerce.Customers.Serialization.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Commerce.Customers.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Commerce.Customers.Serialization.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="Scripts\Customers\addresses.js" />
+    <Content Include="Scripts\Customers\editprofile.js" />
+    <Content Include="Scripts\Customers\forgotpassword.js" />
+    <Content Include="Scripts\Customers\changepassword.js" />
+    <Content Include="Scripts\Customers\addressListViewModel.js" />
+    <Content Include="Scripts\Customers\addressViewModel.js" />
+    <Content Include="Scripts\Customers\countryRegionViewModel.js" />
+    <Content Include="Scripts\Customers\register.js" />
+    <Content Include="Views\Customers\AddressBook.cshtml" />
+    <Content Include="Views\Customers\Addresses.cshtml" />
+    <Content Include="Views\Customers\ChangePassword.cshtml" />
+    <Content Include="Views\Customers\EditProfile.cshtml" />
+    <Content Include="Views\Customers\ForgotPassword.cshtml" />
+    <Content Include="Views\Customers\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Customers\Login.cshtml" />
+    <Content Include="Views\Customers\Logoff.cshtml" />
+    <Content Include="Views\Customers\Profile.cshtml" />
+    <Content Include="Views\Customers\Register.cshtml" />
     <None Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Infrastructure\Pipelines\InitializeRoutes.cs" />
+    <Compile Include="Models\AddressItemBaseApiModel.cs" />
+    <Compile Include="Models\AddressItemApiModel.cs" />
+    <Compile Include="Models\AddressListItemApiModel.cs" />
+    <Compile Include="Models\CardPaymentAcceptUrlApiModel.cs" />
+    <Compile Include="Models\ChangePasswordApiModel.cs" />
+    <Compile Include="Models\ForgotPasswordApiModel.cs" />
+    <Compile Include="Models\ProfileApiModel.cs" />
+    <Compile Include="Models\RegisterApiModel.cs" />
+    <Compile Include="Models\UserApiModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\web.config" />
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\Commerce\Customers\" />
+    <ProjectReference Include="..\..\..\Foundation\Commerce\code\Sitecore.Foundation.Commerce.csproj">
+      <Project>{662345AC-23EE-4125-87A6-0785795C2409}</Project>
+      <Name>Sitecore.Foundation.Commerce</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

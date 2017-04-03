@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <r>
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -53,16 +53,14 @@ SharedFields:
           ph="navbar-activity"
           uid="{831087C9-F9D1-46C7-9F5C-BE1D51DAF845}" />
         <r
-          id="{B6C0593E-1C35-4C61-8DB5-E7C7AA19D955}"
+          id="{604ECBB6-2BBF-45AF-AC6E-BA9F853E7A03}"
           ph="navbar-activity"
-          uid="{492E25F4-848A-4A6A-9C15-7C777FBF2572}" />
+          uid="{A9A13A5C-0737-4BA7-8159-A65739F51C16}" />
         <r
-          ds=""
           id="{9AA8E388-A6BD-46E1-A73B-DDEF601DE6F8}"
           ph="navbar-activity"
           uid="{5DF12722-70B3-42FE-9B30-A5F939681085}" />
         <r
-          ds=""
           id="{A2216CA7-B205-4042-A345-72117D0086C3}"
           par="UseStaticPlaceholderNames=1"
           ph="page-layout"
@@ -86,7 +84,6 @@ SharedFields:
           ph="/page-layout/section"
           uid="{3D0EDBE2-D845-43FF-85F7-29D3471A3168}" />
         <r
-          ds=""
           id="{1CA6E4C1-B92E-48E4-941B-466057ABC752}"
           ph="/page-layout/section/col-narrow-1"
           uid="{CB175AA1-8CF5-4FFF-882E-CA75C7862BE5}" />
@@ -108,7 +105,6 @@ SharedFields:
           ph="/page-layout/section/col-wide-1"
           uid="{3692090F-2F41-4B33-BF68-0F995F6EB535}" />
         <r
-          ds=""
           id="{4B8E6995-6881-47B2-97B8-2D89478B6EAE}"
           ph="/page-layout/section/col-wide-1"
           uid="{C4014A56-FA2D-46CC-B696-483D5543BCED}" />
@@ -144,22 +140,6 @@ SharedFields:
           id="{CED18F24-62C2-445E-B0D9-045E3325297B}"
           ph="page-sidebar"
           uid="{DE89A140-07A6-437F-9C7C-347C1A696AE3}" />
-      </d>
-      <d
-        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-        l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
-        <r
-          id="{1CA6E4C1-B92E-48E4-941B-466057ABC752}"
-          ph="left"
-          uid="{79A552ED-DC24-4BBA-B5F3-1B2013C2E37A}" />
-        <r
-          id="{F66A2EE3-93A5-45C3-8CAA-D8B85E8DCF8E}"
-          ph="left"
-          uid="{22A6B818-B13E-4FD0-A52A-7DD2F96C2030}" />
-        <r
-          id="{CFB07D55-452F-40D5-AA86-55D30F3C120D}"
-          ph="center"
-          uid="{EA8CF19E-4C90-475C-9C6F-F92F50527218}" />
       </d>
     </r>
 - ID: "fd4e2050-186c-4375-8b99-e8a85dd7436e"

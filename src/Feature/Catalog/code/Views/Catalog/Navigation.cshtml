@@ -10,6 +10,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 @using Sitecore.Feature.Commerce.Catalog.Models
+@using Sitecore.Foundation.Commerce.Models
 @model NavigationViewModel
 
 @{
@@ -27,7 +28,7 @@
         @{
             foreach (var category in mainCategories)
             {
-                <li>
+                <li class="@(Model.ActiveCategoryID == category.Item.ID ? "active" : "")">
                     <a class="text-uppercase" href="@category.GetLink()" itemid="@category.Item.ID.ToString()">@Html.Sitecore().Field(category.TitleFieldName, category.Item)</a>
                 </li>
             }
@@ -41,7 +42,7 @@
                         @{
                             foreach (var category in secondaryCategories)
                             {
-                                <li><a href="@category.GetLink()" itemid="@category.Item.ID.ToString()">@Html.Sitecore().Field(category.TitleFieldName, category.Item)</a></li>
+                                <li class="@(Model.ActiveCategoryID == category.Item.ID ? "active" : "")"><a href="@category.GetLink()" itemid="@category.Item.ID.ToString()">@Html.Sitecore().Field(category.TitleFieldName, category.Item)</a></li>
                             }
                         }
                     </ul>
@@ -49,14 +50,4 @@
             }
         }
     </ul>
-
-    <script type="text/javascript">
-        if (currentCategory !== null) {
-            var pathname = window.location.pathname;
-            var item = $(".navbar-nav").find('a[itemid="' + currentCategory + '"]');
-            if (item.length) {
-                item.parent().addClass('active');
-            }
-        }
-    </script>
 </div>

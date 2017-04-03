@@ -11,9 +11,6 @@ SharedFields:
 - ID: "6364fd2c-7b9e-482d-b96b-7c324d49011e"
   Hint: Country Code
   Value: CA
-- ID: "f8487720-7f38-40f3-a689-c5ca1722b809"
-  Hint: Country Code
-  Value: CA
 Languages:
 - Language: en
   Versions:

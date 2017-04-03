@@ -17,13 +17,11 @@
 
 using System;
 using System.Web.Mvc;
-using Sitecore.Commerce.Contacts;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
-using Sitecore.Reference.Storefront.Models.JsonResults;
 
 namespace Sitecore.Reference.Storefront.Controllers
 {
@@ -31,25 +29,14 @@ namespace Sitecore.Reference.Storefront.Controllers
     {
         private readonly RenderingModel _model;
 
-        public SharedController([NotNull] CatalogManager catalogManager)
+        public SharedController(CatalogManager catalogManager, StorefrontManager storefrontManager)
         {
-            Assert.ArgumentNotNull(catalogManager, nameof(catalogManager));
-
-            _model = new RenderingModel();
-
             CatalogManager = catalogManager;
+            StorefrontManager = storefrontManager;
         }
 
         public CatalogManager CatalogManager { get; }
-
-        internal RenderingModel CurrentRenderingModel
-        {
-            get
-            {
-                _model.Initialize(RenderingContext.Current.Rendering);
-                return _model;
-            }
-        }
+        public StorefrontManager StorefrontManager { get; }
 
         public ActionResult ErrorsSummary()
         {
@@ -57,11 +44,6 @@ namespace Sitecore.Reference.Storefront.Controllers
         }
 
         public ActionResult LanguageSelector()
-        {
-            return View();
-        }
-
-        public ActionResult ShareAndPrint()
         {
             return View();
         }
@@ -78,15 +60,15 @@ namespace Sitecore.Reference.Storefront.Controllers
 
             try
             {
-                var result = CatalogManager.RaiseCultureChosenPageEvent(StorefrontManager.CurrentStorefront, culture);
+                var result = CatalogManager.RaiseCultureChosenPageEvent(StorefrontManager.Current, culture);
                 success = result.Result;
             }
             catch (Exception e)
             {
-                return Json(new BaseJsonResult("CultureChosen", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("CultureChosen", e), JsonRequestBehavior.AllowGet);
             }
 
-            var json = new BaseJsonResult {Success = success};
+            var json = new BaseApiModel {Success = success};
             return json;
         }
     }

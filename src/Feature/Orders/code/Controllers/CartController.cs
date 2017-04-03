@@ -18,12 +18,11 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Web.SessionState;
 using System.Web.UI;
-using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Diagnostics;
+using Sitecore.Feature.Commerce.Orders.Models;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
@@ -31,13 +30,12 @@ using Sitecore.Foundation.Commerce.Models.InputModels;
 using Sitecore.Foundation.Commerce.Repositories;
 using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Mvc.Controllers;
-using Sitecore.Feature.Commerce.Orders.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Controllers
 {
     public class CartController : SitecoreController
     {
-        public CartController(CartManager cartManager, VisitorContextRepository visitorContextRepository, CartCacheHelper cartCacheHelper, PricingManager pricingManager, CurrencyManager currencyManager)
+        public CartController(CartManager cartManager, VisitorContextRepository visitorContextRepository, CartCacheHelper cartCacheHelper, PricingManager pricingManager, CurrencyManager currencyManager, StorefrontManager storefrontManager)
         {
             Assert.ArgumentNotNull(cartManager, nameof(cartManager));
 
@@ -46,6 +44,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             CartCacheHelper = cartCacheHelper;
             PricingManager = pricingManager;
             CurrencyManager = currencyManager;
+            StorefrontManager = storefrontManager;
         }
 
         private CartManager CartManager { get; }
@@ -53,6 +52,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         private CartCacheHelper CartCacheHelper { get; }
         private PricingManager PricingManager { get; }
         private CurrencyManager CurrencyManager { get; }
+        public StorefrontManager StorefrontManager { get; }
 
         [HttpGet]
         public override ActionResult Index()
@@ -72,13 +72,13 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             {
                 if (!string.IsNullOrWhiteSpace(currency))
                 {
-                    PricingManager.CurrencyChosenPageEvent(StorefrontManager.CurrentStorefront, CurrencyManager.CurrencyContext.CurrencyCode);
-                    CartManager.UpdateCartCurrency(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), CurrencyManager.CurrencyContext.CurrencyCode);
+                    PricingManager.CurrencyChosenPageEvent(StorefrontManager.Current, CurrencyManager.CurrencyContext.CurrencyCode);
+                    CartManager.UpdateCartCurrency(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), CurrencyManager.CurrencyContext.CurrencyCode);
                 }
             }
             catch (Exception e)
             {
-                return Json(new BaseJsonResult("SwitchCurrency", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("SwitchCurrency", e), JsonRequestBehavior.AllowGet);
             }
 
             return new JsonResult();
@@ -99,7 +99,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         {
             try
             {
-                var response = CartManager.GetCurrentCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), updateCart);
+                var response = CartManager.GetCurrentCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), updateCart);
                 var result = new MiniCartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
@@ -110,8 +110,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("BasketUpdate", this, e);
-                return Json(new BaseJsonResult("BasketUpdate", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("BasketUpdate", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -130,7 +129,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 // The following condition stops the creation of empty carts on startup.
                 if (cart == null && CartCookieHelper.DoesCookieExistForCustomer(id))
                 {
-                    var response = CartManager.GetCurrentCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), true);
+                    var response = CartManager.GetCurrentCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), true);
                     cartResult = new CartApiModel(response.ServiceProviderResult);
                     if (response.ServiceProviderResult.Success && response.Result != null)
                     {
@@ -151,8 +150,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("GetCurrentCart", this, e);
-                return Json(new BaseJsonResult("GetCurrentCart", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("GetCurrentCart", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -172,14 +170,13 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.AddLineItemsToCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), new List<AddCartLineInputModel> {inputModel});
-                var result = new BaseJsonResult(response.ServiceProviderResult);
+                var response = CartManager.AddLineItemsToCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), new List<AddCartLineInputModel> {inputModel});
+                var result = new BaseApiModel(response.ServiceProviderResult);
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("AddCartLine", this);
-                return Json(new BaseJsonResult("AddCartLine", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("AddCartLine", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -199,14 +196,13 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.AddLineItemsToCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModels);
-                var result = new BaseJsonResult(response.ServiceProviderResult);
+                var response = CartManager.AddLineItemsToCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModels);
+                var result = new BaseApiModel(response.ServiceProviderResult);
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("AddCartLines", this);
-                return Json(new BaseJsonResult("AddCartLines", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("AddCartLines", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -226,7 +222,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.RemoveLineItemFromCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), model.ExternalCartLineId);
+                var response = CartManager.RemoveLineItemFromCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), model.ExternalCartLineId);
                 var result = new CartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
@@ -237,8 +233,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("DeleteLineItem", this, e);
-                return Json(new BaseJsonResult("DeleteLineItem", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("DeleteLineItem", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -258,7 +253,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.ChangeLineQuantity(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel);
+                var response = CartManager.ChangeLineQuantity(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel);
                 var result = new CartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
@@ -276,8 +271,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("UpdateLineItem", this, e);
-                return Json(new BaseJsonResult("UpdateLineItem", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("UpdateLineItem", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -297,7 +291,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.AddPromoCodeToCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), model.PromoCode);
+                var response = CartManager.AddPromoCodeToCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), model.PromoCode);
                 var result = new CartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
@@ -308,8 +302,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("ApplyDiscount", this, e);
-                return Json(new BaseJsonResult("ApplyDiscount", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("ApplyDiscount", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -329,7 +322,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.RemovePromoCodeFromCart(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), model.PromoCode);
+                var response = CartManager.RemovePromoCodeFromCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), model.PromoCode);
                 var result = new CartApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
@@ -340,8 +333,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("RemoveDiscount", this, e);
-                return Json(new BaseJsonResult("RemoveDiscount", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("RemoveDiscount", e), JsonRequestBehavior.AllowGet);
             }
         }
 

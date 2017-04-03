@@ -21,7 +21,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class ShippingMethodApiModel : BaseJsonResult
+    public class ShippingMethodApiModel : BaseApiModel
     {
         public string ExternalId { get; set; }
 

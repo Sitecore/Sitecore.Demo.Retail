@@ -29,7 +29,7 @@
         @Html.HiddenFor(m => m.CatalogName)
         @Html.HiddenFor(m => m.ProductUrl)
         @Html.AntiForgeryToken()
-        @Html.Hidden("ImageUrl", Model.DefaultImage?.ImageUrl(50, 50))
+        @Html.Hidden("ImageUrl", Model.GetThumbnailUrl(50))
 
         <div class="form-group">
             <label class="control-label" for="Quantity">@Html.Sitecore().Text("Orders/Add To Cart/Quantity", "Quantity:")</label>
@@ -39,8 +39,8 @@
             </div>
         </div>
 
-        <button id="AddToCartButton" type="submit" class="btn btn-success" data-loading-text="@Html.Sitecore().Text("Orders/Add To Cart/Add To Cart", "Add To Cart:")">
-            @Html.Sitecore().Text("Orders/Add To Cart/Adding To Cart", "Adding To Cart:")
+        <button id="AddToCartButton" type="submit" class="btn btn-success" data-loading-text="@Html.Sitecore().Text("Orders/Add To Cart/Adding To Cart", "Adding To Cart")">
+            @Html.Sitecore().Text("Orders/Add To Cart/Add To Cart", "Add To Cart")
         </button>
     }
 </div>
@@ -48,6 +48,8 @@
 @if (Model.Variants != null && Model.Variants.Any())
 {
     <script type="text/javascript">
-        VariantSelectionChanged();
+        $(document).ready(function () {
+            VariantSelectionChanged();
+        });
     </script>
 }

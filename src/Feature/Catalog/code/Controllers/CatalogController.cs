@@ -19,21 +19,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.UI;
-using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Catalog.Fields;
-using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
-using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.Commerce.Contacts;
 using Sitecore.Commerce.Entities.Inventory;
-using Sitecore.ContentSearch.Linq;
+using Sitecore.Commerce.Services.Inventory;
 using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
+using Sitecore.Feature.Commerce.Catalog.Factories;
 using Sitecore.Feature.Commerce.Catalog.Models;
-using Sitecore.Feature.Commerce.Catalog.Models.JsonResults;
 using Sitecore.Feature.Commerce.Catalog.Services;
 using Sitecore.Foundation.Alerts;
 using Sitecore.Foundation.Alerts.Extensions;
@@ -53,18 +51,22 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 {
     public class CatalogController : SitecoreController
     {
-        public CatalogController(InventoryManager inventoryManager, ContactFactory contactFactory, AccountManager accountManager, CatalogManager catalogManager, GiftCardManager giftCardManager, PricingManager pricingManager, [NotNull] CartManager cartManager, VisitorContextRepository visitorContextRepository, CatalogItemContext catalogItemContext, CatalogUrlService catalogUrlRepository)
+        public CatalogController(InventoryManager inventoryManager, ContactFactory contactFactory, ProductViewModelFactory productViewModelFactory, AccountManager accountManager, CatalogManager catalogManager, GiftCardManager giftCardManager, PricingManager pricingManager, [NotNull] CartManager cartManager, VisitorContextRepository visitorContextRepository, CatalogItemContext catalogItemContext, CatalogUrlService catalogUrlRepository, StorefrontManager storefrontManager)
         {
             InventoryManager = inventoryManager;
+            ProductViewModelFactory = productViewModelFactory;
             CatalogManager = catalogManager;
             GiftCardManager = giftCardManager;
             VisitorContextRepository = visitorContextRepository;
             CatalogItemContext = catalogItemContext;
+            StorefrontManager = storefrontManager;
         }
 
         private VisitorContextRepository VisitorContextRepository { get; }
-        public CatalogItemContext CatalogItemContext { get; }
+        private CatalogItemContext CatalogItemContext { get; }
+        public StorefrontManager StorefrontManager { get; }
         private InventoryManager InventoryManager { get; }
+        public ProductViewModelFactory ProductViewModelFactory { get; }
         private CatalogManager CatalogManager { get; }
         private GiftCardManager GiftCardManager { get; }
 
@@ -115,7 +117,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
             var products = viewModel.ProductSearchResults.SelectMany(productSearchResult => productSearchResult.Items.Where(i => i is ProductViewModel).Cast<ProductViewModel>()).ToList();
             CatalogManager.GetProductBulkPrices(VisitorContextRepository.GetCurrent(), products);
-            CatalogManager.InventoryManager.GetProductsStockStatusForList(StorefrontManager.CurrentStorefront, products);
+            CatalogManager.InventoryManager.GetProductsStockStatusForList(StorefrontManager.Current, products);
 
             foreach (var productViewModel in products)
             {
@@ -127,7 +129,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         public MultipleProductSearchResults GetMultipleProductSearchResults(Item dataSource, string sortField)
         {
             if (!dataSource.IsDerived(Templates.HasNamedSearches.ID))
+            {
                 return null;
+            }
             MultilistField searchesField = dataSource.Fields[Templates.HasNamedSearches.Fields.NamedSearches];
             var searches = searchesField.GetItems();
             var productsSearchResults = new List<SearchResults>();
@@ -135,14 +139,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             {
                 if (search.IsDerived(Templates.NamedSearch.ID))
                 {
-                    var productSearchOptions = new CommerceSearchOptions
+                    var searchOptions = new SearchOptions
                     {
                         NumberOfItemsToReturn = 12,
                         StartPageIndex = 0,
                         SortField = sortField
                     };
 
-                    var productsSearchResult = CatalogManager.GetProductSearchResults(search, productSearchOptions);
+                    var productsSearchResult = CatalogManager.GetProductSearchResults(search, searchOptions);
                     if (productsSearchResult == null)
                     {
                         continue;
@@ -194,11 +198,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             return View(viewModel);
         }
 
-        public ActionResult ProductList([Bind(Prefix = Constants.QueryString.Paging)] int? pageNumber, 
-                                        [Bind(Prefix = Constants.QueryString.Facets)] string facetValues, 
-                                        [Bind(Prefix = Constants.QueryString.Sort)] string sortField, 
-                                        [Bind(Prefix = Constants.QueryString.PageSize)] int? pageSize, 
-                                        [Bind(Prefix = Constants.QueryString.SortDirection)] CommerceConstants.SortDirection? sortDirection)
+        public ActionResult ProductList([Bind(Prefix = Constants.QueryString.Paging)] int? pageNumber,
+            [Bind(Prefix = Constants.QueryString.Facets)] string facetValues,
+            [Bind(Prefix = Constants.QueryString.Sort)] string sortField,
+            [Bind(Prefix = Constants.QueryString.PageSize)] int? pageSize,
+            [Bind(Prefix = Constants.QueryString.SortDirection)] SortDirection? sortDirection)
         {
             if (CatalogManager.CatalogContext == null)
             {
@@ -230,11 +234,12 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             return View(viewModel);
         }
 
-        private CommerceSearchOptions GetCategorySearchOptions(Category currentCategory, int? pageNumber, string facetValues, int? pageSize, string sortField = null, CommerceConstants.SortDirection? sortDirection = null)
+        private SearchOptions GetCategorySearchOptions(Category currentCategory, int? pageNumber, string facetValues, int? pageSize, string sortField = null, SortDirection? sortDirection = null)
         {
-            var searchOptions = new CommerceSearchOptions(pageSize ?? currentCategory.ItemsPerPage, pageNumber ?? 0);
+            var searchOptions = new SearchOptions(pageSize ?? currentCategory.ItemsPerPage, pageNumber ?? 0);
             UpdateOptionsWithFacets(currentCategory.RequiredFacets, facetValues, searchOptions);
-            if (sortField != null) { 
+            if (sortField != null)
+            {
                 SetSortParameters(currentCategory, ref sortField, ref sortDirection);
                 UpdateOptionsWithSorting(sortField, sortDirection, searchOptions);
             }
@@ -292,7 +297,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             [Bind(Prefix = Constants.QueryString.Facets)] string facetValues,
             [Bind(Prefix = Constants.QueryString.Sort)] string sortField,
             [Bind(Prefix = Constants.QueryString.PageSize)] int? pageSize,
-            [Bind(Prefix = Constants.QueryString.SortDirection)] CommerceConstants.SortDirection? sortDirection)
+            [Bind(Prefix = Constants.QueryString.SortDirection)] SortDirection? sortDirection)
         {
             if (CatalogManager.CatalogContext == null)
             {
@@ -302,7 +307,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             var currentCategory = GetCurrentCategory();
             var productSearchOptions = GetCategorySearchOptions(currentCategory, pageNumber, facetValues, pageSize, sortField, sortDirection);
 
-            var viewModel = GetProductListHeaderViewModel(productSearchOptions, currentCategory.SortFields, currentCategory.InnerItem, RenderingContext.Current.Rendering);
+            var viewModel = GetProductListHeaderViewModel(productSearchOptions, currentCategory.SortFields, currentCategory, RenderingContext.Current.Rendering);
 
             return View(viewModel);
         }
@@ -319,7 +324,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
             var currentCategory = GetCurrentCategory();
             var productSearchOptions = GetCategorySearchOptions(currentCategory, pageNumber, facetValues, pageSize);
-            var viewModel = GetPaginationViewModel(productSearchOptions, currentCategory.InnerItem, RenderingContext.Current.Rendering);
+            var viewModel = GetPaginationViewModel(productSearchOptions, currentCategory, RenderingContext.Current.Rendering);
 
             return View(viewModel);
         }
@@ -329,7 +334,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             [Bind(Prefix = Constants.QueryString.PageSize)] int? pageSize,
             [Bind(Prefix = Constants.QueryString.Facets)] string facetValues,
             [Bind(Prefix = Constants.QueryString.Sort)] string sortField,
-            [Bind(Prefix = Constants.QueryString.SortDirection)] CommerceConstants.SortDirection? sortDirection)
+            [Bind(Prefix = Constants.QueryString.SortDirection)] SortDirection? sortDirection)
         {
             if (CatalogManager.CatalogContext == null)
             {
@@ -340,7 +345,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
             var searchOptions = GetCategorySearchOptions(currentCategory, pageNumber, facetValues, pageSize, sortField, sortDirection);
 
-            var viewModel = GetProductFacetsViewModel(searchOptions, currentCategory.InnerItem, RenderingContext.Current.Rendering);
+            var viewModel = GetProductFacetsViewModel(searchOptions, currentCategory, RenderingContext.Current.Rendering);
 
             return View(viewModel);
         }
@@ -368,32 +373,36 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         {
             if (!string.IsNullOrWhiteSpace(facetValue) && isApplied.HasValue)
             {
-                CatalogManager.FacetApplied(StorefrontManager.CurrentStorefront, facetValue, isApplied.Value);
+                CatalogManager.FacetApplied(StorefrontManager.Current, facetValue, isApplied.Value);
             }
 
-            return new BaseJsonResult();
+            return new BaseApiModel();
         }
 
         [HttpPost]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public JsonResult SortOrderApplied(string sortField, CommerceConstants.SortDirection? sortDirection)
+        public JsonResult SortOrderApplied(string sortField, SortDirection? sortDirection)
         {
             if (!string.IsNullOrWhiteSpace(sortField))
             {
-                CatalogManager.SortOrderApplied(StorefrontManager.CurrentStorefront, sortField, sortDirection);
+                CatalogManager.SortOrderApplied(StorefrontManager.Current, sortField, sortDirection);
             }
 
-            return new BaseJsonResult();
+            return new BaseApiModel();
         }
 
         public ActionResult AddToCart()
         {
             if (CatalogManager.CatalogContext == null)
             {
-                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+                return Context.PageMode.IsExperienceEditor ? (ActionResult) this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context.")) : new EmptyResult();
+            }
+            if (!ProductViewModelFactory.IsValid(RenderingContext.Current.Rendering.Item))
+            {
+                return Context.PageMode.IsExperienceEditor ? (ActionResult) this.InfoMessage(InfoMessage.Error("Invalid datasource. Please pick a product.")) : new EmptyResult();
             }
 
-            var model = GetProductViewModel();
+            var model = ProductViewModelFactory.Create(RenderingContext.Current.Rendering.Item);
             return View(model);
         }
 
@@ -401,10 +410,19 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         {
             if (CatalogManager.CatalogContext == null)
             {
-                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+                return Context.PageMode.IsExperienceEditor ? (ActionResult) this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context.")) : new EmptyResult();
+            }
+            if (!ProductViewModelFactory.IsValid(RenderingContext.Current.Rendering.Item))
+            {
+                return Context.PageMode.IsExperienceEditor ? (ActionResult) this.InfoMessage(InfoMessage.Error("Invalid datasource. Please pick a product.")) : new EmptyResult();
             }
 
-            var model = GetProductViewModel();
+            var model = ProductViewModelFactory.Create(RenderingContext.Current.Rendering.Item);
+            if (model.Images == null || !model.Images.Any())
+            {
+                return new EmptyResult();
+            }
+
             return View(model);
         }
 
@@ -412,10 +430,29 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         {
             if (CatalogManager.CatalogContext == null)
             {
-                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+                return Context.PageMode.IsExperienceEditor ? (ActionResult) this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context.")) : new EmptyResult();
+            }
+            if (!ProductViewModelFactory.IsValid(RenderingContext.Current.Rendering.Item))
+            {
+                return Context.PageMode.IsExperienceEditor ? (ActionResult) this.InfoMessage(InfoMessage.Error("Invalid datasource. Please pick a product.")) : new EmptyResult();
             }
 
-            var model = GetProductViewModel();
+            var model = ProductViewModelFactory.Create(RenderingContext.Current.Rendering.Item);
+            return View(model);
+        }
+
+        public ActionResult ProductTeaser()
+        {
+            if (CatalogManager.CatalogContext == null)
+            {
+                return Context.PageMode.IsExperienceEditor ? (ActionResult) this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context.")) : new EmptyResult();
+            }
+            if (!ProductViewModelFactory.IsValid(RenderingContext.Current.Rendering.Item))
+            {
+                return Context.PageMode.IsExperienceEditor ? (ActionResult) this.InfoMessage(InfoMessage.Error("Invalid datasource. Please pick a product.")) : new EmptyResult();
+            }
+
+            var model = ProductViewModelFactory.Create(RenderingContext.Current.Rendering.Item);
             return View(model);
         }
 
@@ -423,10 +460,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         {
             if (CatalogManager.CatalogContext == null)
             {
-                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+                return Context.PageMode.IsExperienceEditor ? (ActionResult) this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context.")) : new EmptyResult();
+            }
+            if (!ProductViewModelFactory.IsValid(RenderingContext.Current.Rendering.Item))
+            {
+                return Context.PageMode.IsExperienceEditor ? (ActionResult) this.InfoMessage(InfoMessage.Error("Invalid datasource. Please pick a product.")) : new EmptyResult();
             }
 
-            var model = GetProductViewModel();
+            var model = ProductViewModelFactory.Create(RenderingContext.Current.Rendering.Item);
             return View(model);
         }
 
@@ -434,14 +475,18 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         {
             if (CatalogManager.CatalogContext == null)
             {
-                return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
+                return Context.PageMode.IsExperienceEditor ? (ActionResult) this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context.")) : new EmptyResult();
+            }
+            if (!ProductViewModelFactory.IsValid(RenderingContext.Current.Rendering.Item))
+            {
+                return Context.PageMode.IsExperienceEditor ? (ActionResult) this.InfoMessage(InfoMessage.Error("Invalid datasource. Please pick a product.")) : new EmptyResult();
             }
 
-            var model = GetProductViewModel();
+            var model = ProductViewModelFactory.Create(RenderingContext.Current.Rendering.Item);
 
             if (model != null)
             {
-                CatalogManager.VisitedProductDetailsPage(StorefrontManager.CurrentStorefront, model.ProductId, model.ProductName, model.ParentCategoryId, model.ParentCategoryName);
+                CatalogManager.VisitedProductDetailsPage(StorefrontManager.Current, model.ProductId, model.ProductName, model.ParentCategoryId, model.ParentCategoryName);
             }
 
             return new EmptyResult();
@@ -468,7 +513,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 return new EmptyResult();
             }
 
-            CatalogManager.VisitedCategoryPage(StorefrontManager.CurrentStorefront, currentCategory.Name, currentCategory.Title);
+            CatalogManager.VisitedCategoryPage(StorefrontManager.Current, currentCategory.Name, currentCategory.Title);
             CategoryCookieHelper.SetLastVisitedCategory(VisitorContextRepository.GetCurrent().GetCustomerId(), currentCategory.Name);
 
             return new EmptyResult();
@@ -481,18 +526,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
             }
 
-            if (RenderingContext.Current.Rendering.Item.IsWildcardItem())
-            {
-                // This is a Wild Card
-                var productViewModel = GetWildCardProductViewModel();
-                var relatedCatalogItemsModel = GetRelationshipsFromItem(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), productViewModel.Item, RenderingContext.Current.Rendering);
-                return View(relatedCatalogItemsModel);
-            }
-            else
-            {
-                var relatedCatalogItemsModel = GetRelationshipsFromItem(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), RenderingContext.Current.Rendering.Item, RenderingContext.Current.Rendering);
-                return View(relatedCatalogItemsModel);
-            }
+            var isCatalogItem = RenderingContext.Current.Rendering.Item.IsDerived(Foundation.Commerce.Templates.Commerce.CatalogItem.Id);
+
+            var catalogItem = isCatalogItem ? RenderingContext.Current.Rendering.Item : CatalogItemContext.Current?.Item;
+            var relatedCatalogItemsModel = GetRelationshipsFromItem(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), catalogItem, RenderingContext.Current.Rendering);
+            return View(relatedCatalogItemsModel);
         }
 
         [HttpGet]
@@ -521,29 +559,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var currentProductItem = CatalogManager.GetProduct(model.ProductId);
-                var productId = currentProductItem.Name;
-                var catalogName = currentProductItem[Foundation.Commerce.Templates.Commerce.CatalogItem.Fields.CatalogName];
-                var products = new List<CommerceInventoryProduct>();
-                if (currentProductItem.HasChildren)
-                {
-                    foreach (Item item in currentProductItem.Children)
-                    {
-                        products.Add(new CommerceInventoryProduct
-                        {
-                            ProductId = productId,
-                            CatalogName = catalogName,
-                            VariantId = item.Name
-                        });
-                    }
-                }
-                else
-                {
-                    products.Add(new CommerceInventoryProduct {ProductId = productId, CatalogName = catalogName});
-                }
-
-                var response = InventoryManager.GetStockInformation(StorefrontManager.CurrentStorefront, products, StockDetailsLevel.All);
-                var result = new StockInfoListBaseJsonResult(response.ServiceProviderResult);
+                var productId = model.ProductId;
+                var response = CatalogManager.GetProductInventory(productId);
+                var result = new StockInfoListApiModel(response.ServiceProviderResult);
                 if (response.Result == null)
                 {
                     return Json(result, JsonRequestBehavior.AllowGet);
@@ -553,15 +571,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 var stockInfo = response.Result.FirstOrDefault();
                 if (stockInfo != null)
                 {
-                    InventoryManager.VisitedProductStockStatus(StorefrontManager.CurrentStorefront, stockInfo, string.Empty);
+                    InventoryManager.VisitedProductStockStatus(StorefrontManager.Current, stockInfo, string.Empty);
                 }
 
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("GetCurrentProductStockInfo", this, e);
-                return Json(new BaseJsonResult("GetCurrentProductStockInfo", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("GetCurrentProductStockInfo", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -581,8 +598,8 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = GiftCardManager.GetGiftCardBalance(StorefrontManager.CurrentStorefront, VisitorContextRepository.GetCurrent(), inputModel.GiftCardId);
-                var result = new GiftCardBaseJsonResult(response.ServiceProviderResult);
+                var response = GiftCardManager.GetGiftCardBalance(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel.GiftCardId);
+                var result = new GiftCardApiModel(response.ServiceProviderResult);
                 if (!response.ServiceProviderResult.Success || response.ServiceProviderResult.GiftCard == null)
                 {
                     return Json(result, JsonRequestBehavior.AllowGet);
@@ -594,8 +611,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("CheckGiftCardBalance", this, e);
-                return Json(new BaseJsonResult("CheckGiftCardBalance", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("CheckGiftCardBalance", e), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -614,26 +630,25 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = InventoryManager.VisitorSignupForStockNotification(StorefrontManager.CurrentStorefront, model, string.Empty);
-                result = new BaseJsonResult(response.ServiceProviderResult);
+                var response = InventoryManager.VisitorSignupForStockNotification(StorefrontManager.Current, model, string.Empty);
+                result = new BaseApiModel(response.ServiceProviderResult);
 
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
-                CommerceLog.Current.Error("GetCurrentUser", this, e);
-                return Json(new BaseJsonResult("GetCurrentUser", e), JsonRequestBehavior.AllowGet);
+                return Json(new ErrorApiModel("GetCurrentUser", e), JsonRequestBehavior.AllowGet);
             }
         }
 
-        public ProductListHeaderViewModel GetProductListHeaderViewModel(CommerceSearchOptions productSearchOptions, IEnumerable<CommerceQuerySort> sortFields, Item categoryItem, Rendering rendering)
+        public ProductListHeaderViewModel GetProductListHeaderViewModel(SearchOptions productSearchOptions, IEnumerable<QuerySortField> sortFields, Category category, Rendering rendering)
         {
             var viewModel = new ProductListHeaderViewModel();
 
             SearchResults childProducts = null;
             if (productSearchOptions != null)
             {
-                childProducts = GetChildProducts(productSearchOptions, categoryItem);
+                childProducts = GetChildProducts(category, productSearchOptions);
             }
 
             viewModel.Initialize(rendering, childProducts, sortFields, productSearchOptions);
@@ -641,14 +656,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             return viewModel;
         }
 
-        public PaginationViewModel GetPaginationViewModel(CommerceSearchOptions productSearchOptions, Item categoryItem, Rendering rendering)
+        public PaginationViewModel GetPaginationViewModel(SearchOptions productSearchOptions, Category category, Rendering rendering)
         {
             var viewModel = new PaginationViewModel();
 
             SearchResults childProducts = null;
             if (productSearchOptions != null)
             {
-                childProducts = GetChildProducts(productSearchOptions, categoryItem);
+                childProducts = GetChildProducts(category, productSearchOptions);
             }
 
             viewModel.Initialize(rendering, childProducts, productSearchOptions);
@@ -656,17 +671,15 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             return viewModel;
         }
 
-        public ProductFacetsViewModel GetProductFacetsViewModel(CommerceSearchOptions productSearchOptions, Item categoryItem, Rendering rendering)
+        public ProductFacetsViewModel GetProductFacetsViewModel(SearchOptions productSearchOptions, Category category, Rendering rendering)
         {
-            var viewModel = new ProductFacetsViewModel();
-
             SearchResults childProducts = null;
             if (productSearchOptions != null)
             {
-                childProducts = GetChildProducts(productSearchOptions, categoryItem);
+                childProducts = GetChildProducts(category, productSearchOptions);
             }
 
-            viewModel.Initialize(rendering, childProducts, productSearchOptions);
+            var viewModel = new ProductFacetsViewModel(childProducts?.Facets ?? productSearchOptions?.FacetFields);
 
             return viewModel;
         }
@@ -676,75 +689,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             return RenderingContext.Current.Rendering.Item != null ? CatalogManager.GetCategoryChildCategories(category.InnerItem).CategoryItems : Enumerable.Empty<Item>();
         }
 
-        private ProductViewModel GetProductViewModel(Item productItem)
-        {
-            const string cacheKey = "CurrentProductViewModel";
-            var productViewModel = this.GetFromCache<ProductViewModel>(cacheKey);
-            if (productViewModel != null)
-            {
-                return productViewModel;
-            }
-
-            var variants = new List<VariantViewModel>();
-            if (productItem != null && productItem.HasChildren)
-            {
-                foreach (Item item in productItem.Children)
-                {
-                    var v = new VariantViewModel(item);
-                    variants.Add(v);
-                }
-            }
-
-            productViewModel = new ProductViewModel(productItem, variants);
-            productViewModel.ProductName = productViewModel.Title;
-
-            if (CatalogItemContext.Current != null)
-            {
-                productViewModel.ParentCategoryId = CatalogItemContext.Current.CategoryId;
-
-                var category = CatalogManager.GetCategory(productViewModel.ParentCategoryId);
-                if (category != null)
-                {
-                    productViewModel.ParentCategoryName = category.Title;
-                }
-            }
-            PopulateStockInformation(productViewModel);
-
-            CatalogManager.GetProductPrice(VisitorContextRepository.GetCurrent(), productViewModel);
-            productViewModel.CustomerAverageRating = CatalogManager.GetProductRating(productItem);
-
-            return this.AddToCache(cacheKey, productViewModel);
-        }
-
-        private void PopulateStockInformation(ProductViewModel model)
-        {
-            var inventoryProducts = new List<CommerceInventoryProduct> {new CommerceInventoryProduct {ProductId = model.ProductId, CatalogName = model.CatalogName}};
-            var response = InventoryManager.GetStockInformation(StorefrontManager.CurrentStorefront, inventoryProducts, StockDetailsLevel.StatusAndAvailability);
-            if (!response.ServiceProviderResult.Success || response.Result == null)
-            {
-                return;
-            }
-
-            var stockInfos = response.Result;
-            var stockInfo = stockInfos.FirstOrDefault();
-            if (stockInfo == null || stockInfo.Status == null)
-            {
-                return;
-            }
-
-            model.StockStatus = stockInfo.Status;
-            model.StockStatusName = LookupManager.GetProductStockStatusName(model.StockStatus);
-            if (stockInfo.AvailabilityDate != null)
-            {
-                model.StockAvailabilityDate = stockInfo.AvailabilityDate.Value.ToDisplayedDate();
-            }
-        }
-
-        private CategoryViewModel GetCategoryViewModel(Category category, CommerceSearchOptions productSearchOptions = null)
+        private CategoryViewModel GetCategoryViewModel(Category category, SearchOptions productSearchOptions = null)
         {
             Assert.IsNotNull(category, nameof(category));
 
-            var cacheKey = $"Category/{category.InnerItem.ID}/{productSearchOptions}";
+            var cacheKey = CreateCacheKey("Category", category, productSearchOptions);
 
             var categoryViewModel = this.GetFromCache<CategoryViewModel>(cacheKey);
             if (categoryViewModel != null)
@@ -755,7 +704,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             SearchResults childProducts = null;
             if (productSearchOptions != null)
             {
-                childProducts = GetChildProducts(productSearchOptions, category.InnerItem);
+                childProducts = GetChildProducts(category, productSearchOptions);
             }
 
             categoryViewModel = new CategoryViewModel(category.InnerItem, childProducts, category.SortFields, productSearchOptions);
@@ -763,7 +712,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             if (childProducts != null && childProducts.SearchResultItems.Count > 0)
             {
                 CatalogManager.GetProductBulkPrices(VisitorContextRepository.GetCurrent(), categoryViewModel.ChildProducts);
-                InventoryManager.GetProductsStockStatusForList(StorefrontManager.CurrentStorefront, categoryViewModel.ChildProducts);
+                InventoryManager.GetProductsStockStatusForList(StorefrontManager.Current, categoryViewModel.ChildProducts);
 
                 foreach (var productViewModel in categoryViewModel.ChildProducts)
                 {
@@ -774,9 +723,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             return this.AddToCache(cacheKey, categoryViewModel);
         }
 
+        private static string CreateCacheKey(string cacheId, Category category, SearchOptions productSearchOptions)
+        {
+            return $"{cacheId}/{category.InnerItem.ID}/{productSearchOptions}";
+        }
+
         private NavigationViewModel GetNavigationViewModel(Category category)
         {
-            var cacheKey = "Navigation/" + category.Name;
+            var cacheKey = CreateCacheKey("Navigation", category, null);
 
             var navigationViewModel = this.GetFromCache<NavigationViewModel>(cacheKey);
             if (navigationViewModel != null)
@@ -784,28 +738,39 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 return navigationViewModel;
             }
 
-            navigationViewModel = new NavigationViewModel();
+            navigationViewModel = new NavigationViewModel(GetCategoryViewModel(category));
             var childCategories = GetChildCategories(category);
             navigationViewModel.ChildCategories.AddRange(childCategories.Select(i => GetCategoryViewModel(CatalogManager.GetCategory(i))));
+
+            if (CatalogItemContext.Current != null)
+            {
+                if (CatalogItemContext.IsCategory)
+                    navigationViewModel.ActiveCategoryID = CatalogItemContext.Current?.Item?.ID;
+                else
+                {
+                    var categoryItem = CatalogManager.GetCategory(CatalogItemContext.Current.CategoryId);
+                    navigationViewModel.ActiveCategoryID = categoryItem?.InnerItem.ID;
+                }
+            }
 
             return this.AddToCache(cacheKey, navigationViewModel);
         }
 
-        private SearchResults GetChildProducts(CommerceSearchOptions searchOptions, Item categoryItem)
+        private SearchResults GetChildProducts(Category category, SearchOptions searchOptions)
         {
-            var cacheKey = $"ChildProductSearch_{categoryItem.ID}";
+            var cacheKey = CreateCacheKey("ChildProducts", category, searchOptions);
 
             var results = this.GetFromCache<SearchResults>(cacheKey);
             if (results != null)
             {
                 return results;
             }
-            results = CatalogManager.GetChildProducts(searchOptions, categoryItem);
+            results = CatalogManager.GetChildProducts(category.InnerItem, searchOptions);
 
             return this.AddToCache(cacheKey, results);
         }
 
-        protected void UpdateOptionsWithFacets(List<CommerceQueryFacet> facets, string valueQueryString, CommerceSearchOptions productSearchOptions)
+        protected void UpdateOptionsWithFacets(List<QueryFacet> facets, string valueQueryString, SearchOptions productSearchOptions)
         {
             if (facets == null || !facets.Any())
             {
@@ -835,7 +800,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             productSearchOptions.FacetFields = facets;
         }
 
-        protected void UpdateOptionsWithSorting(string sortField, CommerceConstants.SortDirection? sortDirection, CommerceSearchOptions productSearchOptions)
+        protected void UpdateOptionsWithSorting(string sortField, SortDirection? sortDirection, SearchOptions productSearchOptions)
         {
             if (string.IsNullOrEmpty(sortField))
             {
@@ -880,7 +845,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             return newFilter.ToString();
         }
 
-        protected void SetSortParameters(Category category, ref string sortField, ref CommerceConstants.SortDirection? sortOrder)
+        protected void SetSortParameters(Category category, ref string sortField, ref SortDirection? sortOrder)
         {
             if (string.IsNullOrWhiteSpace(sortField))
             {
@@ -888,34 +853,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 if (sortfieldList != null && sortfieldList.Count > 0)
                 {
                     sortField = sortfieldList[0].Name;
-                    sortOrder = CommerceConstants.SortDirection.Asc;
+                    sortOrder = SortDirection.Ascending;
                 }
             }
-        }
-
-        private ProductViewModel GetProductViewModel()
-        {
-            if (RenderingContext.Current.Rendering.Item.IsWildcardItem())
-            {
-                return GetWildCardProductViewModel();
-            }
-
-            return GetProductViewModel(RenderingContext.Current.Rendering.Item);
-        }
-
-        private ProductViewModel GetWildCardProductViewModel()
-        {
-            if (CatalogItemContext.IsCategory)
-                return null;
-
-            var productItem = CatalogItemContext.Current?.Item;
-            if (productItem == null)
-            {
-                return null;
-            }
-
-            RenderingContext.Current.Rendering.Item = productItem;
-            return GetProductViewModel(RenderingContext.Current.Rendering.Item);
         }
 
         public RelatedCatalogItemsViewModel GetRelationshipsFromItem([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, Item catalogItem, Rendering rendering)
@@ -929,34 +869,21 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
             RelationshipField field = catalogItem.Fields[Foundation.Commerce.Templates.Commerce.CatalogItem.Fields.RelationshipList];
 
-            return GetRelationshipsFromField(storefront, visitorContext, field, rendering);
-        }
-
-        private RelatedCatalogItemsViewModel GetRelationshipsFromField([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, RelationshipField field, Rendering rendering)
-        {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-
             var model = new RelatedCatalogItemsViewModel();
-
-            if (field != null)
-            {
-                var productRelationshipInfoList = field.GetRelationships();
-                productRelationshipInfoList = productRelationshipInfoList.OrderBy(x => x.Rank);
-                var productModelList = GroupRelationshipsByDescription(storefront, visitorContext, field, productRelationshipInfoList);
-                model.RelatedProducts.AddRange(productModelList);
-            }
-
-            model.Initialize(rendering);
+            var productRelationshipInfoList = field.GetRelationships();
+            productRelationshipInfoList = productRelationshipInfoList.OrderBy(x => x.Rank);
+            var productModelList = GroupRelationshipsByDescription(storefront, visitorContext, productRelationshipInfoList);
+            model.RelatedProducts.AddRange(productModelList);
 
             return model;
         }
 
 
-        private IEnumerable<RelationshipViewModel> GroupRelationshipsByDescription([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, RelationshipField field, IEnumerable<CatalogRelationshipInformation> productRelationshipInfoList)
+        private IEnumerable<RelationshipViewModel> GroupRelationshipsByDescription([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, IEnumerable<CatalogRelationshipInformation> productRelationshipInfoList)
         {
             var relationshipGroups = new Dictionary<string, RelationshipViewModel>(StringComparer.OrdinalIgnoreCase);
 
-            if (field != null && productRelationshipInfoList != null)
+            if (productRelationshipInfoList != null)
             {
                 foreach (var relationshipInfo in productRelationshipInfoList)
                 {
@@ -966,7 +893,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                     RelationshipViewModel relationshipModel;
                     if (!relationshipGroups.TryGetValue(relationshipDescription, out relationshipModel))
                     {
-                        relationshipModel = new RelationshipViewModel()
+                        relationshipModel = new RelationshipViewModel
                         {
                             Name = relationshipInfo.RelationshipName,
                             Description = relationshipDescription,
@@ -977,10 +904,8 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                     }
 
                     var targetItemId = ID.Parse(relationshipInfo.ToItemExternalId);
-                    var targetItem = field.InnerField.Database.GetItem(targetItemId);
-                    var productModel = new ProductViewModel(targetItem);
-
-                    CatalogManager.GetProductRating(targetItem);
+                    var targetItem = storefront.HomeItem.Database.GetItem(targetItemId);
+                    var productModel = ProductViewModelFactory.Create(targetItem);
 
                     relationshipModel.ChildProducts.Add(productModel);
                 }
@@ -1005,7 +930,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         private Category GetCurrentCategory()
         {
-            var categoryId = CatalogItemContext.Current.CategoryId;
+            var categoryId = CatalogItemContext.Current?.CategoryId;
+            if (categoryId == null)
+                return null;
             var virtualCategoryCacheKey = $"VirtualCategory_{categoryId}";
             var currentCategory = this.GetFromCache<Category>(virtualCategoryCacheKey);
             if (currentCategory != null)

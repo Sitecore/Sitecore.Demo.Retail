@@ -24,8 +24,8 @@
     var cityLabel = Html.Sitecore().Field("City Label", deliveryPage);
     var cityLabelPlaceholder = deliveryPage["City Label"];
     var countryLabel = Html.Sitecore().Field("Country Label", deliveryPage);
-    var stateLabel = Html.Sitecore().Field("State Label", deliveryPage);
-    var stateLabelPlaceholder = deliveryPage["State Label"];
+    var regionLabel = Html.Sitecore().Field("State Label", deliveryPage);
+    var regionLabelPlaceholder = deliveryPage["State Label"];
     var address1Label = Html.Sitecore().Field("Address Label", deliveryPage);
     var address1LabelPlaceholder = deliveryPage["Address Label"];
     var zipcodeLabel = Html.Sitecore().Field("Zipcode Label", deliveryPage);
@@ -68,12 +68,12 @@
             <select id="ShipAllItemsInput-Country" class="form-control" data-bind="options: $parent.countries, optionsText:'country', optionsValue:'code', value: country, event: {change: $root.shippingAddressFieldChanged}"></select>
         </div>
         <div class="form-group">
-            <label for="ShipAllItemsInput-State">@stateLabel</label>
-            <!-- ko if: states == 'undefined' -->
-            <select id="ShipAllItemsInput-State" class="form-control" data-bind="options: $parent.states, optionsText:'name', optionsValue:'code', value: state, event: {change: $root.shippingAddressFieldChanged}"></select>
+            <label for="ShipAllItemsInput-State">@regionLabel</label>
+            <!-- ko if: regions == 'undefined' -->
+            <select id="ShipAllItemsInput-State" class="form-control" data-bind="options: $parent.regions, optionsText:'name', optionsValue:'code', value: region, event: {change: $root.shippingAddressFieldChanged}"></select>
             <!-- /ko -->
-            <!-- ko if: states != 'undefined' -->
-            <input type="text" class="form-control" id="ShipAllItemsInput-State" placeholder="@stateLabelPlaceholder" data-bind="value: state, event: {change: $root.shippingAddressFieldChanged}">
+            <!-- ko if: regions != 'undefined' -->
+            <input type="text" class="form-control" id="ShipAllItemsInput-State" placeholder="@regionLabelPlaceholder" data-bind="value: region, event: {change: $root.shippingAddressFieldChanged}">
             <!-- /ko -->
         </div>
     </div>

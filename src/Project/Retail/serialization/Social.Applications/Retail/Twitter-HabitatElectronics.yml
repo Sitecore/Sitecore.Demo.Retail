@@ -1,0 +1,28 @@
+﻿---
+ID: "df31016e-e6a0-4a72-bca5-6d13c410a06a"
+Parent: "270d3b8c-44df-49ef-b862-57678c125034"
+Template: "8015bb44-6d50-4c56-980b-435a77aa5b09"
+Path: "/sitecore/system/Social/Applications/Retail/Twitter-HabitatElectronics"
+DB: master
+SharedFields:
+- ID: "379d5d91-c5bc-4da9-920e-a001765b7abd"
+  Hint: Application Secret
+  Value: QjJwrlSMoRUGUeEeWaKprsRyCiXOvXbPKB4WJ5oinJSplcS8k0
+- ID: "aed4d0d5-8642-43d1-9485-64387919baa6"
+  Hint: Application ID
+  Value: vJHihgezk2HHjOt9WjqGr8MKd
+- ID: "d0ebf5c0-e9b9-4615-a761-d68cd8108341"
+  Hint: Network
+  Value: "{F30A7941-3327-4CA0-9FFD-B019857F27DE}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170221T163731Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

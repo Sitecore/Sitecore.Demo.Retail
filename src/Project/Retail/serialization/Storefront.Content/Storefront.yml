@@ -12,6 +12,24 @@ SharedFields:
   Hint: ShowInMenu
   Type: Checkbox
   Value: 1
+- ID: "365254c4-1c1c-493a-9710-671574717898"
+  Hint: Forgot Password Mail Template
+  Value: /sitecore/content/Storefront/Global/Mails/ForgotPassword
+- ID: "60745023-ffd5-400e-8f80-4bca9f2abb29"
+  Hint: Login Page
+  Value: /sitecore/content/Storefront/Home/Login
+- ID: "71962360-10d8-4b98-bb8d-57660ce11127"
+  Hint: Register Page
+  Value: /sitecore/content/Storefront/Home/Register
+- ID: "b128e2b3-3865-4f1c-a147-5f248676d3f5"
+  Hint: After Login Page
+  Value: /sitecore/content/Storefront/Home/AccountManagement
+- ID: "ed71d374-8c33-4561-991d-77482ae01330"
+  Hint: Accounts Details Page
+  Value: /sitecore/content/Storefront/Home/AccountManagement
+- ID: "f3cd2bb8-472b-4df0-87c0-a13098e391ca"
+  Hint: Forgot Password Page
+  Value: /sitecore/content/Storefront/Home/ForgotPassword
 Languages:
 - Language: en
   Fields:
@@ -40,6 +58,9 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141008T153657Z
+    - ID: "835fa523-d28a-46a2-a589-6aa4a5bf0846"
+      Hint: Register Outcome
+      Value: "{75D53206-47B3-4391-BD48-75C42E5FC2CE}"
     - ID: "e748d808-64c1-4dec-9718-f35cf9689e4b"
       Hint: Logo
       Value: |

@@ -43,8 +43,8 @@
   var zipCodeLabelPlaceholder = billingPage["Zipcode Label"];
   var countryLabel = Html.Sitecore().Field("Country Label", billingPage);
   var validatePaymentLabel = Html.Sitecore().Field("Validate Payment Label", billingPage);
-  var stateLabel = Html.Sitecore().Field("State Label", billingPage);
-  var stateLabelPlaceholder = billingPage["State Label"];
+  var regionLabel = Html.Sitecore().Field("State Label", billingPage);
+  var regionLabelPlaceholder = billingPage["State Label"];
   var sameAsShipping = Html.Sitecore().Field("Same Shipping Address", billingPage);
 
   // Giftcards Labels
@@ -175,12 +175,12 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="billingAddress-State">@stateLabel *</label>
-                                        <!-- ko if: states == 'undefined' -->
-                                        <select id="billingAddress-State" class="form-control" data-bind="options: $parent.states, optionsText:'name', optionsValue:'code', value: state, enable: $parent.billingAddressEnable"></select>
+                                        <label for="billingAddress-Region">@regionLabel *</label>
+                                        <!-- ko if: regions == 'undefined' -->
+                                        <select id="billingAddress-Region" class="form-control" data-bind="options: $parent.regions, optionsText:'name', optionsValue:'code', value: region, enable: $parent.billingAddressEnable"></select>
                                         <!-- /ko -->
-                                        <!-- ko if: states != 'undefined' -->
-                                        <input type="text" class="form-control" id="billingAddress-State" placeholder="@stateLabelPlaceholder" data-bind="value: state, enable: $parent.billingAddressEnable">
+                                        <!-- ko if: regions != 'undefined' -->
+                                        <input type="text" class="form-control" id="billingAddress-Region" placeholder="@regionLabelPlaceholder" data-bind="value: region, enable: $parent.billingAddressEnable">
                                         <!-- /ko -->
                                     </div>
                                 </div>
@@ -289,7 +289,8 @@
     </div>
 </div>
 
-<script src="https://js.braintreegateway.com/js/braintree-2.27.0.min.js"></script>
 <script type="text/javascript">
-            initBillingPage();
+    $(document).ready(function () {
+        initBillingPage();
+    });
 </script>

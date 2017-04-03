@@ -9,9 +9,8 @@
     // either express or implied. See the License for the specific language governing permissions
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
-@using Sitecore.Feature.Commerce.Catalog.Models
+@using Sitecore.Feature.Commerce.Catalog.Extensions
 @using Sitecore.Foundation.Commerce.Extensions
-@using Sitecore.Foundation.Commerce.Managers
 @model Sitecore.Feature.Commerce.Catalog.Models.ProductViewModel
 @{
     if (Model == null)
@@ -132,7 +131,8 @@
             </div>
             <div class="modal-header">
                 <button type="button" class="close" data-bind="click: close">
-                    <span aria-hidden="true">&times;</span><span class="sr-only">@Html.Sitecore().Field("Close Label", Html.Sitecore().CurrentItem)</span></button>
+                    <span aria-hidden="true">&times;</span><span class="sr-only">@Html.Sitecore().Field("Close Label", Html.Sitecore().CurrentItem)</span>
+                </button>
                 <h2 class="modal-title" id="signForNotificationModalLabel">@Html.Sitecore().Field("Sign Up For Notification Label", Html.Sitecore().CurrentItem)</h2>
             </div>
             <div class="modal-body">
@@ -163,35 +163,36 @@
 <span id="InvalidVariant" style="display: none">@invalidVariantText</span>
 
 <script type="text/javascript">
-    priceInfoVM = new PriceInfoViewModel();
-    ko.applyBindingsWithValidation(priceInfoVM, document.getElementById('price-info'));
+    $(document).ready(function () {
+        initProductPriceInfo('price-info');
 
-    @if (Model.Variants != null && Model.Variants.Any())
-    {
-        foreach (var variant in Model.Variants)
+        @if (Model.Variants != null && Model.Variants.Any())
+        {
+            foreach (var variant in Model.Variants)
+            {
+                var savingsMessage = string.Empty;
+                if (variant.IsOnSale)
+                {
+                    var percentLead = Html.Sitecore().CurrentRendering.Item["Save percent lead"];
+                    savingsMessage = percentLead + " " + variant.SavingsPercentage + "%";
+                }
+
+                var sizeValue = string.IsNullOrWhiteSpace(variant.Size) ? string.Empty : variant.Size.GetHashCode().ToString();
+                var colorValue = string.IsNullOrWhiteSpace(variant.ProductColor) ? string.Empty : variant.ProductColor.GetHashCode().ToString();
+
+                @:AddVariantCombination('@sizeValue', '@colorValue', '@variant.Id', '@variant.ListPrice.ToCurrency()', '@variant.AdjustedPrice.ToCurrency()', @variant.IsOnSale.ToString().ToLower(), '@savingsMessage');
+            }
+        }
+        else
         {
             var savingsMessage = string.Empty;
-            if (variant.IsOnSale)
+            if (Model.IsOnSale)
             {
-                string percentLead = Html.Sitecore().CurrentRendering.Item["Save percent lead"];
-                savingsMessage = percentLead + " " + variant.SavingsPercentage + "%";
+                var percentLead = Html.Sitecore().CurrentRendering.Item["Save percent lead"];
+                savingsMessage = percentLead + " " + Model.SavingsPercentage + "%";
             }
 
-            var sizeValue = string.IsNullOrWhiteSpace(variant.Size) ? string.Empty : variant.Size.GetHashCode().ToString();
-            var colorValue = string.IsNullOrWhiteSpace(variant.ProductColor) ? string.Empty : variant.ProductColor.GetHashCode().ToString();
-
-            @:AddVariantCombination('@sizeValue','@colorValue','@variant.Id','@variant.ListPrice.ToCurrency()','@variant.AdjustedPrice.ToCurrency()',@variant.IsOnSale.ToString().ToLower(),'@savingsMessage');
+            @:switchProductPriceInfo('@Model.ListPriceWithCurrency', '@Model.AdjustedPriceWithCurrency', @Model.IsOnSale.ToString().ToLower(), '@savingsMessage');
         }
-    }
-    else
-    {
-        var savingsMessage = string.Empty;
-        if (Model.IsOnSale)
-        {
-            string percentLead = Html.Sitecore().CurrentRendering.Item["Save percent lead"];
-            savingsMessage = percentLead + " " + Model.SavingsPercentage + "%";
-        }
-
-        @:priceInfoVM.switchInfo('@Model.ListPriceWithCurrency', '@Model.AdjustedPriceWithCurrency',@Model.IsOnSale.ToString().ToLower(),'@savingsMessage');
-    }
+    });
 </script>

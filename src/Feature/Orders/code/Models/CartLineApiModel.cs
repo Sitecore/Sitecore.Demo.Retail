@@ -33,7 +33,7 @@ using Sitecore.Links;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class CartLineApiModel : BaseJsonResult
+    public class CartLineApiModel : BaseApiModel
     {
         public CartLineApiModel(CartLine line, Item productItem)
         {
@@ -48,7 +48,7 @@ namespace Sitecore.Feature.Commerce.Orders.Models
             LineTotal = line.Total.Amount.ToCurrency(line.Total.CurrencyCode);
             ExternalCartLineId = StringUtility.RemoveCurlyBrackets(line.ExternalCartLineId);
             ProductUrl = LinkManager.GetDynamicUrl(productItem);
-            Image = (line as CommerceCartLineWithImages)?.DefaultImage?.ImageUrl(100, 100) ?? string.Empty;
+            Image = (line as CommerceCartLineWithImages)?.DefaultImage?.ImageUrl(150, 150) ?? string.Empty;
 
             DiscountOfferNames = line.Adjustments.Select(a => a.Description).ToList();
         }

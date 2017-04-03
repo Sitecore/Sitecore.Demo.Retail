@@ -18,11 +18,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
+using Sitecore.Feature.Commerce.Catalog.Extensions;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
@@ -49,7 +51,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public HtmlString DescriptionRender => PageContext.Current.HtmlHelper.Sitecore().Field(Foundation.Commerce.Templates.Commerce.Product.Fields.Description, Item);
 
-        public MediaItem OnSaleOverlayImage => StorefrontManager.CurrentStorefront.OnSaleOverlayImage;
+        public MediaItem OnSaleOverlayImage
+        {
+            get
+            {
+                var storefrontManager = DependencyResolver.Current.GetService<StorefrontManager>();
+                return storefrontManager.Current.OnSaleOverlayImage;
+            }
+        }
 
         public string ListPriceWithCurrency => ListPrice.HasValue ? ListPrice.ToCurrency() : string.Empty;
 

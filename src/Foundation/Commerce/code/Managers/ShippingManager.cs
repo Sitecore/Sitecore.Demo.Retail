@@ -29,7 +29,7 @@ using GetShippingMethodsRequest = Sitecore.Commerce.Engine.Connect.Services.Ship
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
-    public class ShippingManager : BaseManager
+    public class ShippingManager : IManager
     {
         public ShippingManager([NotNull] ShippingServiceProvider shippingServiceProvider, [NotNull] CartManager cartManager)
         {

@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -40,7 +41,7 @@ using Sitecore.Security.Authentication;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
-    public class AccountManager : BaseManager
+    public class AccountManager : IManager
     {
         public AccountManager(CartManager cartManager, [NotNull] CustomerServiceProvider customerServiceProvider,
             [NotNull] ContactFactory contactFactory)
@@ -170,24 +171,20 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<UpdateUserResult, CommerceUser>(result, result.CommerceUser);
         }
 
-        public ManagerResponse<GetPartiesResult, IEnumerable<CommerceParty>> GetParties(
-            [NotNull] CommerceStorefront storefront, [NotNull] CommerceCustomer customer)
+        public ManagerResponse<GetPartiesResult, IEnumerable<IParty>> GetParties([NotNull] CommerceStorefront storefront, [NotNull] CommerceCustomer customer)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(customer, nameof(customer));
 
             var request = new GetPartiesRequest(customer);
             var result = CustomerServiceProvider.GetParties(request);
-            var partyList = result.Success && result.Parties != null
-                ? result.Parties.Cast<CommerceParty>()
-                : new List<CommerceParty>();
+            var partyList = result.Success && result.Parties != null ? result.Parties.Select(p => p.ToEntity()) : new List<IParty>();
 
             result.WriteToSitecoreLog();
-            return new ManagerResponse<GetPartiesResult, IEnumerable<CommerceParty>>(result, partyList);
+            return new ManagerResponse<GetPartiesResult, IEnumerable<IParty>>(result, partyList);
         }
 
-        public ManagerResponse<GetPartiesResult, IEnumerable<CommerceParty>> GetCurrentCustomerParties(
-            [NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext)
+        public ManagerResponse<GetPartiesResult, IEnumerable<IParty>> GetCurrentCustomerParties([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
@@ -197,7 +194,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             if (!getUserResponse.ServiceProviderResult.Success || getUserResponse.Result == null)
             {
                 result.SystemMessages.ToList().AddRange(getUserResponse.ServiceProviderResult.SystemMessages);
-                return new ManagerResponse<GetPartiesResult, IEnumerable<CommerceParty>>(result, null);
+                return new ManagerResponse<GetPartiesResult, IEnumerable<IParty>>(result, null);
             }
 
             return GetParties(storefront, new CommerceCustomer {ExternalId = getUserResponse.Result.ExternalId});
@@ -210,7 +207,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             Assert.ArgumentNotNull(user, nameof(user));
             Assert.ArgumentNotNull(parties, nameof(parties));
 
-            var request = new RemovePartiesRequest(user, parties.Cast<Party>().ToList());
+            var request = new RemovePartiesRequest(user, parties.Cast<Sitecore.Commerce.Entities.Party>().ToList());
             var result = CustomerServiceProvider.RemoveParties(request);
             result.WriteToSitecoreLog();
             return new ManagerResponse<CustomerResult, bool>(result, result.Success);
@@ -238,36 +235,35 @@ namespace Sitecore.Foundation.Commerce.Managers
             return RemoveParties(storefront, customer, parties);
         }
 
-        public ManagerResponse<CustomerResult, bool> UpdateParties([NotNull] CommerceStorefront storefront,
-            [NotNull] CommerceCustomer user, List<Party> parties)
+        public ManagerResponse<CustomerResult, bool> UpdateParties([NotNull] CommerceStorefront storefront, [NotNull] string customerId, List<IParty> parties)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(user, nameof(user));
+            Assert.ArgumentNotNull(customerId, nameof(customerId));
             Assert.ArgumentNotNull(parties, nameof(parties));
 
-            var request = new UpdatePartiesRequest(user, parties);
+            var customer = new CommerceCustomer() { ExternalId = customerId };
+            var request = new UpdatePartiesRequest(customer, parties.Select(p => p.ToCommerceParty()).ToList());
             var result = CustomerServiceProvider.UpdateParties(request);
             result.WriteToSitecoreLog();
 
             return new ManagerResponse<CustomerResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<AddPartiesResult, bool> AddParties([NotNull] CommerceStorefront storefront,
-            [NotNull] CommerceCustomer user, List<Party> parties)
+        public ManagerResponse<AddPartiesResult, bool> AddParties([NotNull] CommerceStorefront storefront, [NotNull] string customerId, List<IParty> parties)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(user, nameof(user));
+            Assert.ArgumentNotNull(customerId, nameof(customerId));
             Assert.ArgumentNotNull(parties, nameof(parties));
 
-            var request = new AddPartiesRequest(user, parties);
+            var customer = new CommerceCustomer() {ExternalId = customerId};
+            var request = new AddPartiesRequest(customer, parties.Select(a => (Sitecore.Commerce.Entities.Party)a.ToCommerceParty()).ToList());
             var result = CustomerServiceProvider.AddParties(request);
             result.WriteToSitecoreLog();
 
             return new ManagerResponse<AddPartiesResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<CreateUserResult, CommerceUser> RegisterUser(
-            [NotNull] CommerceStorefront storefront, RegisterUserInputModel inputModel)
+        public ManagerResponse<CreateUserResult, CommerceUser> RegisterUser([NotNull] CommerceStorefront storefront, RegisterUserInputModel inputModel)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));
@@ -375,8 +371,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<UpdatePasswordResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<CustomerResult, bool> SetPrimaryAddress([NotNull] CommerceStorefront storefront,
-            [NotNull] VisitorContext visitorContext, [NotNull] string addressExternalId)
+        public ManagerResponse<CustomerResult, bool> SetPrimaryAddress([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string addressExternalId)
         {
             Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
@@ -386,30 +381,26 @@ namespace Sitecore.Foundation.Commerce.Managers
             if (userPartiesResponse.ServiceProviderResult.Success)
             {
                 var customerResult = new CustomerResult {Success = false};
-                customerResult.SystemMessages.ToList()
-                    .AddRange(userPartiesResponse.ServiceProviderResult.SystemMessages);
+                customerResult.SystemMessages.ToList().AddRange(userPartiesResponse.ServiceProviderResult.SystemMessages);
                 return new ManagerResponse<CustomerResult, bool>(customerResult, false);
             }
 
-            var addressesToUpdate = new List<CommerceParty>();
+            var addressesToUpdate = new List<IParty>();
 
-            var notPrimary = userPartiesResponse.Result.SingleOrDefault(address => address.IsPrimary);
-            if (notPrimary != null)
+            var currentPrimary = userPartiesResponse.Result.SingleOrDefault(address => address.IsPrimary);
+            if (currentPrimary != null)
             {
-                notPrimary.IsPrimary = false;
-                addressesToUpdate.Add(notPrimary);
+                currentPrimary.IsPrimary = false;
+                addressesToUpdate.Add(currentPrimary);
             }
 
             var primaryAddress = userPartiesResponse.Result.Single(address => address.PartyId == addressExternalId);
-
-            //primaryAddress.IsPrimary = true;
+            primaryAddress.IsPrimary = true;
             addressesToUpdate.Add(primaryAddress);
 
-            var updatePartiesResponse = UpdateParties(storefront,
-                new CommerceCustomer {ExternalId = visitorContext.UserId}, addressesToUpdate.Cast<Party>().ToList());
+            var updatePartiesResponse = UpdateParties(storefront, visitorContext.UserId, addressesToUpdate);
 
-            return new ManagerResponse<CustomerResult, bool>(updatePartiesResponse.ServiceProviderResult,
-                updatePartiesResponse.Result);
+            return new ManagerResponse<CustomerResult, bool>(updatePartiesResponse.ServiceProviderResult, updatePartiesResponse.Result);
         }
 
         public ManagerResponse<GetUserResult, CommerceUser> ResolveCommerceUser()
@@ -470,6 +461,20 @@ namespace Sitecore.Foundation.Commerce.Managers
                 default:
                     return DictionaryPhraseRepository.Current.Get("/System Messages/Account Manager/Unknown Membership Provider Error", "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.");
             }
+        }
+
+        public string GetCommerceUsersDomain()
+        {
+            var defaultDomain = CommerceServerSitecoreConfig.Current.DefaultCommerceUsersDomain;
+            if (string.IsNullOrWhiteSpace(defaultDomain))
+            {
+                defaultDomain = CommerceConstants.ProfilesStrings.CommerceUsersDomainName;
+            }
+            if (string.IsNullOrEmpty(defaultDomain))
+            {
+                throw new ConfigurationErrorsException("Cannot determine the commerce user domain. Please check your configuration.");
+            }
+            return defaultDomain;
         }
     }
 }

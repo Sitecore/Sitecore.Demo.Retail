@@ -19,6 +19,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Net.Mail;
+using System.Web.Mvc;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
@@ -50,7 +51,8 @@ namespace Sitecore.Foundation.Commerce.Util
             Assert.ArgumentNotNull(subjectParameters, nameof(subjectParameters));
             Assert.ArgumentNotNull(bodyParameters, nameof(bodyParameters));
 
-            var mailTemplates = StorefrontManager.CurrentStorefront.GlobalItem.Children[StorefrontConstants.KnowItemNames.Mails];
+            var storefrontManager = DependencyResolver.Current.GetService<StorefrontManager>();
+            var mailTemplates = storefrontManager.Current.GlobalItem.Children[StorefrontConstants.KnowItemNames.Mails];
             if (mailTemplates == null)
             {
                 return false;

@@ -23,10 +23,10 @@
 <div class="thumbnail">
     @using (Html.BeginEditFrame(Model.Item.Paths.FullPath, CommerceConstants.KnownItemPaths.EditFrameImages))
     {
-        if (Model.DefaultImage != null)
+        if (Model.GetThumbnailUrl(300) != null)
         {
             <a href="@Model.GetLink()">
-                <img src="@(Model.DefaultImage?.ImageUrl(300, 300))" class="img-responsive" alt="product image" title="@Model.Title" />
+                <img src="@Model.GetThumbnailUrl(300)" class="img-responsive" alt="product image" title="@Model.Title" />
             </a>
         }
         else

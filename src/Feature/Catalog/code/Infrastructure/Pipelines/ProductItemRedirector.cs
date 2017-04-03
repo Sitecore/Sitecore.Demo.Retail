@@ -16,12 +16,14 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
-using Sitecore.Pipelines.HttpRequest;
 using System.Web.Mvc;
 using Sitecore.Feature.Commerce.Catalog.Services;
+using Sitecore.Foundation.DependencyInjection;
+using Sitecore.Pipelines.HttpRequest;
 
 namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines
 {
+    [Service]
     public class ProductItemRedirector : HttpRequestProcessor
     {
         public string CommercePath { get; set; } = "/sitecore/Commerce/";

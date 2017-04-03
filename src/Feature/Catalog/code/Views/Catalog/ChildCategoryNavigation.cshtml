@@ -37,7 +37,9 @@
     </button>
     <div class="sidebar-collapse collapse" id="@catalogId-sidebar">
         <div id="CategoryNavigation" class="category-nav-container">
-            <h5 class="hidden-xs">@Html.Sitecore().Text("Catalog/Child Category Navigation/Categories", "Categories")</h5>
+            <h5 class="hidden-xs">
+                <a href="@Model.TopCategory.GetLink()">@Model.TopCategory.Title</a>
+            </h5>
             <div class="@catalogId-list">
                 <ul class="nav nav-pills nav-stacked @catalogId">
                     @foreach (var category in Model.ChildCategories)

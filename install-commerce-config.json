@@ -38,12 +38,12 @@
             }   
         ],
         [   {   "id": "commerceEngineProject",
-                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Foundation\\Commerce\\Engine\\code",
+                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Foundation\\Commerce\\Engine",
                 "files": []   
             }   
         ],  
         [   {   "id": "solutionRoot",
-                "path": "C:\\Projects\\Sitecore.Demo.Retail",
+                "path": "C:\\Projects\\Sitecore.Demo.Retail\\",
                 "files": []   
             }   
         ] 
@@ -53,11 +53,22 @@
     ],
     "iis": {
         "appPools": [
+            [   {   "id": "sitecore", "name": "habitat.dev.local", "managedRuntimeVersion": "v4.0", "accountId": "runTime" }   ],
             [   {   "id": "commerceServerServices", "name": "habitat.csservices.dev.local", "managedRuntimeVersion": "v4.0", "accountId": "runTime" }   ],
             [   {   "id": "commerceEngine", "name": "habitat.commerceengine.dev.local", "managedRuntimeVersion": "", "accountId": "runTime" }   ]
 
         ],
         "websites": [
+            [   {   "id": "sitecore", 
+                    "siteName": "habitat.dev.local", 
+                    "physicalPath": "C:\\Websites\\habitat.dev.local\\Website" ,
+                    "appPoolId":  "sitecore",
+                    "bindings": [
+                        [   {   "protocol": "http", "ipAddress": "*", "port": "80", "hostName": "habitat.dev.local"  }   ],
+                        [   {   "protocol": "http", "ipAddress": "*", "port": "80", "hostName": "retail.dev.local"  }   ]
+                    ]
+                }
+            ],
             [   {   "id": "commerceServerServices", 
                     "siteName": "habitat.csservices.dev.local", 
                     "physicalPath": "C:\\Websites\\habitat.dev.local\\CSServices" ,
@@ -78,8 +89,10 @@
             ]
         ],
         "hostEntries": [
-            [   {   "ipAddress": "127.0.0.1", "hostName": "habitat.csservices.dev.local", "description": "Commerce server services site"   }   ],
-            [   {   "ipAddress": "127.0.0.1", "hostName": "habitat.commerceengine.dev.local", "description": "Sitecore Commerce Engine site"   }   ]
+            [   {   "ipAddress": "127.0.0.1", "hostName": "habitat.dev.local", "description": "Sitecore site"   }   ],
+            [   {   "ipAddress": "127.0.0.1", "hostName": "retail.dev.local", "description": "Sitecore commerce site"   }   ],
+            [   {   "ipAddress": "127.0.0.1", "hostName": "habitat.csservices.dev.local", "description": "Sitecore commerce server services site"   }   ],
+            [   {   "ipAddress": "127.0.0.1", "hostName": "habitat.commerceengine.dev.local", "description": "Sitecore commerce engine site"   }   ]
         ],
         "certificates": [
             [   {   "DnsName": "retail.dev.local", "siteName": "habitat.dev.local"  }   ]
@@ -89,8 +102,8 @@
         [   {   "id": "commerceAdminDB", "server": ".", "name": "MSCS_Admin"    }   ],
         [   {   "id": "commerceCatalogDB", "server": ".", "name": "demo.local_CommerceServer.ProductCatalog"    }   ],
         [   {   "id": "commerceProfilesDB", "server": ".", "name": "demo.local_CommerceServer.Profiles"    }   ],
-        [   {   "id": "commerceEngineGlobalDB", "server": ".", "name": "SitecoreCommerce_Global"    }   ],
-        [   {   "id": "commerceEngineSharedEnvironmentDB", "server": ".", "name": "SitecoreCommerce_SharedEnvironments"    }   ]     
+        [   {   "id": "commerceEngineGlobalDB", "server": ".", "name": "demo.local_SitecoreCommerce.Global"    }   ],
+        [   {   "id": "commerceEngineSharedEnvironmentDB", "server": ".", "name": "demo.local_SitecoreCommerce.SharedEnvironments"    }   ]     
     ],
     "sitecoreCommerce": {
         "csInstallerConfig":  {   "adminDatabaseId": "commerceAdminDB", "windowsSecurity": "yes", "username": "", "password": "", "stagingServiceAccountId": "runTime" },

@@ -26,7 +26,7 @@ using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    public class CheckoutApiModel : BaseJsonResult
+    public class CheckoutApiModel : BaseApiModel
     {
         public CheckoutApiModel()
         {
@@ -42,8 +42,6 @@ namespace Sitecore.Feature.Commerce.Orders.Models
         public IEnumerable<LineShippingOptionApiModel> LineShippingOptions { get; set; }
 
         public ShippingMethodApiModel EmailDeliveryMethod { get; set; }
-
-        public ShippingMethodApiModel ShipToStoreDeliveryMethod { get; set; }
 
         public IDictionary<string, string> Countries { get; set; }
 

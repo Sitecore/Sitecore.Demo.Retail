@@ -7,18 +7,18 @@ using Sitecore.Commerce.Contacts;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Foundation.DependencyInjection;
 
 namespace Sitecore.Foundation.Commerce.Repositories
 {
+    [Service]
     public class VisitorContextRepository
     {
-        public VisitorContextRepository(CatalogItemContext catalogItemContext, AccountManager accountManager, ContactFactory contactFactory)
+        public VisitorContextRepository(AccountManager accountManager, ContactFactory contactFactory)
         {
-            Assert.ArgumentNotNull(catalogItemContext, nameof(catalogItemContext));
             Assert.ArgumentNotNull(accountManager, nameof(accountManager));
             Assert.ArgumentNotNull(contactFactory, nameof(contactFactory));
 
-            CatalogItemContext = catalogItemContext;
             AccountManager = accountManager;
             ContactFactory = contactFactory;
         }
@@ -46,7 +46,5 @@ namespace Sitecore.Foundation.Commerce.Repositories
         public ContactFactory ContactFactory { get; }
 
         public AccountManager AccountManager { get; }
-
-        public CatalogItemContext CatalogItemContext { get; }
     }
 }

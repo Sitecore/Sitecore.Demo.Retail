@@ -33,13 +33,13 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
             PageSizeClass = DefaultPageSizeClass;
         }
 
-        public IEnumerable<CommerceQuerySort> SortFields { get; protected set; }
+        public IEnumerable<QuerySortField> SortFields { get; protected set; }
 
         public PaginationModel Pagination { get; set; }
 
         public string PageSizeClass { get; set; }
 
-        public void Initialize(Rendering rendering, SearchResults products, IEnumerable<CommerceQuerySort> sortFields, CommerceSearchOptions searchOptions)
+        public void Initialize(Rendering rendering, SearchResults products, IEnumerable<QuerySortField> sortFields, SearchOptions searchOptions)
         {
             base.Initialize(rendering);
 
@@ -58,7 +58,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
                 };
             }
 
-            SortFields = sortFields ?? Enumerable.Empty<CommerceQuerySort>();
+            SortFields = sortFields ?? Enumerable.Empty<QuerySortField>();
         }
     }
 }

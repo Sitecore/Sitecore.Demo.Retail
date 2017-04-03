@@ -51,8 +51,5 @@
         <td data-bind="attr: { id:'Email-'+ externalCartLineId }, visible: isLineShipToEmail" colspan="3">
             @Html.Partial("_ByItem_SendByEmail")
         </td>
-        <td data-bind="attr: { id:'PickStore-'+ externalCartLineId }, visible: isLineShipToStore" colspan="3">
-            @Html.Partial("_ByItem_Store")
-        </td>
     </tr>
 </table>

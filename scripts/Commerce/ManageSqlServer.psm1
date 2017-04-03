@@ -231,7 +231,7 @@ function New-SqlLogin
         }
         else
         {
-            Write-Verbose "SQL user '$loginname' allready exists" 
+            Write-Verbose "SQL user '$loginname' already exists" 
         }
 
         return 0;
