@@ -3,7 +3,8 @@ Write-Host 'Ready to modify '  $jsonFile
 
 $catalogDBName = 'habitat'+ $prNumber + '_CommerceServer.ProductCatalog'
 $profileDBName = 'habitat'+ $prNumber + '_CommerceServer.Profiles'
-
+$globalDBName = 'habitat' + $prNumber + '_SitecoreCommerce.Global'
+$sharedDBName = 'habitat' + $prNumber + '_SitecoreCommerce.SharedEnvironments'
 
 Set-ExecutionPolicy Unrestricted –scope CurrentUser
 if (-Not ($PSVersionTable.PSVersion.Major -ge 4)) { Write-Host "Update version of powershell"; exit }
@@ -40,7 +41,9 @@ cd SQLSERVER:\SQL
     
 	ManageSqlServer\Remove-Database -dbname $catalogDBName -Verbose
 	ManageSqlServer\Remove-Database -dbname $profileDBName -Verbose
-
+	ManageSqlServer\Remove-Database -dbname $globalDBName -Verbose
+	ManageSqlServer\Remove-Database -dbname $sharedDBName -Verbose
+	
 	cd $PSScriptRoot
 
 # Step 3: Uninstall websites
