@@ -457,4 +457,26 @@ function Enable-WindowsAuthentication
     return 0; 
 }
 
-Export-ModuleMember New-AppPool, New-Website, Set-HostFile, Remove-Site, Remove-AppPool, Test-WebService, New-Certificate, Enable-WindowsAuthentication,  Remove-HostEntries, Reset-IIS
+function Remove-SSLCertificates
+{
+    param 
+    (
+        [Parameter(Mandatory=$True)][PSCustomObject]$certificateSettingList,
+        [Parameter(Mandatory=$True)][PSCustomObject]$installFolderSetting
+    )
+    begin 
+    {
+        Write-Verbose "Removing SSL Certificate"
+    }
+    process
+    {
+        $myCertStoreLocation = "cert:\LocalMachine\My"
+        $rootCertStoreLocation = "cert:\LocalMachine\Root"
+		
+		  Get-ChildItem $myCertStoreLocation | where-object { $_.DnsNameList -like $certificateSetting.dnsName }  | Select-Object -First 1 | Remove-Item
+		  Get-ChildItem $rootCertStoreLocation | where-object { $_.DnsNameList -like $certificateSetting.dnsName }  | Select-Object -First 1 | Remove-Item
+	}
+	end {}
+}
+
+Export-ModuleMember New-AppPool, New-Website, Set-HostFile, Remove-Site, Remove-AppPool, Test-WebService, New-Certificate, Enable-WindowsAuthentication,  Remove-HostEntries, Reset-IIS, Remove-SSLCertificates

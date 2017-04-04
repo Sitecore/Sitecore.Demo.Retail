@@ -68,6 +68,8 @@ Foreach ($appPool in $settings.iis.appPools)
 Write-Host "`nStep 5: Configure Host File" -foregroundcolor Yellow
 If((ManageIIS\Remove-HostEntries -hostEntryList $settings.iis.hostEntries -Verbose) -ne 0) { Exit }
 
-
+# Step 6: Remove SSL Certificate
+Write-Host "`Step 6: Remove SSL Certificate" -foregroundcolor Yellow
+If((ManageIIS\Remove-SSLCertificates -certificateSettingList $settings.iis.certificates -installFolderSetting $installFolderSetting -Verbose) -ne 0) { Exit }
 
 
