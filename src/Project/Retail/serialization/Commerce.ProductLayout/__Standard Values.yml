@@ -74,11 +74,10 @@ SharedFields:
           ph="navbar-activity"
           uid="{1E13526F-910A-44F7-92EE-BB192A0C08BE}" />
         <r
-          id="{B6C0593E-1C35-4C61-8DB5-E7C7AA19D955}"
+          id="{604ECBB6-2BBF-45AF-AC6E-BA9F853E7A03}"
           ph="navbar-activity"
-          uid="{4F463767-4D70-4EC9-8732-068E6CC5F1F8}" />
+          uid="{6C52E704-D605-4526-823F-4FF493E46013}" />
         <r
-          ds=""
           id="{9AA8E388-A6BD-46E1-A73B-DDEF601DE6F8}"
           ph="navbar-activity"
           uid="{892BBFF6-55FF-4292-9F06-9E944E59A593}" />
@@ -103,39 +102,34 @@ SharedFields:
           uid="{80587E8D-67C3-47AF-97AC-4FAA0F81D9D4}" />
         <r
           id="{A7CEEE33-046A-49DA-8D0B-636BAC05F97F}"
-          ph="col-wide-1"
+          ph="/page-layout/section/col-wide-1"
           uid="{CBF8B050-CFD6-4013-83BF-5EF3AAF64682}" />
         <r
           id="{AAF9B3B2-BE53-4B85-BDBF-E7704C0B28D2}"
-          ph="col-wide-2"
+          ph="/page-layout/section/col-wide-2"
           uid="{8C2C1F8D-59F1-4B59-8B17-FC5BE9CF1765}" />
         <r
           id="{49424190-0EFA-4414-8D18-4569CC8EA5FD}"
-          ph="col-wide-2"
+          ph="/page-layout/section/col-wide-2"
           uid="{3B217F90-4061-48A6-BDCF-23A624D69491}" />
         <r
-          ds=""
           id="{83DA4C94-D96C-4957-B026-6C9AC77DB964}"
-          ph="col-wide-2"
+          ph="/page-layout/section/col-wide-2"
           uid="{D671C715-DAE0-4EFD-8336-7ACB73E3DE47}" />
         <r
-          id="{B0D07BC6-467D-4AEE-9D4B-21A1752215BA}"
-          ph="col-wide-2"
-          uid="{329A65A6-5100-42CD-BD5A-74C3356BB8F7}" />
-        <r
-          ds=""
           id="{5DB98A10-52BD-4AB0-9E2B-C40C45FD2FAE}"
-          ph="col-wide-2"
+          ph="/page-layout/section/col-wide-2"
           uid="{59246F17-EC96-46F0-A632-BE4671929091}" />
         <r
+          ds=""
           id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
-          par="UseStaticPlaceholderNames=1"
+          par="Background&amp;ContainerIsFluid&amp;UseStaticPlaceholderNames=1"
           ph="/page-layout/section"
           uid="{D00DBB92-A2AD-4E94-817E-3184FA9429A8}" />
         <r
           id="{0B0ECF42-1026-4DDA-866B-EEE84778E831}"
           ph="/page-layout/section/col-huge"
-          uid="{8B8DFD0C-2842-4B5D-BA29-4753FB35DCEA}" />
+          uid="{E046C9C1-0650-40D6-8629-6AAFC6B22F08}" />
         <r
           id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"
           ph="footer"
@@ -164,10 +158,6 @@ SharedFields:
           id="{7DAE9F23-890F-4E06-99A7-CCEDB74D3D8E}"
           ph="postfooter"
           uid="{239FEC25-52E9-448B-B1CF-23FE2F78FA89}" />
-        <r
-          id="{CED18F24-62C2-445E-B0D9-045E3325297B}"
-          ph="page-sidebar"
-          uid="{3922F51F-1813-4A7D-8C2F-4E3D664ADA6E}" />
       </d>
     </r>
 Languages:

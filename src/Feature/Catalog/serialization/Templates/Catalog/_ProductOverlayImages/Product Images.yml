@@ -1,0 +1,14 @@
+﻿---
+ID: "bab60ca6-dfd1-4e5c-b9a7-57b27a344219"
+Parent: "d4859fed-cd3b-45a9-9cdb-a061809d5b50"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Feature/Commerce/Catalog/_ProductOverlayImages/Product Images
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170328T225635Z

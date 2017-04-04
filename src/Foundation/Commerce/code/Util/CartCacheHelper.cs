@@ -16,7 +16,6 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
-using System.Globalization;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Caching;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
@@ -28,7 +27,7 @@ namespace Sitecore.Foundation.Commerce.Util
     [Service]
     public class CartCacheHelper
     {
-        public void InvalidateCartCache([NotNull] string customerId)
+        public void InvalidateCartCache(string customerId)
         {
             var cacheProvider = GetCacheProvider();
             var id = GetCustomerId(customerId);
@@ -57,7 +56,7 @@ namespace Sitecore.Foundation.Commerce.Util
             CartCookieHelper.CreateCartCookieForCustomer(id);
         }
 
-        public CommerceCart GetCart([NotNull] string customerId)
+        public CommerceCart GetCart(string customerId)
         {
             var cacheProvider = GetCacheProvider();
 
@@ -73,7 +72,7 @@ namespace Sitecore.Foundation.Commerce.Util
             return cart;
         }
 
-        private string GetCustomerId([NotNull] string customerId)
+        private string GetCustomerId(string customerId)
         {
             Guid csCustomerId;
             return Guid.TryParse(customerId, out csCustomerId) ? Guid.Parse(customerId).ToString("D") : customerId;

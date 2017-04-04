@@ -39,30 +39,45 @@
     Func<RelationshipViewModel, int, string> GetId = (relationship, relationshipIndex) => relationship.Name.Replace(' ', '-').Replace('*', '-').ToLowerInvariant() + "-" + relationshipIndex.ToString();
 }
 
-
-<ul class="nav nav-tabs nav-justified" role="tablist">
-    @{
-        var index = 0;
-        foreach (var relationship in catalogItemList)
-        {
-            <li role="presentation" class="@(index == 0 ? "active" : "")">
-                <a href="#tab-@GetId(relationship, index)" role="tab" data-toggle="tab">
-                    @relationship.DescriptionRenderer
-                </a>
-            </li>
-            index++;
-        }
-    }
-</ul>
-<div class="tab-content">
-    @{
-        var contentIndex = 0;
-        foreach (var relationship in catalogItemList)
-        {
-            <div role="tabpanel" class="tab-pane @(contentIndex == 0 ? "active" : "")" id="tab-@GetId(relationship, contentIndex)">
-                @Html.Partial("_RelatedCatalogItemsSlide", relationship)
+    @if (catalogItemList.Count == 1)
+    {
+        <div>
+            <div class="headline">
+                <h2 class="text-center">
+                    @catalogItemList[0].Description
+                </h2>
             </div>
-            contentIndex++;
-        }
+            @Html.Partial("_RelatedCatalogItemsSlide", catalogItemList[0])
+        </div>
     }
-</div>
+    else
+    {
+        <div class="m-t-1">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+                @{
+                    var index = 0;
+                    foreach (var relationship in catalogItemList)
+                    {
+                        <li role="presentation" class="@(index == 0 ? "active" : "")">
+                            <a href="#tab-@GetId(relationship, index)" role="tab" data-toggle="tab">
+                                @relationship.Description
+                            </a>
+                        </li>
+                        index++;
+                    }
+                }
+            </ul>
+            <div class="tab-content">
+                @{
+                    var contentIndex = 0;
+                    foreach (var relationship in catalogItemList)
+                    {
+                        <div role="tabpanel" class="tab-pane @(contentIndex == 0 ? "active" : "")" id="tab-@GetId(relationship, contentIndex)">
+                            @Html.Partial("_RelatedCatalogItemsSlide", relationship)
+                        </div>
+                        contentIndex++;
+                    }
+                }
+            </div>
+        </div>
+    }

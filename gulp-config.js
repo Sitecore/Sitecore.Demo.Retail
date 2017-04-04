@@ -6,6 +6,8 @@ module.exports = function() {
     licensePath: instanceRoot + "\\Data\\license.xml",
     solutionName: "Sitecore.Demo.Retail",
     buildConfiguration: "Demo-Retail",
+    buildPlatform: "Any CPU",
+    publishPlatform: "AnyCpu",
     runCleanBuilds: false,
     commerceServerSiteName: "Habitat",
     commerceEngineRoot: instanceRoot + "\\CommerceEngine",

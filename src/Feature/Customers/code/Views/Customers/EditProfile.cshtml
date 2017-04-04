@@ -10,42 +10,9 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-@using Sitecore.Foundation.Commerce.Managers
 @model Sitecore.Foundation.Commerce.Models.ProfileModel
-@{
-    //Labels
-    var currentPage = Html.Sitecore().CurrentItem;
-    var firstName = Html.Sitecore().Field("First Name", currentPage);
-    var surname = Html.Sitecore().Field("Surname", currentPage);
-    var email = Html.Sitecore().Field("Email", currentPage);
-    var repeatEmail = Html.Sitecore().Field("Repeat Email", currentPage);
-    var saveChanges = Html.Sitecore().Field("Save Changes Button", currentPage);
-    var savingChanges = Html.Sitecore().Field("Saving Changes Button", currentPage);
-    var cancel = Html.Sitecore().Field("Cancel Button", currentPage);
-    var backtoMyAccount = Html.Sitecore().Field("Back To My Account", currentPage);
-    var telephoneNumber = Html.Sitecore().Field("Telephone Number", currentPage);
 
-    var telephoneNumberPH = currentPage["Telephone Number Placeholder"];
-    var emailPH = currentPage["Email Placeholder"];
-    var firstNamePH = currentPage["First Name Placeholder"];
-    var lastNamePH = currentPage["Last Name Placeholder"];
-
-    var firstNameRequiredMsg = Html.Sitecore().Field("First Name Required Message", currentPage);
-    var lastNameRequiredMsg = Html.Sitecore().Field("Last Name Required Message", currentPage);
-    var emailRequiredMsg = Html.Sitecore().Field("Email Required Message", currentPage);
-    var telephoneRequiredMsg = Html.Sitecore().Field("Telephone Number Required Message", currentPage);
-}
-
-@using (Ajax.BeginForm("UpdateProfile", "Customers", null, new AjaxOptions
-                                                         {
-                                                             OnBegin = "SetSavingProfileButton",
-                                                             OnSuccess = "UpdateProfileSuccess",
-                                                             OnFailure = "UpdateProfileFailure",
-                                                             HttpMethod = "Post"
-                                                         }, new
-                                                            {
-                                                                id = "UpdateProfileForm"
-                                                            }))
+@using (Ajax.BeginForm("UpdateProfile", "Customers", null, new AjaxOptions {OnBegin = "SetSavingProfileButton", OnSuccess = "UpdateProfileSuccess", OnFailure = "UpdateProfileFailure", HttpMethod = "Post"}, new {id = "UpdateProfileForm"}))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -55,27 +22,29 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="FirstName">
-                        @firstName <span class="required">*</span></label>
+                        @Html.Sitecore().Field("First Name", Html.Sitecore().CurrentItem) <span class="required">*</span>
+                    </label>
 
                     @Html.TextBoxFor(m => m.FirstName, new
-                                                       {
-                                                           placeholder = firstNamePH,
-                                                           data_val_required = firstNameRequiredMsg,
-                                                           @class = "form-control"
-                                                       })
+                    {
+                        placeholder = Html.Sitecore().CurrentItem["First Name Placeholder"],
+                        data_val_required = Html.Sitecore().Field("First Name Required Message", Html.Sitecore().CurrentItem),
+                        @class = "form-control"
+                    })
 
                     @Html.ValidationMessageFor(m => m.FirstName)
 
                 </div>
                 <div class="form-group">
                     <label for="LastName">
-                        @surname <span class="required">*</span> </label>
+                        @Html.Sitecore().Field("Surname", Html.Sitecore().CurrentItem) <span class="required">*</span>
+                    </label>
                     @Html.TextBoxFor(m => m.LastName, new
-                                                      {
-                                                          placeholder = lastNamePH,
-                                                          data_val_required = lastNameRequiredMsg,
-                                                          @class = "form-control"
-                                                      })
+                    {
+                        placeholder = Html.Sitecore().CurrentItem["Last Name Placeholder"],
+                        data_val_required = Html.Sitecore().Field("Last Name Required Message", Html.Sitecore().CurrentItem),
+                        @class = "form-control"
+                    })
 
                     @Html.ValidationMessageFor(m => m.LastName)
                 </div>
@@ -83,25 +52,27 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="Email">
-                        @email <span class="required">*</span> </label>
+                        @Html.Sitecore().Field("Email", Html.Sitecore().CurrentItem) <span class="required">*</span>
+                    </label>
                     @Html.TextBoxFor(m => m.Email, new
-                                                   {
-                                                       placeholder = emailPH,
-                                                       data_val_required = emailRequiredMsg,
-                                                       @class = "form-control"
-                                                   })
+                    {
+                        placeholder = Html.Sitecore().CurrentItem["Email Placeholder"],
+                        data_val_required = Html.Sitecore().Field("Email Required Message", Html.Sitecore().CurrentItem),
+                        @class = "form-control"
+                    })
 
                     @Html.ValidationMessageFor(m => m.Email)
                 </div>
                 <div class="form-group">
                     <label for="EmailRepeat">
-                        @repeatEmail <span class="required">*</span> </label>
+                        @Html.Sitecore().Field("Repeat Email", Html.Sitecore().CurrentItem) <span class="required">*</span>
+                    </label>
                     @Html.TextBoxFor(m => m.EmailRepeat, new
-                                                         {
-                                                             placeholder = emailPH,
-                                                             data_val_required = emailRequiredMsg,
-                                                             @class = "form-control"
-                                                         })
+                    {
+                        placeholder = Html.Sitecore().CurrentItem["Email Placeholder"],
+                        data_val_required = Html.Sitecore().Field("Email Required Message", Html.Sitecore().CurrentItem),
+                        @class = "form-control"
+                    })
 
                     @Html.ValidationMessageFor(m => m.EmailRepeat)
                 </div>
@@ -110,20 +81,21 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="TelephoneNumber">
-                        @telephoneNumber<span class="required">*</span> </label>
+                        @Html.Sitecore().Field("Telephone Number", Html.Sitecore().CurrentItem)<span class="required">*</span>
+                    </label>
                     @Html.TextBoxFor(m => m.TelephoneNumber, new
-                                                             {
-                                                                 placeholder = telephoneNumberPH,
-                                                                 data_val_required = telephoneRequiredMsg,
-                                                                 @class = "form-control"
-                                                             })
+                    {
+                        placeholder = Html.Sitecore().CurrentItem["Telephone Number Placeholder"],
+                        data_val_required = Html.Sitecore().Field("Telephone Number Required Message", Html.Sitecore().CurrentItem),
+                        @class = "form-control"
+                    })
 
                     @Html.ValidationMessageFor(m => m.TelephoneNumber)
                 </div>
             </div>
             <div class="col-md-12 m-t-1">
-                <input type="submit" data-loading-text="@savingChanges" value="@saveChanges" class="btn btn-primary" id="saveProfileChangesButton" />
-                <a type="button" href="@("/accountmanagement")" class="btn btn-default">@cancel</a>
+                <input type="submit" data-loading-text="@Html.Sitecore().Field("Saving Changes Button", Html.Sitecore().CurrentItem)" value="@Html.Sitecore().Field("Save Changes Button", Html.Sitecore().CurrentItem)" class="btn btn-primary" id="saveProfileChangesButton"/>
+                <a type="button" href="@("/accountmanagement")" class="btn btn-default">@Html.Sitecore().Field("Cancel Button", Html.Sitecore().CurrentItem)</a>
             </div>
         </div>
     </div>

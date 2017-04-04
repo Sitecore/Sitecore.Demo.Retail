@@ -53,9 +53,15 @@
       <HintPath>..\..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sitecore.Commerce">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Commerce.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Commerce.Connect.CommerceServer">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="Sitecore.Feature.Language">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Feature.Language.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Foundation.Assets">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Assets.dll</HintPath>
@@ -119,7 +125,6 @@
     <Content Include="App_Config\Include\Project\Sitecore.Demo.Retail.config" />
     <Content Include="App_Config\Include\zzz\z.Sitecore.Demo.Retail.DevSettings.config" />
     <Content Include="App_Config\Include\Project\Sitecore.Demo.Retail.Serialization.config" />
-    <Content Include="App_Config\Security\domains.config.transform" />
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
@@ -145,6 +150,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\Pipelines\RaiseCommerceCultureChosenPageEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

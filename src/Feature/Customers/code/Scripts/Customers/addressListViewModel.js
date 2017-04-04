@@ -109,7 +109,7 @@ function AddressListViewModel(data) {
         self.enableSave(false);
         $("#cancelChanges").attr("disabled", "disabled");
 
-        AJAXPost('api/storefront/customers/addressdelete', '{ "ExternalId": "' + self.address().externalId() + '"}', function (data, success, sender) {
+        AJAXPost('/api/storefront/customers/addressdelete', '{ "ExternalId": "' + self.address().externalId() + '"}', function (data, success, sender) {
             if (success && data.Success) {
                 self.reload(data);
             }

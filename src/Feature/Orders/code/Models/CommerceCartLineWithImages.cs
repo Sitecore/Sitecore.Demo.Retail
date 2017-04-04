@@ -25,7 +25,7 @@ using Sitecore.Data.Items;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
-    [Obsolete("Please refactor")]
+#warning Please refactor
     [Serializable]
     public class CommerceCartLineWithImages : CommerceCartLine
     {

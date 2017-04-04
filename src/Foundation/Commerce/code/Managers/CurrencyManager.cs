@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="StorefrontManager.cs" company="Sitecore Corporation">
+// <copyright file="StorefrontContext.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Defines the StorefrontManager class.</summary>
+// <summary>Defines the StorefrontContext class.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
