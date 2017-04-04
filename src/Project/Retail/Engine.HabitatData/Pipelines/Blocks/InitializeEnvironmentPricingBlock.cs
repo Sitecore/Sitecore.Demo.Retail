@@ -39,11 +39,6 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
 
         public override async Task<string> Run(string arg, CommercePipelineExecutionContext context)
         {
-            if (arg != "Habitat" && arg != "HabitatShops")
-            {
-                return arg;
-            }
-
             var artifactSet = "Environment.Habitat.Pricing-1.0";
 
             // Check if this environment has subscribed to this Artifact Set

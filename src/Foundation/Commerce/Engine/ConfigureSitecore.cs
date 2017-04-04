@@ -19,8 +19,8 @@ namespace Sitecore.Foundation.Commerce.Engine
             services.RegisterAllPipelineBlocks(assembly);
             services.ConfigureInitializeEnvironmentPipeline();
             services.ConfigureRunningPluginsPipeline();
-            //services.ConfigureCartPipelines();
-            //services.ConfigureOrdersPipelines();
+            services.ConfigureCartPipelines();
+            services.ConfigureOrdersPipelines();
         }
     }
 }

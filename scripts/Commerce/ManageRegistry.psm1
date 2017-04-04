@@ -1,4 +1,4 @@
-Function GetValueFromRegistryThruWMI([string]$computername, $regkey, $value, $valueType)    
+Function GetValueFromRegistryThroughWMI([string]$computername, $regkey, $value, $valueType)    
 {    
     #constant for the HLKM    
     $HKLM = "&h80000002"   
@@ -54,8 +54,8 @@ function Get-InternetExplorerEnhancedSecurityEnabled
     Try
     {
         # Need to be able to access 64 bit reg from 32 bit prompt
-        $adminIeesValue = GetValueFromRegistryThruWMI $domain $adminKey "IsInstalled"
-        $userIeesValue = GetValueFromRegistryThruWMI $domain $userKey "IsInstalled"
+        $adminIeesValue = GetValueFromRegistryThroughWMI $computerName $adminKey "IsInstalled"
+        $userIeesValue = GetValueFromRegistryThroughWMI $computerName $userKey "IsInstalled"
 
         If(($adminIeesValue -eq 1) -or ($userIeesValue -eq 1))
         {
@@ -87,4 +87,28 @@ function Disable-LoopbackCheck
     Set-ItemProperty -Path $key -Name "DisableLoopbackCheck" -Value 1 -Type DWord
 }
 
-Export-ModuleMember Get-InternetExplorerEnhancedSecurityEnabled, Disable-LoopbackCheck
+function Get-WindowsIdentityFoundationEnabled
+{
+    $computerName = (Get-WmiObject Win32_ComputerSystem).PSComputerName
+              
+    $key = "SOFTWARE\Microsoft\Windows Identity Foundation\Setup\v3.5"
+ 
+    Try
+    {
+        $value = GetValueFromRegistryThroughWMI $computerName $key "InstallPath" "String"
+
+        If($value)
+        {
+            return 0
+        }
+    }
+    Catch [System.ArgumentException]
+    {
+        Write-Host "System does not have windows identity foundation installed. Please install before trying again" -ForegroundColor red
+        Write-Host "Can be done by running 'Install-WindowsFeature windows-identity-foundation' from a 64Bit Powershell session" -ForegroundColor red
+    }
+
+    return 1
+}
+
+Export-ModuleMember Get-InternetExplorerEnhancedSecurityEnabled, Disable-LoopbackCheck, Get-WindowsIdentityFoundationEnabled
