@@ -361,6 +361,8 @@ function New-Certificate
                 Write-Verbose "Certificate $($certificateSetting.dnsName) already exists in store '$rootCertStoreLocation'"
             }
 
+
+            If((Set-Binding -siteName $certificateSetting.siteName -protocol $protocol -ipAddress $ipAddress -port $port -dnsName $certificateSetting.dnsName) -ne 0) { return 1 }
             # AppId is used as a reference to which application created the binding for audit purposes.
             $applicationId = ([guid]::newguid()).ToString('B')
             
@@ -383,7 +385,6 @@ function New-Certificate
                 return 1; 
             }
 
-            If((Set-Binding -siteName $certificateSetting.siteName -protocol $protocol -ipAddress $ipAddress -port $port -dnsName $certificateSetting.dnsName) -ne 0) { return 1 }
         }
 
         return 0;
