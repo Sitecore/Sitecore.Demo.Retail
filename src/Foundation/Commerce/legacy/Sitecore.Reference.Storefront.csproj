@@ -229,17 +229,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\SharedController.cs" />
-    <Compile Include="Controllers\StorefrontSearchController.cs" />
     <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Infrastructure\SitecorePipelines\AddCommerceAssets.cs" />
-    <Compile Include="Models\SiteContentListHeaderViewModel.cs" />
-    <Compile Include="Models\PaginationViewModel.cs" />
-    <Compile Include="Models\SearchBarViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Infrastructure\SitecorePipelines\InitializeRoutes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -250,22 +243,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\Local.pubxml" />
-    <Content Include="Scripts\knockout-2.3.0.debug.js" />
-    <Content Include="Scripts\knockout-2.3.0.js" />
-    <Content Include="Scripts\knockout.validation-2.0.0.js" />
-    <Content Include="Scripts\knockout.validation-2.0.0.min.js" />
     <Content Include="Scripts\Storefront\errorsummary.js" />
     <Content Include="Scripts\Storefront\errorLineDetailViewModel.js" />
-    <Content Include="Views\StorefrontSearch\SiteContentSearchResultsList.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\ErrorsSummary.cshtml" />
-    <Content Include="Views\Shared\LanguageSelector.cshtml" />
-    <Content Include="Views\Shared\NavigationButtons.cshtml" />
-    <Content Include="Views\Shared\SearchBar.cshtml" />
     <Content Include="Views\Shared\SocialConnector.cshtml" />
-    <Content Include="Views\StorefrontSearch\SiteContentSearchResultsListHeader.cshtml" />
-    <Content Include="Views\StorefrontSearch\SiteContentSearchResultsPagination.cshtml" />
-    <Content Include="Scripts\knockout.validation-2.0.0.min.js.map" />
     <None Include="Views\Web.config">
       <SubType>Designer</SubType>
     </None>
@@ -278,8 +259,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\Storefront\debug-knockout.js" />
-    <Content Include="Scripts\Storefront\ajax-helpers.js" />
     <Content Include="Scripts\Storefront\errorSummaryViewModel.js" />
   </ItemGroup>
   <ItemGroup>

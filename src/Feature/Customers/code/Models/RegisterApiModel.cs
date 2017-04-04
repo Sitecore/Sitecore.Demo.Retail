@@ -18,6 +18,7 @@
 using Sitecore.Commerce.Entities.Customers;
 using Sitecore.Commerce.Services.Customers;
 using Sitecore.Foundation.Commerce.Models;
+using CommerceUser = Sitecore.Commerce.Entities.Customers.CommerceUser;
 
 namespace Sitecore.Feature.Commerce.Customers.Models
 {

@@ -15,10 +15,10 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sitecore.Commerce.Connect.CommerceServer;
-using Sitecore.Commerce.Connect.CommerceServer.Orders;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines;
 using Sitecore.Commerce.Engine.Connect.Pipelines.Arguments;
@@ -29,7 +29,6 @@ using Sitecore.Commerce.Services.Carts;
 using Sitecore.Commerce.Services.Orders;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Extensions;
-using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
 using Sitecore.Foundation.Commerce.Util;
 using Sitecore.Foundation.Dictionary.Repositories;
@@ -38,7 +37,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 {
     public class OrderManager : IManager
     {
-        public OrderManager(OrderServiceProvider orderServiceProvider, [NotNull] CartManager cartManager, CartCacheHelper cartCacheHelper)
+        public OrderManager(OrderServiceProvider orderServiceProvider, CartManager cartManager, CartCacheHelper cartCacheHelper, MailManager mailManager, StorefrontContext storefrontContext, AccountManager accountManager)
         {
             Assert.ArgumentNotNull(orderServiceProvider, nameof(orderServiceProvider));
             Assert.ArgumentNotNull(cartManager, nameof(cartManager));
@@ -46,22 +45,26 @@ namespace Sitecore.Foundation.Commerce.Managers
             OrderServiceProvider = orderServiceProvider;
             CartManager = cartManager;
             CartCacheHelper = cartCacheHelper;
+            MailManager = mailManager;
+            StorefrontContext = storefrontContext;
+            AccountManager = accountManager;
         }
 
-        public OrderServiceProvider OrderServiceProvider { get; protected set; }
+        private MailManager MailManager { get; }
+        private OrderServiceProvider OrderServiceProvider { get; }
+        private CartManager CartManager { get; }
+        private CartCacheHelper CartCacheHelper { get; }
+        private StorefrontContext StorefrontContext { get; }
+        private AccountManager AccountManager { get; }
 
-        public CartManager CartManager { get; protected set; }
-        public CartCacheHelper CartCacheHelper { get; }
 
-        public ManagerResponse<SubmitVisitorOrderResult, CommerceOrder> SubmitVisitorOrder([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] SubmitOrderInputModel inputModel)
+        public ManagerResponse<SubmitVisitorOrderResult, CommerceOrder> SubmitVisitorOrder(string userId, SubmitOrderInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
             var errorResult = new SubmitVisitorOrderResult {Success = false};
 
-            var response = CartManager.GetCurrentCart(storefront, visitorContext, true);
+            var response = CartManager.GetCart(userId, true);
             if (!response.ServiceProviderResult.Success || response.Result == null)
             {
                 response.ServiceProviderResult.SystemMessages.ToList().ForEach(m => errorResult.SystemMessages.Add(m));
@@ -86,31 +89,28 @@ namespace Sitecore.Foundation.Commerce.Managers
             errorResult = OrderServiceProvider.SubmitVisitorOrder(request);
             if (errorResult.Success && errorResult.Order != null && errorResult.CartWithErrors == null)
             {
-                CartCacheHelper.InvalidateCartCache(visitorContext.GetCustomerId());
+                CartCacheHelper.InvalidateCartCache(userId);
 
-                var mailUtil = new MailUtil();
-
-                var wasEmailSent = mailUtil.SendMail("PurchaseConfirmation", inputModel.UserEmail,
-                    storefront.SenderEmailAddress, new object(),
-                    new object[]
-                    {
-                        $"{cart.Parties.FirstOrDefault()?.FirstName} {cart.Parties.FirstOrDefault()?.LastName}",
-                        errorResult.Order.TrackingNumber,
-                        errorResult.Order.OrderDate,
-                        string.Join(", ", cart.Lines.Select(x => x.Product.ProductName)),
-                        cart.Total.Amount.ToCurrency(cart.Total.CurrencyCode)
-                    });
-
-                if (!wasEmailSent)
+                try
                 {
+                    var wasEmailSent = MailManager.SendMail("PurchaseConfirmation", inputModel.UserEmail, string.Join(" ", cart.Parties.FirstOrDefault()?.FirstName, cart.Parties.FirstOrDefault()?.LastName), errorResult.Order.TrackingNumber, errorResult.Order.OrderDate, string.Join(", ", cart.Lines.Select(x => x.Product.ProductName)), cart.Total.Amount.ToCurrency(cart.Total.CurrencyCode));
+                    if (!wasEmailSent)
+                    {
+                        var message = DictionaryPhraseRepository.Current.Get("/System Messages/Orders/Could Not Send Email Error", "Sorry, the email could not be sent");
+                        errorResult.SystemMessages.Add(new SystemMessage(message));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Could not send Purchase Confirmation mail message", ex, this);
                     var message = DictionaryPhraseRepository.Current.Get("/System Messages/Orders/Could Not Send Email Error", "Sorry, the email could not be sent");
-                    errorResult.SystemMessages.Add(new Sitecore.Commerce.Services.SystemMessage(message));
+                    errorResult.SystemMessages.Add(new SystemMessage(message));
                 }
             }
 
             errorResult.WriteToSitecoreLog();
             return new ManagerResponse<SubmitVisitorOrderResult, CommerceOrder>(errorResult,
-                errorResult.Order as CommerceOrder);
+                                                                                errorResult.Order as CommerceOrder);
         }
 
         public CartRequestInformation RefreshCartOnOrdersRequest(OrdersRequest request)
@@ -128,12 +128,20 @@ namespace Sitecore.Foundation.Commerce.Managers
             return info;
         }
 
-        public ManagerResponse<GetVisitorOrdersResult, IEnumerable<OrderHeader>> GetOrders(string customerId, string shopName)
+        public ManagerResponse<GetVisitorOrdersResult, IEnumerable<OrderHeader>> GetUserOrders(string userName)
         {
-            Assert.ArgumentNotNullOrEmpty(customerId, nameof(customerId));
-            Assert.ArgumentNotNullOrEmpty(shopName, nameof(shopName));
+            if (userName == null)
+            {
+                throw new ArgumentNullException(nameof(userName));
+            }
 
-            var request = new GetVisitorOrdersRequest(customerId, shopName);
+            var user = this.AccountManager.GetUser(userName);
+            if (!user.ServiceProviderResult.Success || user.Result == null)
+            {
+                throw new ArgumentException("Could not find the user, invalid userName.", nameof(userName));
+            }
+
+            var request = new GetVisitorOrdersRequest(user.Result.ExternalId, StorefrontContext.Current.ShopName);
             var result = OrderServiceProvider.GetVisitorOrders(request);
             if (result.Success && result.OrderHeaders != null && result.OrderHeaders.Count > 0)
             {
@@ -143,20 +151,20 @@ namespace Sitecore.Foundation.Commerce.Managers
             result.WriteToSitecoreLog();
             //no orders found returns false - we treat it as success
             if (!result.Success && !result.SystemMessages.Any())
+            {
                 result.Success = true;
+            }
             return new ManagerResponse<GetVisitorOrdersResult, IEnumerable<OrderHeader>>(result, new List<OrderHeader>());
         }
 
-        public ManagerResponse<CartResult, CommerceCart> Reorder([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, ReorderInputModel inputModel)
+        public ManagerResponse<CartResult, CommerceCart> Reorder(string userId, ReorderInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));
             Assert.ArgumentNotNullOrEmpty(inputModel.OrderId, nameof(inputModel.OrderId));
 
             var request = new ReorderByCartNameRequest
             {
-                CustomerId = visitorContext.GetCustomerId(),
+                CustomerId = userId,
                 OrderId = inputModel.OrderId,
                 ReorderLineExternalIds = inputModel.ReorderLineExternalIds,
                 CartName = CommerceConstants.CartSettings.DefaultCartName,
@@ -168,15 +176,20 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CartResult, CommerceCart>(result, result.Cart as CommerceCart);
         }
 
-        public ManagerResponse<VisitorCancelOrderResult, bool> CancelOrder([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, CancelOrderInputModel inputModel)
+        public ManagerResponse<VisitorCancelOrderResult, bool> CancelOrder(string userId, CancelOrderInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));
             Assert.ArgumentNotNullOrEmpty(inputModel.OrderId, nameof(inputModel.OrderId));
 
-            var request = new VisitorCancelOrderRequest(inputModel.OrderId, visitorContext.GetCustomerId(), storefront.ShopName);
-            request.OrderLineExternalIds = inputModel.OrderLineExternalIds;
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
+
+            var request = new VisitorCancelOrderRequest(inputModel.OrderId, userId, StorefrontContext.Current.ShopName)
+            {
+                OrderLineExternalIds = inputModel.OrderLineExternalIds
+            };
             var result = OrderServiceProvider.VisitorCancelOrder(request);
 
             result.WriteToSitecoreLog();
@@ -184,17 +197,29 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<VisitorCancelOrderResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<GetVisitorOrderResult, CommerceOrder> GetOrderDetails([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string orderId)
+        public ManagerResponse<GetVisitorOrderResult, CommerceOrder> GetOrderDetails(string userId, string orderId)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
+            Assert.ArgumentNotNullOrEmpty(userId, nameof(userId));
             Assert.ArgumentNotNullOrEmpty(orderId, nameof(orderId));
 
-            var customerId = visitorContext.GetCustomerId();
-            var request = new GetVisitorOrderRequest(orderId, customerId, storefront.ShopName);
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
+
+            var request = new GetVisitorOrderRequest(orderId, userId, StorefrontContext.Current.ShopName);
             var result = OrderServiceProvider.GetVisitorOrder(request);
             result.WriteToSitecoreLog();
             return new ManagerResponse<GetVisitorOrderResult, CommerceOrder>(result, result.Order as CommerceOrder);
+        }
+
+        public static string GetOrderStatusName(string orderStatus)
+        {
+            if (string.IsNullOrEmpty(orderStatus))
+            {
+                throw new ArgumentNullException(nameof(orderStatus));
+            }
+            return DictionaryPhraseRepository.Current.Get($"/Commerce/Order Status/{orderStatus}", $"[{orderStatus}]");
         }
     }
 }

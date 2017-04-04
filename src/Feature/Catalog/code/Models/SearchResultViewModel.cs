@@ -16,7 +16,9 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 using Sitecore.Diagnostics;
+using Sitecore.Feature.Commerce.Catalog.Factories;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Mvc.Presentation;
@@ -29,13 +31,15 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
         {
             Assert.ArgumentNotNull(searchResult, nameof(searchResult));
 
+            var factory = DependencyResolver.Current.GetService<ProductViewModelFactory>();
+
             Title = searchResult.Title;
             Items = new List<CatalogItemViewModel>();
             foreach (var child in searchResult.SearchResultItems)
             {
                 CatalogItemViewModel productModel = null;
                 if (child.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id))
-                    productModel = new ProductViewModel(child);
+                    productModel = factory.Create(child);
                 if (child.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id))
                     productModel = new CategoryViewModel(child);
                 if (productModel != null)

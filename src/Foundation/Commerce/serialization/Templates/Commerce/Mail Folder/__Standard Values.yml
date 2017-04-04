@@ -1,0 +1,23 @@
+﻿---
+ID: "553b3b04-de42-44ba-ab9e-084a9282d74b"
+Parent: "f6fa45fa-ed12-4423-aa07-38393f7be27f"
+Template: "f6fa45fa-ed12-4423-aa07-38393f7be27f"
+Path: /sitecore/templates/Foundation/Commerce/Mail Folder/__Standard Values
+DB: master
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: "{5AB2BB7B-811E-4050-A147-0317E60668C5}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150317T211811Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin

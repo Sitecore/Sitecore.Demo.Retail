@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Feature.Commerce.Orders.Models;
+using Sitecore.Foundation.Commerce;
 using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Security.Accounts;
 
@@ -12,30 +14,28 @@ namespace Sitecore.Feature.Commerce.Orders.Repositories
     [Service]
     public class OrdersViewModelRepository
     {
-        public OrdersViewModelRepository(OrderManager orderManager, AccountManager accountManager, StorefrontManager storefrontManager, OrderViewModelRepository orderViewModelRepository)
+        public OrdersViewModelRepository(OrderManager orderManager, AccountManager accountManager, StorefrontContext storefrontContext, OrderViewModelRepository orderViewModelRepository)
         {
             OrderManager = orderManager;
             AccountManager = accountManager;
-            StorefrontManager = storefrontManager;
+            StorefrontContext = storefrontContext;
             OrderViewModelRepository = orderViewModelRepository;
         }
+
         public OrderManager OrderManager { get; }
         public AccountManager AccountManager { get; }
-        public StorefrontManager StorefrontManager { get; }
+        public StorefrontContext StorefrontContext { get; }
         public OrderViewModelRepository OrderViewModelRepository { get; }
 
-        public OrdersViewModel Get(User user)
+        public OrdersViewModel Get(IUser user)
         {
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
             }
 
-            var commerceUser = AccountManager.GetUser(user.Name).Result;
-            if (commerceUser == null)
-                return null;
-            var commerceOrders = OrderManager.GetOrders(commerceUser.ExternalId, StorefrontManager.Current.ShopName).Result;
-            return new OrdersViewModel()
+            var commerceOrders = OrderManager.GetUserOrders(user.UserName).Result;
+            return new OrdersViewModel
             {
                 Orders = CreateOrders(commerceOrders)
             };
@@ -43,7 +43,7 @@ namespace Sitecore.Feature.Commerce.Orders.Repositories
 
         private List<OrderViewModel> CreateOrders(IEnumerable<OrderHeader> commerceOrders)
         {
-            return commerceOrders.Select(o => OrderViewModelRepository.Get(o)).ToList();
+            return commerceOrders?.Select(o => OrderViewModelRepository.Get(o)).ToList() ?? new List<OrderViewModel>();
         }
     }
 }

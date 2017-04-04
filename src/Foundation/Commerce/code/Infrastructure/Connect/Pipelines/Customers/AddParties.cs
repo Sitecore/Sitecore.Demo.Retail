@@ -30,7 +30,7 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.Connect.Pipelines.Customer
 {
     public class AddParties : CustomerPipelineProcessor
     {
-        public AddParties([NotNull] IEntityFactory entityFactory)
+        public AddParties(IEntityFactory entityFactory)
         {
             Assert.ArgumentNotNull(entityFactory, nameof(entityFactory));
 

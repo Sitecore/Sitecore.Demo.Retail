@@ -25,13 +25,14 @@ using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
+using Sitecore.Foundation.Dictionary.Repositories;
 using GetShippingMethodsRequest = Sitecore.Commerce.Engine.Connect.Services.Shipping.GetShippingMethodsRequest;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
     public class ShippingManager : IManager
     {
-        public ShippingManager([NotNull] ShippingServiceProvider shippingServiceProvider, [NotNull] CartManager cartManager)
+        public ShippingManager(ShippingServiceProvider shippingServiceProvider, CartManager cartManager)
         {
             Assert.ArgumentNotNull(shippingServiceProvider, nameof(shippingServiceProvider));
             Assert.ArgumentNotNull(cartManager, nameof(cartManager));
@@ -44,7 +45,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public CartManager CartManager { get; protected set; }
 
-        public ManagerResponse<GetShippingOptionsResult, List<ShippingOption>> GetShippingPreferences([NotNull] Cart cart)
+        public ManagerResponse<GetShippingOptionsResult, List<ShippingOption>> GetShippingPreferences(Cart cart)
         {
             Assert.ArgumentNotNull(cart, nameof(cart));
 
@@ -59,14 +60,12 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetShippingOptionsResult, List<ShippingOption>>(result, null);
         }
 
-        public ManagerResponse<GetShippingMethodsResult, IReadOnlyCollection<ShippingMethod>> GetShippingMethods([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] GetShippingMethodsInputModel inputModel)
+        public ManagerResponse<GetShippingMethodsResult, IReadOnlyCollection<ShippingMethod>> GetShippingMethods(string userId, GetShippingMethodsInputModel inputModel)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
             var result = new GetShippingMethodsResult {Success = false};
-            var cartResult = CartManager.GetCurrentCart(storefront, visitorContext);
+            var cartResult = CartManager.GetCart(userId);
             if (!cartResult.ServiceProviderResult.Success || cartResult.Result == null)
             {
                 result.SystemMessages.ToList().AddRange(cartResult.ServiceProviderResult.SystemMessages);
@@ -83,6 +82,11 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             result = ShippingServiceProvider.GetShippingMethods<Sitecore.Commerce.Services.Shipping.GetShippingMethodsRequest, GetShippingMethodsResult>(request);
             return new ManagerResponse<GetShippingMethodsResult, IReadOnlyCollection<ShippingMethod>>(result, result.ShippingMethods);
+        }
+
+        public static string GetShippingName(string shippingName)
+        {
+            return DictionaryPhraseRepository.Current.Get($"/Commerce/Shipping/{shippingName}", $"[{shippingName}]");
         }
     }
 }

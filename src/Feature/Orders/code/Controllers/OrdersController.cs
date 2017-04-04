@@ -9,31 +9,31 @@ using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Diagnostics;
 using Sitecore.Feature.Commerce.Orders.Models;
 using Sitecore.Feature.Commerce.Orders.Repositories;
+using Sitecore.Foundation.Commerce;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
-using Sitecore.Foundation.Commerce.Repositories;
 
 namespace Sitecore.Feature.Commerce.Orders.Controllers
 {
     public class OrdersController : Controller
     {
-        public OrdersController(OrderManager orderManager, AccountManager accountManager, VisitorContextRepository visitorContextRepository, OrdersViewModelRepository ordersViewModelRepository, StorefrontManager storefrontManager, OrderViewModelRepository orderViewModelRepository)
+        public OrdersController(OrderManager orderManager, AccountManager accountManager, CommerceUserContext commerceUserContext, OrdersViewModelRepository ordersViewModelRepository, StorefrontContext storefrontContext, OrderViewModelRepository orderViewModelRepository)
         {
             OrderManager = orderManager;
             AccountManager = accountManager;
-            VisitorContextRepository = visitorContextRepository;
+            CommerceUserContext = commerceUserContext;
             OrdersViewModelRepository = ordersViewModelRepository;
-            StorefrontManager = storefrontManager;
+            StorefrontContext = storefrontContext;
             OrderViewModelRepository = orderViewModelRepository;
         }
 
         private OrderManager OrderManager { get; }
         private AccountManager AccountManager { get; }
-        private VisitorContextRepository VisitorContextRepository { get; }
+        private CommerceUserContext CommerceUserContext { get; }
         public OrdersViewModelRepository OrdersViewModelRepository { get; }
-        public StorefrontManager StorefrontManager { get; }
+        public StorefrontContext StorefrontContext { get; }
         public OrderViewModelRepository OrderViewModelRepository { get; }
 
 
@@ -46,7 +46,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 return new EmptyResult();
             }
 
-            var orders = OrdersViewModelRepository.Get(Context.User);
+            var orders = OrdersViewModelRepository.Get(CommerceUserContext.Current);
             return View(orders);
         }
 
@@ -81,12 +81,10 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             {
                 var recentOrders = new List<OrderHeader>();
 
-                var userResponse = AccountManager.GetUser(Context.User.Name);
-                var result = new OrdersApiModel(userResponse.ServiceProviderResult);
-                if (userResponse.ServiceProviderResult.Success && userResponse.Result != null)
+                var response = OrderManager.GetUserOrders(CommerceUserContext.Current.UserName);
+                var result = new OrdersApiModel(response?.ServiceProviderResult);
+                if (response != null)
                 {
-                    var commerceUser = userResponse.Result;
-                    var response = OrderManager.GetOrders(commerceUser.ExternalId, StorefrontManager.Current.ShopName);
                     result.SetErrors(response.ServiceProviderResult);
                     if (response.ServiceProviderResult.Success && response.Result != null)
                     {
@@ -119,7 +117,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = OrderManager.Reorder(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel);
+                var response = OrderManager.Reorder(CommerceUserContext.Current.UserId, inputModel);
                 var result = new BaseApiModel(response.ServiceProviderResult);
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -145,7 +143,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = OrderManager.CancelOrder(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel);
+                var response = OrderManager.CancelOrder(CommerceUserContext.Current.UserId, inputModel);
                 var result = new CancelOrderApiModel(response.ServiceProviderResult);
 
                 return Json(result, JsonRequestBehavior.AllowGet);

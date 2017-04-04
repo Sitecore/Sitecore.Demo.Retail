@@ -90,6 +90,7 @@ gulp.task("04-Apply-Xml-Transform", function () {
           maxcpucount: 0,
           toolsVersion: 14.0,
           properties: {
+            Platform: config.buildPlatform,
             WebConfigToTransform: config.websiteRoot,
             TransformFile: file.path,
             FileToTransform: fileToTransform
@@ -151,6 +152,7 @@ var publishProjects = function (location, dest) {
           maxcpucount: 0,
           toolsVersion: 14.0,
           properties: {
+        Platform: config.publishPlatform,
             DeployOnBuild: "true",
             DeployDefaultTarget: "WebPublish",
             WebPublishMethod: "FileSystem",
@@ -178,7 +180,10 @@ gulp.task("Build-Solution", function () {
           stdout: true,
           errorOnFail: true,
           maxcpucount: 0,
-          toolsVersion: 14.0
+          toolsVersion: 14.0,
+          properties: {
+            Platform: config.buildPlatform
+          }
         }));
 });
 

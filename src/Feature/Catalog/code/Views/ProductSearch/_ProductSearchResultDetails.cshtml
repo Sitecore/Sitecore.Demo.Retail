@@ -56,10 +56,10 @@
                 <a href="@Model.GetLink()">
                     <img src="@thumbnailUrl" alt="@Model.Title" title="@Model.Title" />
 
-                    @if (Model.IsOnSale && Model.OnSaleOverlayImage != null)
+                    @if (Model.OverlayImage != null)
                     {
                         <div style="position: absolute; top:0px; left:0px;">
-                            <img src="@(Model.OnSaleOverlayImage.ImageUrl(50,50))" alt="@Html.Sitecore().Text("/Catalog/Search Results/On Sale", "On Sale")" />
+                            <img src="@(Model.OverlayImage.ImageUrl(50,50))" alt="@Html.Sitecore().Text("/Catalog/Search Results/On Sale", "On Sale")" />
                         </div>
                     }
                 </a>

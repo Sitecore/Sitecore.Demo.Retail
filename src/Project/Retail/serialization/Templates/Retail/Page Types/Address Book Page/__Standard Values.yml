@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r>
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -57,7 +57,7 @@ SharedFields:
           ph="navbar-activity"
           uid="{3C399965-80E5-409D-9EF1-B567F041E4F7}" />
         <r
-          id="{B6C0593E-1C35-4C61-8DB5-E7C7AA19D955}"
+          id="{2695013C-DD51-410B-9983-F271F16C727D}"
           ph="navbar-activity"
           uid="{925979FA-3BD7-4AE8-8469-C0B139F3B339}" />
         <r
@@ -135,14 +135,6 @@ SharedFields:
           id="{CED18F24-62C2-445E-B0D9-045E3325297B}"
           ph="page-sidebar"
           uid="{8FC1C13E-EDCA-482D-9B7E-6FB93E850721}" />
-      </d>
-      <d
-        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-        l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
-        <r
-          id="{DAEAE6E9-344B-458C-A757-BCA55C57D03E}"
-          ph="center"
-          uid="{057B3E7C-DEA4-462C-B02E-64D783CBD09A}" />
       </d>
     </r>
 - ID: "fd4e2050-186c-4375-8b99-e8a85dd7436e"

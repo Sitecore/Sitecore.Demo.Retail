@@ -16,6 +16,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
 using Sitecore.Commerce.Entities.GiftCards;
 using Sitecore.Commerce.Services.GiftCards;
 using Sitecore.Diagnostics;
@@ -26,32 +27,37 @@ namespace Sitecore.Foundation.Commerce.Managers
 {
     public class GiftCardManager : IManager
     {
-        public GiftCardManager([NotNull] GiftCardServiceProvider giftCardServiceProvider)
+        public GiftCardManager(GiftCardServiceProvider giftCardServiceProvider, StorefrontContext storefrontContext)
         {
             Assert.ArgumentNotNull(giftCardServiceProvider, nameof(giftCardServiceProvider));
 
             GiftCardServiceProvider = giftCardServiceProvider;
+            StorefrontContext = storefrontContext;
         }
 
-        private GiftCardServiceProvider GiftCardServiceProvider { get; set; }
+        private GiftCardServiceProvider GiftCardServiceProvider { get; }
+        public StorefrontContext StorefrontContext { get; }
 
-        public ManagerResponse<GetGiftCardResult, decimal> GetGiftCardBalance([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, [NotNull] string giftCardId)
+        public ManagerResponse<GetGiftCardResult, decimal> GetGiftCardBalance(string giftCardId)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNullOrEmpty(giftCardId, nameof(giftCardId));
 
-            var result = GetGiftCard(giftCardId, storefront.ShopName).ServiceProviderResult;
+            var result = GetGiftCard(giftCardId).ServiceProviderResult;
 
             result.WriteToSitecoreLog();
             return new ManagerResponse<GetGiftCardResult, decimal>(result, result.Success && result.GiftCard != null ? result.GiftCard.Balance : -1);
         }
 
-        private ManagerResponse<GetGiftCardResult, GiftCard> GetGiftCard(string giftCardId, string shopName)
+        private ManagerResponse<GetGiftCardResult, GiftCard> GetGiftCard(string giftCardId)
         {
             Assert.ArgumentNotNullOrEmpty(giftCardId, nameof(giftCardId));
 
-            var request = new GetGiftCardRequest(giftCardId, shopName);
+            if (this.StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
+
+            var request = new GetGiftCardRequest(giftCardId, StorefrontContext.Current.ShopName);
             var result = GiftCardServiceProvider.GetGiftCard(request);
 
             result.WriteToSitecoreLog();

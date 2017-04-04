@@ -22,6 +22,7 @@ using System.Web.Mvc;
 using Sitecore.Commerce.Services;
 using Sitecore.Data.Items;
 using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Foundation.Dictionary.Repositories;
 
 namespace Sitecore.Foundation.Commerce.Models
 {
@@ -68,15 +69,8 @@ namespace Sitecore.Foundation.Commerce.Models
             var errors = result.SystemMessages;
             foreach (var error in errors)
             {
-                var message = GetSystemMessage(error.Message);
-                Errors.Add(string.IsNullOrEmpty(message) ? error.Message : message);
+                Errors.Add(DictionaryPhraseRepository.Current.Get($"/Commerce/System Messages/{error.Message}", $"[System Error: {error.Message}]"));
             }
-        }
-
-        private static string GetSystemMessage(string messageKey)
-        {
-            Item lookupItem = null;
-            return LookupManager.Lookup("System Messages", messageKey, out lookupItem, false);
         }
 
         public void SetErrors(string area, Exception exception)
