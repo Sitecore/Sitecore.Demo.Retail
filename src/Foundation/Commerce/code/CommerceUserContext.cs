@@ -39,7 +39,7 @@ namespace Sitecore.Foundation.Commerce
                 commerceUser = new CommerceUser(ContactFactory);
                 if (Context.User.IsAuthenticated && !Context.User.Profile.IsAdministrator)
                 {
-                    var result = AccountManager.ResolveCommerceUser()?.Result;
+                    var result = AccountManager.ResolveCommerceUser();
                     if (result != null)
                     {
                         SetUser(commerceUser, result);

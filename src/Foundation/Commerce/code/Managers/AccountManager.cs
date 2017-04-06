@@ -379,21 +379,16 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<CustomerResult, bool>(updatePartiesResponse.ServiceProviderResult, updatePartiesResponse.Result);
         }
 
-        public ManagerResponse<GetUserResult, CommerceUser> ResolveCommerceUser()
+        public CommerceUser ResolveCommerceUser()
         {
             if (Tracker.Current == null || Tracker.Current.Contact == null || Tracker.Current.Contact.ContactId == Guid.Empty)
             {
-                return new ManagerResponse<GetUserResult, CommerceUser>(new GetUserResult {Success = true},
-                                                                        new CommerceUser {FirstName = "Test", LastName = "User"});
+                return null;
             }
 
             var userName = ContactFactory.GetContact();
             var response = GetUser(userName);
-            var commerceUser = response.Result;
-
-            Assert.IsNotNull(commerceUser, "The user '{0}' could not be found.", userName);
-
-            return new ManagerResponse<GetUserResult, CommerceUser>(response.ServiceProviderResult, commerceUser);
+            return response.Result;
         }
 
         private string ErrorCodeToString(MembershipCreateStatus createStatus)
