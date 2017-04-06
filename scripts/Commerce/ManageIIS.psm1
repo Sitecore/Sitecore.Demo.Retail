@@ -361,6 +361,8 @@ function New-Certificate
                 Write-Verbose "Certificate $($certificateSetting.dnsName) already exists in store '$rootCertStoreLocation'"
             }
 
+
+            If((Set-Binding -siteName $certificateSetting.siteName -protocol $protocol -ipAddress $ipAddress -port $port -dnsName $certificateSetting.dnsName) -ne 0) { return 1 }
             # AppId is used as a reference to which application created the binding for audit purposes.
             $applicationId = ([guid]::newguid()).ToString('B')
             
@@ -383,7 +385,6 @@ function New-Certificate
                 return 1; 
             }
 
-            If((Set-Binding -siteName $certificateSetting.siteName -protocol $protocol -ipAddress $ipAddress -port $port -dnsName $certificateSetting.dnsName) -ne 0) { return 1 }
         }
 
         return 0;
@@ -457,4 +458,38 @@ function Enable-WindowsAuthentication
     return 0; 
 }
 
-Export-ModuleMember New-AppPool, New-Website, Set-HostFile, Remove-Site, Remove-AppPool, Test-WebService, New-Certificate, Enable-WindowsAuthentication,  Remove-HostEntries, Reset-IIS
+function Remove-SSLCertificates
+{
+    param 
+    (
+        [Parameter(Mandatory=$True)][PSCustomObject]$certificateSettingList,
+        [Parameter(Mandatory=$True)][PSCustomObject]$installFolderSetting
+    )
+    begin 
+    {
+        Write-Verbose "Removing SSL Certificate"
+    }
+    process
+    {
+        $port = "443"
+		
+        $myCertStoreLocation = "cert:\LocalMachine\My"
+        $rootCertStoreLocation = "cert:\LocalMachine\Root"
+		 Foreach ($certificateSetting in $certificateSettingList)
+        {
+            
+            
+			Write-Verbose "Removing Certificate for $($certificateSetting.dnsName)"
+			netsh http delete sslcert hostnameport=$($certificateSetting.dnsName):$port
+			Get-ChildItem $myCertStoreLocation | where-object { $_.DnsNameList -like $certificateSetting.dnsName }  | Select-Object -First 1 | Remove-Item
+			Get-ChildItem $rootCertStoreLocation | where-object { $_.DnsNameList -like $certificateSetting.dnsName }  | Select-Object -First 1 | Remove-Item
+		}
+		
+		  
+	}
+	end {
+		Write-Verbose "Completed Removing SSL Certificates"
+	}
+}
+
+Export-ModuleMember New-AppPool, New-Website, Set-HostFile, Remove-Site, Remove-AppPool, Test-WebService, New-Certificate, Enable-WindowsAuthentication,  Remove-HostEntries, Reset-IIS, Remove-SSLCertificates
