@@ -10,10 +10,10 @@ SharedFields:
   Value: en
 - ID: "360ec3f9-fe2c-41bc-a00d-424b24fa9579"
   Hint: Currency Symbol
-  Value: USD
+  Value: US$
 - ID: "e505daf1-5476-4b05-af5d-f3425859eb91"
   Hint: Currency Symbol Position
-  Value: 3
+  Value: 2
 Languages:
 - Language: en
   Versions:

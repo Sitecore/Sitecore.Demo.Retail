@@ -10,15 +10,15 @@
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
 
+@using Sitecore.Foundation.Commerce.Extensions
 @model Sitecore.Feature.Commerce.Catalog.Models.SearchBarViewModel
-@{
-    var searchPlaceholder = Html.Sitecore().CurrentItem["Search"];
-}
+
+
 
 <li class="navbar-activity-search">
     <form action="~/search" class="navbar-form" role="search">
         <div class="form-group">
-            <input type="text" name="@Sitecore.Feature.Commerce.Catalog.Constants.QueryString.SearchKeyword" placeholder="@searchPlaceholder" value="@Model.SearchKeyword" autocomplete="off"/>
+            <input type="text" name="@Sitecore.Feature.Commerce.Catalog.Constants.QueryString.SearchKeyword" placeholder="@Html.Sitecore().Text("/Catalog/Search Bar/Search", "Search")" value="@Model.SearchKeyword" autocomplete="off"/>
         </div>
     </form>
 

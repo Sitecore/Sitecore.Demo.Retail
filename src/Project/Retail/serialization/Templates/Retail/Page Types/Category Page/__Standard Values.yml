@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r>
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -48,7 +48,7 @@ SharedFields:
           ph="navbar-right"
           uid="{10324F23-C76C-4042-B2E4-C8A7EA1619E9}" />
         <r
-          ds="{B5F108D3-651F-4344-BF9B-8F10675DDBA0}"
+          ds=""
           id="{FAA386D8-192F-4762-839D-D637BD11549F}"
           ph="navbar-activity"
           uid="{831087C9-F9D1-46C7-9F5C-BE1D51DAF845}" />
@@ -96,7 +96,7 @@ SharedFields:
           ph="/page-layout/section/col-wide-1"
           uid="{D65A7F03-F0FE-412A-A5AE-5536B8A7BA02}" />
         <r
-          ds="{97073912-C895-4FC7-A283-DD8DD309CCD7}"
+          ds=""
           id="{8767AFF3-F7F2-47EC-92C0-8A24B0F18967}"
           ph="/page-layout/section/col-wide-1"
           uid="{1E7D9ACC-C928-4D56-AF64-22958148FD3B}" />
@@ -156,9 +156,13 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{1E7D9ACC-C928-4D56-AF64-22958148FD3B}"
+              s:ds="" />
             <r
               uid="{C4014A56-FA2D-46CC-B696-483D5543BCED}"
               s:ds="" />
@@ -179,7 +183,8 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
@@ -217,7 +222,8 @@ Languages:
       Type: Layout
       Value: |
         <r xmlns:p="p" xmlns:s="s"
-          p:p="1">
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r

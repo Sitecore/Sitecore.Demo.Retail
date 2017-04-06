@@ -102,49 +102,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
             }
         }
 
-        public Item ProductListTexts
-        {
-            get
-            {
-                var home = Context.Database.GetItem(Context.Site.RootPath + Context.Site.StartItem);
-                var textsItemPath = home["Product List Texts"];
-                if (string.IsNullOrEmpty(textsItemPath))
-                {
-                    return null;
-                }
-
-                return Context.Database.GetItem(textsItemPath);
-            }
-        }
-
-        public string AddToCartLinkText
-        {
-            get
-            {
-                var productListTexts = ProductListTexts;
-                if (productListTexts != null)
-                {
-                    return productListTexts["Add To Cart Link Text"];
-                }
-
-                return string.Empty;
-            }
-        }
-
-        public string ProductDetailsLinkText
-        {
-            get
-            {
-                var productListTexts = ProductListTexts;
-                if (productListTexts != null)
-                {
-                    return productListTexts["Product Page Link Text"];
-                }
-
-                return string.Empty;
-            }
-        }
-
         public string ProductUrl => LinkManager.GetDynamicUrl(Item);
 
         public string ProductId => Item.Name;

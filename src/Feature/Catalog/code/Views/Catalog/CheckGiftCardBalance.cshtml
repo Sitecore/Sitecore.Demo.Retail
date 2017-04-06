@@ -1,4 +1,5 @@
-﻿@*//-----------------------------------------------------------------------
+﻿@using Sitecore.Foundation.Commerce.Extensions
+@*//-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
 // except in compliance with the License. You may obtain a copy of the License at
@@ -10,19 +11,14 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-<div class="headline text-center">
-    <a id="CheckBalance"></a>
-    <h2>
-        @Html.Sitecore().Field("Check Your Card Balance Label", Html.Sitecore().CurrentItem)
-    </h2>
-</div>
-
 <div class="row">
     <div class="col-md-4 col-md-offset-4 col-xs-12">
         <div class="input-group">
-            <input type="text" class="form-control" id="GiftCardId" name="GiftCardId" placeholder="@Html.Sitecore().Field("Check Balance Label", Html.Sitecore().CurrentItem)">
+            <input type="text" class="form-control" id="GiftCardId" name="GiftCardId" placeholder="@Html.Sitecore().Text("/Catalog/Check Gift Card Balance/Enter Gift Card Number", "Enter gift card number")">
             <span class="input-group-btn">
-                <button id="CheckGiftCardBalanceButton" type="button" class="btn btn-primary" data-loading-text="@Html.Sitecore().Field("Checking Card  Balance Label", Html.Sitecore().CurrentItem)" onclick="CheckGiftCardBalance();" disabled="disabled">@Html.Sitecore().Field("Check Button", Html.Sitecore().CurrentItem)</button>
+                <button id="CheckGiftCardBalanceButton" type="button" class="btn btn-primary" data-loading-text="@Html.Sitecore().Text("/Catalog/Check Gift Card Balance/Checking", "Checking...")" onclick="CheckGiftCardBalance();" disabled="disabled">
+                    @Html.Sitecore().Text("/Catalog/Check Gift Card Balance/Check", "Check balance")
+                </button>
             </span>
         </div>
         <div class="balance-value">

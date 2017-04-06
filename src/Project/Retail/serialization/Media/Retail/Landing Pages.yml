@@ -1,0 +1,14 @@
+﻿---
+ID: "25edac9f-a4dd-4d70-b6e2-c10c54647400"
+Parent: "41b8125a-e7d1-4728-8bd0-edbb3835add5"
+Template: "fe5dd826-48c6-436d-b87a-7c4210c7413b"
+Path: /sitecore/media library/Retail/Landing Pages
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170228T160346Z

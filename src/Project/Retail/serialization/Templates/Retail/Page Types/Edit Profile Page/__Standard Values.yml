@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r>
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -48,7 +48,7 @@ SharedFields:
           ph="navbar-right"
           uid="{BADD4096-6A45-49EE-80DF-B811C124AFD2}" />
         <r
-          ds="{B5F108D3-651F-4344-BF9B-8F10675DDBA0}"
+          ds=""
           id="{FAA386D8-192F-4762-839D-D637BD11549F}"
           ph="navbar-activity"
           uid="{003D137F-94B8-4466-99AA-C307F0BB5FB4}" />
@@ -159,6 +159,9 @@ Languages:
           s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{003D137F-94B8-4466-99AA-C307F0BB5FB4}"
+              s:ds="" />
             <r
               uid="{6D400C8C-70AE-44DF-AA63-5A7C8631C283}"
               s:ds="" />
@@ -296,6 +299,9 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{003D137F-94B8-4466-99AA-C307F0BB5FB4}"
+              s:ds="" />
+            <r
               uid="{6D400C8C-70AE-44DF-AA63-5A7C8631C283}"
               s:ds="" />
           </d>
@@ -364,7 +370,17 @@ Languages:
     - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
       Hint: __Final Renderings
       Type: Layout
-      Value: 
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{003D137F-94B8-4466-99AA-C307F0BB5FB4}"
+              s:ds="" />
+          </d>
+        </r>
     - ID: "0c1b7dad-d2d0-4640-ad1e-ebe31f159d51"
       Hint: Email Required Message
       Value: The email is required.

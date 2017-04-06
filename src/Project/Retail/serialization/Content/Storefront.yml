@@ -1,0 +1,85 @@
+﻿---
+ID: "662344c9-d908-46d8-9a1a-cbf2eaa32e93"
+Parent: "0de95ae4-41ab-4d01-9eb0-67441b7c2450"
+Template: "4b67a963-ac6d-4a80-b70f-e076a2a563e2"
+Path: /sitecore/content/Storefront
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: 
+- ID: "12537182-f35c-403f-afb5-747d55c450b8"
+  Hint: ShowInMenu
+  Type: Checkbox
+  Value: 1
+- ID: "365254c4-1c1c-493a-9710-671574717898"
+  Hint: Forgot Password Mail Template
+  Value: /sitecore/content/Storefront/Global/Mails/ForgotPassword
+- ID: "60745023-ffd5-400e-8f80-4bca9f2abb29"
+  Hint: Login Page
+  Value: /sitecore/content/Storefront/Home/Login
+- ID: "71962360-10d8-4b98-bb8d-57660ce11127"
+  Hint: Register Page
+  Value: /sitecore/content/Storefront/Home/Register
+- ID: "7315350f-f3b5-4740-a227-186f7a2ba9f7"
+  Hint: Default Currency
+  Value: USD
+- ID: "b128e2b3-3865-4f1c-a147-5f248676d3f5"
+  Hint: After Login Page
+  Value: /sitecore/content/Storefront/Home/AccountManagement
+- ID: "b36de708-9413-4382-bb53-b944e6d02cfc"
+  Hint: Catalog
+  Value: "{A890E85A-FE79-4574-9B99-E180A877993A}"
+- ID: "c15a939b-1c97-48e8-b055-37f80da99c40"
+  Hint: Catalog Root
+  Value: "{889A6934-BCDC-4294-94B7-6D141E7312B4}"
+- ID: "ed71d374-8c33-4561-991d-77482ae01330"
+  Hint: Accounts Details Page
+  Value: /sitecore/content/Storefront/Home/AccountManagement
+- ID: "f3cd2bb8-472b-4df0-87c0-a13098e391ca"
+  Hint: Forgot Password Page
+  Value: /sitecore/content/Storefront/Home/ForgotPassword
+Languages:
+- Language: en
+  Fields:
+  - ID: "2a84eca4-68bb-4451-b4ac-98ea71a5a3dc"
+    Hint: SiteProfiles
+    Type: Multilist
+    Value: "{4F7F3405-9606-495E-8D44-55177A382BB3}"
+  - ID: "53b5af0a-265f-4e60-b2b2-4576ce0beccf"
+    Hint: Theme
+    Value: "{9025588B-C765-458B-829C-1886A98AD3A7}"
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Retail
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "02115632-fe1e-4b3d-9ad4-a4ddf1f782f0"
+      Hint: Copyright
+      Value: |
+        <p>Please read our <a href="~/link.aspx?_id=E0F37E53CA9B47F6897D625C709283EC&amp;_z=z">Legal Notice</a>&nbsp;and our <a href="~/link.aspx?_id=DD218F71CE4F492FBD60ED5C767FB319&amp;_z=z">Privacy Policy</a>.</p>
+        <p>Copyright &copy; 2016 Sitecore<br />
+        <small>&ldquo;Habitat Electronics&rdquo; as used here is for demonstration purposes only and to represent the software and services provided by Sitecore further described at www.sitecore.net.</small></p>
+    - ID: "235ae392-97ac-4822-be38-837da3e7724e"
+      Hint: SiteBrowserTitle
+      Value: " - Habitat Retail"
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141008T153657Z
+    - ID: "378b7d87-5775-4eb6-86b7-282d5359b1c6"
+      Hint: User Profile
+      Value: "{0FFEC1BD-4D35-49CF-8B7D-7F01930834ED}"
+    - ID: "835fa523-d28a-46a2-a589-6aa4a5bf0846"
+      Hint: Register Outcome
+      Value: "{75D53206-47B3-4391-BD48-75C42E5FC2CE}"
+    - ID: "e748d808-64c1-4dec-9718-f35cf9689e4b"
+      Hint: Logo
+      Value: |
+        <image mediaid="{4C894563-1BC9-46ED-B3C6-DD31A64A09F5}" />
+    - ID: "efd4980a-030c-497c-8880-40b6030ac28b"
+      Hint: OrganisationName
+      Value: Habitat Retail
+    - ID: "f07811d3-41e9-440a-9d81-310c1d78bed6"
+      Hint: Title
+      Value: Habitat Retail

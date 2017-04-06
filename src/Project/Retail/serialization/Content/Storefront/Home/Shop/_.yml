@@ -1,0 +1,14 @@
+﻿---
+ID: "a0616639-4bf9-4eba-a6a6-ae9fc851af63"
+Parent: "ce40089d-6e73-4562-bdaf-3989688c2b01"
+Template: "9de07365-6b42-464b-b819-5423b563095c"
+Path: /sitecore/content/Storefront/Home/Shop/*
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150108T213308Z

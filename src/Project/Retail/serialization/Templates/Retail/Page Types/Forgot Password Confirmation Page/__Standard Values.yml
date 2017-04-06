@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r>
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -48,7 +48,7 @@ SharedFields:
           ph="navbar-right"
           uid="{43135B63-E5D6-4BBA-B541-D998C288AAA5}" />
         <r
-          ds="{B5F108D3-651F-4344-BF9B-8F10675DDBA0}"
+          ds=""
           id="{FAA386D8-192F-4762-839D-D637BD11549F}"
           ph="navbar-activity"
           uid="{14ED5BB8-BD15-43DD-97D6-CABA822B6A9D}" />
@@ -144,6 +144,9 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{14ED5BB8-BD15-43DD-97D6-CABA822B6A9D}"
+              s:ds="" />
+            <r
               uid="{52B67631-57D6-447F-BBB0-0C6EA833AD45}"
               s:ds="" />
           </d>
@@ -194,6 +197,9 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{14ED5BB8-BD15-43DD-97D6-CABA822B6A9D}"
+              s:ds="" />
+            <r
               uid="{52B67631-57D6-447F-BBB0-0C6EA833AD45}"
               s:ds="" />
           </d>
@@ -219,7 +225,17 @@ Languages:
     - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
       Hint: __Final Renderings
       Type: Layout
-      Value: 
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{14ED5BB8-BD15-43DD-97D6-CABA822B6A9D}"
+              s:ds="" />
+          </d>
+        </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150110T103523Z

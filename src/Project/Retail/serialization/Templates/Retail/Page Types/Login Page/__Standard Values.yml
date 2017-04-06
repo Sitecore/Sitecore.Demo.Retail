@@ -48,7 +48,7 @@ SharedFields:
           ph="navbar-right"
           uid="{62EE8191-B3CF-4DF6-A14A-038FDA6EFE95}" />
         <r
-          ds="{B5F108D3-651F-4344-BF9B-8F10675DDBA0}"
+          ds=""
           id="{FAA386D8-192F-4762-839D-D637BD11549F}"
           ph="navbar-activity"
           uid="{3775AC4D-48BE-45A4-B58D-5AA0CBF37544}" />
@@ -136,6 +136,9 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{3775AC4D-48BE-45A4-B58D-5AA0CBF37544}"
+              s:ds="" />
+            <r
               uid="{51E53630-3777-45FC-A9BF-72705C984F0D}"
               s:ds="" />
           </d>
@@ -164,6 +167,9 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{3775AC4D-48BE-45A4-B58D-5AA0CBF37544}"
+              s:ds="" />
+            <r
               uid="{51E53630-3777-45FC-A9BF-72705C984F0D}"
               s:ds="" />
           </d>
@@ -184,6 +190,9 @@ Languages:
           s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{3775AC4D-48BE-45A4-B58D-5AA0CBF37544}"
+              s:ds="" />
             <r
               uid="{51E53630-3777-45FC-A9BF-72705C984F0D}"
               s:ds="" />

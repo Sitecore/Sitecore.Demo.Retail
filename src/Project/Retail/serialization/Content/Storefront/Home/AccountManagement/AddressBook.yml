@@ -1,0 +1,78 @@
+﻿---
+ID: "22e25c12-dd87-4e6f-ae6c-9c2aed53ecf6"
+Parent: "4d316bba-345f-4929-9e84-a2208c0f7aa6"
+Template: "870f05da-b99c-46d9-90c1-ddd8fa2b3dcf"
+Path: /sitecore/content/Storefront/Home/AccountManagement/AddressBook
+DB: master
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 100
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: Address Book
+    - ID: "1bd50106-1aa3-4393-bc2d-d2170f8ead36"
+      Hint: Cancel Button
+      Value: Cancel
+    - ID: "1d588062-5217-4496-b325-94b0981369cd"
+      Hint: Address Label
+      Value: Address
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150114T014721Z
+    - ID: "388690da-0e7f-4061-9237-e6cc1a3b7101"
+      Hint: State Label
+      Value: State/province
+    - ID: "541542d6-bdf5-42d4-b20e-021c0287a163"
+      Hint: Zip Code Label
+      Value: ZipCode
+    - ID: "654b1dd8-9b4f-4aca-abae-82f816ee0f70"
+      Hint: Back To My Account Label
+      Value: Back to My Account
+    - ID: "77be2267-2102-4bf0-8ca0-c295677e855c"
+      Hint: Country Label
+      Value: Country/region
+    - ID: "7fd53f4b-d6fb-4f31-ad17-1fa6ded84e3a"
+      Hint: Set As Primary Label
+      Value: Set as primary address
+    - ID: "80a14700-60e0-487d-8b0c-9ccf8b26768e"
+      Hint: Saving Label
+      Value: Saving ...
+    - ID: "8881df15-8613-4cc3-9b5c-09235413d8b0"
+      Hint: New Address Label
+      Value: New Address ...
+    - ID: "90c4d9b9-8620-450a-a674-57eb110ef818"
+      Hint: Change Address Label
+      Value: Change address
+    - ID: "9af5f65a-25a9-42e2-bc39-3c29adbbba94"
+      Hint: Delete Address Button
+      Value: Delete
+    - ID: "b6d5ea80-1003-4a93-8437-3d334dde9ae3"
+      Hint: Deleting Label
+      Value: Deleting ...
+    - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
+      Hint: Title
+      Value: Address Book
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: Address Book
+    - ID: "caa5dc96-a392-4e4a-878a-58f0414e533f"
+      Hint: Select Label
+      Value: Select ...
+    - ID: "d91ab418-c356-4fb6-89de-5ea2cd7c150b"
+      Hint: City Label
+      Value: City
+    - ID: "e16e9b13-d388-419e-b8bd-48c71ef0d3bb"
+      Hint: Name Label
+      Value: Name
+    - ID: "f085c466-000a-40e4-a119-88c3534d9ce3"
+      Hint: Addresses Empty Text
+      Value: <p>You have not added any address yet</p>
+    - ID: "fc30aad9-0050-42cf-b721-0523072fb812"
+      Hint: Save Changes Button
+      Value: Save changes

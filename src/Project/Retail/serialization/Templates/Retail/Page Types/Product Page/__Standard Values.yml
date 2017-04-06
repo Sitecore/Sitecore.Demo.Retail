@@ -48,7 +48,7 @@ SharedFields:
           ph="navbar-right"
           uid="{EBD703F2-199A-489E-813D-5F9E1CEF94A3}" />
         <r
-          ds="{B5F108D3-651F-4344-BF9B-8F10675DDBA0}"
+          ds=""
           id="{FAA386D8-192F-4762-839D-D637BD11549F}"
           ph="navbar-activity"
           uid="{1E13526F-910A-44F7-92EE-BB192A0C08BE}" />
@@ -84,10 +84,6 @@ SharedFields:
           ph="/page-layout/section/col-wide-1"
           uid="{CBF8B050-CFD6-4013-83BF-5EF3AAF64682}" />
         <r
-          id="{AAF9B3B2-BE53-4B85-BDBF-E7704C0B28D2}"
-          ph="/page-layout/section/col-wide-2"
-          uid="{8C2C1F8D-59F1-4B59-8B17-FC5BE9CF1765}" />
-        <r
           id="{49424190-0EFA-4414-8D18-4569CC8EA5FD}"
           ph="/page-layout/section/col-wide-2"
           uid="{3B217F90-4061-48A6-BDCF-23A624D69491}" />
@@ -106,7 +102,7 @@ SharedFields:
         <r
           ds=""
           id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
-          par="Background&amp;ContainerIsFluid&amp;UseStaticPlaceholderNames=1"
+          par="UseStaticPlaceholderNames=1"
           ph="/page-layout/section"
           uid="{D00DBB92-A2AD-4E94-817E-3184FA9429A8}" />
         <r

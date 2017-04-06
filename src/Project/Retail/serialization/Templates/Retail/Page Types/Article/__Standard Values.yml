@@ -55,7 +55,7 @@ SharedFields:
           ph="navbar-right"
           uid="{75551DEC-A457-43A3-B76F-91742B5DDE93}" />
         <r
-          ds="{B5F108D3-651F-4344-BF9B-8F10675DDBA0}"
+          ds=""
           id="{FAA386D8-192F-4762-839D-D637BD11549F}"
           ph="navbar-activity"
           uid="{CA11F036-8927-441C-A150-9A3D0F180D7F}" />

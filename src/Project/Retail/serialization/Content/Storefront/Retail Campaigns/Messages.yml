@@ -1,0 +1,31 @@
+﻿---
+ID: "109a908b-e70a-4c6c-8ca0-6029d3980491"
+Parent: "1de1f060-fc1d-4e24-9494-79c4aa63090a"
+Template: "d8ad4b81-9269-4868-949f-37d1c28687e5"
+Path: /sitecore/content/Storefront/Retail Campaigns/Messages
+DB: master
+SharedFields:
+- ID: "19b597d3-2edd-4ae2-aefe-4a94c7f10e31"
+  Hint: __Source Item
+  Value: "sitecore://master/{E3B90287-50C9-48BE-866D-49FEA95F7F4C}"
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: 
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "1b86697d-60ca-4d80-83fb-7555a2e6ce1c"
+      Hint: __Source
+      Value: "sitecore://master/{E3B90287-50C9-48BE-866D-49FEA95F7F4C}?lang=en&ver=1"
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170322T160615Z
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: 
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

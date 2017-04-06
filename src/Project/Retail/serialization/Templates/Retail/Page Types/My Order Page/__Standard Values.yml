@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r>
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -48,7 +48,7 @@ SharedFields:
           ph="navbar-right"
           uid="{ED96788E-508A-4A7C-9C13-1D9C3A6363AA}" />
         <r
-          ds="{B5F108D3-651F-4344-BF9B-8F10675DDBA0}"
+          ds=""
           id="{FAA386D8-192F-4762-839D-D637BD11549F}"
           ph="navbar-activity"
           uid="{D7FB9722-4EE3-4482-8378-51B93B8255FA}" />
@@ -160,11 +160,14 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{D7FB9722-4EE3-4482-8378-51B93B8255FA}"
+              s:ds="" />
+            <r
               uid="{1FC0194C-979F-4AD9-9D6E-46138F5EA0BE}"
               s:ds="" />
             <r
               uid="{23C64976-8A0E-4DFE-9D35-F5EC89523E37}"
-              p:after="r[@uid='{47757922-2585-481F-9C37-503574C851A6}']"
+              p:after="*[1=2]"
               s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
               s:ph="center" />
           </d>
@@ -193,11 +196,14 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{D7FB9722-4EE3-4482-8378-51B93B8255FA}"
+              s:ds="" />
+            <r
               uid="{1FC0194C-979F-4AD9-9D6E-46138F5EA0BE}"
               s:ds="" />
             <r
               uid="{23C64976-8A0E-4DFE-9D35-F5EC89523E37}"
-              p:after="r[@uid='{47757922-2585-481F-9C37-503574C851A6}']"
+              p:after="*[1=2]"
               s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
               s:ph="center" />
           </d>
@@ -219,11 +225,14 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{D7FB9722-4EE3-4482-8378-51B93B8255FA}"
+              s:ds="" />
+            <r
               uid="{1FC0194C-979F-4AD9-9D6E-46138F5EA0BE}"
               s:ds="" />
             <r
               uid="{23C64976-8A0E-4DFE-9D35-F5EC89523E37}"
-              p:after="r[@uid='{47757922-2585-481F-9C37-503574C851A6}']"
+              p:after="*[1=2]"
               s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
               s:ph="center" />
           </d>

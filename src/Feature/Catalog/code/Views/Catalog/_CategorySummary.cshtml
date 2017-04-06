@@ -12,6 +12,7 @@
 @using Sitecore.Collections
 @using Sitecore.Foundation.SitecoreExtensions.Extensions
 @using Sitecore.Commerce.Connect.CommerceServer
+@using Sitecore.Foundation.Commerce.Extensions
 @model Sitecore.Feature.Commerce.Catalog.Models.CategoryViewModel
 @{
     if (Model == null)
@@ -29,19 +30,6 @@
                 <img src="@Model.GetThumbnailUrl(300)" class="img-responsive" alt="product image" title="@Model.Title" />
             </a>
         }
-        else
-        {
-            <a href="@Model.GetLink()">
-                @Html.Sitecore().Field("Image", Html.Sitecore().CurrentItem, new
-           {
-               Parameters = new SafeDictionary<string>
-                    {
-                        {"class", "img-responsive"},
-                        {"title", Model.Title}
-                    }
-           })
-            </a>
-        }
     }
 
     <div class="caption">
@@ -53,7 +41,7 @@
         </p>
         <div class="p-t-1">
             <a href="@Model.GetLink()" class="btn btn-default">
-                @Html.Sitecore().Field("Category", Html.Sitecore().CurrentRendering.Item)
+                @Html.Sitecore().Text("/Catalog/Category Summary/Category", "Category")
             </a>
         </div>
     </div>

@@ -15,8 +15,13 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System.Linq;
 using System.Web;
+using Sitecore.Commerce.Multishop;
+using Sitecore.Data.Fields;
+using Sitecore.Data.Items;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
@@ -39,9 +44,9 @@ namespace Sitecore.Foundation.Commerce.Managers
 
         public static CurrencyInformationModel GetCurrencyInformation(string currency)
         {
-            var displayKey = $"{currency}_{Context.Language.Name}";
-            var item = Context.Database.GetItem($"/sitecore/Commerce/Storefront Configuration/Currency Display/{displayKey}") ?? Context.Database.GetItem($"/sitecore/Commerce/Storefront Configuration/Currencies/{currency}");
-            return item != null ? new CurrencyInformationModel(item) : null;
+            var currencyConfigurations = ConnectStorefrontContext.Current?.StorefrontConfiguration?.Children.FirstOrDefault(i => i.IsDerived(Sitecore.Commerce.Constants.Templates.CurrenciesDisplayAdjustments.ID));
+            var currencyConfiguration = currencyConfigurations?.Children[currency];
+            return currencyConfiguration != null ? new CurrencyInformationModel(currencyConfiguration) : null;
         }
     }
 }
