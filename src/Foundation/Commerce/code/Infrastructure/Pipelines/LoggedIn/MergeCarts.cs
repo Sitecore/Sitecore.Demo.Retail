@@ -24,14 +24,18 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.Pipelines.LoggedIn
     [Service]
     public class MergeCarts
     {
-        public MergeCarts(CommerceUserContext commerceUserContext, CartManager cartManager)
+        public MergeCarts(CommerceUserContext commerceUserContext, CartManager cartManager, StorefrontContext storefrontContext)
         {
             CommerceUserContext = commerceUserContext;
             CartManager = cartManager;
+            StorefrontContext = storefrontContext;
         }
 
         public void Process(LoggedInPipelineArgs args)
         {
+            if (this.StorefrontContext.Current == null)
+                return;
+
             if (args.PreviousContactId == null)
                 return;
             var previousContactId = args.PreviousContactId.ToString();
@@ -42,6 +46,8 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.Pipelines.LoggedIn
                 return;
             this.CartManager.MergeCarts(CommerceUserContext.Current.UserId, previousContactId, previousCart);
         }
+
+        public StorefrontContext StorefrontContext { get; }
 
         public CartManager CartManager { get; }
 

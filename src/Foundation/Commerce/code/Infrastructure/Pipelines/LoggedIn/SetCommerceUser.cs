@@ -24,19 +24,24 @@ namespace Sitecore.Foundation.Commerce.Infrastructure.Pipelines.LoggedIn
     [Service]
     public class SetCommerceUser
     {
-        public SetCommerceUser(CommerceUserContext commerceUserContext, AccountManager accountManager)
+        public SetCommerceUser(CommerceUserContext commerceUserContext, AccountManager accountManager, StorefrontContext storefrontContext)
         {
             CommerceUserContext = commerceUserContext;
             AccountManager = accountManager;
+            StorefrontContext = storefrontContext;
         }
 
         public void Process(LoggedInPipelineArgs args)
         {
-            var user = AccountManager.ResolveCommerceUser().Result;
+            if (this.StorefrontContext.Current == null)
+                return;
+            var user = AccountManager.ResolveCommerceUser();
             if (user == null)
                 return;
             CommerceUserContext.SetUser(user);
         }
+
+        public StorefrontContext StorefrontContext { get; }
 
         public AccountManager AccountManager { get; }
 
