@@ -167,7 +167,7 @@ function Set-HostFile
         {
             Write-Verbose "Setting Host Entry: $($hostEntry.hostName)"
 
-            Set-HostsEntry -IPAddress $hostEntry.ipAddress -HostName $hostEntry.hostName -Description $hostEntry.description
+            Set-HostsEntry -IPAddress $hostEntry.ipAddress -HostName $hostEntry.hostName
         }
 
         return 0;
