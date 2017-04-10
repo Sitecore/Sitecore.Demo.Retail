@@ -1,8 +1,8 @@
 Set-ExecutionPolicy Unrestricted –scope CurrentUser
 if (-Not ($PSVersionTable.PSVersion.Major -ge 4)) { Write-Host "Update version of powershell"; exit }
-
+Install-PackageProvider nuget -force
 #If Install-Module is not available - install https://www.microsoft.com/en-us/download/details.aspx?id=51451
-if(-Not (Get-Module -ListAvailable -Name Carbon)) { Install-Module -Name Carbon -AllowClobber; Import-Module Carbon}
+if(-Not (Get-Module -ListAvailable -Name Carbon)) { Install-Module -Name Carbon -AllowClobber -Force; Import-Module Carbon -Force}
 
 Import-Module CSPS -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageUser.psm1 -Force
