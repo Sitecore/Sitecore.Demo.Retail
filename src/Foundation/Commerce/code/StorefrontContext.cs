@@ -34,7 +34,7 @@ namespace Sitecore.Foundation.Commerce
                 var site = GetStorefrontSiteContext();
                 if (site == null)
                 {
-                    Log.Warn($"The site '{Context.Site.Name}' has no commerceShopName defined", this);
+                    Log.Debug($"The site '{Context.Site.Name}' has no commerceShopName defined", this);
                     return null;
                 }
 
