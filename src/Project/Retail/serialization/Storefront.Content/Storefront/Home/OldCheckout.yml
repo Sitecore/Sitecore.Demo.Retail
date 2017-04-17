@@ -1,8 +1,8 @@
 ﻿---
-ID: "a7d9c743-6e92-4cef-8626-5c67d2aabf61"
+ID: "efbcff36-2511-4d52-81f0-e058eaf7a97e"
 Parent: "441b60d3-09bb-4111-a3ad-d10076b78b54"
 Template: "caf02d6d-5cb8-4995-b4f3-e4ed6f54e5a7"
-Path: /sitecore/content/Storefront/Home/Checkout
+Path: /sitecore/content/Storefront/Home/OldCheckout
 DB: master
 SharedFields:
 - ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
@@ -29,7 +29,7 @@ SharedFields:
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
         <r
           uid="{27AC3BD4-306D-41C3-BACB-4344B4A2C086}"
-          s:id="{DEED2B81-7F44-42CD-A48A-08D2BE084D11}" />
+          s:id="{A029FBC1-9229-47FA-B539-F2BBBFEC843E}" />
       </d>
     </r>
 Languages:
@@ -42,7 +42,7 @@ Languages:
       Value: Checkout
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20141119T045223
+      Value: 20141119T125223Z
     - ID: "2f7b36fd-c055-4ce3-8096-a196e209ed22"
       Hint: Billing Information Label
       Value: BILLING INFORMATION
