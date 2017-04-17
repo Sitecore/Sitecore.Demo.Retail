@@ -35,6 +35,7 @@ function Add-User
             $mycreds = New-Object System.Management.Automation.PSCredential ($user.username, $secpasswd)
             Install-User -Credential $mycreds -Description $user.description -FullName $user.fullname
             Write-Verbose "User '$($user.username)' created"
+			Restrict-Permissions $($user.username)
         }
         if (Test-GroupMember -GroupName $user.defaultGroupMembership -Member $user.username)
         {
@@ -74,4 +75,20 @@ function Remove-User
     end {}
 }
 
-Export-ModuleMember Confirm-Admin, Add-User, Remove-User
+function Restrict-Permissions
+{
+	param
+	{
+		[Parameter(Mandatory=$True)][string]$username
+	)
+	begin ()
+	process
+	{
+			Write-Verbose "Restricting rights for '$($username)"
+			Grant-UserRight -Account "$username" -Right SeServiceLogonRight
+			Grant-UserRight -Account "$username" -Right SeDenyRemoteInteractiveLogonRight
+	}
+	end {}
+}
+
+Export-ModuleMember Confirm-Admin, Add-User, Remove-User, Restrict-Permissions

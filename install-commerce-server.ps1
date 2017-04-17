@@ -10,6 +10,7 @@ Import-Module $PSScriptRoot\Scripts\Commerce\ManageCommerceServer.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageRegistry.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageIIS.psm1 -Force
 Import-Module $PSScriptRoot\Scripts\Commerce\ManageSqlServer.psm1 -Force
+Import-Module $PSScriptRoot\Scripts\Commerce\UserRights.ps1 -Force
 cd $PSScriptRoot
 
 If ((ManageUser\Confirm-Admin) -ne $true) { Write-Host "Please run script as administrator" -ForegroundColor red; exit }
