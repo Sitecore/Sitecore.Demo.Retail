@@ -68,25 +68,27 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
                     },
                     context);
 
-            this.CreateCartFreeShippingPromotion(book, context);
-            this.CreateCartExclusive5PctOffCouponPromotion(book, context);
-            this.CreateCartExclusive5OffCouponPromotion(book, context);
-            this.CreateCartExclusiveOptixCameraPromotion(book, context);
-            this.CreateCart15PctOffCouponPromotion(book, context);
-            this.CreateDisabledPromotion(book, context);
+            this.CreatePunch360Speaker10DollarffCoupon(book,context);
+            this.CreatePunch360Speaker10PctOffCoupon(book,context);
+            // this.CreateCartFreeShippingPromotion(book, context);
+            // this.CreateCartExclusive5PctOffCouponPromotion(book, context);
+            // this.CreateCartExclusive5OffCouponPromotion(book, context);
+            // this.CreateCartExclusiveOptixCameraPromotion(book, context);
+            //this.CreateCart15PctOffCouponPromotion(book, context);
+            //this.CreateDisabledPromotion(book, context);
 
-            var date = DateTimeOffset.UtcNow;
-            this.CreateCart10PctOffCouponPromotion(book, context, date);
-            System.Threading.Thread.Sleep(1); //// TO ENSURE CREATING DATE IS DIFFERENT BETWEEN THESE TWO PROMOTIONS
-            this.CreateCart10OffCouponPromotion(book, context, date);
+            //var date = DateTimeOffset.UtcNow;
+            //this.CreateCart10PctOffCouponPromotion(book, context, date);
+            //System.Threading.Thread.Sleep(1); //// TO ENSURE CREATING DATE IS DIFFERENT BETWEEN THESE TWO PROMOTIONS
+            //this.CreateCart10OffCouponPromotion(book, context, date);
 
-            this.CreateLineTouchScreenPromotion(book, context);
-            this.CreateLineTouchScreen5OffPromotion(book, context);
-            this.CreateLineExclusiveMiraLaptopPromotion(book, context);
-            this.CreateLineExclusive20PctOffCouponPromotion(book, context);
-            this.CreateLineExclusive20OffCouponPromotion(book, context);
-            this.CreateLine5PctOffCouponPromotion(book, context);
-            this.CreateLine5OffCouponPromotion(book, context);
+            //this.CreateLineTouchScreenPromotion(book, context);
+            //this.CreateLineTouchScreen5OffPromotion(book, context);
+            //this.CreateLineExclusiveMiraLaptopPromotion(book, context);
+            //this.CreateLineExclusive20PctOffCouponPromotion(book, context);
+            //this.CreateLineExclusive20OffCouponPromotion(book, context);
+            //this.CreateLine5PctOffCouponPromotion(book, context);
+            //this.CreateLine5OffCouponPromotion(book, context);
 
             return arg;
         }
@@ -365,6 +367,7 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
             this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context).Wait();
         }
 
+
         /// <summary>
         /// Creates the cart10 PCT off coupon promotion.
         /// </summary>
@@ -532,16 +535,117 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
             this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context);
         }
 
-        #endregion
+    #endregion
 
-        #region Line Promotions
+    #region Line Promotions
+    /// <summary>
+    /// Creates line Punch 360 Speaker Promotion (Coupon Code PUNCHD)
+    /// </summary>
+    /// <param name="book"></param>
+    /// <param name="context"></param>
+    private void CreatePunch360Speaker10PctOffCoupon(PromotionBook book, CommercePipelineExecutionContext context)
+    {
+      var promotion =
+       this._addPromotionPipeline.Run(
+           new AddPromotionArgument(book, "Punch360Speaker10PctOffCouponPromotion", DateTimeOffset.UtcNow.AddDays(-2), DateTimeOffset.UtcNow.AddYears(1), "Punch 360 Spekaer 10% Off Item (Exclusive)", "Punch 360 Spekaer 10% Off Item (Exclusive)")
+           {
+             DisplayName = "Punch 360 Spekaer 10% Off Item (Exclusive)",
+             Description = "10% off the Punch 360 Speaker item (Exclusive)"
+           },
+           context).Result;
 
-        /// <summary>
-        /// Creates line Touch Screen promotion.
-        /// </summary>
-        /// <param name="book">The book.</param>
-        /// <param name="context">The context.</param>
-        private void CreateLineTouchScreenPromotion(PromotionBook book, CommercePipelineExecutionContext context)
+      promotion = this._addPromotionItemPipeline.Run(
+             new PromotionItemArgument(
+                 promotion,
+                 "Habitat_Master|6042083|"),
+             context).Result;
+
+
+      promotion =
+           this._addQualificationPipeline.Run(
+               new PromotionConditionModelArgument(
+                   promotion,
+                   new ConditionModel
+                   {
+                     ConditionOperator = "And",
+                     Id = Guid.NewGuid().ToString(),
+                     LibraryId = CartsConstants.Conditions.CartSubtotalCondition,
+                     Name = CartsConstants.Conditions.CartSubtotalCondition,
+                     Properties = new List<PropertyModel>
+                                        {
+                                                  new PropertyModel { IsOperator = true, Name = "Operator", Value = "Sitecore.Commerce.Plugin.Rules.DecimalGreaterThanOrEqualToOperator", DisplayType = "Sitecore.Framework.Rules.IBinaryOperator`2[[System.Decimal],[System.Decimal]], Sitecore.Framework.Rules.Abstractions" },
+                                                  new PropertyModel { Name = "Subtotal", Value = "100", IsOperator = false, DisplayType = "System.Decimal" }
+                                        }
+                   }),
+               context).Result;
+
+
+      this._addBenefitPipeline.Run(
+             new PromotionActionModelArgument(
+                 promotion,
+                 new ActionModel
+                 {
+                   Id = Guid.NewGuid().ToString(),
+                   LibraryId = CartsConstants.Actions.CartItemSubtotalPercentOffAction,
+                   Name = CartsConstants.Actions.CartItemSubtotalPercentOffAction,
+                   Properties = new List<PropertyModel>
+                                      {
+                                                  new PropertyModel { Name = "PercentOff", Value = "10", IsOperator = false, DisplayType = "System.Decimal" },
+                                                  new PropertyModel { Name = "TargetItemId", Value = "Habitat_Master|6042083|", IsOperator = false, DisplayType = "System.String" }
+                                      }
+                 }),
+             context).Wait();
+      promotion = this._addPublicCouponPipeline.Run(new AddPublicCouponArgument(promotion, "PUNCHD"), context).Result;
+      promotion.SetComponent(new ApprovalComponent(context.GetPolicy<ApprovalStatusPolicy>().Approved));
+      this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context).Wait();
+    }
+    /// <summary>
+    /// Creates line Punch 360 Speaker Promotion (Coupon Code PUNCHD)
+    /// </summary>
+    /// <param name="book"></param>
+    /// <param name="context"></param>
+    private void CreatePunch360Speaker10DollarffCoupon(PromotionBook book, CommercePipelineExecutionContext context)
+    {
+      var promotion =
+       this._addPromotionPipeline.Run(
+           new AddPromotionArgument(book, "Punch360Speaker10DollarOffCouponPromotion", DateTimeOffset.UtcNow.AddDays(-2), DateTimeOffset.UtcNow.AddYears(1), "Punch 360 Spekaer 10$ Off Item (Exclusive)", "Punch 360 Spekaer 10$ Off Item (Exclusive)")
+           {
+             DisplayName = "Punch 360 Spekaer 10$ Off Item (Exclusive)",
+             Description = "10$ off the Punch 360 Speaker item (Exclusive)"
+           },
+           context).Result;
+
+      promotion = this._addPromotionItemPipeline.Run(
+             new PromotionItemArgument(
+                 promotion,
+                 "Habitat_Master|6042083|"),
+             context).Result;
+
+      this._addBenefitPipeline.Run(
+             new PromotionActionModelArgument(
+                 promotion,
+                 new ActionModel
+                 {
+                   Id = Guid.NewGuid().ToString(),
+                   LibraryId = CartsConstants.Actions.CartItemSubtotalAmountOffAction,
+                   Name = CartsConstants.Actions.CartItemSubtotalAmountOffAction,
+                   Properties = new List<PropertyModel>
+                                      {
+                                                  new PropertyModel { Name = "AmountOff", Value = "10", IsOperator = false, DisplayType = "System.Decimal" },
+                                                  new PropertyModel { Name = "TargetItemId", Value = "Habitat_Master|6042083|", IsOperator = false, DisplayType = "System.String" }
+                                      }
+                 }),
+             context).Wait();
+      promotion = this._addPublicCouponPipeline.Run(new AddPublicCouponArgument(promotion, "PUNCHA"), context).Result;
+      promotion.SetComponent(new ApprovalComponent(context.GetPolicy<ApprovalStatusPolicy>().Approved));
+      this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context).Wait();
+    }
+    /// <summary>
+    /// Creates line Touch Screen promotion.
+    /// </summary>
+    /// <param name="book">The book.</param>
+    /// <param name="context">The context.</param>
+    private void CreateLineTouchScreenPromotion(PromotionBook book, CommercePipelineExecutionContext context)
         {
             var promotion =
              this._addPromotionPipeline.Run(
