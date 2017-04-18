@@ -543,67 +543,6 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
     /// </summary>
     /// <param name="book"></param>
     /// <param name="context"></param>
-    private void CreatePunch360Speaker10PctOffCoupon(PromotionBook book, CommercePipelineExecutionContext context)
-    {
-      var promotion =
-       this._addPromotionPipeline.Run(
-           new AddPromotionArgument(book, "Punch360Speaker10PctOffCouponPromotion", DateTimeOffset.UtcNow.AddDays(-2), DateTimeOffset.UtcNow.AddYears(1), "Punch 360 Spekaer 10% Off Item (Exclusive)", "Punch 360 Spekaer 10% Off Item (Exclusive)")
-           {
-             DisplayName = "Punch 360 Spekaer 10% Off Item (Exclusive)",
-             Description = "10% off the Punch 360 Speaker item (Exclusive)"
-           },
-           context).Result;
-
-      promotion = this._addPromotionItemPipeline.Run(
-             new PromotionItemArgument(
-                 promotion,
-                 "Habitat_Master|6042083|"),
-             context).Result;
-
-
-      promotion =
-           this._addQualificationPipeline.Run(
-               new PromotionConditionModelArgument(
-                   promotion,
-                   new ConditionModel
-                   {
-                     ConditionOperator = "And",
-                     Id = Guid.NewGuid().ToString(),
-                     LibraryId = CartsConstants.Conditions.CartSubtotalCondition,
-                     Name = CartsConstants.Conditions.CartSubtotalCondition,
-                     Properties = new List<PropertyModel>
-                                        {
-                                                  new PropertyModel { IsOperator = true, Name = "Operator", Value = "Sitecore.Commerce.Plugin.Rules.DecimalGreaterThanOrEqualToOperator", DisplayType = "Sitecore.Framework.Rules.IBinaryOperator`2[[System.Decimal],[System.Decimal]], Sitecore.Framework.Rules.Abstractions" },
-                                                  new PropertyModel { Name = "Subtotal", Value = "100", IsOperator = false, DisplayType = "System.Decimal" }
-                                        }
-                   }),
-               context).Result;
-
-
-      this._addBenefitPipeline.Run(
-             new PromotionActionModelArgument(
-                 promotion,
-                 new ActionModel
-                 {
-                   Id = Guid.NewGuid().ToString(),
-                   LibraryId = CartsConstants.Actions.CartItemSubtotalPercentOffAction,
-                   Name = CartsConstants.Actions.CartItemSubtotalPercentOffAction,
-                   Properties = new List<PropertyModel>
-                                      {
-                                                  new PropertyModel { Name = "PercentOff", Value = "10", IsOperator = false, DisplayType = "System.Decimal" },
-                                                  new PropertyModel { Name = "TargetItemId", Value = "Habitat_Master|6042083|", IsOperator = false, DisplayType = "System.String" }
-                                      }
-                 }),
-             context).Wait();
-      promotion = this._addPublicCouponPipeline.Run(new AddPublicCouponArgument(promotion, "PUNCHD"), context).Result;
-      promotion.SetComponent(new ApprovalComponent(context.GetPolicy<ApprovalStatusPolicy>().Approved));
-      this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context).Wait();
-    }
-    /// <summary>
-    /// Creates line Punch 360 Speaker Promotion (Coupon Code PUNCHD)
-    /// </summary>
-    /// <param name="book"></param>
-    /// <param name="context"></param>
     private void CreatePunch360Speaker10DollarffCoupon(PromotionBook book, CommercePipelineExecutionContext context)
     {
       var promotion =
@@ -611,7 +550,8 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
            new AddPromotionArgument(book, "Punch360Speaker10DollarOffCouponPromotion", DateTimeOffset.UtcNow.AddDays(-2), DateTimeOffset.UtcNow.AddYears(1), "Punch 360 Spekaer 10$ Off Item (Exclusive)", "Punch 360 Spekaer 10$ Off Item (Exclusive)")
            {
              DisplayName = "Punch 360 Spekaer 10$ Off Item (Exclusive)",
-             Description = "10$ off the Punch 360 Speaker item (Exclusive)"
+             Description = "10$ off the Punch 360 Speaker item (Exclusive)",
+             IsExclusive = true
            },
            context).Result;
 
@@ -637,9 +577,59 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
                  }),
              context).Wait();
       promotion = this._addPublicCouponPipeline.Run(new AddPublicCouponArgument(promotion, "PUNCHA"), context).Result;
+
       promotion.SetComponent(new ApprovalComponent(context.GetPolicy<ApprovalStatusPolicy>().Approved));
       this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context).Wait();
     }
+    /// <summary>
+    /// Creates line Punch 360 Speaker Promotion (Coupon Code PUNCHD)
+    /// </summary>
+    /// <param name="book"></param>
+    /// <param name="context"></param>
+    private void CreatePunch360Speaker10PctOffCoupon(PromotionBook book, CommercePipelineExecutionContext context)
+    {
+      var promotion =
+       this._addPromotionPipeline.Run(
+           new AddPromotionArgument(book, "Punch360Speaker10PercentOffCouponPromotion", DateTimeOffset.UtcNow.AddDays(-2), DateTimeOffset.UtcNow.AddYears(1), "Punch 360 Spekaer 10% Off Item (Exclusive)", "Punch 360 Spekaer 10% Off Item (Exclusive)")
+           {
+             DisplayName = "Punch 360 Spekaer 10% Off Item (Exclusive)",
+             Description = "10% off the Punch 360 Speaker item (Exclusive)",
+             IsExclusive = true
+           },
+           context).Result;
+
+      promotion = this._addPromotionItemPipeline.Run(
+             new PromotionItemArgument(
+                 promotion,
+                 "Habitat_Master|6042083|"),
+             context).Result;
+
+      this._addBenefitPipeline.Run(
+             new PromotionActionModelArgument(
+                 promotion,
+                 new ActionModel
+                 {
+                   Id = Guid.NewGuid().ToString(),
+                   LibraryId = CartsConstants.Actions.CartItemSubtotalPercentOffAction,
+                   Name = CartsConstants.Actions.CartItemSubtotalPercentOffAction,
+                   Properties = new List<PropertyModel>
+                                      {
+                                                  new PropertyModel { Name = "PercentOff", Value = "10", IsOperator = false, DisplayType = "System.Decimal" },
+                                                  new PropertyModel { Name = "TargetItemId", Value = "Habitat_Master|6042083|", IsOperator = false, DisplayType = "System.String" }
+                                      }
+                 }),
+             context).Wait();
+      promotion = this._addPublicCouponPipeline.Run(new AddPublicCouponArgument(promotion, "PUNCHP"), context).Result;
+      
+      promotion.SetComponent(new ApprovalComponent(context.GetPolicy<ApprovalStatusPolicy>().Approved));
+      this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context).Wait();
+    }
+
+      #region  Inactive Discounts
+
+      
+
+      
     /// <summary>
     /// Creates line Touch Screen promotion.
     /// </summary>
@@ -995,7 +985,7 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
             promotion.SetComponent(new ApprovalComponent(context.GetPolicy<ApprovalStatusPolicy>().Approved));
             this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context).Wait();
         }
-
-        #endregion
-    }
+    #endregion Inactive Discounts
+    #endregion
+  }
 }
