@@ -315,7 +315,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             var item = JsonConvert.DeserializeObject<PartyInputModelItem>(shippingAddress);
             item.PartyId = "0";
             item.ExternalId = "0"; //string.IsNullOrWhiteSpace(item.PartyId) || item.PartyId == "0" ? Guid.NewGuid().ToString() : item.PartyId;
-            item.Region = "ON";
+            item.Region = item.State;
             return item;
         }
 
