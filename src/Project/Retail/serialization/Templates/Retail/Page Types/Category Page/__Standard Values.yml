@@ -168,9 +168,6 @@ Languages:
               s:ds="" />
           </d>
         </r>
-    - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
-      Hint: Save percent lead
-      Value: Save up to
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141022T122646Z
@@ -197,9 +194,6 @@ Languages:
               s:ds="" />
           </d>
         </r>
-    - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
-      Hint: Save percent lead
-      Value: Save up to
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141022T122646Z
@@ -207,9 +201,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
-      Hint: Save percent lead
-      Value: Save up to
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141022T122646Z
@@ -231,9 +222,6 @@ Languages:
               s:ds="" />
           </d>
         </r>
-    - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
-      Hint: Save percent lead
-      Value: Save up to
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141022T122646Z

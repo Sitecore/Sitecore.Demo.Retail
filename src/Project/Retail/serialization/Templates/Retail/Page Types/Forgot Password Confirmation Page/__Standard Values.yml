@@ -154,17 +154,6 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150110T103523Z
-    - ID: "7688a550-3c37-4e2b-a710-a8cf34726cec"
-      Hint: Fill Form Message
-      Value: |
-                    <h3>Email Sent</h3>
-                    <p>A confirmation email has been sent to your primary email address with additional instructions.  Follow the steps provided to complete the password reset process.</p>
-    - ID: "f1ed673e-d262-437c-b074-89fe2f11e785"
-      Hint: Email
-      Value: Email Address
-    - ID: "fe750980-1773-482f-92f2-99cc4cf5f117"
-      Hint: Back To Shopping Button
-      Value: Back to shopping
 - Language: en
   Versions:
   - Version: 1
@@ -172,17 +161,6 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150110T103523Z
-    - ID: "7688a550-3c37-4e2b-a710-a8cf34726cec"
-      Hint: Fill Form Message
-      Value: |
-                    <h3>Email Sent</h3>
-                    <p>A confirmation email has been sent to your primary email address with additional instructions.  Follow the steps provided to complete the password reset process.</p>
-    - ID: "f1ed673e-d262-437c-b074-89fe2f11e785"
-      Hint: Email
-      Value: Email Address
-    - ID: "fe750980-1773-482f-92f2-99cc4cf5f117"
-      Hint: Back To Shopping Button
-      Value: Back to shopping
 - Language: "fr-FR"
   Versions:
   - Version: 1
@@ -207,17 +185,6 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150110T103523Z
-    - ID: "7688a550-3c37-4e2b-a710-a8cf34726cec"
-      Hint: Fill Form Message
-      Value: |
-                    <h3>Email Sent</h3>
-                    <p>A confirmation email has been sent to your primary email address with additional instructions.  Follow the steps provided to complete the password reset process.</p>
-    - ID: "f1ed673e-d262-437c-b074-89fe2f11e785"
-      Hint: Email
-      Value: Email Address
-    - ID: "fe750980-1773-482f-92f2-99cc4cf5f117"
-      Hint: Back To Shopping Button
-      Value: Back to shopping
 - Language: "ja-JP"
   Versions:
   - Version: 1
@@ -239,14 +206,3 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150110T103523Z
-    - ID: "7688a550-3c37-4e2b-a710-a8cf34726cec"
-      Hint: Fill Form Message
-      Value: |
-                    <h3>Email Sent</h3>
-                    <p>A confirmation email has been sent to your primary email address with additional instructions.  Follow the steps provided to complete the password reset process.</p>
-    - ID: "f1ed673e-d262-437c-b074-89fe2f11e785"
-      Hint: Email
-      Value: Email Address
-    - ID: "fe750980-1773-482f-92f2-99cc4cf5f117"
-      Hint: Back To Shopping Button
-      Value: Back to shopping

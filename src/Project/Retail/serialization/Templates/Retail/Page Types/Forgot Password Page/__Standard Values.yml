@@ -125,9 +125,6 @@ SharedFields:
           uid="{8D56C3F9-245E-4A2F-BF8F-F00C828A10B9}" />
       </d>
     </r>
-- ID: "fc59d69e-66fb-42de-8621-54c1966a745a"
-  Hint: Email Address Placeholder
-  Value: Email Address
 - ID: "fd4e2050-186c-4375-8b99-e8a85dd7436e"
   Hint: __Enable item fallback
   Type: Checkbox
@@ -154,24 +151,6 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150110T090022Z
-    - ID: "42abb57f-ec16-4278-a08e-aa13169abd8b"
-      Hint: Submit
-      Value: Submit
-    - ID: "980bbf2b-c208-4a75-b9ca-e1c51b6c45d0"
-      Hint: Submitting
-      Value: Submitting...
-    - ID: "a3995f9e-3242-4f02-84e7-be95bb0cfce1"
-      Hint: Fill Form Message
-      Value: Please fill out the form below to reset your password.
-    - ID: "a48dcff4-5ad2-4d4e-8e61-4e4c538770e7"
-      Hint: Email Missing Message
-      Value: The email is required.
-    - ID: "cd8c9707-fe7a-4d3e-912c-95f9f2d0007d"
-      Hint: Cancel
-      Value: Cancel
-    - ID: "ed62d6a1-7371-476a-93d9-c95080613d47"
-      Hint: Email
-      Value: Email Address
 - Language: en
   Versions:
   - Version: 1
@@ -196,24 +175,6 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150110T090022Z
-    - ID: "42abb57f-ec16-4278-a08e-aa13169abd8b"
-      Hint: Submit
-      Value: Submit
-    - ID: "980bbf2b-c208-4a75-b9ca-e1c51b6c45d0"
-      Hint: Submitting
-      Value: Submitting...
-    - ID: "a3995f9e-3242-4f02-84e7-be95bb0cfce1"
-      Hint: Fill Form Message
-      Value: Please fill out the form below to reset your password.
-    - ID: "a48dcff4-5ad2-4d4e-8e61-4e4c538770e7"
-      Hint: Email Missing Message
-      Value: The email is required.
-    - ID: "cd8c9707-fe7a-4d3e-912c-95f9f2d0007d"
-      Hint: Cancel
-      Value: Cancel
-    - ID: "ed62d6a1-7371-476a-93d9-c95080613d47"
-      Hint: Email
-      Value: Email Address
 - Language: "fr-FR"
   Versions:
   - Version: 1
@@ -238,24 +199,6 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150110T090022Z
-    - ID: "42abb57f-ec16-4278-a08e-aa13169abd8b"
-      Hint: Submit
-      Value: Submit
-    - ID: "980bbf2b-c208-4a75-b9ca-e1c51b6c45d0"
-      Hint: Submitting
-      Value: Submitting...
-    - ID: "a3995f9e-3242-4f02-84e7-be95bb0cfce1"
-      Hint: Fill Form Message
-      Value: Please fill out the form below to reset your password.
-    - ID: "a48dcff4-5ad2-4d4e-8e61-4e4c538770e7"
-      Hint: Email Missing Message
-      Value: The email is required.
-    - ID: "cd8c9707-fe7a-4d3e-912c-95f9f2d0007d"
-      Hint: Cancel
-      Value: Cancel
-    - ID: "ed62d6a1-7371-476a-93d9-c95080613d47"
-      Hint: Email
-      Value: Email Address
 - Language: "ja-JP"
   Versions:
   - Version: 1
@@ -277,21 +220,3 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150110T090022Z
-    - ID: "42abb57f-ec16-4278-a08e-aa13169abd8b"
-      Hint: Submit
-      Value: Submit
-    - ID: "980bbf2b-c208-4a75-b9ca-e1c51b6c45d0"
-      Hint: Submitting
-      Value: Submitting...
-    - ID: "a3995f9e-3242-4f02-84e7-be95bb0cfce1"
-      Hint: Fill Form Message
-      Value: Please fill out the form below to reset your password.
-    - ID: "a48dcff4-5ad2-4d4e-8e61-4e4c538770e7"
-      Hint: Email Missing Message
-      Value: The email is required.
-    - ID: "cd8c9707-fe7a-4d3e-912c-95f9f2d0007d"
-      Hint: Cancel
-      Value: Cancel
-    - ID: "ed62d6a1-7371-476a-93d9-c95080613d47"
-      Hint: Email
-      Value: Email Address
