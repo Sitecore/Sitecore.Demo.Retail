@@ -1,0 +1,109 @@
+﻿---
+ID: "b65eb96e-7014-495a-9248-88910bded482"
+Parent: "9d0b9361-2203-4cde-b4e5-56b1c4fee096"
+Template: "074320b7-e0cf-49af-be58-0da379df820f"
+Path: /sitecore/content/Storefront/Home/ExtendedCheckout/Confirm
+DB: master
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 200
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "013b350a-e2d8-497e-979b-7a19bd667944"
+      Hint: Gift Cards Label
+      Value: Gift cards
+    - ID: "0624672e-1868-4954-8e34-34b22738fe71"
+      Hint: Shipping Method Label
+      Value: Shipping method
+    - ID: "08f6044b-e7d9-4732-a63a-bed676ed34fb"
+      Hint: Apply Discount Credit Label
+      Value: Apply discount card
+    - ID: "107fb405-7e12-4307-8a8a-dc8efb3f1d20"
+      Hint: Promotion Code Label
+      Value: Promotion code
+    - ID: "239a6669-1815-4bd9-960f-056553c521de"
+      Hint: Delivery Label
+      Value: "Delivery:"
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141121T070819
+    - ID: "3f42ad47-5396-4365-bbb9-61aabc99986b"
+      Hint: Payment Methods Label
+      Value: Payment methods
+    - ID: "47f37a01-789a-45d9-b40b-af82b289ee13"
+      Hint: Edit Payment Methods Labe
+      Value: Edit payment methods
+    - ID: "521e1824-d65f-4394-988e-589a6be42a17"
+      Hint: Total Label
+      Value: Total
+    - ID: "57059042-8c55-4728-9e8a-81bba8b6d5e2"
+      Hint: Credits Header Label
+      Value: Loyalty Rewards
+    - ID: "5b9bb914-d42c-4791-8005-71ab64ffc53f"
+      Hint: Add Discount Card Label
+      Value: Add discount card
+    - ID: "5d91b3a0-8126-44ac-82be-b52ef403fbba"
+      Hint: Quantity Label
+      Value: Quantity
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "6029191f-8851-496b-86e7-4bff30cfee46"
+      Hint: Color Label
+      Value: "Color:"
+    - ID: "6532c046-9650-41a8-b93f-67c79251e8c3"
+      Hint: Edit Discount Code Label
+      Value: Edit discount code
+    - ID: "6dde7489-4439-4483-b8df-3ba3b44e74dc"
+      Hint: Shipping Address Label
+      Value: Shipping address
+    - ID: "6ff1121a-9c79-4103-bb4a-f76f85be739a"
+      Hint: Edit Gift Cards Label
+      Value: Edit gift cards
+    - ID: "77e7262f-af31-45ba-926c-19c7d2e6643e"
+      Hint: Edit Shipping Method Label
+      Value: Edit shipping method
+    - ID: "8c738971-a3e2-4aa2-ba36-5174e2143573"
+      Hint: Edit Shipping Address Label
+      Value: Edit shipping address
+    - ID: "a0135993-71de-4545-aae2-689fe6d74654"
+      Hint: Subtitle Loyalty Credit Label
+      Value: Enter the information regarding your loyalty card here
+    - ID: "ad4808a1-feab-4f41-9b6c-9708462ff177"
+      Hint: Subtitle Discount Credit Label
+      Value: Enter a coupon code to apply to the current order
+    - ID: "b4c81e3b-ddbb-4177-92a6-a203ab4f11d9"
+      Hint: Discount Code Label
+      Value: Discount code
+    - ID: "b62c80f1-dd74-4c89-b510-01eb49d49d95"
+      Hint: PrevButtonLabel
+      Value: Back to billing
+    - ID: "b8c45dec-446b-445d-a2bd-5a313e6302ef"
+      Hint: Product Details Label
+      Value: Product details
+    - ID: "bbe6905d-c685-4bca-8e1b-e8a3d84710a0"
+      Hint: Billing Address Label
+      Value: Billing address
+    - ID: "bfe51d46-ba02-46b5-b249-e66e0fd93a6d"
+      Hint: Unit Price Label
+      Value: Unit price
+    - ID: "d8619dc5-a4c3-4e1b-a535-b5fc308e74eb"
+      Hint: Discount Label
+      Value: "Discount:"
+    - ID: "e8277201-5a95-464c-957c-ccc50ff74857"
+      Hint: Edit Billing Address Label
+      Value: Edit billing address
+    - ID: "eb52264d-68a7-4760-ad38-85389723a27e"
+      Hint: Credit Card Label
+      Value: Credit Card
+    - ID: "f7164ddb-92fe-4cdf-823d-989c6f90739f"
+      Hint: NextButtonLabel
+      Value: Confirm order
+    - ID: "f995ffda-5bce-445b-af7a-87f97865c88c"
+      Hint: Add Promo Code Label
+      Value: Add promotion code

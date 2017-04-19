@@ -81,7 +81,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             var model = CreateViewModel();
             if (!model.HasLines && !Context.PageMode.IsExperienceEditor)
             {
-#warning Remove hardcoded URL
+//#warning Remove hardcoded URL
                 var cartPageUrl = "/shoppingcart";
                 return Redirect(cartPageUrl);
             }
@@ -90,8 +90,8 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
 
         private RedirectResult SubmitOrder()
         {
-            try
-            {
+            //try
+            //{
                 var inputModel = new SubmitOrderInputModel();
                 inputModel.UserEmail = Request.Cookies["email"]?.Value;
                 inputModel.FederatedPayment = new FederatedPaymentInputModelItem();
@@ -107,11 +107,11 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 }
 
                 return Redirect($"OrderConfirmation?{ConfirmationIdQueryString}={response.Result.OrderID}");
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    throw;
+            //}
         }
 
         [AllowAnonymous]
@@ -271,7 +271,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 shipItemsMethod.ShippingMethodID = CleanGuid(shippingOptionID);
                 shipItemsMethod.ShippingMethodName = model.ShippingOptions[shippingOptionID];
                 shipItemsMethod.ShippingPreferenceType = "1";
-              //  shipItemsMethod.PartyID = "0";
+                shipItemsMethod.PartyId = "0";
                 shipItemsMethod.LineIDs = shipItemsLines.Select(l => l.ExternalCartLineId).ToList();
                 inputModel.ShippingMethods.Add(shipItemsMethod);
             }
@@ -289,18 +289,18 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 inputModel.ShippingMethods.Add(emailMethod);
             }
 
-            try
-            {
+            //try
+            //{
                 var response = CartManager.SetShippingMethods(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel);
                 if (!response.ServiceProviderResult.Success || response.Result == null)
                     throw new Exception("Error setting shipping methods: " +
                         string.Join(",", response.ServiceProviderResult.SystemMessages.Select(sm => sm.Message)));
                 model.Cart = response.Result;
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    throw;
+            //}
 
         }
 
@@ -313,7 +313,8 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             shippingAddress = HttpUtility.UrlDecode(shippingAddress);
             var item = JsonConvert.DeserializeObject<PartyInputModelItem>(shippingAddress);
             item.PartyId = "0";
-            item.ExternalId = "0";
+            item.ExternalId = "0"; //string.IsNullOrWhiteSpace(item.PartyId) || item.PartyId == "0" ? Guid.NewGuid().ToString() : item.PartyId;
+            item.Region = "ON";
             return item;
         }
 
