@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Search;
@@ -35,6 +34,7 @@ using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
 using Sitecore.Foundation.Commerce.Models.Search;
+using Sitecore.Foundation.Dictionary.Repositories;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
@@ -42,7 +42,7 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         private readonly CommerceContextBase _obecContext;
 
-        public InventoryManager([NotNull] InventoryServiceProvider inventoryServiceProvider, [NotNull] ContactFactory contactFactory, ICommerceSearchManager commerceSearchManager)
+        public InventoryManager(InventoryServiceProvider inventoryServiceProvider, ContactFactory contactFactory, ICommerceSearchManager commerceSearchManager, StorefrontContext storefrontContext)
         {
             Assert.ArgumentNotNull(inventoryServiceProvider, nameof(inventoryServiceProvider));
             Assert.ArgumentNotNull(contactFactory, nameof(contactFactory));
@@ -51,27 +51,23 @@ namespace Sitecore.Foundation.Commerce.Managers
             ContactFactory = contactFactory;
             _obecContext = (CommerceContextBase) Factory.CreateObject("commerceContext", true);
             CommerceSearchManager = commerceSearchManager;
+            StorefrontContext = storefrontContext;
         }
 
-        private ICommerceSearchManager CommerceSearchManager { get; set; }
+        private StorefrontContext StorefrontContext { get; }
 
-        private InventoryServiceProvider InventoryServiceProvider { get; set; }
+        private ICommerceSearchManager CommerceSearchManager { get; }
 
-        private ContactFactory ContactFactory { get; set; }
+        private InventoryServiceProvider InventoryServiceProvider { get; }
 
-        public void GetProductsStockStatusForList([NotNull] CommerceStorefront storefront, IEnumerable<IInventoryProduct> productViewModels)
-        {
-            if (!UseIndexFileForProductStatusInLists)
-            {
-                GetProductsStockStatus(storefront, productViewModels);
-            }
-            else
-            {
-                GetProductStockStatusFromIndex(productViewModels);
-            }
-        }
+        private ContactFactory ContactFactory { get; }
 
         private bool UseIndexFileForProductStatusInLists => Settings.GetBoolSetting("Storefront.UseIndexFileForProductStatusInLists", false);
+
+        public void GetProductsStockStatusForList(IEnumerable<IInventoryProduct> productViewModels)
+        {
+            GetProductsStockStatus(productViewModels);
+        }
 
         private void GetProductStockStatusFromIndex(IEnumerable<IInventoryProduct> viewModelList)
         {
@@ -153,7 +149,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                     }
 
                     foundModel.StockStatus = status;
-                    foundModel.StockStatusName = LookupManager.GetProductStockStatusName(foundModel.StockStatus);
+                    foundModel.StockStatusName = GetStockStatusName(foundModel.StockStatus);
                 }
             }
         }
@@ -181,7 +177,7 @@ namespace Sitecore.Foundation.Commerce.Managers
         }
 
 
-        public void GetProductsStockStatus([NotNull] CommerceStorefront storefront, IEnumerable<IInventoryProduct> productViewModels)
+        public void GetProductsStockStatus(IEnumerable<IInventoryProduct> productViewModels)
         {
             if (productViewModels == null || !productViewModels.Any())
             {
@@ -211,7 +207,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             if (products.Any())
             {
-                var response = GetStockInformation(storefront, products, StockDetailsLevel.All);
+                var response = GetStockInformation(products, StockDetailsLevel.All);
                 if (response.Result != null)
                 {
                     var stockInfoList = response.Result.ToList();
@@ -234,19 +230,22 @@ namespace Sitecore.Foundation.Commerce.Managers
                         if (foundItem != null)
                         {
                             viewModel.StockStatus = foundItem.Status;
-                            viewModel.StockStatusName = LookupManager.GetProductStockStatusName(foundItem.Status);
+                            viewModel.StockStatusName = GetStockStatusName(foundItem.Status);
                         }
                     }
                 }
             }
         }
 
-        public ManagerResponse<GetStockInformationResult, IEnumerable<StockInformation>> GetStockInformation([NotNull] CommerceStorefront storefront, IEnumerable<InventoryProduct> products, StockDetailsLevel detailsLevel)
+        public ManagerResponse<GetStockInformationResult, IEnumerable<StockInformation>> GetStockInformation(IEnumerable<InventoryProduct> products, StockDetailsLevel detailsLevel)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(products, nameof(products));
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
 
-            var request = new GetStockInformationRequest(storefront.ShopName, products, detailsLevel) {Location = _obecContext.InventoryLocation, VisitorId = ContactFactory.GetContact()};
+            var request = new GetStockInformationRequest(StorefrontContext.Current.ShopName, products, detailsLevel) {Location = _obecContext.InventoryLocation, VisitorId = ContactFactory.GetContact()};
             var result = InventoryServiceProvider.GetStockInformation(request);
 
             // Currently, both Categories and Products are passed in and are waiting for a fix to filter the categories out.  Until then, this code is commented
@@ -255,48 +254,62 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetStockInformationResult, IEnumerable<StockInformation>>(result, result.StockInformation ?? new List<StockInformation>());
         }
 
-        public ManagerResponse<GetPreOrderableInformationResult, IEnumerable<OrderableInformation>> GetPreOrderableInformation([NotNull] CommerceStorefront storefront, IEnumerable<InventoryProduct> products)
+        public ManagerResponse<GetPreOrderableInformationResult, IEnumerable<OrderableInformation>> GetPreOrderableInformation(IEnumerable<InventoryProduct> products)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(products, nameof(products));
 
-            var request = new GetPreOrderableInformationRequest(storefront.ShopName, products);
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
+
+            var request = new GetPreOrderableInformationRequest(StorefrontContext.Current.ShopName, products);
             var result = InventoryServiceProvider.GetPreOrderableInformation(request);
 
             result.WriteToSitecoreLog();
             return new ManagerResponse<GetPreOrderableInformationResult, IEnumerable<OrderableInformation>>(result, !result.Success || result.OrderableInformation == null ? new List<OrderableInformation>() : result.OrderableInformation);
         }
 
-        public ManagerResponse<GetBackOrderableInformationResult, IEnumerable<OrderableInformation>> GetBackOrderableInformation([NotNull] CommerceStorefront storefront, IEnumerable<InventoryProduct> products)
+        public ManagerResponse<GetBackOrderableInformationResult, IEnumerable<OrderableInformation>> GetBackOrderableInformation(IEnumerable<InventoryProduct> products)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(products, nameof(products));
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
 
-            var request = new GetBackOrderableInformationRequest(storefront.ShopName, products);
+            var request = new GetBackOrderableInformationRequest(StorefrontContext.Current.ShopName, products);
             var result = InventoryServiceProvider.GetBackOrderableInformation(request);
 
             result.WriteToSitecoreLog();
             return new ManagerResponse<GetBackOrderableInformationResult, IEnumerable<OrderableInformation>>(result, !result.Success || result.OrderableInformation == null ? new List<OrderableInformation>() : result.OrderableInformation);
         }
 
-        public ManagerResponse<VisitedProductStockStatusResult, bool> VisitedProductStockStatus([NotNull] CommerceStorefront storefront, StockInformation stockInformation, string location)
+        public ManagerResponse<VisitedProductStockStatusResult, bool> VisitedProductStockStatus(StockInformation stockInformation, string location)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(stockInformation, nameof(stockInformation));
 
-            var request = new VisitedProductStockStatusRequest(storefront.ShopName, stockInformation) {Location = location};
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
+
+            var request = new VisitedProductStockStatusRequest(StorefrontContext.Current.ShopName, stockInformation) {Location = location};
             var result = InventoryServiceProvider.VisitedProductStockStatus(request);
 
             result.WriteToSitecoreLog();
             return new ManagerResponse<VisitedProductStockStatusResult, bool>(result, result.Success);
         }
 
-        public ManagerResponse<VisitorSignUpForStockNotificationResult, bool> VisitorSignupForStockNotification([NotNull] CommerceStorefront storefront, SignUpForNotificationInputModel model, string location)
+        public ManagerResponse<VisitorSignUpForStockNotificationResult, bool> VisitorSignupForStockNotification(SignUpForNotificationInputModel model, string location)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNull(model, nameof(model));
             Assert.ArgumentNotNullOrEmpty(model.ProductId, nameof(model.ProductId));
             Assert.ArgumentNotNullOrEmpty(model.Email, nameof(model.Email));
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
 
             var visitorId = ContactFactory.GetContact();
             var builder = new CommerceInventoryProductBuilder();
@@ -313,7 +326,7 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             DateTime interestDate;
             var isDate = DateTime.TryParse(model.InterestDate, out interestDate);
-            var request = new VisitorSignUpForStockNotificationRequest(storefront.ShopName, visitorId, model.Email, inventoryProduct) {Location = location};
+            var request = new VisitorSignUpForStockNotificationRequest(StorefrontContext.Current.ShopName, visitorId, model.Email, inventoryProduct) {Location = location};
             if (isDate)
             {
                 request.InterestDate = interestDate;
@@ -323,6 +336,11 @@ namespace Sitecore.Foundation.Commerce.Managers
 
             result.WriteToSitecoreLog();
             return new ManagerResponse<VisitorSignUpForStockNotificationResult, bool>(result, result.Success);
+        }
+
+        public static string GetStockStatusName(StockStatus modelStockStatus)
+        {
+            return DictionaryPhraseRepository.Current.Get($"/Commerce/Stock Status/{modelStockStatus.Name}", $"[{modelStockStatus.Name}]");
         }
     }
 }

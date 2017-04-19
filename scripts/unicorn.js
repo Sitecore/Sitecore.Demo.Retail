@@ -26,17 +26,35 @@ module.exports = function (callback, options) {
     });
     return secret;
   }
-
+ var siteHostName;
+  var lastChar = options.siteHostName.slice(-1);
+  if(lastChar == '/') {
+   siteHostName = options.siteHostName.slice(0, -1);
+  }
+  else{
+	  siteHostName = options.siteHostName;
+  }
   var secret = getUnicornSecret();
-  var url = options.siteHostName + "/unicorn.aspx";
+  var url = siteHostName + "/unicorn.aspx";
+
 
   var syncScript =__dirname + "/Unicorn/./Sync.ps1 -secret " + secret + " -url " + url;
   var options = { cwd: __dirname + "/Unicorn/", maxBuffer: 1024 * 500 };
-  return exec("powershell -executionpolicy unrestricted \"" + syncScript + "\"", options, function (err, stdout, stderr) {
+  var process = exec("powershell -executionpolicy unrestricted \"" + syncScript + "\"", options, function (err, stdout, stderr) {
     if (err !== null) throw err;
     console.log(stdout);
     callback();
   });
+  
+  process.stdout.on('data', function (data) {
+    console.log(data.toString());
+  });
+  
+  process.stderr.on('data', function (data) {
+    console.log("Error: " + data.toString());
+  });
+  
+  return process;
 };
 
 module.exports.getFullItemPath = function (itemFile) {

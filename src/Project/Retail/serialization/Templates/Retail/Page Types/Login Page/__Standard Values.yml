@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r>
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -80,7 +80,7 @@ SharedFields:
           ph="/page-layout/section"
           uid="{796AF1FB-F2EB-4607-8C33-0A86B2DB6DD4}" />
         <r
-          id="{F3A5647E-1A48-4259-AA6C-3F368CA7E0A4}"
+          id="{5899FE6B-2AD7-4243-B1F9-3BC664CF0A7C}"
           ph="/page-layout/section/col-huge"
           uid="{BEB5CE58-ED72-42A9-A029-195739BD5894}" />
         <r
@@ -115,14 +115,6 @@ SharedFields:
           id="{CED18F24-62C2-445E-B0D9-045E3325297B}"
           ph="page-sidebar"
           uid="{C6630683-13A8-4AAC-81D3-C59F11284E55}" />
-      </d>
-      <d
-        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-        l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
-        <r
-          id="{F3A5647E-1A48-4259-AA6C-3F368CA7E0A4}"
-          ph="center"
-          uid="{3770FF04-9159-434D-BC14-19DD1B243F20}" />
       </d>
     </r>
 - ID: "fd4e2050-186c-4375-8b99-e8a85dd7436e"

@@ -25,6 +25,7 @@ using Sitecore.Commerce.Entities.Payments;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Diagnostics;
 using Sitecore.Feature.Commerce.Orders.Models;
+using Sitecore.Foundation.Commerce;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
@@ -36,10 +37,11 @@ using Sitecore.Feature.Commerce.Orders.Models;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Data;
 using Sitecore.Links;
-using Sitecore.Foundation.SitecoreExtensions.Extensions;
+//using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Data.Items;
 using Newtonsoft.Json;
 using System.Web;
+using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Feature.Commerce.Orders.Controllers
 {
@@ -47,26 +49,26 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
     {
         private const string ConfirmationIdQueryString = "confirmationId";
 
-        public CheckoutController(CartManager cartManager, OrderManager orderManager, AccountManager accountManager, PaymentManager paymentManager, ShippingManager shippingManager, VisitorContextRepository visitorContextRepository, CurrencyManager currencyManager, CountryManager countryManager, StorefrontManager storefrontManager)
+        public CheckoutController(CartManager cartManager, OrderManager orderManager, AccountManager accountManager, PaymentManager paymentManager, ShippingManager shippingManager, CommerceUserContext commerceUserContext, CurrencyManager currencyManager, CountryManager countryManager, StorefrontContext storefrontContext)
         {
             CartManager = cartManager;
             OrderManager = orderManager;
             AccountManager = accountManager;
             PaymentManager = paymentManager;
             ShippingManager = shippingManager;
-            VisitorContextRepository = visitorContextRepository;
+            CommerceUserContext = commerceUserContext;
             CurrencyManager = currencyManager;
             CountryManager = countryManager;
-            StorefrontManager = storefrontManager;
+            StorefrontContext = storefrontContext;
         }
 
         private CartManager CartManager { get; }
         private PaymentManager PaymentManager { get; }
         private ShippingManager ShippingManager { get; }
-        private VisitorContextRepository VisitorContextRepository { get; }
+        private CommerceUserContext CommerceUserContext { get; }
         private CurrencyManager CurrencyManager { get; }
         private CountryManager CountryManager { get; }
-        public StorefrontManager StorefrontManager { get; }
+        public StorefrontContext StorefrontContext { get; }
         private OrderManager OrderManager { get; }
         private AccountManager AccountManager { get; }
 
@@ -99,7 +101,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 inputModel.FederatedPayment.CardPaymentAcceptCardPrefix = "paypal";
                 inputModel.FederatedPayment.CardToken = Request.Form["payment_method_nonce"];
 
-                var response = OrderManager.SubmitVisitorOrder(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel);
+                var response = OrderManager.SubmitVisitorOrder(CommerceUserContext.Current.UserId, inputModel);
                 if (!response.ServiceProviderResult.Success || response.Result == null || response.ServiceProviderResult.CartWithErrors != null)
                 {
                     throw new Exception("Error submitting order: " +
@@ -150,8 +152,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
 
         private CommerceCart GetCart()
         {
-            var cartResponse = CartManager.GetCurrentCart(StorefrontManager.Current,
-                VisitorContextRepository.GetCurrent(), true);
+            var cartResponse = CartManager.GetCart(CommerceUserContext.Current.UserId, true);
             return cartResponse.ServiceProviderResult.Cart as CommerceCart;
         }
 
@@ -291,7 +292,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
 
             //try
             //{
-                var response = CartManager.SetShippingMethods(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel);
+                var response = CartManager.SetShippingMethods(CommerceUserContext.Current.UserId, inputModel);
                 if (!response.ServiceProviderResult.Success || response.Result == null)
                     throw new Exception("Error setting shipping methods: " +
                         string.Join(",", response.ServiceProviderResult.SystemMessages.Select(sm => sm.Message)));
@@ -332,7 +333,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpGet]
         public ActionResult StartCheckout()
         {
-            var response = CartManager.GetCurrentCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), true);
+            var response = CartManager.GetCart(CommerceUserContext.Current.UserId, true);
             var cart = (CommerceCart) response.ServiceProviderResult.Cart;
             if (!Context.PageMode.IsExperienceEditor && (cart.Lines == null || !cart.Lines.Any()))
             {
@@ -350,18 +351,16 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         public ActionResult OrderConfirmation([Bind(Prefix = ConfirmationIdQueryString)] string confirmationId)
         {
             var viewModel = new OrderConfirmationViewModel();
-            CommerceOrder order = null;
 
             if (!string.IsNullOrWhiteSpace(confirmationId))
             {
-                var response = OrderManager.GetOrderDetails(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), confirmationId);
+                var response = OrderManager.GetOrderDetails(CommerceUserContext.Current.UserId, confirmationId);
                 if (response.ServiceProviderResult.Success)
                 {
-                    order = response.Result;
+                    var order = response.Result;
+                    viewModel.Initialize(RenderingContext.Current.Rendering, order.TrackingNumber, OrderManager.GetOrderStatusName(order.Status));
                 }
             }
-
-            viewModel.Initialize(RenderingContext.Current.Rendering, order.TrackingNumber, order);
 
             return View(viewModel);
         }
@@ -375,7 +374,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             try
             {
                 var result = new CheckoutApiModel();
-                var response = CartManager.GetCurrentCart(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), true);
+                var response = CartManager.GetCart(CommerceUserContext.Current.UserId, true);
                 if (response.ServiceProviderResult.Success && response.Result != null)
                 {
                     var cart = (CommerceCart) response.ServiceProviderResult.Cart;
@@ -441,7 +440,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = OrderManager.SubmitVisitorOrder(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel);
+                var response = OrderManager.SubmitVisitorOrder(CommerceUserContext.Current.UserId, inputModel);
                 var result = new SubmitOrderApiModel(response.ServiceProviderResult);
                 if (!response.ServiceProviderResult.Success || response.Result == null || response.ServiceProviderResult.CartWithErrors != null)
                 {
@@ -473,7 +472,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = ShippingManager.GetShippingMethods(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel);
+                var response = ShippingManager.GetShippingMethods(CommerceUserContext.Current.UserId, inputModel);
                 var result = new ShippingMethodsApiModel(response.ServiceProviderResult);
                 if (response.ServiceProviderResult.Success)
                 {
@@ -504,7 +503,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.SetShippingMethods(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel);
+                var response = CartManager.SetShippingMethods(CommerceUserContext.Current.UserId, inputModel);
                 var result = new CartApiModel(response.ServiceProviderResult);
                 if (!response.ServiceProviderResult.Success || response.Result == null)
                 {
@@ -537,7 +536,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
                 }
 
-                var response = CartManager.SetPaymentMethods(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel);
+                var response = CartManager.SetPaymentMethods(CommerceUserContext.Current.UserId, inputModel);
                 var result = new CartApiModel(response.ServiceProviderResult);
                 if (!response.ServiceProviderResult.Success || response.Result == null)
                 {
@@ -585,7 +584,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
         }
 
-        [Obsolete("Please refactor")]
+#warning Please refactor
         private void AddShippingOptionsToResult(CheckoutApiModel result, CommerceCart cart)
         {
             var response = ShippingManager.GetShippingPreferences(cart);
@@ -603,7 +602,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             result.SetErrors(response.ServiceProviderResult);
         }
 
-        [Obsolete("Please refactor")]
+#warning Please refactor
         private void GetAvailableCountries(CheckoutApiModel result)
         {
             var response = CountryManager.GetAvailableCountries();
@@ -617,31 +616,31 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             result.SetErrors(response.ServiceProviderResult);
         }
 
-        [Obsolete("Please refactor")]
+#warning Please refactor
         private void GetPaymentOptions(CheckoutApiModel result)
         {
-            var response = PaymentManager.GetPaymentOptions(StorefrontManager.Current, VisitorContextRepository.GetCurrent());
+            var response = PaymentManager.GetPaymentOptions(CommerceUserContext.Current.UserId);
             var paymentOptions = new List<PaymentOption>();
             if (response.ServiceProviderResult.Success && response.Result != null)
             {
                 paymentOptions = response.Result.ToList();
-                paymentOptions.ForEach(x => x.Name = LookupManager.GetPaymentName(x.Name));
+                paymentOptions.ForEach(x => x.Name = PaymentManager.GetPaymentName(x.Name));
             }
 
             result.PaymentOptions = paymentOptions;
             result.SetErrors(response.ServiceProviderResult);
         }
 
-        [Obsolete("Please refactor")]
+#warning Please refactor
         private void GetPaymentMethods(CheckoutApiModel result)
         {
             var paymentMethodList = new List<PaymentMethod>();
 
-            var response = PaymentManager.GetPaymentMethods(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), new PaymentOption {PaymentOptionType = PaymentOptionType.PayCard});
+            var response = PaymentManager.GetPaymentMethods(CommerceUserContext.Current.UserId, new PaymentOption {PaymentOptionType = PaymentOptionType.PayCard});
             if (response.ServiceProviderResult.Success)
             {
                 paymentMethodList.AddRange(response.Result);
-                paymentMethodList.ForEach(x => x.Description = LookupManager.GetPaymentName(x.Description));
+                paymentMethodList.ForEach(x => x.Description = PaymentManager.GetPaymentName(x.Description));
             }
 
             result.SetErrors(response.ServiceProviderResult);
@@ -649,7 +648,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             result.PaymentMethods = paymentMethodList;
         }
 
-        [Obsolete("Please refactor")]
+#warning Please refactor
         private void GetPaymentClientToken(CheckoutApiModel result)
         {
             var response = PaymentManager.GetPaymentClientToken();
@@ -661,12 +660,12 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             result.SetErrors(response.ServiceProviderResult);
         }
 
-        [Obsolete("Please refactor")]
+#warning Please refactor
         private void AddShippingMethodsToResult(CheckoutApiModel result)
         {
             var shippingMethodJsonResult = new ShippingMethodApiModel();
 
-            var response = ShippingManager.GetShippingMethods(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), new GetShippingMethodsInputModel {ShippingPreferenceType = ShippingOptionType.None.Name});
+            var response = ShippingManager.GetShippingMethods(CommerceUserContext.Current.UserId, new GetShippingMethodsInputModel {ShippingPreferenceType = ShippingOptionType.None.Name});
             if (response.ServiceProviderResult.Success && response.Result.Count > 0)
             {
                 shippingMethodJsonResult.Initialize(response.Result.ElementAt(0));
@@ -681,19 +680,22 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             result.SetErrors(response.ServiceProviderResult);
         }
 
-        [Obsolete("Please refactor")]
+#warning Please refactor
         private void GetUserInfo(CheckoutApiModel result)
         {
-            var isUserAuthenticated = Context.User.IsAuthenticated;
-            result.IsUserAuthenticated = isUserAuthenticated;
-            result.UserEmail = isUserAuthenticated && !Context.User.Profile.IsAdministrator ? AccountManager.ResolveCommerceUser().Result.Email : string.Empty;
-            if (!isUserAuthenticated)
+            if (CommerceUserContext.Current == null)
+                return;
+
+            result.IsUserAuthenticated = Context.User.IsAuthenticated;
+            result.UserEmail = string.Empty;
+            if (!Context.User.IsAuthenticated)
             {
                 return;
             }
 
+            result.UserEmail = CommerceUserContext.Current.Email;
             var addresses = new List<IParty>();
-            var response = AccountManager.GetCurrentCustomerParties(StorefrontManager.Current, VisitorContextRepository.GetCurrent());
+            var response = AccountManager.GetCustomerParties(CommerceUserContext.Current.UserName);
             if (response.ServiceProviderResult.Success && response.Result != null)
             {
                 addresses = response.Result.ToList();

@@ -16,7 +16,5 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
         public List<ProductViewModel> ChildProducts { get; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Item Item { get; set; }
-        public HtmlString DescriptionRenderer => Item == null ? new HtmlString(Description) : PageContext.Current.HtmlHelper.Sitecore().Field("Value", Item);
     }
 }

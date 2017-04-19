@@ -15,6 +15,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sitecore.Commerce.Engine.Connect.Pipelines.Arguments;
@@ -24,52 +25,54 @@ using Sitecore.Commerce.Services.Payments;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Foundation.Dictionary.Repositories;
 using GetPaymentMethodsRequest = Sitecore.Commerce.Engine.Connect.Services.Payments.GetPaymentMethodsRequest;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
     public class PaymentManager : IManager
     {
-        public PaymentManager([NotNull] PaymentServiceProvider paymentServiceProvider, [NotNull] CartManager cartManager)
+        public PaymentManager(PaymentServiceProvider paymentServiceProvider, CartManager cartManager, StorefrontContext storefrontContext)
         {
             Assert.ArgumentNotNull(paymentServiceProvider, nameof(paymentServiceProvider));
 
             PaymentServiceProvider = paymentServiceProvider;
             CartManager = cartManager;
+            StorefrontContext = storefrontContext;
         }
 
         public PaymentServiceProvider PaymentServiceProvider { get; protected set; }
-
         public CartManager CartManager { get; protected set; }
+        public StorefrontContext StorefrontContext { get; }
 
-        public ManagerResponse<GetPaymentOptionsResult, IEnumerable<PaymentOption>> GetPaymentOptions([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext)
+
+        public ManagerResponse<GetPaymentOptionsResult, IEnumerable<PaymentOption>> GetPaymentOptions(string userId)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
-
             var result = new GetPaymentOptionsResult {Success = false};
-            var cartResult = CartManager.GetCurrentCart(storefront, visitorContext);
+            var cartResult = CartManager.GetCart(userId);
             if (!cartResult.ServiceProviderResult.Success || cartResult.Result == null)
             {
                 result.SystemMessages.ToList().AddRange(cartResult.ServiceProviderResult.SystemMessages);
                 return new ManagerResponse<GetPaymentOptionsResult, IEnumerable<PaymentOption>>(result, null);
             }
 
-            var request = new GetPaymentOptionsRequest(storefront.ShopName, cartResult.Result);
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
+            var request = new GetPaymentOptionsRequest(StorefrontContext.Current.ShopName, cartResult.Result);
             result = PaymentServiceProvider.GetPaymentOptions(request);
             result.WriteToSitecoreLog();
 
             return new ManagerResponse<GetPaymentOptionsResult, IEnumerable<PaymentOption>>(result, result.PaymentOptions.ToList());
         }
 
-        public ManagerResponse<GetPaymentMethodsResult, IEnumerable<PaymentMethod>> GetPaymentMethods([NotNull] CommerceStorefront storefront, [NotNull] VisitorContext visitorContext, PaymentOption paymentOption)
+        public ManagerResponse<GetPaymentMethodsResult, IEnumerable<PaymentMethod>> GetPaymentMethods(string userId, PaymentOption paymentOption)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
-            Assert.ArgumentNotNull(visitorContext, nameof(visitorContext));
             Assert.ArgumentNotNull(paymentOption, nameof(paymentOption));
 
             var result = new GetPaymentMethodsResult {Success = false};
-            var cartResult = CartManager.GetCurrentCart(storefront, visitorContext);
+            var cartResult = CartManager.GetCart(userId);
             if (!cartResult.ServiceProviderResult.Success || cartResult.Result == null)
             {
                 result.SystemMessages.ToList().AddRange(cartResult.ServiceProviderResult.SystemMessages);
@@ -90,6 +93,11 @@ namespace Sitecore.Foundation.Commerce.Managers
             result.WriteToSitecoreLog();
 
             return new ManagerResponse<PaymentClientTokenResult, string>(result, result.ClientToken);
+        }
+
+        public static string GetPaymentName(string paymentType)
+        {
+            return DictionaryPhraseRepository.Current.Get($"/Commerce/Payment/{paymentType}", $"[{paymentType}]");
         }
     }
 }

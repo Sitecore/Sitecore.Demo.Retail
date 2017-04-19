@@ -29,7 +29,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetAvailableCountriesResult, Dictionary<string, string>>(result, new Dictionary<string, string>(result.AvailableCountries));
         }
 
-        public ManagerResponse<GetAvailableRegionsResult, Dictionary<string, string>> GetAvailableRegions([NotNull] string countryCode)
+        public ManagerResponse<GetAvailableRegionsResult, Dictionary<string, string>> GetAvailableRegions(string countryCode)
         {
             Assert.ArgumentNotNullOrEmpty(countryCode, nameof(countryCode));
 

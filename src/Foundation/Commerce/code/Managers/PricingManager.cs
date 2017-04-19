@@ -34,18 +34,21 @@ namespace Sitecore.Foundation.Commerce.Managers
     {
         private static readonly string[] _defaultPriceTypeIds = {PriceTypes.List, PriceTypes.Adjusted, PriceTypes.LowestPricedVariant, PriceTypes.LowestPricedVariantListPrice, PriceTypes.HighestPricedVariant};
 
-        public PricingManager(PricingServiceProvider pricingServiceProvider, CurrencyManager currencyManager)
+        public PricingManager(PricingServiceProvider pricingServiceProvider, CurrencyManager currencyManager, StorefrontContext storefrontContext)
         {
             Assert.ArgumentNotNull(pricingServiceProvider, nameof(pricingServiceProvider));
 
             PricingServiceProvider = pricingServiceProvider;
             CurrencyManager = currencyManager;
+            StorefrontContext = storefrontContext;
         }
 
-        public PricingServiceProvider PricingServiceProvider { get; protected set; }
-        public CurrencyManager CurrencyManager { get; }
+        private PricingServiceProvider PricingServiceProvider { get; }
+        private CurrencyManager CurrencyManager { get; }
+        private StorefrontContext StorefrontContext { get; }
 
-        public ManagerResponse<GetProductPricesResult, IDictionary<string, Price>> GetProductPrices([NotNull] VisitorContext visitorContext, string catalogName, string productId, bool includeVariants, params string[] priceTypeIds)
+
+        public ManagerResponse<GetProductPricesResult, IDictionary<string, Price>> GetProductPrices(string catalogName, string productId, bool includeVariants, string userId, params string[] priceTypeIds)
         {
             if (priceTypeIds == null)
             {
@@ -57,11 +60,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                 DateTime = GetCurrentDate()
             };
 
-            if (Context.User.IsAuthenticated)
-            {
-                request.UserId = visitorContext.GetCustomerId();
-            }
-
+            request.UserId = userId;
             request.IncludeVariantPrices = includeVariants;
             request.CurrencyCode = CurrencyManager.CurrencyContext.CurrencyCode;
             var result = PricingServiceProvider.GetProductPrices(request);
@@ -70,7 +69,7 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetProductPricesResult, IDictionary<string, Price>>(result, result.Prices ?? new Dictionary<string, Price>());
         }
 
-        public ManagerResponse<GetProductBulkPricesResult, IDictionary<string, Price>> GetProductBulkPrices([NotNull] string catalogName, [NotNull] IEnumerable<string> productIds, params string[] priceTypeIds)
+        public ManagerResponse<GetProductBulkPricesResult, IDictionary<string, Price>> GetProductBulkPrices(string catalogName, IEnumerable<string> productIds, params string[] priceTypeIds)
         {
             Assert.ArgumentNotNull(catalogName, nameof(catalogName));
             Assert.ArgumentNotNull(productIds, nameof(productIds));
@@ -94,22 +93,29 @@ namespace Sitecore.Foundation.Commerce.Managers
             return new ManagerResponse<GetProductBulkPricesResult, IDictionary<string, Price>>(result, result.Prices ?? new Dictionary<string, Price>());
         }
 
-        public ManagerResponse<GetSupportedCurrenciesResult, IReadOnlyCollection<string>> GetSupportedCurrencies(CommerceStorefront storefront, string catalogName)
+        public ManagerResponse<GetSupportedCurrenciesResult, IReadOnlyCollection<string>> GetSupportedCurrencies(string catalogName)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
 
-            var request = new GetSupportedCurrenciesRequest(storefront.ShopName, catalogName);
+            var request = new GetSupportedCurrenciesRequest(StorefrontContext.Current.ShopName, catalogName);
             var result = PricingServiceProvider.GetSupportedCurrencies(request);
 
             return new ManagerResponse<GetSupportedCurrenciesResult, IReadOnlyCollection<string>>(result, result.Currencies);
         }
 
-        public ManagerResponse<ServiceProviderResult, bool> CurrencyChosenPageEvent(CommerceStorefront storefront, string currency)
+        public ManagerResponse<ServiceProviderResult, bool> CurrencyChosenPageEvent(string currency)
         {
-            Assert.ArgumentNotNull(storefront, nameof(storefront));
             Assert.ArgumentNotNullOrEmpty(currency, nameof(currency));
 
-            var request = new CurrencyChosenRequest(storefront.ShopName, currency);
+            if (StorefrontContext.Current == null)
+            {
+                throw new InvalidOperationException("Cannot be called without a valid storefront context.");
+            }
+
+            var request = new CurrencyChosenRequest(StorefrontContext.Current.ShopName, currency);
             var result = PricingServiceProvider.CurrencyChosen(request);
 
             return new ManagerResponse<ServiceProviderResult, bool>(result, result.Success);

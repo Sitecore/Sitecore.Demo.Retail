@@ -10,6 +10,7 @@ using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Feature.Commerce.Orders.Models;
+using Sitecore.Foundation.Commerce;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
@@ -23,18 +24,18 @@ namespace Sitecore.Feature.Commerce.Orders.Repositories
     [Service]
     public class OrderViewModelRepository
     {
-        public OrderViewModelRepository(VisitorContextRepository visitorContextRepository, OrderManager orderManager, StorefrontManager storefrontManager, CatalogManager catalogManager)
+        public OrderViewModelRepository(CommerceUserContext commerceUserContext, OrderManager orderManager, StorefrontContext storefrontContext, CatalogManager catalogManager)
         {
-            VisitorContextRepository = visitorContextRepository;
+            CommerceUserContext = commerceUserContext;
             OrderManager = orderManager;
-            StorefrontManager = storefrontManager;
+            StorefrontContext = storefrontContext;
             CatalogManager = catalogManager;
         }
 
-        public VisitorContextRepository VisitorContextRepository { get; }
+        public CommerceUserContext CommerceUserContext { get; }
 
         public OrderManager OrderManager { get; }
-        public StorefrontManager StorefrontManager { get; }
+        public StorefrontContext StorefrontContext { get; }
         public CatalogManager CatalogManager { get; }
 
         public OrderViewModel Get(OrderHeader orderHeader)
@@ -46,7 +47,7 @@ namespace Sitecore.Feature.Commerce.Orders.Repositories
             {
                 OrderId = commerceOrderHeader.OrderID,
                 ExternalId = commerceOrderHeader.ExternalId,
-                StatusText = LookupManager.GetOrderStatusName(commerceOrderHeader.Status),
+                StatusText = OrderManager.GetOrderStatusName(commerceOrderHeader.Status),
                 Status = commerceOrderHeader.Status,
                 LastModified = commerceOrderHeader.LastModified,
                 Created = commerceOrderHeader.Created,
@@ -61,7 +62,7 @@ namespace Sitecore.Feature.Commerce.Orders.Repositories
             {
                 throw new ArgumentNullException(nameof(externalId));
             }
-            var commerceOrder = OrderManager.GetOrderDetails(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), externalId).Result;
+            var commerceOrder = OrderManager.GetOrderDetails(CommerceUserContext.Current.UserId, externalId).Result;
             if (commerceOrder == null)
                 return null;
 
@@ -72,7 +73,7 @@ namespace Sitecore.Feature.Commerce.Orders.Repositories
                 IsItemShipping = commerceOrder.Shipping != null && commerceOrder.Shipping.Count > 1 && commerceOrder.Lines.Count > 1,
                 OrderId = GetOrderId(commerceOrder),
                 ExternalId = commerceOrder.ExternalId,
-                StatusText = LookupManager.GetOrderStatusName(commerceOrder.Status),
+                StatusText = OrderManager.GetOrderStatusName(commerceOrder.Status),
                 Status = commerceOrder.Status,
                 LastModified = commerceOrder.LastModified,
                 Created = commerceOrder.Created,
