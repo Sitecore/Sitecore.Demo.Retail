@@ -95,18 +95,20 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 var inputModel = new SubmitOrderInputModel();
                 inputModel.UserEmail = Request.Cookies["email"]?.Value;
                 inputModel.FederatedPayment = new FederatedPaymentInputModelItem();
-                inputModel.FederatedPayment.Amount = GetCart().Total.Amount;
-                inputModel.FederatedPayment.CardPaymentAcceptCardPrefix = "paypal";
+                inputModel.FederatedPayment.Amount = decimal.Round(GetCart().Total.Amount, 2, MidpointRounding.AwayFromZero); ; //GetCart().Total.Amount
+            inputModel.FederatedPayment.CardPaymentAcceptCardPrefix = "paypal";
                 inputModel.FederatedPayment.CardToken = Request.Form["payment_method_nonce"];
 
-                var response = OrderManager.SubmitVisitorOrder(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel);
-                if (!response.ServiceProviderResult.Success || response.Result == null || response.ServiceProviderResult.CartWithErrors != null)
+            var response = OrderManager.SubmitVisitorOrder(StorefrontManager.Current, VisitorContextRepository.GetCurrent(), inputModel);
+            var result = new SubmitOrderApiModel(response.ServiceProviderResult);
+            if (!response.ServiceProviderResult.Success || response.Result == null || response.ServiceProviderResult.CartWithErrors != null)
                 {
                     throw new Exception("Error submitting order: " +
                         string.Join(", ", response.ServiceProviderResult.SystemMessages.Select(sm => sm.Message)));
                 }
 
-                return Redirect($"OrderConfirmation?{ConfirmationIdQueryString}={response.Result.OrderID}");
+            result.Initialize($"checkout/OrderConfirmation?{ConfirmationIdQueryString}={response.Result.OrderID}");
+            return Redirect($"OrderConfirmation?{ConfirmationIdQueryString}={response.Result.OrderID}");
             //}
             //catch (Exception e)
             //{
@@ -314,7 +316,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             var item = JsonConvert.DeserializeObject<PartyInputModelItem>(shippingAddress);
             item.PartyId = "0";
             item.ExternalId = "0"; //string.IsNullOrWhiteSpace(item.PartyId) || item.PartyId == "0" ? Guid.NewGuid().ToString() : item.PartyId;
-            item.Region = "ON";
+            item.Region = item.State;
             return item;
         }
 
