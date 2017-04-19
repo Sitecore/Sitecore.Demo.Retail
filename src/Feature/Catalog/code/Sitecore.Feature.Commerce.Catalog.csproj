@@ -95,6 +95,9 @@
     <Reference Include="Sitecore.Foundation.Dictionary">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Foundation.Indexing">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Indexing.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.SitecoreExtensions">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.SitecoreExtensions.dll</HintPath>
     </Reference>
@@ -199,6 +202,7 @@
     <Compile Include="Factories\ProductViewModelFactory.cs" />
     <Compile Include="Infrastructure\Dialogs\InsertLinkForm.cs" />
     <Compile Include="Infrastructure\Pipelines\ProductItemRedirector.cs" />
+    <Compile Include="Infrastructure\Provider\IndexingProvider.cs" />
     <Compile Include="Models\SearchBarViewModel.cs" />
     <Compile Include="Models\SearchInfo.cs" />
     <Compile Include="Factories\CatalogItemContextFactory.cs" />

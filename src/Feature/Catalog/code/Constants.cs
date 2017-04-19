@@ -13,5 +13,10 @@
         }
 
         public const char FacetsSeparator = '|';
+
+        public static class IndexFields
+        {
+            public const string CatalogName = "catalogname";
+        }
     }
 }

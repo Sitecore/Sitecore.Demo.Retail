@@ -86,7 +86,7 @@ SharedFields:
           ph="/page-layout/page-header"
           uid="{9A330B78-4526-4C50-A8DB-F2FA8E1854CC}" />
         <r
-          id="{45B8E1D9-D522-49E0-B9B7-04C965CC7089}"
+          id="{D1AAD687-8B93-44C8-9011-8E8CE2DD281F}"
           ph="/page-layout/page-header"
           uid="{1DE91068-1717-4B37-BAFD-A7BF7ACAB156}" />
         <r
@@ -104,18 +104,9 @@ SharedFields:
           ph="/page-layout/section/col-narrow-1"
           uid="{73D00F74-0956-495D-B055-DDCF76AE26A3}" />
         <r
-          ds=""
-          id="{60A0246E-2616-499A-B6FB-CA69A9F3401F}"
-          ph="/page-layout/section/col-wide-1"
-          uid="{65003F87-E7CF-4CE9-A237-63A5FC0BA4D3}" />
-        <r
-          id="{1A3D1CE3-0C73-4D6E-809B-272E60BE006D}"
+          id="{E52D0AE8-2989-44E5-BEA1-EA30C17B2080}"
           ph="/page-layout/section/col-wide-1"
           uid="{85517EC8-30AA-44BD-B996-867C66F08F1D}" />
-        <r
-          id="{16D92136-9228-4EFE-9969-BA1930520CBE}"
-          ph="/page-layout/section/col-wide-1"
-          uid="{6600C8E6-D9C3-4252-A64B-D3E6B6805596}" />
         <r
           id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"
           ph="footer"
@@ -195,9 +186,6 @@ Languages:
             <r
               uid="{9A330B78-4526-4C50-A8DB-F2FA8E1854CC}"
               p:after="r[@uid='{1DE91068-1717-4B37-BAFD-A7BF7ACAB156}']" />
-            <r
-              uid="{65003F87-E7CF-4CE9-A237-63A5FC0BA4D3}"
-              s:ds="" />
           </d>
         </r>
     - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
