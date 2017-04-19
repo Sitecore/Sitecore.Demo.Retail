@@ -24,7 +24,7 @@
 <!-- Wrapper for slides -->
 <div class="owl-carousel" data-options='{"items": @slides, "navigation": true, "navigationText": ["<", ">"], "autoPlay": false}'>
     @{
-        foreach (ProductViewModel product in Model.ChildProducts)
+        foreach (var product in Model.ChildProducts)
         {
             @Html.Partial("_ProductSummary", product)
         }

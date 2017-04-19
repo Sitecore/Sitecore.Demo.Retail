@@ -59,7 +59,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
             ProductId = stockInfo.Product.ProductId;
             VariantId = string.IsNullOrEmpty(((CommerceInventoryProduct) stockInfo.Product).VariantId) ? string.Empty : ((CommerceInventoryProduct) stockInfo.Product).VariantId;
-            Status = LookupManager.GetProductStockStatusName(stockInfo.Status);
+            Status = InventoryManager.GetStockStatusName(stockInfo.Status);
             Count = stockInfo.Count < 0 ? 0 : stockInfo.Count;
             CanShowSignupForNotification = Context.User.IsAuthenticated;
             if ((stockInfo.AvailabilityDate != null) & stockInfo.AvailabilityDate.HasValue)

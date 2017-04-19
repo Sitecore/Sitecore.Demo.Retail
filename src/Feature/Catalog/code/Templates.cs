@@ -33,7 +33,6 @@ namespace Sitecore.Feature.Commerce.Catalog
             public static class Fields
             {
                 public static readonly ID NamedSearches = new ID("{BB8B5123-FD0C-48DF-B908-B59C6D67D9CF}");
-
             }
         }
 
@@ -57,6 +56,20 @@ namespace Sitecore.Feature.Commerce.Catalog
                     public static readonly string Description = "Description";
                     public static readonly string Brand = "Brand";
                 }
+            }
+        }
+
+        public class ProductOverlayImages
+        {
+            public static readonly ID ID = new ID("{D4859FED-CD3B-45A9-9CDB-A061809D5B50}");
+
+            public static class Fields
+            {
+                public static readonly ID AlmostOutOfStockLimit = new ID("{84AA59B2-090D-483C-B3AC-23E68C3CE2EB}");
+                public static readonly ID AlmostOutOfStockOverlayImage = new ID("{5E667B19-3D2D-4854-A959-5E4339339817}");
+                public static readonly ID OnSaleOverlayImage = new ID("{CD92DFF9-AE15-443C-8DE5-661D23B5AC6C}");
+                public static readonly ID OutOfStockOverlayImage = new ID("{A5EB87FB-5D87-40CA-84D1-9AE2C8169A66}");
+                public static readonly ID PreorderOverlayImage = new ID("{5BF6C285-0BC0-4A3B-B248-A2355D42AC06}");
             }
         }
     }

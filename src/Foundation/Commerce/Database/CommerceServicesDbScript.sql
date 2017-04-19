@@ -2,10 +2,12 @@ USE [master]
 GO
 
 IF  EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'demo.local_SitecoreCommerce.SharedEnvironments')
+ALTER DATABASE [demo.local_SitecoreCommerce.SharedEnvironments] set single_user with rollback immediate
 DROP DATABASE [demo.local_SitecoreCommerce.SharedEnvironments]
 GO
 
 IF  EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'demo.local_SitecoreCommerce.Global')
+ALTER DATABASE [demo.local_SitecoreCommerce.Global] set single_user with rollback immediate
 DROP DATABASE [demo.local_SitecoreCommerce.Global]
 GO
 

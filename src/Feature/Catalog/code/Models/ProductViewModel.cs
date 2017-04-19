@@ -49,16 +49,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public string ParentCategoryName { get; set; }
 
-        public HtmlString DescriptionRender => PageContext.Current.HtmlHelper.Sitecore().Field(Foundation.Commerce.Templates.Commerce.Product.Fields.Description, Item);
+        public HtmlString DescriptionRender => PageContext.Current.HtmlHelper.Sitecore().Field(Foundation.Commerce.Templates.Commerce.Product.FieldNames.Description, Item);
 
-        public MediaItem OnSaleOverlayImage
-        {
-            get
-            {
-                var storefrontManager = DependencyResolver.Current.GetService<StorefrontManager>();
-                return storefrontManager.Current.OnSaleOverlayImage;
-            }
-        }
+        public MediaItem OverlayImage { get; set; }
 
         public string ListPriceWithCurrency => ListPrice.HasValue ? ListPrice.ToCurrency() : string.Empty;
 
@@ -74,7 +67,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public decimal VariantSavingsPercentage => CalculateSavingsPercentage(LowestPricedVariantAdjustedPrice, LowestPricedVariantListPrice);
 
-        public bool IsOnSale => Item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id) && Item.Fields[Foundation.Commerce.Templates.Commerce.Product.Fields.OnSale].IsChecked();
+        public bool IsOnSale => Item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id) && Item.Fields[Foundation.Commerce.Templates.Commerce.Product.FieldNames.OnSale].IsChecked();
 
         public bool IsProduct
         {

@@ -58,6 +58,9 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141008T153657Z
+    - ID: "378b7d87-5775-4eb6-86b7-282d5359b1c6"
+      Hint: User Profile
+      Value: "{0FFEC1BD-4D35-49CF-8B7D-7F01930834ED}"
     - ID: "835fa523-d28a-46a2-a589-6aa4a5bf0846"
       Hint: Register Outcome
       Value: "{75D53206-47B3-4391-BD48-75C42E5FC2CE}"

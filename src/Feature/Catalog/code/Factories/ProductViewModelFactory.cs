@@ -6,6 +6,8 @@ using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Data.Items;
 using Sitecore.Feature.Commerce.Catalog.Models;
+using Sitecore.Feature.Commerce.Catalog.Services;
+using Sitecore.Foundation.Commerce;
 using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
@@ -19,20 +21,22 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
     [Service]
     public class ProductViewModelFactory
     {
-        public ProductViewModelFactory(CatalogItemContext catalogItemContext, CatalogManager catalogManager, InventoryManager inventoryManager, VisitorContextRepository visitorContextRepository, StorefrontManager storefrontManager)
+        public ProductViewModelFactory(CatalogItemContext catalogItemContext, CatalogManager catalogManager, InventoryManager inventoryManager, CommerceUserContext commerceUserContext, StorefrontContext storefrontContext, ProductOverlayImageService productOverlayImageService)
         {
             CatalogItemContext = catalogItemContext;
             CatalogManager = catalogManager;
             InventoryManager = inventoryManager;
-            VisitorContextRepository = visitorContextRepository;
-            StorefrontManager = storefrontManager;
+            CommerceUserContext = commerceUserContext;
+            StorefrontContext = storefrontContext;
+            ProductOverlayImageService = productOverlayImageService;
         }
 
-        private CatalogItemContext CatalogItemContext { get; }
-        public CatalogManager CatalogManager { get; }
-        public InventoryManager InventoryManager { get; }
-        public VisitorContextRepository VisitorContextRepository { get; }
-        public StorefrontManager StorefrontManager { get; }
+        public CatalogItemContext CatalogItemContext { get; }
+        private CatalogManager CatalogManager { get; }
+        private InventoryManager InventoryManager { get; }
+        private CommerceUserContext CommerceUserContext { get; }
+        private StorefrontContext StorefrontContext { get; }
+        private ProductOverlayImageService ProductOverlayImageService { get; }
 
         public ProductViewModel CreateFromCatalogItemContext()
         {
@@ -78,6 +82,32 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
             productViewModel = new ProductViewModel(item, variants);
             productViewModel.ProductName = productViewModel.Title;
 
+            PopulateCategoryInformation(productViewModel);
+            PopulateStockInformation(productViewModel);
+            PopulatePriceInformation(productViewModel);
+            PopulateRatings(productViewModel);
+            PopulateImages(productViewModel);
+
+            return AddToCache(cacheKey, productViewModel);
+        }
+
+        private void PopulateImages(ProductViewModel productViewModel)
+        {
+            productViewModel.OverlayImage = this.ProductOverlayImageService.GetProductOverlayImage(productViewModel);
+        }
+
+        private void PopulateRatings(ProductViewModel productViewModel)
+        {
+            productViewModel.CustomerAverageRating = CatalogManager.GetProductRating(productViewModel.Item);
+        }
+
+        private void PopulatePriceInformation(ProductViewModel productViewModel)
+        {
+            CatalogManager.GetProductPrice(productViewModel);
+        }
+
+        private void PopulateCategoryInformation(ProductViewModel productViewModel)
+        {
             if (CatalogItemContext.Current != null)
             {
                 productViewModel.ParentCategoryId = CatalogItemContext.Current.CategoryId;
@@ -88,12 +118,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
                     productViewModel.ParentCategoryName = category.Title;
                 }
             }
-            PopulateStockInformation(productViewModel);
-
-            CatalogManager.GetProductPrice(VisitorContextRepository.GetCurrent(), productViewModel);
-            productViewModel.CustomerAverageRating = CatalogManager.GetProductRating(item);
-
-            return AddToCache(cacheKey, productViewModel);
         }
 
         public bool IsValid(Item item)
@@ -107,8 +131,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
 
         private void PopulateStockInformation(ProductViewModel model)
         {
+            if (StorefrontContext.Current == null)
+                return;
+
             var inventoryProducts = new List<CommerceInventoryProduct> { new CommerceInventoryProduct { ProductId = model.ProductId, CatalogName = model.CatalogName } };
-            var response = InventoryManager.GetStockInformation(StorefrontManager.Current, inventoryProducts, StockDetailsLevel.StatusAndAvailability);
+            var response = InventoryManager.GetStockInformation(inventoryProducts, StockDetailsLevel.StatusAndAvailability);
             if (!response.ServiceProviderResult.Success || response.Result == null)
             {
                 return;
@@ -122,7 +149,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
             }
 
             model.StockStatus = stockInfo.Status;
-            model.StockStatusName = LookupManager.GetProductStockStatusName(model.StockStatus);
+            model.StockStatusName = InventoryManager.GetStockStatusName(model.StockStatus);
             if (stockInfo.AvailabilityDate != null)
             {
                 model.StockAvailabilityDate = stockInfo.AvailabilityDate.Value.ToDisplayedDate();

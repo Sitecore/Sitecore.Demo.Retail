@@ -18,6 +18,7 @@
 using System;
 using System.Web.Mvc;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Mvc.Controllers;
@@ -29,21 +30,16 @@ namespace Sitecore.Reference.Storefront.Controllers
     {
         private readonly RenderingModel _model;
 
-        public SharedController(CatalogManager catalogManager, StorefrontManager storefrontManager)
+        public SharedController(CatalogManager catalogManager, StorefrontContext storefrontContext)
         {
             CatalogManager = catalogManager;
-            StorefrontManager = storefrontManager;
+            StorefrontContext = storefrontContext;
         }
 
         public CatalogManager CatalogManager { get; }
-        public StorefrontManager StorefrontManager { get; }
+        public StorefrontContext StorefrontContext { get; }
 
         public ActionResult ErrorsSummary()
-        {
-            return View();
-        }
-
-        public ActionResult LanguageSelector()
         {
             return View();
         }
@@ -53,23 +49,5 @@ namespace Sitecore.Reference.Storefront.Controllers
             return View();
         }
 
-        [HttpPost]
-        public JsonResult CultureChosen(string culture)
-        {
-            var success = false;
-
-            try
-            {
-                var result = CatalogManager.RaiseCultureChosenPageEvent(StorefrontManager.Current, culture);
-                success = result.Result;
-            }
-            catch (Exception e)
-            {
-                return Json(new ErrorApiModel("CultureChosen", e), JsonRequestBehavior.AllowGet);
-            }
-
-            var json = new BaseApiModel {Success = success};
-            return json;
-        }
-    }
+   }
 }

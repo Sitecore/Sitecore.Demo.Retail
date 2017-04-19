@@ -60,12 +60,12 @@
             <span id="stockStatus">
                 <strong data-bind="text: selectedStockInfo().status"></strong>
             </span>
-            / <span id="stockCount" data-bind="text:selectedStockInfo(). count"></span>
+            / <span id="stockCount" data-bind="text:selectedStockInfo().count"></span>
             <!-- ko if: selectedStockInfo().showSingleLabel -->
-            <label id="stockCountLabel">@Html.Sitecore().Field("Item Count", Html.Sitecore().CurrentRendering.Item)</label>
+            <label id="stockCountLabel">@Html.Sitecore().Text("/Catalog/Product Information/Item In Stock", "item")</label>
             <!-- /ko -->
             <!-- ko ifnot: selectedStockInfo().showSingleLabel -->
-            <label id="stockCountLabel">@Html.Sitecore().Field("Items Count", Html.Sitecore().CurrentRendering.Item)</label>
+            <label id="stockCountLabel">@Html.Sitecore().Text("/Catalog/Product Information/Items In Stock", "items")</label>
             <!-- /ko -->
             <!-- ko if: selectedStockInfo().availabilityDate -->
             / <span id="stockAvailabilityDate" data-bind="text: selectedStockInfo().availabilityDate"></span>

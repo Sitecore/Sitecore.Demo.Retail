@@ -29,11 +29,11 @@
         if (thumbnailUrl != null)
         {
             <div style="position: relative">
-                @if (Model.IsOnSale && Model.OnSaleOverlayImage != null)
+                @if (Model.OverlayImage != null)
                 {
                     // TODO: Move the following hard-coded style settings to .css.
                     <div style="position: absolute; top: 25px; left: 25px;">
-                        <img src="@(Model.OnSaleOverlayImage.ImageUrl(50, 50))" alt="On sale!" />
+                        <img src="@(Model.OverlayImage.ImageUrl(50, 50))" alt="On sale!" />
                     </div>
                 }
 

@@ -26,12 +26,12 @@ namespace Sitecore.Feature.Commerce.Orders.Models
 
         public string OrderStatus { get; set; }
 
-        public void Initialize(Rendering renderings, string confirmationId, CommerceOrder order)
+        public void Initialize(Rendering renderings, string confirmationId, string orderStatus)
         {
             base.Initialize(renderings);
 
             ConfirmationId = confirmationId;
-            OrderStatus = LookupManager.GetOrderStatusName(order.Status);
+            OrderStatus = orderStatus;
         }
     }
 }

@@ -3,7 +3,8 @@ Write-Host 'Ready to modify '  $jsonFile
 
 $catalogDBName = 'habitat'+ $prNumber + '_CommerceServer.ProductCatalog'
 $profileDBName = 'habitat'+ $prNumber + '_CommerceServer.Profiles'
-
+$globalDBName = 'habitat' + $prNumber + '_SitecoreCommerce.Global'
+$sharedDBName = 'habitat' + $prNumber + '_SitecoreCommerce.SharedEnvironments'
 
 Set-ExecutionPolicy Unrestricted –scope CurrentUser
 if (-Not ($PSVersionTable.PSVersion.Major -ge 4)) { Write-Host "Update version of powershell"; exit }
@@ -40,26 +41,35 @@ cd SQLSERVER:\SQL
     
 	ManageSqlServer\Remove-Database -dbname $catalogDBName -Verbose
 	ManageSqlServer\Remove-Database -dbname $profileDBName -Verbose
-
+	ManageSqlServer\Remove-Database -dbname $globalDBName -Verbose
+	ManageSqlServer\Remove-Database -dbname $sharedDBName -Verbose
+	
 	cd $PSScriptRoot
 
 # Step 3: Uninstall websites
 Write-Host "`nStep 3: Remove Websites" -foregroundcolor Yellow
 Foreach ($website in $settings.iis.websites)
 {
-    ManageIIS\Remove-Site -name $website.siteName -Verbose
+	If ( $website.id -ne "sitecore") {
+		ManageIIS\Remove-Site -name $website.siteName -Verbose
+	}
 }
 
 # Step 4: Uninstall Application Pools
 Write-Host "`nStep 4: Remove Application Pools" -foregroundcolor Yellow
 Foreach ($appPool in $settings.iis.appPools)
 {
-    ManageIIS\Remove-AppPool -name $appPool.name -Verbose
+	If ( $appPool.id -ne "sitecore") {
+		ManageIIS\Remove-AppPool -name $appPool.name -Verbose
+	}
 }
 
 # Step 5: Configure host file
 Write-Host "`nStep 5: Configure Host File" -foregroundcolor Yellow
 If((ManageIIS\Remove-HostEntries -hostEntryList $settings.iis.hostEntries -Verbose) -ne 0) { Exit }
 
+# Step 6: Remove SSL Certificate
+Write-Host "`Step 6: Remove SSL Certificate" -foregroundcolor Yellow
+If((ManageIIS\Remove-SSLCertificates -certificateSettingList $settings.iis.certificates -installFolderSetting $installFolderSetting -Verbose) -ne 0) { Exit }
 
 

@@ -23,6 +23,7 @@ using System.Xml.Serialization;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
+using Sitecore.Feature.Commerce.Catalog.Factories;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Links;
 using Sitecore.Mvc;
@@ -45,10 +46,10 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
             if (products != null)
             {
                 ChildProducts = new List<ProductViewModel>();
+                var factory = DependencyResolver.Current.GetService<ProductViewModelFactory>();
                 foreach (var child in products.SearchResultItems)
                 {
-                    var productModel = new ProductViewModel(child);
-                    ChildProducts.Add(productModel);
+                    ChildProducts.Add(factory.Create(child));
                 }
 
                 ChildProductFacets = products.Facets;
