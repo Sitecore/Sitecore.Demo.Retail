@@ -152,159 +152,27 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
-      Hint: Save percent lead
-      Value: "- Save up to "
-    - ID: "098d3ff9-c4a9-43e1-8f9a-f15f5c82c764"
-      Hint: Email Label
-      Value: Email
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141022T122640Z
-    - ID: "56852681-a8ae-4637-b14f-3e6c7a009b20"
-      Hint: Item Count
-      Value: item in stock
-    - ID: "570ca6ea-e9c8-4eab-86de-25e4acc6610f"
-      Hint: Signing Up Label
-      Value: Signing up ...
-    - ID: "5af849ae-19c4-4e84-85e8-8351e7aac8a0"
-      Hint: Items Count
-      Value: items in stock
-    - ID: "5b793011-27f5-4bd6-b088-d566cbe39adb"
-      Hint: Close Label
-      Value: Close
-    - ID: "7fae2425-7256-40ea-9ebb-7bd7c7a345a7"
-      Hint: Sign Up For Notification Tooltip
-      Value: Sign up for notification when product is in stock
-    - ID: "835d9052-694c-4cbf-a376-c7693ae67ba2"
-      Hint: Sign Up For Notification Label
-      Value: Sign up for notification
-    - ID: "bd93b2d4-4e5b-40d4-8de7-b8cdfed69104"
-      Hint: Confirm Email Label
-      Value: Confirm email
-    - ID: "e02d3cb5-39fd-4d67-b8b7-7d9bc6929311"
-      Hint: Sign Up Label
-      Value: Sign up
-    - ID: "fd795459-1b65-4d95-9199-b1e1888c3d34"
-      Hint: Name Label
-      Value: Name
 - Language: en
   Versions:
   - Version: 1
     Fields:
-    - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
-      Hint: Save percent lead
-      Value: "- Save up to "
-    - ID: "098d3ff9-c4a9-43e1-8f9a-f15f5c82c764"
-      Hint: Email Label
-      Value: Email
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141022T122640Z
-    - ID: "56852681-a8ae-4637-b14f-3e6c7a009b20"
-      Hint: Item Count
-      Value: item in stock
-    - ID: "570ca6ea-e9c8-4eab-86de-25e4acc6610f"
-      Hint: Signing Up Label
-      Value: Signing up ...
-    - ID: "5af849ae-19c4-4e84-85e8-8351e7aac8a0"
-      Hint: Items Count
-      Value: items in stock
-    - ID: "5b793011-27f5-4bd6-b088-d566cbe39adb"
-      Hint: Close Label
-      Value: Close
-    - ID: "7fae2425-7256-40ea-9ebb-7bd7c7a345a7"
-      Hint: Sign Up For Notification Tooltip
-      Value: Sign up for notification when product is in stock
-    - ID: "835d9052-694c-4cbf-a376-c7693ae67ba2"
-      Hint: Sign Up For Notification Label
-      Value: Sign up for notification
-    - ID: "bd93b2d4-4e5b-40d4-8de7-b8cdfed69104"
-      Hint: Confirm Email Label
-      Value: Confirm email
-    - ID: "e02d3cb5-39fd-4d67-b8b7-7d9bc6929311"
-      Hint: Sign Up Label
-      Value: Sign up
-    - ID: "fd795459-1b65-4d95-9199-b1e1888c3d34"
-      Hint: Name Label
-      Value: Name
 - Language: "fr-FR"
   Versions:
   - Version: 1
     Fields:
-    - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
-      Hint: Save percent lead
-      Value: "- Save up to "
-    - ID: "098d3ff9-c4a9-43e1-8f9a-f15f5c82c764"
-      Hint: Email Label
-      Value: Email
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141022T122640Z
-    - ID: "56852681-a8ae-4637-b14f-3e6c7a009b20"
-      Hint: Item Count
-      Value: item in stock
-    - ID: "570ca6ea-e9c8-4eab-86de-25e4acc6610f"
-      Hint: Signing Up Label
-      Value: Signing up ...
-    - ID: "5af849ae-19c4-4e84-85e8-8351e7aac8a0"
-      Hint: Items Count
-      Value: items in stock
-    - ID: "5b793011-27f5-4bd6-b088-d566cbe39adb"
-      Hint: Close Label
-      Value: Close
-    - ID: "7fae2425-7256-40ea-9ebb-7bd7c7a345a7"
-      Hint: Sign Up For Notification Tooltip
-      Value: Sign up for notification when product is in stock
-    - ID: "835d9052-694c-4cbf-a376-c7693ae67ba2"
-      Hint: Sign Up For Notification Label
-      Value: Sign up for notification
-    - ID: "bd93b2d4-4e5b-40d4-8de7-b8cdfed69104"
-      Hint: Confirm Email Label
-      Value: Confirm email
-    - ID: "e02d3cb5-39fd-4d67-b8b7-7d9bc6929311"
-      Hint: Sign Up Label
-      Value: Sign up
-    - ID: "fd795459-1b65-4d95-9199-b1e1888c3d34"
-      Hint: Name Label
-      Value: Name
 - Language: "ja-JP"
   Versions:
   - Version: 1
     Fields:
-    - ID: "06a6a591-cb8b-480b-87e5-d87aeae9cb20"
-      Hint: Save percent lead
-      Value: "- Save up to "
-    - ID: "098d3ff9-c4a9-43e1-8f9a-f15f5c82c764"
-      Hint: Email Label
-      Value: Email
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141022T122640Z
-    - ID: "56852681-a8ae-4637-b14f-3e6c7a009b20"
-      Hint: Item Count
-      Value: item in stock
-    - ID: "570ca6ea-e9c8-4eab-86de-25e4acc6610f"
-      Hint: Signing Up Label
-      Value: Signing up ...
-    - ID: "5af849ae-19c4-4e84-85e8-8351e7aac8a0"
-      Hint: Items Count
-      Value: items in stock
-    - ID: "5b793011-27f5-4bd6-b088-d566cbe39adb"
-      Hint: Close Label
-      Value: Close
-    - ID: "7fae2425-7256-40ea-9ebb-7bd7c7a345a7"
-      Hint: Sign Up For Notification Tooltip
-      Value: Sign up for notification when product is in stock
-    - ID: "835d9052-694c-4cbf-a376-c7693ae67ba2"
-      Hint: Sign Up For Notification Label
-      Value: Sign up for notification
-    - ID: "bd93b2d4-4e5b-40d4-8de7-b8cdfed69104"
-      Hint: Confirm Email Label
-      Value: Confirm email
-    - ID: "e02d3cb5-39fd-4d67-b8b7-7d9bc6929311"
-      Hint: Sign Up Label
-      Value: Sign up
-    - ID: "fd795459-1b65-4d95-9199-b1e1888c3d34"
-      Hint: Name Label
-      Value: Name

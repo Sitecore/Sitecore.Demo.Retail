@@ -14,9 +14,6 @@ SharedFields:
     {B2BE0A70-179C-4BB2-86EB-D7C6189F5584}
     {1295278C-7061-4BED-8C87-43372499F61B}
     {97E55781-EB1C-42AC-AE73-9EDA64A2CE74}
-- ID: "8b1d9d97-a517-48d8-bd62-7cb01366fd3c"
-  Hint: Product List Texts
-  Value: /sitecore/content/Storefront/Global/Site Spots/Product List Texts
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
   Value: 300
