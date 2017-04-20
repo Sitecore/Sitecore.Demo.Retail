@@ -42,6 +42,7 @@ namespace Sitecore.Feature.Commerce.Orders
             new ApiControllerMapping("orders-recentorders", "Orders", "RecentOrders"),
             new ApiControllerMapping("orders-reorder", "Orders", "Reorder"),
             new ApiControllerMapping("orders-cancelorder", "Orders", "CancelOrder"),
+            new ApiControllerMapping("checkout-updatemodel", "Checkout", "UpdateModel")
         };
 
         public static void RegisterRoutes(RouteCollection routes)

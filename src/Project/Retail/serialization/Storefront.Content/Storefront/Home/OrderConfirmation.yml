@@ -1,13 +1,13 @@
 ﻿---
 ID: "a4852323-9562-4130-bb49-1a3dc3c1c8c1"
-Parent: "a7d9c743-6e92-4cef-8626-5c67d2aabf61"
+Parent: "441b60d3-09bb-4111-a3ad-d10076b78b54"
 Template: "9583e4e7-8900-4381-9c03-0e4b75c05f08"
-Path: /sitecore/content/Storefront/Home/Checkout/OrderConfirmation
+Path: /sitecore/content/Storefront/Home/OrderConfirmation
 DB: master
 SharedFields:
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
-  Value: 350
+  Value: 850
 Languages:
 - Language: en
   Versions:

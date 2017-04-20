@@ -1,0 +1,130 @@
+﻿---
+ID: "7362a7e4-4b01-4c69-ab62-e9793c0f2f9b"
+Parent: "9d0b9361-2203-4cde-b4e5-56b1c4fee096"
+Template: "ad7edca2-fbf0-4664-842e-1daa84b3ce32"
+Path: /sitecore/content/Storefront/Home/ExtendedCheckout/Billing
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "00249bcb-f270-4edd-8ec1-3dfe65136314"
+      Hint: Billing Address Header
+      Value: Billing address
+    - ID: "04d47388-9794-44c5-b6d5-78af663bcf3b"
+      Hint: NextButtonLabel
+      Value: Continue to confirmation
+    - ID: "0bf8dcbf-08f2-4f50-80a1-a603d5342009"
+      Hint: Apply Amount Button
+      Value: Apply full amount
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141121T120805Z
+    - ID: "29457d5c-b582-4054-b746-114037c1a33e"
+      Hint: Email Address Label
+      Value: Email address
+    - ID: "2d004cde-9269-4fa5-b523-f6c12f86cdc8"
+      Hint: Confirm Email Address Label
+      Value: Confirm email address
+    - ID: "30e29f51-27ee-44c6-b227-1aea9bae36de"
+      Hint: Paypal Password
+      Value: Paypal password
+    - ID: "3252f170-4cb2-4aba-8450-77fa42ed6688"
+      Hint: Name on Card Label
+      Value: Name on card
+    - ID: "362a19c3-a7e7-414c-9e52-593fadf5a8c7"
+      Hint: Order Information Label
+      Value: Order Information
+    - ID: "3bb46433-5d5b-4187-b8ca-99a09117f1cb"
+      Hint: Billing Name Label
+      Value: Billing name
+    - ID: "3be0618a-8761-40df-a27f-2c3c8153c283"
+      Hint: Card Number Label
+      Value: Card number
+    - ID: "44e61890-4744-49dc-b9b0-8b8d0c8cfe50"
+      Hint: Payment Options Header
+      Value: Payment options
+    - ID: "4ce9339c-af1e-49ec-8c55-210e92f3c334"
+      Hint: Shipping Cost Label
+      Value: Shipping Cost
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "688be7ca-7fe3-4b94-a671-fd23b0f763b9"
+      Hint: SignIn Label
+      Value: Sign in
+    - ID: "6d0902e3-c47c-4de4-aeb9-2e06f0a8da0c"
+      Hint: Contact Information Header
+      Value: Contact information
+    - ID: "750f2ecb-4ec2-4e33-9786-e950dff2793e"
+      Hint: Taxes Label
+      Value: VAT
+    - ID: "7c73b197-8938-48f6-a047-29d8443838b0"
+      Hint: Choose Payment Method Label
+      Value: Choose a payment method
+    - ID: "7c91b1e8-b599-4c1d-9ee2-4216e6deb50f"
+      Hint: Payment Info Header
+      Value: Payment information
+    - ID: "7cc2659f-f7ce-464f-a6ee-e154b14308f8"
+      Hint: Same Shipping Address
+      Value: Same as shipping address
+    - ID: "7fc4ecaa-2aed-4ade-b9e4-f1265c1e824c"
+      Hint: Expiration Date Label
+      Value: Expiration date
+    - ID: "86690679-3be1-42c0-a5de-96764a815aac"
+      Hint: Payment Total Label
+      Value: Payment total
+    - ID: "8724fb79-17c0-4602-a0fa-4681927ad591"
+      Hint: Total Label
+      Value: Order total
+    - ID: "8b0e5e72-80fa-48c0-9f8e-a7a67b915ebb"
+      Hint: Credit Card Label
+      Value: Credit Card
+    - ID: "a0531c10-9929-4554-88f9-1199e044142b"
+      Hint: Apply Credit Card Label
+      Value: Pay with Credit Card
+    - ID: "a1237227-60f6-43d5-b9f2-314510e74a03"
+      Hint: Address Label
+      Value: Address
+    - ID: "a3f57b0a-9c20-4eb7-a7df-8497979252cb"
+      Hint: Add Gift Card Button
+      Value: Add gift card
+    - ID: "a7eb1929-96b8-4670-b46e-d6d1f97e9bd0"
+      Hint: State Label
+      Value: State/Province
+    - ID: "a9d20a97-c056-430f-b076-368ea2d8ab03"
+      Hint: CCID Label
+      Value: CCID
+    - ID: "a9f52d36-77de-4f3a-940f-d99531ce59af"
+      Hint: Disclaimer Text
+      Value: |
+        <b>IMPORTANT NOTICE:</b> &nbsp; This form is provided by your designated third-party payment provider. By clicking "Next" you acknowledge your information will be transmitted directly to your payment provider, and will be handled in accordance with the terms and conditions and privacy statement that you agreed to with your payment provider. 'Your Company Name' does not collect, store, or transmit any of your payment card information, or provide rights for third-party products or services.&nbsp;
+    - ID: "b1a9c292-a7aa-40d8-86ed-b32840dd8db1"
+      Hint: PrevButtonLabel
+      Value: Back to delivery
+    - ID: "b38e1871-9f00-4d57-8419-a67301675b31"
+      Hint: Expiration Year Label
+      Value: Expiration year
+    - ID: "bbb53ed5-6422-43d7-9c16-6b3ec7b172e5"
+      Hint: Subtotal Label
+      Value: Subtotal
+    - ID: "bcdf63bd-683e-4173-8ef1-c5ad8b6e3cfb"
+      Hint: Get Balance Button
+      Value: Get balance
+    - ID: "c84f3978-0801-460f-800d-046a261525b3"
+      Hint: Country Label
+      Value: Country/Region
+    - ID: "d6e5495f-8f1b-423a-aeef-ed544704cde0"
+      Hint: Validate Payment Label
+      Value: Validate Payment
+    - ID: "e375aba1-d631-4c68-b6da-93e7ddf7ca24"
+      Hint: Zipcode Label
+      Value: Zipcode
+    - ID: "ea2e2144-3429-4102-ba3b-9702ce0d60bc"
+      Hint: City Label
+      Value: City
+    - ID: "fc614c3e-0667-43b4-9185-739312c9c8be"
+      Hint: Savings Label
+      Value: Savings
