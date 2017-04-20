@@ -152,6 +152,9 @@
   <ItemGroup>
     <Content Include="Scripts\Errors\errorSummaryViewModel.js" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Checkout\" />
+  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

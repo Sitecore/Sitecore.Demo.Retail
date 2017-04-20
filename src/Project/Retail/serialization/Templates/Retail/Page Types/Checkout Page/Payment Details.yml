@@ -1,0 +1,18 @@
+﻿---
+ID: "2866b5fb-f875-4b01-9635-442443e8ea7d"
+Parent: "caf02d6d-5cb8-4995-b4f3-e4ed6f54e5a7"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Project/Retail/Page Types/Checkout Page/Payment Details
+DB: master
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 400
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170316T135532Z

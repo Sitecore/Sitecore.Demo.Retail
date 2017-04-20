@@ -33,6 +33,15 @@ using Sitecore.Foundation.Commerce.Models.InputModels;
 using Sitecore.Foundation.Commerce.Repositories;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
+using Sitecore.Feature.Commerce.Orders.Models;
+using Sitecore.Commerce.Entities.Carts;
+using Sitecore.Data;
+using Sitecore.Links;
+//using Sitecore.Foundation.SitecoreExtensions.Extensions;
+using Sitecore.Data.Items;
+using Newtonsoft.Json;
+using System.Web;
+using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Feature.Commerce.Orders.Controllers
 {
@@ -63,13 +72,270 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         private OrderManager OrderManager { get; }
         private AccountManager AccountManager { get; }
 
+        #region CheckoutRenderingMethods
+
+        [AllowAnonymous]
+        public ActionResult Checkout()
+        {
+            if (Request.HttpMethod == "POST")
+                return SubmitOrder();
+
+            var model = CreateViewModel();
+            if (!model.HasLines && !Context.PageMode.IsExperienceEditor)
+            {
+//#warning Remove hardcoded URL
+                var cartPageUrl = "/shoppingcart";
+                return Redirect(cartPageUrl);
+            }
+            return View(model);
+        }
+
+        private RedirectResult SubmitOrder()
+        {
+            //try
+            //{
+                var inputModel = new SubmitOrderInputModel();
+                inputModel.UserEmail = Request.Cookies["email"]?.Value;
+                inputModel.FederatedPayment = new FederatedPaymentInputModelItem();
+                inputModel.FederatedPayment.Amount = GetCart().Total.Amount;
+                inputModel.FederatedPayment.CardPaymentAcceptCardPrefix = "paypal";
+                inputModel.FederatedPayment.CardToken = Request.Form["payment_method_nonce"];
+
+                var response = OrderManager.SubmitVisitorOrder(CommerceUserContext.Current.UserId, inputModel);
+                if (!response.ServiceProviderResult.Success || response.Result == null || response.ServiceProviderResult.CartWithErrors != null)
+                {
+                    throw new Exception("Error submitting order: " +
+                        string.Join(", ", response.ServiceProviderResult.SystemMessages.Select(sm => sm.Message)));
+                }
+
+                return Redirect($"OrderConfirmation?{ConfirmationIdQueryString}={response.Result.OrderID}");
+            //}
+            //catch (Exception e)
+            //{
+            //    throw;
+            //}
+        }
+
+        [AllowAnonymous]
+        [ValidateJsonAntiForgeryToken]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        public ActionResult UpdateModel()
+        {
+            var validationResult = this.CreateJsonResult();
+            if (validationResult.HasErrors)
+                return Json(validationResult, JsonRequestBehavior.AllowGet);
+
+            var model = CreateViewModel();
+            var json = JsonConvert.SerializeObject(model);
+            return Content(json, "application/json");
+        }
+
+        private string CleanGuid(string guid)
+        {
+            return guid.Replace("{", "").Replace("}", "").ToLower();
+        }
+
+        private CheckoutViewModel CreateViewModel() {
+            var model = new CheckoutViewModel();
+            model.Cart = GetCart();
+
+            InitCountriesRegions(model);
+            InitShippingOptions(model);
+
+            InitLineShippingOptions(model);
+            InitLineHrefs(model);
+            InitLineImgSrcs(model);
+            InitPaymentClientToken(model);
+
+            return model;
+        }
+
+        private CommerceCart GetCart()
+        {
+            var cartResponse = CartManager.GetCart(CommerceUserContext.Current.UserId, true);
+            return cartResponse.ServiceProviderResult.Cart as CommerceCart;
+        }
+
+        private void InitCountriesRegions(CheckoutViewModel model)
+        {
+            // Get the proper node in Sitecore...
+            Item countriesRegionsItem = Context.Database.GetItem("/sitecore/Commerce/Commerce Control Panel/Shared Settings/Countries-Regions");
+            foreach (Item countryItem in countriesRegionsItem.Children)
+            {
+                string country = countryItem["Country Code"] + "|" + countryItem["Name"];
+                model.CountriesRegions[country] = new List<string>();
+                foreach (Item regionItem in countryItem.Children)
+                {
+                    string region = regionItem["Code"] + "|" + regionItem["Name"];
+                    model.CountriesRegions[country].Add(region);
+                }
+            }
+        }
+
+        private void InitLineHrefs(CheckoutViewModel model)
+        {
+            if (!model.HasLines)
+                return;
+
+            foreach (CommerceCartLineWithImages line in model.Cart.Lines)
+            {
+                var productVariantItemId = line.Product.SitecoreProductItemId;
+                var productVariantItem = Context.Database.GetItem(productVariantItemId);
+                var url = LinkManager.GetDynamicUrl(productVariantItem.Parent).TrimEnd('/');
+                model.LineHrefs[line.ExternalCartLineId] = url;
+            }
+        }
+
+        private void InitLineImgSrcs(CheckoutViewModel model)
+        {
+            if (!model.HasLines)
+                return;
+
+            foreach (CommerceCartLineWithImages line in model.Cart.Lines)
+            {
+                var src = line?.DefaultImage?.ImageUrl(100, 100);
+                model.LineImgSrcs[line.ExternalCartLineId] = src;
+            }
+        }
+
+        private void InitLineShippingOptions(CheckoutViewModel model)
+        {
+            if (!model.HasLines)
+                return;
+
+            var prefsResponse = ShippingManager.GetShippingPreferences(model.Cart);
+            if (!prefsResponse.ServiceProviderResult.Success || prefsResponse.Result == null)
+            {
+                return;
+            }
+
+            var lineShippingOptions = prefsResponse.ServiceProviderResult.LineShippingPreferences.ToList();
+            foreach (CommerceCartLineWithImages line in model.Cart.Lines)
+            {
+                var option = lineShippingOptions?.FirstOrDefault(lso =>
+                    lso.LineId == line.ExternalCartLineId)?.ShippingOptions?.FirstOrDefault();
+                model.LineShippingOptions[line.ExternalCartLineId] = option;
+            }
+
+            SetShippingMethods(model);
+        }
+
+        private void InitPaymentClientToken(CheckoutViewModel model)
+        {
+            var response = PaymentManager.GetPaymentClientToken();
+            if (response.ServiceProviderResult.Success)
+            {
+                model.PaymentClientToken = response.ServiceProviderResult.ClientToken;
+            }
+        }
+
+        private void InitShippingOptions(CheckoutViewModel model)
+        {
+            Item shipItemsItem = Context.Database.GetItem("/sitecore/Commerce/Commerce Control Panel/Shared Settings/Fulfillment Options/Ship items");
+            foreach (Item shippingOptionItem in shipItemsItem.Children)
+            {
+                string shippingOption = shippingOptionItem["Title"];
+                model.ShippingOptions[shippingOptionItem.ID.ToString()] = shippingOption;
+            }
+        }
+
+        private void SetShippingMethods(CheckoutViewModel model)
+        {
+            var inputModel = new SetShippingMethodsInputModel();
+
+            var digitalLines = model.Cart.Lines.Where(l =>
+                model.LineShippingOptions[l.ExternalCartLineId].Name == "Digital");
+            var shipItemsLines = model.Cart.Lines.Where(l =>
+                model.LineShippingOptions[l.ExternalCartLineId].Name == "Ship items");
+
+            PartyInputModelItem address = GetPartyInputModelItem();
+            string email = Request.Cookies["email"]?.Value;
+            if (digitalLines.Any() && shipItemsLines.Any() &&
+                address != null && !string.IsNullOrWhiteSpace(email))
+                inputModel.OrderShippingPreferenceType = "4";
+            else if (digitalLines.Any() && !shipItemsLines.Any() &&
+                !string.IsNullOrWhiteSpace(email))
+                inputModel.OrderShippingPreferenceType = "3";
+            else if (!digitalLines.Any() && shipItemsLines.Any() &&
+                address != null)
+                inputModel.OrderShippingPreferenceType = "1";
+            else
+                return;
+
+            if (new[] { "4", "1" }.Contains(inputModel.OrderShippingPreferenceType))
+            {
+                if (address != null)
+                    inputModel.ShippingAddresses.Add(address);
+
+                var shipItemsMethod = new ShippingMethodInputModelItem();
+                string shippingOptionID = GetShippingOptionID(model);
+                shipItemsMethod.ShippingMethodID = CleanGuid(shippingOptionID);
+                shipItemsMethod.ShippingMethodName = model.ShippingOptions[shippingOptionID];
+                shipItemsMethod.ShippingPreferenceType = "1";
+                shipItemsMethod.PartyId = "0";
+                shipItemsMethod.LineIDs = shipItemsLines.Select(l => l.ExternalCartLineId).ToList();
+                inputModel.ShippingMethods.Add(shipItemsMethod);
+            }
+
+            if (new[] { "4", "3" }.Contains(inputModel.OrderShippingPreferenceType))
+            {
+                var emailMethod = new ShippingMethodInputModelItem();
+                Item emailItem = Context.Database.GetItem("/sitecore/Commerce/Commerce Control Panel/Shared Settings/Fulfillment Options/Digital/Email");
+                emailMethod.ShippingMethodID = CleanGuid(emailItem.ID.ToString());
+                emailMethod.ShippingMethodName = "Email";
+                emailMethod.ShippingPreferenceType = "3";
+                emailMethod.ElectronicDeliveryEmail = email;
+                emailMethod.ElectronicDeliveryEmailContent = "";
+                emailMethod.LineIDs = digitalLines.Select(l => l.ExternalCartLineId).ToList();
+                inputModel.ShippingMethods.Add(emailMethod);
+            }
+
+            //try
+            //{
+                var response = CartManager.SetShippingMethods(CommerceUserContext.Current.UserId, inputModel);
+                if (!response.ServiceProviderResult.Success || response.Result == null)
+                    throw new Exception("Error setting shipping methods: " +
+                        string.Join(",", response.ServiceProviderResult.SystemMessages.Select(sm => sm.Message)));
+                model.Cart = response.Result;
+            //}
+            //catch (Exception e)
+            //{
+            //    throw;
+            //}
+
+        }
+
+        private PartyInputModelItem GetPartyInputModelItem()
+        {
+            var shippingAddress = Request.Cookies["shippingAddress"]?.Value;
+            if (shippingAddress == null)
+                return null;
+
+            shippingAddress = HttpUtility.UrlDecode(shippingAddress);
+            var item = JsonConvert.DeserializeObject<PartyInputModelItem>(shippingAddress);
+            item.PartyId = "0";
+            item.ExternalId = "0"; //string.IsNullOrWhiteSpace(item.PartyId) || item.PartyId == "0" ? Guid.NewGuid().ToString() : item.PartyId;
+            item.Region = item.State;
+            return item;
+        }
+
+        private string GetShippingOptionID(CheckoutViewModel model)
+        {
+            var shippingOptionID = Request.Cookies["shippingOptionID"]?.Value;
+            if (shippingOptionID == null)
+                shippingOptionID = model.ShippingOptions.First(so => so.Value == "Ground").Key;
+            return shippingOptionID;
+        }
+
+        #endregion
+
         [AllowAnonymous]
         [HttpGet]
         public ActionResult StartCheckout()
         {
             var response = CartManager.GetCart(CommerceUserContext.Current.UserId, true);
             var cart = (CommerceCart) response.ServiceProviderResult.Cart;
-            if (cart.Lines == null || !cart.Lines.Any())
+            if (!Context.PageMode.IsExperienceEditor && (cart.Lines == null || !cart.Lines.Any()))
             {
 #warning Remove hardcoded URL
                 var cartPageUrl = "/shoppingcart";
@@ -407,7 +673,10 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 return;
             }
 
-            result.EmailDeliveryMethod = shippingMethodJsonResult;
+            var shippingToStoreJsonResult = new ShippingMethodApiModel();
+
+         //   result.EmailDeliveryMethod = shippingMethodJsonResult;
+          //  result.ShipToStoreDeliveryMethod = shippingToStoreJsonResult;
             result.SetErrors(response.ServiceProviderResult);
         }
 

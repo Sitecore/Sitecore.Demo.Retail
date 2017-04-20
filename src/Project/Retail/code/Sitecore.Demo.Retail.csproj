@@ -150,8 +150,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Infrastructure\Pipelines\RaiseCommerceCultureChosenPageEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SitecorePipelines\InitializeBundles.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\web.config" />

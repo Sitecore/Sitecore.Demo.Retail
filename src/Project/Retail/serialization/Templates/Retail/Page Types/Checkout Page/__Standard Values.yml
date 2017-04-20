@@ -5,6 +5,14 @@ Template: "caf02d6d-5cb8-4995-b4f3-e4ed6f54e5a7"
 Path: /sitecore/templates/Project/Retail/Page Types/Checkout Page/__Standard Values
 DB: master
 SharedFields:
+- ID: "5585a30d-b115-4753-93ce-422c3455deb2"
+  Hint: ShowInNavigation
+  Type: Checkbox
+  Value: 0
+- ID: "68016087-aa00-45d6-922a-678475c50d4a"
+  Hint: ShowChildren
+  Type: Checkbox
+  Value: 0
 - ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
   Hint: __Renderings
   Type: layout
@@ -80,9 +88,9 @@ SharedFields:
           ph="/page-layout/section"
           uid="{8A3ACEDA-2A5E-4979-A7D6-7C3009CA383A}" />
         <r
-          id="{A029FBC1-9229-47FA-B539-F2BBBFEC843E}"
+          id="{474F58D1-6ECC-4727-A106-EE701574A9A2}"
           ph="/page-layout/section/col-huge"
-          uid="{48265D23-CC2C-493D-99E5-A61CFCEF366B}" />
+          uid="{27AC3BD4-306D-41C3-BACB-4344B4A2C086}" />
         <r
           id="{299FD8EA-2CFD-4A69-9CA4-7EA24CD34A46}"
           ph="footer"
@@ -138,20 +146,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
-      Hint: __Final Renderings
-      Type: Layout
-      Value: |
-        <r xmlns:p="p" xmlns:s="s"
-          p:p="1"
-          s:xsd="http://www.w3.org/2001/XMLSchema">
-          <d
-            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-            <r
-              uid="{B62E3D4C-BC95-440F-BAEF-AC54F87969E1}"
-              s:ds="" />
-          </d>
-        </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141121T071552
@@ -163,27 +157,100 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
-      Hint: __Final Renderings
-      Type: Layout
-      Value: |
-        <r xmlns:p="p" xmlns:s="s"
-          p:p="1"
-          s:xsd="http://www.w3.org/2001/XMLSchema">
-          <d
-            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-            <r
-              uid="{B62E3D4C-BC95-440F-BAEF-AC54F87969E1}"
-              s:ds="" />
-          </d>
-        </r>
+    - ID: "12c92671-0f6b-4868-b0f5-ab54de90e251"
+      Hint: Address Line 1 Label
+      Value: Address
+    - ID: "17edb6f6-98da-4767-8431-e3c2786abc1d"
+      Hint: Quantity Label
+      Value: Quantity
+    - ID: "1a57d919-3c69-4ef6-bde8-ee8b771e0dc5"
+      Hint: Shipment Options Label
+      Value: Shipping Options
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141121T071552
+    - ID: "2fed33f2-f966-4549-8e1f-0bcc6056fc9b"
+      Hint: Credit Card Expiration Label
+      Value: Expiration
+    - ID: "4a40a168-d8b4-4d41-bc60-a482181d3063"
+      Hint: Shipping Address Label
+      Value: Shipping Address
+    - ID: "5c2f7961-745b-40c9-80fa-46223ad4a204"
+      Hint: Shipping Label
+      Value: Shipping
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
         sitecore\admin
+    - ID: "618a8ea9-9bb2-48d3-8501-f9ad8a793687"
+      Hint: Shipment Details Header
+      Value: Shipment Details
+    - ID: "63297ef5-04e5-4bb6-bd3c-8a832112b86b"
+      Hint: Address Change Link Text
+      Value: Change
+    - ID: "7716d1b6-2db1-413e-908d-90c77fad2743"
+      Hint: Address Postal Code Label
+      Value: Zip
+    - ID: "83adc8ca-7338-4426-90ac-de12d02078e8"
+      Hint: Same As Shipping Address Text
+      Value: Same as Shipping Address
+    - ID: "8577210e-f362-4124-b6c2-1c3318334a34"
+      Hint: Unit Price Label
+      Value: Unit Price
+    - ID: "87471d20-3b11-4325-aee6-ca9dc47b7f7d"
+      Hint: Recipient Label
+      Value: Name
+    - ID: "944a7308-eff7-4124-a834-54262d643450"
+      Hint: Credit Card Number Label
+      Value: Number
+    - ID: "9ddfa199-d6ea-4ad2-b77d-79658d60b3e2"
+      Hint: Payment Address Label
+      Value: Payment Address
+    - ID: "a7fb2b76-df4b-406b-910f-5b699979e4f8"
+      Hint: Product Label
+      Value: Product Details
+    - ID: "c2099ba9-e3f7-4e68-ba13-2b4185638e21"
+      Hint: Taxes Label
+      Value: Taxes
+    - ID: "c73b91e0-a0d9-4942-b647-1fce293f9460"
+      Hint: Use Shipping Address Button Text
+      Value: Use Shipping Address
+    - ID: "c9e4a1a1-653e-4a39-9d7a-a716ca9b2dae"
+      Hint: Address City Label
+      Value: City
+    - ID: "ccdfc0b9-1c09-42c2-9599-ee75fbd72716"
+      Hint: Payment Type Label
+      Value: Payment Type
+    - ID: "daf15c3e-dab6-4c9c-b831-7a5ebe7330b3"
+      Hint: Confirm Button Text
+      Value: Confirm Order
+    - ID: "e0ad8c79-18b7-4cb8-8782-9cefe09e0200"
+      Hint: Address Province Label
+      Value: State
+    - ID: "e10bef95-1f7c-497d-81b4-b7a373d3c726"
+      Hint: Continue Shopping Button Text
+      Value: Continue Shopping
+    - ID: "e21b64f5-c51a-4326-bbe8-3a52125ffd7d"
+      Hint: Items Label
+      Value: Items
+    - ID: "e2dd2fb2-4b18-4942-ac23-221e24b24d42"
+      Hint: Total Label
+      Value: Total
+    - ID: "e813b36c-739d-4232-a437-bb02e899b6c9"
+      Hint: Payment Details Header
+      Value: Payment Details
+    - ID: "e91db38c-4d24-44cb-83e6-0028327a146f"
+      Hint: Savings Label
+      Value: Savings
+    - ID: "eea889c7-8ec7-4cda-906f-6cffe2b6c0a4"
+      Hint: Address Done Button Text
+      Value: Done
+    - ID: "f6de4448-5481-4ceb-8dd1-6c1567cf5ede"
+      Hint: Shipment Email Label
+      Value: Email
+    - ID: "fa777ba0-fa19-483a-afe2-290dac1487cd"
+      Hint: Total Label
+      Value: Total
 - Language: "fr-FR"
   Versions:
   - Version: 1
@@ -199,20 +266,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
-      Hint: __Final Renderings
-      Type: Layout
-      Value: |
-        <r xmlns:p="p" xmlns:s="s"
-          p:p="1"
-          s:xsd="http://www.w3.org/2001/XMLSchema">
-          <d
-            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-            <r
-              uid="{B62E3D4C-BC95-440F-BAEF-AC54F87969E1}"
-              s:ds="" />
-          </d>
-        </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141121T071552

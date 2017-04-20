@@ -1,8 +1,8 @@
 ﻿---
-ID: "a97fb006-447f-4c29-b43a-05f73a1e3a11"
-Parent: "a7d9c743-6e92-4cef-8626-5c67d2aabf61"
+ID: "7362a7e4-4b01-4c69-ab62-e9793c0f2f9b"
+Parent: "9d0b9361-2203-4cde-b4e5-56b1c4fee096"
 Template: "ad7edca2-fbf0-4664-842e-1daa84b3ce32"
-Path: /sitecore/content/Storefront/Home/Checkout/Billing
+Path: /sitecore/content/Storefront/Home/ExtendedCheckout/Billing
 DB: master
 Languages:
 - Language: en

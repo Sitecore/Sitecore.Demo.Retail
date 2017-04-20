@@ -1,8 +1,8 @@
 ﻿---
-ID: "92a41595-0e49-4919-95cc-1c9b5595c907"
-Parent: "a7d9c743-6e92-4cef-8626-5c67d2aabf61"
+ID: "b0f8dc87-fbe3-4874-8229-5f151328d905"
+Parent: "9d0b9361-2203-4cde-b4e5-56b1c4fee096"
 Template: "953ed43a-aa45-4c2d-8852-fbf2fb05beb9"
-Path: /sitecore/content/Storefront/Home/Checkout/Delivery
+Path: /sitecore/content/Storefront/Home/ExtendedCheckout/Delivery
 DB: master
 SharedFields:
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"

@@ -21,6 +21,8 @@ namespace Sitecore.Foundation.Commerce.Models.InputModels
         [Required]
         public string Region { get; set; }
 
+        public string State { get; set; }
+
         [Required]
         public string ZipPostalCode { get; set; }
 
