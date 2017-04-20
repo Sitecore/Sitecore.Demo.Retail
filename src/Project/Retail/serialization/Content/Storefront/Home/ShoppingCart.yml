@@ -1,0 +1,78 @@
+﻿---
+ID: "e330d3e4-3af7-4a88-bbad-e5783072b63e"
+Parent: "441b60d3-09bb-4111-a3ad-d10076b78b54"
+Template: "a5a90b92-457c-490f-8b98-a54990772c75"
+Path: /sitecore/content/Storefront/Home/ShoppingCart
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Business/32x32/shoppingcart_full.png
+- ID: "5585a30d-b115-4753-93ce-422c3455deb2"
+  Hint: ShowInNavigation
+  Type: Checkbox
+  Value: 0
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 1107
+Languages:
+- Language: en
+  Fields:
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Shopping Cart
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "00a44708-3f62-40da-bd5c-96eafd85cac2"
+      Hint: Promo Code Label
+      Value: Discount code
+    - ID: "03972573-f2e1-4750-973c-abe93fae5f81"
+      Hint: Payment Total Label
+      Value: "Sub total:"
+    - ID: "10c5a9bd-14ed-49f6-ba5c-70f4bd0bd4a1"
+      Hint: Shipping Label
+      Value: "Shipping:"
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: Your Cart
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141119T095223Z
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}"
+    - ID: "3e503a8f-ad03-464e-b61d-09cc8d6e79f7"
+      Hint: Order Total Header Label
+      Value: Shopping Cart Total
+    - ID: "4fe90be9-09e0-4915-881e-0def17a3f3a0"
+      Hint: Promo Code List Label
+      Value: "Discount code:"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "6c2b407a-476f-4b29-80b7-78526ff43645"
+      Hint: Order Total Label
+      Value: "Total:"
+    - ID: "71834529-ffdc-4d99-8203-86576cc04f33"
+      Hint: Enter Coupon Code Message
+      Value: Enter a discount code to apply to the shopping cart
+    - ID: "7774845a-2602-442f-8741-2b34c1623100"
+      Hint: Adding Promo Code Button
+      Value: Adding discount code...
+    - ID: "88c87f20-8237-4e2f-87f7-2d6b6ea43331"
+      Hint: Add Promo Code Button
+      Value: Add discount code
+    - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
+      Hint: Title
+      Value: Your Cart
+    - ID: "d8221196-ca94-4d7c-a67d-a9c5e0ed496c"
+      Hint: Checkout Button
+      Value: Checkout
+    - ID: "ed153781-e66a-49fa-8149-1ee7c6fc5452"
+      Hint: Back To Shopping Button
+      Value: Back to shopping

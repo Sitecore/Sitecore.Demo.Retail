@@ -9,7 +9,7 @@ SharedFields:
   Hint: __Renderings
   Type: layout
   Value: |
-    <r>
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
         l="{83EEB1E8-D75E-4ABE-984A-A1275E5C27F7}">
@@ -48,7 +48,7 @@ SharedFields:
           ph="navbar-right"
           uid="{CF470F24-440F-4566-8F19-88614548830A}" />
         <r
-          ds="{B5F108D3-651F-4344-BF9B-8F10675DDBA0}"
+          ds=""
           id="{FAA386D8-192F-4762-839D-D637BD11549F}"
           ph="navbar-activity"
           uid="{7E812AAB-E9AD-46A8-9A87-E653CA61999A}" />
@@ -160,11 +160,14 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{7E812AAB-E9AD-46A8-9A87-E653CA61999A}"
+              s:ds="" />
+            <r
               uid="{24A04B11-BDE5-4096-9FFE-ADB995D1FF68}"
               s:ds="" />
             <r
               uid="{D26D50A5-EAAC-467B-A1BF-7C08F1C7C0A6}"
-              p:after="r[@uid='{0FD06ADF-3D56-4D8D-BC6B-91AD7E36ADEF}']"
+              p:after="*[1=2]"
               s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
               s:ph="center" />
           </d>
@@ -185,6 +188,9 @@ Languages:
           s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{7E812AAB-E9AD-46A8-9A87-E653CA61999A}"
+              s:ds="" />
             <r
               uid="{24A04B11-BDE5-4096-9FFE-ADB995D1FF68}"
               s:ds="" />
@@ -207,8 +213,11 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{7E812AAB-E9AD-46A8-9A87-E653CA61999A}"
+              s:ds="" />
+            <r
               uid="{D26D50A5-EAAC-467B-A1BF-7C08F1C7C0A6}"
-              p:after="r[@uid='{0FD06ADF-3D56-4D8D-BC6B-91AD7E36ADEF}']"
+              p:after="*[1=2]"
               s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
               s:ph="center" />
           </d>
@@ -230,8 +239,11 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{7E812AAB-E9AD-46A8-9A87-E653CA61999A}"
+              s:ds="" />
+            <r
               uid="{D26D50A5-EAAC-467B-A1BF-7C08F1C7C0A6}"
-              p:after="r[@uid='{0FD06ADF-3D56-4D8D-BC6B-91AD7E36ADEF}']"
+              p:after="*[1=2]"
               s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
               s:ph="center" />
           </d>

@@ -1,4 +1,5 @@
-﻿@*//-----------------------------------------------------------------------
+﻿@using Sitecore.Foundation.Commerce.Extensions
+@*//-----------------------------------------------------------------------
     // Copyright 2016 Sitecore Corporation A/S
     // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
     // except in compliance with the License. You may obtain a copy of the License at
@@ -10,37 +11,31 @@
     // and limitations under the License.
     // -------------------------------------------------------------------------------------------*@
 
-@{
-    var orderTotalHeaderLabel = Html.Sitecore().Field("Order Total Header Label", Html.Sitecore().CurrentItem);
-    var paymentTotalLabel = Html.Sitecore().Field("Payment Total Label", Html.Sitecore().CurrentItem);
-    var vatLabel = Html.Sitecore().Field("VAT Label", Html.Sitecore().CurrentItem);
-    var shippingLabel = Html.Sitecore().Field("shipping Label", Html.Sitecore().CurrentItem);
-    var orderTotalLabel = Html.Sitecore().Field("Order Total Label", Html.Sitecore().CurrentItem);
-    var totalSavingsLabel = Html.Sitecore().Field("Total Savings Label", Html.Sitecore().CurrentItem);
-}
+
+
 
 <div class="headline text-center">
-    <h3>@orderTotalHeaderLabel</h3>
+    <h3>@Html.Sitecore().Text("/Orders/Cart Summary/Order Total", "Order total")</h3>
 </div>
 <table class="table table-striped">
     <tr>
-        <td>@paymentTotalLabel</td>
+        <td>@Html.Sitecore().Text("/Orders/Cart Summary/Payment Total", "Total payment:")</td>
         <td class="text-right"><strong data-bind="text: subTotal" pid="subtotal"></strong></td>
     </tr>
     <tr>
-        <td>@vatLabel</td>
+        <td>@Html.Sitecore().Text("/Orders/Cart Summary/VAT", "VAT:")</td>
         <td class="text-right" data-bind="text: taxTotal" pid="taxTotal"></td>
     </tr>
     <tr>
-        <td>@shippingLabel</td>
+        <td>@Html.Sitecore().Text("/Orders/Cart Summary/Shipping Total", "Shipping:")</td>
         <td class="text-right" data-bind="text: shippingTotal" pid="shippingTotal"></td>
     </tr>
     <tr>
-        <td><strong>@orderTotalLabel</strong></td>
+        <td><strong>@Html.Sitecore().Text("/Orders/Cart Summary/Order Total", "Order total:")</strong></td>
         <td class="text-right"><strong data-bind="text: total" pid="total"></strong></td>
     </tr>
     <tr>
-        <td><em>@totalSavingsLabel</em></td>
+        <td><em>@Html.Sitecore().Text("/Orders/Cart Summary/Savings", "Savings:")</em></td>
         <td class="text-right">
             <em pid="discountTotal" data-bind="text: discount"></em>
         </td>

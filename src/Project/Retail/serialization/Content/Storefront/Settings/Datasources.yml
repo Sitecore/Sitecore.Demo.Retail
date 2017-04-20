@@ -1,0 +1,14 @@
+﻿---
+ID: "64bd9b66-1baa-4955-bb06-3abb9b3fb207"
+Parent: "b96dc0d5-7258-432b-8665-2cb378ead67a"
+Template: "7a98be60-9f59-4064-82c2-58da63562fa5"
+Path: /sitecore/content/Storefront/Settings/Datasources
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160426T060112Z

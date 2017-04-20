@@ -55,7 +55,7 @@ SharedFields:
           ph="navbar-right"
           uid="{75551DEC-A457-43A3-B76F-91742B5DDE93}" />
         <r
-          ds="{B5F108D3-651F-4344-BF9B-8F10675DDBA0}"
+          ds=""
           id="{FAA386D8-192F-4762-839D-D637BD11549F}"
           ph="navbar-activity"
           uid="{CA11F036-8927-441C-A150-9A3D0F180D7F}" />
@@ -148,6 +148,9 @@ Languages:
           p:p="1">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{CA11F036-8927-441C-A150-9A3D0F180D7F}"
+              s:ds="" />
             <r
               uid="{E2040FB7-4151-456D-9315-5973E4EB4D9D}">
               <p:d />

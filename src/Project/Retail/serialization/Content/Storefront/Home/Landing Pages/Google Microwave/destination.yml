@@ -1,0 +1,21 @@
+﻿---
+ID: "0e6bde0e-85cf-4da0-abb8-4fc24eb8c82b"
+Parent: "bde903bd-a29d-480e-8706-f8b54a0232ab"
+Template: "3f3cae5e-63d2-4f75-95d9-23eb01827aa9"
+Path: /sitecore/content/Storefront/Home/Landing Pages/Google Microwave/destination
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170214T124239Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "7b9f4fe3-6285-4969-9784-b96d49973161"
+      Hint: Token Value
+      Value: /shop/Microwaves_microwaves

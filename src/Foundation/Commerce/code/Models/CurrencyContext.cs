@@ -16,13 +16,13 @@ namespace Sitecore.Foundation.Commerce.Models
         {
             get
             {
-                var currencyItem = ContextItem?.TargetItem(Templates.CurrencyContext.Fields.DefaultCurrency);
-                if (currencyItem == null)
+                var currency = ContextItem[Templates.CurrencyContext.Fields.DefaultCurrency];
+                if (string.IsNullOrWhiteSpace(currency))
                 {
                     throw new ConfigurationErrorsException("Default currency not set on the store");
                 }
 
-                return currencyItem.Name;
+                return currency;
             }
         }
 

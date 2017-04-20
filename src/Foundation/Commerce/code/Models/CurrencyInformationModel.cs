@@ -15,6 +15,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using System;
 using Sitecore.Data.Items;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
@@ -24,11 +25,13 @@ namespace Sitecore.Foundation.Commerce.Models
     {
         public CurrencyInformationModel(Item item)
         {
+            if (!item.IsDerived(Sitecore.Commerce.Constants.Templates.Currency.ID))
+                throw new ArgumentException("Invalid items type, must be a CurrenciesDisplayAdjustments item", nameof(item));
             this.Name = item.Name;
-            this.Description = item[Templates.Currency.Fields.Description];
-            this.Symbol = item[Templates.Currency.Fields.Symbol];
-            this.SymbolPosition = item.GetInteger(Templates.Currency.Fields.SymbolPosition) ?? 3;
-            this.CurrencyNumberFormatCulture = item[Templates.Currency.Fields.NumberFormatCulture];
+            this.Description = item[Sitecore.Commerce.Constants.Templates.Currency.Fields.CurrencyDescription];
+            this.Symbol = item[Sitecore.Commerce.Constants.Templates.Currency.Fields.CurrencySymbol];
+            this.SymbolPosition = item.GetInteger(Sitecore.Commerce.Constants.Templates.Currency.Fields.CurrencySymbolPosition) ?? 3;
+            this.CurrencyNumberFormatCulture = item[Sitecore.Commerce.Constants.Templates.Currency.Fields.CurrencyNumberFormat];
         }
 
         public string Name { get; set; }
