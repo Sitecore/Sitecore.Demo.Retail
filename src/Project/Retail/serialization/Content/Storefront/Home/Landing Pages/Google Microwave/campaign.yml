@@ -1,0 +1,21 @@
+﻿---
+ID: "c75c991e-fd90-4f1c-94a6-41d26353b847"
+Parent: "bde903bd-a29d-480e-8706-f8b54a0232ab"
+Template: "51b1726b-4290-4908-a2da-b169194ae80c"
+Path: /sitecore/content/Storefront/Home/Landing Pages/Google Microwave/campaign
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170214T121754Z
+    - ID: "3b485bd9-deae-4aaf-9c32-4106c4214162"
+      Hint: Token Value
+      Value: "{C06C656B-0A23-4314-B687-836BC62044E4}"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

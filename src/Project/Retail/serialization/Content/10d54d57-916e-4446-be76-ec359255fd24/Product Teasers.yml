@@ -1,0 +1,22 @@
+﻿---
+ID: "258a7789-d5d1-4d1c-883f-69a4e10d7c2e"
+Parent: "10d54d57-916e-4446-be76-ec359255fd24"
+Template: "f5f30cdc-9003-4015-84ec-c3a7e3e50d5e"
+Path: /sitecore/content/Storefront/Home/Life with Habitat/9 things to know before you by a TV/_Local/Product Teasers
+DB: master
+SharedFields:
+- ID: "a33f9523-96c4-4e42-b6d7-1e861718d373"
+  Hint: Count
+  Value: 5
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170329T110316Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin

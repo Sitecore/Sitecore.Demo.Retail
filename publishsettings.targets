@@ -1,6 +1,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <publishUrl>http://habitat.dev.local</publishUrl>
+        <ExcludeFilesFromDeployment>bin\**\Sitecore.Kernel.dll;bin\**\CommerceServer.*.dll</ExcludeFilesFromDeployment>
     </PropertyGroup>
     <Import Project="./publishsettings.targets.user" Condition="Exists('./publishsettings.targets.user')"/>
 </Project>

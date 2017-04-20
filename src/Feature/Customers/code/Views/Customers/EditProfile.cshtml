@@ -10,6 +10,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
+@using Sitecore.Foundation.Commerce.Extensions
 @model Sitecore.Foundation.Commerce.Models.ProfileModel
 
 @using (Ajax.BeginForm("UpdateProfile", "Customers", null, new AjaxOptions {OnBegin = "SetSavingProfileButton", OnSuccess = "UpdateProfileSuccess", OnFailure = "UpdateProfileFailure", HttpMethod = "Post"}, new {id = "UpdateProfileForm"}))
@@ -22,13 +23,13 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="FirstName">
-                        @Html.Sitecore().Field("First Name", Html.Sitecore().CurrentItem) <span class="required">*</span>
+                        @Html.Sitecore().Text("/Customers/Edit Profile/First Name", "First name:") <span class="required">*</span>
                     </label>
 
                     @Html.TextBoxFor(m => m.FirstName, new
                     {
-                        placeholder = Html.Sitecore().CurrentItem["First Name Placeholder"],
-                        data_val_required = Html.Sitecore().Field("First Name Required Message", Html.Sitecore().CurrentItem),
+                        placeholder = Html.Sitecore().Text("/Customers/Edit Profile/Enter First Name", "Enter your first name"),
+                        data_val_required = Html.Sitecore().Text("/Customers/Edit Profile/First Name Required", "Please enter your first name"),
                         @class = "form-control"
                     })
 
@@ -37,12 +38,12 @@
                 </div>
                 <div class="form-group">
                     <label for="LastName">
-                        @Html.Sitecore().Field("Surname", Html.Sitecore().CurrentItem) <span class="required">*</span>
+                        @Html.Sitecore().Text("/Customers/Edit Profile/Last Name", "Last name:") <span class="required">*</span>
                     </label>
                     @Html.TextBoxFor(m => m.LastName, new
                     {
-                        placeholder = Html.Sitecore().CurrentItem["Last Name Placeholder"],
-                        data_val_required = Html.Sitecore().Field("Last Name Required Message", Html.Sitecore().CurrentItem),
+                        placeholder = Html.Sitecore().Text("/Customers/Edit Profile/Enter Last Name", "Enter your last name"),
+                        data_val_required = Html.Sitecore().Text("/Customers/Edit Profile/Last Name Required", "Please enter your last name"),
                         @class = "form-control"
                     })
 
@@ -52,12 +53,12 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="Email">
-                        @Html.Sitecore().Field("Email", Html.Sitecore().CurrentItem) <span class="required">*</span>
+                        @Html.Sitecore().Text("/Customers/Edit Profile/Email", "E-mail:") <span class="required">*</span>
                     </label>
                     @Html.TextBoxFor(m => m.Email, new
                     {
-                        placeholder = Html.Sitecore().CurrentItem["Email Placeholder"],
-                        data_val_required = Html.Sitecore().Field("Email Required Message", Html.Sitecore().CurrentItem),
+                        placeholder = Html.Sitecore().Text("/Customers/Edit Profile/Enter Email", "Enter your email"),
+                        data_val_required = Html.Sitecore().Text("/Customers/Edit Profile/Email required", "Please enter your email"),
                         @class = "form-control"
                     })
 
@@ -65,12 +66,12 @@
                 </div>
                 <div class="form-group">
                     <label for="EmailRepeat">
-                        @Html.Sitecore().Field("Repeat Email", Html.Sitecore().CurrentItem) <span class="required">*</span>
+                        @Html.Sitecore().Text("/Customers/Edit Profile/Repeat Email", "Repeat E-mail:") <span class="required">*</span>
                     </label>
                     @Html.TextBoxFor(m => m.EmailRepeat, new
                     {
-                        placeholder = Html.Sitecore().CurrentItem["Email Placeholder"],
-                        data_val_required = Html.Sitecore().Field("Email Required Message", Html.Sitecore().CurrentItem),
+                        placeholder = Html.Sitecore().Text("/Customers/Edit Profile/Enter Email Again", "Enter your email again"),
+                        data_val_required = Html.Sitecore().Text("/Customers/Edit Profile/Repeat Email required", "Please enter your email again"),
                         @class = "form-control"
                     })
 
@@ -81,12 +82,12 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="TelephoneNumber">
-                        @Html.Sitecore().Field("Telephone Number", Html.Sitecore().CurrentItem)<span class="required">*</span>
+                        @Html.Sitecore().Text("/Customers/Edit Profile/Phone", "Phone number:")<span class="required">*</span>
                     </label>
                     @Html.TextBoxFor(m => m.TelephoneNumber, new
                     {
-                        placeholder = Html.Sitecore().CurrentItem["Telephone Number Placeholder"],
-                        data_val_required = Html.Sitecore().Field("Telephone Number Required Message", Html.Sitecore().CurrentItem),
+                        placeholder = Html.Sitecore().Text("/Customers/Edit Profile/Enter Phone", "Enter your phone number"),
+                        data_val_required = Html.Sitecore().Text("/Customers/Edit Profile/Phone required", "Please enter your phone number"),
                         @class = "form-control"
                     })
 
@@ -94,8 +95,8 @@
                 </div>
             </div>
             <div class="col-md-12 m-t-1">
-                <input type="submit" data-loading-text="@Html.Sitecore().Field("Saving Changes Button", Html.Sitecore().CurrentItem)" value="@Html.Sitecore().Field("Save Changes Button", Html.Sitecore().CurrentItem)" class="btn btn-primary" id="saveProfileChangesButton"/>
-                <a type="button" href="@("/accountmanagement")" class="btn btn-default">@Html.Sitecore().Field("Cancel Button", Html.Sitecore().CurrentItem)</a>
+                <input type="submit" data-loading-text="@Html.Sitecore().Text("/Customers/Edit Profile/Saving", "Saving...")" value="@Html.Sitecore().Text("/Customers/Edit Profile/Save changes", "Save changes")" class="btn btn-primary" id="saveProfileChangesButton"/>
+                <a type="button" href="@("/accountmanagement")" class="btn btn-default">@Html.Sitecore().Text("/Customers/Edit Profile/Cancel", "Cancel")</a>
             </div>
         </div>
     </div>
