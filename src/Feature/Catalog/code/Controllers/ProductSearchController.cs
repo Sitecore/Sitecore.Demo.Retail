@@ -269,18 +269,19 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         private void UpdateOptionsWithSorting(string sortField, SortDirection? sortDirection, SearchOptions productSearchOptions)
         {
-            if (!string.IsNullOrEmpty(sortField))
+            if (string.IsNullOrEmpty(sortField))
             {
-                productSearchOptions.SortField = sortField;
-
-                if (sortDirection.HasValue)
-                {
-                    productSearchOptions.SortDirection = sortDirection.Value;
-                }
-
-                ViewBag.SortField = sortField;
-                ViewBag.SortDirection = sortDirection;
+                return;
             }
+            productSearchOptions.SortField = sortField;
+
+            if (sortDirection.HasValue)
+            {
+                productSearchOptions.SortDirection = sortDirection.Value;
+            }
+
+            ViewBag.SortField = sortField;
+            ViewBag.SortDirection = sortDirection;
         }
 
         private SearchInfo GetSearchInfo(string searchKeyword, int? pageNumber, string facetValues, string sortField, int? pageSize, SortDirection? sortDirection)

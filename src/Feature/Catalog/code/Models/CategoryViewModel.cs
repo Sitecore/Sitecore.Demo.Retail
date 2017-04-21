@@ -34,12 +34,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 {
     public class CategoryViewModel : CatalogItemViewModel
     {
-        public CategoryViewModel(Item item) : base(item)
-        {
-            ChildProducts = new List<ProductViewModel>();
-        }
-
-        public CategoryViewModel(Item categoryItem, SearchResults products, IEnumerable<QuerySortField> sortFields, SearchOptions searchOptions) : this(categoryItem)
+        public CategoryViewModel(Item categoryItem, SearchResults products, IEnumerable<QuerySortField> sortFields, SearchOptions searchOptions) : base(categoryItem)
         {
             var itemsPerPage = searchOptions?.NumberOfItemsToReturn ?? 0;
 
@@ -67,6 +62,8 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
                     EndResultIndex = Math.Min(products.TotalItemCount, alreadyShown + itemsPerPage)
                 };
             }
+            else
+                ChildProducts = new List<ProductViewModel>();
 
             SortFields = sortFields;
         }

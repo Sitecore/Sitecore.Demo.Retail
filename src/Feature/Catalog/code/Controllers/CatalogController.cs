@@ -54,7 +54,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         private const string CustomerIdKey = "CustomerId";
         private const string CategoryIdKey = "CategoryId";
 
-        public CatalogController(InventoryManager inventoryManager, ContactFactory contactFactory, ProductViewModelFactory productViewModelFactory, AccountManager accountManager, CatalogManager catalogManager, GiftCardManager giftCardManager, PricingManager pricingManager, CartManager cartManager, CommerceUserContext commerceUserContext, CatalogItemContext catalogItemContext, CatalogUrlService catalogUrlRepository, StorefrontContext storefrontContext)
+        public CatalogController(InventoryManager inventoryManager, ContactFactory contactFactory, ProductViewModelFactory productViewModelFactory, AccountManager accountManager, CatalogManager catalogManager, GiftCardManager giftCardManager, PricingManager pricingManager, CartManager cartManager, CommerceUserContext commerceUserContext, CatalogItemContext catalogItemContext, CatalogUrlService catalogUrlRepository, StorefrontContext storefrontContext, CategoryViewModelFactory categoryViewModelFactory, GetChildProductsService getChildProductsService)
         {
             InventoryManager = inventoryManager;
             ProductViewModelFactory = productViewModelFactory;
@@ -63,13 +63,15 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             CommerceUserContext = commerceUserContext;
             CatalogItemContext = catalogItemContext;
             StorefrontContext = storefrontContext;
+            CategoryViewModelFactory = categoryViewModelFactory;
+            GetChildProductsService = getChildProductsService;
         }
 
         private CommerceUserContext CommerceUserContext { get; }
         private CatalogItemContext CatalogItemContext { get; }
-        public StorefrontContext StorefrontContext { get; }
+        private StorefrontContext StorefrontContext { get; }
         private InventoryManager InventoryManager { get; }
-        public ProductViewModelFactory ProductViewModelFactory { get; }
+        private ProductViewModelFactory ProductViewModelFactory { get; }
         private CatalogManager CatalogManager { get; }
         private GiftCardManager GiftCardManager { get; }
 
@@ -193,19 +195,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
             }
 
-            Category currentCategory;
-
-            if (RenderingContext.Current.Rendering.Item.IsWildcardItem())
-            {
-                //Supported option - pass in a categoryid
-                currentCategory = GetCurrentCategory();
-                ViewBag.Title = currentCategory.Name;
-            }
-            else
-            {
-                currentCategory = CatalogManager.GetCategory(Context.Item);
-            }
-
+            var currentCategory = GetCurrentCategory();
             if (currentCategory == null)
             {
                 return this.InfoMessage(InfoMessage.Error(AlertTexts.InvalidDataSourceTemplateFriendlyMessage));
@@ -289,6 +279,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             }
 
             var currentCategory = GetCurrentCategory();
+            if (currentCategory == null)
+            {
+                return this.InfoMessage(InfoMessage.Error(AlertTexts.InvalidDataSourceTemplateFriendlyMessage));
+            }
+
             var productSearchOptions = GetCategorySearchOptions(currentCategory, pageNumber, facetValues, pageSize, sortField, sortDirection);
 
             var viewModel = GetProductListHeaderViewModel(productSearchOptions, currentCategory.SortFields, currentCategory, RenderingContext.Current.Rendering);
@@ -307,6 +302,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             }
 
             var currentCategory = GetCurrentCategory();
+            if (currentCategory == null)
+            {
+                return this.InfoMessage(InfoMessage.Error(AlertTexts.InvalidDataSourceTemplateFriendlyMessage));
+            }
+
             var productSearchOptions = GetCategorySearchOptions(currentCategory, pageNumber, facetValues, pageSize);
             var viewModel = GetPaginationViewModel(productSearchOptions, currentCategory, RenderingContext.Current.Rendering);
 
@@ -326,6 +326,10 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             }
 
             var currentCategory = GetCurrentCategory();
+            if (currentCategory == null)
+            {
+                return this.InfoMessage(InfoMessage.Error(AlertTexts.InvalidDataSourceTemplateFriendlyMessage));
+            }
 
             var searchOptions = GetCategorySearchOptions(currentCategory, pageNumber, facetValues, pageSize, sortField, sortDirection);
 
@@ -341,13 +345,13 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
             }
 
-            var currentCategory = RenderingContext.Current.Rendering.Item.IsWildcardItem() ? GetCurrentCategory() : CatalogManager.GetCategory(Context.Item);
+            var currentCategory = GetCurrentCategory();
             if (currentCategory == null)
             {
                 return this.InfoMessage(InfoMessage.Error(AlertTexts.InvalidDataSourceTemplateFriendlyMessage));
             }
 
-            var model = new CategoryViewModel(currentCategory.InnerItem);
+            var model = CategoryViewModelFactory.Create(currentCategory);
             return View(model);
         }
 
@@ -485,8 +489,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
             var lastCategoryId = GetLastVisitedCategory(CommerceUserContext.Current.UserId);
 
-            var currentCategory = RenderingContext.Current.Rendering.Item.IsWildcardItem() ? GetCurrentCategory() : CatalogManager.GetCategory(Context.Item);
-
+            var currentCategory = GetCurrentCategory();
             if (currentCategory == null)
             {
                 return new EmptyResult();
@@ -647,7 +650,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             SearchResults childProducts = null;
             if (productSearchOptions != null)
             {
-                childProducts = GetChildProducts(category, productSearchOptions);
+                childProducts = GetChildProductsService.GetChildProducts(category, productSearchOptions);
             }
 
             viewModel.Initialize(rendering, childProducts, sortFields, productSearchOptions);
@@ -662,7 +665,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             SearchResults childProducts = null;
             if (productSearchOptions != null)
             {
-                childProducts = GetChildProducts(category, productSearchOptions);
+                childProducts = GetChildProductsService.GetChildProducts(category, productSearchOptions);
             }
 
             viewModel.Initialize(rendering, childProducts, productSearchOptions);
@@ -675,13 +678,15 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             SearchResults childProducts = null;
             if (productSearchOptions != null)
             {
-                childProducts = GetChildProducts(category, productSearchOptions);
+                childProducts = GetChildProductsService.GetChildProducts(category, productSearchOptions);
             }
 
             var viewModel = new ProductFacetsViewModel(childProducts?.Facets ?? productSearchOptions?.FacetFields);
 
             return viewModel;
         }
+
+        public GetChildProductsService GetChildProductsService { get; }
 
         private IEnumerable<Item> GetChildCategories(Category category)
         {
@@ -699,28 +704,12 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             {
                 return categoryViewModel;
             }
+            categoryViewModel = CategoryViewModelFactory.Create(category, productSearchOptions);
 
-            SearchResults childProducts = null;
-            if (productSearchOptions != null)
-            {
-                childProducts = GetChildProducts(category, productSearchOptions);
-            }
-
-            categoryViewModel = new CategoryViewModel(category.InnerItem, childProducts, category.SortFields, productSearchOptions);
-
-            if (childProducts != null && childProducts.SearchResultItems.Count > 0)
-            {
-                CatalogManager.GetProductBulkPrices(categoryViewModel.ChildProducts);
-                InventoryManager.GetProductsStockStatusForList(categoryViewModel.ChildProducts);
-
-                foreach (var productViewModel in categoryViewModel.ChildProducts)
-                {
-                    var productItem = childProducts.SearchResultItems.Single(item => item.Name == productViewModel.ProductId);
-                    productViewModel.CustomerAverageRating = CatalogManager.GetProductRating(productItem);
-                }
-            }
             return this.AddToCache(cacheKey, categoryViewModel);
         }
+
+        public CategoryViewModelFactory CategoryViewModelFactory { get; }
 
         private static string CreateCacheKey(string cacheId, Category category, SearchOptions productSearchOptions)
         {
@@ -755,20 +744,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             }
 
             return this.AddToCache(cacheKey, navigationViewModel);
-        }
-
-        private SearchResults GetChildProducts(Category category, SearchOptions searchOptions)
-        {
-            var cacheKey = CreateCacheKey("ChildProducts", category, searchOptions);
-
-            var results = this.GetFromCache<SearchResults>(cacheKey);
-            if (results != null)
-            {
-                return results;
-            }
-            results = CatalogManager.GetChildProducts(category.InnerItem, searchOptions);
-
-            return this.AddToCache(cacheKey, results);
         }
 
         protected void UpdateOptionsWithFacets(List<QueryFacet> facets, string valueQueryString, SearchOptions productSearchOptions)
@@ -931,6 +906,11 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         private Category GetCurrentCategory()
         {
+            if (!RenderingContext.Current.Rendering.Item.IsWildcardItem() && RenderingContext.Current.Rendering.Item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id))
+            {
+                return CatalogManager.GetCategory(Context.Item);
+            }
+
             var categoryId = CatalogItemContext.Current?.CategoryId;
             if (categoryId == null)
             {
@@ -950,7 +930,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         {
             var categoryCookie = Request.Cookies[CookieName];
 
-            return categoryCookie != null && categoryCookie[CustomerIdKey] != null && categoryCookie[CustomerIdKey].Equals(customerId, StringComparison.OrdinalIgnoreCase) ? categoryCookie[CategoryIdKey] : string.Empty;
+            return categoryCookie?[CustomerIdKey] != null && categoryCookie[CustomerIdKey].Equals(customerId, StringComparison.OrdinalIgnoreCase) ? categoryCookie[CategoryIdKey] : string.Empty;
         }
 
         private void SetLastVisitedCategory(string customerId, string categoryId)

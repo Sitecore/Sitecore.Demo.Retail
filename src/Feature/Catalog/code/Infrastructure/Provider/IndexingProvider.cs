@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Configuration.Provider;
 using System.Linq.Expressions;
-using Sitecore.Configuration;
-using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.Linq.Utilities;
 using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data;
+using Sitecore.Data.Items;
 using Sitecore.Feature.Commerce.Catalog.Factories;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Dictionary.Repositories;
@@ -18,7 +17,7 @@ using ISearchResult = Sitecore.Foundation.Indexing.Models.ISearchResult;
 
 namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
 {
-    public class IndexingProvider : ProviderBase, ISearchResultFormatter, IQueryPredicateProvider
+    public class IndexingProvider : ProviderBase, ISearchResultFormatter, IQueryPredicateProvider, IQueryRoot
     {
         public CatalogManager CatalogManager { get; }
         public ProductViewModelFactory ProductViewModelFactory { get; }
@@ -60,13 +59,24 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
                 var product = ProductViewModelFactory.Create(contentItem);
                 formattedResult.Title = product.ProductName;
                 formattedResult.Description = product.Description;
-                formattedResult.ContentType = product.ParentCategoryName;
+                formattedResult.ViewName = "~/Views/Catalog/_ProductSearchResult.cshtml";
             }
             if (contentItem.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id))
             {
                 formattedResult.Title = contentItem.DisplayName;
                 formattedResult.Description = FieldRenderer.Render(contentItem, Templates.Generated.Category.Fields.Description);
+                formattedResult.ViewName = "~/Views/Catalog/_CategorySearchResult.cshtml";
             }
+        }
+
+        public Item Root
+        {
+            get
+            {
+                var catalogRootItem = CatalogManager.CatalogContext?.CatalogRootItem;
+                return catalogRootItem?.TargetItem(Foundation.Commerce.Templates.Commerce.NavigationItem.Fields.CategoryDatasource);
+            }
+            set { throw new NotImplementedException(); }
         }
     }
 }
