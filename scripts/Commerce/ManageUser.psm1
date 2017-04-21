@@ -78,7 +78,7 @@ function Remove-User
 function Restrict-Permissions
 {
 	param
-	{
+	(
 		[Parameter(Mandatory=$True)][string]$username
 	)
 	begin ()
