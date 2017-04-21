@@ -81,7 +81,7 @@ function Restrict-Permissions
 	(
 		[Parameter(Mandatory=$True)][string]$username
 	)
-	begin ()
+	begin {}
 	process
 	{
 			Write-Verbose "Restricting rights for '$($username)"
