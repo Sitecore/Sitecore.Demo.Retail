@@ -79,13 +79,64 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
             this.CreateCartExclusive5PctOffCouponPromotion(book, context);
             this.CreateCartExclusive5OffCouponPromotion(book, context);
             this.CreateCart15PctOffCouponPromotion(book, context);
-            
+            this.CreateCartExclusive10PctOffPromotion(book, context);
 
             return arg;
         }
 
+
+
         #region Cart's Promotions
 
+        private void CreateCartExclusive10PctOffPromotion(PromotionBook book, CommercePipelineExecutionContext context)
+        {
+            var promotion =
+            this._addPromotionPipeline.Run(
+                new AddPromotionArgument(book, "Cart 10Pct Off Exclusive Promotion", DateTimeOffset.UtcNow.AddDays(-2), DateTimeOffset.UtcNow.AddYears(1), "10% Off Cart over $500 (Exclusive)", "10% Off Cart over $500 (Exclusive)")
+                {
+                    IsExclusive = true,
+                    DisplayName = "10% Off Cart over $500 (Exclusive)",
+                    Description = "10% off Cart with subtotal of $500 or more (Exclusive Coupon)"
+                },
+                context).Result;
+
+            promotion =
+            this._addQualificationPipeline.Run(
+                new PromotionConditionModelArgument(
+                    promotion,
+                    new ConditionModel
+                    {
+                        ConditionOperator = "And",
+                        Id = Guid.NewGuid().ToString(),
+                        LibraryId = CartsConstants.Conditions.CartAnyItemSubtotalCondition,
+                        Name = CartsConstants.Conditions.CartAnyItemSubtotalCondition,
+                        Properties = new List<PropertyModel>
+                        {
+                            new PropertyModel { IsOperator = true, Name = "Operator", Value = "Sitecore.Commerce.Plugin.Rules.DecimalGreaterThanOrEqualToOperator", DisplayType = "Sitecore.Framework.Rules.IBinaryOperator`2[[System.Decimal],[System.Decimal]], Sitecore.Framework.Rules.Abstractions" },
+                            new PropertyModel { Name = "Subtotal", Value = "500", IsOperator = false, DisplayType = "System.Decimal" }
+                        }
+                    }),
+                context).Result;
+
+            promotion =
+            this._addBenefitPipeline.Run(
+                new PromotionActionModelArgument(
+                    promotion,
+                    new ActionModel
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        LibraryId = CartsConstants.Actions.CartSubtotalPercentOffAction,
+                        Name = CartsConstants.Actions.CartSubtotalPercentOffAction,
+                        Properties = new List<PropertyModel>
+                        {
+                            new PropertyModel { Name = "PercentOff", Value = "10", DisplayType = "System.Decimal" }
+                        }
+                    }),
+                context).Result;
+
+            promotion.SetComponent(new ApprovalComponent(context.GetPolicy<ApprovalStatusPolicy>().Approved));
+            this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context).Wait();
+        }
         /// <summary>
         /// Creates cart free shipping promotion.
         /// </summary>
@@ -95,7 +146,7 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
         {
             var promotion =
                 this._addPromotionPipeline.Run(
-                    new AddPromotionArgument(book, "CartFreeShippingPromotion", DateTimeOffset.UtcNow.AddDays(-1), DateTimeOffset.UtcNow.AddYears(1), "Free Shipping", "Free Shipping")
+                    new AddPromotionArgument(book, "Cart Free Shipping Promotion", DateTimeOffset.UtcNow.AddDays(-1), DateTimeOffset.UtcNow.AddYears(1), "Free Shipping", "Free Shipping")
                     {
                         DisplayName = "Free Shipping",
                         Description = "Free shipping when Cart subtotal of $100 or more"
@@ -158,7 +209,7 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
         {
             var promotion =
               this._addPromotionPipeline.Run(
-                  new AddPromotionArgument(book, "Cart5PctOffExclusiveCouponPromotion", DateTimeOffset.UtcNow.AddDays(-2), DateTimeOffset.UtcNow.AddYears(1), "5% Off Cart (Exclusive Coupon)", "5% Off Cart (Exclusive Coupon)")
+                  new AddPromotionArgument(book, "Cart 5Pct Off Coupon Exclusive Promotion", DateTimeOffset.UtcNow.AddDays(-2), DateTimeOffset.UtcNow.AddYears(1), "5% Off Cart (Exclusive Coupon)", "5% Off Cart (Exclusive Coupon)")
                   {
                       IsExclusive = true,
                       DisplayName = "5% Off Cart (Exclusive Coupon)",
@@ -214,7 +265,7 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
         {
             var promotion =
               this._addPromotionPipeline.Run(
-                  new AddPromotionArgument(book, "Cart5OffExclusiveCouponPromotion", DateTimeOffset.UtcNow.AddDays(-3), DateTimeOffset.UtcNow.AddYears(1), "$5 Off Cart (Exclusive Coupon)", "$5 Off Cart (Exclusive Coupon)")
+                  new AddPromotionArgument(book, "Cart 5 Off Coupon Exclusive Promotion", DateTimeOffset.UtcNow.AddDays(-3), DateTimeOffset.UtcNow.AddYears(1), "$5 Off Cart (Exclusive Coupon)", "$5 Off Cart (Exclusive Coupon)")
                   {
                       IsExclusive = true,
                       DisplayName = "$5 Off Cart (Exclusive Coupon)",
@@ -271,7 +322,7 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
         {
             var promotion =
                this._addPromotionPipeline.Run(
-                   new AddPromotionArgument(book, "Cart15PctOffCouponPromotion", DateTimeOffset.UtcNow.AddDays(-5), DateTimeOffset.UtcNow.AddYears(1), "15% Off Cart (Coupon)", "15% Off Cart (Coupon)")
+                   new AddPromotionArgument(book, "Cart 15Pct Off Coupon Promotion", DateTimeOffset.UtcNow.AddDays(-5), DateTimeOffset.UtcNow.AddYears(1), "15% Off Cart (Coupon)", "15% Off Cart (Coupon)")
                    {
                        DisplayName = "15% Off Cart (Coupon)",
                        Description = "15% off Cart with subtotal of $50 or more (Coupon)"
@@ -332,7 +383,7 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
     {
       var promotion =
        this._addPromotionPipeline.Run(
-           new AddPromotionArgument(book, "Punch360Speaker10DollarOffCouponPromotion", DateTimeOffset.UtcNow.AddDays(-2), DateTimeOffset.UtcNow.AddYears(1), "Punch 360 Speaker 10$ Off Item (Exclusive)", "Punch 360 Speaker 10$ Off Item (Exclusive)")
+           new AddPromotionArgument(book, "Line Punch 360 10 Off Coupon Excl Promo", DateTimeOffset.UtcNow.AddDays(-2), DateTimeOffset.UtcNow.AddYears(1), "Punch 360 Speaker 10$ Off Item (Exclusive)", "Punch 360 Speaker 10$ Off Item (Exclusive)")
            {
              DisplayName = "Punch 360 Speaker 10$ Off Item (Exclusive)",
              Description = "10$ off the Punch 360 Speaker item (Exclusive)",
@@ -375,7 +426,7 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
     {
       var promotion =
        this._addPromotionPipeline.Run(
-           new AddPromotionArgument(book, "Punch360Speaker10PercentOffCouponPromotion", DateTimeOffset.UtcNow.AddDays(-2), DateTimeOffset.UtcNow.AddYears(1), "Punch 360 Speaker 10% Off Item (Exclusive)", "Punch 360 Speaker 10% Off Item (Exclusive)")
+           new AddPromotionArgument(book, "Line Punch 360 10Pct Off Coupon Excl Promo", DateTimeOffset.UtcNow.AddDays(-2), DateTimeOffset.UtcNow.AddYears(1), "Punch 360 Speaker 10% Off Item (Exclusive)", "Punch 360 Speaker 10% Off Item (Exclusive)")
            {
              DisplayName = "Punch 360 Speaker 10% Off Item (Exclusive)",
              Description = "10% off the Punch 360 Speaker item (Exclusive)",
@@ -420,7 +471,7 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
         {
             var promotion =
              this._addPromotionPipeline.Run(
-                 new AddPromotionArgument(book, "LineOptix25PctOffPromotion", DateTimeOffset.UtcNow.AddDays(-1), DateTimeOffset.UtcNow.AddYears(1), "25% Off Optix 16.0 Megapixel Digital Camera", "25% Off Optix 16.0 Megapixel Digital Camera")
+                 new AddPromotionArgument(book, "Line Optix 25Pct Off Promotion", DateTimeOffset.UtcNow.AddDays(-1), DateTimeOffset.UtcNow.AddYears(1), "25% Off Optix 16.0 Megapixel Digital Camera", "25% Off Optix 16.0 Megapixel Digital Camera")
                  {
                      DisplayName = "Optix 16.0 Megapixel Camera 25% Off",
                      Description = "25% Off Optix 16.0 Megapixel Digital Camera item"
