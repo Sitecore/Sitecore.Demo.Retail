@@ -49,7 +49,7 @@ SharedFields:
           uid="{10324F23-C76C-4042-B2E4-C8A7EA1619E9}" />
         <r
           ds=""
-          id="{FAA386D8-192F-4762-839D-D637BD11549F}"
+          id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}"
           ph="navbar-activity"
           uid="{831087C9-F9D1-46C7-9F5C-BE1D51DAF845}" />
         <r
@@ -161,8 +161,8 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
-              uid="{1E7D9ACC-C928-4D56-AF64-22958148FD3B}"
-              s:ds="" />
+              uid="{831087C9-F9D1-46C7-9F5C-BE1D51DAF845}"
+              s:id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}" />
             <r
               uid="{C4014A56-FA2D-46CC-B696-483D5543BCED}"
               s:ds="" />
@@ -217,6 +217,9 @@ Languages:
           s:xsd="http://www.w3.org/2001/XMLSchema">
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{831087C9-F9D1-46C7-9F5C-BE1D51DAF845}"
+              s:id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}" />
             <r
               uid="{C4014A56-FA2D-46CC-B696-483D5543BCED}"
               s:ds="" />

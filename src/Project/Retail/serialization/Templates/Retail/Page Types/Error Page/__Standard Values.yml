@@ -49,7 +49,7 @@ SharedFields:
           uid="{C61251A1-7B0C-4539-8B9E-0AC13B752544}" />
         <r
           ds=""
-          id="{FAA386D8-192F-4762-839D-D637BD11549F}"
+          id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}"
           ph="navbar-activity"
           uid="{8FEA554A-F45C-48A7-A84E-6E4C14EB3B73}" />
         <r
@@ -136,7 +136,7 @@ Languages:
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
               uid="{8FEA554A-F45C-48A7-A84E-6E4C14EB3B73}"
-              s:ds="" />
+              s:id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}" />
             <r
               uid="{EBF7BD13-67A0-48B1-8BBC-834704E703C5}"
               s:ds="" />
@@ -160,7 +160,7 @@ Languages:
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
               uid="{8FEA554A-F45C-48A7-A84E-6E4C14EB3B73}"
-              s:ds="" />
+              s:id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}" />
             <r
               uid="{EBF7BD13-67A0-48B1-8BBC-834704E703C5}"
               s:ds="" />
@@ -184,7 +184,7 @@ Languages:
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
               uid="{8FEA554A-F45C-48A7-A84E-6E4C14EB3B73}"
-              s:ds="" />
+              s:id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}" />
             <r
               uid="{EBF7BD13-67A0-48B1-8BBC-834704E703C5}"
               s:ds="" />
@@ -208,7 +208,7 @@ Languages:
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
               uid="{8FEA554A-F45C-48A7-A84E-6E4C14EB3B73}"
-              s:ds="" />
+              s:id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}" />
             <r
               uid="{EBF7BD13-67A0-48B1-8BBC-834704E703C5}"
               s:ds="" />
