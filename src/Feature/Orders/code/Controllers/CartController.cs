@@ -29,6 +29,7 @@ using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
 using Sitecore.Foundation.Commerce.Util;
+using Sitecore.Foundation.SitecoreExtensions.Attributes;
 using Sitecore.Mvc.Controllers;
 
 namespace Sitecore.Feature.Commerce.Orders.Controllers
@@ -66,6 +67,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         }
 
         [HttpPost]
+        [SkipAnalyticsTracking]
         public JsonResult SwitchCurrency(string currency)
         {
             try
@@ -95,6 +97,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult UpdateMiniCart(bool updateCart = false)
         {
             try
@@ -118,6 +121,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult GetCurrentCart()
         {
             try
@@ -158,6 +162,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult AddCartLine(AddCartLineInputModel inputModel)
         {
             try
@@ -184,6 +189,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult AddCartLines(IEnumerable<AddCartLineInputModel> inputModels)
         {
             try
@@ -210,6 +216,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult DeleteLineItem(DeleteCartLineInputModel model)
         {
             try
@@ -241,6 +248,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult UpdateLineItem(UpdateCartLineInputModel inputModel)
         {
             try
@@ -279,6 +287,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult ApplyDiscount(DiscountInputModel model)
         {
             try
@@ -310,6 +319,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult RemoveDiscount(DiscountInputModel model)
         {
             try

@@ -240,7 +240,6 @@
     <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Infrastructure\Pipelines\AddCommerceAssets.cs" />
     <Compile Include="Infrastructure\Pipelines\ApplyVaryByUrlPath.cs" />
-    <Compile Include="Infrastructure\Pipelines\ExcludeUrlTracking.cs" />
     <Compile Include="Infrastructure\Pipelines\ResetContact.cs" />
     <Compile Include="Infrastructure\Pipelines\LoggedIn\SetCommerceUser.cs" />
     <Compile Include="Infrastructure\Pipelines\VaryByCurrency.cs" />

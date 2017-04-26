@@ -18,6 +18,10 @@ SharedFields:
     {7DEDCAD6-1D46-4CE2-96AB-2FAC19846A8F}
     {9EBE8AB2-B474-4C22-81FE-F464BB9E8A98}
     {BCB31BCB-F921-4CC5-8DDE-0AA47EDB74C7}
+- ID: "8d5c486e-a0e3-4dbe-9a4a-cdff93594bda"
+  Hint: IncludeInSearchResults
+  Type: Checkbox
+  Value: 0
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
   Value: 300

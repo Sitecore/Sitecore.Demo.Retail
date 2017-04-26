@@ -42,6 +42,7 @@ using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
 using Sitecore.Foundation.Commerce.Models.Search;
 using Sitecore.Foundation.Dictionary.Repositories;
+using Sitecore.Foundation.SitecoreExtensions.Attributes;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
@@ -357,6 +358,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         [HttpPost]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult FacetApplied(string facetValue, bool? isApplied)
         {
             if (!string.IsNullOrWhiteSpace(facetValue) && isApplied.HasValue && StorefrontContext.Current != null)
@@ -369,6 +371,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         [HttpPost]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult SortOrderApplied(string sortField, SortDirection? sortDirection)
         {
             if (!string.IsNullOrWhiteSpace(sortField) && StorefrontContext.Current != null)
@@ -534,6 +537,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult GetCurrentProductStockInfo(ProductStockInfoInputModel model)
         {
             try
@@ -578,6 +582,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult CheckGiftCardBalance(GetGiftCardBalanceInputModel inputModel)
         {
             try
@@ -615,6 +620,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult SignUpForBackInStockNotification(SignUpForNotificationInputModel model)
         {
             try
