@@ -250,7 +250,6 @@
     <Compile Include="Managers\CountryManager.cs" />
     <Compile Include="Managers\GiftCardManager.cs" />
     <Compile Include="Managers\CurrencyManager.cs" />
-    <Compile Include="Managers\ProductSearchManager.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\ApiControllerMapping.cs" />
     <Compile Include="Models\ErrorApiModel.cs" />
