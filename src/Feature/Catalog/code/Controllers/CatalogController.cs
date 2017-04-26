@@ -15,14 +15,6 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using System.Web.Helpers;
-using System.Web.Mvc;
-using System.Web.UI;
 using Sitecore.Commerce.Connect.CommerceServer.Catalog.Fields;
 using Sitecore.Commerce.Contacts;
 using Sitecore.Data;
@@ -45,6 +37,14 @@ using Sitecore.Foundation.Dictionary.Repositories;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Mvc.Controllers;
 using Sitecore.Mvc.Presentation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.Helpers;
+using System.Web.Mvc;
+using System.Web.UI;
 
 namespace Sitecore.Feature.Commerce.Catalog.Controllers
 {
@@ -222,11 +222,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
         {
             var searchOptions = new SearchOptions(pageSize ?? currentCategory.ItemsPerPage, pageNumber ?? 0);
             UpdateOptionsWithFacets(currentCategory.RequiredFacets, facetValues, searchOptions);
-            if (sortField != null)
-            {
-                SetSortParameters(currentCategory, ref sortField, ref sortDirection);
-                UpdateOptionsWithSorting(sortField, sortDirection, searchOptions);
-            }
+            UpdateOptionsWithSorting(sortField, sortDirection, searchOptions);
             return searchOptions;
         }
 
@@ -844,19 +840,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             }
 
             return newFilter.ToString();
-        }
-
-        protected void SetSortParameters(Category category, ref string sortField, ref SortDirection? sortOrder)
-        {
-            if (string.IsNullOrWhiteSpace(sortField))
-            {
-                var sortfieldList = category.SortFields;
-                if (sortfieldList != null && sortfieldList.Count > 0)
-                {
-                    sortField = sortfieldList[0].Name;
-                    sortOrder = SortDirection.Ascending;
-                }
-            }
         }
 
         public RelatedCatalogItemsViewModel GetRelationshipsFromItem(Item catalogItem, Rendering rendering)

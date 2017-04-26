@@ -13,9 +13,9 @@
 $(document).ready(function () {
     var queryStringParamerterSort = "s";
     var queryStringParamerterSortDirection = "sd";
-    var queryStringParamerterSortDirectionAsc = "asc";
+    var queryStringParamerterSortDirectionAsc = "ascending";
     var queryStringParamerterSortDirectionAscShort = "+";
-    var queryStringParamerterSortDirectionDesc = "desc";
+    var queryStringParamerterSortDirectionDesc = "descending";
     var queryStringParamerterPage = "pg";
     var queryStringParamerterPageSize = "ps";
 

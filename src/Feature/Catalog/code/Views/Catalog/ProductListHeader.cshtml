@@ -65,6 +65,7 @@
                         {
                             <label for="sortDropDown">@Html.Sitecore().Text("/Catalog/Product List/Sort By", "Sort by:")</label>
                             <select class="form-control sortDropdown" id="sortDropDown">
+                                <option value="">@Html.Sitecore().Text("/Catalog/Product List/Relevance", "Relevance")</option>
                                 @foreach (var sortField in Model.SortFields)
                                 {
                                     var ascSelected = string.Empty;
