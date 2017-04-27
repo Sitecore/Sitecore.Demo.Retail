@@ -22,7 +22,7 @@ function LineItemListViewModel(data) {
     self.adjustments = ko.observableArray();
 
     $(data.Adjustments).each(function () {
-        self.adjustments.push(new AdjustmentViewModel(this.Description));
+        self.adjustments.push(new AdjustmentViewModel(this));
     });
 
     self.promoCodes = ko.observableArray();
@@ -36,7 +36,11 @@ function LineItemListViewModel(data) {
     self.total = ko.observable(data.Total);
     self.totalAmount = ko.observable(data.TotalAmount);
     self.discount = ko.observable(data.Discount);
+    self.discountAmount = ko.observable(data.DiscountAmount);
+    self.totalDiscount = ko.observable(data.TotalDiscount);
     self.shippingTotal = ko.observable(data.ShippingTotal);
+    self.hasShipping = ko.observable(data.HasShipping);
+    self.hasTaxes = ko.observable(data.HasTaxes);
 
     self.promoCode = ko.observable("");
 
@@ -44,7 +48,7 @@ function LineItemListViewModel(data) {
         self.adjustments.removeAll();
 
         $(data.Adjustments).each(function () {
-            self.adjustments.push(new AdjustmentViewModel(this.Description));
+            self.adjustments.push(new AdjustmentViewModel(this));
         });
     }
 
@@ -54,7 +58,11 @@ function LineItemListViewModel(data) {
         self.total(data.Total);
         self.totalAmount(data.TotalAmount);
         self.discount(data.Discount);
+        self.discountAmount(data.DiscountAmount);
+        self.totalDiscount(data.TotalDiscount);
         self.shippingTotal(data.ShippingTotal);
+        self.hasShipping(data.HasShipping);
+        self.hasTaxes(data.HasTaxes);
     }
 
     self.setPromoCodes = function (data) {

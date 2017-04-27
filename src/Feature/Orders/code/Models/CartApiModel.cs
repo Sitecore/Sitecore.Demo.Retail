@@ -60,9 +60,16 @@ namespace Sitecore.Feature.Commerce.Orders.Models
 
         public decimal DiscountAmount { get; set; }
 
+        public string TotalDiscount { get; set; }
+
+        public decimal TotalDiscountAmount { get; set; }
+
         public string ShippingTotal { get; set; }
 
         public decimal ShippingTotalAmount { get; set; }
+
+        public bool HasShipping { get; set; }
+        public bool HasTaxes { get; set; }
 
         public List<string> PromoCodes { get; set; }
 
@@ -114,14 +121,15 @@ namespace Sitecore.Feature.Commerce.Orders.Models
             DiscountAmount = commerceTotal.OrderLevelDiscountAmount;
             ShippingTotal = commerceTotal.ShippingTotal.ToCurrency();
             ShippingTotalAmount = commerceTotal.ShippingTotal;
+            HasShipping = cart.Shipping != null && cart.Shipping.Any();
+            HasTaxes = cart.Total.TaxTotal.TaxSubtotals?.Any() ?? false;
+            var totalSavings = cart.Lines?.Sum(lineitem => ((CommerceTotal)lineitem.Total).LineItemDiscountAmount) ?? 0;
+            totalSavings += ((CommerceTotal)cart.Total).OrderLevelDiscountAmount;
+            TotalDiscountAmount = totalSavings;
+            TotalDiscount = totalSavings.ToCurrency();
 
             var commerceCart = cart as CommerceCart;
-            if (commerceCart == null)
-            {
-                return;
-            }
-
-            if (commerceCart.OrderForms.Count > 0)
+            if (commerceCart?.OrderForms.Count > 0)
             {
                 foreach (var promoCode in commerceCart.OrderForms[0].PromoCodes ?? Enumerable.Empty<string>())
                 {
@@ -129,9 +137,6 @@ namespace Sitecore.Feature.Commerce.Orders.Models
                 }
             }
 
-            var totalSavings = cart.Lines.Sum(lineitem => ((CommerceTotal)lineitem.Total).LineItemDiscountAmount);
-            totalSavings += ((CommerceTotal)cart.Total).OrderLevelDiscountAmount;
-            Discount = totalSavings.ToCurrency();
         }
     }
 }
