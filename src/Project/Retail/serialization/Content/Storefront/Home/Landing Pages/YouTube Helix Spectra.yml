@@ -9,7 +9,8 @@ SharedFields:
   Hint: __Tracking
   Type: Tracking
   Value: |
-    <tracking>
+    <tracking
+      ignore="1">
       <profile
         id="{4F7F3405-9606-495E-8D44-55177A382BB3}"
         name="Retail Persona">
