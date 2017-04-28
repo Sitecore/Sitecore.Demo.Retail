@@ -17,6 +17,7 @@
 
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
@@ -26,7 +27,7 @@ namespace Sitecore.Feature.Commerce.Orders.Models
         public CartAdjustmentApiModel(CartAdjustment adjustment)
         {
             Assert.ArgumentNotNull(adjustment, nameof(adjustment));
-            Amount = adjustment.Amount.ToString("C", Context.Language.CultureInfo);
+            Amount = adjustment.Amount.ToCurrency();
             Description = adjustment.Description;
             IsCharge = adjustment.IsCharge;
             LineNumber = adjustment.LineNumber;
