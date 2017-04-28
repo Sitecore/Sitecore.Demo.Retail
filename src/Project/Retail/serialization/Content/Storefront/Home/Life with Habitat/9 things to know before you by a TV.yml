@@ -133,7 +133,7 @@ Languages:
               p:after="r[@uid='{69DEF693-8A46-4558-9018-2C5B431824B1}']"
               s:ds=""
               s:id="{1149A3C7-C69A-4E6B-A6C3-32687EC2F8D4}"
-              s:par="UseStaticPlaceholderNames&amp;Type=bg-primary&amp;Media&amp;Parallax"
+              s:par="Type=bg-primary"
               s:ph="page-layout" />
             <r
               uid="{E8262130-D43A-4847-B791-ACCE5BDA1635}"

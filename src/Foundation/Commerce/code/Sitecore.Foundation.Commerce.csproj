@@ -240,7 +240,6 @@
     <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Infrastructure\Pipelines\AddCommerceAssets.cs" />
     <Compile Include="Infrastructure\Pipelines\ApplyVaryByUrlPath.cs" />
-    <Compile Include="Infrastructure\Pipelines\ExcludeUrlTracking.cs" />
     <Compile Include="Infrastructure\Pipelines\ResetContact.cs" />
     <Compile Include="Infrastructure\Pipelines\LoggedIn\SetCommerceUser.cs" />
     <Compile Include="Infrastructure\Pipelines\VaryByCurrency.cs" />
@@ -251,7 +250,6 @@
     <Compile Include="Managers\CountryManager.cs" />
     <Compile Include="Managers\GiftCardManager.cs" />
     <Compile Include="Managers\CurrencyManager.cs" />
-    <Compile Include="Managers\ProductSearchManager.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\ApiControllerMapping.cs" />
     <Compile Include="Models\ErrorApiModel.cs" />

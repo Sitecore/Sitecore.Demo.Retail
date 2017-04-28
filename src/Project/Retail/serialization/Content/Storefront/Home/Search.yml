@@ -9,6 +9,13 @@ SharedFields:
   Hint: ShowInNavigation
   Type: Checkbox
   Value: 0
+- ID: "8c4dad9d-1ea2-4eb7-ae19-d4c28604757a"
+  Hint: Facets
+  Type: Treelist
+  Value: |
+    {F80AC325-FE72-4242-8543-E421F0CD6E74}
+    {DCAD67E4-A0EB-4EBE-99B8-26C57DA43022}
+    {A906B878-2517-4E8A-B403-40B530F6386D}
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
   Value: 1104
@@ -23,6 +30,9 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20150107T172228Z
+    - ID: "80e30dd8-8021-45f5-9fe1-23d2702cc206"
+      Hint: SearchBoxTitle
+      Value: Find products and pages
     - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
       Hint: Title
       Value: Search

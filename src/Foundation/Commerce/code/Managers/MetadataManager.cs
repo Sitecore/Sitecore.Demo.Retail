@@ -23,6 +23,7 @@ using Sitecore.Foundation.Commerce.Repositories;
 
 namespace Sitecore.Foundation.Commerce.Managers
 {
+#warning move to feature.catalog
     public static class MetadataManager
     {
         public static HtmlString GetTags()

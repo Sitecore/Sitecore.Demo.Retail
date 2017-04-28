@@ -32,7 +32,7 @@ SharedFields:
           p:after="r[@uid='{81F6D61C-DF96-46C2-80D2-32EF31E2A6F9}']"
           s:ds=""
           s:id="{7DFD9396-CB94-4174-9721-9419A2AA68E3}"
-          s:par="EnableMapTypeControl=1&amp;ZoomLevel=0&amp;EnableZoomControl=1&amp;CenterLocation=-5.055576%2c3.803790&amp;Caching=0%7c0%7c0%7c0%7c0%7c0%7c0%7c0"
+          s:par="EnableMapTypeControl=1&amp;ZoomLevel=0&amp;EnableZoomControl=1&amp;MapType=roadmap&amp;CenterLocation=-5.055576%2c3.803790&amp;Caching=0%7c0%7c0%7c0%7c0%7c0%7c0%7c0"
           s:ph="/page-layout/section/col-wide-1" />
       </d>
     </r>

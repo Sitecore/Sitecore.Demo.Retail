@@ -95,6 +95,9 @@
     <Reference Include="Sitecore.Foundation.Dictionary">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Foundation.Indexing">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Indexing.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.SitecoreExtensions">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.SitecoreExtensions.dll</HintPath>
     </Reference>
@@ -181,26 +184,21 @@
     <Content Include="Views\Catalog\RelatedCatalogItems.cshtml" />
     <Content Include="Views\Catalog\RelatedProducts.cshtml" />
     <Content Include="Views\Catalog\Navigation.cshtml" />
-    <Content Include="Views\ProductSearch\ProductSearchResultsPagination.cshtml" />
-    <Content Include="Views\ProductSearch\ProductSearchResultsFacets.cshtml" />
-    <Content Include="Views\ProductSearch\ProductSearchResultsList.cshtml" />
-    <Content Include="Views\ProductSearch\ProductSearchResultsListHeader.cshtml" />
     <Content Include="Views\Catalog\_CategorySummary.cshtml" />
-    <Content Include="Views\ProductSearch\_ProductSearchResultDetails.cshtml" />
-    <Content Include="Views\ProductSearch\_CategorySearchResultDetails.cshtml" />
     <Content Include="Views\Catalog\_ProductPrice.cshtml" />
     <Content Include="Views\Catalog\_ProductLabels.cshtml" />
     <Content Include="Views\Catalog\CategoryBreadcrumb.cshtml" />
     <Content Include="Views\Catalog\ProductTeaser.cshtml" />
-    <Content Include="Views\ProductSearch\SearchBar.cshtml" />
+    <Content Include="Views\Catalog\_CategorySearchResult.cshtml" />
+    <Content Include="Views\Catalog\_ProductSearchResult.cshtml" />
     <None Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\CategoryViewModelFactory.cs" />
     <Compile Include="Factories\ProductViewModelFactory.cs" />
     <Compile Include="Infrastructure\Dialogs\InsertLinkForm.cs" />
     <Compile Include="Infrastructure\Pipelines\ProductItemRedirector.cs" />
-    <Compile Include="Models\SearchBarViewModel.cs" />
-    <Compile Include="Models\SearchInfo.cs" />
+    <Compile Include="Infrastructure\Provider\IndexingProvider.cs" />
     <Compile Include="Factories\CatalogItemContextFactory.cs" />
     <Compile Include="Models\RelationshipViewModel.cs" />
     <Compile Include="Models\RouteItemType.cs" />
@@ -208,7 +206,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\CatalogController.cs" />
-    <Compile Include="Controllers\ProductSearchController.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Infrastructure\Pipelines\InitializeRoutes.cs" />
     <Compile Include="Infrastructure\Pipelines\ProductItemResolver.cs" />
@@ -231,6 +228,7 @@
     <Compile Include="Models\VariantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CatalogUrlService.cs" />
+    <Compile Include="Services\GetChildProductsService.cs" />
     <Compile Include="Services\ProductOverlayImageService.cs" />
     <Compile Include="Templates.cs" />
   </ItemGroup>
