@@ -28,6 +28,7 @@ function Add-User
         if (Test-User -Username $user.username)
         {
             Write-Verbose "User '$($user.username)' already exists"
+			Restrict-Permissions $($user.username)
         }
         else 
         {
