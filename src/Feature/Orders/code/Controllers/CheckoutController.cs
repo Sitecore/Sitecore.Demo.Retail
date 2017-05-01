@@ -78,9 +78,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [AllowAnonymous]
         public ActionResult Checkout()
         {
-            //if (Request.HttpMethod == "POST")
-            //    return SubmitOrder();
-
             var model = CreateViewModel();
             if (!model.HasLines && !Context.PageMode.IsExperienceEditor)
             {
