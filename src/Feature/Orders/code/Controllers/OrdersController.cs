@@ -14,6 +14,7 @@ using Sitecore.Foundation.Commerce.Extensions;
 using Sitecore.Foundation.Commerce.Managers;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
+using Sitecore.Foundation.SitecoreExtensions.Attributes;
 
 namespace Sitecore.Feature.Commerce.Orders.Controllers
 {
@@ -69,6 +70,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [Authorize]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult RecentOrders()
         {
             if (!Context.User.IsAuthenticated)
@@ -106,6 +108,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult Reorder(ReorderInputModel inputModel)
         {
             try
@@ -132,6 +135,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult CancelOrder(CancelOrderInputModel inputModel)
         {
             try

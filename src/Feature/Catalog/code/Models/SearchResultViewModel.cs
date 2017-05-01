@@ -31,7 +31,8 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
         {
             Assert.ArgumentNotNull(searchResult, nameof(searchResult));
 
-            var factory = DependencyResolver.Current.GetService<ProductViewModelFactory>();
+            var productViewFactory = DependencyResolver.Current.GetService<ProductViewModelFactory>();
+            var categoryViewFactory = DependencyResolver.Current.GetService<CategoryViewModelFactory>();
 
             Title = searchResult.Title;
             Items = new List<CatalogItemViewModel>();
@@ -39,9 +40,9 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
             {
                 CatalogItemViewModel productModel = null;
                 if (child.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id))
-                    productModel = factory.Create(child);
+                    productModel = productViewFactory.Create(child);
                 if (child.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id))
-                    productModel = new CategoryViewModel(child);
+                    productModel = categoryViewFactory.Create(child);
                 if (productModel != null)
                     Items.Add(productModel);
             }

@@ -32,7 +32,7 @@ SharedFields:
           p:after="r[@uid='{81F6D61C-DF96-46C2-80D2-32EF31E2A6F9}']"
           s:ds=""
           s:id="{7DFD9396-CB94-4174-9721-9419A2AA68E3}"
-          s:par="EnableMapTypeControl=1&amp;ZoomLevel=0&amp;EnableZoomControl=1&amp;CenterLocation=-5.055576%2c3.803790&amp;Caching=0%7c0%7c0%7c0%7c0%7c0%7c0%7c0"
+          s:par="EnableMapTypeControl=1&amp;ZoomLevel=0&amp;EnableZoomControl=1&amp;MapType=roadmap&amp;CenterLocation=-5.055576%2c3.803790&amp;Caching=0%7c0%7c0%7c0%7c0%7c0%7c0%7c0"
           s:ph="/page-layout/section/col-wide-1" />
       </d>
     </r>
@@ -41,6 +41,20 @@ Languages:
   Versions:
   - Version: 1
     Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{2C3470C5-C497-4EC5-8E16-88D320B07965}"
+              s:ds="{A98AC31E-6B84-47FB-9101-696CC3EA9AC2}"
+              s:par="MapType=roadmap&amp;CenterLocation=39.3840346%2C-99.4020405&amp;ZoomLevel=4&amp;EnableCenterMapControl=1&amp;EnableZoomControl=1&amp;EnableMapTypeControl&amp;EnableScaleControl&amp;EnableStreetViewControl&amp;EnableRotateControl" />
+          </d>
+        </r>
     - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
       Hint: NavigationTitle
       Value: Find a Store

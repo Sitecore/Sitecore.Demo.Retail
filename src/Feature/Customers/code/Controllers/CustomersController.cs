@@ -30,6 +30,7 @@ using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.Commerce.Models.InputModels;
 using Sitecore.Foundation.Commerce.Repositories;
 using Sitecore.Foundation.Dictionary.Repositories;
+using Sitecore.Foundation.SitecoreExtensions.Attributes;
 using Sitecore.Links;
 using Sitecore.Mvc.Controllers;
 
@@ -159,6 +160,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult Register(RegisterUserInputModel inputModel)
         {
             try
@@ -193,6 +195,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
         [Authorize]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult ChangePassword(ChangePasswordInputModel inputModel)
         {
             try
@@ -221,6 +224,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SkipAnalyticsTracking]
         public ActionResult AccountHomeProfile()
         {
             if (!Context.User.IsAuthenticated)
@@ -259,6 +263,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
         [Authorize]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult AddressList()
         {
             try
@@ -279,6 +284,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
         [Authorize]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult AddressDelete(DeleteAddressInputModelItem model)
         {
             try
@@ -312,6 +318,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
         [Authorize]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult AddressModify(PartyInputModelItem model)
         {
             try
@@ -378,6 +385,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
         [Authorize]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult UpdateProfile(ProfileModel model)
         {
             try
@@ -419,6 +427,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
         [AllowAnonymous]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult GetCurrentUser()
         {
             try
@@ -444,6 +453,7 @@ namespace Sitecore.Feature.Commerce.Customers.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult ForgotPassword(ForgotPasswordInputModel model)
         {
             try

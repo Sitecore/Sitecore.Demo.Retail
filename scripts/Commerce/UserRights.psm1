@@ -936,6 +936,7 @@ function Revoke-TokenPrivilege {
     }
 } # Disables privileges in the current process token
 
+Export-ModuleMember Grant-UserRight
 # SIG # Begin signature block
 # MIIcxAYJKoZIhvcNAQcCoIIctTCCHLECAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR

@@ -61,7 +61,7 @@ SharedFields:
           uid="{874A6AA4-0403-4BAB-951C-7308B7965154}" />
         <r
           ds=""
-          id="{FAA386D8-192F-4762-839D-D637BD11549F}"
+          id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}"
           ph="navbar-activity"
           uid="{1B0865BA-8725-40D7-B472-5466055F1834}" />
         <r
@@ -139,15 +139,6 @@ SharedFields:
           ph="page-sidebar"
           uid="{84C6136D-EC87-4CC8-B086-EC97BCF1847D}" />
       </d>
-      <d
-        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}"
-        l="{158292D8-6523-4052-8DEF-60DD6F112A09}">
-        <r
-          ds="{1063CC9D-6ED9-4102-8D9E-82FACE2128F7}"
-          id="{8BD15EC8-799B-4AA1-AEBB-45EC6678A57F}"
-          ph="center"
-          uid="{B2810CEE-47A7-4D42-8DCC-6FBB9996ADD4}" />
-      </d>
     </r>
 - ID: "fd4e2050-186c-4375-8b99-e8a85dd7436e"
   Hint: __Enable item fallback
@@ -180,28 +171,6 @@ Languages:
   Versions:
   - Version: 1
     Fields:
-    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
-      Hint: __Final Renderings
-      Type: Layout
-      Value: |
-        <r xmlns:p="p" xmlns:s="s"
-          p:p="1"
-          s:xsd="http://www.w3.org/2001/XMLSchema">
-          <d
-            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
-            <r
-              uid="{5CD7D17E-B9AD-46B9-9B7C-925E2BFF59F7}"
-              p:before="*"
-              s:id="{0AD8EC59-33EC-4103-AAD4-F3A49BFDB92C}"
-              s:ph="/footer/section" />
-            <r
-              uid="{1B0865BA-8725-40D7-B472-5466055F1834}"
-              s:ds="" />
-            <r
-              uid="{8C308774-5362-4996-A416-527ED85204F1}"
-              s:ds="" />
-          </d>
-        </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20141019T193955Z

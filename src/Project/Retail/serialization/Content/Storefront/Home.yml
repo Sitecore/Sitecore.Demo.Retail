@@ -9,18 +9,6 @@ SharedFields:
   Hint: ShowInNavigation
   Type: Checkbox
   Value: 0
-- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
-  Hint: __Renderings
-  Type: layout
-  Value: |
-    <r xmlns:p="p" xmlns:s="s"
-      p:p="1"
-      s:xsd="http://www.w3.org/2001/XMLSchema">
-      <d
-        id="{46D2F427-4CE5-4E1F-BA10-EF3636F43534}">
-        <p:d />
-      </d>
-    </r>
 Languages:
 - Language: "de-DE"
   Versions:

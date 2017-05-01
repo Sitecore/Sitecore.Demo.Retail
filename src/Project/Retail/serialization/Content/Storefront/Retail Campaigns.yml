@@ -16,13 +16,13 @@ SharedFields:
   Value: "64fd6c34-3ea1-4514-bc0c-64835ae67e13"
 - ID: "5c4af5b4-52d0-4db7-ac78-4eb030d6edc2"
   Hint: Subscriber Profile
-  Value: "{D5CEA46D-5E7A-42D9-B654-652040D66483}"
+  Value: "{0FFEC1BD-4D35-49CF-8B7D-7F01930834ED}"
 - ID: "943d8e5d-b924-41f8-ba1e-e0b630960e6e"
   Hint: Preview base URL
   Value: "http://retail.dev.local"
 - ID: "9b82216d-f53b-4558-b30a-e6952c8587f3"
   Hint: Website Site Configuration Name
-  Value: retail
+  Value: storefront
 - ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
   Hint: __Workflow
   Value: 

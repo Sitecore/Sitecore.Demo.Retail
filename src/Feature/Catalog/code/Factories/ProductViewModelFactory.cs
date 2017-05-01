@@ -108,15 +108,16 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
 
         private void PopulateCategoryInformation(ProductViewModel productViewModel)
         {
-            if (CatalogItemContext.Current != null)
+            if (CatalogItemContext.Current == null)
             {
-                productViewModel.ParentCategoryId = CatalogItemContext.Current.CategoryId;
+                return;
+            }
 
-                var category = CatalogManager.GetCategory(productViewModel.ParentCategoryId);
-                if (category != null)
-                {
-                    productViewModel.ParentCategoryName = category.Title;
-                }
+            productViewModel.ParentCategoryId = CatalogItemContext.Current.CategoryId;
+            var category = CatalogManager.GetCategory(productViewModel.ParentCategoryId);
+            if (category != null)
+            {
+                productViewModel.ParentCategoryName = category.Title;
             }
         }
 

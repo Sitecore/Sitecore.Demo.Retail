@@ -41,6 +41,7 @@ using Sitecore.Links;
 using Sitecore.Data.Items;
 using Newtonsoft.Json;
 using System.Web;
+using Sitecore.Foundation.SitecoreExtensions.Attributes;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Feature.Commerce.Orders.Controllers
@@ -369,6 +370,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult GetCheckoutData()
         {
             try
@@ -428,6 +430,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult SubmitOrder(SubmitOrderInputModel inputModel)
         {
             try
@@ -460,6 +463,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult GetShippingMethods(GetShippingMethodsInputModel inputModel)
         {
             try
@@ -491,6 +495,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult SetShippingMethods(SetShippingMethodsInputModel inputModel)
         {
             try
@@ -524,6 +529,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult SetPaymentMethods(PaymentInputModel inputModel)
         {
             try
@@ -557,6 +563,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [HttpPost]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [SkipAnalyticsTracking]
         public JsonResult GetAvailableRegions(GetAvailableRegionsInputModel model)
         {
             try

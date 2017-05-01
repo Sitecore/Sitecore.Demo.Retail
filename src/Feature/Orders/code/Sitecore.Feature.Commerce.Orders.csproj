@@ -179,7 +179,6 @@
     <Content Include="Scripts\ViewModels\orders_VM.js" />
     <Content Include="Scripts\ViewModels\StepIndicator.js" />
     <Content Include="Scripts\ViewModels\wishlist_VM.js" />
-    <Content Include="Views\Cart\_CartSummary.cshtml" />
     <Content Include="Views\Cart\_LineItem.cshtml" />
     <Content Include="Views\Cart\CheckoutButtons.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />

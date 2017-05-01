@@ -49,7 +49,7 @@ SharedFields:
           uid="{34A6FFAA-4E6F-473D-93AA-A089C4812AB3}" />
         <r
           ds=""
-          id="{FAA386D8-192F-4762-839D-D637BD11549F}"
+          id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}"
           ph="navbar-activity"
           uid="{4D0BDA61-6859-4263-A8B4-B082B3579972}" />
         <r
@@ -155,8 +155,11 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{4D0BDA61-6859-4263-A8B4-B082B3579972}"
+              s:id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}" />
+            <r
               uid="{F365044F-479D-44C4-807E-39376C4646E6}"
-              p:after="r[@uid='{008E8B8D-1D76-4437-866F-D24A674E4BC9}']"
+              p:after="*[1=2]"
               s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
               s:ph="center" />
           </d>
@@ -185,6 +188,9 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{4D0BDA61-6859-4263-A8B4-B082B3579972}"
+              s:id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}" />
+            <r
               uid="{F365044F-479D-44C4-807E-39376C4646E6}"
               p:after="*[1=2]"
               s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
@@ -208,8 +214,11 @@ Languages:
           <d
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
+              uid="{4D0BDA61-6859-4263-A8B4-B082B3579972}"
+              s:id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}" />
+            <r
               uid="{F365044F-479D-44C4-807E-39376C4646E6}"
-              p:after="r[@uid='{008E8B8D-1D76-4437-866F-D24A674E4BC9}']"
+              p:after="*[1=2]"
               s:id="{2685E523-5828-4F75-9B4E-476EFE1DC2DC}"
               s:ph="center" />
           </d>

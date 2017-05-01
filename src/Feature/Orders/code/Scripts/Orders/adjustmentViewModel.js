@@ -10,6 +10,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-function AdjustmentViewModel(description) {
-    this.description = description;
+function AdjustmentViewModel(adjustment) {
+    this.amount = adjustment.Amount;
+    this.description = adjustment.Description;
 }

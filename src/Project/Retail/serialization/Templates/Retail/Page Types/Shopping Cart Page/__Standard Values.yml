@@ -49,7 +49,7 @@ SharedFields:
           uid="{A168D191-12C1-4CFD-A3C5-FDFFC785DEA6}" />
         <r
           ds=""
-          id="{FAA386D8-192F-4762-839D-D637BD11549F}"
+          id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}"
           ph="navbar-activity"
           uid="{078941F7-E5A6-47B2-8F2B-3B2DB498527F}" />
         <r
@@ -158,7 +158,7 @@ Languages:
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
               uid="{078941F7-E5A6-47B2-8F2B-3B2DB498527F}"
-              s:ds="" />
+              s:id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}" />
             <r
               uid="{7F2C0907-44BB-414A-9E0C-A9D51C61B356}"
               s:ds="" />
@@ -305,7 +305,7 @@ Languages:
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
               uid="{078941F7-E5A6-47B2-8F2B-3B2DB498527F}"
-              s:ds="" />
+              s:id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}" />
             <r
               uid="{7F2C0907-44BB-414A-9E0C-A9D51C61B356}"
               s:ds="" />
@@ -387,7 +387,7 @@ Languages:
             id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
             <r
               uid="{078941F7-E5A6-47B2-8F2B-3B2DB498527F}"
-              s:ds="" />
+              s:id="{8C3A2CFC-18FB-4BF5-8584-50EA88978ED6}" />
             <r
               uid="{7F2C0907-44BB-414A-9E0C-A9D51C61B356}"
               s:ds="" />
