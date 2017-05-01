@@ -45,8 +45,8 @@
                         </td>
                         <td class="cart-quantity" style="width: 10%;">
                             <input pid="quantity" type="number" class="form-control form-control-quantity" placeholder="1"
-                                data-bind="value: $data.Quantity, attr: {'data-ExternalCartLineId': $data.ExternalCartLineId}"
-                                onfocusout="var input = this; setTimeout(function() { updateLineItem(input); }, 200);">
+                                   data-bind="value: $data.Quantity, attr: {'data-ExternalCartLineId': $data.ExternalCartLineId}"
+                                   onfocusout="var input = this; setTimeout(function() { updateLineItem(input); }, 200);">
                         </td>
                         <td class="cart-price text-right hidden-xs">
                             <span pid="price" data-bind="text: $data.Product.Price.Amount.toCurrency()"></span>
@@ -56,7 +56,7 @@
                         </td>
                         <td class="cart-delete">
                             <a pid="remove" class="delete-item" href="#" data-bind="click: deleteLineItem">
-                              <span class="glyphicon glyphicon-remove icon-md"></span>
+                                <span class="glyphicon glyphicon-remove icon-md"></span>
                             </a>
                         </td>
                     </tr>
@@ -104,7 +104,7 @@
                         <span data-bind="text: shippingAddress.address2"></span>
                         <br data-bind="visible: shippingAddress.Address2">
                         <span data-bind="text: shippingAddress.City"></span>
-                        <span data-bind="text: shippingAddress.State"></span>
+                        <span data-bind="text: shippingAddress.Region"></span>
                         <span data-bind="text: shippingAddress.ZipPostalCode"></span><br>
                         <span data-bind="text: getCountryElement(shippingAddress.Country).split('|')[1]"></span>
                     </div>
@@ -148,7 +148,7 @@
                             <label for="shippingAddress_State" class="col-md-2 control-label">@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-4">
                                 <select id="shippingAddress_State" class="form-control"
-                                        data-bind="value: shippingAddress.State,
+                                        data-bind="value: shippingAddress.Region,
                                                    options: model.activeShippingRegions,
                                                    optionsValue: function(c) { return c.split('|')[0]; },
                                                    optionsText: function(c) { return c.split('|')[1]; },
@@ -233,7 +233,7 @@
                         <span data-bind="text: billingAddress.address2"></span>
                         <br data-bind="visible: billingAddress.Address2">
                         <span data-bind="text: billingAddress.City"></span>
-                        <span data-bind="text: billingAddress.State"></span>
+                        <span data-bind="text: billingAddress.Region"></span>
                         <span data-bind="text: billingAddress.ZipPostalCode"></span><br>
                         <span data-bind="text: getCountryElement(billingAddress.Country).split('|')[1]"></span>
                         <!-- /ko -->
@@ -281,7 +281,7 @@
                             <label for="billingAddress_State" class="col-md-2 control-label">@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem)</label>
                             <div class="col-md-4">
                                 <select id="billingAddress_State" class="form-control"
-                                        data-bind="value: billingAddress.State,
+                                        data-bind="value: billingAddress.Region,
                                                    options: model.activeBillingRegions,
                                                    optionsValue: function(c) { return c.split('|')[0]; },
                                                    optionsText: function(c) { return c.split('|')[1]; },
@@ -307,7 +307,7 @@
                         <div class="form-group">
                             <div class="col-md-9">
                                 <button type="button" class="btn btn-default" onclick="useShippingAddress(); return false;"
-                                    data-bind="visible: model.groupedLines['Ship items'] && model.groupedLines['Ship items'].length">
+                                        data-bind="visible: model.groupedLines['Ship items'] && model.groupedLines['Ship items'].length">
                                     @Html.Sitecore().Field("Use Shipping Address Button Text", Html.Sitecore().CurrentItem)
                                 </button>
                             </div>
@@ -324,11 +324,17 @@
                 </div>
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
-                        <form id="checkout" method="post" action="/checkout">
-                            <div id="payment-form"></div>
-                            <input type="submit" class="btn btn-success pull-right"
-                                   value="@Html.Sitecore().Field("Confirm Button Text", Html.Sitecore().CurrentItem)"
-                                   data-bind="enable: model.isReadyToCheckout()">
+
+                        <form>
+                            <div class="show-payment">
+                                <div>
+                                    <div id="dropin-container"></div>
+                                </div>
+                            </div>
+
+                            <div id="btn-billing-next" class="btn btn-success pull-right" style="margin-top:24px">
+                                <button id="ToConfirmButton" data-loading-text="processing" class="btn btn-lg btn-success">Complete Order <span class="glyphicon glyphicon-chevron-right"></span></button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -337,8 +343,13 @@
     </div>
 </div>
 
-<script src="https://js.braintreegateway.com/js/braintree-2.27.0.min.js"></script>
 <script>
+
+    $(document).ready(function () {
+        initCheckoutData();
+        initBillingPage();
+    });
+
     var rendering = $("main section div.container");
 
     var currencyFormat = function() {
@@ -419,8 +430,6 @@
             return num.toCurrency();
     }
 
-
-
     function applyModel() {
         applyModel.originalHTML = applyModel.originalHTML || rendering[0].innerHTML;
         rendering[0].innerHTML = applyModel.originalHTML;
@@ -465,19 +474,27 @@
         ko.cleanNode(rendering[0]);
         ko.applyBindings(model, rendering[0]);
 
-        /*
-        braintree.setup(model.PaymentClientToken, 'dropin', {
-            container: 'dropin-container',
+        braintree.setup(model.PaymentClientToken, "dropin", {
+            container: "dropin-container",
             paymentMethodNonceReceived: function (event, nonce) {
                 if (nonce.length > 0) {
-                    checkoutDataViewModel.cardPaymentResultAccessCode = nonce;
-                    checkoutDataViewModel.cardPaymentAcceptCardPrefix = "paypal";
+                    model.cardPaymentResultAccessCode = nonce;
+                    model.cardPaymentAcceptCardPrefix = "paypal";
+                    setPaymentMethodsSinglePageCheckout();
+                }
+            },
+            paypal: {
+                singleUse: true,
+                amount: 10.00,
+                currency: 'USD',
+                onSuccess: function (nonce, email) {
+                    if (nonce.length > 0) {
+                        model.cardPaymentResultAccessCode = nonce;
+                        model.cardPaymentAcceptCardPrefix = "paypal";
+                        setPaymentMethodsSinglePageCheckout();
+                    }
                 }
             }
-        });
-        */
-        braintree.setup(model.PaymentClientToken, "dropin", {
-            container: "payment-form"
         });
     }
 
@@ -498,9 +515,10 @@
             Address1: null,
             Address2: null,
             City: null,
-            State: null,
+            Region: null,
             ZipPostalCode: null,
-            Country: 'US'
+            Country: 'US',
+            PartyID: '0'
         }
     }
 
@@ -626,7 +644,7 @@
             errors.push('@Html.Sitecore().Field("Address City Label", Html.Sitecore().CurrentItem) is a required field.');
 
         var possibleRegions = model.CountriesRegions[getCountryElement(address.Country)];
-        if (!address.State && possibleRegions && possibleRegions.length)
+        if (!address.Region && possibleRegions && possibleRegions.length)
             errors.push('@Html.Sitecore().Field("Address Province Label", Html.Sitecore().CurrentItem) is a required field.');
 
         if (!address.ZipPostalCode)
@@ -641,9 +659,58 @@
         return !errors.length;
     }
 
-
-
     var model = @Html.Raw(JsonConvert.SerializeObject(Model));
     applyModel();
 
+    function setPaymentMethodsSinglePageCheckout() {
+        var data = "{";
+
+        var creditCard = {
+            "CardToken": model.cardPaymentResultAccessCode,
+            "Amount": model.Cart.Total.Amount,
+            "CardPaymentAcceptCardPrefix": "paypal"
+        };
+
+        if (data.length > 1) {
+            data += ",";
+        }
+
+        data += '"FederatedPayment":' + JSON.stringify(creditCard);
+
+        if (data.length > 1) {
+            data += ",";
+        }
+        model.PartyID = "0";
+        data += '"BillingAddress":' + JSON.stringify(model.shippingAddress);
+
+        data += "}";
+
+        AJAXPost("/api/storefront/checkout/SetPaymentMethods", data, function (data, success, sender) {
+            if (success && data.Success) {
+                submitOrderSinglePageCheckout();
+            }
+        }, $(this));
+
+    }
+
+    // ----- CONFIRM & SUBMIT ----- //
+    function submitOrderSinglePageCheckout() {
+        var data = "{";
+        data += '"userEmail": "' + model.email + '"';
+        var creditCard = {
+            "CardToken": model.cardPaymentResultAccessCode,
+            "Amount": model.Cart.Total.Amount,
+            "CardPaymentAcceptCardPrefix": "paypal"
+        };
+
+        if (data.length > 1) {
+            data += ",";
+        }
+
+        data += '"FederatedPayment":' + JSON.stringify(creditCard);
+
+        data += "}";
+
+        AJAXPost("/api/storefront/checkout/SubmitOrder", data, submitOrderResponse, $(this));
+    }
 </script>

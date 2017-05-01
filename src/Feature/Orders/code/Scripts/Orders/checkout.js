@@ -408,10 +408,10 @@ function updatePaymentAllAmount() {
 function submitCardPaymentAcceptPayment() {
     if (checkoutDataViewModel && checkoutDataViewModel.payFederatedPayment && checkoutDataViewModel.creditCardPayment().isAdded() && !checkoutDataViewModel.cardPaymentResultAccessCode) {
         if (checkoutDataViewModel.messageOrigin) {
-            // Send a message to the card page to trigger submit
+             //Send a message to the card page to trigger submit
             var cardPaymentAcceptIframe = document.getElementById("cardPaymentAcceptFrame");
             var cardPaymentAcceptMessage = {
-                type: checkoutDataViewModel.CARDPAYMENTACCEPTPAGESUBMIT,
+                type: "msax-cc-submit",
                 value: "true"
             };
             cardPaymentAcceptIframe.contentWindow.postMessage(JSON.stringify(cardPaymentAcceptMessage), checkoutDataViewModel.messageOrigin);

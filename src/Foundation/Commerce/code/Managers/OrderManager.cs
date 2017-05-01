@@ -97,7 +97,7 @@ namespace Sitecore.Foundation.Commerce.Managers
                     if (!wasEmailSent)
                     {
                         var message = DictionaryPhraseRepository.Current.Get("/System Messages/Orders/Could Not Send Email Error", "Sorry, the email could not be sent");
-                        errorResult.SystemMessages.Add(new SystemMessage(message));
+                        //errorResult.SystemMessages.Add(new SystemMessage(message));
                     }
                 }
                 catch (Exception ex)

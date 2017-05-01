@@ -78,9 +78,6 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
         [AllowAnonymous]
         public ActionResult Checkout()
         {
-            if (Request.HttpMethod == "POST")
-                return SubmitOrder();
-
             var model = CreateViewModel();
             if (!model.HasLines && !Context.PageMode.IsExperienceEditor)
             {
@@ -90,33 +87,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             }
             return View(model);
         }
-
-        private RedirectResult SubmitOrder()
-        {
-            //try
-            //{
-                var inputModel = new SubmitOrderInputModel();
-                inputModel.UserEmail = Request.Cookies["email"]?.Value;
-                inputModel.FederatedPayment = new FederatedPaymentInputModelItem();
-                inputModel.FederatedPayment.Amount = GetCart().Total.Amount;
-                inputModel.FederatedPayment.CardPaymentAcceptCardPrefix = "paypal";
-                inputModel.FederatedPayment.CardToken = Request.Form["payment_method_nonce"];
-
-                var response = OrderManager.SubmitVisitorOrder(CommerceUserContext.Current.UserId, inputModel);
-                if (!response.ServiceProviderResult.Success || response.Result == null || response.ServiceProviderResult.CartWithErrors != null)
-                {
-                    throw new Exception("Error submitting order: " +
-                        string.Join(", ", response.ServiceProviderResult.SystemMessages.Select(sm => sm.Message)));
-                }
-
-                return Redirect($"OrderConfirmation?{ConfirmationIdQueryString}={response.Result.OrderID}");
-            //}
-            //catch (Exception e)
-            //{
-            //    throw;
-            //}
-        }
-
+   
         [AllowAnonymous]
         [ValidateJsonAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
@@ -151,7 +122,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             return model;
         }
 
-        private CommerceCart GetCart()
+        public CommerceCart GetCart()
         {
             var cartResponse = CartManager.GetCart(CommerceUserContext.Current.UserId, true);
             return cartResponse.ServiceProviderResult.Cart as CommerceCart;
@@ -291,20 +262,20 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
                 inputModel.ShippingMethods.Add(emailMethod);
             }
 
-            //try
-            //{
+            try
+            {
                 var response = CartManager.SetShippingMethods(CommerceUserContext.Current.UserId, inputModel);
                 if (!response.ServiceProviderResult.Success || response.Result == null)
                     throw new Exception("Error setting shipping methods: " +
                         string.Join(",", response.ServiceProviderResult.SystemMessages.Select(sm => sm.Message)));
                 model.Cart = response.Result;
-            //}
-            //catch (Exception e)
-            //{
-            //    throw;
-            //}
-
         }
+            catch (Exception e)
+            {
+                throw;
+    }
+
+}
 
         private PartyInputModelItem GetPartyInputModelItem()
         {
@@ -315,8 +286,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             shippingAddress = HttpUtility.UrlDecode(shippingAddress);
             var item = JsonConvert.DeserializeObject<PartyInputModelItem>(shippingAddress);
             item.PartyId = "0";
-            item.ExternalId = "0"; //string.IsNullOrWhiteSpace(item.PartyId) || item.PartyId == "0" ? Guid.NewGuid().ToString() : item.PartyId;
-            item.Region = item.State;
+            item.ExternalId = "0";
             return item;
         }
 
@@ -436,14 +406,14 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             try
             {
                 Assert.ArgumentNotNull(inputModel, nameof(inputModel));
+            if (String.IsNullOrEmpty(inputModel.UserEmail))
+            {
+                inputModel.UserEmail = Request.Cookies["email"]?.Value;
+            }
 
-                var validationResult = this.CreateJsonResult();
-                if (validationResult.HasErrors)
-                {
-                    return Json(validationResult, JsonRequestBehavior.AllowGet);
-                }
-
-                var response = OrderManager.SubmitVisitorOrder(CommerceUserContext.Current.UserId, inputModel);
+            var validationResult = this.CreateJsonResult();
+            
+            var response = OrderManager.SubmitVisitorOrder(CommerceUserContext.Current.UserId, inputModel);
                 var result = new SubmitOrderApiModel(response.ServiceProviderResult);
                 if (!response.ServiceProviderResult.Success || response.Result == null || response.ServiceProviderResult.CartWithErrors != null)
                 {
@@ -452,12 +422,12 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
 
                 result.Initialize($"checkout/OrderConfirmation?{ConfirmationIdQueryString}={response.Result.OrderID}");
                 return Json(result, JsonRequestBehavior.AllowGet);
-            }
+        }
             catch (Exception e)
             {
                 return Json(new ErrorApiModel("SubmitOrder", e), JsonRequestBehavior.AllowGet);
             }
-        }
+}
 
         [AllowAnonymous]
         [HttpPost]
@@ -536,7 +506,7 @@ namespace Sitecore.Feature.Commerce.Orders.Controllers
             {
                 Assert.ArgumentNotNull(inputModel, nameof(inputModel));
 
-                var validationResult = this.CreateJsonResult();
+            var validationResult = this.CreateJsonResult();
                 if (validationResult.HasErrors)
                 {
                     return Json(validationResult, JsonRequestBehavior.AllowGet);
