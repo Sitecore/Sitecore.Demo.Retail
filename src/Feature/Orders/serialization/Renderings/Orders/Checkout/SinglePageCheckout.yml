@@ -22,7 +22,6 @@ SharedFields:
     /Scripts/Orders/checkoutDataViewModel.js
     /Scripts/Orders/checkout.js
     /Scripts/Orders/cart.js
-    https://js.braintreegateway.com/js/braintree-2.27.0.min.js
     /Scripts/Orders/orders.js
     /Scripts/Orders/main.js
 - ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"

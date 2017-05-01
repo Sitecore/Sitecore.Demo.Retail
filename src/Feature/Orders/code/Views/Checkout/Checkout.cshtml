@@ -343,6 +343,7 @@
     </div>
 </div>
 
+<script src="https://js.braintreegateway.com/js/braintree-2.27.0.min.js"></script>
 <script>
 
     $(document).ready(function () {
@@ -680,8 +681,18 @@
         if (data.length > 1) {
             data += ",";
         }
+
         model.PartyID = "0";
-        data += '"BillingAddress":' + JSON.stringify(model.shippingAddress);
+
+        model.billingAddress = JSON.parse(Cookies.get('billingAddress') || null);
+        if (model.billingAddress == null) {
+            data += '"BillingAddress":' + JSON.stringify(model.shippingAddress);
+        }
+        else {
+            model.billingAddress.PartyID = "1";
+            model.billingAddress.ExternalId = "1";
+            data += '"BillingAddress":' + JSON.stringify(model.billingAddress);
+        }
 
         data += "}";
 
