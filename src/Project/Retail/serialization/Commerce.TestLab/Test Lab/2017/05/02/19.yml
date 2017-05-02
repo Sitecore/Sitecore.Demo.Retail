@@ -1,8 +1,8 @@
 ﻿---
-ID: "5c386337-ea58-4c83-bdf2-2530daf1cbf5"
-Parent: "b200a152-f965-435b-ab46-e667fa44e511"
+ID: "26441609-3311-4133-8362-387601b6d910"
+Parent: "6a6e29f1-9315-4cdc-aa0d-3d038e90df2b"
 Template: "adb6ca4f-03ef-4f47-b9ac-9ce2ba53ff97"
-Path: /sitecore/content/Storefront/Home/Customer Service/News/2016/12
+Path: /sitecore/system/Marketing Control Panel/Test Lab/2017/05/02/19
 DB: master
 Languages:
 - Language: en
@@ -11,7 +11,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20161228T230503Z
+      Value: 20170502T190627Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
