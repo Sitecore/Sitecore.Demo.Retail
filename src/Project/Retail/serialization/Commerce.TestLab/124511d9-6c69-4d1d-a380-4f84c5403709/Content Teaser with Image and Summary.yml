@@ -1,0 +1,29 @@
+﻿---
+ID: "8a3b2a55-33ba-41a9-a431-4eaae3644fbf"
+Parent: "124511d9-6c69-4d1d-a380-4f84c5403709"
+Template: "72296cfa-6354-47ad-901a-17f1651e9505"
+Path: /sitecore/system/Marketing Control Panel/Test Lab/2017/05/02/19/58/Home 38F5E8BEB8954C54A4D2C403D1D76483/Content Teaser with Image and Summary
+DB: master
+SharedFields:
+- ID: "4549eb29-846c-4682-80b6-fd2cba0c1c51"
+  Hint: Original Value
+  Value: "{05B64FEC-F44D-4565-905C-978869679A8E}"
+- ID: "895e3a86-982b-409a-aa41-0bc1fe4f4d36"
+  Hint: Name
+  Value: Content Teaser with Image and Summary2
+- ID: "9c6106ea-7a5a-48e2-8cad-f0f693b1e2d4"
+  Hint: __Read Only
+  Type: Checkbox
+  Value: 1
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20170502T194658Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
