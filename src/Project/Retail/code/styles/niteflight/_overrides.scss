@@ -7,3 +7,37 @@
 @media (min-width: 992px) {
     #miniCart-responsive { display: none; }
 }
+
+/* Dropdown Minicart styles */
+.minicart-content{
+    max-height:405px;
+    overflow-y:auto;
+}
+
+/* Styles for MVC validation helpers*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+        
+.field-validation-valid
+{
+    display: none;
+}
+        
+.input-validation-error
+{
+    border: 1px solid #ff0000 !important;
+    background-color: #ffeeee !important;
+}
+        
+.validation-summary-errors
+{
+    font-weight: bold !important;
+    color: #ff0000 !important;
+}
+        
+.validation-summary-valid
+{
+    display: none;
+}
