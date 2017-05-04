@@ -31,7 +31,7 @@ SharedFields:
     /Scripts/Orders/miniCartItemListViewModel.js
     /Scripts/Orders/miniCartViewModel.js
     /Scripts/Orders/minicart.js
-    
+    /Scripts/Errors/errorsummary.js
 - ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
   Hint: Controller
   Value: Cart
