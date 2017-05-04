@@ -1,23 +1,23 @@
 ﻿---
-ID: "05b64fec-f44d-4565-905c-978869679a8e"
-Parent: "8a3b2a55-33ba-41a9-a431-4eaae3644fbf"
+ID: "75447567-fbfe-48d1-a2a5-7898139553bd"
+Parent: "60540b5a-47a8-4d76-a1d7-bb411000a972"
 Template: "6d00d695-0cab-47d7-8929-a03ea002eb19"
-Path: /sitecore/system/Marketing Control Panel/Test Lab/2017/05/02/19/58/Home 38F5E8BEB8954C54A4D2C403D1D76483/Content Teaser with Image and Summary/Original
+Path: /sitecore/system/Marketing Control Panel/Test Lab/2017/05/04/15/31/Home 27B9B4CE7C6D4214989E0BF8930EBBEC/Content Teaser with Image and Summary/Value Off
 DB: master
 SharedFields:
 - ID: "77c2a8f6-ab1c-40b7-be7b-ebcb615b770a"
   Hint: Datasource
-  Value: "{E8A40684-4165-43FE-A7FA-B3107FA04F6D}"
+  Value: "{022B500A-6372-41E8-8015-66EDD9CF1BD1}"
 - ID: "9c6106ea-7a5a-48e2-8cad-f0f693b1e2d4"
   Hint: __Read Only
   Type: Checkbox
   Value: 1
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
-  Value: 100
+  Value: 99
 - ID: "c5230c52-c652-435b-8b1d-b6c96a96330d"
   Hint: Name
-  Value: 10 Percent Off
+  Value: Value Off
 Languages:
 - Language: en
   Versions:
@@ -25,7 +25,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20170502T194658Z
+      Value: 20170504T152622Z
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |

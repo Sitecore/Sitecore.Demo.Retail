@@ -1,8 +1,8 @@
 ﻿---
-ID: "124511d9-6c69-4d1d-a380-4f84c5403709"
-Parent: "a9a8a276-c945-46b8-8e59-bc0409a62a97"
+ID: "18349174-e082-4478-8a5c-7e628bdebcf5"
+Parent: "a4c4a4a4-f4cb-40b6-80ad-abfdb4f9e262"
 Template: "45fb02e9-70b3-4cfe-8050-06ead4b5db3e"
-Path: /sitecore/system/Marketing Control Panel/Test Lab/2017/05/02/19/58/Home 38F5E8BEB8954C54A4D2C403D1D76483
+Path: /sitecore/system/Marketing Control Panel/Test Lab/2017/05/04/15/31/Home 27B9B4CE7C6D4214989E0BF8930EBBEC
 DB: master
 SharedFields:
 - ID: "0410bcd6-1c08-4bc6-a4f4-1e288c5483d7"
@@ -11,22 +11,22 @@ SharedFields:
 - ID: "30f291c9-cf14-41bf-8173-1ee796e423d1"
   Hint: Device
   Value: "{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+- ID: "4e028608-3407-4d52-9956-b3774784d347"
+  Hint: Conversion
+  Type: Multilist with Search
+  Value: "{7D82353B-9A54-495D-A241-20CC13A58B91}"
 - ID: "54ab2781-4a1b-4db3-86be-1797fd041af3"
   Hint: Name
-  Value: Home 38F5E8BEB8954C54A4D2C403D1D76483
+  Value: Home 27B9B4CE7C6D4214989E0BF8930EBBEC
 - ID: "6997d734-2b0b-4ce4-8cd0-b4f73a3999a6"
   Hint: Test Strategy
   Value: "{5E06B64F-6EA7-495C-AA66-7B69F7B94C19}"
-- ID: "8c0f9980-5a09-4874-a96e-468c13853b3a"
-  Hint: TrackWithEngagement
-  Type: Checkbox
-  Value: 1
 - ID: "8d275b38-730d-4ab1-9280-761a3fbefad9"
   Hint: Content Item
-  Value: "sitecore://{441B60D3-09BB-4111-A3AD-D10076B78B54}?lang=en&ver=2"
+  Value: "sitecore://{441B60D3-09BB-4111-A3AD-D10076B78B54}?lang=en&ver=4"
 - ID: "936e7737-5d1e-45d5-ae4d-c207f16238a0"
   Hint: ConfidenceLevel
-  Value: 95
+  Value: 90
 - ID: "9c6106ea-7a5a-48e2-8cad-f0f693b1e2d4"
   Hint: __Read Only
   Type: Checkbox
@@ -59,7 +59,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20170502T195832Z
+      Value: 20170504T153112Z
     - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
       Hint: __Workflow state
       Value: "{1789B344-EA1D-4DF7-BA53-1BB2814F7A5A}"
