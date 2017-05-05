@@ -63,8 +63,14 @@
     <Reference Include="Sitecore.Feature.Language">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Feature.Language.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Feature.Metadata">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Feature.Metadata.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.Assets">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Assets.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Foundation.DependencyInjection">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.DependencyInjection.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Foundation.SitecoreExtensions">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.SitecoreExtensions.dll</HintPath>
@@ -151,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\Pipelines\RaiseCommerceCultureChosenPageEvent.cs" />
+    <Compile Include="Infrastructure\Pipelines\SetProductCatalogMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
