@@ -73,7 +73,7 @@ namespace Sitecore.Foundation.Commerce.Engine.Plugin.Payments.Pipelines.Blocks
                     Transaction transaction = result.Target;
                     payment.TransactionId = transaction?.Id;
                     payment.TransactionStatus = transaction?.Status?.ToString();
-                    //payment.PaymentInstrumentType = transaction?.PaymentInstrumentType?.ToString();
+                    payment.PaymentInstrumentType = transaction?.PaymentInstrumentType?.ToString();
                     var cc = transaction?.CreditCard;
                     payment.MaskedNumber = cc?.MaskedNumber;
                     payment.CardType = cc?.CardType?.ToString();
