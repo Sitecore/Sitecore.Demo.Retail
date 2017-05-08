@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configurat
 		package.json = package.json
 		publishsettings.targets = publishsettings.targets
 		uninstall-commerce.ps1 = uninstall-commerce.ps1
+		src\Project\Retail\code\App_Config\Include\zzz\z.Sitecore.Demo.Retail.DevSettings.config = src\Project\Retail\code\App_Config\Include\zzz\z.Sitecore.Demo.Retail.DevSettings.config
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Foundation", "Foundation", "{A65C1E2B-A56A-4E86-B928-23176FC86DB8}"
