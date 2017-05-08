@@ -1,0 +1,35 @@
+﻿---
+Username: |
+  CommerceUsers\mariasmith@gmail.com
+Email: mariasmith@gmail.com
+Comment: 
+Created: "2017-05-03T12:39:29.0000000Z"
+IsApproved: True
+Properties:
+- Key: IsAdministrator
+  Value: False
+  ValueType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: Portrait
+  Value: office/16x16/default_user.png
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: ProfileItemId
+  Value: "{0FFEC1BD-4D35-49CF-8B7D-7F01930834ED}"
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: __Serialization
+  Value: |
+    {"UserName":"mariasmith@gmail.com","FirstName":null,"LastName":null,"Email":"mariasmith@gmail.com","Comment":null,"IsDisabled":false,"CreationDate":"2017-05-03T12:39:29.7530366Z","LastActivityDate":"0001-01-01T00:00:00","LastLoginDate":"0001-01-01T00:00:00","LastDisabledDate":"0001-01-01T00:00:00","LastPasswordChangedDate":"0001-01-01T00:00:00","Shops":["storefront"],"Customers":[],"ExternalId":null,"Properties":[]}
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: digestcredentialhash
+  Value: 12c068ec8faaedbd1edb763b3cb31078
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: digestcredentialhashwithoutdomain
+  Value: f1a593f6cb9628bd5fa87e0ff43ec5d6
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+Roles:
+  MemberOf: User Role
