@@ -35,5 +35,3 @@ Properties:
   Value: 36ee468840a5793c9eca58777cc5604b
   ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
   IsCustom: True
-Roles:
-  MemberOf: User Role
