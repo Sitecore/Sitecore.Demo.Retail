@@ -1,0 +1,36 @@
+﻿---
+ID: "e48e2cca-493d-410d-9b15-b2e1a0939730"
+Parent: "50ca28d4-c93c-435b-92da-866276a1bfdf"
+Template: "d8144149-f3db-443a-9e26-c8d92cd824a9"
+Path: /sitecore/content/Storefront/Global/Site Spots/ShareAndPrint
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "1b09addd-5165-4c61-8e3b-ee06943c431d"
+      Hint: Create New Wish List Label
+      Value: Create new wish list
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20150106T221503Z
+    - ID: "3e3e4db9-85a9-435a-a5f3-965f159694f1"
+      Hint: Add New Wish List Label
+      Value: Add new wish list
+    - ID: "5293c5d6-0c92-4fb7-887b-c3fa5a9d2e83"
+      Hint: Create Wish List Label
+      Value: Create wish list
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "66cba671-e9f1-41f2-942f-3d27fae5857a"
+      Hint: New Wish List Label
+      Value: New wish list
+    - ID: "834db12a-1186-45d1-84c9-c7eba58467f4"
+      Hint: Save Changes Label
+      Value: Save changes
+    - ID: "98efb1c2-07df-4788-aa85-2c28b1b04922"
+      Hint: Close Label
+      Value: Close

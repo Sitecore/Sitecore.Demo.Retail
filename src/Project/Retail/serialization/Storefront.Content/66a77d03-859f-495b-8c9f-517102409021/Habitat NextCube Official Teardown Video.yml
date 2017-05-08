@@ -1,0 +1,72 @@
+﻿---
+ID: "7c942039-f66f-44a2-a912-73db508a765b"
+Parent: "66a77d03-859f-495b-8c9f-517102409021"
+Template: "042c770b-89ae-466a-9a31-18397780c535"
+Path: /sitecore/content/Storefront/Home/Customer Service/News/2016/12/29/08/45/Habitat NextCube Official Teardown Video
+DB: master
+SharedFields:
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: 
+- ID: "c464d2d7-3382-428a-bcdf-0963c60ba0e3"
+  Hint: NewsDate
+  Value: 20161229T000000Z
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{346595F0-F92E-4020-9EA3-A8C12C4BB8D7}"
+              s:ds="" />
+            <r
+              uid="{0A92E89B-04DE-4A45-9DD5-A9E2369239DD}"
+              s:ds=""
+              s:par="" />
+            <r
+              uid="{76A38F26-9D74-4197-8CBD-71D9F3C46BBD}"
+              p:after="r[@uid='{0A92E89B-04DE-4A45-9DD5-A9E2369239DD}']"
+              s:ds="{35595D8B-BD46-4CF8-9173-C42F929595FA}"
+              s:id="{349287CD-182C-4F2F-80B8-62A8B62CC57E}"
+              s:par=""
+              s:ph="/page-layout/section/col-wide-1" />
+          </d>
+        </r>
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20161229T084544Z
+    - ID: "3437eaac-6ee8-460b-a33d-da1f714b5a93"
+      Hint: NewsImage
+      Value: |
+        <image mediaid="{DFCA91A9-EA37-494B-8774-89873C7CAB7F}"></image>
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: 
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "801612c7-5e98-4e3c-80d2-a34d0eebcbda"
+      Hint: NewsBody
+      Value: "<p>But what does it look like on the inside? See for yourself in our new video where our lead engineer disassembles the new system once piece at a time.</p>"
+    - ID: "9d08271a-1672-44dd-b7ef-0a6ec34fcba7"
+      Hint: NewsSummary
+      Value: <p>Habitat's NextCube is the most powerful gaming console yet.</p>
+    - ID: "bb7a38c0-323c-4f81-8eb9-288abf7c4638"
+      Hint: MetaDescription
+      Value: NextCube, tear down, video, gaming console, gamer
+    - ID: "bd9ecd4a-c0b0-4233-a3cd-d995519ac87b"
+      Hint: NewsTitle
+      Value: Habitat NextCube Official Teardown Video
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: Habitat NextCube Official Teardown Video

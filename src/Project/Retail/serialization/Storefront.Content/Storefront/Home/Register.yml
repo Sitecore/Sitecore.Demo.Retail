@@ -1,0 +1,112 @@
+﻿---
+ID: "32af489d-e6f9-4202-b6c7-6259c9f52e0e"
+Parent: "441b60d3-09bb-4111-a3ad-d10076b78b54"
+Template: "2483d7fa-6703-4633-9ffc-76f6ce53d7c4"
+Path: /sitecore/content/Storefront/Home/Register
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: People/32x32/user1_edit.png
+- ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
+  Hint: __Workflow
+  Value: "{A5BC37E7-ED96-4C1E-8590-A26E64DB55EA}"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 1300
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "04fed636-94a9-47e4-92cd-a7f92befb811"
+      Hint: Cancel
+      Value: Cancel
+    - ID: "0754ef47-267d-4390-a004-a28badef4d0b"
+      Hint: First Name
+      Value: First Name
+    - ID: "0ee2f208-1fee-42fc-8051-6696d49a92bf"
+      Hint: OpenGraphTitle
+      Value: Create an Acccount
+    - ID: "0f00bf99-7f90-4fca-b56c-b171f305477c"
+      Hint: Facebook Button
+      Value: Connect to facebook
+    - ID: "11e1495c-fc5f-40e7-a8fc-0aec024d4d66"
+      Hint: Password Placeholder
+      Value: Password
+    - ID: "17035dd9-9e0f-4459-82f1-6455be08ccad"
+      Hint: Email Of Existing Customer
+      Value: Email Of Existing Customer
+    - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
+      Hint: NavigationTitle
+      Value: Create an Acccount
+    - ID: "25654646-90c4-487f-96b2-9ab21bfdbfeb"
+      Hint: Registering
+      Value: Registering ...
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20141119T095223Z
+    - ID: "272fd624-6448-464b-ad8f-ed706c580f1d"
+      Hint: Create User
+      Value: Create user
+    - ID: "2ef94cae-2fc4-4936-80e5-cc14d680cc5c"
+      Hint: Password Length Message
+      Value: "The Password must be at least {0} characters long."
+    - ID: "3e431de1-525e-47a3-b6b0-1ccbec3a8c98"
+      Hint: __Workflow state
+      Value: "{FCA998C5-0CC3-4F91-94D8-0A4E6CAECE88}"
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "601747ac-bba2-4d26-940a-990ebd71f2e7"
+      Hint: First Name Placeholder
+      Value: First name
+    - ID: "6dfeaa2a-d395-4d6b-9a28-baa067234c74"
+      Hint: Last Name Placeholder
+      Value: Surname
+    - ID: "6f1b8496-8581-43bf-93b2-983cc992bbe7"
+      Hint: Email Address Placeholder
+      Value: Email Address
+    - ID: "6ffd7d04-6add-4608-9fef-304cc12dde36"
+      Hint: Password Missing Message
+      Value: The password is required.
+    - ID: "96760d29-01c8-4158-b80d-8ae8b3427ef3"
+      Hint: Password Again
+      Value: Confirm Password
+    - ID: "b5f1b2be-f451-4196-9b19-3b8c3addc0e4"
+      Hint: First Name Missing Message
+      Value: The First name is required.
+    - ID: "b65df6cb-e4d5-4b11-9da5-1d1e411eebc1"
+      Hint: Email Missing Message
+      Value: The email is required.
+    - ID: "b7938ec0-1f55-45de-8010-c59f52ef43e9"
+      Hint: Last Name
+      Value: Surname
+    - ID: "bf56e529-3ee6-4aa5-a74d-8472be8b78ca"
+      Hint: Last Name Missing Message
+      Value: The Surname is required.
+    - ID: "c025ee06-d9f1-45a3-9bbe-b849c24ea25f"
+      Hint: Password
+      Value: Password
+    - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
+      Hint: Title
+      Value: Create an Acccount
+    - ID: "c4a8e07e-4cd4-4b78-8c1a-68d327dcebbd"
+      Hint: Passwords Do Not Match Message
+      Value: The password and confirmation password do not match.
+    - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
+      Hint: BrowserTitle
+      Value: Create an Acccount
+    - ID: "cb93092d-1dd9-4bc7-b30c-bac55e1b6e26"
+      Hint: Facebook Text
+      Value: |
+                    <h3>Save yourself some time, and log in via Facebook</h3>
+                    <p>We will not use or share you information with others.</p>
+        
+    - ID: "d788a7e2-00d1-44c0-96a1-993a51fd274c"
+      Hint: Email
+      Value: Email Address
+    - ID: "e066eb82-1f62-4e92-a749-2c885a6fbcf4"
+      Hint: Fill Form Message
+      Value: Please fill out the form below to create your own user.

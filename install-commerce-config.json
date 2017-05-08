@@ -1,28 +1,28 @@
 {
     "resources": [ 
         [   {   "id": "install",
-                "path": "C:\\Sitecore\\Repos\\Sitecore.Demo.Retail.Hotfix\\Install",
+                "path": "C:\\Projects\\Sitecore.Demo.Retail\\Install",
                 "files": [
                     [   {   "id": "commerceInstaller", "fileName": "CommerceServer-11.4.148.exe"}   ]
                 ]   
             }   
         ],
         [   {   "id": "projectDatabaseScripts",
-                "path": "C:\\Sitecore\\Repos\\Sitecore.Demo.Retail.Hotfix\\src\\Project\\Retail\\Database",
+                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Project\\Retail\\Database",
                 "files": [
                     [   {   "id": "profileDacpac", "fileName": "Commerce.Storefront.ProfileDatabase.dacpac", "databaseId": "CommerceProfilesDB"  }   ]
                 ]   
             }   
         ],
         [   {   "id": "foundationDatabaseScripts",
-                "path": "C:\\Sitecore\\Repos\\Sitecore.Demo.Retail.Hotfix\\src\\Foundation\\Commerce\\Database",
+                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Foundation\\Commerce\\Database",
                 "files": [
                     [   {   "id": "commerceEngineScript", "fileName": "CommerceServicesDbScript.sql", "databaseId": "commerceEngineGlobalDB", "useDatabaseName": false  }   ]
                 ]   
             }   
         ],
         [   {   "id": "commerceServerResources",
-                "path": "C:\\Sitecore\\Repos\\Sitecore.Demo.Retail.Hotfix\\src\\Project\\Retail\\Database",
+                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Project\\Retail\\Database",
                 "files": [
                     [   {   "id": "catalog",      "fileName": "Catalog.xml"   }   ],
 				    [   {   "id": "inventory",    "fileName": "Inventory.xml" }   ],
@@ -38,12 +38,12 @@
             }   
         ],
         [   {   "id": "commerceEngineProject",
-                "path": "C:\\Sitecore\\Repos\\Sitecore.Demo.Retail.Hotfix\\src\\Foundation\\Commerce\\Engine",
+                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Foundation\\Commerce\\Engine",
                 "files": []   
             }   
         ],  
         [   {   "id": "solutionRoot",
-                "path": "C:\\Sitecore\\Repos\\Sitecore.Demo.Retail.Hotfix\\",
+                "path": "C:\\Projects\\Sitecore.Demo.Retail\\",
                 "files": []   
             }   
         ] 
@@ -61,7 +61,7 @@
         "websites": [
             [   {   "id": "sitecore", 
                     "siteName": "habitat.dev.local", 
-                    "physicalPath": "C:\\websites\\habitat.dev.local\\Website" ,
+                    "physicalPath": "C:\\Websites\\habitat.dev.local\\Website" ,
                     "appPoolId":  "sitecore",
                     "bindings": [
                         [   {   "protocol": "http", "ipAddress": "*", "port": "80", "hostName": "habitat.dev.local"  }   ],
@@ -71,7 +71,7 @@
             ],
             [   {   "id": "commerceServerServices", 
                     "siteName": "habitat.csservices.dev.local", 
-                    "physicalPath": "C:\\websites\\habitat.dev.local\\CSServices" ,
+                    "physicalPath": "C:\\Websites\\habitat.dev.local\\CSServices" ,
                     "appPoolId":  "commerceServerServices",
                     "bindings": [
                         [   {   "protocol": "http", "ipAddress": "*", "port": "1004", "hostName": "habitat.csservices.dev.local"  }   ]
@@ -80,7 +80,7 @@
             ],
             [   {   "id": "commerceEngine", 
                     "siteName": "habitat.commerceengine.dev.local", 
-                    "physicalPath": "C:\\websites\\habitat.dev.local\\CommerceEngine" ,
+                    "physicalPath": "C:\\Websites\\habitat.dev.local\\CommerceEngine" ,
                     "appPoolId":  "commerceEngine",
                     "bindings": [
                         [   {   "protocol": "http", "ipAddress": "*", "port": "5000", "hostName": "habitat.commerceengine.dev.local"  }   ]
