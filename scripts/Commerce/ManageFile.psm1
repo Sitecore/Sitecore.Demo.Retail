@@ -61,4 +61,18 @@ function Confirm-File
     }
 }
 
-Export-ModuleMember Confirm-Resources
+function Clean-Directory
+{
+  param
+    (
+        [Parameter(Mandatory=$True)][string]$outputBaseDirectory
+
+    )
+	process
+	{
+		Write-Verbose "Deleting all Mongo Databases from $outputBaseDirectory\Mongo"
+		Remove-Item $outputBaseDirectory\Mongo\* -Recurse
+	}
+}
+
+Export-ModuleMember Confirm-Resources, Clean-Directory

@@ -1,5 +1,205 @@
 import-module sqlps -DisableNameChecking 3>$Nul
 
+
+"Loading 'Microsoft.SqlServer.Smo' assembly..."
+[System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SqlServer.Smo") | Out-Null
+[System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SqlServer.SmoExtended") | Out-Null
+[Reflection.Assembly]::LoadWithPartialName("Microsoft.SqlServer.ConnectionInfo") | Out-Null
+[Reflection.Assembly]::LoadWithPartialName("Microsoft.SqlServer.SmoEnum") | Out-Null
+
+Function Detach-Database ($DbName, $ServerName, [switch]$force)
+{
+<#
+.SYNOPSIS
+Detaches database from local SQl server.
+
+.DESCRIPTION
+Function performs detaching DB with defined name on local SQL server.
+
+.PARAMETER Name
+Specifies database name.
+
+.PARAMETER ServerName
+Specifies SQL server name.
+
+.EXAMPLE
+Detach-Database "Test_Sitecore.Core" "."
+#>
+
+  $Server = New-Object Microsoft.SqlServer.Management.Smo.Server -ArgumentList $ServerName
+
+  if ($Server.Databases.Contains($DbName))
+  {
+    Write-Log "Set database offline $DbName" -Program "MS SQL"
+	
+    $iter = 0
+    $successful = 0
+    do
+    {
+	  $iter += 1
+
+	  Write-Log "Detaching database $DbName on server $ServerName, attempt: $iter, total: 5" -Program "MS SQL"
+      try
+      {
+        if($force)
+        {
+          $Server.KillDatabase($DbName)
+        }
+        else
+        {
+          $MyDatabase = $Server.Databases.Item($DbName)
+          $Server.KillAllprocesses($DbName)
+          $MyDatabase.SetOffline()
+          $Server.DetachDatabase($DbName, $false) | Out-Null
+        }
+        $successful = 1
+      }
+      catch
+      {
+        Write-Log "Detaching database $DbName on server $ServerName, attempt failed" -Program "MS SQL" -Level "Warn"
+        $successful = 0
+      }
+      if (($successful -eq 0) -and ($iter -gt 4))
+      {
+        throw "Failed to detach $DbName on server $ServerName"
+      }
+    }
+    until (($successful -ne 0) -or ($iter -gt 4))
+  }
+  else
+  {
+    Write-Log "Database $DbName was not found on server $ServerName. Nothing performed" -Program "MS SQL" -Level "Warn"
+  }
+
+  if ($Server.Databases.Contains($DbName))
+  {
+    Write-Log "Database $DbName has not been successfully detached ..." -Program "MS SQL" -Level "Error"
+  }
+  else
+  {
+    Write-Log "Database $DbName has been successfully detached..." -Program "MS SQL"
+  }
+}
+
+Function Detach-Databases ($Prefix, $ServerName, [switch]$force)
+{
+<#
+.SYNOPSIS
+Detaches databases from local SQl server.
+
+.DESCRIPTION
+Function performs detaching DBs starting with prefix on local SQL server.
+
+.PARAMETER Prefix
+Specifies database prefix.
+
+.PARAMETER ServerName
+Specifies SQL server name.
+
+.EXAMPLE
+Detach-Databases "Test" "."
+#>
+
+  Write-Log "Detaching databases with prefix $Prefix on server $ServerName" -Program "MS SQL"
+  $Server = New-Object Microsoft.SqlServer.Management.Smo.Server -ArgumentList $ServerName
+  Write-Log "Searching databases with prefix $Prefix" -Program "MS SQL"
+  $dbs = $Server.Databases | Where-Object { $_.Name -Like $Prefix + "_*" } | select Name
+  if (($dbs -eq $null) -or ($dbs -eq ""))
+  {
+    Write-Log "Databases with prefix $Prefix was not found on server $ServerName" -Program "MS SQL" -Level "Warn"
+  }
+  else
+  {
+    foreach ($db in $dbs)
+    {
+      Detach-Database -DbName $db.Name -ServerName $ServerName -force:$force
+    }
+  }
+}
+
+Function Attach-Database($dbPath, $dbName, $prefix, $serverName)
+{
+<#
+.SYNOPSIS
+Attaches database to local SQL server.
+
+.DESCRIPTION
+Function performs attaching DB with defined name on local SQL server.
+
+.PARAMETER db
+Specifies database name.
+
+.PARAMETER ServerName
+Specifies SQL server name.
+
+.EXAMPLE
+Attach-Database "@{FullName=C:\inetpub\wwwroot\TestDeploy\Databases\Sitecore.Master.MDF; DBName=TestDeploy_Sitecore.Master; LogFullName=C:\inetpub\wwwroot\TestDeploy\Databases\Sitecore.Master.ldf}" "."
+#>
+
+  $Server = New-Object Microsoft.SqlServer.Management.Smo.Server -ArgumentList $ServerName
+  $sc = new-object System.Collections.Specialized.StringCollection;
+  if ($prefix.length -gt 0) {
+  $db = gci $dbpath -filter $dbname* | Where-Object {$_.Extension -like '*.mdf'}  | Select-Object FullName,@{Name = "DBName"; Expression = {$prefix + "_" + $_.BaseName}},@{Name = "LogFullName"; Expression = {$_.Directory.ToString() + "\" + $_.BaseName + ".ldf"}}
+  }
+  else {
+  $db = gci $dbpath -filter $dbname* | Where-Object {$_.Extension -like '*.mdf'}  | Select-Object FullName,@{Name = "DBName"; Expression = {$_.BaseName}},@{Name = "LogFullName"; Expression = {$_.Directory.ToString() + "\" + $_.BaseName + ".ldf"}}
+  }
+  $sc.Add($db.FullName) | Out-Null;
+  $sc.Add($db.LogFullName) | Out-Null;
+  if ($Server.Databases.Contains($db.DBName))
+  {
+    Write-Log "Database is already attached. Detaching database on server $ServerName" -Program "MS SQL" -Level "Warning"
+    Detach-Database $db.DBName $ServerName
+  }
+  Write-Log $sc
+  Write-Log $db.DBName
+  Write-Log "Attaching database $db String Collection: $sc  on server $ServerName" -Program "MS SQL"
+  $Srv = New-Object Microsoft.SqlServer.Management.Smo.Server -ArgumentList $ServerName
+  $Srv.ConnectionContext.StatementTimeout = 0
+  
+  $Srv.AttachDatabase($db.DBName, $sc) | Out-Null
+  Write-Log "Database has been attached $db.DBName locating at $db.FullName with log file $db.LogFullName on server $ServerName" -Program "MS SQL"
+}
+
+Function Attach-Databases ($DbPath, $Prefix, $ServerName)
+{
+<#
+.SYNOPSIS
+Attaches databases from defined folder to local SQL server.
+
+.DESCRIPTION
+Function performs attaching DBs with defined prefix from defined folder on local SQL server.
+
+.PARAMETER DbPath
+Specifies path to databases.
+
+.PARAMETER Prefix
+Specifies database prefix.
+
+.PARAMETER ServerName
+Specifies SQL server name.
+
+.EXAMPLE
+Attach-Databases "C:\Databases" "Test" "."
+#>
+
+  Push-Location $DbPath
+  $dbs = [string[]](Get-ChildItem *.mdf | select -Expand Name)
+  if($dbs -eq $null)
+  {
+    Write-Log "Databases with prefix $Prefix was not found on path $DbPath" -Program "MS SQL" -Level "Error"
+  }
+  else
+  {
+    foreach ($db in $dbs)
+    {
+      Attach-Database -DbPath $DbPath -dbName $db -prefix $Prefix -serverName $serverName
+    }
+  }
+  Pop-Location
+}
+
+
 function Import-DatabaseChanges
 {
     param 
