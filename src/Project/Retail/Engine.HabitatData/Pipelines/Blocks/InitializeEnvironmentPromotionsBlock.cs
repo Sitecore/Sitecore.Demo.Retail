@@ -80,6 +80,7 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
             this.CreateCartExclusive5OffCouponPromotion(book, context);
             this.CreateCart15PctOffCouponPromotion(book, context);
             this.CreateCartExclusive10PctOffPromotion(book, context);
+            this.CreateCartExclusive65PctBraintreePromotion(book, context);
 
             return arg;
         }
@@ -252,6 +253,79 @@ namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
                     context).Result;
 
             promotion = this._addPublicCouponPipeline.Run(new AddPublicCouponArgument(promotion, "HABRTRNEC5P"), context).Result;
+            promotion.SetComponent(new ApprovalComponent(context.GetPolicy<ApprovalStatusPolicy>().Approved));
+            this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context).Wait();
+        }
+        /// <summary>
+        /// Creates a cart exclusive 65% off coupon when the cart subtotal is between $2,000 and $3,000.99.
+        /// This is a workaround to the braintree sandbox environment which automatically declines transactions within a certain range.
+        /// </summary>
+        /// <param name="book">The book.</param>
+        /// <param name="context">The context.</param>
+        private void CreateCartExclusive65PctBraintreePromotion(PromotionBook book, CommercePipelineExecutionContext context)
+        {
+            var promotion =
+            this._addPromotionPipeline.Run(
+                new AddPromotionArgument(book, "Braintree 65Pct Cart Discount", DateTimeOffset.UtcNow.AddYears(-5), DateTimeOffset.UtcNow.AddYears(10), "Get 65% off your order when the order total is between $2,000 and $3,000.99", "Get 65% off your order when the order total is between $2,000 and $3,000.99")
+                {
+                    IsExclusive = true,
+                    DisplayName = "Braintree 65Pct Cart Discount",
+                    Description = "Braintree 65Pct Cart Discount"
+                },
+                context).Result;
+
+            promotion =
+            this._addQualificationPipeline.Run(
+                new PromotionConditionModelArgument(
+                    promotion,
+                    new ConditionModel
+                    {
+                        ConditionOperator = "And",
+                        Id = Guid.NewGuid().ToString(),
+                        LibraryId = CartsConstants.Conditions.CartSubtotalCondition,
+                        Name = CartsConstants.Conditions.CartSubtotalCondition,
+                        Properties = new List<PropertyModel>
+                        {
+                            new PropertyModel { IsOperator = true, Name = "Operator", Value = "Sitecore.Commerce.Plugin.Rules.DecimalGreaterThanOrEqualToOperator", DisplayType = "Sitecore.Framework.Rules.IBinaryOperator`2[[System.Decimal],[System.Decimal]], Sitecore.Framework.Rules.Abstractions" },
+                            new PropertyModel { Name = "Subtotal", Value = "2000", IsOperator = false, DisplayType = "System.Decimal" }
+                        }
+                    }),
+                context).Result;
+
+            promotion =
+            this._addQualificationPipeline.Run(
+                new PromotionConditionModelArgument(
+                    promotion,
+                    new ConditionModel
+                    {
+                        ConditionOperator = "And",
+                        Id = Guid.NewGuid().ToString(),
+                        LibraryId = CartsConstants.Conditions.CartSubtotalCondition,
+                        Name = CartsConstants.Conditions.CartSubtotalCondition,
+                        Properties = new List<PropertyModel>
+                        {
+                            new PropertyModel { IsOperator = true, Name = "Operator", Value = "Sitecore.Commerce.Plugin.Rules.DecimalLessThanOrEqualToOperator", DisplayType = "Sitecore.Framework.Rules.IBinaryOperator`2[[System.Decimal],[System.Decimal]], Sitecore.Framework.Rules.Abstractions" },
+                            new PropertyModel { Name = "Subtotal", Value = "3000.99", IsOperator = false, DisplayType = "System.Decimal" }
+                        }
+                    }),
+                context).Result;
+
+            promotion =
+            this._addBenefitPipeline.Run(
+                new PromotionActionModelArgument(
+                    promotion,
+                    new ActionModel
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        LibraryId = CartsConstants.Actions.CartSubtotalPercentOffAction,
+                        Name = CartsConstants.Actions.CartSubtotalPercentOffAction,
+                        Properties = new List<PropertyModel>
+                        {
+                            new PropertyModel { Name = "PercentOff", Value = "65", DisplayType = "System.Decimal" }
+                        }
+                    }),
+                context).Result;
+
             promotion.SetComponent(new ApprovalComponent(context.GetPolicy<ApprovalStatusPolicy>().Approved));
             this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context).Wait();
         }
