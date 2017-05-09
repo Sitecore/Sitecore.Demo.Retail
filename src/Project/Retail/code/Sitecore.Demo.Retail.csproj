@@ -135,17 +135,17 @@
     </None>
     <None Include="Properties\PublishProfiles\commerce3.pubxml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
-    <Content Include="styles\niteflight.css">
-      <DependentUpon>niteflight.scss</DependentUpon>
+    <Content Include="styles\nite-commerce.css">
+      <DependentUpon>nite-commerce.scss</DependentUpon>
     </Content>
-    <Content Include="styles\niteflight.min.css">
-      <DependentUpon>niteflight.css</DependentUpon>
+    <Content Include="styles\nite-commerce.min.css">
+      <DependentUpon>nite-commerce.css</DependentUpon>
     </Content>
     <Content Include="Views\Retail\Layouts\Retail.cshtml" />
-    <Content Include="styles\niteflight\_fonts.scss" />
-    <Content Include="styles\niteflight\_overrides.scss" />
-    <Content Include="styles\niteflight\_variables.scss" />
-    <Content Include="styles\niteflight.scss" />
+    <Content Include="styles\nite-commerce\_fonts.scss" />
+    <Content Include="styles\nite-commerce\_overrides.scss" />
+    <Content Include="styles\nite-commerce\_variables.scss" />
+    <Content Include="styles\nite-commerce.scss" />
     <None Include="Web.config">
       <SubType>Designer</SubType>
     </None>
