@@ -106,4 +106,4 @@ function Start-Websites
 }
 
 
-Export-ModuleMember Invoke-WebRequestWithWebsiteId, Invoke-WebRequest, Test-Certificate, Stop-WebSites, Start-Websites
+Export-ModuleMember Invoke-WebRequestWithWebsiteId, Invoke-WebRequest, Test-Certificate

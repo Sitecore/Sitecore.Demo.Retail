@@ -65,14 +65,43 @@ function Clean-Directory
 {
   param
     (
-        [Parameter(Mandatory=$True)][string]$outputBaseDirectory
+        [Parameter(Mandatory=$True)][string]$path
 
     )
 	process
 	{
-		Write-Verbose "Deleting all Mongo Databases from $outputBaseDirectory\Mongo"
-		Remove-Item $outputBaseDirectory\Mongo\* -Recurse
+		Write-Verbose "Empty $path"
+		Remove-Item $path\* -Recurse
+		return 0;
 	}
 }
 
-Export-ModuleMember Confirm-Resources, Clean-Directory
+function Create-Directory
+{
+  param
+    (
+        [Parameter(Mandatory=$True)][string]$path
+
+    )
+	process
+	{
+		Write-Verbose "Creating base directory: $path"
+		New-Item -ItemType Directory -Force -Path $path
+	}
+}
+function Copy-SQLDataFiles
+{
+	param
+		(
+			[Parameter(Mandatory=$True)][string]$sourcePath,
+			[Parameter(Mandatory=$True)][string]$destinationPath,
+			[Parameter(Mandatory=$True)][string]$prefix
+		)
+		begin{}
+		process
+		{
+			gci $sourcePath -filter $prefix* | % { Copy-Item -Path $sourcePath\$_ -Destination $destinationPath -Force }
+		}
+		end{}
+}
+Export-ModuleMember Confirm-Resources, Clean-Directory, Create-Directory, Copy-SQLDataFiles

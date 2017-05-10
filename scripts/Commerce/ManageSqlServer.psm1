@@ -30,7 +30,7 @@ Detach-Database "Test_Sitecore.Core" "."
 
   if ($Server.Databases.Contains($DbName))
   {
-    Write-Log "Set database offline $DbName" -Program "MS SQL"
+    Write-Verbose "Set database offline $DbName" 
 	
     $iter = 0
     $successful = 0
@@ -38,7 +38,7 @@ Detach-Database "Test_Sitecore.Core" "."
     {
 	  $iter += 1
 
-	  Write-Log "Detaching database $DbName on server $ServerName, attempt: $iter, total: 5" -Program "MS SQL"
+	  Write-Verbose "Detaching database $DbName on server $ServerName, attempt: $iter, total: 5" 
       try
       {
         if($force)
@@ -56,7 +56,7 @@ Detach-Database "Test_Sitecore.Core" "."
       }
       catch
       {
-        Write-Log "Detaching database $DbName on server $ServerName, attempt failed" -Program "MS SQL" -Level "Warn"
+        Write-Verbose "Detaching database $DbName on server $ServerName, attempt failed"  
         $successful = 0
       }
       if (($successful -eq 0) -and ($iter -gt 4))
@@ -68,16 +68,16 @@ Detach-Database "Test_Sitecore.Core" "."
   }
   else
   {
-    Write-Log "Database $DbName was not found on server $ServerName. Nothing performed" -Program "MS SQL" -Level "Warn"
+    Write-Verbose "Database $DbName was not found on server $ServerName. Nothing performed"  
   }
 
   if ($Server.Databases.Contains($DbName))
   {
-    Write-Log "Database $DbName has not been successfully detached ..." -Program "MS SQL" -Level "Error"
+    Write-Verbose "Database $DbName has not been successfully detached ..." 
   }
   else
   {
-    Write-Log "Database $DbName has been successfully detached..." -Program "MS SQL"
+    Write-Verbose "Database $DbName has been successfully detached..." 
   }
 }
 
@@ -100,13 +100,13 @@ Specifies SQL server name.
 Detach-Databases "Test" "."
 #>
 
-  Write-Log "Detaching databases with prefix $Prefix on server $ServerName" -Program "MS SQL"
+  Write-Verbose "Detaching databases with prefix $Prefix on server $ServerName" 
   $Server = New-Object Microsoft.SqlServer.Management.Smo.Server -ArgumentList $ServerName
-  Write-Log "Searching databases with prefix $Prefix" -Program "MS SQL"
+  Write-Verbose "Searching databases with prefix $Prefix" 
   $dbs = $Server.Databases | Where-Object { $_.Name -Like $Prefix + "_*" } | select Name
   if (($dbs -eq $null) -or ($dbs -eq ""))
   {
-    Write-Log "Databases with prefix $Prefix was not found on server $ServerName" -Program "MS SQL" -Level "Warn"
+    Write-Verbose "Databases with prefix $Prefix was not found on server $ServerName"  
   }
   else
   {
@@ -148,17 +148,16 @@ Attach-Database "@{FullName=C:\inetpub\wwwroot\TestDeploy\Databases\Sitecore.Mas
   $sc.Add($db.LogFullName) | Out-Null;
   if ($Server.Databases.Contains($db.DBName))
   {
-    Write-Log "Database is already attached. Detaching database on server $ServerName" -Program "MS SQL" -Level "Warning"
+    Write-Verbose "Database $db.DBName is already attached. Detaching database on server $ServerName" 
     Detach-Database $db.DBName $ServerName
   }
-  Write-Log $sc
-  Write-Log $db.DBName
-  Write-Log "Attaching database $db String Collection: $sc  on server $ServerName" -Program "MS SQL"
+  
+  Write-Verbose "Attaching database $db String Collection: $sc  on server $ServerName" 
   $Srv = New-Object Microsoft.SqlServer.Management.Smo.Server -ArgumentList $ServerName
   $Srv.ConnectionContext.StatementTimeout = 0
   
   $Srv.AttachDatabase($db.DBName, $sc) | Out-Null
-  Write-Log "Database has been attached $db.DBName locating at $db.FullName with log file $db.LogFullName on server $ServerName" -Program "MS SQL"
+  Write-Verbose "Database has been attached $db.DBName locating at $db.FullName with log file $db.LogFullName on server $ServerName" 
 }
 
 Function Attach-Databases ($DbPath, $Prefix, $ServerName)
@@ -187,7 +186,7 @@ Attach-Databases "C:\Databases" "Test" "."
   $dbs = [string[]](Get-ChildItem *.mdf | select -Expand Name)
   if($dbs -eq $null)
   {
-    Write-Log "Databases with prefix $Prefix was not found on path $DbPath" -Program "MS SQL" -Level "Error"
+    Write-Verbose "Databases with prefix $Prefix was not found on path $DbPath" 
   }
   else
   {
@@ -474,4 +473,4 @@ function Remove-SqlLogin
     end {}
 }
 
-Export-ModuleMember Import-DatabaseChanges, Import-Dacpac, Remove-Database, New-SqlLogin, Remove-SqlLogin
+Export-ModuleMember Import-DatabaseChanges, Import-Dacpac, Remove-Database, New-SqlLogin, Remove-SqlLogin, Attach-Databases, Detach-Databases

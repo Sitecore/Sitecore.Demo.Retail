@@ -492,4 +492,47 @@ function Remove-SSLCertificates
 	}
 }
 
-Export-ModuleMember New-AppPool, New-Website, Set-HostFile, Remove-Site, Remove-AppPool, Test-WebService, New-Certificate, Enable-WindowsAuthentication,  Remove-HostEntries, Reset-IIS, Remove-SSLCertificates
+
+function Stop-Websites
+{
+	process 
+	{
+		Get-ChildItem -Path IIS:\Sites | foreach { Stop-WebSite $_.Name; }
+	}
+}
+
+function Start-Websites
+{
+	process
+	{
+		Get-ChildItem -Path IIS:\Sites | foreach { Start-WebSite $_.Name; }
+	}
+}
+
+#Start To Start Application Pool
+
+    Function Start-ApplicationPool([string]$appPoolName)
+    {
+	  
+       if((Get-WebAppPoolState $appPoolName).Value -ne 'Started')
+       {
+	      Start-WebAppPool -Name $appPoolName
+       }
+    }
+    
+#End To Start Application Pool
+
+#Start To Stop Application Pool
+
+    Function Stop-ApplicationPool([string]$appPoolName)
+    {
+	  
+       if((Get-WebAppPoolState $appPoolName).Value -ne 'Stopped')
+       {
+	      Stop-WebAppPool -Name $appPoolName
+       }
+    }
+    
+#End To Stop Application Pool
+
+Export-ModuleMember New-AppPool, New-Website, Set-HostFile, Remove-Site, Remove-AppPool, Test-WebService, New-Certificate, Enable-WindowsAuthentication,  Remove-HostEntries, Reset-IIS, Remove-SSLCertificates,Stop-WebSites, Start-Websites, Start-ApplicationPool, Stop-ApplicationPool
