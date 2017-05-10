@@ -2,7 +2,7 @@
 ID: "a12c0831-708f-47b4-8463-5dcb6aef417d"
 Parent: "ed3c9b4c-f879-4798-9e10-b860931539a7"
 Template: "843fe5e3-63c2-48d6-8feb-bab096b9715e"
-Path: /sitecore/content/Storefront/Home/Life with Habitat/9 things to know before you by a TV
+Path: /sitecore/content/Storefront/Home/Life with Habitat/9 things to know before you buy a TV
 DB: master
 SharedFields:
 - ID: "a4f985d9-98b3-4b52-aaaf-4344f6e747c6"
@@ -168,7 +168,7 @@ Languages:
         </r>
     - ID: "1b483e91-d8c4-4d19-ba03-462074b55936"
       Hint: NavigationTitle
-      Value: 9 things to know before you by a TV
+      Value: 9 things to know before you buy a TV
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20161215T141204Z
@@ -184,10 +184,10 @@ Languages:
       Value: "<p><span>When considering a new TV for your living room or mancave, most people think about just two factors: How big it is and how much it is. For some people, buying a TV may never come down to anything more than that. But if you truly want to get the most for your money, you&rsquo;ll want to understand what&rsquo;s really going on with the TVs you're considering.</span></p>"
     - ID: "c30a013f-3cc8-4961-9837-1c483277084a"
       Hint: Title
-      Value: 9 things to know before you by a TV
+      Value: 9 things to know before you buy a TV
     - ID: "ca0479ce-0bfe-4522-83de-ba688b380a78"
       Hint: BrowserTitle
-      Value: 9 things to know before you by a TV
+      Value: 9 things to know before you buy a TV
     - ID: "d74f396d-5c5e-4916-bd0a-bfd58b6b1967"
       Hint: Body
       Value: |
