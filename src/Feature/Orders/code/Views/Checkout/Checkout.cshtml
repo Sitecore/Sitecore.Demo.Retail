@@ -741,6 +741,10 @@
         if (model.shippingAddress == null) {
             model.shippingAddress = model.DefaultAddress;
         }
+
+        if (model.shippingAddress == null) {
+            model.shippingAddress = model.DefaultAddress;
+        }
         model.shippingAddress.Name = model.UserName;
 
         data += '"BillingAddress":' + JSON.stringify(model.shippingAddress);
