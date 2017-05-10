@@ -109,7 +109,7 @@
                     <span data-bind="text: getCountryElement(shippingAddress.Country).split('|')[1]"></span>
                 </div>
                 <div class="col-md-2">
-                    <a href="javascript: model.isChangingShippingAddress(true);">@Html.Sitecore().Field("Address Change Link Text", Html.Sitecore().CurrentItem)</a>
+                    <a href="javascript: model.isChangingShippingAddress(true);javascript:void(0);">@Html.Sitecore().Field("Address Change Link Text", Html.Sitecore().CurrentItem)</a>
                 </div>
             </div>
             <div class="row" data-bind="if: groupedLines['Ship items'] && isChangingShippingAddress">
