@@ -592,7 +592,8 @@
         });
     }
 
-    function setBillingAddress() {        
+    function setBillingAddress() {
+        updateModel();	
         if (model.billingAddress && !validateAddress(model.billingAddress))
             return;
 
@@ -738,13 +739,25 @@
             data += ",";
         }
         model.PartyID = "0";
-
-        if (model.shippingAddress == null) {
-            model.shippingAddress = model.DefaultAddress;
+		
+        model.billingAddress = JSON.parse(Cookies.get('billingAddress') || null);
+        if (model.billingAddress == null)
+        {
+            if (model.shippingAddress == null && model.billingAddress == null) {
+                model.billingAddress = model.DefaultAddress;
+                model.billingAddress.Name = model.UserName;
+            }
+            else if (model.shippingAddress != null)
+            {
+                model.billingAddress = model.shippingAddress;
+            }
         }
-        model.shippingAddress.Name = model.UserName;
+        else{
+            model.billingAddress.PartyID = "1";
+            model.billingAddress.ExternalId = model.billingAddress.PartyID;
+        }
 
-        data += '"BillingAddress":' + JSON.stringify(model.shippingAddress);
+        data += '"BillingAddress":' + JSON.stringify(model.billingAddress);
         data += "}";
 
         AJAXPost("/api/storefront/checkout/SetPaymentMethods", data, function (data, success, sender) {
