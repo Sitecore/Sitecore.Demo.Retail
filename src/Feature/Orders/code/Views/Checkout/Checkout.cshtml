@@ -1,4 +1,4 @@
-@*//-----------------------------------------------------------------------
+﻿@*//-----------------------------------------------------------------------
         // Copyright 2016 Sitecore Corporation A/S
         // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
     // except in compliance with the License. You may obtain a copy of the License at
@@ -344,6 +344,8 @@
 </div>
 
 <script src="https://js.braintreegateway.com/js/braintree-2.27.0.min.js"></script>
+<script src="http://retail.dev.local/Scripts/Orders/main.js"></script>
+
 <script>
 
     if (!String.prototype.repeat) {
@@ -484,7 +486,7 @@
         });
 
         // Shipping Details
-        model.shippingAddress = JSON.parse(window.Cookies.get('shippingAddress') || null);
+        model.shippingAddress = JSON.parse(Cookies.get('shippingAddress') || null);
         if (model.shippingAddress == null) {
             model.shippingAddress = model.DefaultAddress;
         } else {
@@ -497,21 +499,21 @@
                 model.shippingAddress = createAddress();
         }
 
-        model.shippingOptionID = window.Cookies.get('shippingOptionID') ||
+        model.shippingOptionID = Cookies.get('shippingOptionID') ||
             _.head(Object.keys(model.ShippingOptions));
 
         model.activeShippingRegions = ko.observableArray();
         updateShippingRegions();
 
-        if (window.Cookies.get('email') != null) {
-            model.email = window.Cookies.get('email');
+        if (Cookies.get('email') != null) {
+            model.email = Cookies.get('email');
         }
         else {
             model.email = model.Cart.Email;
         }
 
         // Payment Details
-        model.billingAddress = JSON.parse(window.Cookies.get('billingAddress') || null);
+        model.billingAddress = JSON.parse(Cookies.get('billingAddress') || null);
         model.isChangingBillingAddress = ko.observable(!model.billingAddress &&
             (!model.groupedLines['Ship items'] || !model.shippingAddress));
         if (model.isChangingBillingAddress())
@@ -606,9 +608,6 @@
 
     function setShippingAddress() {
         model.shippingAddress.Name = model.UserName;
-
-        if (!validateAddress(model.shippingAddress))
-            return;
 
         var $button = $("button[onclick*='setShippingAddress']");
         $button.width($button.width());
@@ -717,6 +716,8 @@
 
     var model = @Html.Raw(JsonConvert.SerializeObject(Model));
     applyModel();
+    if (model.DefaultAddress != null)
+        setShippingAddress();
 
     function setPaymentMethodsSinglePageCheckout() {
         var data = "{";
@@ -737,10 +738,6 @@
             data += ",";
         }
         model.PartyID = "0";
-
-        if (model.shippingAddress == null) {
-            model.shippingAddress = model.DefaultAddress;
-        }
 
         if (model.shippingAddress == null) {
             model.shippingAddress = model.DefaultAddress;
