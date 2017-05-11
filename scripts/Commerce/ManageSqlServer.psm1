@@ -1,5 +1,204 @@
 import-module sqlps -DisableNameChecking 3>$Nul
 
+
+"Loading 'Microsoft.SqlServer.Smo' assembly..."
+[System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SqlServer.Smo") | Out-Null
+[System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SqlServer.SmoExtended") | Out-Null
+[Reflection.Assembly]::LoadWithPartialName("Microsoft.SqlServer.ConnectionInfo") | Out-Null
+[Reflection.Assembly]::LoadWithPartialName("Microsoft.SqlServer.SmoEnum") | Out-Null
+
+Function Detach-Database ($DbName, $ServerName, [switch]$force)
+{
+<#
+.SYNOPSIS
+Detaches database from local SQl server.
+
+.DESCRIPTION
+Function performs detaching DB with defined name on local SQL server.
+
+.PARAMETER Name
+Specifies database name.
+
+.PARAMETER ServerName
+Specifies SQL server name.
+
+.EXAMPLE
+Detach-Database "Test_Sitecore.Core" "."
+#>
+
+  $Server = New-Object Microsoft.SqlServer.Management.Smo.Server -ArgumentList $ServerName
+
+  if ($Server.Databases.Contains($DbName))
+  {
+    Write-Verbose "Set database offline $DbName" 
+	
+    $iter = 0
+    $successful = 0
+    do
+    {
+	  $iter += 1
+
+	  Write-Verbose "Detaching database $DbName on server $ServerName, attempt: $iter, total: 5" 
+      try
+      {
+        if($force)
+        {
+          $Server.KillDatabase($DbName)
+        }
+        else
+        {
+          $MyDatabase = $Server.Databases.Item($DbName)
+          $Server.KillAllprocesses($DbName)
+          $MyDatabase.SetOffline()
+          $Server.DetachDatabase($DbName, $false) | Out-Null
+        }
+        $successful = 1
+      }
+      catch
+      {
+        Write-Verbose "Detaching database $DbName on server $ServerName, attempt failed"  
+        $successful = 0
+      }
+      if (($successful -eq 0) -and ($iter -gt 4))
+      {
+        throw "Failed to detach $DbName on server $ServerName"
+      }
+    }
+    until (($successful -ne 0) -or ($iter -gt 4))
+  }
+  else
+  {
+    Write-Verbose "Database $DbName was not found on server $ServerName. Nothing performed"  
+  }
+
+  if ($Server.Databases.Contains($DbName))
+  {
+    Write-Verbose "Database $DbName has not been successfully detached ..." 
+  }
+  else
+  {
+    Write-Verbose "Database $DbName has been successfully detached..." 
+  }
+}
+
+Function Detach-Databases ($Prefix, $ServerName, [switch]$force)
+{
+<#
+.SYNOPSIS
+Detaches databases from local SQl server.
+
+.DESCRIPTION
+Function performs detaching DBs starting with prefix on local SQL server.
+
+.PARAMETER Prefix
+Specifies database prefix.
+
+.PARAMETER ServerName
+Specifies SQL server name.
+
+.EXAMPLE
+Detach-Databases "Test" "."
+#>
+
+  Write-Verbose "Detaching databases with prefix $Prefix on server $ServerName" 
+  $Server = New-Object Microsoft.SqlServer.Management.Smo.Server -ArgumentList $ServerName
+  Write-Verbose "Searching databases with prefix $Prefix" 
+  $dbs = $Server.Databases | Where-Object { $_.Name -Like $Prefix + "_*" } | select Name
+  if (($dbs -eq $null) -or ($dbs -eq ""))
+  {
+    Write-Verbose "Databases with prefix $Prefix was not found on server $ServerName"  
+  }
+  else
+  {
+    foreach ($db in $dbs)
+    {
+      Detach-Database -DbName $db.Name -ServerName $ServerName -force:$force
+    }
+  }
+}
+
+Function Attach-Database($dbPath, $dbName, $prefix, $serverName)
+{
+<#
+.SYNOPSIS
+Attaches database to local SQL server.
+
+.DESCRIPTION
+Function performs attaching DB with defined name on local SQL server.
+
+.PARAMETER db
+Specifies database name.
+
+.PARAMETER ServerName
+Specifies SQL server name.
+
+.EXAMPLE
+Attach-Database "@{FullName=C:\inetpub\wwwroot\TestDeploy\Databases\Sitecore.Master.MDF; DBName=TestDeploy_Sitecore.Master; LogFullName=C:\inetpub\wwwroot\TestDeploy\Databases\Sitecore.Master.ldf}" "."
+#>
+
+  $Server = New-Object Microsoft.SqlServer.Management.Smo.Server -ArgumentList $ServerName
+  $sc = new-object System.Collections.Specialized.StringCollection;
+  if ($prefix.length -gt 0) {
+  $db = gci $dbpath -filter $dbname* | Where-Object {$_.Extension -like '*.mdf'}  | Select-Object FullName,@{Name = "DBName"; Expression = {$prefix + "_" + $_.BaseName}},@{Name = "LogFullName"; Expression = {$_.Directory.ToString() + "\" + $_.BaseName + ".ldf"}}
+  }
+  else {
+  $db = gci $dbpath -filter $dbname* | Where-Object {$_.Extension -like '*.mdf'}  | Select-Object FullName,@{Name = "DBName"; Expression = {$_.BaseName}},@{Name = "LogFullName"; Expression = {$_.Directory.ToString() + "\" + $_.BaseName + ".ldf"}}
+  }
+  $sc.Add($db.FullName) | Out-Null;
+  $sc.Add($db.LogFullName) | Out-Null;
+  if ($Server.Databases.Contains($db.DBName))
+  {
+    Write-Verbose "Database $db.DBName is already attached. Detaching database on server $ServerName" 
+    Detach-Database $db.DBName $ServerName
+  }
+  
+  Write-Verbose "Attaching database $db String Collection: $sc  on server $ServerName" 
+  $Srv = New-Object Microsoft.SqlServer.Management.Smo.Server -ArgumentList $ServerName
+  $Srv.ConnectionContext.StatementTimeout = 0
+  
+  $Srv.AttachDatabase($db.DBName, $sc) | Out-Null
+  Write-Verbose "Database has been attached $db.DBName locating at $db.FullName with log file $db.LogFullName on server $ServerName" 
+}
+
+Function Attach-Databases ($DbPath, $Prefix, $ServerName)
+{
+<#
+.SYNOPSIS
+Attaches databases from defined folder to local SQL server.
+
+.DESCRIPTION
+Function performs attaching DBs with defined prefix from defined folder on local SQL server.
+
+.PARAMETER DbPath
+Specifies path to databases.
+
+.PARAMETER Prefix
+Specifies database prefix.
+
+.PARAMETER ServerName
+Specifies SQL server name.
+
+.EXAMPLE
+Attach-Databases "C:\Databases" "Test" "."
+#>
+
+  Push-Location $DbPath
+  $dbs = [string[]](Get-ChildItem *.mdf | select -Expand Name)
+  if($dbs -eq $null)
+  {
+    Write-Verbose "Databases with prefix $Prefix was not found on path $DbPath" 
+  }
+  else
+  {
+    foreach ($db in $dbs)
+    {
+      Attach-Database -DbPath $DbPath -dbName $db -prefix $Prefix -serverName $serverName
+    }
+  }
+  Pop-Location
+}
+
+
 function Import-DatabaseChanges
 {
     param 
@@ -274,4 +473,4 @@ function Remove-SqlLogin
     end {}
 }
 
-Export-ModuleMember Import-DatabaseChanges, Import-Dacpac, Remove-Database, New-SqlLogin, Remove-SqlLogin
+Export-ModuleMember Import-DatabaseChanges, Import-Dacpac, Remove-Database, New-SqlLogin, Remove-SqlLogin, Attach-Databases, Detach-Databases
