@@ -210,9 +210,9 @@
                 "$type": "Sitecore.Commerce.Plugin.Management.SitecoreConnectionPolicy, Sitecore.Commerce.Plugin.Management",
                 "Host": "retail.dev.local",
                 "SitecoreDatabase": "master",
-                "UserName": "admin",
+                "UserName": "CommerceEngineUser",
                 "Domain": "sitecore",
-                "Password": "b",
+                "Password": "demopass",
                 "PolicyId": "a12d609f37124c4fb9007519a8e18b69",
                 "Models": {
                     "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
