@@ -88,4 +88,22 @@ function Test-Certificate
     end { }
 }
 
+
+function Stop-Websites
+{
+	process 
+	{
+		Get-ChildItem -Path IIS:\Sites | foreach { Stop-WebSite $_.Name; }
+	}
+}
+
+function Start-Websites
+{
+	process
+	{
+		Get-ChildItem -Path IIS:\Sites | foreach { Start-WebSite $_.Name; }
+	}
+}
+
+
 Export-ModuleMember Invoke-WebRequestWithWebsiteId, Invoke-WebRequest, Test-Certificate
