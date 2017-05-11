@@ -1,0 +1,37 @@
+﻿---
+Username: |
+  CommerceUsers\jackbennett@demo.com
+Email: jackbennett@demo.com
+Comment: 
+Created: "2017-05-03T21:30:34.0000000Z"
+IsApproved: True
+Properties:
+- Key: FullName
+  Value: Jack Bennett
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: IsAdministrator
+  Value: False
+  ValueType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: Portrait
+  Value: office/16x16/default_user.png
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: ProfileItemId
+  Value: "{0FFEC1BD-4D35-49CF-8B7D-7F01930834ED}"
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: __Serialization
+  Value: |
+    {"UserName":"CommerceUsers\\jackbennett@demo.com","FirstName":"Jack","LastName":"Bennett","Email":"jackbennett@demo.com","Comment":"","IsDisabled":false,"CreationDate":"2017-05-03T21:30:34.9122725Z","LastActivityDate":"0001-01-01T00:00:00","LastLoginDate":"0001-01-01T00:00:00","LastDisabledDate":"0001-01-01T00:00:00","LastPasswordChangedDate":"0001-01-01T00:00:00","Shops":["storefront"],"Customers":["{c0f89181-7a88-4a47-adac-51b5299eb350}"],"ExternalId":"{c0f89181-7a88-4a47-adac-51b5299eb350}","Properties":[{"Key":"Phone","Value":"541-754-3010"}]}
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: digestcredentialhash
+  Value: 8680ed177f79d16a4ec7395343de4f6b
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: digestcredentialhashwithoutdomain
+  Value: d27828049c6617b82ac3063fe540e26b
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True

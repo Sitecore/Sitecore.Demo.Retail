@@ -1,0 +1,37 @@
+﻿---
+Username: |
+  CommerceUsers\clairelewis@demo.com
+Email: clairelewis@demo.com
+Comment: 
+Created: "2017-05-03T15:38:55.0000000Z"
+IsApproved: True
+Properties:
+- Key: FullName
+  Value: Claire Lewis
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: IsAdministrator
+  Value: False
+  ValueType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: Portrait
+  Value: office/16x16/default_user.png
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: ProfileItemId
+  Value: "{0FFEC1BD-4D35-49CF-8B7D-7F01930834ED}"
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: __Serialization
+  Value: |
+    {"UserName":"CommerceUsers\\clairelewis@demo.com","FirstName":"Claire","LastName":"Lewis","Email":"clairelewis@demo.com","Comment":"","IsDisabled":false,"CreationDate":"2017-05-03T15:38:55.9454453Z","LastActivityDate":"0001-01-01T00:00:00","LastLoginDate":"0001-01-01T00:00:00","LastDisabledDate":"0001-01-01T00:00:00","LastPasswordChangedDate":"0001-01-01T00:00:00","Shops":["storefront"],"Customers":["{43ca483f-d73a-42c3-b269-4162cfc9998c}"],"ExternalId":"{43ca483f-d73a-42c3-b269-4162cfc9998c}","Properties":[{"Key":"Phone","Value":"541-754-3010"}]}
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: digestcredentialhash
+  Value: 2b9cfc11f62663e964977274f0841dd6
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: digestcredentialhashwithoutdomain
+  Value: 3e2e7f281591a6207d2fd778dfa9ce38
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True

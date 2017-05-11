@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/">
+  <sitecore>
+  
+    <sc.variable name="rootHostName" value="na.sitecore.net" />
+	
+    <sites>
+      <site name="habitat">
+        <patch:attribute name="database">master</patch:attribute>
+		<patch:attribute name="targetHostName">habitat.$(rootHostName)</patch:attribute>
+		<patch:attribute name="database">master</patch:attribute>
+		<patch:attribute name="cacheHtml">true</patch:attribute>
+      </site>
+	  
+	  <site name="storefront">
+        <patch:attribute name="targetHostName">commercedemo.$(rootHostName)</patch:attribute>
+		<patch:attribute name="hostName">retail|storefront|retail.dev.local|commercedemo</patch:attribute>
+		<patch:attribute name="database">master</patch:attribute>
+		<patch:attribute name="cacheHtml">true</patch:attribute>
+      </site>
+	  
+	  <site name="finance">
+        <patch:attribute name="targetHostName">financedemo.$(rootHostName)</patch:attribute>
+		<patch:attribute name="database">master</patch:attribute>
+		<patch:attribute name="cacheHtml">true</patch:attribute>
+      </site>
+	  
+	  <site name="legal">
+        <patch:attribute name="targetHostName">legaldemo.$(rootHostName)</patch:attribute>
+		<patch:attribute name="database">master</patch:attribute>
+		<patch:attribute name="cacheHtml">true</patch:attribute>
+      </site>
+	  
+	  <site name="utilities">
+        <patch:attribute name="targetHostName">utilitiesdemo.$(rootHostName)</patch:attribute>
+		<patch:attribute name="database">master</patch:attribute>
+		<patch:attribute name="cacheHtml">true</patch:attribute>
+      </site>
+	</sites>
+
+	<settings>
+		<setting name="Counters.Enabled">
+			<patch:attribute name="value">true</patch:attribute>
+		</setting>
+	</settings>
+	
+  </sitecore>
+</configuration>

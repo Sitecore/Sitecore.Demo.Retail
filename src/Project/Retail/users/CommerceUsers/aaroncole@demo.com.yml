@@ -1,0 +1,37 @@
+﻿---
+Username: |
+  CommerceUsers\aaroncole@demo.com
+Email: aaroncole@demo.com
+Comment: 
+Created: "2017-05-03T14:30:37.0000000Z"
+IsApproved: True
+Properties:
+- Key: FullName
+  Value: Aaron Cole
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: IsAdministrator
+  Value: False
+  ValueType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: Portrait
+  Value: office/16x16/default_user.png
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: ProfileItemId
+  Value: "{0FFEC1BD-4D35-49CF-8B7D-7F01930834ED}"
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: __Serialization
+  Value: |
+    {"UserName":"CommerceUsers\\aaroncole@demo.com","FirstName":"Aaron","LastName":"Cole","Email":"aaroncole@demo.com","Comment":"","IsDisabled":false,"CreationDate":"2017-05-03T14:30:37.3391955Z","LastActivityDate":"0001-01-01T00:00:00","LastLoginDate":"0001-01-01T00:00:00","LastDisabledDate":"0001-01-01T00:00:00","LastPasswordChangedDate":"0001-01-01T00:00:00","Shops":["storefront"],"Customers":["{b67a6ba2-f36e-4cd2-8c3e-98159d0be262}"],"ExternalId":"{b67a6ba2-f36e-4cd2-8c3e-98159d0be262}","Properties":[{"Key":"Phone","Value":"541-754-3010"}]}
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: digestcredentialhash
+  Value: 1a08d29404d07fd6713c19739ddedaf7
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: digestcredentialhashwithoutdomain
+  Value: 0b6353757cca6738c106dc7b852586cb
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True

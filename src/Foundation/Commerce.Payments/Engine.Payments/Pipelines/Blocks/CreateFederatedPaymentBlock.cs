@@ -73,11 +73,19 @@ namespace Sitecore.Foundation.Commerce.Engine.Plugin.Payments.Pipelines.Blocks
                     Transaction transaction = result.Target;
                     payment.TransactionId = transaction?.Id;
                     payment.TransactionStatus = transaction?.Status?.ToString();
-                    CreditCard cc = transaction?.CreditCard;
+                    //payment.PaymentInstrumentType = transaction?.PaymentInstrumentType?.ToString();
+                    var cc = transaction?.CreditCard;
                     payment.MaskedNumber = cc?.MaskedNumber;
-                    payment.ExpiresMonth = Int32.Parse(cc?.ExpirationMonth);
-                    payment.ExpiresYear = Int32.Parse(cc?.ExpirationYear);
                     payment.CardType = cc?.CardType?.ToString();
+                    if (cc?.ExpirationMonth != null)
+                    {
+                        payment.ExpiresMonth = int.Parse(cc.ExpirationMonth);
+                    }
+
+                    if (cc?.ExpirationYear != null)
+                    {
+                        payment.ExpiresYear = int.Parse(cc.ExpirationYear);
+                    }                   
                 }
                 else 
                 {
@@ -96,9 +104,9 @@ namespace Sitecore.Foundation.Commerce.Engine.Plugin.Payments.Pipelines.Blocks
             {
                 context.Abort(context.CommerceContext.AddMessage(
                    context.GetPolicy<KnownResultCodes>().Error,
-                   "InvalidClientPolicy",
-                   new object[] { "BraintreeClientPolicy" },
-                    $"{this.Name}. Invalid BraintreeClientPolicy { ex.Message }"), context);
+                   "CreatePaymentFailed",
+                    new object[] { "PaymentMethodNonce", ex },
+                    $"{this.Name}. Create payment failed."), context);
                 return Task.FromResult(arg);
             }
         }
