@@ -1,0 +1,89 @@
+﻿---
+Username: |
+  sitecore\demoadmin
+Email: 
+Comment: 
+Created: "2017-05-11T18:52:03.0000000Z"
+IsApproved: True
+Properties:
+- Key: |
+    /sitecore\demoadmin/Ribbon/My Strip
+  Value: "{D33A0641-9F1C-4984-8342-0655C3D0F123}"
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: FullName
+  Value: demoadmin
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: IsAdministrator
+  Value: False
+  ValueType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: Portrait
+  Value: office/16x16/default_user.png
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: ProfileItemId
+  Value: "{AE4C4969-5B7E-4B4E-9042-B2D8701CE214}"
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: False
+- Key: "SpeakComponentStatus-3CAD0BE7734A47DD8D3FD55A2E4012F8-SearchTabControl"
+  Value: |
+    {"SelectedValue":"{18AF25A0-0F69-4AD8-89A9-E8D056C53AF3}"}
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: "SpeakComponentStatus-53A1C1E921E14338B8C3741A4FD4BA57-OrderTabControl"
+  Value: |
+    {"SelectedValue":"{CD557E9B-F7D9-4740-A943-480941065A5E}"}
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: "SpeakComponentStatus-BC39400B62554CBFA9975CD1863595FA-CustomerTabControl"
+  Value: |
+    {"SelectedValue":"{9EF3C04F-D563-42DF-813F-309B5AE601B1}"}
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: "SpeakComponentStatus-BusinessTools-EnvironmentId"
+  Value: |
+    {"Id":"Entity-CommerceEnvironment-HabitatAuthoring","Name":"HabitatAuthoring"}
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: "SpeakComponentStatus-CrossPagesNavigationStatus-7A3144DC2A9A4BCB9BE3FCF9D9D243EF"
+  Value: |
+    [{"id":"{DFAF7E81-E8AC-4271-A8F8-7D4D9C777783}"}]
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: "SpeakComponentStatus-CrossPagesNavigationStatus-BCDEDA7AD6DC4D2F95707D7F89AAAA0B"
+  Value: |
+    [{"id":"{416EC2F3-D9D9-4A14-8926-87A4184FF081}"}]
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: digestcredentialhash
+  Value: bed66512968747aa57b6d0546aeb6636
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: digestcredentialhashwithoutdomain
+  Value: 2e294d69e04a0d46a25a027ba3ae1878
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+- Key: "sc-pathexplorer-state"
+  Value: |
+    {"explorer":{"mapId":"{68E713D8-A382-4378-8FB0-9D7F7AD14B25}","mapName":"All visits","startDate":"2017-05-10T07:00:00.000Z","endDate":"2017-05-11T19:58:43.680Z","groupingOption":"{00000000-0000-0000-0000-000000000000}","datePreset":"","favoriteFunnels":[],"funnels":null},"mapSelector":{"favorites":[]},"help":{"dontShowOnStartup":false},"layoutSelector":{"selectedLayout":"dashboard"},"settings":{"enableTransitions":true,"dontShowOnStartup":false,"showLabels":false,"showLegend":true,"showOutcomeMetricsOnDashboard":false,"allowBlockedDateSelection":true}}
+  ValueType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  IsCustom: True
+Roles:
+  MemberOf: |
+    sitecore\Analytics Reporting
+  MemberOf: |
+    sitecore\Analytics Testing
+  MemberOf: |
+    sitecore\Author
+  MemberOf: |
+    sitecore\Commerce Merchandiser
+  MemberOf: |
+    sitecore\Customer Service Representative
+  MemberOf: |
+    sitecore\Experience Explorer
+  MemberOf: |
+    sitecore\Pricer
+  MemberOf: |
+    sitecore\Promotioner
