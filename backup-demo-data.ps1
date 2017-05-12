@@ -14,8 +14,6 @@ If ((ManageRegistry\Get-InternetExplorerEnhancedSecurityEnabled -Verbose) -eq $t
 
 $settings = ((Get-Content $PSScriptRoot\install-commerce-config.json -Raw) | ConvertFrom-Json)
 
-if ((ManageFile\Confirm-Resources $settings.resources -verbose) -ne 0) { Exit }
-
 $sitecoreWebsiteFolderSetting = ($settings.iis.websites | Where { $_.id -eq "sitecore" } | Select)
 If ($sitecoreWebsiteFolderSetting -eq $null) { Write-Host "Expected sitecore iis website settings" -ForegroundColor red; exit; }
 
@@ -24,11 +22,11 @@ $siteName = $sitecoreWebsiteFolderSetting.siteName
 $sitecoreApplicationPoolSetting = ($settings.iis.appPools)
 
 
-$backupRootPath = "C:\SitecoreDemoDataBackup"
+$backupRootPath = "C:\websites\habitat.dev.local\Databases\Backup"
 $mongoBackupDataPath = "$backupRootPath\MongoData"
 $sqlDbPath = "c:\websites\$siteName\databases"
 $sqlDbBackupPath = "$backupRootPath\SQL"
-$mongoBinDirectory = "C:\MongoDB\bin"
+$mongoBinDirectory = "C:\MongoDB\Server\bin"
 
 
 

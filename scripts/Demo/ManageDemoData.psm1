@@ -43,10 +43,10 @@ function Import-MongoData
     process
     {
 		$mongorestore = $mongoBinDirectory + "\mongorestore.exe"
-		& $mongorestore --db "habitat821_analytics"  "$inputDirectory\analytics" 
-		& $mongorestore --db "habitat821_tracking_contact"  "$inputDirectory\tracking_contact" 
-		& $mongorestore --db "habitat821_tracking_history"  "$inputDirectory\tracking_history" 
-		& $mongorestore --db "habitat821_tracking_live"  "$inputDirectory\tracking_live" 
+		& $mongorestore --db "habitat821_analytics"  "$inputDirectory\analytics"  --drop
+		& $mongorestore --db "habitat821_tracking_contact"  "$inputDirectory\tracking_contact" --drop
+		& $mongorestore --db "habitat821_tracking_history"  "$inputDirectory\tracking_history" --drop
+		& $mongorestore --db "habitat821_tracking_live"  "$inputDirectory\tracking_live" --drop
     }
     end
     {
