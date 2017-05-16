@@ -60,6 +60,10 @@
       padding: 15px;
       color: $text-color;
 
+      &-wide {
+        min-width: 600px;
+      }
+
       & > .active {
         & > a {
           color: $active-list-text-color;

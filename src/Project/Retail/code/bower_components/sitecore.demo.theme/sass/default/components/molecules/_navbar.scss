@@ -177,7 +177,7 @@
                 }
             }
             .is-searching & {
-                li {
+                > li {
                     max-width: 0;
                     transform: translateY(100%);
                     opacity: 0;
@@ -199,8 +199,8 @@
             }
         }
         &-search {
-            form,
-            a {
+            >form,
+            >a {
                 display: inline-block;
                 float: left;
             }
