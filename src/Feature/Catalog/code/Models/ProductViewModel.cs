@@ -69,15 +69,15 @@ namespace Sitecore.Feature.Commerce.Catalog.Models
 
         public bool IsOnSale => Item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id) && Item.Fields[Foundation.Commerce.Templates.Commerce.Product.FieldNames.OnSale].IsChecked();
 
-        public bool IsProduct
+        public IEnumerable<string> Tags
         {
             get
             {
-                var val = Item["IsProduct"];
-
-                return !string.IsNullOrEmpty(val) && val != "0";
+                var tagsString = Item[Templates.Generated.Product.Fields.Tags];
+                return string.IsNullOrWhiteSpace(tagsString) ? Enumerable.Empty<string>() : tagsString.Split(new[] {',', '|', ';'}, StringSplitOptions.RemoveEmptyEntries);
             }
         }
+
 
         public decimal? Quantity { get; set; }
 
