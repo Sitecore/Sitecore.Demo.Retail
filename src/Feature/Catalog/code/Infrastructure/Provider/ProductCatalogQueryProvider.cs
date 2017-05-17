@@ -17,17 +17,13 @@ using ISearchResult = Sitecore.Foundation.Indexing.Models.ISearchResult;
 
 namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
 {
-    public class IndexingProvider : ProviderBase, ISearchResultFormatter, IQueryPredicateProvider, IQueryRoot
+    public class ProductCatalogQueryProvider : ProviderBase, IQueryPredicateProvider, IQueryRoot
     {
-        public CatalogManager CatalogManager { get; }
-        public ProductViewModelFactory ProductViewModelFactory { get; }
-        public IndexingProvider(CatalogManager catalogManager, ProductViewModelFactory productViewModelFactory)
+        private CatalogManager CatalogManager { get; }
+        public ProductCatalogQueryProvider(CatalogManager catalogManager)
         {
             CatalogManager = catalogManager;
-            ProductViewModelFactory = productViewModelFactory;
         }
-
-        public string ContentType => DictionaryPhraseRepository.Current.Get("/Catalog/Search/Content Type", "Product Catalog");
 
         public IEnumerable<ID> SupportedTemplates => new[]
         {
@@ -51,24 +47,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
             return predicate.And(i => i[Constants.IndexFields.CatalogName] == catalogName);
         }
 
-        public void FormatResult(SearchResultItem item, ISearchResult formattedResult)
-        {
-            var contentItem = item.GetItem();
-            if (contentItem.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id))
-            {
-                var product = ProductViewModelFactory.Create(contentItem);
-                formattedResult.Title = product.ProductName;
-                formattedResult.Description = product.Description;
-                formattedResult.ViewName = "~/Views/Catalog/_ProductSearchResult.cshtml";
-            }
-            if (contentItem.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id))
-            {
-                formattedResult.Title = contentItem.DisplayName;
-                formattedResult.Description = FieldRenderer.Render(contentItem, Templates.Generated.Category.Fields.Description);
-                formattedResult.ViewName = "~/Views/Catalog/_CategorySearchResult.cshtml";
-            }
-        }
-
         public Item Root
         {
             get
@@ -78,5 +56,6 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
             }
             set { throw new NotImplementedException(); }
         }
+
     }
 }
