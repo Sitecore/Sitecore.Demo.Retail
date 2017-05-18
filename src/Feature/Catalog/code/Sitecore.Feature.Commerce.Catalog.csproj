@@ -198,7 +198,9 @@
     <Compile Include="Factories\ProductViewModelFactory.cs" />
     <Compile Include="Infrastructure\Dialogs\InsertLinkForm.cs" />
     <Compile Include="Infrastructure\Pipelines\ProductItemRedirector.cs" />
-    <Compile Include="Infrastructure\Provider\IndexingProvider.cs" />
+    <Compile Include="Infrastructure\Provider\ProductCatalogQueryProvider.cs" />
+    <Compile Include="Infrastructure\Provider\ProductSearchResultFormatter.cs" />
+    <Compile Include="Infrastructure\Provider\CategorySearchResultFormatter.cs" />
     <Compile Include="Factories\CatalogItemContextFactory.cs" />
     <Compile Include="Models\RelationshipViewModel.cs" />
     <Compile Include="Models\RouteItemType.cs" />

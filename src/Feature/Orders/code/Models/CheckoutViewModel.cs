@@ -1,4 +1,4 @@
-﻿using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
+using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Data;
@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Sitecore.Foundation.Commerce.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {
@@ -40,5 +41,9 @@ namespace Sitecore.Feature.Commerce.Orders.Models
             new Dictionary<string, string>();
 
         public bool HasLines => Cart?.Lines != null && Cart.Lines.Any();
+
+        public IParty DefaultAddress { get; set; }
+
+        public string UserName { get; set; }
     }
 }

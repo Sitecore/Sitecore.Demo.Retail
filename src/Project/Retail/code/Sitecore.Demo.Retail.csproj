@@ -63,8 +63,14 @@
     <Reference Include="Sitecore.Feature.Language">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Feature.Language.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Feature.Metadata">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Feature.Metadata.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Foundation.Assets">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.Assets.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Foundation.DependencyInjection">
+      <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.DependencyInjection.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Foundation.SitecoreExtensions">
       <HintPath>..\..\..\..\lib\Sitecore\Sitecore.Foundation.SitecoreExtensions.dll</HintPath>
@@ -135,23 +141,24 @@
     </None>
     <None Include="Properties\PublishProfiles\commerce3.pubxml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
-    <Content Include="styles\niteflight.css">
-      <DependentUpon>niteflight.scss</DependentUpon>
+    <Content Include="styles\nite-commerce.css">
+      <DependentUpon>nite-commerce.scss</DependentUpon>
     </Content>
-    <Content Include="styles\niteflight.min.css">
-      <DependentUpon>niteflight.css</DependentUpon>
+    <Content Include="styles\nite-commerce.min.css">
+      <DependentUpon>nite-commerce.css</DependentUpon>
     </Content>
     <Content Include="Views\Retail\Layouts\Retail.cshtml" />
-    <Content Include="styles\niteflight\_fonts.scss" />
-    <Content Include="styles\niteflight\_overrides.scss" />
-    <Content Include="styles\niteflight\_variables.scss" />
-    <Content Include="styles\niteflight.scss" />
+    <Content Include="styles\nite-commerce\_fonts.scss" />
+    <Content Include="styles\nite-commerce\_overrides.scss" />
+    <Content Include="styles\nite-commerce\_variables.scss" />
+    <Content Include="styles\nite-commerce.scss" />
     <None Include="Web.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\Pipelines\RaiseCommerceCultureChosenPageEvent.cs" />
+    <Compile Include="Infrastructure\Pipelines\SetProductCatalogMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -55,6 +55,7 @@ namespace Sitecore.Feature.Commerce.Catalog
                     public static readonly string Images = "Images";
                     public static readonly string Description = "Description";
                     public static readonly string Brand = "Brand";
+                    public static readonly string Tags = "Tags";
                 }
             }
         }
