@@ -103,7 +103,7 @@ gulp.task("05-Sync-Unicorn", function (callback) {
   var options = {};
   options.siteHostName = habitat.getSiteUrl();
   options.authenticationConfigFile = config.websiteRoot + "/App_config/Include/Unicorn/Unicorn.UI.config";
-
+  options.maxBuffer = 10000 * 1024;
   unicorn(function() { return callback() }, options);
 });
 
