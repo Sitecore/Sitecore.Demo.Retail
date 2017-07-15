@@ -3,7 +3,7 @@ using Sitecore.Feature.Metadata.Infrastructure.Pipelines.GetPageMetadata;
 using Sitecore.Foundation.Commerce.Models;
 using Sitecore.Foundation.DependencyInjection;
 
-namespace Sitecore.Demo.Retail.Infrastructure.Pipelines
+namespace Sitecore.Demo.Retail.Project.Website.Infrastructure.Pipelines
 {
     [Service]
     public class SetProductCatalogMetadata
