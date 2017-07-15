@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sitecore.Commerce.Core;
 
-namespace Sitecore.Foundation.Commerce.Engine.App_Startup
+namespace Sitecore.Demo.Retail.Project.Engine.App_Startup
 {
     public static class CommerceNodeExtentions
     {

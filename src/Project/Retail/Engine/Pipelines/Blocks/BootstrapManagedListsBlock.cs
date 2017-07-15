@@ -1,11 +1,10 @@
 ﻿using System.Threading.Tasks;
-
 using Sitecore.Commerce.Core;
+using Sitecore.Commerce.Plugin.ManagedLists;
 using Sitecore.Commerce.Plugin.Orders;
 using Sitecore.Framework.Pipelines;
-using Sitecore.Commerce.Plugin.ManagedLists;
 
-namespace Sitecore.Foundation.Commerce.Engine.Pipelines.Blocks
+namespace Sitecore.Demo.Retail.Project.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(CommerceEngineConstants.Pipelines.Blocks.BootstrapManagedListsBlock)]
     public class BootstrapManagedListsBlock : PipelineBlock<string, string, CommercePipelineExecutionContext>

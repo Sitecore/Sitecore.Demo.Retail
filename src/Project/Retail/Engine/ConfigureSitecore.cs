@@ -1,14 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 using Sitecore.Commerce.Core;
-using Sitecore.Foundation.Commerce.Engine.App_ConfigureSitecore;
+using Sitecore.Demo.Retail.Project.Engine.App_ConfigureSitecore;
 using Sitecore.Framework.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 
-namespace Sitecore.Foundation.Commerce.Engine
+namespace Sitecore.Demo.Retail.Project.Engine
 {
     public class ConfigureSitecore : IConfigureSitecore
     {

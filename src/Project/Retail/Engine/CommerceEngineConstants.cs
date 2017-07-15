@@ -1,4 +1,4 @@
-﻿namespace Sitecore.Foundation.Commerce.Engine
+﻿namespace Sitecore.Demo.Retail.Project.Engine
 {
     /// <summary>
     /// The adventure works  constants.

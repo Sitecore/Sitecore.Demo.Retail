@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.DataProtection.XmlEncryption;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Sitecore.Foundation.Commerce.Engine.App_Startup
+namespace Sitecore.Demo.Retail.Project.Engine.App_Startup
 {
     public static class DataProtectionExtentions
     {

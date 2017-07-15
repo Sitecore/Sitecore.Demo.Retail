@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Sitecore.Foundation.Commerce.Engine.App_Startup
+namespace Sitecore.Demo.Retail.Project.Engine.App_Startup
 {
     public static class ErrorPageExtentions
     {

@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Sitecore.Framework.Rules;
 
-namespace Sitecore.Foundation.Commerce.Engine.App_Startup
+namespace Sitecore.Demo.Retail.Project.Engine.App_Startup
 {
     public static class SitecoreExtentions
     {

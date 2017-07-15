@@ -1,10 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
+using Microsoft.Extensions.Logging;
 
-namespace Sitecore.Foundation.Commerce.Engine
+namespace Sitecore.Demo.Retail.Project.Engine
 {
     public static class ApplicationLogging
     {
