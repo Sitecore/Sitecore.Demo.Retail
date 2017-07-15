@@ -22,7 +22,7 @@ using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines;
 using Sitecore.Feature.Commerce.Catalog.Services;
-using Sitecore.Foundation.Commerce.Util;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Util;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Links;
 using Sitecore.Web;

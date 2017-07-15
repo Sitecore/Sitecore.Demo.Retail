@@ -23,9 +23,9 @@ using Sitecore.Configuration;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Feature.Commerce.Catalog.Models;
-using Sitecore.Foundation.Commerce.Managers;
-using Sitecore.Foundation.Commerce.Models;
-using Sitecore.Foundation.Commerce.Repositories;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Repositories;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Links;
@@ -61,7 +61,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Services
             var productCatalogRootItem = CatalogManager.CatalogContext.CatalogRootItem;
             Assert.IsTrue(productCatalogRootItem != null, "CatalogManager.CatalogContext.CatalogRootItem must be set");
 
-            var categoryDatasource = productCatalogRootItem[Foundation.Commerce.Templates.Commerce.NavigationItem.Fields.CategoryDatasource];
+            var categoryDatasource = productCatalogRootItem[Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.NavigationItem.Fields.CategoryDatasource];
             Assert.IsNotNullOrEmpty(categoryDatasource, "the Catalog root has no CategoryDatasource.");
 
             var parentPath = productItem.Paths.FullPath;
@@ -217,7 +217,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Services
         {
             Assert.ArgumentNotNull(item, nameof(item));
 
-            return item[Foundation.Commerce.Templates.Commerce.CatalogItem.Fields.CatalogName].ToLowerInvariant();
+            return item[Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.CatalogItem.Fields.CatalogName].ToLowerInvariant();
         }
 
         private CatalogItemInfo ExtractCatalogItemInfo(Item item)
@@ -228,20 +228,20 @@ namespace Sitecore.Feature.Commerce.Catalog.Services
             Item variantItem = null;
             Item productItem = null;
             Item categoryItem;
-            if (item.IsDerived(Foundation.Commerce.Templates.Commerce.ProductVariant.Id))
+            if (item.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.ProductVariant.Id))
             {
                 info.ItemType = CatalogItemType.Variant;
                 variantItem = item;
                 productItem = item.Parent;
                 categoryItem = item.Parent.Parent;
             }
-            else if (item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id))
+            else if (item.IsDerived(Demo.Retail.Foundation.Commerce.Website .Templates.Commerce.Product.Id))
             {
                 info.ItemType = CatalogItemType.Product;
                 productItem = item;
                 categoryItem = item.Parent;
             }
-            else if (item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id))
+            else if (item.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.Category.Id))
             {
                 info.ItemType = CatalogItemType.Category;
                 categoryItem = item;

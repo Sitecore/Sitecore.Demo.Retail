@@ -19,9 +19,9 @@ using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Sitecore.Foundation.Commerce;
-using Sitecore.Foundation.Commerce.Extensions;
-using Sitecore.Foundation.Commerce.Util;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Util;
 
 namespace Sitecore.Feature.Commerce.Catalog.Extensions
 {

@@ -21,8 +21,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Sitecore.Feature.Commerce.Catalog.Infrastructure.Pipelines;
 using Sitecore.Feature.Commerce.Catalog.Models;
-using Sitecore.Foundation.Commerce.Managers;
-using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
 namespace Sitecore.Feature.Commerce.Catalog

@@ -18,9 +18,9 @@
 using System.Collections.Generic;
 using Sitecore.Data;
 using Sitecore.Data.Items;
-using Sitecore.Foundation.Commerce;
-using Sitecore.Foundation.Commerce.Managers;
-using Sitecore.Foundation.Commerce.Models.Search;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.Search;
 using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models

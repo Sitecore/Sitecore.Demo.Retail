@@ -7,7 +7,7 @@ using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Feature.Commerce.Catalog.Factories;
-using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
 using Sitecore.Foundation.Dictionary.Repositories;
 using Sitecore.Foundation.Indexing.Infrastructure;
 using Sitecore.Foundation.Indexing.Models;
@@ -29,7 +29,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
 
         public IEnumerable<ID> SupportedTemplates => new[]
         {
-            Foundation.Commerce.Templates.Commerce.Product.Id
+            Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.Product.Id
         };
 
         public void FormatResult(SearchResultItem item, ISearchResult formattedResult)

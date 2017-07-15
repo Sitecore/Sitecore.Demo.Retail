@@ -9,11 +9,11 @@ using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Diagnostics;
 using Sitecore.Feature.Commerce.Orders.Models;
 using Sitecore.Feature.Commerce.Orders.Repositories;
-using Sitecore.Foundation.Commerce;
-using Sitecore.Foundation.Commerce.Extensions;
-using Sitecore.Foundation.Commerce.Managers;
-using Sitecore.Foundation.Commerce.Models;
-using Sitecore.Foundation.Commerce.Models.InputModels;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.InputModels;
 using Sitecore.Foundation.SitecoreExtensions.Attributes;
 
 namespace Sitecore.Feature.Commerce.Orders.Controllers

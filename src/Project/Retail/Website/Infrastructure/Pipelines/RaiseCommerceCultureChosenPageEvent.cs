@@ -1,8 +1,8 @@
 ﻿using System;
 using Sitecore.Diagnostics;
 using Sitecore.Feature.Language.Infrastructure.Pipelines;
-using Sitecore.Foundation.Commerce;
-using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
 
 namespace Sitecore.Demo.Retail.Project.Website.Infrastructure.Pipelines
 {

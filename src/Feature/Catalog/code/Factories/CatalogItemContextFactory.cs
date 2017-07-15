@@ -6,8 +6,8 @@ using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Feature.Commerce.Catalog.Models;
 using Sitecore.Feature.Commerce.Catalog.Services;
-using Sitecore.Foundation.Commerce.Managers;
-using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
@@ -66,14 +66,14 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
         private ICatalogItemContext Create(Item productCatalogItem)
         {
             Assert.IsNotNull(productCatalogItem, nameof(productCatalogItem));
-            Assert.ArgumentCondition(productCatalogItem.IsDerived(Foundation.Commerce.Templates.Commerce.CatalogItem.Id), nameof(productCatalogItem), "Item must be of type Commerce Catalog Item");
+            Assert.ArgumentCondition(productCatalogItem.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.CatalogItem.Id), nameof(productCatalogItem), "Item must be of type Commerce Catalog Item");
 
             var data = new CatalogRouteData
             {
-                ItemType = productCatalogItem.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id) ? CatalogItemType.Product : CatalogItemType.Category,
+                ItemType = productCatalogItem.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.Product.Id) ? CatalogItemType.Product : CatalogItemType.Category,
                 Id = productCatalogItem.Name.ToLowerInvariant(),
                 Item = productCatalogItem,
-                Catalog = productCatalogItem[Foundation.Commerce.Templates.Commerce.CatalogItem.Fields.CatalogName],
+                Catalog = productCatalogItem[Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.CatalogItem.Fields.CatalogName],
                 CategoryId = GetCategoryIdFromItem(productCatalogItem)
             };
 
@@ -190,15 +190,15 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
 
         private string GetCategoryIdFromItem(Item item)
         {
-            if (item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id))
+            if (item.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.Category.Id))
             {
                 return item.Name.ToLowerInvariant();
             }
-            if (item.IsDerived(Foundation.Commerce.Templates.Commerce.Product.Id))
+            if (item.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.Product.Id))
             {
                 return item.Parent.Name.ToLowerInvariant();
             }
-            if (item.IsDerived(Foundation.Commerce.Templates.Commerce.ProductVariant.Id))
+            if (item.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.ProductVariant.Id))
             {
                 return item.Parent.Parent.Name.ToLowerInvariant();
             }

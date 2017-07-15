@@ -5,9 +5,9 @@ using System.Web;
 using Sitecore.Data.Items;
 using Sitecore.Feature.Commerce.Catalog.Models;
 using Sitecore.Feature.Commerce.Catalog.Services;
-using Sitecore.Foundation.Commerce.Extensions;
-using Sitecore.Foundation.Commerce.Managers;
-using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
@@ -40,7 +40,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Factories
 
         private bool IsValid(Item categoryItem)
         {
-            return categoryItem != null && categoryItem.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id);
+            return categoryItem != null && categoryItem.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.Category.Id);
         }
 
         public CategoryViewModel Create(Category category, SearchOptions productSearchOptions = null)

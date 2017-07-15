@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Feature.Commerce.Orders.Models;
-using Sitecore.Foundation.Commerce;
-using Sitecore.Foundation.Commerce.Managers;
-using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Security.Accounts;
 

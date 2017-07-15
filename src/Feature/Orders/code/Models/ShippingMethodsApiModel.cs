@@ -21,7 +21,7 @@ using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Commerce.Services.Shipping;
 using System;
-using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {

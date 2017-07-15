@@ -16,7 +16,7 @@
 // -------------------------------------------------------------------------------------------
 
 using Sitecore.Commerce.Services;
-using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
 namespace Sitecore.Feature.Commerce.Customers.Models
 {

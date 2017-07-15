@@ -23,12 +23,12 @@ using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Diagnostics;
 using Sitecore.Feature.Commerce.Orders.Models;
-using Sitecore.Foundation.Commerce;
-using Sitecore.Foundation.Commerce.Extensions;
-using Sitecore.Foundation.Commerce.Managers;
-using Sitecore.Foundation.Commerce.Models;
-using Sitecore.Foundation.Commerce.Models.InputModels;
-using Sitecore.Foundation.Commerce.Util;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.InputModels;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Util;
 using Sitecore.Foundation.SitecoreExtensions.Attributes;
 using Sitecore.Mvc.Controllers;
 

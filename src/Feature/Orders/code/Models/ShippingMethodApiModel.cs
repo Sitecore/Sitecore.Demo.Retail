@@ -16,8 +16,8 @@
 // -------------------------------------------------------------------------------------------
 
 using Sitecore.Commerce.Entities.Shipping;
-using Sitecore.Foundation.Commerce.Managers;
-using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {

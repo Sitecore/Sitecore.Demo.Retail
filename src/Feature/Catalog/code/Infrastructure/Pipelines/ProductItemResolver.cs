@@ -18,7 +18,7 @@
 using System.Web;
 using System.Web.Routing;
 using Sitecore.Feature.Commerce.Catalog.Factories;
-using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Pipelines.HttpRequest;
 

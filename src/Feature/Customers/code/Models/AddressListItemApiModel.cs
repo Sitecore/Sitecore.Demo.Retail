@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
-using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Mvc.Extensions;
 
 namespace Sitecore.Feature.Commerce.Customers.Models

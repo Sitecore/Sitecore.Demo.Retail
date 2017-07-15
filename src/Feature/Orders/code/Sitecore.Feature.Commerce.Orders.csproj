@@ -243,11 +243,10 @@
     <None Include="Views\web.config" />
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Foundation\Commerce\code\Sitecore.Foundation.Commerce.csproj">
+    <ProjectReference Include="..\..\..\Foundation\Commerce\Website\Sitecore.Demo.Retail.Foundation.Commerce.Website\Sitecore.Demo.Retail.Foundation.Commerce.Website.csproj">
       <Project>{662345ac-23ee-4125-87a6-0785795c2409}</Project>
-      <Name>Sitecore.Foundation.Commerce</Name>
+      <Name>Sitecore.Demo.Retail.Foundation.Commerce.Website</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

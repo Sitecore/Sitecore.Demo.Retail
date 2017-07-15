@@ -24,7 +24,7 @@ using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Feature.Commerce.Catalog.Factories;
-using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Links;
 using Sitecore.Mvc;
 using Sitecore.Mvc.Common;

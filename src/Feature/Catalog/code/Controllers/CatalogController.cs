@@ -27,12 +27,12 @@ using Sitecore.Feature.Commerce.Catalog.Services;
 using Sitecore.Foundation.Alerts;
 using Sitecore.Foundation.Alerts.Extensions;
 using Sitecore.Foundation.Alerts.Models;
-using Sitecore.Foundation.Commerce;
-using Sitecore.Foundation.Commerce.Extensions;
-using Sitecore.Foundation.Commerce.Managers;
-using Sitecore.Foundation.Commerce.Models;
-using Sitecore.Foundation.Commerce.Models.InputModels;
-using Sitecore.Foundation.Commerce.Models.Search;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.InputModels;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.Search;
 using Sitecore.Foundation.Dictionary.Repositories;
 using Sitecore.Foundation.SitecoreExtensions.Attributes;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
@@ -152,7 +152,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                     var productList = productListField.GetItems();
                     foreach (var productItem in productList)
                     {
-                        if (!productItem.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id) && !productItem.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id))
+                        if (!productItem.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.Category.Id) && !productItem.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.Category.Id))
                         {
                             continue;
                         }
@@ -225,7 +225,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
             }
 
             var item = RenderingContext.Current.Rendering.Item;
-            var dataSource = item.IsDerived(Foundation.Commerce.Templates.Commerce.NavigationItem.Id) ? item?.TargetItem(Foundation.Commerce.Templates.Commerce.NavigationItem.Fields.CategoryDatasource) : null;
+            var dataSource = item.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.NavigationItem.Id) ? item?.TargetItem(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.NavigationItem.Fields.CategoryDatasource) : null;
             if (dataSource == null)
             {
                 return this.InfoMessage(InfoMessage.Error(AlertTexts.InvalidDataSourceTemplateFriendlyMessage));
@@ -512,7 +512,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
                 return this.InfoMessage(InfoMessage.Error("This rendering cannot be shown without a valid catalog context."));
             }
 
-            var isCatalogItem = RenderingContext.Current.Rendering.Item.IsDerived(Foundation.Commerce.Templates.Commerce.CatalogItem.Id);
+            var isCatalogItem = RenderingContext.Current.Rendering.Item.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.CatalogItem.Id);
 
             var catalogItem = isCatalogItem ? RenderingContext.Current.Rendering.Item : CatalogItemContext.Current?.Item;
             var relatedCatalogItemsModel = GetRelationshipsFromItem(catalogItem, RenderingContext.Current.Rendering);
@@ -825,12 +825,12 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         public RelatedCatalogItemsViewModel GetRelationshipsFromItem(Item catalogItem, Rendering rendering)
         {
-            if (catalogItem == null || !catalogItem.IsDerived(Foundation.Commerce.Templates.Commerce.CatalogItem.Id) || !catalogItem.FieldHasValue(Foundation.Commerce.Templates.Commerce.CatalogItem.Fields.RelationshipList))
+            if (catalogItem == null || !catalogItem.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.CatalogItem.Id) || !catalogItem.FieldHasValue(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.CatalogItem.Fields.RelationshipList))
             {
                 return null;
             }
 
-            RelationshipField field = catalogItem.Fields[Foundation.Commerce.Templates.Commerce.CatalogItem.Fields.RelationshipList];
+            RelationshipField field = catalogItem.Fields[Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.CatalogItem.Fields.RelationshipList];
 
             var model = new RelatedCatalogItemsViewModel();
             var productRelationshipInfoList = field.GetRelationships();
@@ -895,7 +895,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Controllers
 
         private Category GetCurrentCategory()
         {
-            if (!RenderingContext.Current.Rendering.Item.IsWildcardItem() && RenderingContext.Current.Rendering.Item.IsDerived(Foundation.Commerce.Templates.Commerce.Category.Id))
+            if (!RenderingContext.Current.Rendering.Item.IsWildcardItem() && RenderingContext.Current.Rendering.Item.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.Category.Id))
             {
                 return CatalogManager.GetCategory(Context.Item);
             }

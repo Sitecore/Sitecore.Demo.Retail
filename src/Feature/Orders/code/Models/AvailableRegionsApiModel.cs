@@ -18,7 +18,7 @@
 using System.Collections.Generic;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
-using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
 namespace Sitecore.Feature.Commerce.Orders.Models
 {

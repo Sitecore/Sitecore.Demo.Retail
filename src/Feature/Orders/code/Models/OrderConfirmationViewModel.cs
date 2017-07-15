@@ -15,7 +15,7 @@
 // -------------------------------------------------------------------------------------------
 
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
-using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
 using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Feature.Commerce.Orders.Models

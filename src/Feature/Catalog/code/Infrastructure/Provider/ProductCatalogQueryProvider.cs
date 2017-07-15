@@ -7,7 +7,7 @@ using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Feature.Commerce.Catalog.Factories;
-using Sitecore.Foundation.Commerce.Managers;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
 using Sitecore.Foundation.Dictionary.Repositories;
 using Sitecore.Foundation.Indexing.Infrastructure;
 using Sitecore.Foundation.Indexing.Models;
@@ -27,8 +27,8 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
 
         public IEnumerable<ID> SupportedTemplates => new[]
         {
-            Foundation.Commerce.Templates.Commerce.Product.Id,
-            Foundation.Commerce.Templates.Commerce.Category.Id
+            Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.Product.Id,
+            Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.Category.Id
         };
 
         public Expression<Func<SearchResultItem, bool>> GetQueryPredicate(IQuery query)
@@ -52,7 +52,7 @@ namespace Sitecore.Feature.Commerce.Catalog.Infrastructure.Provider
             get
             {
                 var catalogRootItem = CatalogManager.CatalogContext?.CatalogRootItem;
-                return catalogRootItem?.TargetItem(Foundation.Commerce.Templates.Commerce.NavigationItem.Fields.CategoryDatasource);
+                return catalogRootItem?.TargetItem(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.NavigationItem.Fields.CategoryDatasource);
             }
             set { throw new NotImplementedException(); }
         }

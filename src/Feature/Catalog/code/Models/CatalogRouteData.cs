@@ -1,5 +1,5 @@
 ﻿using Sitecore.Data.Items;
-using Sitecore.Foundation.Commerce.Models;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
 namespace Sitecore.Feature.Commerce.Catalog.Models
 {
