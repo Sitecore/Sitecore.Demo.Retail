@@ -132,9 +132,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\Feature\Feature.Commerce.Orders.config" />
-    <Content Include="App_Config\Include\Feature\Feature.Commerce.Orders.Serialization.config" />
-    <Content Include="App_Config\Include\Feature\Feature.Commerce.Orders.Processing.config" />
+    <Content Include="App_Config\Include\Feature\Sitecore.Demo.Retail.Feature.Orders.Website.config" />
+    <Content Include="App_Config\Include\Feature\Sitecore.Demo.Retail.Feature.Orders.Website.Serialization.config" />
+    <Content Include="App_Config\Include\Feature\Sitecore.Demo.Retail.Feature.Orders.Website.Processing.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <Content Include="Scripts\jquery\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery\jquery-ui-1.10.4.js" />
