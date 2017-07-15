@@ -1,12 +1,11 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Braintree;
 using Braintree.Exceptions;
 using Sitecore.Commerce.Core;
+using Sitecore.Demo.Retail.Feature.Payments.Engine.Policies;
 using Sitecore.Framework.Pipelines;
-using Sitecore.Foundation.Commerce.Engine.Plugin.Payments.Policies;
 
-namespace Sitecore.Foundation.Commerce.Engine.Plugin.Payments.Pipelines.Blocks
+namespace Sitecore.Demo.Retail.Feature.Payments.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(PaymentsConstants.Pipelines.Blocks.GetClientTokenBlock)]
     public class GetClientTokenBlock : PipelineBlock<string, string, CommercePipelineExecutionContext>

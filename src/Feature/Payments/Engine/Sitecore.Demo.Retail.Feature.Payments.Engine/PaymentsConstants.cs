@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sitecore.Foundation.Commerce.Engine.Plugin.Payments
+﻿namespace Sitecore.Demo.Retail.Feature.Payments.Engine
 {
     public static class PaymentsConstants
     {

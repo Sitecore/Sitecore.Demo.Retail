@@ -3,11 +3,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.Orders;
 using Sitecore.Commerce.Plugin.Payments;
+using Sitecore.Demo.Retail.Feature.Payments.Engine.Pipelines.Blocks;
 using Sitecore.Framework.Configuration;
 using Sitecore.Framework.Pipelines.Definitions.Extensions;
-using Sitecore.Foundation.Commerce.Engine.Plugin.Payments.Pipelines.Blocks;
+using GetClientTokenBlock = Sitecore.Demo.Retail.Feature.Payments.Engine.Pipelines.Blocks.GetClientTokenBlock;
 
-namespace Sitecore.Foundation.Commerce.Engine.Plugin.Payments
+namespace Sitecore.Demo.Retail.Feature.Payments.Engine
 {
     public class ConfigureSitecore : IConfigureSitecore
     {
@@ -19,7 +20,7 @@ namespace Sitecore.Foundation.Commerce.Engine.Plugin.Payments
             services.Sitecore().Pipelines(config => config
 
                 .ConfigurePipeline<IGetClientTokenPipeline>(builder => builder
-                    .Add<Pipelines.Blocks.GetClientTokenBlock>().After<Sitecore.Commerce.Plugin.Payments.GetClientTokenBlock>()
+                    .Add<GetClientTokenBlock>().After<Sitecore.Commerce.Plugin.Payments.GetClientTokenBlock>()
                 )
 
                 .ConfigurePipeline<ICreateOrderPipeline>(builder => builder

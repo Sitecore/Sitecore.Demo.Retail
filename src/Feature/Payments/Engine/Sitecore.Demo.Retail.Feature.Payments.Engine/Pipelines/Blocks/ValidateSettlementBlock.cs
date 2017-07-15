@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using global::Braintree;
+using Braintree;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.ManagedLists;
 using Sitecore.Commerce.Plugin.Orders;
@@ -10,7 +10,7 @@ using Sitecore.Commerce.Plugin.Payments;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 
-namespace Sitecore.Foundation.Commerce.Engine.Plugin.Payments.Pipelines.Blocks
+namespace Sitecore.Demo.Retail.Feature.Payments.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(PaymentsConstants.Pipelines.Blocks.ValidateSettlementBlock)]
     public class ValidateSettlementBlock : PipelineBlock<SalesActivity, SalesActivity, CommercePipelineExecutionContext>

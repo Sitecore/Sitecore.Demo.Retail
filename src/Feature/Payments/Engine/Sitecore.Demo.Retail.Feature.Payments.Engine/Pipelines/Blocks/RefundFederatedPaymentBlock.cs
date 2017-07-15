@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using global::Braintree;
-using global::Braintree.Exceptions;
+using Braintree;
+using Braintree.Exceptions;
 using Microsoft.Extensions.Logging;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.ManagedLists;
 using Sitecore.Commerce.Plugin.Orders;
 using Sitecore.Commerce.Plugin.Payments;
+using Sitecore.Demo.Retail.Feature.Payments.Engine.Policies;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
-using Sitecore.Foundation.Commerce.Engine.Plugin.Payments.Policies;
 
-namespace Sitecore.Foundation.Commerce.Engine.Plugin.Payments.Pipelines.Blocks
+namespace Sitecore.Demo.Retail.Feature.Payments.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(PaymentsConstants.Pipelines.Blocks.RefundFederatedPaymentBlock)]
     public class RefundFederatedPaymentBlock : PipelineBlock<OrderPaymentsArgument, OrderPaymentsArgument, CommercePipelineExecutionContext>
