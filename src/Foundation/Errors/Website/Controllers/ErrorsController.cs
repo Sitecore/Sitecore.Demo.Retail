@@ -15,11 +15,10 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System;
 using System.Web.Mvc;
 using Sitecore.Mvc.Controllers;
 
-namespace Sitecore.Foundation.Commerce.Errors.Controllers
+namespace Sitecore.Demo.Retail.Foundation.Errors.Website.Controllers
 {
     public class ErrorsController : SitecoreController
     {
