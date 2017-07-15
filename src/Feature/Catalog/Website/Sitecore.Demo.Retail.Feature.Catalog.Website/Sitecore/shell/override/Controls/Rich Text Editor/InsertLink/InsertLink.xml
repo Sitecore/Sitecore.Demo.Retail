@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<control xmlns:def="Definition" xmlns="http://schemas.sitecore.net/Visual-Studio-Intellisense">
+  <RichText.InsertLink>
+    <FormDialog Icon="Network/32x32/link.png" Header="Insert Link"
+      Text="Navigate to or search for the item that you want to insert a link to." OKButton="Insert">
+
+      <script Type="text/javascript" Language="javascript" Src="/sitecore/shell/Controls/Rich Text Editor/InsertLink/InsertLink.js">.</script>
+
+      <CodeBeside Type="Sitecore.Demo.Retail.Feature.Catalog.Website.Infrastructure.Dialogs.InsertLinkForm, Sitecore.Demo.Retail.Feature.Catalog.Website"/>
+
+      <DataContext ID="InternalLinkDataContext"/>
+      <DataContext ID="MediaDataContext" Root="{3D6658D8-A0BF-4E75-B3E2-D050FABCF4E1}"/>
+
+      <Tabstrip ID="Tabs" Width="100%" Height="100%">
+        <Tab ID="InternalLinkTab" Header="Internal Link">
+          <Scrollbox Width="100%" Height="100%" Background="white" Border="none" Padding="0">
+            <TreeviewEx ID="InternalLinkTreeview" DataContext="InternalLinkDataContext" Root="true" />
+          </Scrollbox>
+        </Tab>
+        </Tab>
+        <Tab ID="MediaTab" Header="Media Items">
+          <TreeviewEx ID="MediaTreeview" DataContext="MediaDataContext" Root="true" Click="OnMediaTreeviewClicked" />
+        </Tab>
+        <SearchTab Mode="MiniResults" Header="Search"/>
+      </Tabstrip>
+      <Border def:placeholder="Buttons">
+        <Button ID="BtnUpload" style="display:none;" Header="Upload" Click="media:upload(edit=1,load=1)"/>
+      </Border>
+    </FormDialog>
+  </RichText.InsertLink>
+</control>

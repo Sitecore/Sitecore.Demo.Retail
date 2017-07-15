@@ -1,0 +1,71 @@
+﻿@*//-----------------------------------------------------------------------
+    // Copyright 2016 Sitecore Corporation A/S
+    // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+    // except in compliance with the License. You may obtain a copy of the License at
+    //       http://www.apache.org/licenses/LICENSE-2.0
+    //
+    // Unless required by applicable law or agreed to in writing, software distributed under the
+    // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    // either express or implied. See the License for the specific language governing permissions
+    // and limitations under the License.
+    // -------------------------------------------------------------------------------------------*@
+@using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions
+@model Sitecore.Demo.Retail.Feature.Catalog.Website.Models.ProductViewModel
+@{
+    if (Model == null)
+    {
+        return;
+    }
+}
+
+@{
+    var hasVariantPrices = Model.LowestPricedVariantAdjustedPrice.HasValue && Model.HighestPricedVariantAdjustedPrice.HasValue;
+    var showStartingFrom = hasVariantPrices && Model.LowestPricedVariantAdjustedPrice.Value < Model.HighestPricedVariantAdjustedPrice.Value;
+
+    decimal? secondaryPrice = null;
+    var savingsPercentage = 0.0M;
+
+    var primaryPrice = hasVariantPrices ? Model.LowestPricedVariantAdjustedPrice : Model.AdjustedPrice ?? Model.ListPrice;
+    if (Model.IsOnSale)
+    {
+        var originalPrice = hasVariantPrices ? Model.LowestPricedVariantListPrice : Model.ListPrice;
+        if (originalPrice > primaryPrice)
+        {
+            secondaryPrice = originalPrice;
+            savingsPercentage = hasVariantPrices ? Model.VariantSavingsPercentage : Model.SavingsPercentage;
+        }
+    }
+
+    if (primaryPrice.HasValue)
+    {
+        <div class="text-info">
+            @if (showStartingFrom)
+            {
+                <small>
+                    <em>@Html.Sitecore().Text("/Catalog/Product Details/Starting from", "Starting from:")</em> 
+                    <span>&#160;</span>
+                </small>
+            }
+            else
+            {
+                <small>
+                    <em>@Html.Sitecore().Text("/Catalog/Product Details/Price", "Price:")</em> 
+                    <span>&#160;</span>
+                </small>
+            }
+            <strong>@primaryPrice.ToCurrency()</strong>
+        </div>
+        if (secondaryPrice.HasValue)
+        {
+            <div class="text-muted">
+                <small>
+                    <del>@secondaryPrice.ToCurrency()</del>
+                </small>
+            </div>
+
+            <div>
+                <small class="price-savings">@Html.Sitecore().Text("/Catalog/Product Details/Save percent", "You save: ") @savingsPercentage.ToString("P0")</small>
+            </div>
+        }
+    }
+}

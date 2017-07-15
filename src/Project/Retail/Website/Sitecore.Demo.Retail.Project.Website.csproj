@@ -171,9 +171,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Feature\Catalog\code\Sitecore.Feature.Commerce.Catalog.csproj">
+    <ProjectReference Include="..\..\..\Feature\Catalog\Website\Sitecore.Demo.Retail.Feature.Catalog.Website\Sitecore.Demo.Retail.Feature.Catalog.Website.csproj">
       <Project>{7031f757-2830-44e3-9639-aad2dba69a24}</Project>
-      <Name>Sitecore.Feature.Commerce.Catalog</Name>
+      <Name>Sitecore.Demo.Retail.Feature.Catalog.Website</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Foundation\Commerce\Website\Sitecore.Demo.Retail.Foundation.Commerce.Website\Sitecore.Demo.Retail.Foundation.Commerce.Website.csproj">
       <Project>{662345ac-23ee-4125-87a6-0785795c2409}</Project>

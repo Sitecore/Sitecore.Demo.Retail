@@ -1,4 +1,4 @@
-﻿using Sitecore.Feature.Commerce.Catalog.Factories;
+﻿using Sitecore.Demo.Retail.Feature.Catalog.Website.Factories;
 using Sitecore.Feature.Metadata.Infrastructure.Pipelines.GetPageMetadata;
 using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.DependencyInjection;

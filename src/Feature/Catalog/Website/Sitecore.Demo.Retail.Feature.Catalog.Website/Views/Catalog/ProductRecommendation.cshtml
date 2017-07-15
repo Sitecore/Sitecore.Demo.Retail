@@ -1,0 +1,66 @@
+﻿@*//-----------------------------------------------------------------------
+    // Copyright 2016 Sitecore Corporation A/S
+    // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+    // except in compliance with the License. You may obtain a copy of the License at
+    //       http://www.apache.org/licenses/LICENSE-2.0
+    //
+    // Unless required by applicable law or agreed to in writing, software distributed under the
+    // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    // either express or implied. See the License for the specific language governing permissions
+    // and limitations under the License.
+    // -------------------------------------------------------------------------------------------*@
+@using Sitecore.Demo.Retail.Feature.Catalog.Website.Models
+@model MultipleSearchResultsViewModel
+@{
+    if (Model?.ProductSearchResults == null || !Model.ProductSearchResults.Any())
+    {
+        return;
+    }
+
+    var idList = new List<string>();
+}
+
+<ul class="nav nav-tabs nav-justified" role="tablist">
+
+    @for (var index = 0; index < Model.ProductSearchResults.Count; index++)
+    {
+        var productSearchResult = Model.ProductSearchResults[index];
+        idList.Add(Guid.NewGuid().ToString("N"));
+        var active = Model.ProductSearchResults.IndexOf(productSearchResult) == 0;
+        <li role="presentation" class=@(active ? "active" : "")>
+            <a href="#tab-@idList[index]" role="tab" data-toggle="tab">
+                @productSearchResult.Title
+            </a>
+        </li>
+        index++;
+    }
+
+</ul>
+<div class="tab-content">
+    @for (var index = 0; index < Model.ProductSearchResults.Count; index++)
+    {
+        var productSearchResult = Model.ProductSearchResults[index];
+        var active = Model.ProductSearchResults.IndexOf(productSearchResult) == 0;
+        <div role="tabpanel" class="tab-pane @(active ? "active" : "")" id="tab-@idList[index]">
+            @{
+                var slides = productSearchResult.Items.Count < 4 && productSearchResult.Items.Count > 1 ? productSearchResult.Items.Count : 4;
+            }
+            <div class="owl-carousel" data-options='{"items": @slides, "navigation": true, "navigationText": ["<", ">"], "autoPlay": false}'>
+                @{
+                    foreach (var item in productSearchResult.Items)
+                    {
+                        if (item is ProductViewModel)
+                        {
+                            @Html.Partial("_ProductSummary", (ProductViewModel)item)
+                        }
+                        else if (item is CategoryViewModel)
+                        {
+                            @Html.Partial("_CategorySummary", (CategoryViewModel)item)
+                        }
+                    }
+                }
+            </div>
+        </div>
+    }
+
+</div>

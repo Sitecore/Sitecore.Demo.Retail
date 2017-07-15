@@ -1,0 +1,48 @@
+﻿@*//-----------------------------------------------------------------------
+    // Copyright 2016 Sitecore Corporation A/S
+    // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+    // except in compliance with the License. You may obtain a copy of the License at
+    //       http://www.apache.org/licenses/LICENSE-2.0
+    //
+    // Unless required by applicable law or agreed to in writing, software distributed under the
+    // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    // either express or implied. See the License for the specific language governing permissions
+    // and limitations under the License.
+    // -------------------------------------------------------------------------------------------*@
+@using Sitecore.Collections
+@using Sitecore.Foundation.SitecoreExtensions.Extensions
+@using Sitecore.Commerce.Connect.CommerceServer
+@using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions
+@model Sitecore.Demo.Retail.Feature.Catalog.Website.Models.CategoryViewModel
+@{
+    if (Model == null)
+    {
+        return;
+    }
+}
+
+<div class="thumbnail">
+    @using (Html.BeginEditFrame(Model.Item.Paths.FullPath, CommerceConstants.KnownItemPaths.EditFrameImages))
+    {
+        if (Model.GetThumbnailUrl(300) != null)
+        {
+            <a href="@Model.GetLink()">
+                <img src="@Model.GetThumbnailUrl(300)" class="img-responsive" alt="product image" title="@Model.Title" />
+            </a>
+        }
+    }
+
+    <div class="caption">
+        <a href="@Model.GetLink()">
+            <h3 class="twolines">@Html.Sitecore().Field(Model.TitleFieldName, Model.Item)</h3>
+        </a>
+        <p>
+            @Html.Sitecore().Field(Model.DescriptionFieldName, Model.Item)
+        </p>
+        <div class="p-t-1">
+            <a href="@Model.GetLink()" class="btn btn-default">
+                @Html.Sitecore().Text("/Catalog/Category Summary/Category", "Category")
+            </a>
+        </div>
+    </div>
+</div>
