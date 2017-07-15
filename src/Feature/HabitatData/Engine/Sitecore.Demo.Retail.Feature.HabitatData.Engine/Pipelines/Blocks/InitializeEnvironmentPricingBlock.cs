@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Microsoft.Extensions.Logging;
-
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.Pricing;
 using Sitecore.Framework.Pipelines;
 
-namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
+namespace Sitecore.Demo.Retail.Feature.HabitatData.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(HabitatDataConstants.Pipelines.Blocks.InitializeEnvironmentPricingBlock)]
     public class InitializeEnvironmentPricingBlock : PipelineBlock<string, string, CommercePipelineExecutionContext>

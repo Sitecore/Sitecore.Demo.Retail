@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData
+﻿namespace Sitecore.Demo.Retail.Feature.HabitatData.Engine
 {
     public class HabitatDataConstants
     {

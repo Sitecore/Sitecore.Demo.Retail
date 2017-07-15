@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using Microsoft.Extensions.Logging;
-
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.Carts;
 using Sitecore.Commerce.Plugin.Coupons;
@@ -12,7 +10,7 @@ using Sitecore.Commerce.Plugin.Promotions;
 using Sitecore.Commerce.Plugin.Rules;
 using Sitecore.Framework.Pipelines;
 
-namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
+namespace Sitecore.Demo.Retail.Feature.HabitatData.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(HabitatDataConstants.Pipelines.Blocks.InitializeEnvironmentPromotionsBlock)]
     public class InitializeEnvironmentPromotionsBlock : PipelineBlock<string, string, CommercePipelineExecutionContext>

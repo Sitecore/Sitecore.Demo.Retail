@@ -1,18 +1,16 @@
-﻿namespace Sitecore.Project.Commerce.Engine.Plugin.HabitatData.Pipelines.Blocks
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Sitecore.Commerce.Core;
+using Sitecore.Commerce.Plugin.Availability;
+using Sitecore.Commerce.Plugin.Catalog;
+using Sitecore.Commerce.Plugin.ManagedLists;
+using Sitecore.Commerce.Plugin.Pricing;
+using Sitecore.Framework.Pipelines;
+
+namespace Sitecore.Demo.Retail.Feature.HabitatData.Engine.Pipelines.Blocks
 {
-  using System.Collections.Generic;
-  using System.Threading.Tasks;
-
-  using Microsoft.Extensions.Logging;
-
-  using Sitecore.Commerce.Core;
-  using Sitecore.Commerce.Plugin.Availability;
-  using Sitecore.Commerce.Plugin.Catalog;
-  using Sitecore.Commerce.Plugin.ManagedLists;
-  using Sitecore.Commerce.Plugin.Pricing;
-  using Sitecore.Framework.Pipelines;
-
-  /// <summary>
+    /// <summary>
   /// Defines a block which bootstraps sellable items the Habitat sample environment.
   /// </summary>
   /// <seealso>
