@@ -1,9 +1,9 @@
-﻿//---------------------------------------------------------------------
-// <copyright file="InitializeRoutes.cs" company="Sitecore Corporation">
+﻿//-----------------------------------------------------------------------
+// <copyright file="AddressItemBaseJsonResult.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>The route ininitialization</summary>
-//---------------------------------------------------------------------
+// <summary>Defines the AddressItemBaseJsonResult class.</summary>
+//-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
 // except in compliance with the License. You may obtain a copy of the License at
@@ -15,19 +15,19 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System.Web.Routing;
-using Sitecore.Pipelines;
+using Sitecore.Commerce.Services;
+using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
-namespace Sitecore.Feature.Commerce.Customers.Infrastructure.Pipelines
+namespace Sitecore.Demo.Retail.Feature.Customers.Website.Models
 {
-    public class InitializeRoutes
+    public class AddressItemBaseApiModel : BaseApiModel
     {
-        public void Process(PipelineArgs args)
+        public AddressItemBaseApiModel()
         {
-            if (!Context.IsUnitTesting)
-            {
-                RouteConfig.RegisterRoutes(RouteTable.Routes);
-            }
+        }
+
+        public AddressItemBaseApiModel(ServiceProviderResult result) : base(result)
+        {
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="AddressItemBaseJsonResult.cs" company="Sitecore Corporation">
+// <copyright file="UserBaseJsonResult.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Defines the AddressItemBaseJsonResult class.</summary>
+// <summary>Defines the UserBaseJsonResult class.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -17,17 +17,36 @@
 
 using Sitecore.Commerce.Services;
 using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
+using Sitecore.Diagnostics;
 
-namespace Sitecore.Feature.Commerce.Customers.Models
+namespace Sitecore.Demo.Retail.Feature.Customers.Website.Models
 {
-    public class AddressItemBaseApiModel : BaseApiModel
+    public class UserApiModel : BaseApiModel
     {
-        public AddressItemBaseApiModel()
+        public UserApiModel()
         {
         }
 
-        public AddressItemBaseApiModel(ServiceProviderResult result) : base(result)
+        public UserApiModel(ServiceProviderResult result) : base(result)
         {
+        }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string FullName { get; set; }
+
+        public string Email { get; set; }
+
+        public void Initialize(IUser user)
+        {
+            Assert.ArgumentNotNull(user, nameof(user));
+
+            FirstName = user.FirstName;
+            LastName = user.LastName;
+            FullName = string.Concat(FirstName, string.Empty, LastName);
+            Email = user.Email;
         }
     }
 }

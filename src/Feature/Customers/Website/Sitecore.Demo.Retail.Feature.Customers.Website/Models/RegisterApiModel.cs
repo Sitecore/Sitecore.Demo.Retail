@@ -15,12 +15,11 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using Sitecore.Commerce.Entities.Customers;
 using Sitecore.Commerce.Services.Customers;
 using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using CommerceUser = Sitecore.Commerce.Entities.Customers.CommerceUser;
 
-namespace Sitecore.Feature.Commerce.Customers.Models
+namespace Sitecore.Demo.Retail.Feature.Customers.Website.Models
 {
     public class RegisterApiModel : BaseApiModel
     {

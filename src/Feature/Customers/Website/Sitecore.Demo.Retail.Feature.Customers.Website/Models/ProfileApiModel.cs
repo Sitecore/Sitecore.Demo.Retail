@@ -19,7 +19,7 @@ using System.ComponentModel.DataAnnotations;
 using Sitecore.Commerce.Services.Customers;
 using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
-namespace Sitecore.Feature.Commerce.Customers.Models
+namespace Sitecore.Demo.Retail.Feature.Customers.Website.Models
 {
     public class ProfileApiModel : BaseApiModel
     {

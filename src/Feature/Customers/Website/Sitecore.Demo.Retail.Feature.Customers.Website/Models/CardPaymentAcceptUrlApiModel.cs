@@ -17,10 +17,10 @@
 
 using System;
 using Sitecore.Commerce.Services.Payments;
-using Sitecore.Diagnostics;
 using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
+using Sitecore.Diagnostics;
 
-namespace Sitecore.Feature.Commerce.Customers.Models
+namespace Sitecore.Demo.Retail.Feature.Customers.Website.Models
 {
     public class CardPaymentAcceptUrlApiModel : BaseApiModel
     {

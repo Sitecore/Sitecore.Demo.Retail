@@ -18,7 +18,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Sitecore.Feature.Commerce.Customers.Models
+namespace Sitecore.Demo.Retail.Feature.Customers.Website.Models
 {
     public class RegisterViewModel
     {

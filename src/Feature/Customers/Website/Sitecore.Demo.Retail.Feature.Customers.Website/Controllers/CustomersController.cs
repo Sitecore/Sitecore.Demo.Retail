@@ -21,20 +21,19 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI;
 using Sitecore.Configuration;
-using Sitecore.Diagnostics;
-using Sitecore.Feature.Commerce.Customers.Models;
+using Sitecore.Demo.Retail.Feature.Customers.Website.Models;
 using Sitecore.Demo.Retail.Foundation.Commerce.Website;
 using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
 using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
 using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.InputModels;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Repositories;
+using Sitecore.Diagnostics;
 using Sitecore.Foundation.Dictionary.Repositories;
 using Sitecore.Foundation.SitecoreExtensions.Attributes;
 using Sitecore.Links;
 using Sitecore.Mvc.Controllers;
 
-namespace Sitecore.Feature.Commerce.Customers.Controllers
+namespace Sitecore.Demo.Retail.Feature.Customers.Website.Controllers
 {
     public class CustomersController : SitecoreController
     {

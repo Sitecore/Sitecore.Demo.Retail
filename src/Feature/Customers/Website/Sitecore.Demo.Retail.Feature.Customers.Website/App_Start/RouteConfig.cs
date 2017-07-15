@@ -20,7 +20,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
-namespace Sitecore.Feature.Commerce.Customers
+namespace Sitecore.Demo.Retail.Feature.Customers.Website
 {
     public static class RouteConfig
     {
