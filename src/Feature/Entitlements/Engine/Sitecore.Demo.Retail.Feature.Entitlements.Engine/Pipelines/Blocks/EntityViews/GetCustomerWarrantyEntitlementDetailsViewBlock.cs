@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Core.Commands;
 using Sitecore.Commerce.EntityViews;
 using Sitecore.Commerce.Plugin.Customers;
 using Sitecore.Commerce.Plugin.Entitlements;
+using Sitecore.Demo.Retail.Feature.Entitlements.Engine.Entities;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
-using Sitecore.Foundation.Commerce.Engine.Plugin.Entitlements.Entities;
 
-namespace Sitecore.Foundation.Commerce.Engine.Plugin.Entitlements.Pipelines.Blocks.EntityViews
+namespace Sitecore.Demo.Retail.Feature.Entitlements.Engine.Pipelines.Blocks.EntityViews
 {
     [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.GetCustomerWarrantyEntitlementDetailsViewBlock)]
     public class GetCustomerWarrantyEntitlementDetailsViewBlock : PipelineBlock<EntityView, EntityView, CommercePipelineExecutionContext>

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-
 using Sitecore.Commerce.Core;
 
-namespace Sitecore.Foundation.Commerce.Engine.Plugin.Entitlements.Policies
+namespace Sitecore.Demo.Retail.Feature.Entitlements.Engine.Policies
 {
     public class KnownEntitlementsTags : Policy
     {

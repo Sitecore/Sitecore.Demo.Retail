@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Core.Commands;
 using Sitecore.Commerce.EntityViews;
+using Sitecore.Commerce.Plugin.Customers;
 using Sitecore.Commerce.Plugin.Entitlements;
-using Sitecore.Commerce.Plugin.Orders;
+using Sitecore.Demo.Retail.Feature.Entitlements.Engine.Entities;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
-using Sitecore.Foundation.Commerce.Engine.Plugin.Entitlements.Entities;
 
-namespace Sitecore.Foundation.Commerce.Engine.Plugin.Entitlements.Pipelines.Blocks.EntityViews
+namespace Sitecore.Demo.Retail.Feature.Entitlements.Engine.Pipelines.Blocks.EntityViews
 {
-
-    [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.GetOrderInstallationEntitlementDetailsViewBlock)]
-    public class GetOrderInstallationEntitlementDetailsViewBlock : PipelineBlock<EntityView, EntityView, CommercePipelineExecutionContext>
+    [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.GetCustomerInstallationEntitlementDetailsViewBlock)]
+    public class GetCustomerInstallationEntitlementDetailsViewBlock : PipelineBlock<EntityView, EntityView, CommercePipelineExecutionContext>
     {
         private readonly FindEntityCommand _findEntityCommand;
 
-        public GetOrderInstallationEntitlementDetailsViewBlock(FindEntityCommand findEntityCommand)
+        public GetCustomerInstallationEntitlementDetailsViewBlock(FindEntityCommand findEntityCommand)
         {
             this._findEntityCommand = findEntityCommand;
         }
@@ -30,23 +28,23 @@ namespace Sitecore.Foundation.Commerce.Engine.Plugin.Entitlements.Pipelines.Bloc
 
             var request = context.CommerceContext.Objects.OfType<EntityViewArgument>().FirstOrDefault();
             if (string.IsNullOrEmpty(request?.ViewName)
-               || (!request.ViewName.Equals(context.GetPolicy<KnownEntitlementsViewsPolicy>().OrderEntitlements, StringComparison.OrdinalIgnoreCase)
-                   && !request.ViewName.Equals(context.GetPolicy<KnownOrderViewsPolicy>().Master, StringComparison.OrdinalIgnoreCase))
-               || !(request.Entity is Order))
+               || (!request.ViewName.Equals(context.GetPolicy<KnownEntitlementsViewsPolicy>().CustomerEntitlements, StringComparison.OrdinalIgnoreCase)
+                   && !request.ViewName.Equals(context.GetPolicy<KnownCustomerViewsPolicy>().Master, StringComparison.OrdinalIgnoreCase))
+               || !(request.Entity is Customer))
             {
                 return entityView;
             }
 
-            var order = (Order)request.Entity;
-            if (!order.HasComponent<EntitlementsComponent>())
+            var customer = (Customer)request.Entity;
+            if (!customer.HasComponent<EntitlementsComponent>())
             {
                 return entityView;
             }
 
-            var entitlementsView = request.ViewName.Equals(context.GetPolicy<KnownOrderViewsPolicy>().Master, StringComparison.OrdinalIgnoreCase)
-                   ? entityView.ChildViews.Cast<EntityView>().FirstOrDefault(ev => ev.Name.Equals(context.GetPolicy<KnownEntitlementsViewsPolicy>().OrderEntitlements, StringComparison.OrdinalIgnoreCase))
+            var entitlementsView = request.ViewName.Equals(context.GetPolicy<KnownCustomerViewsPolicy>().Master, StringComparison.OrdinalIgnoreCase)
+                   ? entityView.ChildViews.Cast<EntityView>().FirstOrDefault(ev => ev.Name.Equals(context.GetPolicy<KnownEntitlementsViewsPolicy>().CustomerEntitlements, StringComparison.OrdinalIgnoreCase))
                    : entityView;
-            var entitlementViews = entitlementsView?.ChildViews.Where(cv => cv.Name.Equals(context.GetPolicy<KnownEntitlementsViewsPolicy>().OrderEntitlementDetails, StringComparison.OrdinalIgnoreCase)).Cast<EntityView>().ToList();
+            var entitlementViews = entitlementsView?.ChildViews.Where(cv => cv.Name.Equals(context.GetPolicy<KnownEntitlementsViewsPolicy>().CustomerEntitlementDetails, StringComparison.OrdinalIgnoreCase)).Cast<EntityView>().ToList();
             if (entitlementViews == null)
             {
                 return entityView;

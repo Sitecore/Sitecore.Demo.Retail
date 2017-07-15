@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Core.Commands;
 using Sitecore.Commerce.EntityViews;
 using Sitecore.Commerce.Plugin.Entitlements;
 using Sitecore.Commerce.Plugin.Orders;
+using Sitecore.Demo.Retail.Feature.Entitlements.Engine.Entities;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
-using Sitecore.Foundation.Commerce.Engine.Plugin.Entitlements.Entities;
 
-namespace Sitecore.Foundation.Commerce.Engine.Plugin.Entitlements.Pipelines.Blocks.EntityViews
+namespace Sitecore.Demo.Retail.Feature.Entitlements.Engine.Pipelines.Blocks.EntityViews
 {
-    [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.GetOrderDigitalProductEntitlementDetailsViewBlock)]
-    public class GetOrderDigitalProductEntitlementDetailsViewBlock : PipelineBlock<EntityView, EntityView, CommercePipelineExecutionContext>
+    [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.GetOrderWarrantyEntitlementDetailsViewBlock)]
+    public class GetOrderWarrantyEntitlementDetailsViewBlock : PipelineBlock<EntityView, EntityView, CommercePipelineExecutionContext>
     {
         private readonly FindEntityCommand _findEntityCommand;
 
-        public GetOrderDigitalProductEntitlementDetailsViewBlock(FindEntityCommand findEntityCommand)
+        public GetOrderWarrantyEntitlementDetailsViewBlock(FindEntityCommand findEntityCommand)
         {
             this._findEntityCommand = findEntityCommand;
         }
@@ -60,13 +59,13 @@ namespace Sitecore.Foundation.Commerce.Engine.Plugin.Entitlements.Pipelines.Bloc
                     continue;
                 }
 
-                var digitalProduct = entitlement as DigitalProduct;
-                if (digitalProduct == null)
+                var warranty = entitlement as Warranty;
+                if (warranty == null)
                 {
                     continue;
                 }
 
-                entitlementView.Properties.Add(new ViewProperty { Name = "Details", IsReadOnly = true, RawValue = "Type=DigitalProduct" });
+                entitlementView.Properties.Add(new ViewProperty { Name = "Details", IsReadOnly = true, RawValue = "Type=Warranty" });
             }
 
             return entityView;

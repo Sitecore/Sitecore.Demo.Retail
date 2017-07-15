@@ -2,20 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Microsoft.Extensions.Logging;
-
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.Availability;
 using Sitecore.Commerce.Plugin.Carts;
 using Sitecore.Commerce.Plugin.Entitlements;
 using Sitecore.Commerce.Plugin.ManagedLists;
+using Sitecore.Demo.Retail.Feature.Entitlements.Engine.Entities;
+using Sitecore.Demo.Retail.Feature.Entitlements.Engine.Policies;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
-using Sitecore.Foundation.Commerce.Engine.Plugin.Entitlements.Policies;
-using Sitecore.Foundation.Commerce.Engine.Plugin.Entitlements.Entities;
 
-namespace Sitecore.Foundation.Commerce.Engine.Plugin.Entitlements.Pipelines.Blocks
+namespace Sitecore.Demo.Retail.Feature.Entitlements.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.ProvisionDigitalProductEntitlementsBlock)]
     public class ProvisionDigitalProductEntitlementsBlock : PipelineBlock<IEnumerable<Entitlement>, IEnumerable<Entitlement>, CommercePipelineExecutionContext>
