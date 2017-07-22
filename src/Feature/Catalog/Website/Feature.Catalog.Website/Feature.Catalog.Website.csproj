@@ -157,8 +157,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\Feature\Sitecore.Demo.Retail.Feature.Catalog.Website.config" />
-    <Content Include="App_Config\Include\Feature\Sitecore.Demo.Retail.Feature.Catalog.Website.Serialization.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Catalog.Website.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Catalog.Website.Serialization.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <Content Include="Scripts\Catalog\jsuri.js" />
     <Content Include="Scripts\Catalog\priceInfoViewModel.js" />

@@ -104,8 +104,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\Feature\Sitecore.Demo.Retail.Feature.Customers.Website.config" />
-    <Content Include="App_Config\Include\Feature\Sitecore.Demo.Retail.Feature.Customers.Website.Serialization.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Customers.Website.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Customers.Website.Serialization.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <Content Include="Scripts\Customers\addresses.js" />
     <Content Include="Scripts\Customers\editprofile.js" />

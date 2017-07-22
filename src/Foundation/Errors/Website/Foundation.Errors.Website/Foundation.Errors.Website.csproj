@@ -127,10 +127,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\Foundation\Sitecore.Demo.Retail.Foundation.Errors.Website.config">
+    <Content Include="App_Config\Include\Foundation\Foundation.Errors.Website.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Config\Include\Foundation\Sitecore.Demo.Retail.Foundation.Errors.Website.Serialization.config" />
+    <Content Include="App_Config\Include\Foundation\Foundation.Errors.Website.Serialization.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

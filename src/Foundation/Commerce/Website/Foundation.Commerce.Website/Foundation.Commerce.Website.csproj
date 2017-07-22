@@ -186,7 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="App_Config\Include\Foundation\Sitecore.Demo.Retail.Foundation.Commerce.Website.Customer.config" />
+    <Content Include="App_Config\Include\Foundation\Foundation.Commerce.Website.Customer.config" />
     <Content Include="App_Config\Include\Y.Commerce.Engine\Sitecore.Commerce.Engine.config" />
     <Content Include="Scripts\Commerce\ajax-helpers.js" />
     <Content Include="Scripts\Commerce\debug-knockout.js" />
@@ -198,7 +198,7 @@
     <None Include="web.config.transform">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="App_Config\Include\Foundation\Sitecore.Demo.Retail.Foundation.Commerce.Website.Lucene.config">
+    <Content Include="App_Config\Include\Foundation\Foundation.Commerce.Website.Lucene.config">
       <SubType>Designer</SubType>
     </Content>
     <None Include="web.config.transform">
@@ -335,8 +335,8 @@
     <Compile Include="Util\UrlBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\Foundation\Sitecore.Demo.Retail.Foundation.Commerce.Website.Serialization.config" />
-    <Content Include="App_Config\Include\Foundation\Sitecore.Demo.Retail.Foundation.Commerce.Website.config" />
+    <Content Include="App_Config\Include\Foundation\Foundation.Commerce.Website.Serialization.config" />
+    <Content Include="App_Config\Include\Foundation\Foundation.Commerce.Website.config" />
     <None Include="Properties\PublishProfiles\Local.pubxml">
       <SubType>Designer</SubType>
     </None>
