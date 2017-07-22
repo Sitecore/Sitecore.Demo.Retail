@@ -17,7 +17,6 @@
             <TreeviewEx ID="InternalLinkTreeview" DataContext="InternalLinkDataContext" Root="true" />
           </Scrollbox>
         </Tab>
-        </Tab>
         <Tab ID="MediaTab" Header="Media Items">
           <TreeviewEx ID="MediaTreeview" DataContext="MediaDataContext" Root="true" Click="OnMediaTreeviewClicked" />
         </Tab>
