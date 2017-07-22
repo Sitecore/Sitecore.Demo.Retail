@@ -23,10 +23,11 @@ gulp.task("default", function (callback) {
   return runSequence(
     "01-Copy-Sitecore-Lib",
     "02-Nuget-Restore",
-    "03-Publish-All-Projects",
+    "03-Publish-Website",
     "04-Apply-Xml-Transform",
-    "05-Sync-Unicorn",
-    "06-Deploy-Transforms",
+    "05-Publish-Engine",
+    "06-Sync-Unicorn",
+    "07-Deploy-Transforms",
 	callback);
 });
 
@@ -35,9 +36,10 @@ gulp.task("deploy", function (callback) {
   return runSequence(
     "01-Copy-Sitecore-Lib",
     "02-Nuget-Restore",
-    "03-Publish-All-Projects",
+    "03-Publish-Website",
     "04-Apply-Xml-Transform",
-    "06-Deploy-Transforms",
+    "05-Publish-Engine",
+    "07-Deploy-Transforms",
 	callback);
 });
 
@@ -62,7 +64,7 @@ gulp.task("02-Nuget-Restore", function (callback) {
   return gulp.src(solution).pipe(nugetRestore());
 });
 
-gulp.task("03-Publish-All-Projects", function (callback) {
+gulp.task("03-Publish-Website", function (callback) {
   return runSequence(
     "Build-Solution",
     "Publish-Storefront-Projects",
@@ -76,7 +78,7 @@ gulp.task("04-Apply-Xml-Transform", function () {
   var layerPathFilters = ["./src/Foundation/**/*.transform", "./src/Feature/**/*.transform", "./src/Project/**/*.transform", "!./src/**/obj/**/*.transform", "!./src/**/bin/**/*.transform"];
   return gulp.src(layerPathFilters)
     .pipe(foreach(function (stream, file) {
-      var fileToTransform = file.path.replace(/.+code\\(.+)\.transform/, "$1");
+      var fileToTransform = file.path.replace(/.+Website\\(.+)\.transform/, "$1");
       fileToTransform = fileToTransform.replace(/.+legacy\\(.+)\.transform/, "$1");
       util.log("Applying configuration transform: " + file.path);
       return gulp.src("./scripts/applytransform.targets")
@@ -99,7 +101,15 @@ gulp.task("04-Apply-Xml-Transform", function () {
     }));
 });
 
-gulp.task("05-Sync-Unicorn", function (callback) {
+gulp.task("05-Publish-Engine", function (callback) {
+    return exec('dotnet publish .\\src\\Project\\Retail\\Engine -o ' + config.commerceEngineRoot, function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        callback(err);
+    });
+});
+
+gulp.task("06-Sync-Unicorn", function (callback) {
   var options = {};
   options.siteHostName = habitat.getSiteUrl();
   options.authenticationConfigFile = config.websiteRoot + "/App_config/Include/Unicorn/Unicorn.UI.config";
@@ -108,7 +118,7 @@ gulp.task("05-Sync-Unicorn", function (callback) {
 });
 
 
-gulp.task("06-Deploy-Transforms", function () {
+gulp.task("07-Deploy-Transforms", function () {
   return gulp.src(["./src/**/code/**/*.transform", "./src/**/legacy/**/*.transform"]).pipe(gulp.dest(config.websiteRoot + "/temp/transforms"));
 });
 
