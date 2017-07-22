@@ -6,18 +6,19 @@ using Sitecore.Commerce.Core.Commands;
 using Sitecore.Commerce.EntityViews;
 using Sitecore.Commerce.Plugin.Entitlements;
 using Sitecore.Commerce.Plugin.Orders;
-using Sitecore.Demo.Retail.Feature.Entitlements.Engine.Entities;
+using Feature.Entitlements.Engine.Entities;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 
-namespace Sitecore.Demo.Retail.Feature.Entitlements.Engine.Pipelines.Blocks.EntityViews
+namespace Feature.Entitlements.Engine.Pipelines.Blocks.EntityViews
 {
-    [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.GetOrderDigitalProductEntitlementDetailsViewBlock)]
-    public class GetOrderDigitalProductEntitlementDetailsViewBlock : PipelineBlock<EntityView, EntityView, CommercePipelineExecutionContext>
+
+    [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.GetOrderInstallationEntitlementDetailsViewBlock)]
+    public class GetOrderInstallationEntitlementDetailsViewBlock : PipelineBlock<EntityView, EntityView, CommercePipelineExecutionContext>
     {
         private readonly FindEntityCommand _findEntityCommand;
 
-        public GetOrderDigitalProductEntitlementDetailsViewBlock(FindEntityCommand findEntityCommand)
+        public GetOrderInstallationEntitlementDetailsViewBlock(FindEntityCommand findEntityCommand)
         {
             this._findEntityCommand = findEntityCommand;
         }
@@ -59,13 +60,13 @@ namespace Sitecore.Demo.Retail.Feature.Entitlements.Engine.Pipelines.Blocks.Enti
                     continue;
                 }
 
-                var digitalProduct = entitlement as DigitalProduct;
-                if (digitalProduct == null)
+                var installation = entitlement as Installation;
+                if (installation == null)
                 {
                     continue;
                 }
 
-                entitlementView.Properties.Add(new ViewProperty { Name = "Details", IsReadOnly = true, RawValue = "Type=DigitalProduct" });
+                entitlementView.Properties.Add(new ViewProperty { Name = "Details", IsReadOnly = true, RawValue = "Type=Installation" });
             }
 
             return entityView;

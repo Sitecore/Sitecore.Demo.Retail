@@ -3,12 +3,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.EntityViews;
 using Sitecore.Commerce.Plugin.Entitlements;
-using Sitecore.Demo.Retail.Feature.Entitlements.Engine.Pipelines.Blocks;
-using Sitecore.Demo.Retail.Feature.Entitlements.Engine.Pipelines.Blocks.EntityViews;
+using Feature.Entitlements.Engine.Pipelines.Blocks;
+using Feature.Entitlements.Engine.Pipelines.Blocks.EntityViews;
 using Sitecore.Framework.Configuration;
 using Sitecore.Framework.Pipelines.Definitions.Extensions;
 
-namespace Sitecore.Demo.Retail.Feature.Entitlements.Engine
+namespace Feature.Entitlements.Engine
 {
     public class ConfigureSitecore : IConfigureSitecore
     {

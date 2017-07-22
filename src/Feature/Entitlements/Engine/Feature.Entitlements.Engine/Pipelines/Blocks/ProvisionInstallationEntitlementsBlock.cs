@@ -8,12 +8,12 @@ using Sitecore.Commerce.Plugin.Availability;
 using Sitecore.Commerce.Plugin.Carts;
 using Sitecore.Commerce.Plugin.Entitlements;
 using Sitecore.Commerce.Plugin.ManagedLists;
-using Sitecore.Demo.Retail.Feature.Entitlements.Engine.Entities;
-using Sitecore.Demo.Retail.Feature.Entitlements.Engine.Policies;
+using Feature.Entitlements.Engine.Entities;
+using Feature.Entitlements.Engine.Policies;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 
-namespace Sitecore.Demo.Retail.Feature.Entitlements.Engine.Pipelines.Blocks
+namespace Feature.Entitlements.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.ProvisionInstallationEntitlementsBlock)]
     public class ProvisionInstallationEntitlementsBlock : PipelineBlock<IEnumerable<Entitlement>, IEnumerable<Entitlement>, CommercePipelineExecutionContext>
