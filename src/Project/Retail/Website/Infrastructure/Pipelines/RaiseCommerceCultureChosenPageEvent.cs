@@ -1,10 +1,10 @@
 ﻿using System;
-using Sitecore.Diagnostics;
-using Sitecore.Feature.Language.Infrastructure.Pipelines;
 using Sitecore.Demo.Retail.Foundation.Commerce.Website;
 using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Sitecore.Diagnostics;
+using Sitecore.Feature.Language.Infrastructure.Pipelines;
 
-namespace Sitecore.Demo.Retail.Project.Website.Infrastructure.Pipelines
+namespace Project.Retail.Website.Infrastructure.Pipelines
 {
     public class RaiseCommerceCultureChosenPageEvent
     {

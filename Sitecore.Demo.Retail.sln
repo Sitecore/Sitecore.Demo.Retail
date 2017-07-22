@@ -53,7 +53,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{9FD852
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sitecore.Demo.Retail.Project.Engine", "src\Project\Retail\Engine\Sitecore.Demo.Retail.Project.Engine.xproj", "{7F35C803-0290-4BFD-A806-F1EDDF1E24D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Demo.Retail.Project.Website", "src\Project\Retail\Website\Sitecore.Demo.Retail.Project.Website.csproj", "{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Retail.Website", "src\Project\Retail\Website\Project.Retail.Website.csproj", "{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HabitatData", "HabitatData", "{8409BB9E-81A8-47BF-9E0C-E09B1B47FDDD}"
 EndProject
