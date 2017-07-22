@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Sitecore.Commerce.Core;
 
-namespace Sitecore.Demo.Retail.Project.Engine.App_Startup
+namespace Project.Retail.Engine.App_Startup
 {
     public static class LoggingExtentions
     {

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Sitecore.Demo.Retail.Project.Engine.App_Startup
+namespace Project.Retail.Engine.App_Startup
 {
     public static class SettingsExtentions
     {

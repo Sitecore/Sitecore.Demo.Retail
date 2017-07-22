@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Provider.FileSystem;
 
-namespace Sitecore.Demo.Retail.Project.Engine.App_Startup
+namespace Project.Retail.Engine.App_Startup
 {
     public static class CommerceEnvironmentExtentions
     {

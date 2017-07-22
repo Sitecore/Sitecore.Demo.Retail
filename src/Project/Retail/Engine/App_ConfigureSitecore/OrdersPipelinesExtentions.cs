@@ -3,7 +3,7 @@ using Sitecore.Commerce.Plugin.Inventory.Cs;
 using Sitecore.Commerce.Plugin.Orders;
 using Sitecore.Framework.Pipelines.Definitions.Extensions;
 
-namespace Sitecore.Demo.Retail.Project.Engine.App_ConfigureSitecore
+namespace Project.Retail.Engine.App_ConfigureSitecore
 {
     public static class OrdersPipelinesExtentions
     {

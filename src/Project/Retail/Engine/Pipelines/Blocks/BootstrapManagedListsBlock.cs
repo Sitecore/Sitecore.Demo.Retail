@@ -4,7 +4,7 @@ using Sitecore.Commerce.Plugin.ManagedLists;
 using Sitecore.Commerce.Plugin.Orders;
 using Sitecore.Framework.Pipelines;
 
-namespace Sitecore.Demo.Retail.Project.Engine.Pipelines.Blocks
+namespace Project.Retail.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(CommerceEngineConstants.Pipelines.Blocks.BootstrapManagedListsBlock)]
     public class BootstrapManagedListsBlock : PipelineBlock<string, string, CommercePipelineExecutionContext>

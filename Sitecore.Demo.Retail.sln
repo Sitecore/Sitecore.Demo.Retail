@@ -51,7 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{84CF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{9FD85232-8C31-433C-A6D1-8DA670AF9AA8}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sitecore.Demo.Retail.Project.Engine", "src\Project\Retail\Engine\Sitecore.Demo.Retail.Project.Engine.xproj", "{7F35C803-0290-4BFD-A806-F1EDDF1E24D2}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Project.Retail.Engine", "src\Project\Retail\Engine\Project.Retail.Engine.xproj", "{7F35C803-0290-4BFD-A806-F1EDDF1E24D2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Retail.Website", "src\Project\Retail\Website\Project.Retail.Website.csproj", "{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655}"
 EndProject

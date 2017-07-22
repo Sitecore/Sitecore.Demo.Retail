@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Sitecore.Demo.Retail.Project.Engine
+namespace Project.Retail.Engine
 {
     public class Program
     {
