@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="CardPaymentAcceptUrlJsonResult.cs" company="Sitecore Corporation">
+// <copyright file="AddressItemBaseJsonResult.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Defines the CardPaymentAcceptUrlJsonResult class.</summary>
+// <summary>Defines the AddressItemBaseJsonResult class.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -15,33 +15,19 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using System;
 using Foundation.Commerce.Website.Models;
-using Sitecore.Commerce.Services.Payments;
-using Sitecore.Diagnostics;
+using Sitecore.Commerce.Services;
 
-namespace Sitecore.Demo.Retail.Feature.Customers.Website.Models
+namespace Feature.Customers.Website.Models
 {
-    public class CardPaymentAcceptUrlApiModel : BaseApiModel
+    public class AddressItemBaseApiModel : BaseApiModel
     {
-        public CardPaymentAcceptUrlApiModel(GetPaymentServiceUrlResult result) : base(result)
+        public AddressItemBaseApiModel()
         {
-            Assert.IsNotNull(result, "result");
-
-            if (result.Success)
-            {
-                var serviceUrl = new Uri(result.Url);
-                ServiceUrl = result.Url;
-                MessageOrigin = $"{serviceUrl.Scheme}://{serviceUrl.Authority}";
-            }
-            else
-            {
-                SetErrors(result);
-            }
         }
 
-        public string ServiceUrl { get; set; }
-
-        public string MessageOrigin { get; set; }
+        public AddressItemBaseApiModel(ServiceProviderResult result) : base(result)
+        {
+        }
     }
 }

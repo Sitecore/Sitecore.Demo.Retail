@@ -16,9 +16,10 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Web.Routing;
+using Sitecore;
 using Sitecore.Pipelines;
 
-namespace Sitecore.Demo.Retail.Feature.Customers.Website.Infrastructure.Pipelines
+namespace Feature.Customers.Website.Infrastructure.Pipelines
 {
     public class InitializeRoutes
     {

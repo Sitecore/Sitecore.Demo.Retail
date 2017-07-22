@@ -22,7 +22,7 @@ using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
 using Sitecore.Mvc.Extensions;
 
-namespace Sitecore.Demo.Retail.Feature.Customers.Website.Models
+namespace Feature.Customers.Website.Models
 {
     public class AddressListItemApiModel : BaseApiModel
     {

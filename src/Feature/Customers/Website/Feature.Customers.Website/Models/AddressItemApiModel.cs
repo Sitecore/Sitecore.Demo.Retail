@@ -19,7 +19,7 @@ using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Feature.Customers.Website.Models
+namespace Feature.Customers.Website.Models
 {
     public class AddressItemApiModel : BaseApiModel, IParty
     {

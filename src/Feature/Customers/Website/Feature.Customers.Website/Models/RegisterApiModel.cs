@@ -19,7 +19,7 @@ using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Services.Customers;
 using CommerceUser = Sitecore.Commerce.Entities.Customers.CommerceUser;
 
-namespace Sitecore.Demo.Retail.Feature.Customers.Website.Models
+namespace Feature.Customers.Website.Models
 {
     public class RegisterApiModel : BaseApiModel
     {

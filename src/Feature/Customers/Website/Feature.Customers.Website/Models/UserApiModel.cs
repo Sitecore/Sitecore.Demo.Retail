@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ForgotPasswordBaseJsonResult.cs" company="Sitecore Corporation">
+// <copyright file="UserBaseJsonResult.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Emits the Json result of a reset password.</summary>
+// <summary>Defines the UserBaseJsonResult class.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -19,26 +19,34 @@ using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Feature.Customers.Website.Models
+namespace Feature.Customers.Website.Models
 {
-    public class ForgotPasswordApiModel : BaseApiModel
+    public class UserApiModel : BaseApiModel
     {
-        public ForgotPasswordApiModel()
+        public UserApiModel()
         {
         }
 
-        public ForgotPasswordApiModel(ServiceProviderResult result)
-            : base(result)
+        public UserApiModel(ServiceProviderResult result) : base(result)
         {
         }
 
-        public string UserName { get; set; }
+        public string FirstName { get; set; }
 
-        public void Initialize(string userName)
+        public string LastName { get; set; }
+
+        public string FullName { get; set; }
+
+        public string Email { get; set; }
+
+        public void Initialize(IUser user)
         {
-            Assert.ArgumentNotNullOrEmpty(userName, nameof(userName));
+            Assert.ArgumentNotNull(user, nameof(user));
 
-            UserName = userName;
+            FirstName = user.FirstName;
+            LastName = user.LastName;
+            FullName = string.Concat(FirstName, string.Empty, LastName);
+            Email = user.Email;
         }
     }
 }

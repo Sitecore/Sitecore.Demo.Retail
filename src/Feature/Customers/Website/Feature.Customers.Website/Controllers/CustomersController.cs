@@ -20,20 +20,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI;
+using Feature.Customers.Website.Models;
 using Foundation.Commerce.Website;
 using Foundation.Commerce.Website.Extensions;
 using Foundation.Commerce.Website.Managers;
 using Foundation.Commerce.Website.Models;
 using Foundation.Commerce.Website.Models.InputModels;
+using Sitecore;
 using Sitecore.Configuration;
-using Sitecore.Demo.Retail.Feature.Customers.Website.Models;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Dictionary.Repositories;
 using Sitecore.Foundation.SitecoreExtensions.Attributes;
 using Sitecore.Links;
 using Sitecore.Mvc.Controllers;
 
-namespace Sitecore.Demo.Retail.Feature.Customers.Website.Controllers
+namespace Feature.Customers.Website.Controllers
 {
     public class CustomersController : SitecoreController
     {

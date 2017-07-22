@@ -1,8 +1,8 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="AddressItemBaseJsonResult.cs" company="Sitecore Corporation">
+// <copyright file="ChangePasswordBaseJsonResult.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
-// <summary>Defines the AddressItemBaseJsonResult class.</summary>
+// <summary>Emits the Json result of a change password.</summary>
 //-----------------------------------------------------------------------
 // Copyright 2016 Sitecore Corporation A/S
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -17,17 +17,27 @@
 
 using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Services;
+using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Feature.Customers.Website.Models
+namespace Feature.Customers.Website.Models
 {
-    public class AddressItemBaseApiModel : BaseApiModel
+    public class ChangePasswordApiModel : BaseApiModel
     {
-        public AddressItemBaseApiModel()
+        public ChangePasswordApiModel()
         {
         }
 
-        public AddressItemBaseApiModel(ServiceProviderResult result) : base(result)
+        public ChangePasswordApiModel(ServiceProviderResult result) : base(result)
         {
+        }
+
+        public string UserName { get; set; }
+
+        public void Initialize(string userName)
+        {
+            Assert.ArgumentNotNullOrEmpty(userName, nameof(userName));
+
+            UserName = userName;
         }
     }
 }
