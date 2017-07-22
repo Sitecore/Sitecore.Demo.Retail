@@ -175,10 +175,6 @@
       <Project>{7031f757-2830-44e3-9639-aad2dba69a24}</Project>
       <Name>Sitecore.Demo.Retail.Feature.Catalog.Website</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Foundation\Commerce\Website\Sitecore.Demo.Retail.Foundation.Commerce.Website\Foundation.Commerce.Website.Models.csproj">
-      <Project>{662345ac-23ee-4125-87a6-0785795c2409}</Project>
-      <Name>Foundation.Commerce.Website.Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

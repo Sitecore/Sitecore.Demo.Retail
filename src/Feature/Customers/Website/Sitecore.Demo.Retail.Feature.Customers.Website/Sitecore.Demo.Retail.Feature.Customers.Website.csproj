@@ -146,12 +146,6 @@
     <None Include="Views\web.config" />
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Foundation\Commerce\Website\Sitecore.Demo.Retail.Foundation.Commerce.Website\Foundation.Commerce.Website.Models.csproj">
-      <Project>{662345ac-23ee-4125-87a6-0785795c2409}</Project>
-      <Name>Foundation.Commerce.Website.Models</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
