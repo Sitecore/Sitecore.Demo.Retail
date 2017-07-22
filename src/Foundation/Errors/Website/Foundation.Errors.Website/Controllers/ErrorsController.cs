@@ -18,7 +18,7 @@
 using System.Web.Mvc;
 using Sitecore.Mvc.Controllers;
 
-namespace Sitecore.Demo.Retail.Foundation.Errors.Website.Controllers
+namespace Foundation.Errors.Website.Controllers
 {
     public class ErrorsController : SitecoreController
     {
