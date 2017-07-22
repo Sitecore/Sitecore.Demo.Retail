@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using Sitecore;
 using Sitecore.Analytics;
 using Sitecore.Analytics.Automation.Data.Items;
 using Sitecore.Data;
@@ -25,7 +26,7 @@ using Sitecore.Data.Managers;
 using Sitecore.Diagnostics;
 using Sitecore.Install.Framework;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Util
+namespace Foundation.Commerce.Website.Util
 {
     public class InstallPostStep : IPostStep
     {

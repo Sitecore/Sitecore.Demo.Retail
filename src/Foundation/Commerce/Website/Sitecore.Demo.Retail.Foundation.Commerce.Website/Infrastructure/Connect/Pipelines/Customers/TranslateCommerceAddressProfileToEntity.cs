@@ -17,14 +17,14 @@
 
 using System;
 using CommerceServer.Core.Runtime.Profiles;
+using Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Arguments;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Pipelines;
 using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Pipelines;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Arguments;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Customers
+namespace Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Customers
 {
     public class TranslateCommerceAddressProfileToEntity : CommerceTranslateProcessor
     {
@@ -47,20 +47,20 @@ namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connec
 
         private void TranslateToCommerceParty(Profile profile, CommerceParty party)
         {
-            party.ExternalId = Get<string>(profile, Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressId);
-            party.FirstName = Get<string>(profile, Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.FirstName);
-            party.LastName = Get<string>(profile, Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.LastName);
-            party.Name = Get<string>(profile, Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressName);
-            party.Address1 = Get<string>(profile, Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressLine1);
-            party.Address2 = Get<string>(profile, Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressLine2);
-            party.City = Get<string>(profile, Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.City);
-            party.RegionCode = Get<string>(profile, Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.RegionCode);
-            party.RegionName = Get<string>(profile, Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.RegionName);
-            party.ZipPostalCode = Get<string>(profile, Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PostalCode);
-            party.CountryCode = Get<string>(profile, Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.CountryCode);
-            party.Country = Get<string>(profile, Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.CountryName);
-            party.PhoneNumber = Get<string>(profile, Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.TelNumber);
-            party.State = Get<string>(profile, Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.RegionCode);
+            party.ExternalId = Get<string>(profile, global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressId);
+            party.FirstName = Get<string>(profile, global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.FirstName);
+            party.LastName = Get<string>(profile, global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.LastName);
+            party.Name = Get<string>(profile, global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressName);
+            party.Address1 = Get<string>(profile, global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressLine1);
+            party.Address2 = Get<string>(profile, global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressLine2);
+            party.City = Get<string>(profile, global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.City);
+            party.RegionCode = Get<string>(profile, global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.RegionCode);
+            party.RegionName = Get<string>(profile, global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.RegionName);
+            party.ZipPostalCode = Get<string>(profile, global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PostalCode);
+            party.CountryCode = Get<string>(profile, global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.CountryCode);
+            party.Country = Get<string>(profile, global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.CountryName);
+            party.PhoneNumber = Get<string>(profile, global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.TelNumber);
+            party.State = Get<string>(profile, global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.RegionCode);
 
             TranslateToCommercePartyCustomProperties(profile, party);
         }

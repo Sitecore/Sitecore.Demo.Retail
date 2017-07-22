@@ -18,7 +18,7 @@
 using System.Collections.Generic;
 using Sitecore.Data.Items;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models
+namespace Foundation.Commerce.Website.Models
 {
     public class Category : SitecoreItemBase
     {

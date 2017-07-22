@@ -19,8 +19,8 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Demo.Retail.Feature.Catalog.Website.Models;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
 namespace Sitecore.Demo.Retail.Feature.Catalog.Website
 {

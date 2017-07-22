@@ -18,7 +18,7 @@ using System;
 using System.Web.Helpers;
 using System.Web.Mvc;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions
+namespace Foundation.Commerce.Website.Extensions
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public sealed class ValidateJsonAntiForgeryTokenAttribute : FilterAttribute, IAuthorizationFilter

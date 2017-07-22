@@ -21,7 +21,7 @@ namespace Sitecore.Demo.Retail.Feature.Catalog.Website.Infrastructure.Provider
 
         public IEnumerable<ID> SupportedTemplates => new[]
         {
-            Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.Product.Id
+            global::Foundation.Commerce.Website.Templates.Commerce.Product.Id
         };
 
         public void FormatResult(SearchResultItem item, ISearchResult formattedResult)

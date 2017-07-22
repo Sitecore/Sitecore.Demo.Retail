@@ -19,16 +19,17 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Foundation.Commerce.Website.Models;
+using Foundation.Commerce.Website.Models.InputModels;
+using Sitecore;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Engine.Connect.Entities.Carts;
 using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Commerce.Entities.GiftCards;
 using Sitecore.Commerce.Entities.Shipping;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.InputModels;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions
+namespace Foundation.Commerce.Website.Extensions
 {
     public static class InputModelExtension
     {

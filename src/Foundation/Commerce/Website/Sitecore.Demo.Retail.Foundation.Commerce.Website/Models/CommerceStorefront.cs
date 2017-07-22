@@ -16,10 +16,10 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Extensions;
 using Sitecore.Sites;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models
+namespace Foundation.Commerce.Website.Models
 {
     public class CommerceStorefront
     {

@@ -17,7 +17,7 @@
 
 using System.Text.RegularExpressions;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Util
+namespace Foundation.Commerce.Website.Util
 {
     public static class StringUtility
     {

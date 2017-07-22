@@ -18,7 +18,7 @@
 using System.Linq;
 using Sitecore.Commerce.Services;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions
+namespace Foundation.Commerce.Website.Extensions
 {
     public static class ServiceProviderResultExtensions
     {

@@ -17,18 +17,19 @@
 
 using System;
 using System.Collections.Generic;
+using Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Models;
+using Sitecore;
 using Sitecore.Commerce.Entities.Prices;
 using Sitecore.Commerce.Services;
 using Sitecore.Commerce.Services.Prices;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Diagnostics;
 using Sitecore.Web;
 using GetProductBulkPricesRequest = Sitecore.Commerce.Engine.Connect.Services.Prices.GetProductBulkPricesRequest;
 using GetProductPricesRequest = Sitecore.Commerce.Engine.Connect.Services.Prices.GetProductPricesRequest;
-using GetSupportedCurrenciesRequest = Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Arguments.GetSupportedCurrenciesRequest;
+using GetSupportedCurrenciesRequest = Foundation.Commerce.Website.Infrastructure.Connect.Arguments.GetSupportedCurrenciesRequest;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+namespace Foundation.Commerce.Website.Managers
 {
     public class PricingManager : IManager
     {

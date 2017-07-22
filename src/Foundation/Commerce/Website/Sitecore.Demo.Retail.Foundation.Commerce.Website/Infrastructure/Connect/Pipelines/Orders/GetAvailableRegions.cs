@@ -15,13 +15,13 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Foundation.Commerce.Website.Repositories;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines;
 using Sitecore.Commerce.Pipelines;
 using Sitecore.Commerce.Services.Orders;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Repositories;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Orders
+namespace Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Orders
 {
     public class GetAvailableRegions : CommerceOrderPipelineProcessor
     {

@@ -1,7 +1,8 @@
 ﻿using System;
+using Sitecore;
 using Sitecore.Sites;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions
+namespace Foundation.Commerce.Website.Extensions
 {
     public static class SiteContextExtensions
     {

@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using Sitecore.ContentSearch.Linq;
 using Sitecore.Data.Items;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.Search
+namespace Foundation.Commerce.Website.Models.Search
 {
     public class CategorySearchResults
     {

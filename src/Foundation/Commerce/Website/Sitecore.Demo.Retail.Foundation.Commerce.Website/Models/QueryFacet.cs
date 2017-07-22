@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sitecore.ContentSearch.Linq;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models
+namespace Foundation.Commerce.Website.Models
 {
     public class QueryFacet
     {

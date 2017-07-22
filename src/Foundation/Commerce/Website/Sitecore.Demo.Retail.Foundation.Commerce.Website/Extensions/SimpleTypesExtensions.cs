@@ -18,9 +18,10 @@
 using System;
 using System.Globalization;
 using System.Web.Mvc;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Foundation.Commerce.Website.Managers;
+using Sitecore;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions
+namespace Foundation.Commerce.Website.Extensions
 {
     public static class SimpleTypesExtensions
     {

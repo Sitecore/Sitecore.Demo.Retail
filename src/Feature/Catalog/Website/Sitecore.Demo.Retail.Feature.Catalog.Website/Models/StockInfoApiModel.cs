@@ -15,12 +15,12 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Managers;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Commerce.Services;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Diagnostics;
 
 namespace Sitecore.Demo.Retail.Feature.Catalog.Website.Models

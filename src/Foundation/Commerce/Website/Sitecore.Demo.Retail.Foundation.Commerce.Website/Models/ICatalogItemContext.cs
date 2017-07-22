@@ -1,7 +1,6 @@
 ﻿using Sitecore.Data.Items;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models
+namespace Foundation.Commerce.Website.Models
 {
     public interface ICatalogItemContext
     {

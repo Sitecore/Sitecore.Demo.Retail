@@ -21,16 +21,16 @@ using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using CommerceServer.Core.Catalog;
+using Foundation.Commerce.Website.Models;
 using Newtonsoft.Json;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Catalog;
 using Sitecore.Commerce.Connect.CommerceServer.Search.ComputedFields;
 using Sitecore.ContentSearch;
 using Sitecore.Data;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.ComputedFields
+namespace Foundation.Commerce.Website.Infrastructure.ComputedFields
 {
     public class VariantInfoComputedField : BaseCommerceVariants<string>
     {

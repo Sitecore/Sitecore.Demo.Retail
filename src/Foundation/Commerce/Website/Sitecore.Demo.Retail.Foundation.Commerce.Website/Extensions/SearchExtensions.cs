@@ -17,12 +17,12 @@
 
 using System.Linq;
 using System.Web.Helpers;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.ContentSearch.Linq;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions
+namespace Foundation.Commerce.Website.Extensions
 {
     public static class SearchExtensions
     {

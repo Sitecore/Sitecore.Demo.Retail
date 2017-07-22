@@ -77,7 +77,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{618E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{4FB59E30-C4E0-4D12-BA4F-4536550B3C89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Demo.Retail.Foundation.Commerce.Website", "src\Foundation\Commerce\Website\Sitecore.Demo.Retail.Foundation.Commerce.Website\Sitecore.Demo.Retail.Foundation.Commerce.Website.csproj", "{662345AC-23EE-4125-87A6-0785795C2409}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation.Commerce.Website.Models", "src\Foundation\Commerce\Website\Sitecore.Demo.Retail.Foundation.Commerce.Website\Foundation.Commerce.Website.Models.csproj", "{662345AC-23EE-4125-87A6-0785795C2409}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Demo.Retail.Feature.Orders.Website", "src\Feature\Orders\Website\Sitecore.Demo.Retail.Feature.Orders.Website\Sitecore.Demo.Retail.Feature.Orders.Website.csproj", "{9CC4BF07-1259-43FF-B205-AFD1E59E5834}"
 EndProject

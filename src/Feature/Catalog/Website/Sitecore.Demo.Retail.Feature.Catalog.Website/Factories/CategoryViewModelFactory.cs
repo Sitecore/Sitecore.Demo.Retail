@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
+using Foundation.Commerce.Website.Managers;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Data.Items;
 using Sitecore.Demo.Retail.Feature.Catalog.Website.Models;
 using Sitecore.Demo.Retail.Feature.Catalog.Website.Services;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
@@ -37,7 +37,7 @@ namespace Sitecore.Demo.Retail.Feature.Catalog.Website.Factories
 
         private bool IsValid(Item categoryItem)
         {
-            return categoryItem != null && categoryItem.IsDerived(Foundation.Commerce.Website.Templates.Commerce.Category.Id);
+            return categoryItem != null && categoryItem.IsDerived(global::Foundation.Commerce.Website.Templates.Commerce.Category.Id);
         }
 
         public CategoryViewModel Create(Category category, SearchOptions productSearchOptions = null)

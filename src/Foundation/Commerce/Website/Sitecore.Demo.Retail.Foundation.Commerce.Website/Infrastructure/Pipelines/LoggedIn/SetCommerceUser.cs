@@ -15,11 +15,11 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Foundation.Commerce.Website.Managers;
 using Sitecore.Foundation.Accounts.Pipelines;
 using Sitecore.Foundation.DependencyInjection;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Pipelines.LoggedIn
+namespace Foundation.Commerce.Website.Infrastructure.Pipelines.LoggedIn
 {
     [Service]
     public class SetCommerceUser

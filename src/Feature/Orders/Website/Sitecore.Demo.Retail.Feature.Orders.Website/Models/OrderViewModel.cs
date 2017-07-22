@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
+using Foundation.Commerce.Website.Models;
 
 namespace Sitecore.Demo.Retail.Feature.Orders.Website.Models
 {

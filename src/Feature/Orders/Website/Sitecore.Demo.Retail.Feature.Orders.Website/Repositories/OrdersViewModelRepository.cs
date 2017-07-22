@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Foundation.Commerce.Website;
+using Foundation.Commerce.Website.Managers;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Demo.Retail.Feature.Orders.Website.Models;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.DependencyInjection;
 
 namespace Sitecore.Demo.Retail.Feature.Orders.Website.Repositories

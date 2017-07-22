@@ -18,7 +18,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
+using Foundation.Commerce.Website.Models;
 
 namespace Sitecore.Demo.Retail.Feature.Orders.Website
 {

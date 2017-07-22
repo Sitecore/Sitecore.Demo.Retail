@@ -15,7 +15,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models
+namespace Foundation.Commerce.Website.Models
 {
     public class VariantIndexInfo
     {

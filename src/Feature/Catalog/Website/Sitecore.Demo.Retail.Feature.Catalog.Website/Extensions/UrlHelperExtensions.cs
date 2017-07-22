@@ -19,7 +19,7 @@ using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Util;
+using Foundation.Commerce.Website.Util;
 
 namespace Sitecore.Demo.Retail.Feature.Catalog.Website.Extensions
 {

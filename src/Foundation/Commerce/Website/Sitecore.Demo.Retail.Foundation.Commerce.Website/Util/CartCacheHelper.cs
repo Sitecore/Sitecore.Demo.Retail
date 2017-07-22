@@ -22,7 +22,7 @@ using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.DependencyInjection;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Util
+namespace Foundation.Commerce.Website.Util
 {
     [Service]
     public class CartCacheHelper

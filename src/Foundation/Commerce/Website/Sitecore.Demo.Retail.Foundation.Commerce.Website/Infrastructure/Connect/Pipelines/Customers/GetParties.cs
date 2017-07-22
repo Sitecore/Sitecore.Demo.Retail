@@ -19,16 +19,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CommerceServer.Core.Runtime.Profiles;
+using Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Arguments;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Pipelines;
 using Sitecore.Commerce.Connect.CommerceServer.Profiles.Models;
 using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Pipelines;
 using Sitecore.Commerce.Services.Customers;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Arguments;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Customers
+namespace Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Customers
 {
     public class GetParties : CustomerPipelineProcessor
     {
@@ -62,9 +62,9 @@ namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connec
                 return;
             }
 
-            var preferredAddress = customerProfile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PreferredAddress].Value as string;
+            var preferredAddress = customerProfile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PreferredAddress].Value as string;
 
-            var profileValue = customerProfile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressList].Value as object[];
+            var profileValue = customerProfile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressList].Value as object[];
             if (profileValue != null)
             {
                 var e = profileValue.Select(i => i.ToString());

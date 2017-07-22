@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Foundation.Commerce.Website;
+using Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Managers;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Data.Items;
 using Sitecore.Demo.Retail.Feature.Catalog.Website.Models;
 using Sitecore.Demo.Retail.Feature.Catalog.Website.Services;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Mvc.Presentation;
@@ -124,7 +124,7 @@ namespace Sitecore.Demo.Retail.Feature.Catalog.Website.Factories
         {
             if (item == null)
                 return false;
-            if (item.IsDerived(Foundation.Commerce.Website.Templates.Commerce.Product.Id))
+            if (item.IsDerived(global::Foundation.Commerce.Website.Templates.Commerce.Product.Id))
                 return true;
             return item.IsWildcardItem() && IsValid(CatalogItemContext.Current?.Item);
         }

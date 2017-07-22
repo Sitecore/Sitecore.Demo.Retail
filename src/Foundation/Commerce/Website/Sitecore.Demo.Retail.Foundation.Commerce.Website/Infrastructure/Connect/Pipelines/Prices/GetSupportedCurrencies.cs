@@ -25,9 +25,9 @@ using Sitecore.Commerce.Connect.CommerceServer.Catalog.Pipelines;
 using Sitecore.Commerce.Pipelines;
 using Sitecore.Commerce.Services.Prices;
 using Sitecore.Diagnostics;
-using GetSupportedCurrenciesRequest = Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Arguments.GetSupportedCurrenciesRequest;
+using GetSupportedCurrenciesRequest = Foundation.Commerce.Website.Infrastructure.Connect.Arguments.GetSupportedCurrenciesRequest;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Prices
+namespace Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Prices
 {
     public class GetSupportedCurrencies : PricePipelineProcessor
     {

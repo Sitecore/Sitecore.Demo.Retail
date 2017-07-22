@@ -16,7 +16,7 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Mvc.Presentation;
 
 namespace Sitecore.Demo.Retail.Feature.Catalog.Website.Models

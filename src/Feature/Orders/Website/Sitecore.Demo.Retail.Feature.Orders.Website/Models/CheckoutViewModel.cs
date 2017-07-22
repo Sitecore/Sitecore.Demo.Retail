@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Shipping;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
 namespace Sitecore.Demo.Retail.Feature.Orders.Website.Models
 {

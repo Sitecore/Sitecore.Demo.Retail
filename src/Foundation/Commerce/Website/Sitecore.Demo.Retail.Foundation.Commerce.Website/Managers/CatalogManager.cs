@@ -20,6 +20,10 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Helpers;
+using Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Models;
+using Foundation.Commerce.Website.Models.Search;
+using Sitecore;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Search;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
@@ -35,13 +39,10 @@ using Sitecore.ContentSearch.Security;
 using Sitecore.ContentSearch.Utilities;
 using Sitecore.Data;
 using Sitecore.Data.Items;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.Search;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+namespace Foundation.Commerce.Website.Managers
 {
     public class CatalogManager : IManager
     {
@@ -539,12 +540,12 @@ namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
                 {
                     return new CategorySearchResults(childCategoryList, childCategoryList.Count, 1, 1, new List<FacetCategory>());
                 }
-                if (!list[0].Fields.ContainsKey(Constants.CommerceIndex.Fields.ChildCategoriesSequence))
+                if (!list[0].Fields.ContainsKey(global::Foundation.Commerce.Website.Constants.CommerceIndex.Fields.ChildCategoriesSequence))
                 {
                     return new CategorySearchResults(childCategoryList, childCategoryList.Count, 1, 1, new List<FacetCategory>());
                 }
 
-                var childCategoryDelimitedString = list[0][Constants.CommerceIndex.Fields.ChildCategoriesSequence];
+                var childCategoryDelimitedString = list[0][global::Foundation.Commerce.Website.Constants.CommerceIndex.Fields.ChildCategoriesSequence];
 
                 var categoryIdArray = childCategoryDelimitedString.Split('|');
 

@@ -18,11 +18,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Data.Items;
 using Sitecore.Demo.Retail.Feature.Catalog.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Links;
@@ -35,7 +35,7 @@ namespace Sitecore.Demo.Retail.Feature.Catalog.Website.Models
     {
         public ProductViewModel(Item item, List<VariantViewModel> variants = null) : base(item)
         {
-            Assert.IsTrue(item.IsDerived(Foundation.Commerce.Website.Templates.Commerce.Product.Id), "Item must be a Product");
+            Assert.IsTrue(item.IsDerived(global::Foundation.Commerce.Website.Templates.Commerce.Product.Id), "Item must be a Product");
             Variants = variants;
         }
 
@@ -45,7 +45,7 @@ namespace Sitecore.Demo.Retail.Feature.Catalog.Website.Models
 
         public string ParentCategoryName { get; set; }
 
-        public HtmlString DescriptionRender => PageContext.Current.HtmlHelper.Sitecore().Field(Foundation.Commerce.Website.Templates.Commerce.Product.FieldNames.Description, Item);
+        public HtmlString DescriptionRender => PageContext.Current.HtmlHelper.Sitecore().Field(global::Foundation.Commerce.Website.Templates.Commerce.Product.FieldNames.Description, Item);
 
         public MediaItem OverlayImage { get; set; }
 
@@ -63,7 +63,7 @@ namespace Sitecore.Demo.Retail.Feature.Catalog.Website.Models
 
         public decimal VariantSavingsPercentage => CalculateSavingsPercentage(LowestPricedVariantAdjustedPrice, LowestPricedVariantListPrice);
 
-        public bool IsOnSale => Item.IsDerived(Foundation.Commerce.Website.Templates.Commerce.Product.Id) && Item.Fields[Foundation.Commerce.Website.Templates.Commerce.Product.FieldNames.OnSale].IsChecked();
+        public bool IsOnSale => Item.IsDerived(global::Foundation.Commerce.Website.Templates.Commerce.Product.Id) && Item.Fields[global::Foundation.Commerce.Website.Templates.Commerce.Product.FieldNames.OnSale].IsChecked();
 
         public IEnumerable<string> Tags
         {
@@ -156,7 +156,7 @@ namespace Sitecore.Demo.Retail.Feature.Catalog.Website.Models
 
         public bool IsCategory()
         {
-            return Item.IsDerived(Foundation.Commerce.Website.Templates.Commerce.Category.Id);
+            return Item.IsDerived(global::Foundation.Commerce.Website.Templates.Commerce.Category.Id);
         }
 
         public override string ImagesFieldName => Templates.Generated.Product.Fields.Images;

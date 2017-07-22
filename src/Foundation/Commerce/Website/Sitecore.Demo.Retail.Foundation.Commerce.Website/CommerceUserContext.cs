@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Web;
+using Foundation.Commerce.Website.Managers;
+using Foundation.Commerce.Website.Models;
+using Sitecore;
 using Sitecore.Commerce.Contacts;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.DependencyInjection;
-using CommerceUser = Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.CommerceUser;
+using CommerceUser = Foundation.Commerce.Website.Models.CommerceUser;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website
+namespace Foundation.Commerce.Website
 {
     [Service]
     public class CommerceUserContext

@@ -22,7 +22,7 @@ using System.Web.Mvc;
 using Sitecore.Commerce.Services;
 using Sitecore.Foundation.Dictionary.Repositories;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models
+namespace Foundation.Commerce.Website.Models
 {
     public class BaseApiModel : JsonResult
     {

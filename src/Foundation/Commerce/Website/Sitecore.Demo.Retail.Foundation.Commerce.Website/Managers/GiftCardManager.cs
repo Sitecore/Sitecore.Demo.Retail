@@ -17,12 +17,12 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
+using Foundation.Commerce.Website.Extensions;
 using Sitecore.Commerce.Entities.GiftCards;
 using Sitecore.Commerce.Services.GiftCards;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+namespace Foundation.Commerce.Website.Managers
 {
     public class GiftCardManager : IManager
     {

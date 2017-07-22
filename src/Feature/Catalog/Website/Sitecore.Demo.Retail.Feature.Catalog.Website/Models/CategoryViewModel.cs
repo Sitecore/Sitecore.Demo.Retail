@@ -19,9 +19,9 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Xml.Serialization;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Data.Items;
 using Sitecore.Demo.Retail.Feature.Catalog.Website.Factories;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Mvc.Common;
 
 namespace Sitecore.Demo.Retail.Feature.Catalog.Website.Models

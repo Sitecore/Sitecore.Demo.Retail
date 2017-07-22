@@ -1,4 +1,4 @@
-﻿namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+﻿namespace Foundation.Commerce.Website.Managers
 {
     public interface IManager
     {

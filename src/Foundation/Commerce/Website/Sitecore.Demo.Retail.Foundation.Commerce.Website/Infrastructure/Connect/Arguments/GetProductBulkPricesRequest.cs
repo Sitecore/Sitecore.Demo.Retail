@@ -18,7 +18,7 @@
 using System.Collections.Generic;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Arguments
+namespace Foundation.Commerce.Website.Infrastructure.Connect.Arguments
 {
     public class GetProductBulkPricesRequest : Sitecore.Commerce.Services.Prices.GetProductBulkPricesRequest
     {

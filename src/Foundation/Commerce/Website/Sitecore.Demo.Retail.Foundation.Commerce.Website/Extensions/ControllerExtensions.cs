@@ -17,9 +17,9 @@
 
 using System.Linq;
 using System.Web.Mvc;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
+using Foundation.Commerce.Website.Models;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions
+namespace Foundation.Commerce.Website.Extensions
 {
     public static class ControllerExtensions
     {

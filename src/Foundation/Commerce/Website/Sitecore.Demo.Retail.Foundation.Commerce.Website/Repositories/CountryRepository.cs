@@ -7,7 +7,7 @@ using Sitecore.Data.Items;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Repositories
+namespace Foundation.Commerce.Website.Repositories
 {
     [Service]
     public class CountryRepository

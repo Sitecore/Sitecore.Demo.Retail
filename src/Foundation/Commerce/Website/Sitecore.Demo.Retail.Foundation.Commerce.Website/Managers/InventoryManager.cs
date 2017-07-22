@@ -19,6 +19,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Models;
+using Foundation.Commerce.Website.Models.InputModels;
+using Foundation.Commerce.Website.Models.Search;
+using Sitecore;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Search;
@@ -29,14 +34,10 @@ using Sitecore.Commerce.Services.Inventory;
 using Sitecore.Configuration;
 using Sitecore.ContentSearch.Linq;
 using Sitecore.ContentSearch.Linq.Utilities;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.InputModels;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.Search;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Dictionary.Repositories;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+namespace Foundation.Commerce.Website.Managers
 {
     public class InventoryManager : IManager
     {
@@ -81,10 +82,10 @@ namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
 
             using (var context = searchIndex.CreateSearchContext())
             {
-                var predicate = PredicateBuilder.Create<InventorySearchResultItem>(item => item[Constants.CommerceIndex.Fields.InStockLocations].Contains("Default"));
-                predicate = predicate.Or(item => item[Constants.CommerceIndex.Fields.OutOfStockLocations].Contains("Default"));
-                predicate = predicate.Or(item => item[Constants.CommerceIndex.Fields.OrderableLocations].Contains("Default"));
-                predicate = predicate.Or(item => item[Constants.CommerceIndex.Fields.PreOrderable].Contains("0"));
+                var predicate = PredicateBuilder.Create<InventorySearchResultItem>(item => item[global::Foundation.Commerce.Website.Constants.CommerceIndex.Fields.InStockLocations].Contains("Default"));
+                predicate = predicate.Or(item => item[global::Foundation.Commerce.Website.Constants.CommerceIndex.Fields.OutOfStockLocations].Contains("Default"));
+                predicate = predicate.Or(item => item[global::Foundation.Commerce.Website.Constants.CommerceIndex.Fields.OrderableLocations].Contains("Default"));
+                predicate = predicate.Or(item => item[global::Foundation.Commerce.Website.Constants.CommerceIndex.Fields.PreOrderable].Contains("0"));
 
                 var searchResults = context.GetQueryable<InventorySearchResultItem>()
                     .Where(item => item.CommerceSearchItemType == CommerceSearchResultItemType.Product)
@@ -109,15 +110,15 @@ namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
 
                     StockStatus status;
 
-                    var isInStock = resultDocument.Fields.ContainsKey(Constants.CommerceIndex.Fields.InStockLocations)
-                                    && resultDocument.Fields[Constants.CommerceIndex.Fields.InStockLocations] != null;
+                    var isInStock = resultDocument.Fields.ContainsKey(global::Foundation.Commerce.Website.Constants.CommerceIndex.Fields.InStockLocations)
+                                    && resultDocument.Fields[global::Foundation.Commerce.Website.Constants.CommerceIndex.Fields.InStockLocations] != null;
                     if (isInStock)
                     {
                         status = StockStatus.InStock;
                     }
                     else
                     {
-                        var isPreOrderable = resultDocument.Fields.ContainsKey(Constants.CommerceIndex.Fields.PreOrderable)
+                        var isPreOrderable = resultDocument.Fields.ContainsKey(global::Foundation.Commerce.Website.Constants.CommerceIndex.Fields.PreOrderable)
                                              && result.Document.PreOrderable != null
                                              && (result.Document.PreOrderable.Equals("1", StringComparison.OrdinalIgnoreCase)
                                                  || result.Document.PreOrderable.Equals("true", StringComparison.OrdinalIgnoreCase));
@@ -127,9 +128,9 @@ namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
                         }
                         else
                         {
-                            var isOutOfStock = resultDocument.Fields.ContainsKey(Constants.CommerceIndex.Fields.OutOfStockLocations)
+                            var isOutOfStock = resultDocument.Fields.ContainsKey(global::Foundation.Commerce.Website.Constants.CommerceIndex.Fields.OutOfStockLocations)
                                                && result.Document.OutOfStockLocations != null;
-                            var isBackOrderable = resultDocument.Fields.ContainsKey(Constants.CommerceIndex.Fields.OrderableLocations)
+                            var isBackOrderable = resultDocument.Fields.ContainsKey(global::Foundation.Commerce.Website.Constants.CommerceIndex.Fields.OrderableLocations)
                                                   && result.Document.OrderableLocations != null;
                             if (isOutOfStock && isBackOrderable)
                             {

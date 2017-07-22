@@ -18,6 +18,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Models.InputModels;
+using Foundation.Commerce.Website.Util;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Pipelines;
@@ -27,13 +30,10 @@ using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Commerce.Services;
 using Sitecore.Commerce.Services.Carts;
 using Sitecore.Commerce.Services.Orders;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.InputModels;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Util;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Dictionary.Repositories;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+namespace Foundation.Commerce.Website.Managers
 {
     public class OrderManager : IManager
     {

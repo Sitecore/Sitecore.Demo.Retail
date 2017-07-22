@@ -15,8 +15,8 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Services.Customers;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using CommerceUser = Sitecore.Commerce.Entities.Customers.CommerceUser;
 
 namespace Sitecore.Demo.Retail.Feature.Customers.Website.Models

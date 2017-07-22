@@ -15,9 +15,9 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Entities.Carts;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Diagnostics;
 
 namespace Sitecore.Demo.Retail.Feature.Orders.Website.Models

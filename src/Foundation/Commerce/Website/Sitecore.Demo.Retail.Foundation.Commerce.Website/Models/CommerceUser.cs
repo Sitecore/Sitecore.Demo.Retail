@@ -17,12 +17,13 @@
 
 using System;
 using System.Configuration;
+using Sitecore;
 using Sitecore.Analytics;
 using Sitecore.Commerce.Contacts;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Dictionary.Repositories;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models
+namespace Foundation.Commerce.Website.Models
 {
     public class CommerceUser : IUser
     {

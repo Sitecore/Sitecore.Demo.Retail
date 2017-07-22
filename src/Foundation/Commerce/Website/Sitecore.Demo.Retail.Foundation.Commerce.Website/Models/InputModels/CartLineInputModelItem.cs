@@ -15,7 +15,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.InputModels
+namespace Foundation.Commerce.Website.Models.InputModels
 {
     public class CartLineInputModelItem
     {

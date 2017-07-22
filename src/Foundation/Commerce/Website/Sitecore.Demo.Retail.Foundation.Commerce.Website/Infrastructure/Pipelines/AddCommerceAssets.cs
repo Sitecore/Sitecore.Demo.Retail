@@ -2,7 +2,7 @@
 using Sitecore.Foundation.Assets.Repositories;
 using Sitecore.Mvc.Pipelines.Response.GetPageRendering;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Pipelines
+namespace Foundation.Commerce.Website.Infrastructure.Pipelines
 {
     public class AddCommerceAssets : GetPageRenderingProcessor
     {

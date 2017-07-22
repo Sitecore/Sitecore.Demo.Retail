@@ -21,9 +21,9 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
+using Foundation.Commerce.Website.Models;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Util
+namespace Foundation.Commerce.Website.Util
 {
     [Serializable]
     public class QueryStringCollection : NameValueCollection

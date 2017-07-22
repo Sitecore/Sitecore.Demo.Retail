@@ -1,7 +1,7 @@
 ﻿using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions
+namespace Foundation.Commerce.Website.Extensions
 {
     public static class ItemExtensions
     {

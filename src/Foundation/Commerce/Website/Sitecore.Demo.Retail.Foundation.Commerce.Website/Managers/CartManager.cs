@@ -1,4 +1,5 @@
 ﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="CartManager.cs" company="Sitecore Corporation">
 //     Copyright (c) Sitecore Corporation 1999-2016
 // </copyright>
@@ -19,6 +20,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Models.InputModels;
+using Foundation.Commerce.Website.Util;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Orders;
@@ -30,15 +34,12 @@ using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Commerce.Services;
 using Sitecore.Commerce.Services.Carts;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.InputModels;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Util;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Dictionary.Repositories;
 using WebGrease.Css.Extensions;
 using AddShippingInfoRequest = Sitecore.Commerce.Engine.Connect.Services.Carts.AddShippingInfoRequest;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+namespace Foundation.Commerce.Website.Managers
 {
     public class CartManager : IManager
     {

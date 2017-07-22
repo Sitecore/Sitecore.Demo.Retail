@@ -1,4 +1,4 @@
-﻿namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Pipelines
+﻿namespace Foundation.Commerce.Website.Infrastructure.Connect.Pipelines
 {
     public class Constants {
         public static class Pipelines

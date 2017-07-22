@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Sitecore.Commerce.Entities.Inventory;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models
+namespace Foundation.Commerce.Website.Models
 {
     public interface IInventoryProduct
     {

@@ -21,6 +21,10 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
+using Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Models;
+using Foundation.Commerce.Website.Models.InputModels;
+using Sitecore;
 using Sitecore.Analytics;
 using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Commerce.Connect.CommerceServer.Configuration;
@@ -30,15 +34,12 @@ using Sitecore.Commerce.Entities;
 using Sitecore.Commerce.Entities.Customers;
 using Sitecore.Commerce.Services;
 using Sitecore.Commerce.Services.Customers;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.InputModels;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Dictionary.Repositories;
 using Sitecore.Security.Authentication;
 using CommerceUser = Sitecore.Commerce.Entities.Customers.CommerceUser;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+namespace Foundation.Commerce.Website.Managers
 {
     public class AccountManager : IManager
     {

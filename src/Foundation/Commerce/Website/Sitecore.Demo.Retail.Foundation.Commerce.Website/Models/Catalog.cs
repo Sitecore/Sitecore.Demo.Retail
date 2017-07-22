@@ -19,7 +19,7 @@ using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models
+namespace Foundation.Commerce.Website.Models
 {
     public class Catalog : SitecoreItemBase
     {

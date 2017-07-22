@@ -1,7 +1,7 @@
 ﻿using Sitecore.Commerce.Connect.CommerceServer;
 using Sitecore.Data;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website
+namespace Foundation.Commerce.Website
 {
     public static class Templates
     {

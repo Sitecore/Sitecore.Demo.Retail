@@ -18,16 +18,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Foundation.Commerce.Website.Extensions;
 using Sitecore.Commerce.Engine.Connect.Pipelines.Arguments;
 using Sitecore.Commerce.Entities.Payments;
 using Sitecore.Commerce.Services;
 using Sitecore.Commerce.Services.Payments;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Dictionary.Repositories;
 using GetPaymentMethodsRequest = Sitecore.Commerce.Engine.Connect.Services.Payments.GetPaymentMethodsRequest;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+namespace Foundation.Commerce.Website.Managers
 {
     public class PaymentManager : IManager
     {

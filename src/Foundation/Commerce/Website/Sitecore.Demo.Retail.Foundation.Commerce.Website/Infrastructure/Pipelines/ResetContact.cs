@@ -16,11 +16,12 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
+using Sitecore;
 using Sitecore.Analytics.Pipelines.InitializeTracker;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Pipelines;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Pipelines
+namespace Foundation.Commerce.Website.Infrastructure.Pipelines
 {
     [Service]
     public class ResetContact

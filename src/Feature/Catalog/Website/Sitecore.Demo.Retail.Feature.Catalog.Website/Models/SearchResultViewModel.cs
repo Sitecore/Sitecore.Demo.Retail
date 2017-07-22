@@ -16,8 +16,8 @@
 
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Demo.Retail.Feature.Catalog.Website.Factories;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
@@ -37,9 +37,9 @@ namespace Sitecore.Demo.Retail.Feature.Catalog.Website.Models
             foreach (var child in searchResult.SearchResultItems)
             {
                 CatalogItemViewModel productModel = null;
-                if (child.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.Product.Id))
+                if (child.IsDerived(global::Foundation.Commerce.Website.Templates.Commerce.Product.Id))
                     productModel = productViewFactory.Create(child);
-                if (child.IsDerived(Demo.Retail.Foundation.Commerce.Website.Templates.Commerce.Category.Id))
+                if (child.IsDerived(global::Foundation.Commerce.Website.Templates.Commerce.Category.Id))
                     productModel = categoryViewFactory.Create(child);
                 if (productModel != null)
                     Items.Add(productModel);

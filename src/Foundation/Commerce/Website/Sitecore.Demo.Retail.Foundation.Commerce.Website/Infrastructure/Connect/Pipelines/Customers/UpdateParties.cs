@@ -18,15 +18,15 @@
 using System;
 using System.Linq;
 using CommerceServer.Core.Runtime.Profiles;
+using Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Arguments;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Pipelines;
 using Sitecore.Commerce.Connect.CommerceServer.Profiles.Models;
 using Sitecore.Commerce.Pipelines;
 using Sitecore.Commerce.Services.Customers;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Arguments;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Customers
+namespace Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Customers
 {
     public class UpdateParties : CustomerPipelineProcessor
     {
@@ -48,9 +48,9 @@ namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connec
                 return;
             }
 
-            var preferredAddress = customerProfile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PreferredAddress].Value as string;
+            var preferredAddress = customerProfile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PreferredAddress].Value as string;
 
-            var profileValue = customerProfile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressList].Value as object[];
+            var profileValue = customerProfile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressList].Value as object[];
             if (profileValue == null)
                 return;
 
@@ -76,12 +76,12 @@ namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connec
                 // Check if the IsPrimary address flag has been flipped.
                 if (((CommerceParty) partyToUpdate).IsPrimary)
                 {
-                    customerProfile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PreferredAddress].Value = partyToUpdate.ExternalId;
+                    customerProfile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PreferredAddress].Value = partyToUpdate.ExternalId;
                     customerProfile.Update();
                 }
                 else if (!string.IsNullOrWhiteSpace(preferredAddress) && preferredAddress.Equals(partyToUpdate.ExternalId, StringComparison.OrdinalIgnoreCase))
                 {
-                    customerProfile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PreferredAddress].Value = DBNull.Value;
+                    customerProfile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PreferredAddress].Value = DBNull.Value;
                     customerProfile.Update();
                 }
 

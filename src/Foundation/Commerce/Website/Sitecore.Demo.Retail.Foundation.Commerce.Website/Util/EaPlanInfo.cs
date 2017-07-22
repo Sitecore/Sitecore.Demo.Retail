@@ -15,7 +15,7 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Util
+namespace Foundation.Commerce.Website.Util
 {
     public class EaPlanInfo
     {

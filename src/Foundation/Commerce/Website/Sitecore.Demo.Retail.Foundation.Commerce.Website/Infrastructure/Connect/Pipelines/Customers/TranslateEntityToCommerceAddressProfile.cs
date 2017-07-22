@@ -16,13 +16,13 @@
 // -------------------------------------------------------------------------------------------
 
 using CommerceServer.Core.Runtime.Profiles;
+using Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Arguments;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Pipelines;
 using Sitecore.Commerce.Pipelines;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Arguments;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Customers
+namespace Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Customers
 {
     public class TranslateEntityToCommerceAddressProfile : CommerceTranslateProcessor
     {
@@ -49,25 +49,25 @@ namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connec
 
         private void TranslateCommerceCustomerParty(CommerceParty party, Profile profile)
         {
-            profile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.FirstName].Value = party.FirstName;
-            profile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.LastName].Value = party.LastName;
-            profile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressName].Value = party.Name;
-            profile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressLine1].Value = party.Address1;
-            profile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressLine2].Value = party.Address2;
-            profile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.City].Value = party.City;
+            profile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.FirstName].Value = party.FirstName;
+            profile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.LastName].Value = party.LastName;
+            profile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressName].Value = party.Name;
+            profile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressLine1].Value = party.Address1;
+            profile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressLine2].Value = party.Address2;
+            profile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.City].Value = party.City;
             if (!string.IsNullOrEmpty(party.State))
             {
-                profile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.RegionCode].Value = party.State;
+                profile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.RegionCode].Value = party.State;
             }
             else if (!string.IsNullOrEmpty(party.RegionCode))
             {
-                profile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.RegionCode].Value = party.RegionCode;
+                profile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.RegionCode].Value = party.RegionCode;
             }
-            profile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.RegionName].Value = party.RegionName;
-            profile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PostalCode].Value = party.ZipPostalCode;
-            profile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.CountryCode].Value = party.CountryCode;
-            profile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.CountryName].Value = party.Country;
-            profile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.TelNumber].Value = party.PhoneNumber;
+            profile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.RegionName].Value = party.RegionName;
+            profile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PostalCode].Value = party.ZipPostalCode;
+            profile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.CountryCode].Value = party.CountryCode;
+            profile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.CountryName].Value = party.Country;
+            profile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.TelNumber].Value = party.PhoneNumber;
 
             TranslateCommerceCustomerPartyCustomProperties(party, profile);
         }

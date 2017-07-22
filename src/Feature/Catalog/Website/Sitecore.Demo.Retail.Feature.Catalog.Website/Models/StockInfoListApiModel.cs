@@ -17,9 +17,9 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Commerce.Services;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Diagnostics;
 
 namespace Sitecore.Demo.Retail.Feature.Catalog.Website.Models

@@ -18,12 +18,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Managers;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Commerce.Services;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
 namespace Sitecore.Demo.Retail.Feature.Orders.Website.Models
 {

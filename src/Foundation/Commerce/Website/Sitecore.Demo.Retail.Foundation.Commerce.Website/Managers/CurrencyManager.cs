@@ -17,11 +17,11 @@
 
 using System.Linq;
 using System.Web;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Multishop;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+namespace Foundation.Commerce.Website.Managers
 {
     public class CurrencyManager : IManager
     {

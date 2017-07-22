@@ -17,7 +17,7 @@
 
 using Sitecore.Commerce.Services;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+namespace Foundation.Commerce.Website.Managers
 {
     public class ManagerResponse<TServiceProviderResult, TResult> where TServiceProviderResult : ServiceProviderResult
     {

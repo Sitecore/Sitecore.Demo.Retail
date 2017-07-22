@@ -17,10 +17,10 @@
 
 using System.Web;
 using System.Web.Mvc;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Data.Items;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+namespace Foundation.Commerce.Website.Managers
 {
 #warning move to feature.catalog
     public static class MetadataManager

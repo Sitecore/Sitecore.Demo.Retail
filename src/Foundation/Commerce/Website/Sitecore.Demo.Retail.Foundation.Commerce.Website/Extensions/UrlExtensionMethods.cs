@@ -18,9 +18,9 @@
 using System.Globalization;
 using System.Web;
 using System.Web.Mvc;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Util;
+using Foundation.Commerce.Website.Util;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions
+namespace Foundation.Commerce.Website.Extensions
 {
     public static class UrlExtensionMethods
     {

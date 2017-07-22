@@ -17,20 +17,20 @@
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.ContentSearch;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.Search
+namespace Foundation.Commerce.Website.Models.Search
 {
     public class InventorySearchResultItem : CommerceProductSearchResultItem
     {
-        [IndexField(Demo.Retail.Foundation.Commerce.Website.Constants.CommerceIndex.Fields.OutOfStockLocations)]
+        [IndexField(Constants.CommerceIndex.Fields.OutOfStockLocations)]
         public string OutOfStockLocations { get; set; }
 
-        [IndexField(Demo.Retail.Foundation.Commerce.Website.Constants.CommerceIndex.Fields.OrderableLocations)]
+        [IndexField(Constants.CommerceIndex.Fields.OrderableLocations)]
         public string OrderableLocations { get; set; }
 
-        [IndexField(Demo.Retail.Foundation.Commerce.Website.Constants.CommerceIndex.Fields.PreOrderable)]
+        [IndexField(Constants.CommerceIndex.Fields.PreOrderable)]
         public string PreOrderable { get; set; }
 
-        [IndexField(Demo.Retail.Foundation.Commerce.Website.Constants.CommerceIndex.Fields.InStockLocations)]
+        [IndexField(Constants.CommerceIndex.Fields.InStockLocations)]
         public string InStockLocations { get; set; }
     }
 }

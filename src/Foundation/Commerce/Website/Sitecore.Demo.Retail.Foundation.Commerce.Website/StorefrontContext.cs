@@ -16,13 +16,14 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Web;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
+using Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Models;
+using Sitecore;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Sites;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website
+namespace Foundation.Commerce.Website
 {
     [Service]
     public class StorefrontContext

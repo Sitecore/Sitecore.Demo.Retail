@@ -1,4 +1,4 @@
-﻿namespace Sitecore.Demo.Retail.Foundation.Commerce.Website
+﻿namespace Foundation.Commerce.Website
 {
     public class Constants
     {

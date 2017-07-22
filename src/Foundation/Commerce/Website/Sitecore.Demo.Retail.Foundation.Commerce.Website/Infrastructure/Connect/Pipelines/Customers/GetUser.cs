@@ -25,7 +25,7 @@ using Sitecore.Diagnostics;
 using Sitecore.Security;
 using Sitecore.Security.Accounts;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Customers
+namespace Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Customers
 {
     public class GetUser : GetUserFromSitecore
     {
@@ -51,7 +51,7 @@ namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connec
 
         protected void AssociateSitecoreUserWithCommerceUser(CommerceUser commerceUser, UserProfile sitecoreUser)
         {
-            var externalId = sitecoreUser[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.SitecoreProfile.UserId];
+            var externalId = sitecoreUser[global::Foundation.Commerce.Website.Constants.Profile.SitecoreProfile.UserId];
             Assert.IsNotNullOrEmpty(externalId, $"The external id for the user {sitecoreUser.UserName} is empty.");
             commerceUser.ExternalId = externalId;
 

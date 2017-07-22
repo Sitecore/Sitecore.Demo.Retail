@@ -23,7 +23,7 @@ using Sitecore.Commerce.Pipelines;
 using Sitecore.Commerce.Services.Customers;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Customers
+namespace Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Customers
 {
     public class RemoveParties : CustomerPipelineProcessor
     {
@@ -45,9 +45,9 @@ namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connec
                 return;
             }
 
-            var preferredAddress = customerProfile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PreferredAddress].Value as string;
+            var preferredAddress = customerProfile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PreferredAddress].Value as string;
 
-            var profileValue = customerProfile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressList].Value as object[];
+            var profileValue = customerProfile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressList].Value as object[];
             if (profileValue == null)
                 return;
             var e = profileValue.Select(i => i.ToString());
@@ -70,13 +70,13 @@ namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connec
                 addressList.Remove(foundId);
 
                 if (!addressList.Any())
-                    customerProfile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressList].Value = DBNull.Value;
+                    customerProfile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressList].Value = DBNull.Value;
                 else
-                    customerProfile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressList].Value = addressList.Cast<object>().ToArray();
+                    customerProfile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.AddressList].Value = addressList.Cast<object>().ToArray();
 
                 // Prefered address check. If the address being deleted was the preferred address we must clear it from the customer profile.
                 if (!string.IsNullOrWhiteSpace(preferredAddress) && preferredAddress.Equals(partyToRemove.ExternalId, StringComparison.OrdinalIgnoreCase))
-                    customerProfile[Demo.Retail.Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PreferredAddress].Value = DBNull.Value;
+                    customerProfile[global::Foundation.Commerce.Website.Constants.Profile.GeneralInfo.PreferredAddress].Value = DBNull.Value;
 
                 customerProfile.Update();
             }

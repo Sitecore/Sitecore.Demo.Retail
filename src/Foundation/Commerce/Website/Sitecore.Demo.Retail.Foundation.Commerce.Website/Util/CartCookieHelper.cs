@@ -18,7 +18,7 @@
 using System;
 using System.Web;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Util
+namespace Foundation.Commerce.Website.Util
 {
     public static class CartCookieHelper
     {

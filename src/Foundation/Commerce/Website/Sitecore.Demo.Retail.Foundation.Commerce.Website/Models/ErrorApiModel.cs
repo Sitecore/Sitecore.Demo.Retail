@@ -17,9 +17,8 @@
 
 using System;
 using Sitecore.Diagnostics;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models
+namespace Foundation.Commerce.Website.Models
 {
     public class ErrorApiModel : BaseApiModel
     {

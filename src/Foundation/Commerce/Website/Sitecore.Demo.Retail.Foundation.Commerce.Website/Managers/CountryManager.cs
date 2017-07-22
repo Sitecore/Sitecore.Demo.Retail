@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
+using Foundation.Commerce.Website.Extensions;
 using Sitecore.Commerce.Services.Orders;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+namespace Foundation.Commerce.Website.Managers
 {
     public class CountryManager : IManager
     {

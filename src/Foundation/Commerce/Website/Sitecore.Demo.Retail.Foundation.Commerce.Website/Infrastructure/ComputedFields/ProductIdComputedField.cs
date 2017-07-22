@@ -23,7 +23,7 @@ using Sitecore.ContentSearch;
 using Sitecore.Data;
 using Sitecore.Diagnostics;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.ComputedFields
+namespace Foundation.Commerce.Website.Infrastructure.ComputedFields
 {
     public class ProductIdComputedField : BaseCommerceComputedField
     {

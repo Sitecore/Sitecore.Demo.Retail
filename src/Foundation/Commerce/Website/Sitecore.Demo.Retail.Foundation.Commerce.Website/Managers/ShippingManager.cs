@@ -17,17 +17,17 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Models.InputModels;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Commerce.Services.Shipping;
 using Sitecore.Commerce.Services.Shipping.Generics;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.InputModels;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.Dictionary.Repositories;
 using GetShippingMethodsRequest = Sitecore.Commerce.Engine.Connect.Services.Shipping.GetShippingMethodsRequest;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+namespace Foundation.Commerce.Website.Managers
 {
     public class ShippingManager : IManager
     {

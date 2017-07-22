@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Foundation.Commerce.Website;
+using Foundation.Commerce.Website.Extensions;
+using Foundation.Commerce.Website.Managers;
+using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Engine.Connect.Entities.Carts;
 using Sitecore.Commerce.Entities.Carts;
@@ -9,10 +13,6 @@ using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Demo.Retail.Feature.Orders.Website.Models;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Extensions;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Links;
 

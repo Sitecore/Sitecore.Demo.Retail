@@ -16,7 +16,7 @@
 
 using System.Collections.Generic;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.Search
+namespace Foundation.Commerce.Website.Models.Search
 {
     public class MultipleProductSearchResults
     {

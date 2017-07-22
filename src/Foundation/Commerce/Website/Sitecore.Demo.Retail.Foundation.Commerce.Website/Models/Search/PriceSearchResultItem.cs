@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using Sitecore.Commerce.Connect.CommerceServer.Search.Models;
 using Sitecore.ContentSearch;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.Search
+namespace Foundation.Commerce.Website.Models.Search
 {
     public class PriceSearchResultItem : CommerceProductSearchResultItem
     {
@@ -29,7 +29,7 @@ namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.Search
         [IndexField("adjustedprice")]
         public double AdjustedPrice { get; set; }
 
-        [IndexField(Demo.Retail.Foundation.Commerce.Website.Constants.CommerceIndex.Fields.VariantInfo)]
+        [IndexField(global::Foundation.Commerce.Website.Constants.CommerceIndex.Fields.VariantInfo)]
         public string VariantInfo { get; set; }
 
         public Dictionary<string, object> OtherFields { get; set; }

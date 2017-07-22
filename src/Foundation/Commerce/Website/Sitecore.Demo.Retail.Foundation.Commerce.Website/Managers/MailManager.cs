@@ -18,11 +18,12 @@
 using System;
 using System.IO;
 using System.Net.Mail;
+using Sitecore;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers
+namespace Foundation.Commerce.Website.Managers
 {
     public class MailManager : IManager
     {

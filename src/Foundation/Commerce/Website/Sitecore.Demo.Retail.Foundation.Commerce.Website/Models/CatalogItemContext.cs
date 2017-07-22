@@ -18,7 +18,7 @@
 using System.Web;
 using Sitecore.Foundation.DependencyInjection;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models
+namespace Foundation.Commerce.Website.Models
 {
     [Service]
     public class CatalogItemContext

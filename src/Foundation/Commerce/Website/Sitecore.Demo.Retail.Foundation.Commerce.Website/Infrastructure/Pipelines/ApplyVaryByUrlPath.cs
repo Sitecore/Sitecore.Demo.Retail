@@ -16,11 +16,12 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Web;
+using Sitecore;
 using Sitecore.Diagnostics;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Mvc.Pipelines.Response.RenderRendering;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Pipelines
+namespace Foundation.Commerce.Website.Infrastructure.Pipelines
 {
     [Service]
     public class ApplyVaryByUrlPath : RenderRenderingProcessor

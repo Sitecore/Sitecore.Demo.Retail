@@ -16,11 +16,12 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Web;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Foundation.Commerce.Website.Managers;
+using Sitecore;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Mvc.Pipelines.Response.RenderRendering;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Pipelines
+namespace Foundation.Commerce.Website.Infrastructure.Pipelines
 {
     [Service]
     public class VaryByCurrency : RenderRenderingProcessor

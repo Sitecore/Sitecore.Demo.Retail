@@ -16,7 +16,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models.InputModels
+namespace Foundation.Commerce.Website.Models.InputModels
 {
     public class AddCartLineInputModel
     {

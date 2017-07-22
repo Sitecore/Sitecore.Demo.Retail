@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Models
+namespace Foundation.Commerce.Website.Models
 {
     public interface ICatalogProduct
     {

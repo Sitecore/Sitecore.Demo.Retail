@@ -23,7 +23,7 @@ using Sitecore.Commerce.Connect.CommerceServer.Profiles.Pipelines;
 using Sitecore.Commerce.Services;
 using Sitecore.Pipelines;
 
-namespace Sitecore.Demo.Retail.Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Customers
+namespace Foundation.Commerce.Website.Infrastructure.Connect.Pipelines.Customers
 {
     public class CustomerPipelineProcessor : CommercePipelineProcessor
     {

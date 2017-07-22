@@ -1,6 +1,6 @@
 ﻿using System;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website;
-using Sitecore.Demo.Retail.Foundation.Commerce.Website.Managers;
+using Foundation.Commerce.Website;
+using Foundation.Commerce.Website.Managers;
 using Sitecore.Diagnostics;
 using Sitecore.Feature.Language.Infrastructure.Pipelines;
 
