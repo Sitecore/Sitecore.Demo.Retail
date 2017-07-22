@@ -8,11 +8,11 @@ using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.ManagedLists;
 using Sitecore.Commerce.Plugin.Orders;
 using Sitecore.Commerce.Plugin.Payments;
-using Sitecore.Demo.Retail.Feature.Payments.Engine.Policies;
+using Feature.Payments.Engine.Policies;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 
-namespace Sitecore.Demo.Retail.Feature.Payments.Engine.Pipelines.Blocks
+namespace Feature.Payments.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(PaymentsConstants.Pipelines.Blocks.EnsureSettlePaymentRequestedBlock)]
     public class EnsureSettlePaymentRequestedBlock : PipelineBlock<SalesActivity, SalesActivity, CommercePipelineExecutionContext>

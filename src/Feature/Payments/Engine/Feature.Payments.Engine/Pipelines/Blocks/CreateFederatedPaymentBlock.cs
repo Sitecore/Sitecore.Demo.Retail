@@ -5,12 +5,12 @@ using Braintree.Exceptions;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.Orders;
 using Sitecore.Commerce.Plugin.Payments;
-using Sitecore.Demo.Retail.Feature.Payments.Engine.Helpers;
-using Sitecore.Demo.Retail.Feature.Payments.Engine.Policies;
+using Feature.Payments.Engine.Helpers;
+using Feature.Payments.Engine.Policies;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 
-namespace Sitecore.Demo.Retail.Feature.Payments.Engine.Pipelines.Blocks
+namespace Feature.Payments.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(PaymentsConstants.Pipelines.Blocks.CreateFederatedPaymentBlock)]
     public class CreateFederatedPaymentBlock : PipelineBlock<CartEmailArgument, CartEmailArgument, CommercePipelineExecutionContext>

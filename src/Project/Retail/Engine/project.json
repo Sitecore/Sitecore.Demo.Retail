@@ -29,7 +29,7 @@
         "Sitecore.Commerce.Plugin.Returns": "1.0.2301",
         "Sitecore.Commerce.Plugin.SQL": "1.0.2301",
         "Sitecore.Demo.Retail.Feature.Entitlements.Engine": "1.0.0-*",
-        "Sitecore.Demo.Retail.Feature.Payments.Engine": "1.0.0-*",
+        "Feature.Payments.Engine": "1.0.0-*",
         "Sitecore.Demo.Retail.Feature.HabitatData.Engine": "1.0.0-*"
     },
     "tools": {

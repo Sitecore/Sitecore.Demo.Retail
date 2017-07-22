@@ -10,7 +10,7 @@ using Sitecore.Commerce.Plugin.Payments;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 
-namespace Sitecore.Demo.Retail.Feature.Payments.Engine.Pipelines.Blocks
+namespace Feature.Payments.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(PaymentsConstants.Pipelines.Blocks.ValidateSettlementBlock)]
     public class ValidateSettlementBlock : PipelineBlock<SalesActivity, SalesActivity, CommercePipelineExecutionContext>

@@ -2,10 +2,10 @@
 using Braintree;
 using Braintree.Exceptions;
 using Sitecore.Commerce.Core;
-using Sitecore.Demo.Retail.Feature.Payments.Engine.Policies;
+using Feature.Payments.Engine.Policies;
 using Sitecore.Framework.Pipelines;
 
-namespace Sitecore.Demo.Retail.Feature.Payments.Engine.Pipelines.Blocks
+namespace Feature.Payments.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(PaymentsConstants.Pipelines.Blocks.GetClientTokenBlock)]
     public class GetClientTokenBlock : PipelineBlock<string, string, CommercePipelineExecutionContext>
