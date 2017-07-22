@@ -1,4 +1,4 @@
-﻿namespace Sitecore.Demo.Retail.Feature.HabitatData.Engine
+﻿namespace Feature.HabitatData.Engine
 {
     public class HabitatDataConstants
     {

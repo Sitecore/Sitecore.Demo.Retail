@@ -7,7 +7,7 @@ using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.Pricing;
 using Sitecore.Framework.Pipelines;
 
-namespace Sitecore.Demo.Retail.Feature.HabitatData.Engine.Pipelines.Blocks
+namespace Feature.HabitatData.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(HabitatDataConstants.Pipelines.Blocks.InitializeEnvironmentPricingBlock)]
     public class InitializeEnvironmentPricingBlock : PipelineBlock<string, string, CommercePipelineExecutionContext>

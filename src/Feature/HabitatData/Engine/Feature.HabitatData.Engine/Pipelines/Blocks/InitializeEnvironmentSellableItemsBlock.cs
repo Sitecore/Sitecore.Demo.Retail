@@ -8,7 +8,7 @@ using Sitecore.Commerce.Plugin.ManagedLists;
 using Sitecore.Commerce.Plugin.Pricing;
 using Sitecore.Framework.Pipelines;
 
-namespace Sitecore.Demo.Retail.Feature.HabitatData.Engine.Pipelines.Blocks
+namespace Feature.HabitatData.Engine.Pipelines.Blocks
 {
     /// <summary>
   /// Defines a block which bootstraps sellable items the Habitat sample environment.
