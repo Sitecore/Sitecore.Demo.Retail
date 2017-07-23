@@ -207,6 +207,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Models\OrderLineViewModel.cs" />
     <Compile Include="Models\PaymentInfoViewModel.cs" />
     <Compile Include="Models\PaymentType.cs" />

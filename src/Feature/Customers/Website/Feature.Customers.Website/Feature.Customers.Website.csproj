@@ -48,8 +48,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Sitecore.Commerce">
       <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Commerce.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Foundation.DependencyInjection">
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Foundation.DependencyInjection.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Foundation.Dictionary">
       <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
@@ -130,6 +137,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Infrastructure\Pipelines\InitializeRoutes.cs" />
+    <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Models\AddressItemBaseApiModel.cs" />
     <Compile Include="Models\AddressItemApiModel.cs" />
     <Compile Include="Models\AddressListItemApiModel.cs" />
