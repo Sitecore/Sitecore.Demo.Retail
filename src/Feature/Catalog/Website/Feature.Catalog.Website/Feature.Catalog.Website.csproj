@@ -202,6 +202,7 @@
     <Compile Include="Infrastructure\Provider\ProductSearchResultFormatter.cs" />
     <Compile Include="Infrastructure\Provider\CategorySearchResultFormatter.cs" />
     <Compile Include="Factories\CatalogItemContextFactory.cs" />
+    <Compile Include="Infrastructure\ServicesConfigurator.cs" />
     <Compile Include="Models\RelationshipViewModel.cs" />
     <Compile Include="Models\RouteItemType.cs" />
     <Compile Include="Models\CatalogRouteData.cs" />

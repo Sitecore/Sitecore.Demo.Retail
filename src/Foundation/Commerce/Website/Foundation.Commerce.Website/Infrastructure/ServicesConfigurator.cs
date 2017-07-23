@@ -12,6 +12,7 @@ namespace Foundation.Commerce.Website.Infrastructure
     {
         public void Configure(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddClassesWithServiceAttribute();
             serviceCollection.AddTypesImplementingInCurrentAssembly<IManager>(Lifetime.Transient);
             serviceCollection.AddTypesImplementing<object>(Lifetime.Transient, "Sitecore.Commerce.Connect.CommerceServer");
             serviceCollection.AddTypesImplementing<object>(Lifetime.Transient, "Sitecore.Commerce");

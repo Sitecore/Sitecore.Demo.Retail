@@ -195,9 +195,6 @@
     <Content Include="Scripts\Commerce\knockout.validation-2.0.0.js" />
     <Content Include="Scripts\Commerce\knockout.validation-2.0.0.min.js" />
     <None Include="App_Config\CommerceServer.Core.config.example.transform" />
-    <None Include="web.config.transform">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="App_Config\Include\Foundation\Foundation.Commerce.Website.Lucene.config">
       <SubType>Designer</SubType>
     </Content>
