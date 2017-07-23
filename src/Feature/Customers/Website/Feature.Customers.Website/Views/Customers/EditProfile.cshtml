@@ -10,8 +10,8 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------*@
 
-@using Sitecore.Foundation.Commerce.Extensions
-@model Sitecore.Foundation.Commerce.Models.ProfileModel
+@using Foundation.Commerce.Website.Extensions
+@model Foundation.Commerce.Website.Models.ProfileModel
 
 @using (Ajax.BeginForm("UpdateProfile", "Customers", null, new AjaxOptions {OnBegin = "SetSavingProfileButton", OnSuccess = "UpdateProfileSuccess", OnFailure = "UpdateProfileFailure", HttpMethod = "Post"}, new {id = "UpdateProfileForm"}))
 {
