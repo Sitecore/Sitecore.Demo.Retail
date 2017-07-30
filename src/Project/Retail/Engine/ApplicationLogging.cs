@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
 
-namespace Project.Retail.Engine
+namespace Sitecore.Project.Retail.Engine
 {
     public static class ApplicationLogging
     {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Sitecore.Commerce.Core;
-using Project.Retail.Engine.Pipelines.Blocks;
 using Sitecore.Framework.Pipelines.Definitions.Extensions;
+using Sitecore.Project.Retail.Engine.Pipelines.Blocks;
 
-namespace Project.Retail.Engine.App_ConfigureSitecore
+namespace Sitecore.Project.Retail.Engine.App_ConfigureSitecore
 {
     public static class RunningPluginsPipelineExtentions
     {

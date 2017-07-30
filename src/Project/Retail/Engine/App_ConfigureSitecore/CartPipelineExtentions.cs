@@ -8,7 +8,7 @@ using Sitecore.Commerce.Plugin.Promotions;
 using Sitecore.Commerce.Plugin.Tax;
 using Sitecore.Framework.Pipelines.Definitions.Extensions;
 
-namespace Project.Retail.Engine.App_ConfigureSitecore
+namespace Sitecore.Project.Retail.Engine.App_ConfigureSitecore
 {
     public static class CartPipelineExtentions
     {

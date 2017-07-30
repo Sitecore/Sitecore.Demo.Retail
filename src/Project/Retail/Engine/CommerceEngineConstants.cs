@@ -1,4 +1,4 @@
-﻿namespace Project.Retail.Engine
+﻿namespace Sitecore.Project.Retail.Engine
 {
     /// <summary>
     /// The adventure works  constants.

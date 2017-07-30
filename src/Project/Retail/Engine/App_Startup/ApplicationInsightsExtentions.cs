@@ -3,7 +3,7 @@ using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Project.Retail.Engine.App_Startup
+namespace Sitecore.Project.Retail.Engine.App_Startup
 {
     public static class ApplicationInsightsExtentions
     {
