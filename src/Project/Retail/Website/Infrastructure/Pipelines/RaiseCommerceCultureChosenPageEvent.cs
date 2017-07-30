@@ -4,7 +4,7 @@ using Foundation.Commerce.Website.Managers;
 using Sitecore.Diagnostics;
 using Sitecore.Feature.Language.Infrastructure.Pipelines;
 
-namespace Project.Retail.Website.Infrastructure.Pipelines
+namespace Sitecore.Project.Retail.Website.Infrastructure.Pipelines
 {
     public class RaiseCommerceCultureChosenPageEvent
     {
