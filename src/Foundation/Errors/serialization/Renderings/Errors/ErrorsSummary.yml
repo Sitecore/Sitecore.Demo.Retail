@@ -1,8 +1,8 @@
 ﻿---
 ID: "11680cdd-d6cf-4f1a-a770-b9815a6f7cec"
-Parent: "44bd03a4-2010-425f-9d12-6d14940c762a"
+Parent: "cbfeb23c-d04f-4e31-8ab9-a96191aece8e"
 Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
-Path: /sitecore/layout/Renderings/Feature/Commerce/Errors/ErrorsSummary
+Path: /sitecore/layout/Renderings/Foundation/Commerce/Errors/ErrorsSummary
 DB: master
 SharedFields:
 - ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
