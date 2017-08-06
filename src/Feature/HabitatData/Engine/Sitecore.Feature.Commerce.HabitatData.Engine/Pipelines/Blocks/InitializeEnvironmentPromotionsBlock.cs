@@ -10,7 +10,7 @@ using Sitecore.Commerce.Plugin.Promotions;
 using Sitecore.Commerce.Plugin.Rules;
 using Sitecore.Framework.Pipelines;
 
-namespace Feature.HabitatData.Engine.Pipelines.Blocks
+namespace Sitecore.Feature.Commerce.HabitatData.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(HabitatDataConstants.Pipelines.Blocks.InitializeEnvironmentPromotionsBlock)]
     public class InitializeEnvironmentPromotionsBlock : PipelineBlock<string, string, CommercePipelineExecutionContext>

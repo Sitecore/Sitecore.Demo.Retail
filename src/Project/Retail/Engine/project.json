@@ -30,7 +30,7 @@
         "Sitecore.Commerce.Plugin.SQL": "1.0.2301",
         "Feature.Entitlements.Engine": "1.0.0-*",
         "Sitecore.Feature.Commerce.Payments.Engine": "1.0.0-*",
-        "Feature.HabitatData.Engine": "1.0.0-*"
+        "Sitecore.Feature.Commerce.HabitatData.Engine": "1.0.0-*"
     },
     "tools": {
         "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"

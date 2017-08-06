@@ -7,7 +7,7 @@
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>b02c5772-df1e-48e5-b5ec-084ecf8a0b42</ProjectGuid>
-    <RootNamespace>Sitecore.Demo.Retail.Feature.HabitatData.Engine</RootNamespace>
+    <RootNamespace>Sitecore.Feature.Commerce.HabitatData.Engine</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>

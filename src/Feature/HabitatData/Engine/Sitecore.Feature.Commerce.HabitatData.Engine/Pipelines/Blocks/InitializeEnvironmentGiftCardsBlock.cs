@@ -7,7 +7,7 @@ using Sitecore.Commerce.Plugin.ManagedLists;
 using Sitecore.Commerce.Plugin.Pricing;
 using Sitecore.Framework.Pipelines;
 
-namespace Feature.HabitatData.Engine.Pipelines.Blocks
+namespace Sitecore.Feature.Commerce.HabitatData.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(HabitatDataConstants.Pipelines.Blocks.InitializeEnvironmentGiftCardsBlock)]
     public class InitializeEnvironmentGiftCardsBlock : PipelineBlock<string, string, CommercePipelineExecutionContext>

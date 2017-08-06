@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Sitecore.Commerce.Core;
-using Feature.HabitatData.Engine.Pipelines.Blocks;
+using Sitecore.Feature.Commerce.HabitatData.Engine.Pipelines.Blocks;
 using Sitecore.Framework.Configuration;
 using Sitecore.Framework.Pipelines.Definitions.Extensions;
 
-namespace Feature.HabitatData.Engine
+namespace Sitecore.Feature.Commerce.HabitatData.Engine
 {
     public class ConfigureSitecore : IConfigureSitecore
     {
