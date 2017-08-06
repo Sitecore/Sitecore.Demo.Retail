@@ -73,7 +73,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{083D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{4138BD3B-699D-45B9-940A-DA5ED169CC59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation.Errors.Website", "src\Foundation\Errors\Website\Foundation.Errors.Website\Foundation.Errors.Website.csproj", "{A82E5D5A-3935-465D-996C-12570BFDD896}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Foundation.Commerce.Errors.Website", "src\Foundation\Errors\Website\Foundation.Errors.Website\Sitecore.Foundation.Commerce.Errors.Website.csproj", "{A82E5D5A-3935-465D-996C-12570BFDD896}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation.Commerce.Website", "src\Foundation\Commerce\Website\Foundation.Commerce.Website\Foundation.Commerce.Website.csproj", "{662345AC-23EE-4125-87A6-0785795C2409}"
 EndProject

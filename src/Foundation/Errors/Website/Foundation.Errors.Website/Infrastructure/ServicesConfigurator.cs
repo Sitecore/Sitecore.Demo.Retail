@@ -2,7 +2,7 @@
 using Sitecore.DependencyInjection;
 using Sitecore.Foundation.DependencyInjection;
 
-namespace Foundation.Errors.Website.Infrastructure
+namespace Sitecore.Foundation.Commerce.Errors.Website.Infrastructure
 {
     public class ServicesConfigurator : IServicesConfigurator
     {
