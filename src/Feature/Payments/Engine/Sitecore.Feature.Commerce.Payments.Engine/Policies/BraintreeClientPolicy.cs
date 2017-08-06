@@ -1,6 +1,6 @@
 ﻿using Sitecore.Commerce.Core;
 
-namespace Feature.Payments.Engine.Policies
+namespace Sitecore.Feature.Commerce.Payments.Engine.Policies
 {
     public class BraintreeClientPolicy : Policy
     {

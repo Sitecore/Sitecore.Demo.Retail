@@ -3,12 +3,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.Orders;
 using Sitecore.Commerce.Plugin.Payments;
-using Feature.Payments.Engine.Pipelines.Blocks;
+using Sitecore.Feature.Commerce.Payments.Engine.Pipelines.Blocks;
 using Sitecore.Framework.Configuration;
 using Sitecore.Framework.Pipelines.Definitions.Extensions;
-using GetClientTokenBlock = Feature.Payments.Engine.Pipelines.Blocks.GetClientTokenBlock;
+using GetClientTokenBlock = Sitecore.Feature.Commerce.Payments.Engine.Pipelines.Blocks.GetClientTokenBlock;
 
-namespace Feature.Payments.Engine
+namespace Sitecore.Feature.Commerce.Payments.Engine
 {
     public class ConfigureSitecore : IConfigureSitecore
     {

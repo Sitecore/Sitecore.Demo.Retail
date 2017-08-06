@@ -5,7 +5,7 @@ using Sitecore.Commerce.Plugin.Payments;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 
-namespace Feature.Payments.Engine.Pipelines.Blocks
+namespace Sitecore.Feature.Commerce.Payments.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(PaymentsConstants.Pipelines.Blocks.UpdateFederatedPaymentAfterSettlementBlock)]
     public class UpdateFederatedPaymentAfterSettlementBlock : PipelineBlock<SalesActivity, SalesActivity, CommercePipelineExecutionContext>

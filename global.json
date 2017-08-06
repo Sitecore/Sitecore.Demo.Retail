@@ -2,7 +2,7 @@
     "projects": [
         "src/Feature/HabitatData/Engine/Feature.HabitatData.Engine",
         "src/Feature/Entitlements/Engine/Feature.Entitlements.Engine",
-        "src/Feature/Payments/Engine/Feature.Payments.Engine",
+        "src/Feature/Payments/Engine/Sitecore.Feature.Commerce.Payments.Engine",
         "src/Project/Retail/Engine"
     ],
     "sdk": {

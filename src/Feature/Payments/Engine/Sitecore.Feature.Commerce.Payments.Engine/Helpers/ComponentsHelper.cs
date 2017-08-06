@@ -1,7 +1,7 @@
 ﻿using Braintree;
 using Sitecore.Commerce.Core;
 
-namespace Feature.Payments.Engine.Helpers
+namespace Sitecore.Feature.Commerce.Payments.Engine.Helpers
 {
     public class ComponentsHelper
     {

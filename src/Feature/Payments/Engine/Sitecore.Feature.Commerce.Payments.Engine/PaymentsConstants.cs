@@ -1,4 +1,4 @@
-﻿namespace Feature.Payments.Engine
+﻿namespace Sitecore.Feature.Commerce.Payments.Engine
 {
     public static class PaymentsConstants
     {
