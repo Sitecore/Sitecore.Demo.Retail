@@ -7,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Sitecore.Commerce.Core;
 using Sitecore.Framework.Diagnostics;
-using Sitecore.Project.Retail.Engine.App_Startup;
+using Sitecore.Project.Commerce.Retail.Engine.App_Startup;
 
-namespace Sitecore.Project.Retail.Engine
+namespace Sitecore.Project.Commerce.Retail.Engine
 {
     public class Startup
     {

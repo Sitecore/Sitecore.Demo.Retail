@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.OData.Extensions;
 using Microsoft.AspNetCore.OData.Routing;
 using Sitecore.Commerce.Core;
 
-namespace Sitecore.Project.Retail.Engine.App_Startup
+namespace Sitecore.Project.Commerce.Retail.Engine.App_Startup
 {
     public static class ODataExtentions
     {

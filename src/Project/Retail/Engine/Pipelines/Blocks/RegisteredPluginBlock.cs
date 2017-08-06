@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Sitecore.Commerce.Core;
 using Sitecore.Framework.Pipelines;
 
-namespace Sitecore.Project.Retail.Engine.Pipelines.Blocks
+namespace Sitecore.Project.Commerce.Retail.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(CommerceEngineConstants.Pipelines.Blocks.RegisteredPluginBlock)]
     public class RegisteredPluginBlock : PipelineBlock<IEnumerable<RegisteredPluginModel>, IEnumerable<RegisteredPluginModel>, CommercePipelineExecutionContext>
