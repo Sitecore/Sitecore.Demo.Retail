@@ -89,7 +89,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Customers.Website",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Catalog.Website", "src\Feature\Catalog\Website\Feature.Catalog.Website\Feature.Catalog.Website.csproj", "{7031F757-2830-44E3-9639-AAD2DBA69A24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Project.Retail.Website", "src\Project\Retail\Website\Sitecore.Project.Retail.Website.csproj", "{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Project.Commerce.Retail.Website", "src\Project\Retail\Website\Sitecore.Project.Commerce.Retail.Website.csproj", "{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sitecore.Project.Retail.Engine", "src\Project\Retail\Engine\Sitecore.Project.Retail.Engine.xproj", "{7F35C803-0290-4BFD-A806-F1EDDF1E24D2}"
 EndProject
