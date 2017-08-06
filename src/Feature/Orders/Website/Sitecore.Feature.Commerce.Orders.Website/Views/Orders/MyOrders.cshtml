@@ -1,0 +1,44 @@
+﻿@*//-----------------------------------------------------------------------
+// Copyright 2016 Sitecore Corporation A/S
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+// except in compliance with the License. You may obtain a copy of the License at
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the
+// License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+// either express or implied. See the License for the specific language governing permissions
+// and limitations under the License.
+// -------------------------------------------------------------------------------------------*@
+
+@using Sitecore.Foundation.Commerce.Website.Extensions
+@model Sitecore.Feature.Commerce.Orders.Models.OrdersViewModel
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>@Html.Sitecore().Text("/Orders/My Orders/Order Number", "Order Number")</th>
+            <th>@Html.Sitecore().Text("/Orders/My Orders/Order Date", "Order Date")</th>
+            <th>@Html.Sitecore().Text("/Orders/My Orders/Order Status", "Status")</th>
+            <th width="10%">&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+                <td>
+                    <a href="@order.Url">@order.OrderId</a>
+                </td>
+                <td>
+                    <a href="@order.Url">@order.LastModified.ToDisplayedDate()</a>
+                </td>
+                <td>
+                    <a href="@order.Url">@order.StatusText</a>
+                </td>
+                <td>
+                    <a href="@order.Url"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

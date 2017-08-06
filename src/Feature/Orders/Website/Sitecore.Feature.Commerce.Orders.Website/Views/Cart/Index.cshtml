@@ -1,0 +1,147 @@
+﻿@*//-----------------------------------------------------------------------
+    // Copyright 2016 Sitecore Corporation A/S
+    // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+    // except in compliance with the License. You may obtain a copy of the License at
+    //       http://www.apache.org/licenses/LICENSE-2.0
+    //
+    // Unless required by applicable law or agreed to in writing, software distributed under the
+    // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    // either express or implied. See the License for the specific language governing permissions
+    // and limitations under the License.
+    // -------------------------------------------------------------------------------------------*@
+
+@using Sitecore.Foundation.Commerce.Website.Extensions
+
+<div id="cartContainer">
+    <table class="table">
+        <tr class="row">
+            <th class="col-md-6 hidden-xs" colspan="2">
+                @Html.Sitecore().Text("/Orders/Cart/Product Details", "Product details")
+            </th>
+            <th class="col-md-4 visible-xs">
+                @Html.Sitecore().Text("/Orders/Cart/Product Details", "Product details")
+            </th>
+            <th class="col-md-1">
+                @Html.Sitecore().Text("/Orders/Cart/Product Quantity", "Quantity")
+            </th>
+            <th class="col-md-2 hidden-xs text-right">
+                @Html.Sitecore().Text("/Orders/Cart/Product Unit price", "Unit price")
+            </th>
+            <th class="col-md-2 text-right">
+                @Html.Sitecore().Text("/Orders/Cart/Product Total", "Price")
+            </th>
+            <th class="col-md-1">
+                &nbsp;
+            </th>
+        </tr>
+        <tbody data-bind="foreach: cartLines">
+            @Html.Partial("_LineItem")
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="discountcode_cart">@Html.Sitecore().Text("/Orders/Cart/Discount Code", "Discount Code:")</label>
+                    <input type="text" class="form-control" id="discountcode_cart" placeholder="@Html.Sitecore().Text("/Orders/Cart/Discount Code Placeholder", "Enter your discount code")" data-bind="value: promoCode, valueUpdate: 'keyup'">
+                </div>
+                <div class="form-group m-l-1">
+                    <button type="button" class="cart-applydiscount btn btn-default" data-bind="enable: hasPromoCode" data-loading-text="@Html.Sitecore().Text("/Orders/Cart/Adding Discount Code", "Calculating discount...")">@Html.Sitecore().Text("/Orders/Cart/Discount Code", "Add discount code")</button>
+                </div>
+            </div>
+            <div data-bind="visible: promoCodes().length>0">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th colspan="2">@Html.Sitecore().Text("/Orders/Cart/Discount Code List", "Discount codes")</th>
+                    </tr>
+                    </thead>
+                    <tbody data-bind="foreach: promoCodes">
+                    <tr>
+                        <td>
+                            <span data-bind="text: $data"></span>
+                        </td>
+                        <td style="width: 15%;">
+                            <span class="delete">
+                                <a class="delete-promocode" data-bind="attr: {'data-ajax-promocode': $data}">
+                                    <span class="glyphicon glyphicon-remove icon-md"></span>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div data-bind="visible: adjustments().length>0">
+                <table class="table table-striped">
+                    <tr>
+                        <th>
+                            @Html.Sitecore().Text("/Orders/Cart/Discount List", "Discounts")
+                        </th>
+                        <th class="text-right">
+                            @Html.Sitecore().Text("/Orders/Cart/Discount List Amount", "Amount")
+                        </th>
+                    </tr>
+                    <tbody data-bind="foreach: adjustments">
+                        <tr>
+                            <td>
+                                <span data-bind="text: description"></span>
+                            </td>
+                            <td class="text-right">
+                                <span data-bind="text: amount"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-md-offset-3">
+            <div>
+                <h4>@Html.Sitecore().Text("/Orders/Cart/Order Total", "Order total")</h4>
+            </div>
+
+            <table class="table table-striped">
+                <tr>
+                    <td>@Html.Sitecore().Text("/Orders/Cart/Payment Total", "Subtotal:")</td>
+                    <td class="text-right" data-bind="text: subTotal" pid="subtotal">
+                    </td>
+                </tr>
+                <tr data-bind="visible: hasTaxes()">
+                    <td>@Html.Sitecore().Text("/Orders/Cart/Taxes Total", "Taxes:")</td>
+                    <td class="text-right" data-bind="text: taxTotal" pid="taxTotal"></td>
+                </tr>
+                <tr data-bind="visible: hasShipping()">
+                    <td>@Html.Sitecore().Text("/Orders/Cart/Shipping Total", "Shipping:")</td>
+                    <td class="text-right" data-bind="text: shippingTotal" pid="shippingTotal"></td>
+                </tr>
+                <tr data-bind="visible: discountAmount()>0">
+                    <td>@Html.Sitecore().Text("/Orders/Cart/Discounts Total", "Discounts:")</td>
+                    <td class="text-right" pid="discount" data-bind="text: discount"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>@Html.Sitecore().Text("/Orders/Cart/Order Total", "Order total:")</strong>
+                    </td>
+                    <td class="text-right">
+                        <strong data-bind="text: total" pid="total"></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <em>@Html.Sitecore().Text("/Orders/Cart/Savings Total", "Total savings:")</em>
+                    </td>
+                    <td class="text-right">
+                        <em pid="discountTotal" data-bind="text: totalDiscount"></em>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        initShoppingCart("cartContainer");
+    });
+</script>
