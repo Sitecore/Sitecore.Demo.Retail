@@ -89,9 +89,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Project.Commerce.R
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sitecore.Project.Commerce.Retail.Engine", "src\Project\Retail\Engine\Sitecore.Project.Commerce.Retail.Engine.xproj", "{7F35C803-0290-4BFD-A806-F1EDDF1E24D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Foundation.Commerce.Errors.Website", "src\Foundation\Errors\Website\Foundation.Errors.Website\Sitecore.Foundation.Commerce.Errors.Website.csproj", "{A82E5D5A-3935-465D-996C-12570BFDD896}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Foundation.Commerce.Website", "src\Foundation\Commerce\Website\Sitecore.Foundation.Commerce.Website\Sitecore.Foundation.Commerce.Website.csproj", "{662345AC-23EE-4125-87A6-0785795C2409}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Foundation.Commerce.Errors.Website", "src\Foundation\Errors\Website\Sitecore.Foundation.Commerce.Errors.Website\Sitecore.Foundation.Commerce.Errors.Website.csproj", "{A82E5D5A-3935-465D-996C-12570BFDD896}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -148,18 +148,18 @@ Global
 		{7F35C803-0290-4BFD-A806-F1EDDF1E24D2}.Demo-Retail|Any CPU.Build.0 = Debug|Any CPU
 		{7F35C803-0290-4BFD-A806-F1EDDF1E24D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F35C803-0290-4BFD-A806-F1EDDF1E24D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A82E5D5A-3935-465D-996C-12570BFDD896}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A82E5D5A-3935-465D-996C-12570BFDD896}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A82E5D5A-3935-465D-996C-12570BFDD896}.Demo-Retail|Any CPU.ActiveCfg = Demo-Retail|Any CPU
-		{A82E5D5A-3935-465D-996C-12570BFDD896}.Demo-Retail|Any CPU.Build.0 = Demo-Retail|Any CPU
-		{A82E5D5A-3935-465D-996C-12570BFDD896}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A82E5D5A-3935-465D-996C-12570BFDD896}.Release|Any CPU.Build.0 = Release|Any CPU
 		{662345AC-23EE-4125-87A6-0785795C2409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{662345AC-23EE-4125-87A6-0785795C2409}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{662345AC-23EE-4125-87A6-0785795C2409}.Demo-Retail|Any CPU.ActiveCfg = Demo-Retail|Any CPU
 		{662345AC-23EE-4125-87A6-0785795C2409}.Demo-Retail|Any CPU.Build.0 = Demo-Retail|Any CPU
 		{662345AC-23EE-4125-87A6-0785795C2409}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{662345AC-23EE-4125-87A6-0785795C2409}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A82E5D5A-3935-465D-996C-12570BFDD896}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82E5D5A-3935-465D-996C-12570BFDD896}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82E5D5A-3935-465D-996C-12570BFDD896}.Demo-Retail|Any CPU.ActiveCfg = Demo-Retail|Any CPU
+		{A82E5D5A-3935-465D-996C-12570BFDD896}.Demo-Retail|Any CPU.Build.0 = Demo-Retail|Any CPU
+		{A82E5D5A-3935-465D-996C-12570BFDD896}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82E5D5A-3935-465D-996C-12570BFDD896}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -194,7 +194,7 @@ Global
 		{7031F757-2830-44E3-9639-AAD2DBA69A24} = {4138BD3B-699D-45B9-940A-DA5ED169CC59}
 		{114E21CE-7B7B-436E-AA5C-BE4C1ADCC655} = {84CFB6FB-4C24-4E50-8300-50329024EC74}
 		{7F35C803-0290-4BFD-A806-F1EDDF1E24D2} = {9FD85232-8C31-433C-A6D1-8DA670AF9AA8}
-		{A82E5D5A-3935-465D-996C-12570BFDD896} = {618EA7B2-3C2B-497B-85CE-EB085E400584}
 		{662345AC-23EE-4125-87A6-0785795C2409} = {4FB59E30-C4E0-4D12-BA4F-4536550B3C89}
+		{A82E5D5A-3935-465D-996C-12570BFDD896} = {618EA7B2-3C2B-497B-85CE-EB085E400584}
 	EndGlobalSection
 EndGlobal
