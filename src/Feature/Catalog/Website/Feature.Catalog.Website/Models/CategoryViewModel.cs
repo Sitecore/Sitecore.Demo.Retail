@@ -20,9 +20,9 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Xml.Serialization;
 using Feature.Catalog.Website.Factories;
-using Foundation.Commerce.Website.Models;
 using Sitecore;
 using Sitecore.Data.Items;
+using Sitecore.Foundation.Commerce.Website.Models;
 using Sitecore.Mvc.Common;
 
 namespace Feature.Catalog.Website.Models

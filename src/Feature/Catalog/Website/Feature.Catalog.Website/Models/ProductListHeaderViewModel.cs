@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Foundation.Commerce.Website.Models;
+using Sitecore.Foundation.Commerce.Website.Models;
 using Sitecore.Mvc.Presentation;
 
 namespace Feature.Catalog.Website.Models

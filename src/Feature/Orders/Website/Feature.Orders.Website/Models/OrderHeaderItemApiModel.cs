@@ -15,10 +15,10 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using Foundation.Commerce.Website.Extensions;
-using Foundation.Commerce.Website.Managers;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Orders;
+using Sitecore.Foundation.Commerce.Website.Extensions;
+using Sitecore.Foundation.Commerce.Website.Managers;
 
 namespace Feature.Orders.Website.Models
 {

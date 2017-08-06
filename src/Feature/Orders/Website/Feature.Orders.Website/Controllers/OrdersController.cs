@@ -6,15 +6,15 @@ using System.Web.Mvc;
 using System.Web.UI;
 using Feature.Orders.Website.Models;
 using Feature.Orders.Website.Repositories;
-using Foundation.Commerce.Website;
-using Foundation.Commerce.Website.Extensions;
-using Foundation.Commerce.Website.Managers;
-using Foundation.Commerce.Website.Models;
-using Foundation.Commerce.Website.Models.InputModels;
 using Sitecore;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Website;
+using Sitecore.Foundation.Commerce.Website.Extensions;
+using Sitecore.Foundation.Commerce.Website.Managers;
+using Sitecore.Foundation.Commerce.Website.Models;
+using Sitecore.Foundation.Commerce.Website.Models.InputModels;
 using Sitecore.Foundation.SitecoreExtensions.Attributes;
 
 namespace Feature.Orders.Website.Controllers

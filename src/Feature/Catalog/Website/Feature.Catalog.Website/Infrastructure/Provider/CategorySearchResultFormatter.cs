@@ -15,7 +15,7 @@ namespace Feature.Catalog.Website.Infrastructure.Provider
 
         public IEnumerable<ID> SupportedTemplates => new[]
         {
-            global::Foundation.Commerce.Website.Templates.Commerce.Category.Id
+            global::Sitecore.Foundation.Commerce.Website.Templates.Commerce.Category.Id
         };
 
         public void FormatResult(SearchResultItem item, ISearchResult formattedResult)

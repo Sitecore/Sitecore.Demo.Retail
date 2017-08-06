@@ -18,8 +18,8 @@
 using System.Web;
 using System.Web.Routing;
 using Feature.Catalog.Website.Factories;
-using Foundation.Commerce.Website.Models;
 using Sitecore;
+using Sitecore.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Pipelines.HttpRequest;
 

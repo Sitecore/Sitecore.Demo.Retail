@@ -15,11 +15,11 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using Foundation.Commerce.Website.Extensions;
-using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Entities.GiftCards;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Website.Extensions;
+using Sitecore.Foundation.Commerce.Website.Models;
 
 namespace Feature.Catalog.Website.Models
 {

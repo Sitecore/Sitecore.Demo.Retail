@@ -16,8 +16,8 @@
 // -------------------------------------------------------------------------------------------
 
 using System.ComponentModel.DataAnnotations;
-using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Services.Customers;
+using Sitecore.Foundation.Commerce.Website.Models;
 
 namespace Feature.Customers.Website.Models
 {

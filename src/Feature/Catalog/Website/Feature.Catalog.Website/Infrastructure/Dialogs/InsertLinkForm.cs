@@ -79,7 +79,7 @@ namespace Feature.Catalog.Website.Infrastructure.Dialogs
 
         private static bool IsValidContentOrProductItem(Item selectedItem)
         {
-            return selectedItem.Paths.IsContentItem || selectedItem.IsDerived(global::Foundation.Commerce.Website.Templates.Commerce.CatalogItem.Id);
+            return selectedItem.Paths.IsContentItem || selectedItem.IsDerived(global::Sitecore.Foundation.Commerce.Website.Templates.Commerce.CatalogItem.Id);
         }
 
         private string GetMediaUrl(Item item)

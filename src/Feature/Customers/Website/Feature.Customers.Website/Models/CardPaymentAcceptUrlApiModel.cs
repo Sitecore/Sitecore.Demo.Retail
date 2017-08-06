@@ -16,9 +16,9 @@
 // -------------------------------------------------------------------------------------------
 
 using System;
-using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Services.Payments;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Website.Models;
 
 namespace Feature.Customers.Website.Models
 {

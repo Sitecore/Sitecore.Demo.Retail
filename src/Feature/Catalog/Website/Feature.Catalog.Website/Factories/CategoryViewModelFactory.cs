@@ -2,9 +2,9 @@
 using System.Linq;
 using Feature.Catalog.Website.Models;
 using Feature.Catalog.Website.Services;
-using Foundation.Commerce.Website.Managers;
-using Foundation.Commerce.Website.Models;
 using Sitecore.Data.Items;
+using Sitecore.Foundation.Commerce.Website.Managers;
+using Sitecore.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 
@@ -37,7 +37,7 @@ namespace Feature.Catalog.Website.Factories
 
         private bool IsValid(Item categoryItem)
         {
-            return categoryItem != null && categoryItem.IsDerived(global::Foundation.Commerce.Website.Templates.Commerce.Category.Id);
+            return categoryItem != null && categoryItem.IsDerived(global::Sitecore.Foundation.Commerce.Website.Templates.Commerce.Category.Id);
         }
 
         public CategoryViewModel Create(Category category, SearchOptions productSearchOptions = null)

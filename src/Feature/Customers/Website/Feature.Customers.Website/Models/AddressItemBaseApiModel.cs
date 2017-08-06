@@ -15,8 +15,8 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Services;
+using Sitecore.Foundation.Commerce.Website.Models;
 
 namespace Feature.Customers.Website.Models
 {

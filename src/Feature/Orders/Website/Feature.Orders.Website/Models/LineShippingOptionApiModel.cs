@@ -16,8 +16,8 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Entities.Shipping;
+using Sitecore.Foundation.Commerce.Website.Models;
 
 namespace Feature.Orders.Website.Models
 {

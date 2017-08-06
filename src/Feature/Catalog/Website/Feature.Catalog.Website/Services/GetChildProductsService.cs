@@ -1,6 +1,6 @@
 ﻿using System.Web;
-using Foundation.Commerce.Website.Managers;
-using Foundation.Commerce.Website.Models;
+using Sitecore.Foundation.Commerce.Website.Managers;
+using Sitecore.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.DependencyInjection;
 
 namespace Feature.Catalog.Website.Services

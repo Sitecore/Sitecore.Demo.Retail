@@ -15,9 +15,9 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using Foundation.Commerce.Website.Managers;
-using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Entities.Shipping;
+using Sitecore.Foundation.Commerce.Website.Managers;
+using Sitecore.Foundation.Commerce.Website.Models;
 
 namespace Feature.Orders.Website.Models
 {

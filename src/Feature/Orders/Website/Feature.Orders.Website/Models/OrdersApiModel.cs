@@ -16,10 +16,10 @@
 // -------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Entities.Orders;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Website.Models;
 
 namespace Feature.Orders.Website.Models
 {

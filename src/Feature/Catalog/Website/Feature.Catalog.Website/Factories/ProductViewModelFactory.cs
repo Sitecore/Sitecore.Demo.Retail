@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using Feature.Catalog.Website.Models;
 using Feature.Catalog.Website.Services;
-using Foundation.Commerce.Website;
-using Foundation.Commerce.Website.Extensions;
-using Foundation.Commerce.Website.Managers;
-using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Connect.CommerceServer.Inventory.Models;
 using Sitecore.Commerce.Entities.Inventory;
 using Sitecore.Data.Items;
+using Sitecore.Foundation.Commerce.Website;
+using Sitecore.Foundation.Commerce.Website.Extensions;
+using Sitecore.Foundation.Commerce.Website.Managers;
+using Sitecore.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.DependencyInjection;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Mvc.Presentation;
@@ -124,7 +124,7 @@ namespace Feature.Catalog.Website.Factories
         {
             if (item == null)
                 return false;
-            if (item.IsDerived(global::Foundation.Commerce.Website.Templates.Commerce.Product.Id))
+            if (item.IsDerived(global::Sitecore.Foundation.Commerce.Website.Templates.Commerce.Product.Id))
                 return true;
             return item.IsWildcardItem() && IsValid(CatalogItemContext.Current?.Item);
         }

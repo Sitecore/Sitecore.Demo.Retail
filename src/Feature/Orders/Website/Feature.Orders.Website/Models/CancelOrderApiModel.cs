@@ -15,9 +15,9 @@
 // and limitations under the License.
 // -------------------------------------------------------------------------------------------
 
-using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Services.Orders;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Website.Models;
 
 namespace Feature.Orders.Website.Models
 {

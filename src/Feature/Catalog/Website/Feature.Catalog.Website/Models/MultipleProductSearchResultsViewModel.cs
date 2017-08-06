@@ -16,8 +16,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Foundation.Commerce.Website.Models.Search;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Website.Models.Search;
 
 namespace Feature.Catalog.Website.Models
 {

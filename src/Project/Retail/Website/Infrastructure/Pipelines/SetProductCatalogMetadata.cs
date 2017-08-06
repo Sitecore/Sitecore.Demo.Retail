@@ -1,6 +1,6 @@
 ﻿using Feature.Catalog.Website.Factories;
-using Foundation.Commerce.Website.Models;
 using Sitecore.Feature.Metadata.Infrastructure.Pipelines.GetPageMetadata;
+using Sitecore.Foundation.Commerce.Website.Models;
 using Sitecore.Foundation.DependencyInjection;
 
 namespace Sitecore.Project.Commerce.Retail.Website.Infrastructure.Pipelines

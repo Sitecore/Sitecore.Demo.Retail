@@ -17,14 +17,14 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Foundation.Commerce.Website.Extensions;
-using Foundation.Commerce.Website.Models;
-using Foundation.Commerce.Website.Util;
 using Sitecore;
 using Sitecore.Commerce.Connect.CommerceServer.Orders.Models;
 using Sitecore.Commerce.Entities.Carts;
 using Sitecore.Commerce.Entities.Shipping;
 using Sitecore.Data.Items;
+using Sitecore.Foundation.Commerce.Website.Extensions;
+using Sitecore.Foundation.Commerce.Website.Models;
+using Sitecore.Foundation.Commerce.Website.Util;
 using Sitecore.Foundation.SitecoreExtensions.Extensions;
 using Sitecore.Links;
 

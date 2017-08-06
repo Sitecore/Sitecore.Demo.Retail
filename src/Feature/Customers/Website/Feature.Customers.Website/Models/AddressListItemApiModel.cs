@@ -17,9 +17,9 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Foundation.Commerce.Website.Models;
 using Sitecore.Commerce.Services;
 using Sitecore.Diagnostics;
+using Sitecore.Foundation.Commerce.Website.Models;
 using Sitecore.Mvc.Extensions;
 
 namespace Feature.Customers.Website.Models
