@@ -38,7 +38,7 @@
             }   
         ],
         [   {   "id": "commerceEngineProject",
-                "path": "C:\\Projects\\Sitecore.Demo.Retail\\src\\Foundation\\Commerce\\Engine",
+                "path": "C:\\projects\\Sitecore.Demo.Retail\\src\\Project\\Retail\\Engine",
                 "files": []   
             }   
         ],  
@@ -61,7 +61,7 @@
         "websites": [
             [   {   "id": "sitecore", 
                     "siteName": "habitat.dev.local", 
-                    "physicalPath": "C:\\Websites\\habitat.dev.local\\Website" ,
+                    "physicalPath": "C:\\inetpub\\wwwroot\\habitat.dev\\Website" ,
                     "appPoolId":  "sitecore",
                     "bindings": [
                         [   {   "protocol": "http", "ipAddress": "*", "port": "80", "hostName": "habitat.dev.local"  }   ],
@@ -71,7 +71,7 @@
             ],
             [   {   "id": "commerceServerServices", 
                     "siteName": "habitat.csservices.dev.local", 
-                    "physicalPath": "C:\\Websites\\habitat.dev.local\\CSServices" ,
+                    "physicalPath": "C:\\inetpub\\wwwroot\\sc82u1\\CSServices" ,
                     "appPoolId":  "commerceServerServices",
                     "bindings": [
                         [   {   "protocol": "http", "ipAddress": "*", "port": "1004", "hostName": "habitat.csservices.dev.local"  }   ]
@@ -80,7 +80,7 @@
             ],
             [   {   "id": "commerceEngine", 
                     "siteName": "habitat.commerceengine.dev.local", 
-                    "physicalPath": "C:\\Websites\\habitat.dev.local\\CommerceEngine" ,
+                    "physicalPath": "C:\\inetpub\\wwwroot\\habitat.dev\\CommerceEngine" ,
                     "appPoolId":  "commerceEngine",
                     "bindings": [
                         [   {   "protocol": "http", "ipAddress": "*", "port": "5000", "hostName": "habitat.commerceengine.dev.local"  }   ]
@@ -99,11 +99,11 @@
         ]    
     },
     "databases": [
-        [   {   "id": "commerceAdminDB", "server": ".", "name": "MSCS_Admin"    }   ],
-        [   {   "id": "commerceCatalogDB", "server": ".", "name": "demo.local_CommerceServer.ProductCatalog"    }   ],
-        [   {   "id": "commerceProfilesDB", "server": ".", "name": "demo.local_CommerceServer.Profiles"    }   ],
-        [   {   "id": "commerceEngineGlobalDB", "server": ".", "name": "demo.local_SitecoreCommerce.Global"    }   ],
-        [   {   "id": "commerceEngineSharedEnvironmentDB", "server": ".", "name": "demo.local_SitecoreCommerce.SharedEnvironments"    }   ]     
+        [   {   "id": "commerceAdminDB", "server": ".\\SQLEXPRESS", "name": "MSCS_Admin"    }   ],
+        [   {   "id": "commerceCatalogDB", "server": ".\\SQLEXPRESS", "name": "demo.local_CommerceServer.ProductCatalog"    }   ],
+        [   {   "id": "commerceProfilesDB", "server": ".\\SQLEXPRESS", "name": "demo.local_CommerceServer.Profiles"    }   ],
+        [   {   "id": "commerceEngineGlobalDB", "server": ".\\SQLEXPRESS", "name": "demo.local_SitecoreCommerce.Global"    }   ],
+        [   {   "id": "commerceEngineSharedEnvironmentDB", "server": ".\\SQLEXPRESS", "name": "demo.local_SitecoreCommerce.SharedEnvironments"    }   ]     
     ],
     "sitecoreCommerce": {
         "csInstallerConfig":  {   "adminDatabaseId": "commerceAdminDB", "windowsSecurity": "yes", "username": "", "password": "", "stagingServiceAccountId": "runTime" },
