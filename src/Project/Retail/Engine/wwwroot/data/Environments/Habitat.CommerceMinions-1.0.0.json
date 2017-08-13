@@ -54,7 +54,7 @@
                 }
             },
             {
-                "$type": "Feature.Payments.Engine.Policies.BraintreeClientPolicy, Feature.Payments.Engine",
+                "$type": "Sitecore.Feature.Commerce.Payments.Engine.Policies.BraintreeClientPolicy, Sitecore.Feature.Commerce.Payments.Engine",
                 "Environment": "sandbox",
                 "MerchantId": "rwd84b5k2rck8c7f",
                 "PublicKey": "747f5tsgkbk9xrk3",
