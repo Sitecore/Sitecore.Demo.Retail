@@ -1,4 +1,4 @@
-﻿namespace Feature.Commerce.Entitlements.Engine
+﻿namespace Sitecore.Feature.Commerce.Entitlements.Engine
 {
     public static class EntitlementsConstants
     {

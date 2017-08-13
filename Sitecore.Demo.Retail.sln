@@ -91,7 +91,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.Feature.Commerce.O
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sitecore.Feature.Commerce.HabitatData.Engine", "src\Feature\HabitatData\Engine\Sitecore.Feature.Commerce.HabitatData.Engine\Sitecore.Feature.Commerce.HabitatData.Engine.xproj", "{B02C5772-DF1E-48E5-B5EC-084ECF8A0B42}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Feature.Commerce.Entitlements.Engine", "src\Feature\Entitlements\Engine\Feature.Commerce.Entitlements.Engine\Feature.Commerce.Entitlements.Engine.xproj", "{47A05070-727E-444F-85A8-CF50620ACE04}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sitecore.Feature.Commerce.Entitlements.Engine", "src\Feature\Entitlements\Engine\Sitecore.Feature.Commerce.Entitlements.Engine\Sitecore.Feature.Commerce.Entitlements.Engine.xproj", "{47A05070-727E-444F-85A8-CF50620ACE04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

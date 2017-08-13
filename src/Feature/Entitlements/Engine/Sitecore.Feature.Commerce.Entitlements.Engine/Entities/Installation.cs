@@ -1,6 +1,6 @@
 ﻿using Sitecore.Commerce.Plugin.Entitlements;
 
-namespace Feature.Commerce.Entitlements.Engine.Entities
+namespace Sitecore.Feature.Commerce.Entitlements.Engine.Entities
 {
     public class Installation : Entitlement {}
 }

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Feature.Commerce.Entitlements.Engine.Entities;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Core.Commands;
 using Sitecore.Commerce.EntityViews;
 using Sitecore.Commerce.Plugin.Entitlements;
 using Sitecore.Commerce.Plugin.Orders;
+using Sitecore.Feature.Commerce.Entitlements.Engine.Entities;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 
-namespace Feature.Commerce.Entitlements.Engine.Pipelines.Blocks.EntityViews
+namespace Sitecore.Feature.Commerce.Entitlements.Engine.Pipelines.Blocks.EntityViews
 {
     [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.GetOrderDigitalProductEntitlementDetailsViewBlock)]
     public class GetOrderDigitalProductEntitlementDetailsViewBlock : PipelineBlock<EntityView, EntityView, CommercePipelineExecutionContext>
