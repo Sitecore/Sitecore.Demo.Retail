@@ -1,6 +1,6 @@
 ﻿using Sitecore.Commerce.Plugin.Entitlements;
 
-namespace Feature.Entitlements.Engine.Entities
+namespace Feature.Commerce.Entitlements.Engine.Entities
 {
     public class DigitalProduct : Entitlement {}
 }

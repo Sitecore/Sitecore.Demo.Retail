@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Feature.Commerce.Entitlements.Engine.Entities;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Core.Commands;
 using Sitecore.Commerce.EntityViews;
 using Sitecore.Commerce.Plugin.Customers;
 using Sitecore.Commerce.Plugin.Entitlements;
-using Feature.Entitlements.Engine.Entities;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 
-namespace Feature.Entitlements.Engine.Pipelines.Blocks.EntityViews
+namespace Feature.Commerce.Entitlements.Engine.Pipelines.Blocks.EntityViews
 {
-    [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.GetCustomerWarrantyEntitlementDetailsViewBlock)]
-    public class GetCustomerWarrantyEntitlementDetailsViewBlock : PipelineBlock<EntityView, EntityView, CommercePipelineExecutionContext>
+    [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.GetCustomerInstallationEntitlementDetailsViewBlock)]
+    public class GetCustomerInstallationEntitlementDetailsViewBlock : PipelineBlock<EntityView, EntityView, CommercePipelineExecutionContext>
     {
         private readonly FindEntityCommand _findEntityCommand;
 
-        public GetCustomerWarrantyEntitlementDetailsViewBlock(FindEntityCommand findEntityCommand)
+        public GetCustomerInstallationEntitlementDetailsViewBlock(FindEntityCommand findEntityCommand)
         {
             this._findEntityCommand = findEntityCommand;
         }
@@ -59,13 +59,13 @@ namespace Feature.Entitlements.Engine.Pipelines.Blocks.EntityViews
                     continue;
                 }
 
-                var warranty = entitlement as Warranty;
-                if (warranty == null)
+                var installation = entitlement as Installation;
+                if (installation == null)
                 {
                     continue;
                 }
 
-                entitlementView.Properties.Add(new ViewProperty { Name = "Details", IsReadOnly = true, RawValue = "Type=Warranty" });
+                entitlementView.Properties.Add(new ViewProperty { Name = "Details", IsReadOnly = true, RawValue = "Type=Installation" });
             }
 
             return entityView;

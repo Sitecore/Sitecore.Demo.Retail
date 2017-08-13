@@ -1,4 +1,4 @@
-﻿namespace Feature.Entitlements.Engine
+﻿namespace Feature.Commerce.Entitlements.Engine
 {
     public static class EntitlementsConstants
     {

@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Feature.Commerce.Entitlements.Engine.Entities;
+using Feature.Commerce.Entitlements.Engine.Policies;
 using Microsoft.Extensions.Logging;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.Availability;
 using Sitecore.Commerce.Plugin.Carts;
 using Sitecore.Commerce.Plugin.Entitlements;
 using Sitecore.Commerce.Plugin.ManagedLists;
-using Feature.Entitlements.Engine.Entities;
-using Feature.Entitlements.Engine.Policies;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 
-namespace Feature.Entitlements.Engine.Pipelines.Blocks
+namespace Feature.Commerce.Entitlements.Engine.Pipelines.Blocks
 {
     [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.ProvisionInstallationEntitlementsBlock)]
     public class ProvisionInstallationEntitlementsBlock : PipelineBlock<IEnumerable<Entitlement>, IEnumerable<Entitlement>, CommercePipelineExecutionContext>

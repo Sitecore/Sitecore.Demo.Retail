@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Feature.Commerce.Entitlements.Engine.Entities;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Core.Commands;
 using Sitecore.Commerce.EntityViews;
 using Sitecore.Commerce.Plugin.Entitlements;
 using Sitecore.Commerce.Plugin.Orders;
-using Feature.Entitlements.Engine.Entities;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 
-namespace Feature.Entitlements.Engine.Pipelines.Blocks.EntityViews
+namespace Feature.Commerce.Entitlements.Engine.Pipelines.Blocks.EntityViews
 {
-
-    [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.GetOrderInstallationEntitlementDetailsViewBlock)]
-    public class GetOrderInstallationEntitlementDetailsViewBlock : PipelineBlock<EntityView, EntityView, CommercePipelineExecutionContext>
+    [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.GetOrderDigitalProductEntitlementDetailsViewBlock)]
+    public class GetOrderDigitalProductEntitlementDetailsViewBlock : PipelineBlock<EntityView, EntityView, CommercePipelineExecutionContext>
     {
         private readonly FindEntityCommand _findEntityCommand;
 
-        public GetOrderInstallationEntitlementDetailsViewBlock(FindEntityCommand findEntityCommand)
+        public GetOrderDigitalProductEntitlementDetailsViewBlock(FindEntityCommand findEntityCommand)
         {
             this._findEntityCommand = findEntityCommand;
         }
@@ -60,13 +59,13 @@ namespace Feature.Entitlements.Engine.Pipelines.Blocks.EntityViews
                     continue;
                 }
 
-                var installation = entitlement as Installation;
-                if (installation == null)
+                var digitalProduct = entitlement as DigitalProduct;
+                if (digitalProduct == null)
                 {
                     continue;
                 }
 
-                entitlementView.Properties.Add(new ViewProperty { Name = "Details", IsReadOnly = true, RawValue = "Type=Installation" });
+                entitlementView.Properties.Add(new ViewProperty { Name = "Details", IsReadOnly = true, RawValue = "Type=DigitalProduct" });
             }
 
             return entityView;

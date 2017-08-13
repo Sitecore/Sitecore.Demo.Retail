@@ -28,7 +28,7 @@
         "Sitecore.Commerce.Plugin.Orders.DelayedAvailability": "1.0.2301",
         "Sitecore.Commerce.Plugin.Returns": "1.0.2301",
         "Sitecore.Commerce.Plugin.SQL": "1.0.2301",
-        "Feature.Entitlements.Engine": "1.0.0-*",
+        "Feature.Commerce.Entitlements.Engine": "1.0.0-*",
         "Sitecore.Feature.Commerce.Payments.Engine": "1.0.0-*",
         "Sitecore.Feature.Commerce.HabitatData.Engine": "1.0.0-*"
     },

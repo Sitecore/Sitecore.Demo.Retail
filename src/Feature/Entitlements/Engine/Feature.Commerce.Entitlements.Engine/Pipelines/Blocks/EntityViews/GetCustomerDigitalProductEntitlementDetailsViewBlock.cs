@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Feature.Commerce.Entitlements.Engine.Entities;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Core.Commands;
 using Sitecore.Commerce.EntityViews;
 using Sitecore.Commerce.Plugin.Customers;
 using Sitecore.Commerce.Plugin.Entitlements;
-using Feature.Entitlements.Engine.Entities;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 
-namespace Feature.Entitlements.Engine.Pipelines.Blocks.EntityViews
+namespace Feature.Commerce.Entitlements.Engine.Pipelines.Blocks.EntityViews
 {
     [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.GetCustomerDigitalProductEntitlementDetailsViewBlock)]
     public class GetCustomerDigitalProductEntitlementDetailsViewBlock : PipelineBlock<EntityView, EntityView, CommercePipelineExecutionContext>

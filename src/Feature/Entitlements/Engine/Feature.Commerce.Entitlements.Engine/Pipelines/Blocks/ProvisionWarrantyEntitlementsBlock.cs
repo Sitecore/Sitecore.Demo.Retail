@@ -2,25 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Feature.Commerce.Entitlements.Engine.Entities;
+using Feature.Commerce.Entitlements.Engine.Policies;
 using Microsoft.Extensions.Logging;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.Availability;
 using Sitecore.Commerce.Plugin.Carts;
 using Sitecore.Commerce.Plugin.Entitlements;
 using Sitecore.Commerce.Plugin.ManagedLists;
-using Feature.Entitlements.Engine.Entities;
-using Feature.Entitlements.Engine.Policies;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 
-namespace Feature.Entitlements.Engine.Pipelines.Blocks
+namespace Feature.Commerce.Entitlements.Engine.Pipelines.Blocks
 {
-    [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.ProvisionDigitalProductEntitlementsBlock)]
-    public class ProvisionDigitalProductEntitlementsBlock : PipelineBlock<IEnumerable<Entitlement>, IEnumerable<Entitlement>, CommercePipelineExecutionContext>
+
+    [PipelineDisplayName(EntitlementsConstants.Pipelines.Blocks.ProvisionWarrantyEntitlementsBlock)]
+    public class ProvisionWarrantyEntitlementsBlock : PipelineBlock<IEnumerable<Entitlement>, IEnumerable<Entitlement>, CommercePipelineExecutionContext>
     {
         private readonly IPersistEntityPipeline _persistEntityPipeline;
 
-        public ProvisionDigitalProductEntitlementsBlock(IPersistEntityPipeline persistEntityPipeline)
+        public ProvisionWarrantyEntitlementsBlock(
+            IPersistEntityPipeline persistEntityPipeline)
         {
             this._persistEntityPipeline = persistEntityPipeline;
         }
@@ -43,8 +45,8 @@ namespace Feature.Entitlements.Engine.Pipelines.Blocks
                 return entitlements.AsEnumerable();
             }
 
-            var digitalTags = context.GetPolicy<KnownEntitlementsTags>().DigitalProductTags;
-            var lineWithDigitalGoods = order.Lines.Where(line => line != null 
+            var digitalTags = context.GetPolicy<KnownEntitlementsTags>().WarrantyTags;
+            var lineWithDigitalGoods = order.Lines.Where(line => line != null
                 && line.GetComponent<CartProductComponent>().HasPolicy<AvailabilityAlwaysPolicy>()
                 && line.GetComponent<CartProductComponent>().Tags.Select(t => t.Name).Intersect(digitalTags, StringComparer.OrdinalIgnoreCase).Any()).ToList();
             if (!lineWithDigitalGoods.Any())
@@ -59,20 +61,20 @@ namespace Feature.Entitlements.Engine.Pipelines.Blocks
                 {
                     try
                     {
-                        var entitlement = new DigitalProduct();
+                        var entitlement = new Warranty();
                         var id = Guid.NewGuid().ToString("N");
-                        entitlement.Id = $"{CommerceEntity.IdPrefix<DigitalProduct>()}{id}";
+                        entitlement.Id = $"{CommerceEntity.IdPrefix<Warranty>()}{id}";
                         entitlement.FriendlyId = id;
                         entitlement.SetComponent(
                             new ListMembershipsComponent
-                                {
-                                    Memberships =
+                            {
+                                Memberships =
                                         new List<string>
                                             {
-                                                $"{CommerceEntity.ListName<DigitalProduct>()}",
+                                                $"{CommerceEntity.ListName<Warranty>()}",
                                                 $"{CommerceEntity.ListName<Entitlement>()}"
                                             }
-                                });
+                            });
                         entitlement.Order = new EntityReference(order.Id, order.Name);
                         if (customer != null)
                         {
@@ -82,13 +84,13 @@ namespace Feature.Entitlements.Engine.Pipelines.Blocks
                         await this._persistEntityPipeline.Run(new PersistEntityArgument(entitlement), context);
                         entitlements.Add(entitlement);
                         context.Logger.LogInformation(
-                            $"DigitalProduct Entitlement Created - Order={order.Id}, LineId={line.Id}, EntitlementId={entitlement.Id}");
+                            $"Warranty Entitlement Created - Order={order.Id}, LineId={line.Id}, EntitlementId={entitlement.Id}");
                     }
                     catch
                     {
                         hasErrors = true;
                         context.Logger.LogError(
-                            $"DigitalProduct Entitlement NOT Created - Order={order.Id}, LineId={line.Id}");
+                            $"Warranty Entitlement NOT Created - Order={order.Id}, LineId={line.Id}");
                         break;
                     }
                 }
