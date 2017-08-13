@@ -1,0 +1,64 @@
+﻿@*//-----------------------------------------------------------------------
+// Copyright 2016 Sitecore Corporation A/S
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+// except in compliance with the License. You may obtain a copy of the License at
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the
+// License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+// either express or implied. See the License for the specific language governing permissions
+// and limitations under the License.
+// -------------------------------------------------------------------------------------------*@
+
+@using Sitecore.Foundation.Commerce.Website.Extensions
+
+<div class="panel panel-default" id="addressesSection">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+            @Html.Sitecore().Text("/Customers/Address Book/Title", "Address book")
+        </h2>
+    </div>
+    <div class="panel-body" data-bind="visible: isEmpty" >
+        <div data-bind="visible: showLoader" class="text-center">
+            <span class="fa fa-spinner fa-pulse fa-3x"></span>
+        </div>
+        <div id="addressesEmpty" data-bind="visible: isEmpty" style="display: none;">
+            @Html.Sitecore().Text("/Customers/Address Book/No addresses", "Your address book is empty")
+        </div>
+    </div>
+    <table class="table table-hover" id="addresses" data-bind="visible: isNotEmpty" style="display: none;">
+        <thead>
+            <tr>
+                <th>
+                    @Html.Sitecore().Text("/Customers/Address Book/Address", "Address")
+                </th>
+                <th class="pull-right">
+                    @Html.Sitecore().Text("/Customers/Address Book/Primary Address", "Primary")
+                </th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: addresses()">
+            <tr data-bind="css: { 'odd': $index() % 2 == 0 }">
+                <td>
+                    <a href="#" data-bind="attr: { href: detailsUrl }">
+                        <span data-bind="text: fullAddress"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="#" data-bind="attr: { href: detailsUrl }">
+                        <span class="pull-right" data-bind="if: isPrimary">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        initAddressList("addressesSection");
+    });
+</script>

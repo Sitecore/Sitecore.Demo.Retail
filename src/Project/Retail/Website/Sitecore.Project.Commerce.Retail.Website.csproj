@@ -175,9 +175,21 @@
       <Project>{7031f757-2830-44e3-9639-aad2dba69a24}</Project>
       <Name>Feature.Catalog.Website</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Feature\Customers\Website\Sitecore.Feature.Commerce.Customers.Website\Sitecore.Feature.Commerce.Customers.Website.csproj">
+      <Project>{ed23dc0f-4fff-48e1-b9c8-e3ad73329661}</Project>
+      <Name>Sitecore.Feature.Commerce.Customers.Website</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Feature\Orders\Website\Sitecore.Feature.Commerce.Orders.Website\Sitecore.Feature.Commerce.Orders.Website.csproj">
+      <Project>{9cc4bf07-1259-43ff-b205-afd1e59e5834}</Project>
+      <Name>Sitecore.Feature.Commerce.Orders.Website</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Foundation\Commerce\Website\Sitecore.Foundation.Commerce.Website\Sitecore.Foundation.Commerce.Website.csproj">
       <Project>{662345ac-23ee-4125-87a6-0785795c2409}</Project>
       <Name>Sitecore.Foundation.Commerce.Website</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Foundation\Errors\Website\Sitecore.Foundation.Commerce.Errors.Website\Sitecore.Foundation.Commerce.Errors.Website.csproj">
+      <Project>{a82e5d5a-3935-465d-996c-12570bfdd896}</Project>
+      <Name>Sitecore.Foundation.Commerce.Errors.Website</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
