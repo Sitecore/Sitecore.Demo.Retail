@@ -61,7 +61,7 @@
         "websites": [
             [   {   "id": "sitecore", 
                     "siteName": "habitat.dev.local", 
-                    "physicalPath": "C:\\websites\\habitat.dev\\Website" ,
+                    "physicalPath": "C:\\websites\\habitat.dev.local\\Website" ,
                     "appPoolId":  "sitecore",
                     "bindings": [
                         [   {   "protocol": "http", "ipAddress": "*", "port": "80", "hostName": "habitat.dev.local"  }   ],
@@ -71,7 +71,7 @@
             ],
             [   {   "id": "commerceServerServices", 
                     "siteName": "habitat.csservices.dev.local", 
-                    "physicalPath": "C:\\websites\\sc82u1\\CSServices" ,
+                    "physicalPath": "C:\\websites\\habitat.dev.local\\CSServices" ,
                     "appPoolId":  "commerceServerServices",
                     "bindings": [
                         [   {   "protocol": "http", "ipAddress": "*", "port": "1004", "hostName": "habitat.csservices.dev.local"  }   ]
@@ -80,7 +80,7 @@
             ],
             [   {   "id": "commerceEngine", 
                     "siteName": "habitat.commerceengine.dev.local", 
-                    "physicalPath": "C:\\websites\\habitat.dev\\CommerceEngine" ,
+                    "physicalPath": "C:\\websites\\habitat.dev.local\\CommerceEngine" ,
                     "appPoolId":  "commerceEngine",
                     "bindings": [
                         [   {   "protocol": "http", "ipAddress": "*", "port": "5000", "hostName": "habitat.commerceengine.dev.local"  }   ]
