@@ -39,7 +39,7 @@
         "$values": [
             {
                 "$type": "Sitecore.Commerce.Plugin.Customers.Cs.ProfilesSqlPolicy, Sitecore.Commerce.Plugin.Customers.Cs",
-                "Server": ".\\SQLEXPRESS",
+                "Server": ".",
                 "Database": "demo.local_CommerceServer.Profiles",
                 "TrustedConnection": true,
                 "UserName": "",
@@ -140,7 +140,7 @@
                 "TrustedConnection": true,
                 "UserName": "",
                 "Password": "",
-                "Server": ".\\SQLEXPRESS",
+                "Server": ".",
                 "Database": "demo.local_SitecoreCommerce.SharedEnvironments",
                 "AdditionalParameters": "",
                 "ConnectTimeout": 120000,
@@ -158,7 +158,7 @@
                 "TrustedConnection": true,
                 "UserName": "",
                 "Password": "",
-                "Server": ".\\SQLEXPRESS",
+                "Server": ".",
                 "Database": "demo.local_CommerceServer.ProductCatalog",
                 "AdditionalParameters": "",
                 "ConnectTimeout": 120000,
