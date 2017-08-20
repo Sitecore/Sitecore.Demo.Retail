@@ -28,10 +28,6 @@ SharedFields:
       <d
         id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
         <r
-          uid="{23B39254-BC32-4884-9732-CAA89A3F7379}">
-          <p:d />
-        </r>
-        <r
           uid="{27AC3BD4-306D-41C3-BACB-4344B4A2C086}"
           s:id="{DEED2B81-7F44-42CD-A48A-08D2BE084D11}" />
       </d>

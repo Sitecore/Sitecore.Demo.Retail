@@ -1,6 +1,6 @@
 ﻿---
 ID: "11680cdd-d6cf-4f1a-a770-b9815a6f7cec"
-Parent: "cbfeb23c-d04f-4e31-8ab9-a96191aece8e"
+Parent: "CBFEB23C-D04F-4E31-8AB9-A96191AECE8E"
 Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
 Path: /sitecore/layout/Renderings/Foundation/Commerce/Errors/ErrorsSummary
 DB: master
@@ -8,6 +8,12 @@ SharedFields:
 - ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
   Hint: Controller Action
   Value: ErrorsSummary
+- ID: "e514a1eb-ddba-44f7-8528-82ca2280f778"
+  Hint: JavaScript assets
+  Value: |
+    /Scripts/Errors/errorLineDetailViewModel.js
+    /Scripts/Errors/errorSummaryViewModel.js
+    /Scripts/Errors/errorsummary.js
 - ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
   Hint: Controller
   Value: Errors
