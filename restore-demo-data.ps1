@@ -24,7 +24,7 @@ $siteName = $sitecoreWebsiteFolderSetting.siteName
 $sitecoreApplicationPoolSetting = ($settings.iis.appPools)
 
 
-$backupRootPath = "C:\SitecoreDemoDataBackup"
+$backupRootPath = "C:\websites\habitat.dev.local\databases\backup"
 $mongoBackupDataPath = "$backupRootPath\MongoData"
 $sqlDbPath = "c:\websites\$siteName\databases"
 $sqlDbBackupPath = "$backupRootPath\SQL"
