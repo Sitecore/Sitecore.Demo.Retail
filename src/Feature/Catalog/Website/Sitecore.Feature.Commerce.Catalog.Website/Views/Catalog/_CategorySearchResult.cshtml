@@ -1,0 +1,57 @@
+﻿@*//-----------------------------------------------------------------------
+    // Copyright 2016 Sitecore Corporation A/S
+    // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+    // except in compliance with the License. You may obtain a copy of the License at
+    //       http://www.apache.org/licenses/LICENSE-2.0
+    //
+    // Unless required by applicable law or agreed to in writing, software distributed under the
+    // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    // either express or implied. See the License for the specific language governing permissions
+    // and limitations under the License.
+    // -------------------------------------------------------------------------------------------*@
+@using Sitecore.Feature.Commerce.Catalog.Website.Factories
+@using Sitecore.Foundation.Commerce.Website.Extensions
+@model Sitecore.Foundation.Indexing.Models.ISearchResult
+@{
+    if (Model == null)
+    {
+        return;
+    }
+
+    var categoryViewFactory = DependencyResolver.Current.GetService<CategoryViewModelFactory>();
+    var category = categoryViewFactory.Create(Model.Item);
+
+    if (category == null)
+    {
+        return;
+    }
+}
+
+<div class="media">
+    <div class="media-body ">
+        <div>
+            <span class="label label-info">@Model.ContentType</span>
+        </div>
+        <h2>
+            <a href="@category.GetLink()">
+                @category.Title
+            </a>
+        </h2>
+        <p>
+            @category.Description
+        </p>
+        <div>
+            <a href="@category.GetLink()" class="btn btn-xs btn-default" title="@category.Title">
+                @Html.Sitecore().Text("/Catalog/Search Results/Category Link", "See all products") <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+    </div>
+    <div class="media-right">
+        @if (category.GetThumbnailUrl(150) != null)
+        {
+            <a href="@category.GetLink()">
+                <img src="@(category.GetThumbnailUrl(150))" alt="@Model.Title" title="@Model.Title"/>
+            </a>
+        }
+    </div>
+</div>

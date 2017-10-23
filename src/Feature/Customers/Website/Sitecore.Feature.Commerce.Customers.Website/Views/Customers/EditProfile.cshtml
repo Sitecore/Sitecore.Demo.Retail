@@ -1,0 +1,103 @@
+﻿@*//-----------------------------------------------------------------------
+// Copyright 2016 Sitecore Corporation A/S
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+// except in compliance with the License. You may obtain a copy of the License at
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the
+// License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+// either express or implied. See the License for the specific language governing permissions
+// and limitations under the License.
+// -------------------------------------------------------------------------------------------*@
+
+@using Sitecore.Foundation.Commerce.Website.Extensions
+@model Sitecore.Foundation.Commerce.Website.Models.ProfileModel
+
+@using (Ajax.BeginForm("UpdateProfile", "Customers", null, new AjaxOptions {OnBegin = "SetSavingProfileButton", OnSuccess = "UpdateProfileSuccess", OnFailure = "UpdateProfileFailure", HttpMethod = "Post"}, new {id = "UpdateProfileForm"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div id="" class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="FirstName">
+                        @Html.Sitecore().Text("/Customers/Edit Profile/First Name", "First name:") <span class="required">*</span>
+                    </label>
+
+                    @Html.TextBoxFor(m => m.FirstName, new
+                    {
+                        placeholder = Html.Sitecore().Text("/Customers/Edit Profile/Enter First Name", "Enter your first name"),
+                        data_val_required = Html.Sitecore().Text("/Customers/Edit Profile/First Name Required", "Please enter your first name"),
+                        @class = "form-control"
+                    })
+
+                    @Html.ValidationMessageFor(m => m.FirstName)
+
+                </div>
+                <div class="form-group">
+                    <label for="LastName">
+                        @Html.Sitecore().Text("/Customers/Edit Profile/Last Name", "Last name:") <span class="required">*</span>
+                    </label>
+                    @Html.TextBoxFor(m => m.LastName, new
+                    {
+                        placeholder = Html.Sitecore().Text("/Customers/Edit Profile/Enter Last Name", "Enter your last name"),
+                        data_val_required = Html.Sitecore().Text("/Customers/Edit Profile/Last Name Required", "Please enter your last name"),
+                        @class = "form-control"
+                    })
+
+                    @Html.ValidationMessageFor(m => m.LastName)
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Email">
+                        @Html.Sitecore().Text("/Customers/Edit Profile/Email", "E-mail:") <span class="required">*</span>
+                    </label>
+                    @Html.TextBoxFor(m => m.Email, new
+                    {
+                        placeholder = Html.Sitecore().Text("/Customers/Edit Profile/Enter Email", "Enter your email"),
+                        data_val_required = Html.Sitecore().Text("/Customers/Edit Profile/Email required", "Please enter your email"),
+                        @class = "form-control"
+                    })
+
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+                <div class="form-group">
+                    <label for="EmailRepeat">
+                        @Html.Sitecore().Text("/Customers/Edit Profile/Repeat Email", "Repeat E-mail:") <span class="required">*</span>
+                    </label>
+                    @Html.TextBoxFor(m => m.EmailRepeat, new
+                    {
+                        placeholder = Html.Sitecore().Text("/Customers/Edit Profile/Enter Email Again", "Enter your email again"),
+                        data_val_required = Html.Sitecore().Text("/Customers/Edit Profile/Repeat Email required", "Please enter your email again"),
+                        @class = "form-control"
+                    })
+
+                    @Html.ValidationMessageFor(m => m.EmailRepeat)
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="TelephoneNumber">
+                        @Html.Sitecore().Text("/Customers/Edit Profile/Phone", "Phone number:")<span class="required">*</span>
+                    </label>
+                    @Html.TextBoxFor(m => m.TelephoneNumber, new
+                    {
+                        placeholder = Html.Sitecore().Text("/Customers/Edit Profile/Enter Phone", "Enter your phone number"),
+                        data_val_required = Html.Sitecore().Text("/Customers/Edit Profile/Phone required", "Please enter your phone number"),
+                        @class = "form-control"
+                    })
+
+                    @Html.ValidationMessageFor(m => m.TelephoneNumber)
+                </div>
+            </div>
+            <div class="col-md-12 m-t-1">
+                <input type="submit" data-loading-text="@Html.Sitecore().Text("/Customers/Edit Profile/Saving", "Saving...")" value="@Html.Sitecore().Text("/Customers/Edit Profile/Save changes", "Save changes")" class="btn btn-primary" id="saveProfileChangesButton"/>
+                <a type="button" href="@("/accountmanagement")" class="btn btn-default">@Html.Sitecore().Text("/Customers/Edit Profile/Cancel", "Cancel")</a>
+            </div>
+        </div>
+    </div>
+}

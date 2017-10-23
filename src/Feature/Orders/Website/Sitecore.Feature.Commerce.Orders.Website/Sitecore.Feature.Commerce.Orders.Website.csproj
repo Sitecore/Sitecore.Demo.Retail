@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9CC4BF07-1259-43FF-B205-AFD1E59E5834}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sitecore.Feature.Commerce.Orders.Website</RootNamespace>
+    <AssemblyName>Sitecore.Feature.Commerce.Orders.Website</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.DataAccess, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.MongoDB, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Analytics.MongoDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Commerce, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Commerce.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Commerce.Connect.CommerceServer">
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Commerce.Connect.CommerceServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Commerce.Engine.Connect, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Commerce.Engine.Connect.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Foundation.DependencyInjection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Foundation.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Foundation.Dictionary">
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Foundation.Dictionary.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Foundation.SitecoreExtensions">
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Foundation.SitecoreExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Kernel">
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Mvc">
+      <HintPath>..\..\..\..\..\lib\Sitecore\Sitecore.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\..\..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\..\..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Config\Include\Feature\Feature.Orders.Website.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Orders.Website.Serialization.config" />
+    <Content Include="App_Config\Include\Feature\Feature.Orders.Website.Processing.config" />
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="Scripts\jquery\jquery-2.0.3.js" />
+    <Content Include="Scripts\jquery\jquery-ui-1.10.4.js" />
+    <Content Include="Scripts\jquery\jquery.blockUI.js" />
+    <Content Include="Scripts\jquery\jquery.cookie.js" />
+    <Content Include="Scripts\jquery\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery\jquery.validate.js" />
+    <Content Include="Scripts\jquery\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Orders\adjustmentViewModel.js" />
+    <Content Include="Scripts\Orders\cart.js" />
+    <Content Include="Scripts\Orders\checkout.js" />
+    <Content Include="Scripts\Orders\checkoutDataViewModel.js" />
+    <Content Include="Scripts\Orders\countryRegionViewModel.js" />
+    <Content Include="Scripts\Orders\creditCardPaymentViewModel.js" />
+    <Content Include="Scripts\Orders\debug-knockout.js" />
+    <Content Include="Scripts\Orders\deliveryAddressViewModel.js" />
+    <Content Include="Scripts\Orders\giftCardPaymentViewModel.js" />
+    <Content Include="Scripts\Orders\lineItemDataViewModel.js" />
+    <Content Include="Scripts\Orders\lineItemListViewModel.js" />
+    <Content Include="Scripts\Orders\main.js" />
+    <Content Include="Scripts\Orders\minicart.js" />
+    <Content Include="Scripts\Orders\miniCartItemListViewModel.js" />
+    <Content Include="Scripts\Orders\miniCartItemViewModel.js" />
+    <Content Include="Scripts\Orders\miniCartViewModel.js" />
+    <Content Include="Scripts\Orders\orderHeaderModel.js" />
+    <Content Include="Scripts\Orders\orderHeaderViewModel.js" />
+    <Content Include="Scripts\Orders\orders.js" />
+    <Content Include="Scripts\Orders\storeViewModel.js" />
+    <Content Include="Scripts\ViewModels\addresses_VM.js" />
+    <Content Include="Scripts\ViewModels\billing_VM.js" />
+    <Content Include="Scripts\ViewModels\CartKnockoutModels.js" />
+    <Content Include="Scripts\ViewModels\checkoutData_VM.js" />
+    <Content Include="Scripts\ViewModels\confirm_VM.js" />
+    <Content Include="Scripts\ViewModels\delivery_VM.js" />
+    <Content Include="Scripts\ViewModels\errorsummary_VM.js" />
+    <Content Include="Scripts\ViewModels\loyaltycards_VM.js" />
+    <Content Include="Scripts\ViewModels\minicart_VM.js" />
+    <Content Include="Scripts\ViewModels\orders_VM.js" />
+    <Content Include="Scripts\ViewModels\StepIndicator.js" />
+    <Content Include="Scripts\ViewModels\wishlist_VM.js" />
+    <Content Include="Views\Cart\_LineItem.cshtml" />
+    <Content Include="Views\Cart\CheckoutButtons.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\MiniCart.cshtml" />
+    <Content Include="Views\Checkout\_Billing.cshtml" />
+    <Content Include="Views\Checkout\_ByItem_SendByEmail.cshtml" />
+    <Content Include="Views\Checkout\_ByItem_ShipAll.cshtml" />
+    <Content Include="Views\Checkout\_CheckoutFooter.cshtml" />
+    <Content Include="Views\Checkout\_Confirm.cshtml" />
+    <Content Include="Views\Checkout\_Delivery.cshtml" />
+    <Content Include="Views\Checkout\_PickDeliveryByItem.cshtml" />
+    <Content Include="Views\Checkout\_SendByEmail.cshtml" />
+    <Content Include="Views\Checkout\_ShipAll.cshtml" />
+    <Content Include="Views\Checkout\_StartCheckout.cshtml" />
+    <Content Include="Views\Checkout\_StepIndicator.cshtml" />
+    <Content Include="Views\Checkout\OrderConfirmation.cshtml" />
+    <Content Include="Views\Checkout\StartCheckout.cshtml" />
+    <Content Include="Views\Checkout\Checkout.cshtml" />
+    <Content Include="Views\Orders\MyOrder.cshtml" />
+    <Content Include="Views\Orders\MyOrders.cshtml" />
+    <Content Include="Views\Orders\RecentOrders.cshtml" />
+    <None Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Infrastructure\ServicesConfigurator.cs" />
+    <Compile Include="Models\OrderLineViewModel.cs" />
+    <Compile Include="Models\PaymentInfoViewModel.cs" />
+    <Compile Include="Models\PaymentType.cs" />
+    <Compile Include="Repositories\OrderViewModelRepository.cs" />
+    <Compile Include="Models\OrdersViewModel.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
+    <Compile Include="Repositories\OrdersViewModelRepository.cs" />
+    <Compile Include="Infrastructure\Pipelines\InitializeRoutes.cs" />
+    <Compile Include="Infrastructure\Pipelines\RegisterDataModelExtensions.cs" />
+    <Compile Include="Models\AddressItemApiModel.cs" />
+    <Compile Include="Models\AddressListItemApiModel.cs" />
+    <Compile Include="Models\AvailableRegionsApiModel.cs" />
+    <Compile Include="Models\CancelOrderApiModel.cs" />
+    <Compile Include="Models\CartAdjustmentApiModel.cs" />
+    <Compile Include="Models\CartLineApiModel.cs" />
+    <Compile Include="Models\CartApiModel.cs" />
+    <Compile Include="Models\CheckoutApiModel.cs" />
+    <Compile Include="Models\CheckoutViewModel.cs" />
+    <Compile Include="Models\LineShippingOptionApiModel.cs" />
+    <Compile Include="Models\MiniCartApiModel.cs" />
+    <Compile Include="Models\OrderHeaderItemApiModel.cs" />
+    <Compile Include="Models\OrdersApiModel.cs" />
+    <Compile Include="Models\ShippingMethodApiModel.cs" />
+    <Compile Include="Models\ShippingMethodPerItemApiModel.cs" />
+    <Compile Include="Models\ShippingMethodsApiModel.cs" />
+    <Compile Include="Models\ShippingOptionApiModel.cs" />
+    <Compile Include="Models\SubmitOrderApiModel.cs" />
+    <Compile Include="Models\CommerceCartLineWithImages.cs" />
+    <Compile Include="Models\CartViewModel.cs" />
+    <Compile Include="Models\OrderConfirmationViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\web.config" />
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Foundation\Commerce\Website\Sitecore.Foundation.Commerce.Website\Sitecore.Foundation.Commerce.Website.csproj">
+      <Project>{662345ac-23ee-4125-87a6-0785795c2409}</Project>
+      <Name>Sitecore.Foundation.Commerce.Website</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Demo-Retail|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63497</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:61278/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

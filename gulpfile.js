@@ -23,10 +23,11 @@ gulp.task("default", function (callback) {
   return runSequence(
     "01-Copy-Sitecore-Lib",
     "02-Nuget-Restore",
-    "03-Publish-All-Projects",
+    "03-Publish-Website",
     "04-Apply-Xml-Transform",
-    "05-Sync-Unicorn",
-    "06-Deploy-Transforms",
+    "05-Publish-Engine",
+    "06-Sync-Unicorn",
+    "07-Deploy-Transforms",
 	callback);
 });
 
@@ -35,9 +36,10 @@ gulp.task("deploy", function (callback) {
   return runSequence(
     "01-Copy-Sitecore-Lib",
     "02-Nuget-Restore",
-    "03-Publish-All-Projects",
+    "03-Publish-Website",
     "04-Apply-Xml-Transform",
-    "06-Deploy-Transforms",
+    "05-Publish-Engine",
+    "07-Deploy-Transforms",
 	callback);
 });
 
@@ -62,7 +64,7 @@ gulp.task("02-Nuget-Restore", function (callback) {
   return gulp.src(solution).pipe(nugetRestore());
 });
 
-gulp.task("03-Publish-All-Projects", function (callback) {
+gulp.task("03-Publish-Website", function (callback) {
   return runSequence(
     "Build-Solution",
     "Publish-Storefront-Projects",
@@ -76,7 +78,7 @@ gulp.task("04-Apply-Xml-Transform", function () {
   var layerPathFilters = ["./src/Foundation/**/*.transform", "./src/Feature/**/*.transform", "./src/Project/**/*.transform", "!./src/**/obj/**/*.transform", "!./src/**/bin/**/*.transform"];
   return gulp.src(layerPathFilters)
     .pipe(foreach(function (stream, file) {
-      var fileToTransform = file.path.replace(/.+code\\(.+)\.transform/, "$1");
+      var fileToTransform = file.path.replace(/.+Website\\(.+)\.transform/, "$1");
       fileToTransform = fileToTransform.replace(/.+legacy\\(.+)\.transform/, "$1");
       util.log("Applying configuration transform: " + file.path);
       return gulp.src("./scripts/applytransform.targets")
@@ -99,7 +101,15 @@ gulp.task("04-Apply-Xml-Transform", function () {
     }));
 });
 
-gulp.task("05-Sync-Unicorn", function (callback) {
+gulp.task("05-Publish-Engine", function (callback) {
+    return exec('dotnet publish .\\src\\Project\\Retail\\Engine -o ' + config.commerceEngineRoot, function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        callback(err);
+    });
+});
+
+gulp.task("06-Sync-Unicorn", function (callback) {
   var options = {};
   options.siteHostName = habitat.getSiteUrl();
   options.authenticationConfigFile = config.websiteRoot + "/App_config/Include/Unicorn/Unicorn.UI.config";
@@ -108,8 +118,8 @@ gulp.task("05-Sync-Unicorn", function (callback) {
 });
 
 
-gulp.task("06-Deploy-Transforms", function () {
-  return gulp.src(["./src/**/code/**/*.transform", "./src/**/legacy/**/*.transform"]).pipe(gulp.dest(config.websiteRoot + "/temp/transforms"));
+gulp.task("07-Deploy-Transforms", function () {
+  return gulp.src(["./src/**/Website/**/*.transform", "./src/**/legacy/**/*.transform"]).pipe(gulp.dest(config.websiteRoot + "/temp/transforms"));
 });
 
 /*****************************
@@ -120,7 +130,7 @@ gulp.task("Copy-Local-Assemblies", function () {
   var files = config.sitecoreLibraries + "/**/*";
 
   var root = "./src";
-  var projects = [root + "/**/code/bin", root + "/**/legacy/bin"];
+  var projects = [root + "/**/Website/bin", root + "/**/legacy/bin"];
   return gulp.src(projects, { base: root })
     .pipe(foreach(function (stream, file) {
       console.log("copying to " + file.path);
@@ -138,7 +148,7 @@ var publishProjects = function (location, dest) {
   var targets = ["Build"];
 
   console.log("publish to " + dest + " folder");
-  return gulp.src([location + "/**/code/*.csproj", location + "/**/legacy/*.csproj", location + "/*.csproj"])
+  return gulp.src([location + "/**/Website/**/*.csproj", location + "/**/legacy/*.csproj", location + "/**/*.csproj"])
     .pipe(foreach(function (stream, file) {
       return stream
         .pipe(debug({ title: "Building project:" }))
@@ -206,7 +216,7 @@ gulp.task("Publish-Project-Projects", function () {
 
 gulp.task("Publish-Assemblies", function () {
   var root = "./src";
-  var binFiles = root + "/**/code/**/bin/Sitecore.{Feature,Foundation,Habitat}.*.{dll,pdb}";
+  var binFiles = root + "/**/Website/**/bin/Sitecore.{Feature,Foundation,Project}.*.{dll,pdb}";
   var destination = config.websiteRoot + "/bin/";
   return gulp.src(binFiles, { base: root })
     .pipe(rename({ dirname: "" }))
@@ -309,8 +319,8 @@ gulp.task("Auto-Publish-Views", function () {
 
 gulp.task("Auto-Publish-Assemblies", function () {
   var root = "./src";
-  var roots = [root + "/**/code/**/bin", root + "/**/legacy/**/bin"];
-  var files = "/**/Sitecore.{Feature,Foundation,Habitat}.*.{dll,pdb}";;
+  var roots = [root + "/**/Website/**/bin", root + "/**/legacy/**/bin"];
+  var files = "/**/Sitecore.{Feature,Foundation,Project,Habitat}.*.{dll,pdb}";;
   var destination = config.websiteRoot + "/bin/";
   gulp.src(roots, { base: root }).pipe(
     foreach(function (stream, rootFolder) {
@@ -381,7 +391,7 @@ gulp.task("CE-01-Nuget-Restore", function (callback) {
 });
 
 gulp.task("CE-02-Publish-CommerceEngine-Projects", function (callback) {
-    var cmd = "dotnet publish ./src/Foundation/Commerce/Engine -o " + config.commerceEngineRoot
+    var cmd = "dotnet publish ./src/Project/Retail/Engine -o " + config.commerceEngineRoot
     var options = { maxBuffer: 1024 * 1024 };
     console.log("cmd: " + cmd);
     return exec(cmd, options, function (err, stdout, stderr) {

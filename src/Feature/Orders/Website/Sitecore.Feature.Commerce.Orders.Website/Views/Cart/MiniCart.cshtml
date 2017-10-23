@@ -1,0 +1,64 @@
+﻿@using Sitecore.Foundation.Commerce.Website.Extensions
+@*//-----------------------------------------------------------------------
+    // Copyright 2016 Sitecore Corporation A/S
+    // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+    // except in compliance with the License. You may obtain a copy of the License at
+    //       http://www.apache.org/licenses/LICENSE-2.0
+    //
+    // Unless required by applicable law or agreed to in writing, software distributed under the
+    // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    // either express or implied. See the License for the specific language governing permissions
+    // and limitations under the License.
+    // -------------------------------------------------------------------------------------------*@
+
+<li class="dropdown" id="miniCart">
+    <a href="#" class="dropdown-toggle toggle-cart" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-shopping-cart"></span><span class="badge bg-primary" id="miniCartItemCount" data-bind="text: lineitemcount"></span> 
+    </a>
+    <div class="dropdown-menu minicart">
+        <ul class="media-list minicart-content" data-bind="foreach: miniCartItems, visible:miniCartItems().length">
+            <li class="media" data-bind="attr: {'data-ajax-lineitemid': externalCartlineId}">
+                <div class="media-left">
+                    <a data-bind="attr:{ href:productUrl}">
+                        <img class="media-object" alt="a" data-bind="attr:{src: image, alt: title}">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <a data-bind="attr:{ href:productUrl}">
+                        <strong class="media-heading">@Html.Sitecore().Text("Orders/MiniCart/Items in your cart", "Items in your cart")</strong>
+                    </a>
+                    <p>
+                        @Html.Sitecore().Text("Orders/MiniCart/Quantity", "Quantity") <strong data-bind="text: quantity"></strong><br/>
+                        @Html.Sitecore().Text("Orders/MiniCart/Price", "Price") <strong data-bind="text: linePrice"></strong>
+                    </p>
+                </div>
+                <div class="media-right">
+                    <a href="javascript:;" class="text-primary minicart-delete">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <div class="m-b-1">
+            <strong>
+                @Html.Sitecore().Text("Orders/MiniCart/Total", "Total") <span data-bind="text: total"></span>
+            </strong>
+        </div>
+        <div>
+            <button type="button" id="rsf-btn-checkout" onclick="window.location.href = '@("/Checkout")'" class="btn btn-block btn-primary">@Html.Sitecore().Text("Orders/MiniCart/Checkout", "Checkout")</button>
+            <a class="btn btn-block btn-default" href="@("/ShoppingCart")">@Html.Sitecore().Text("Orders/MiniCart/View Cart", "View Cart")</a>
+        </div>
+    </div>
+</li>
+
+<li class="dropdown" id="miniCart-responsive">
+    <a href="@("/ShoppingCart")">
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+    </a>
+</li>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        initMiniShoppingCart("miniCart");
+    });
+</script>

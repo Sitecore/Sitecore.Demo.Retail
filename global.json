@@ -1,5 +1,10 @@
 {
-    "projects": [ "src/Foundation/Commerce/legacyCommerce", "src/Project/Retail", "src/Foundation/Commerce.Payments", "src/Foundation/Commerce.Entitlements" ],
+    "projects": [
+        "src/Feature/HabitatData/Engine/Feature.HabitatData.Engine",
+        "src/Feature/Entitlements/Engine/Feature.Entitlements.Engine",
+        "src/Feature/Payments/Engine/Sitecore.Feature.Commerce.Payments.Engine",
+        "src/Project/Retail/Engine"
+    ],
     "sdk": {
         "version": "1.0.0-preview2-003131"
     }

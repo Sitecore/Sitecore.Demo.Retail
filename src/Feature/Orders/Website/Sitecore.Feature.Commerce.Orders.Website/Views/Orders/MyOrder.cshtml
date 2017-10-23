@@ -1,0 +1,338 @@
+﻿@*//-----------------------------------------------------------------------
+    // Copyright 2016 Sitecore Corporation A/S
+    // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+    // except in compliance with the License. You may obtain a copy of the License at
+    //       http://www.apache.org/licenses/LICENSE-2.0
+    //
+    // Unless required by applicable law or agreed to in writing, software distributed under the
+    // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    // either express or implied. See the License for the specific language governing permissions
+    // and limitations under the License.
+    // -------------------------------------------------------------------------------------------*@
+@using Sitecore.Feature.Commerce.Orders.Website.Models
+@using Sitecore.Foundation.Commerce.Website.Extensions
+@using Sitecore.Resources.Media
+@model  OrderViewModel
+<div class="row">
+    <div class="col-md-12">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.Sitecore().Text("/Orders/My Order/Order Number", "Order Number:")
+            </dt>
+            <dd id="confirm-orderNumber">
+                @Model.OrderId
+            </dd>
+            <dt>
+                @Html.Sitecore().Text("/Orders/My Order/Order Date", "Order Date:")
+            </dt>
+            <dd id="confirm-orderDate">
+                @Model.Created.ToDisplayedDate()
+            </dd>
+            <dt>
+                @Html.Sitecore().Text("/Orders/My Order/Order Status", "Order Status:")
+            </dt>
+            <dd>
+                @Model.StatusText
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="headline text-center">
+    <h3>
+        @Html.Sitecore().Text("/Orders/My Order/Products", "Your Products")
+    </h3>
+</div>
+<div class="table-responsive" id="confirmProductsContainer">
+    <table class="table table-hover" id="orderTable" data-orderId="@Model.ExternalId">
+        <tr class="order-header">
+            <th>
+                <input type="checkbox" onclick="selectAllOrderItems(this)" id="selectAllOrderItems"/>
+            </th>
+            <th></th>
+            <th>@Html.Sitecore().Text("/Orders/My Order/Product Details", "Product Details")</th>
+            <th>@Html.Sitecore().Text("/Orders/My Order/Unit Price", "Unit Price")</th>
+            <th>@Html.Sitecore().Text("/Orders/My Order/Quantity", "Quantity")</th>
+            <th>@Html.Sitecore().Text("/Orders/My Order/Total Price", "Total Price")</th>
+        </tr>
+        @{
+            foreach (var orderLine in Model.Lines)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" class="item-to-selected" onchange="enableAddOrderItemsToCart();enableCancelOrderItems();" data-externalId="@orderLine.OrderLineId"/>
+                    </td>
+                    <td class="cart-image hidden-sm hidden-xs">
+                        @if (orderLine.Image != null)
+                        {
+                            <a href="@MediaManager.GetMediaUrl(orderLine.Image)" data-toggle="lightbox" data-type="image" data-title="@orderLine.Title">
+                                <img src="@orderLine.Image.ImageUrl(110, 110)" class="img-responsive" alt="@orderLine.Image.Alt" pid="image"/>
+                            </a>
+                        }
+                    </td>
+                    <td class="cart-info">
+                        @if (orderLine.ProductUrl == null)
+                        {
+                            <h5 pid="title">@orderLine.Title</h5>
+                        }
+                        else
+                        {
+                            <a pid="link " href="@orderLine.ProductUrl">
+                                <h5 pid="title">@orderLine.Title</h5>
+                            </a>
+                        }
+                        <dl class="small dl-horizontal">
+                            @if (!string.IsNullOrEmpty(orderLine.ProductColor))
+                            {
+                                <dt>
+                                    @Html.Sitecore().Text("/Orders/My Order/Color", "Color:")
+                                </dt>
+                                <dd pid="color">
+                                    @orderLine.ProductColor
+                                </dd>
+                            }
+                            @if (!string.IsNullOrEmpty(orderLine.ShippingMethodName))
+                            {
+                                <dt>
+                                    @Html.Sitecore().Text("/Orders/My Order/Delivery", "Delivery:")
+                                </dt>
+                                <dd pid="shippingMethodName">
+                                    @orderLine.ShippingMethodName
+                                </dd>
+                            }
+                            @if (Model.IsItemShipping)
+                            {
+                                if (orderLine.ShippingAddress != null)
+                                {
+                                    <dt>
+                                        @Html.Sitecore().Text("/Orders/My Order/Delivery", "Delivery:")
+                                    </dt>
+                                    <dd class="cart-delivery">
+                                        <ul pid="lineShippingAddress">
+                                            <li pid="lineShippingAddressName">@orderLine.ShippingAddress.Name</li>
+                                            <li>
+                                                <span pid="lineShippingAddressLine">
+                                                    @orderLine.ShippingAddress.Address1,
+                                                </span>
+                                                <span pid="lineShippingAddressCity">
+                                                    @orderLine.ShippingAddress.City
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span pid="lineShippingAddressState">@orderLine.ShippingAddress.Region, </span>
+                                                <span pid="lineShippingAddressZipCode">@orderLine.ShippingAddress.ZipPostalCode</span>
+                                            </li>
+                                            <li pid="lineShippingAddressCountry">@orderLine.ShippingAddress.Country</li>
+                                        </ul>
+                                    </dd>
+                                }
+                                if (!string.IsNullOrEmpty(orderLine.ShippingEmail))
+                                {
+                                    <dt>
+                                        @Html.Sitecore().Text("/Orders/My Order/Delivery", "Delivery:")
+                                    </dt>
+                                    <dd class="cart-email" pid="lineEmail">@orderLine.ShippingEmail</dd>
+                                }
+                            }
+                        </dl>
+                    </td>
+                    <td class="cart-price text-right text-nowrap" pid="price">
+                        <p pid="price">@orderLine.ItemPrice.ToCurrency(orderLine.Currency)</p>
+                        @if (orderLine.Adjustments.Any())
+                        {
+                            <span>
+                                <span>@Html.Sitecore().Text("/Orders/My Order/Discount", "Discount:")</span>
+                                <span pid="discountNames" class="savings">@string.Join(", ", orderLine.Adjustments)</span>
+                            </span>
+                        }
+                    </td>
+                    <td class="cart-quantity text-right text-nowrap" pid="quantity">
+                        <p>@orderLine.Quantity</p>
+                    </td>
+                    <td class="cart-total text-right text-nowrap">
+                        <p pid="total">@orderLine.Total.ToCurrency(orderLine.Currency)</p>
+                        @if (orderLine.Discount > 0)
+                        {
+                            <span class="savings">
+                                <span>@Html.Sitecore().Text("/Orders/My Order/Discount", "Discount:")</span>
+                                <span pid="discount">@orderLine.Discount.ToCurrency(orderLine.Currency))</span>
+                            </span>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        <tr>
+            <td colspan="3"></td>
+            <td class="text" colspan="2">
+                @Html.Sitecore().Text("/Orders/My Order/Subtotal", "Subtotal:")
+            </td>
+            <td class="text-right text-nowrap" pid="subtotal" id="confirm-subtotal">
+                <strong>@Model.Subtotal.ToCurrency(Model.Currency)</strong>
+            </td>
+        </tr>
+        <tr class="small">
+            <td colspan="3"></td>
+            <td class="text" colspan="2">
+                @Html.Sitecore().Text("/Orders/My Order/Shipping Total", "Shipping Total:")
+            </td>
+            <td class="text-right text-nowrap" pid="shippingTotal" id="confirm-shippingTotal">@Model.ShippingTotal.ToCurrency(Model.Currency)</td>
+        </tr>
+        <tr class="small">
+            <td colspan="3"></td>
+            <td class="text" colspan="2">
+                @Html.Sitecore().Text("/Orders/My Order/Tax Total", "Tax Total:")
+            </td>
+            <td class="text-right text-nowrap" pid="taxTotal" id="confirm-taxTotal">@Model.TaxTotal.ToCurrency(Model.Currency)</td>
+        </tr>
+        <tr class="small">
+            <td colspan="3"></td>
+            <td class="text" colspan="2">
+                @Html.Sitecore().Text("/Orders/My Order/Savings", "Savings:")
+                @if (Model.Adjustments.Any())
+                {
+                    <ul>
+                        @foreach (var adjustment in Model.Adjustments)
+                        {
+                            <li class="text-nowrap">
+                                @adjustment
+                            </li>
+                        }
+                    </ul>
+                }
+            </td>
+            <td class="text-right text-nowrap" pid="discountTotal" id="confirm-discountTotal">
+                <em>@Model.TotalSavings.ToCurrency(Model.Currency)</em>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+            <td class="text" colspan="2">
+                @Html.Sitecore().Text("/Orders/My Order/Order Total", "Order Total:")
+            </td>
+            <td class="text-right text-nowrap" pid="total" id="confirm-total">
+                <strong>@Model.Total.ToCurrency(Model.Currency)</strong>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-inline">
+            <button type="button" id="addOrderItemsToCart" class="btn btn-success" disabled="disabled" onclick="addOrderItemsToCart()" data-loading-text="@Html.Sitecore().Text("/Orders/My Order/Loading", "Loading...")" data-text="@Html.Sitecore().Text("/Orders/My Order/Add To Cart", "Add to Cart")">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                @Html.Sitecore().Text("/Orders/My Order/Add To Cart", "Add to Cart")
+            </button>
+            <button type="button" id="cancelOrderItems" class="btn btn-success" disabled="disabled" onclick="cancelOrderItems()" data-loading-text="@Html.Sitecore().Text("/Orders/My Order/Loading", "Loading...")" data-text="@Html.Sitecore().Text("/Orders/My Order/Cancel Order", "Cancel Order")">
+                @Html.Sitecore().Text("/Orders/My Order/Cancel Order", "Cancel Order")
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row p-t-1">
+    @if (!Model.IsItemShipping)
+    {
+        <div class="col-md-4 col-sm-6 col-xs-6" id="confirm-shippingAddressContainer">
+            @foreach (var shippingAddress in Model.ShippingAddresses)
+            {
+                <div class="panel panel-default" data-bind="with: store">
+                    <div class="panel-heading">
+                        <h4>@Html.Sitecore().Text("/Orders/My Order/Shipping Address", "Shipping Address")</h4>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list list-unstyled">
+                            <li id="confirm-shippingAddressName">@shippingAddress.Name</li>
+                            <li id="confirm-shippingAddressLine">@shippingAddress.Address1</li>
+                            <li>
+                                <span id="confirm-shippingAddressCity">@shippingAddress.City, </span>
+                                <span id="confirm-shippingAddressState">@shippingAddress.Region, </span>
+                                <span id="confirm-shippingAddressCountry">@shippingAddress.Country</span>
+                            </li>
+                            <li id="confirm-shippingAddressZipCode">@shippingAddress.ZipPostalCode</li>
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    <div class="col-md-4 col-sm-6 col-xs-6" id="confirm-billingAddressContainer">
+        @foreach (var billingAddress in Model.BillingAddresses)
+        {
+            <div class="panel panel-default" data-bind="with: store">
+                <div class="panel-heading">
+                    <h4>@Html.Sitecore().Text("/Orders/My Order/Billing Address", "Billing Address")</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="list list-unstyled">
+                        <li id="confirm-billingAddressName">@billingAddress.Name</li>
+                        <li id="confirm-billingAddressLine">@billingAddress.Address1</li>
+                        <li>
+                            <span id="confirm-billingAddressCity">@billingAddress.City, </span>
+                            <span id="confirm-billingAddressState">@billingAddress.Region, </span>
+                            <span id="confirm-billingAddressCountry">@billingAddress.Country</span>
+                        </li>
+                        <li id="confirm-billingAddressZipCode">@billingAddress.ZipPostalCode</li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="col-md-4 col-sm-6 col-xs-6" id="confirm-paymentMethodsContainer">
+        @foreach (var payment in Model.PaymentInfo)
+        {
+            if (payment.PaymentType == PaymentType.CreditCard)
+            {
+                <div class="panel panel-default" data-bind="with: store">
+                    <div class="panel-heading">
+                        <h5>@Html.Sitecore().Text("/Orders/My Order/Credit Card", "Credit Card")</h5>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list list-unstyled">
+                            <li id="confirm-creditCardNameOnCard">@payment.CustomerName</li>
+                            <li id="confirm-creditCardType">@payment.CardType</li>
+                            <li id="confirm-creditCardNumber">@payment.CreditCardNumber</li>
+                            <li>
+                                <span id="confirm-creditCardExpMonth">@payment.ExpirationMonth.ToString("D2")</span>/<span id="confirm-creditCardExpYear">@payment.ExpirationYear.ToString("D2")</span>
+                            </li>
+                            <li id="confirm-creditCardAmount">
+                                @payment.Amount.ToCurrency(Model.Currency)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            }
+            if (payment.PaymentType == PaymentType.GiftCard)
+            {
+                <div class="panel panel-default" data-bind="with: store">
+                    <div class="panel-heading">
+                        <h5>@Html.Sitecore().Text("/Orders/My Order/Gift Card", "Gift Card")</h5>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list list-unstyled">
+                            <li id="confirm-giftCardNumber">@payment.GiftCardId</li>
+                            <li id="confirm-giftCardAmount">
+                                @payment.Amount.ToCurrency(Model.Currency)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            }
+            if (payment.PaymentType == PaymentType.Federated)
+            {
+                <div class="panel panel-default" data-bind="with: store">
+                    <div class="panel-heading">
+                        <h5>@Html.Sitecore().Text("/Orders/My Order/Federated Payment", "External Payment Provider")</h5>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list list-unstyled">
+                            <li id="confirm-giftCardAmount">
+                                @payment.Amount.ToCurrency(Model.Currency)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,1535 @@
+﻿{
+    "$type": "Sitecore.Commerce.Core.CommerceEnvironment, Sitecore.Commerce.Core",
+    "EnvironmentId": "40E77B7B-4BE9-4186-B53B-5BFD89A6A83B",
+    "Components": {
+        "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Component, Sitecore.Commerce.Core]], mscorlib",
+        "$values": [
+            {
+                "$type": "Sitecore.Commerce.Plugin.ManagedLists.ListMembershipsComponent, Sitecore.Commerce.Plugin.ManagedLists",
+                "Memberships": {
+                    "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+                    "$values": [
+                        "CommerceEnvironments"
+                    ]
+                },
+                "Id": "efe49ff743d34b649fffcof293615cd9",
+                "Policies": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                },
+                "ChildComponents": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Component, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            }
+        ]
+    },
+    "DateCreated": "2016-09-23T18:04:08.1660038Z",
+    "DateUpdated": "2016-09-23T18:04:08.1760227Z",
+    "Id": "Entity-CommerceEnvironment-HabitatAuthoring",
+    "Version": 1,
+    "IsPersisted": false,
+    "Name": "HabitatAuthoring",
+    "Policies": {
+        "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+        "$values": [
+            {
+                "$type": "Sitecore.Commerce.Core.EnvironmentInitializationPolicy, Sitecore.Commerce.Core",
+                "InitialArtifactSets": {
+                    "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+						"$values": [
+							"Catalog.DefaultSellableItems-1.0",
+							"Environment.Habitat.SellableItems-1.0",
+							"Environment.Habitat.Pricing-1.0",
+							"Environment.Habitat.Promotions-1.0"
+
+																	]
+                },
+                "PolicyId": "db1674059c344e33899c5f1f45c6508b",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.Customers.Cs.ProfilesSqlPolicy, Sitecore.Commerce.Plugin.Customers.Cs",
+                "Server": ".",
+                "Database": "demo.local_CommerceServer.Profiles",
+                "TrustedConnection": true,
+                "UserName": "",
+                "Password": "",
+                "DebugLevel": "Production",
+                "PolicyId": "6de49ca629ab42adadf27d61baf687ab",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.Customers.Cs.SitecoreUserTermsPolicy, Sitecore.Commerce.Plugin.Customers.Cs",
+                "AccountStatusPath": "/sitecore/Commerce/Commerce Control Panel/Commerce Engine Settings/Commerce Terms/CS User Site Terms/Account Status",
+                "UserTypePath": "/sitecore/Commerce/Commerce Control Panel/Commerce Engine Settings/Commerce Terms/CS User Site Terms/User Type",
+                "AllLanguagesPath": "/sitecore/Commerce/Commerce Control Panel/Shared Settings/Language Sets/All Languages",
+                "PolicyId": "18538a4f96094ef1a85df8cdf83d620a",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Feature.Commerce.Payments.Engine.Policies.BraintreeClientPolicy, Sitecore.Feature.Commerce.Payments.Engine",
+                "Environment": "sandbox",
+                "MerchantId": "rwd84b5k2rck8c7f",
+                "PublicKey": "747f5tsgkbk9xrk3",
+                "PrivateKey": "25d3cfa5a9674a8b12e167af80b8607f",
+                "ConnectTimeout": 120000,
+                "PolicyId": "0af6253f42184fd8ae0a61085980c03c",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.EntityViews.ActionsRolesPolicy, Sitecore.Commerce.Plugin.Views",
+                "Roles": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views]], mscorlib",
+                    "$values": [
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "PriceSnapshotDetails",
+                            "Action": "RequestSnapshotApproval",
+                            "Role": "sitecore\\Pricer",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "PriceSnapshotDetails",
+                            "Action": "RequestSnapshotApproval",
+                            "Role": "sitecore\\Pricer Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "PriceSnapshotDetails",
+                            "Action": "RejectSnapshot",
+                            "Role": "sitecore\\Pricer Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "PriceSnapshotDetails",
+                            "Action": "ApproveSnapshot",
+                            "Role": "sitecore\\Pricer Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "PriceSnapshotDetails",
+                            "Action": "RetractSnapshot",
+                            "Role": "sitecore\\Pricer Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "SetSnapshotApprovalStatus",
+                            "Action": "RequestSnapshotApproval",
+                            "Role": "sitecore\\Pricer",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "SetSnapshotApprovalStatus",
+                            "Action": "RequestSnapshotApproval",
+                            "Role": "sitecore\\Pricer Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "SetSnapshotApprovalStatus",
+                            "Action": "RejectSnapshot",
+                            "Role": "sitecore\\Pricer Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "SetSnapshotApprovalStatus",
+                            "Action": "ApproveSnapshot",
+                            "Role": "sitecore\\Pricer Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "SetSnapshotApprovalStatus",
+                            "Action": "RetractSnapshot",
+                            "Role": "sitecore\\Pricer Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "Details",
+                            "Action": "RequestPromotionApproval",
+                            "Role": "sitecore\\Promotioner",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "Details",
+                            "Action": "RequestPromotionApproval",
+                            "Role": "sitecore\\Promotioner Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "Details",
+                            "Action": "RejectPromotion",
+                            "Role": "sitecore\\Promotioner Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "Details",
+                            "Action": "ApprovePromotion",
+                            "Role": "sitecore\\Promotioner Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "Details",
+                            "Action": "RetractPromotion",
+                            "Role": "sitecore\\Promotioner Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "Details",
+                            "Action": "DisablePromotion",
+                            "Role": "sitecore\\Promotioner Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "SetPromotionApprovalStatus",
+                            "Action": "RequestPromotionApproval",
+                            "Role": "sitecore\\Promotioner",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "SetPromotionApprovalStatus",
+                            "Action": "RequestPromotionApproval",
+                            "Role": "sitecore\\Promotioner Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "SetPromotionApprovalStatus",
+                            "Action": "RejectPromotion",
+                            "Role": "sitecore\\Promotioner Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "SetPromotionApprovalStatus",
+                            "Action": "ApprovePromotion",
+                            "Role": "sitecore\\Promotioner Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "SetPromotionApprovalStatus",
+                            "Action": "RetractPromotion",
+                            "Role": "sitecore\\Promotioner Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.EntityViews.ActionRoleModel, Sitecore.Commerce.Plugin.Views",
+                            "View": "SetPromotionApprovalStatus",
+                            "Action": "DisablePromotion",
+                            "Role": "sitecore\\Promotioner Manager",
+                            "AdditionalProperties": {
+                                "$type": "Sitecore.Commerce.Core.PropertiesModel, Sitecore.Commerce.Core",
+                                "Properties": {
+                                    "$type": "System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, mscorlib],[System.Object, mscorlib]], mscorlib"
+                                },
+                                "Name": "",
+                                "Policies": {
+                                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                    "$values": [
+
+                                    ]
+                                }
+                            },
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "PolicyId": "65f19871067c4c76be81fb6db43db518",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.GlobalEnvironmentPolicy, Sitecore.Commerce.Core",
+                "Languages": {
+                    "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+                    "$values": [
+                        "en-US",
+                        "en-CA",
+                        "es",
+                        "fr-CA"
+                    ]
+                },
+                "DefaultCurrency": "USD",
+                "DefaultCountry": {
+                    "$type": "Sitecore.Commerce.Core.EntityReference, Sitecore.Commerce.Core",
+                    "Name": "",
+                    "EntityTarget": "Entity-Country-USA",
+                    "Policies": {
+                        "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                        "$values": [
+
+                        ]
+                    }
+                },
+                "Countries": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.EntityReference, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+                        {
+                            "$type": "Sitecore.Commerce.Core.EntityReference, Sitecore.Commerce.Core",
+                            "Name": "",
+                            "EntityTarget": "Entity-Country-USA",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.Core.EntityReference, Sitecore.Commerce.Core",
+                            "Name": "",
+                            "EntityTarget": "Entity-Country-CAN",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "DefaultLocale": "en-US",
+                "TimeZone": "PST",
+                "FirstDayOfWeek": "Sunday",
+                "PostalCodeOptionalCountries": {
+                    "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+                    "$values": [
+
+                    ]
+                },
+                "PolicyId": "cc4e9ce753cc41818e2e30810ba2a8c4",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.SQL.EntityStoreSqlPolicy, Sitecore.Commerce.Plugin.SQL",
+                "TrustedConnection": true,
+                "UserName": "",
+                "Password": "",
+                "Server": ".",
+                "Database": "demo.local_SitecoreCommerce.SharedEnvironments",
+                "AdditionalParameters": "",
+                "ConnectTimeout": 120000,
+                "CleanEnvironmentTimeout": 120000,
+                "PolicyId": "e1bdaa0a7c1a413e964fa37f56f6dfb0",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.Inventory.Cs.InventoryCatalogSqlPolicy, Sitecore.Commerce.Plugin.Inventory.Cs",
+                "TrustedConnection": true,
+                "UserName": "",
+                "Password": "",
+                "Server": ".",
+                "Database": "demo.local_CommerceServer.ProductCatalog",
+                "AdditionalParameters": "",
+                "ConnectTimeout": 120000,
+                "PolicyId": "1edf834d65714efb949218f02720334e",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.CsAgent.CsCatalogPolicy, Sitecore.Commerce.Plugin.CsAgent",
+                "CacheEnable": true,
+                "EnableInventorySystem": true,
+                "SchemaTimeout": "10",
+                "ItemInformationCacheTimeout": "10",
+                "ItemHierarchyCacheTimeout": "10",
+                "ItemRelationshipsCacheTimeout": "10",
+                "ItemAssociationsCacheTimeout": "10",
+                "CatalogCollectionCacheTimeout": "10",
+                "ServiceUrl": "http://habitat.csservices.dev.local:1004/Habitat_CatalogWebService/CatalogWebService.asmx",
+                "SiteName": "Habitat",
+                "DebugLevel": "Production",
+                "PolicyId": "04698b7d04e249d4a3e1324b1f13989b",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.CsAgent.CsProfilesPolicy, Sitecore.Commerce.Plugin.CsAgent",
+                "PublicKey": "registry:HKEY_LOCAL_MACHINE\\SOFTWARE\\CommerceServer\\Encryption\\Keys\\Habitat,PublicKey",
+                "PrivateKey1": "registry:HKEY_LOCAL_MACHINE\\SOFTWARE\\CommerceServer\\Encryption\\Keys\\Habitat,PrivateKey",
+                "KeyIndex": "1",
+                "SiteName": "Habitat",
+                "DebugLevel": "Production",
+                "PolicyId": "b48aa48009084cc78e5e7de25aa24ca5",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.Management.SitecoreConnectionPolicy, Sitecore.Commerce.Plugin.Management",
+                "Host": "retail.dev.local",
+                "SitecoreDatabase": "master",
+                "UserName": "CommerceEngineUser",
+                "Domain": "sitecore",
+                "Password": "demopass",
+                "PolicyId": "a12d609f37124c4fb9007519a8e18b69",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.Carts.RollupCartLinesPolicy, Sitecore.Commerce.Plugin.Carts",
+                "Rollup": true,
+                "PolicyId": "90af91c1f2b142048eb0a2fb4e2c44f5",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Core.CommerceEnvironment",
+                "AllowCaching": false,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": false,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "AFF010224343405AB3F98D9961771AB8",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "*",
+                "AllowCaching": true,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": false,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "1c5560c4b93942cdafda6170b1b8b6fc",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Plugin.Returns.ReturnMerchandiseAuthorization",
+                "AllowCaching": false,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": false,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "94F7533979F3492397921023F340A9C0",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Plugin.Orders.Order",
+                "AllowCaching": false,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": false,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "fed8a00b00e445148a6989b716156597",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Plugin.Orders.SalesActivity",
+                "AllowCaching": false,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": false,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "0e0410c8ccac4326a17e78515d1d8704",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Plugin.Journaling.JournalEntry",
+                "AllowCaching": false,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": false,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "6e5953d5ee92445abc498a4a4268efd3",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Plugin.Fulfillment.Shipment",
+                "AllowCaching": false,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": false,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "984320d96aed40fb84448a257bae5eea",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Plugin.Carts.Cart",
+                "AllowCaching": false,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": false,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "d50824d4d2d145e6a87b9cfd8c1cba99",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Plugin.GiftCards.GiftCard",
+                "AllowCaching": false,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": false,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "acc8b0573c8e43de8d9b9102b838fb37",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Plugin.ManagedLists.ManagedList",
+                "AllowCaching": true,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": true,
+                "HasNegativeCaching": true,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "ac2bd3952d624fff9d55b79aa4c54453",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Core.EntityIndex",
+                "AllowCaching": false,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": true,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "acaa09c9432b406bba69c2991d2ec353",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Plugin.Promotions.Promotion",
+                "AllowCaching": false,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": true,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "Promotions.All",
+                "PolicyId": "d0deeccc3cae40e9bff7ac9c9972973c",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Plugin.Customers.Customer",
+                "AllowCaching": false,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": true,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "Customers.All",
+                "PolicyId": "dd17c720f1944d12afb8cf79c6f0a16c",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Plugin.Coupons.Coupon",
+                "AllowCaching": true,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": true,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "79e8a8aa07074dc185ee3a270ebd2f7c",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Plugin.Catalog.SellableItem",
+                "AllowCaching": true,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": true,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "ff1a1ab3ca184cee974789b1318c36d5",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Plugin.Pricing.PriceCard",
+                "AllowCaching": true,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": false,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "03b7df01f2d64276b72e46c8d0cf0a70",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+                "EntityFullName": "Sitecore.Commerce.Core.NegativeCache",
+                "AllowCaching": true,
+                "Priority": "Normal",
+                "Expiration": 60000,
+                "CacheAsEntity": true,
+                "HasNegativeCaching": false,
+                "EntityCacheName": "EntityCache",
+                "PolicyId": "bda5b3aebe38458dbaf5469f0549c17c",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.Journaling.EntityJournalingPolicy, Sitecore.Commerce.Plugin.Journaling",
+                "EntityFullName": "Sitecore.Commerce.Plugin.Orders.Order",
+                "Journal": "OrdersJournal",
+                "PolicyId": "ac1ae9a5d5c24f4b81ace16bac64765d",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.Returns.RequestRmaReasonsPolicy, Sitecore.Commerce.Plugin.Returns",
+                "List": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Plugin.Returns.RmaReason, Sitecore.Commerce.Plugin.Returns]], mscorlib",
+                    "$values": [
+                        {
+                            "$type": "Sitecore.Commerce.Plugin.Returns.RmaReason, Sitecore.Commerce.Plugin.Returns",
+                            "Code": "WrongItem",
+                            "Description": "The wrong item was sent",
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.Plugin.Returns.RmaReason, Sitecore.Commerce.Plugin.Returns",
+                            "Code": "DidNotLike",
+                            "Description": "Customer did not like item",
+                            "Name": "",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "AllowReturnStatuses": {
+                    "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+                    "$values": [
+                        "Completed",
+                        "Released"
+                    ]
+                },
+                "PolicyId": "ac170e03aeae40a8a24f9ca110e2e9e4",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.ListNamePolicy, Sitecore.Commerce.Core",
+                "Prefix": "List",
+                "Suffix": "ByDate",
+                "Separator": "-",
+                "PolicyId": "ce1ce4824adf49b89fd473b483e5577c",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.Orders.GlobalOrderPolicy, Sitecore.Commerce.Plugin.Orders",
+                "InvoicePrefix": "aaa",
+                "InvoiceSuffix": "zzz",
+                "AllowOrderCancel": true,
+                "SubmittedOrderList": "PendingOrders",
+                "CompletedOrderList": "CompletedOrders",
+                "CreatedOrderStatus": "Pending",
+                "CreatedOrderPaymentStatus": "Paid",
+                "PolicyId": "GlobalOrderPolicy",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.Orders.OnHoldOrdersPolicy, Sitecore.Commerce.Plugin.Orders",
+                "AllowHoldStatuses": {
+                    "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+                    "$values": [
+                        "Pending",
+                        "Problem"
+                    ]
+                },
+                "PolicyId": "f856813d39e94b17892bddf7eda7ffa7",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.Orders.CancelOrdersPolicy, Sitecore.Commerce.Plugin.Orders",
+                "AllowCancelStatuses": {
+                    "$type": "System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+                    "$values": [
+                        "Pending",
+                        "Problem",
+                        "OnHold"
+                    ]
+                },
+                "PolicyId": "6d3d6cfbc4d541348d485127ac06d9ce",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.Inventory.GlobalInventoryPolicy, Sitecore.Commerce.Plugin.Inventory",
+                "CheckStockLevel": true,
+                "SubtractStockOnOrder": true,
+                "DefaultAllocationDateAvailable": "0001-01-01T00:00:00+00:00",
+                "PolicyId": "GlobalInventoryPolicy",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.Fulfillment.GlobalPhysicalFulfillmentPolicy, Sitecore.Commerce.Plugin.Fulfillment",
+                "MaxShippingWeight": 50.0,
+                "MeasurementUnits": "Inches",
+                "WeightUnits": "Lbs",
+                "DefaultCartFulfillmentFees": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+                        {
+                            "$type": "Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core",
+                            "CurrencyCode": "USD",
+                            "Amount": 10.0
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core",
+                            "CurrencyCode": "CAD",
+                            "Amount": 12.0
+                        }
+                    ]
+                },
+                "DefaultCartFulfillmentFee": {
+                    "$type": "Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core",
+                    "CurrencyCode": "USD",
+                    "Amount": 3.0
+                },
+                "DefaultItemFulfillmentFees": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+                        {
+                            "$type": "Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core",
+                            "CurrencyCode": "USD",
+                            "Amount": 2.0
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core",
+                            "CurrencyCode": "CAD",
+                            "Amount": 3.0
+                        }
+                    ]
+                },
+                "DefaultItemFulfillmentFee": {
+                    "$type": "Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core",
+                    "CurrencyCode": "USD",
+                    "Amount": 3.0
+                },
+                "FulfillmentFees": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Plugin.Fulfillment.FulfillmentFee, Sitecore.Commerce.Plugin.Fulfillment]], mscorlib",
+                    "$values": [
+                        {
+                            "$type": "Sitecore.Commerce.Plugin.Fulfillment.FulfillmentFee, Sitecore.Commerce.Plugin.Fulfillment",
+                            "Fee": {
+                                "$type": "Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core",
+                                "CurrencyCode": "USD",
+                                "Amount": 15.0
+                            },
+                            "Name": "Ground",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.Plugin.Fulfillment.FulfillmentFee, Sitecore.Commerce.Plugin.Fulfillment",
+                            "Fee": {
+                                "$type": "Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core",
+                                "CurrencyCode": "USD",
+                                "Amount": 2.0
+                            },
+                            "Name": "Standard",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.Plugin.Fulfillment.FulfillmentFee, Sitecore.Commerce.Plugin.Fulfillment",
+                            "Fee": {
+                                "$type": "Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core",
+                                "CurrencyCode": "USD",
+                                "Amount": 5.0
+                            },
+                            "Name": "Next Day Air",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.Plugin.Fulfillment.FulfillmentFee, Sitecore.Commerce.Plugin.Fulfillment",
+                            "Fee": {
+                                "$type": "Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core",
+                                "CurrencyCode": "USD",
+                                "Amount": 10.0
+                            },
+                            "Name": "Standard Overnight",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.Plugin.Fulfillment.FulfillmentFee, Sitecore.Commerce.Plugin.Fulfillment",
+                            "Fee": {
+                                "$type": "Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core",
+                                "CurrencyCode": "CAD",
+                                "Amount": 15.0
+                            },
+                            "Name": "Ground",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.Plugin.Fulfillment.FulfillmentFee, Sitecore.Commerce.Plugin.Fulfillment",
+                            "Fee": {
+                                "$type": "Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core",
+                                "CurrencyCode": "CAD",
+                                "Amount": 2.0
+                            },
+                            "Name": "Standard",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.Plugin.Fulfillment.FulfillmentFee, Sitecore.Commerce.Plugin.Fulfillment",
+                            "Fee": {
+                                "$type": "Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core",
+                                "CurrencyCode": "CAD",
+                                "Amount": 5.0
+                            },
+                            "Name": "Next Day Air",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        },
+                        {
+                            "$type": "Sitecore.Commerce.Plugin.Fulfillment.FulfillmentFee, Sitecore.Commerce.Plugin.Fulfillment",
+                            "Fee": {
+                                "$type": "Sitecore.Commerce.Core.Money, Sitecore.Commerce.Core",
+                                "CurrencyCode": "CAD",
+                                "Amount": 10.0
+                            },
+                            "Name": "Standard Overnight",
+                            "Policies": {
+                                "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                                "$values": [
+
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "PolicyId": "GlobalPhysicalFulfillmentPolicy",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.Orders.GlobalCheckoutPolicy, Sitecore.Commerce.Plugin.Orders",
+                "EnableQuickCheckout": true,
+                "EnableGuestCheckout": true,
+                "EnableTermsAndConditions": true,
+                "MinimumOrderQuantity": 1.0,
+                "PolicyId": "GlobalCheckoutPolicy",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Plugin.Tax.GlobalTaxPolicy, Sitecore.Commerce.Plugin.Tax",
+                "DefaultCartTaxRate": 0.1,
+                "DefaultItemTaxRate": 0.1,
+                "TaxCalculationEnabled": true,
+                "PriceIncudesTax": false,
+                "CalculateTaxBasedOn": "ShippingAddress",
+                "ShippingTaxClass": "CartItems",
+                "RoundAtSubTotal": false,
+                "PolicyId": "65610930a40c4382a47588b95e6fce5d",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            },
+            {
+                "$type": "Sitecore.Commerce.Core.GeoLocationDefaultsPolicy, Sitecore.Commerce.Core",
+                "TimeZone": "",
+                "Longitude": "",
+                "Latitude": "",
+                "Region": "",
+                "AreaCode": "613",
+                "MetroCode": "",
+                "City": "",
+                "PostalCode": "",
+                "BusinessName": "",
+                "DnsAddress": "",
+                "IpAddress": "127.0.0.1",
+                "IspName": "",
+                "LocationDefaults": {
+                    "$type": "Sitecore.Commerce.Core.GeoLocation, Sitecore.Commerce.Core",
+                    "TimeZone": "",
+                    "Longitude": "",
+                    "Latitude": "",
+                    "Region": "",
+                    "AreaCode": "613",
+                    "MetroCode": "",
+                    "City": "",
+                    "PostalCode": "",
+                    "BusinessName": "",
+                    "DnsAddress": "",
+                    "IpAddress": "127.0.0.1",
+                    "IspName": "",
+                    "Name": "",
+                    "Policies": {
+                        "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
+                        "$values": [
+
+                        ]
+                    }
+                },
+                "PolicyId": "059abb9a814e4971b158fddd8b063287",
+                "Models": {
+                    "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+                    "$values": [
+
+                    ]
+                }
+            }
+        ]
+    }
+}

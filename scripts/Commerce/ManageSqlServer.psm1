@@ -295,8 +295,12 @@ function Import-Dacpac
     process
     {
         # could not find a reliable way to find the location of Microsoft.SqlServer.Dac.dll
-        $sqlDACFolder="C:\Program Files (x86)\Microsoft SQL Server\130\DAC\bin\Microsoft.SqlServer.Dac.dll" 
+        $sqlDACFolder="C:\Program Files (x86)\Microsoft SQL Server\140\DAC\bin\Microsoft.SqlServer.Dac.dll" 
         if ((Test-Path ($sqlDACFolder)) -eq $false) 
+        {
+            $sqlDACFolder="C:\Program Files (x86)\Microsoft SQL Server\130\DAC\bin\Microsoft.SqlServer.Dac.dll"
+        }
+		if ((Test-Path ($sqlDACFolder)) -eq $false) 
         {
             $sqlDACFolder="C:\Program Files (x86)\Microsoft SQL Server\120\DAC\bin\Microsoft.SqlServer.Dac.dll"
         }

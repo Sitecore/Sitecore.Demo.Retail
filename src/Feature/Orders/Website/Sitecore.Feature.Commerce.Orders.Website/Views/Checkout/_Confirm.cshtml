@@ -1,0 +1,254 @@
+﻿@*//-----------------------------------------------------------------------
+    // Copyright 2016 Sitecore Corporation A/S
+    // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+    // except in compliance with the License. You may obtain a copy of the License at
+    //       http://www.apache.org/licenses/LICENSE-2.0
+    //
+    // Unless required by applicable law or agreed to in writing, software distributed under the
+    // License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    // either express or implied. See the License for the specific language governing permissions
+    // and limitations under the License.
+    // -------------------------------------------------------------------------------------------*@
+
+@{
+    var currencyDecimalSeparator = Sitecore.Context.Language.CultureInfo.NumberFormat.CurrencyDecimalSeparator;
+    var currencyGroupSeparator = Sitecore.Context.Language.CultureInfo.NumberFormat.CurrencyGroupSeparator;
+
+    var confirmPage = Html.Sitecore().CurrentItem.Children["Confirm"];
+    var billingPage = Html.Sitecore().CurrentItem.Children["Billing"];
+
+    // Table Headers
+    var productDetailsLabel = Html.Sitecore().Field("Product Details Label", confirmPage);
+    var unitPriceLabel = Html.Sitecore().Field("Unit Price Label", confirmPage);
+    var quantityLabel = Html.Sitecore().Field("Quantity Label", confirmPage);
+    var totalLabel = Html.Sitecore().Field("Total Label", confirmPage);
+
+    // Payment Information Labels
+    var taxesLabel = Html.Sitecore().Field("Taxes Label", billingPage);
+    var savingsLabel = Html.Sitecore().Field("Savings Label", billingPage);
+
+    //Footer Summart
+    var ShippingAddress = Html.Sitecore().Field("Shipping Address Label", confirmPage);
+    var EditShippingAddress = Html.Sitecore().Field("Edit Shipping Address Label", confirmPage);
+    var BillingAddress = Html.Sitecore().Field("Billing Address Label", confirmPage);
+    var EditBillingAddress = Html.Sitecore().Field("Edit Billing Address Label", confirmPage);
+    var GiftCards = Html.Sitecore().Field("Gift Cards Label", confirmPage);
+    var PaymentMethods = Html.Sitecore().Field("Payment Methods Label", confirmPage);
+    var EditPaymentMethods = Html.Sitecore().Field("Edit Payment Methods Label", confirmPage);
+    var creditCardLabel = Html.Sitecore().Field("Credit Card Label", confirmPage);
+
+    var orderInformationLabel = Html.Sitecore().Field("Order Information Label", billingPage);
+    var subtotalLabel = Html.Sitecore().Field("Subtotal Label", billingPage);
+    var shippingCostLabel = Html.Sitecore().Field("Shipping Cost Label", billingPage);
+
+    // Labels
+    var discountLabel = Html.Sitecore().Field("Discount Label", confirmPage);
+    var colorLabel = Html.Sitecore().Field("Color Label", confirmPage);
+    var deliveryLabel = Html.Sitecore().Field("Delivery Label", confirmPage);
+}
+
+<table class="table table-striped table-responsive">
+    <thead>
+        <tr class="cart-header">
+            <th class="hidden-sm hidden-xs">&nbsp;</th>
+            <th>@productDetailsLabel</th>
+            <th class="text-right">@unitPriceLabel</th>
+            <th class="">@quantityLabel</th>
+            <th class="text-right">@totalLabel</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: cart().cartLines">
+        <tr>
+            <td class="cart-image hidden-sm hidden-xs">
+                <img data-bind="attr:{src:image}" class="img-responsive" alt="a" pid="image" />
+            </td>
+            <td class="cart-info">
+                <a pid="link" data-bind="attr: {href: productUrl}">
+                    <h5 data-bind="text:title" pid="title"></h5>
+                </a>
+                <p class="cart-variable" data-bind="if: color != null">
+                    @colorLabel <span data-bind="text:color" pid="color"></span>
+                </p>
+                <p class="cart-delivery">
+                    @deliveryLabel
+                    <!-- ko if: $root.isShipAll -->
+                    <span data-bind="text: $root.shippingMethod().description" pid="lineSippingMethodName"></span>
+                    <!-- /ko -->
+                    <!-- ko if: $root.isShipToEmail -->
+                    <span data-bind="text: $root.emailDeliveryMethod().Description" pid="lineSippingMethodName"></span>
+                    <!-- /ko -->
+                    <!-- ko if: isLineShipAll -->
+                    <span data-bind="text: shippingMethod().description" pid="lineSippingMethodName"></span>
+                    <!-- /ko -->
+                    <!-- ko if: isLineShipToEmail -->
+                    <span data-bind="text: $root.emailDeliveryMethod().Description" pid="lineSippingMethodName"></span>
+                    <!-- /ko -->
+                </p>
+                <div data-bind="if: isLineShipAll" class="cart-delivery">
+                    <ul data-bind="with: shippingAddress" pid="lineShippingAddress">
+                        <li pid="lineShippingAddressName" data-bind="text: name, attr: {id: 'confirm-shippingAddressName-' + $parent.externalCartLineId}"></li>
+                        <li pid="lineShippingAddressLine" data-bind="text: address1, attr: {id: 'confirm-shippingAddressLine-' + $parent.externalCartLineId}"></li>
+                        <li>
+                            <span pid="lineShippingAddressCity" data-bind="text: city, attr: {id: 'confirm-shippingAddressCity-' + $parent.externalCartLineId}"></span>,
+                            <span pid="lineShippingAddressState" data-bind="text: region, attr: {id: 'confirm-shippingAddressState-' + $parent.externalCartLineId}"></span>,
+                            <span pid="lineShippingAddressCountry" data-bind="text: country, attr: {id: 'confirm-shippingAddressCountry-' + $parent.externalCartLineId}"></span>
+                        </li>
+                        <li pid="lineShippingAddressZipCode" data-bind="text: zipPostalCode, attr: {id: 'confirm-shippingAddressZipCode-' + $parent.externalCartLineId}"></li>
+                    </ul>
+                </div>
+                <!-- ko if: $root.isShipToEmail -->
+                <div class="cart-delivery">
+                    <span pid="lineEmail" data-bind="text: $root.shippingEmail, attr: {id: 'confirm-emailAddress-' + $parent.externalCartLineId}"></span>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: isLineShipToEmail -->
+                <div class="cart-delivery">
+                    <span pid="lineEmail" data-bind="text: shippingEmail, attr: {id: 'confirm-emailAddress-' + $parent.externalCartLineId}"></span>
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="cart-price text-right">
+                <p data-bind="text:linePrice" pid="price"></p>
+                <em data-bind="visible: shouldShowDiscountOffers">
+                    <span>@discountLabel </span>
+                    <span pid="discountNames" data-bind="text: discountOfferNames" class="savings"></span>
+                </em>
+            </td>
+            <td pid="quantity" class="cart-quantity text-right" style="width: 10%;" data-bind="text:quantity"></td>
+            <td class="cart-total text-right">
+                <p>
+                    <strong data-bind="text: lineTotal"></strong>
+                </p>
+                <em class="savings" data-bind="visible: shouldShowSavings">
+                    <span>@discountLabel </span>
+                    <span pid="discount" data-bind="text: lineItemDiscount"></span>
+                </em>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-md-6 col-md-offset-4 col-xs-12">
+        <div class="headline text-center">
+            <h3>@orderInformationLabel</h3>
+        </div>
+        <table class="table table-striped">
+            <tr>
+                <td class="text"><strong>@subtotalLabel</strong></td>
+                <td id="confirm-subTotal" class="text-right" pid="subtotal"><strong data-bind="text: cart().subTotal"></strong></td>
+            </tr>
+            <tr>
+                <td class="text">@shippingCostLabel <span id="billingShippingCostLabel"></span></td>
+                <td id="confirm-shippingTotal" class="text-right" data-bind="text: cart().shippingTotal" pid="shippingTotal"></td>
+            </tr>
+            <tr>
+                <td class="text">@taxesLabel</td>
+                <td idd="confirm-taxTotal" class="text-right" data-bind="text: cart().taxTotal" pid="taxTotal"></td>
+            </tr>
+            <tr>
+                <td class="text"><em>@savingsLabel</em></td>
+                <td id="confirm-discountTotal" class="text-right"><em data-bind="text: cart().discount"></em></td>
+            </tr>
+            <tr>
+                <td class="text"><strong>@totalLabel</strong></td>
+                <td id="confirm-total" class="text-right"><strong data-bind="text: cart().total"></strong></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <!-- ko if: isShipAll -->
+    <div class="col-md-3 col-sm-6 col-xs-6" id="confirm-shippingAddressContainer">
+        <div class="panel panel-default" data-bind="with: shippingAddress">
+            <div class="panel-heading">
+                <h4 class="panel-title">@ShippingAddress</h4>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled">
+                    <li id="confirm-shippingAddressName" data-bind="text: name"></li>
+                    <li id="confirm-shippingAddressLine" data-bind="text: address1"></li>
+                    <li>
+                        <span id="confirm-shippingAddressCity" data-bind="text: city"></span>, <span id="confirm-shippingAddressState" data-bind="text: region"></span>, <span id="confirm-shippingAddressCountry" data-bind="text: country"></span>
+                    </li>
+                    <li id="confirm-shippingAddressZipCode" data-bind="text: zipPostalCode"></li>
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <a href="#" class="btn btn-default">
+                    <span class="glyphicon glyphicon-edit toBilling"></span>
+                    @EditShippingAddress
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $root.creditCardPayment().isAdded -->
+    <div class="col-md-3 col-sm-6 col-xs-6" id="confirm-billingAddressContainer">
+        <div class="panel panel-default" data-bind="with: billingAddress">
+            <div class="panel-heading">
+                <h4 class="panel-title">@BillingAddress</h4>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled">
+                    <li id="confirm-billingAddressName" data-bind="text: name"></li>
+                    <li id="confirm-billingAddressLine" data-bind="text: address1"></li>
+                    <li>
+                        <span id="confirm-billingAddressCity" data-bind="text: city"></span>, <span id="confirm-billingAddressState" data-bind="text: region"></span>, <span id="confirm-billingAddressCountry" data-bind="text: country"></span>
+                    </li>
+                    <li id="confirm-billingAddressZipCode" data-bind="text: zipPostalCode"></li>
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <a href="#" class="btn btn-default toBilling">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    @EditBillingAddress
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div class="col-md-3 col-sm-6 col-xs-6" id="confirm-paymentMethodsContainer">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">@PaymentMethods</h4>
+            </div>
+            <div class="panel-body">
+                <!-- ko if: $root.creditCardPayment().isAdded -->
+                <h5>@creditCardLabel</h5>
+                <ul class="list list-unstyled" data-bind="with: creditCardPayment" id="confirm-creditCardContainer">
+                    <li id="confirm-creditCardNameOnCard" data-bind="text: customerNameOnPayment"></li>
+                    <li id="confirm-creditCardType" data-bind="text: description"></li>
+                    <li id="confirm-creditCardNumber" data-bind="text: creditCardNumberMasked"></li>
+                    <li>
+                        <span id="confirm-creditCardExpMonth" data-bind="text: expirationMonth"></span> - <span id="confirm-creditCardExpYear" data-bind="text: expirationYear"></span>
+                    </li>
+                    <li id="confirm-creditCardAmount">
+                        <strong>
+                            <span data-bind="text: formatCurrency(creditCardAmount, 2, '@currencyDecimalSeparator', '', '@currencyGroupSeparator')"></span>
+                            <span data-bind="text: $root.currencyCode"></span>
+                        </strong>
+                    </li>
+                </ul>
+                <!-- /ko -->
+                <!-- ko if: $root.giftCardPayment().isAdded -->
+                <h5>@GiftCards</h5>
+                <ul class="list list-unstyled" data-bind="with: giftCardPayment" id="confirm-giftCardContainer">
+                    <li id="confirm-giftCardNumber" data-bind="text: giftCardNumber"></li>
+                    <li id="confirm-giftCardAmount">
+                        <strong>
+                            <span data-bind="text: formatCurrency(giftCardAmount, 2, '@currencyDecimalSeparator', '', '@currencyGroupSeparator')"></span>
+                            <span data-bind="text: $root.currencyCode"></span>
+                        </strong>
+                    </li>
+                </ul>
+                <!-- /ko -->
+            </div>
+            <div class="panel-footer">
+                <a href="#" class="btn btn-default">
+                    <span class="glyphicon glyphicon-edit toBilling"></span>
+                    @EditPaymentMethods
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

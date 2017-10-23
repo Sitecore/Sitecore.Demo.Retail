@@ -1,0 +1,41 @@
+﻿@*//-----------------------------------------------------------------------
+// Copyright 2016 Sitecore Corporation A/S
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+// except in compliance with the License. You may obtain a copy of the License at
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the
+// License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+// either express or implied. See the License for the specific language governing permissions
+// and limitations under the License.
+// -------------------------------------------------------------------------------------------*@
+
+<div class="delivery-form form-inline text-center">
+    <div class="form-group">
+        <label for="orderShippingPreference">@Html.Sitecore().Field("DeliveryPreference", Html.Sitecore().CurrentItem.Children["Delivery"])</label>
+        <select id="orderShippingPreference" class="form-control" data-bind="foreach: orderShippingOptions, value: selectedShippingOption">
+            <!-- ko if: $index() == 0 -->
+            <option value="0">@Html.Sitecore().Field("Delivery Option Label", Html.Sitecore().CurrentItem.Children["Delivery"])</option>
+            <!-- /ko -->
+            <option data-bind="text: Name, value: ShippingOptionType.Value"></option>
+        </select>
+    </div>
+</div>
+<div id="ShipAllItems" data-bind="visible: $root.isShipAll" style="display: none;">
+    @Html.Partial("_ShipAll")
+</div>
+<div id="SendByEmail" data-bind="visible: $root.isShipToEmail" style="display: none;">
+    @Html.Partial("_SendByEmail")
+</div>
+<div id="DeliveryOptionsByItems" data-bind="visible: $root.isShipItems" style="display: none;">
+    @Html.Partial("_PickDeliveryByItem")
+</div>
+
+<input type="hidden" id="deliveryMethodSet" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        setupCheckoutPage();
+        InitDeliveryPage();
+    });
+</script>
